@@ -4,7 +4,6 @@ export interface AuthForm {
 }
 
 export interface UserInfo {
-  id: number;
-  username: string;
+  nickname: string;
   avatar: string | null;
 }

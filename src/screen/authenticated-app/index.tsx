@@ -113,7 +113,7 @@ const User = ({
       <UserInner>
         <div style={{ lineHeight: 1.5, marginRight: "1rem" }}>
           <div>欢迎您！</div>
-          <div>{userInfo?.username}</div>
+          <div>{userInfo?.nickname}</div>
         </div>
         <CaretDownOutlined style={{ fontSize: "1.2rem" }} />
       </UserInner>
