@@ -15,10 +15,12 @@ export const login = async (form: AuthForm) => {
   return token;
 };
 
-export const logout = async () =>
+export const logout = async () => {
+  await http("/admin/auth/logout", { token: getToken() as string });
   window.localStorage.removeItem(localStorageKey);
+};
 
 export const useUserInfo = () => {
   const client = useHttp();
-  return useQuery<UserInfo>(["useInfo"], () => client("/api/v1/admin/auth/me"));
+  return useQuery<UserInfo>(["useInfo"], () => client("/admin/auth/me"));
 };
