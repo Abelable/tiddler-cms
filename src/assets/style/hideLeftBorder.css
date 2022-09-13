@@ -1,0 +1,7 @@
+.hide-left-border {
+  border-left-width: 0;
+}
+.hide-left-border:hover,
+.hide-left-border:focus {
+  border-left-width: 1px;
+}

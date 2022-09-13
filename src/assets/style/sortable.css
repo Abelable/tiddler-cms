@@ -1,0 +1,15 @@
+.row-dragging {
+  background: #fafafa;
+  border: 1px solid #ccc;
+  overflow: hidden;
+  z-index: 9999;
+}
+.row-dragging td {
+  padding: 16px;
+}
+.row-dragging .drag-transparent {
+  background: transparent;
+}
+.row-dragging .drag-options {
+  width: 300px;
+}
