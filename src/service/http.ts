@@ -41,9 +41,9 @@ export const http = async (
     .fetch(`${API_URL}/api/${VERSION}${endpoint}`, config)
     .then(async (response) => {
       const result = await response.json();
-      console.log(result);
       if ([200, 201, 204].includes(response.status)) {
-        return result.data;
+        if (result.code === 0) return result.data;
+        else return Promise.reject({ message: result.message });
       } else if (response.status === 403 && token) {
         await auth.logout();
         window.location.reload();
