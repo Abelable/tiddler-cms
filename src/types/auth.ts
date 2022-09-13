@@ -1,5 +1,5 @@
 export interface AuthForm {
-  username: string;
+  account: string;
   password: string;
 }
 

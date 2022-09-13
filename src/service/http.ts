@@ -2,9 +2,9 @@ import { useAuth } from "context/auth-context";
 import * as auth from "./auth";
 import qs from "qs";
 import { useCallback } from "react";
-import { message } from "antd";
 
-const apiUrl = process.env.REACT_APP_API_URL;
+const API_URL = process.env.REACT_APP_API_URL;
+const VERSION = process.env.REACT_APP_VERSION;
 
 interface Config extends RequestInit {
   token?: string;
@@ -37,39 +37,20 @@ export const http = async (
       config.body = JSON.stringify(data || {});
     }
   }
-  return window.fetch(`${apiUrl}${endpoint}`, config).then(async (response) => {
-    if (response.ok) {
-      if (config.headers.responseType === "arraybuffer") {
-        if (response.headers.get("X-Error-Message")) {
-          message.error(
-            `${decodeURI(response.headers.get("X-Error-Message") as string)}`
-          );
-          return;
-        }
-        const result = await response.blob();
-        const url = window.URL.createObjectURL(result);
-        const link = document.createElement("a");
-        link.style.display = "none";
-        link.href = url;
-        link.setAttribute(
-          "download",
-          `${decodeURI(response.headers.get("X-File-Name") as string)}`
-        );
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      } else {
+  return window
+    .fetch(`${API_URL}/api/${VERSION}${endpoint}`, config)
+    .then(async (response) => {
+      if (response.ok) {
         const result = await response.json();
-        if (result.code === 401) {
+        if (result.code === 403) {
           await auth.logout();
           window.location.reload();
           return Promise.reject({ message: "请重新登录" });
         }
         if ([200, 201, 204].includes(result.code)) return result.data;
         else return Promise.reject(result);
-      }
-    } else return Promise.reject({ message: response.statusText });
-  });
+      } else return Promise.reject({ message: response.statusText });
+    });
 };
 
 export const useHttp = () => {
