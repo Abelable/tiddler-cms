@@ -12,7 +12,7 @@ import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
   CaretDownOutlined,
-  HomeOutlined,
+  KeyOutlined,
 } from "@ant-design/icons";
 import logo from "assets/images/logo.png";
 import { UserInfo } from "types/auth";
@@ -34,10 +34,10 @@ export const AuthenticatedApp = () => {
           <NavigationBar />
           <Content>
             <Routes>
-              <Route path="home" element={<Home />} />
+              <Route path="authority" element={<Home />} />
               <Route
                 path={"*"}
-                element={<Navigate to={"home"} replace={true} />}
+                element={<Navigate to={"authority"} replace={true} />}
               />
             </Routes>
           </Content>
@@ -52,9 +52,9 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
 
   const items: MenuProps["items"] = [
     {
-      label: <Link to={"home"}>首页</Link>,
+      label: <Link to={"home"}>权限管理</Link>,
       key: "home",
-      icon: <HomeOutlined />,
+      icon: <KeyOutlined />,
     },
   ];
 
