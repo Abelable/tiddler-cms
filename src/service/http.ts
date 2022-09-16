@@ -12,6 +12,26 @@ interface Config extends RequestInit {
   formData?: FormData;
 }
 
+const fetch = (endpoint: string, config: Config): void | any =>
+  window
+    .fetch(`${API_URL}/api/${VERSION}${endpoint}`, config)
+    .then(async (response) => {
+      const result = await response.json();
+      if ([200, 201, 204].includes(response.status)) {
+        if (result.code === 0) return result.data;
+        else return Promise.reject({ message: result.message });
+      } else if (response.status === 403 && auth.getToken()) {
+        auth.removeToken();
+        window.location.reload();
+        return Promise.reject({ message: "请重新登录" });
+      } else if (response.status === 401) {
+        await auth.refreshToken();
+        return fetch(endpoint, config);
+      } else {
+        return Promise.reject({ message: result.message || result.statusText });
+      }
+    });
+
 export const http = async (
   endpoint: string,
   { token, data, formData, headers, ...customConfig }: Config = {}
@@ -37,20 +57,7 @@ export const http = async (
       config.body = JSON.stringify(data || {});
     }
   }
-  return window
-    .fetch(`${API_URL}/api/${VERSION}${endpoint}`, config)
-    .then(async (response) => {
-      const result = await response.json();
-      if ([200, 201, 204].includes(response.status)) {
-        if (result.code === 0) return result.data;
-        else return Promise.reject({ message: result.message });
-      } else if (response.status === 403 && token) {
-        await auth.logout();
-        window.location.reload();
-        return Promise.reject({ message: "请重新登录" });
-      } else
-        return Promise.reject({ message: result.message || result.statusText });
-    });
+  return fetch(endpoint, config);
 };
 
 export const useHttp = () => {
