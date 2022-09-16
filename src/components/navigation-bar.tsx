@@ -3,7 +3,7 @@ import { Breadcrumb } from "antd";
 import { Link, useLocation } from "react-router-dom";
 
 const breadcrumbNameMap: { [key: string]: string } = {
-  "/home": "首页",
+  "/authority": "权限管理",
   "/suppliers": "我的供应商",
   "/suppliers/goods_list": "查看供应商产品",
   "/agents": "我的代理商",
@@ -44,6 +44,5 @@ export const NavigationBar = () => {
 const Wrap = styled.div`
   display: flex;
   align-items: center;
-  padding: 2.4rem;
-  background: #fff;
+  padding-bottom: 0.4rem;
 `;

@@ -5,7 +5,7 @@ import styled from "@emotion/styled";
 import { useUserInfo } from "service/auth";
 import { HashRouter as Router, Link } from "react-router-dom";
 import { Routes, Route, Navigate } from "react-router";
-import { Button, Dropdown, Layout, Menu, MenuProps } from "antd";
+import { Avatar, Button, Dropdown, Layout, Menu, MenuProps } from "antd";
 import { NavigationBar } from "components/navigation-bar";
 import { Home } from "./home";
 import {
@@ -16,6 +16,7 @@ import {
 } from "@ant-design/icons";
 import logo from "assets/images/logo.png";
 import { UserInfo } from "types/auth";
+import { Row } from "components/lib";
 
 export const AuthenticatedApp = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -28,10 +29,12 @@ export const AuthenticatedApp = () => {
         <MenuSider collapsed={collapsed} />
         <Layout>
           <Header>
-            <Trigger collapsed={collapsed} setCollapsed={setCollapsed} />
+            <Row>
+              <Trigger collapsed={collapsed} setCollapsed={setCollapsed} />
+              <NavigationBar />
+            </Row>
             <User userInfo={userInfo} logout={logout} />
           </Header>
-          <NavigationBar />
           <Content>
             <Routes>
               <Route path="authority" element={<Home />} />
@@ -52,8 +55,8 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
 
   const items: MenuProps["items"] = [
     {
-      label: <Link to={"home"}>权限管理</Link>,
-      key: "home",
+      label: <Link to={"authority"}>权限管理</Link>,
+      key: "authority",
       icon: <KeyOutlined />,
     },
   ];
@@ -109,22 +112,15 @@ const User = ({
   ];
 
   return (
-    <Dropdown overlay={<Menu items={items} />}>
-      <UserInner>
-        <div style={{ lineHeight: 1.5, marginRight: "1rem" }}>
-          <div>欢迎您！</div>
-          <div>{userInfo?.nickname}</div>
-        </div>
+    <Row gap={1} style={{ cursor: "pointer" }}>
+      <Avatar src={userInfo?.avatar} />
+      <div>{userInfo?.nickname}</div>
+      <Dropdown overlay={<Menu items={items} />}>
         <CaretDownOutlined style={{ fontSize: "1.2rem" }} />
-      </UserInner>
-    </Dropdown>
+      </Dropdown>
+    </Row>
   );
 };
-
-const UserInner = styled.div`
-  display: flex;
-  align-items: center;
-`;
 
 const Logo = styled.div<{ collapsed: boolean }>`
   display: flex;
