@@ -37,7 +37,7 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
       <Header between={true}>
         <PageTitle>角色列表</PageTitle>
         <Button onClick={() => open()} type={"primary"} icon={<PlusOutlined />}>
-          新增角色
+          新增
         </Button>
       </Header>
       <ErrorBox error={error} />
@@ -66,8 +66,9 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
                   : "无"}
               </span>
             ),
-            width: "18rem",
-            sorter: (a, b) => Number(a.createdAt) - Number(b.createdAt),
+            width: "20rem",
+            sorter: (a, b) =>
+              dayjs(a.createdAt).valueOf() - dayjs(b.createdAt).valueOf(),
           },
           {
             title: "操作",
