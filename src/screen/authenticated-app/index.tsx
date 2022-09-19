@@ -43,14 +43,12 @@ export const AuthenticatedApp = () => {
           </Header>
           <Content>
             <Routes>
-              <Route path="authority/role_list" element={<RoleList />} />
-              <Route path="authority/admin_list" element={<AdminList />} />
+              <Route path="auth/role_list" element={<RoleList />} />
+              <Route path="auth/admin_list" element={<AdminList />} />
               <Route path="user_list" element={<UserList />} />
               <Route
                 path={"*"}
-                element={
-                  <Navigate to={"authority/admin_list"} replace={true} />
-                }
+                element={<Navigate to={"user_list"} replace={true} />}
               />
             </Routes>
           </Content>
@@ -65,17 +63,17 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
 
   const items: MenuProps["items"] = [
     {
-      label: <Link to={"authority"}>权限管理</Link>,
-      key: "authority",
+      label: "权限管理",
+      key: "auth",
       icon: <LockOutlined />,
       children: [
         {
-          label: <Link to={"authority/role_list"}>角色管理</Link>,
+          label: <Link to={"auth/role_list"}>角色管理</Link>,
           key: "role_list",
           icon: <KeyOutlined />,
         },
         {
-          label: <Link to={"authority/admin_list"}>管理员列表</Link>,
+          label: <Link to={"auth/admin_list"}>管理员列表</Link>,
           key: "admin_list",
           icon: <TeamOutlined />,
         },
