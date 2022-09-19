@@ -7,12 +7,18 @@ import { HashRouter as Router, Link } from "react-router-dom";
 import { Routes, Route, Navigate } from "react-router";
 import { Avatar, Button, Dropdown, Layout, Menu, MenuProps } from "antd";
 import { NavigationBar } from "components/navigation-bar";
-import { Home } from "./home";
+
+import { RoleList } from "./role-list";
+import { AdminList } from "./admin-list";
+import { UserList } from "./user-list";
+
 import {
+  LockOutlined,
   MenuUnfoldOutlined,
   MenuFoldOutlined,
   CaretDownOutlined,
   KeyOutlined,
+  TeamOutlined,
 } from "@ant-design/icons";
 import logo from "assets/images/logo.png";
 import { UserInfo } from "types/auth";
@@ -37,10 +43,14 @@ export const AuthenticatedApp = () => {
           </Header>
           <Content>
             <Routes>
-              <Route path="authority" element={<Home />} />
+              <Route path="authority/role_list" element={<RoleList />} />
+              <Route path="authority/admin_list" element={<AdminList />} />
+              <Route path="user_list" element={<UserList />} />
               <Route
                 path={"*"}
-                element={<Navigate to={"authority"} replace={true} />}
+                element={
+                  <Navigate to={"authority/admin_list"} replace={true} />
+                }
               />
             </Routes>
           </Content>
@@ -57,7 +67,24 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
     {
       label: <Link to={"authority"}>权限管理</Link>,
       key: "authority",
-      icon: <KeyOutlined />,
+      icon: <LockOutlined />,
+      children: [
+        {
+          label: <Link to={"authority/role_list"}>角色管理</Link>,
+          key: "role_list",
+          icon: <KeyOutlined />,
+        },
+        {
+          label: <Link to={"authority/admin_list"}>管理员列表</Link>,
+          key: "admin_list",
+          icon: <TeamOutlined />,
+        },
+      ],
+    },
+    {
+      label: <Link to={"user_list"}>用户列表</Link>,
+      key: "user_list",
+      icon: <TeamOutlined />,
     },
   ];
 
