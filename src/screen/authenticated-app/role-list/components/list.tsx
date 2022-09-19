@@ -9,11 +9,12 @@ import {
   TablePaginationConfig,
   TableProps,
 } from "antd";
-import { ButtonNoPadding, ErrorBox, Row } from "components/lib";
+import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
 import dayjs from "dayjs";
 import { useDeleteRole } from "service/role";
 import { RoleItem, RolesSearchParams } from "types/role";
 import { useRoleModal, useRolesQueryKey } from "../util";
+import { PlusOutlined } from "@ant-design/icons";
 
 interface ListProps extends TableProps<RoleItem> {
   params: Partial<RolesSearchParams>;
@@ -34,8 +35,10 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
   return (
     <Container>
       <Header between={true}>
-        <div>角色列表</div>
-        <Button onClick={() => open()}>新建角色</Button>
+        <PageTitle>角色列表</PageTitle>
+        <Button onClick={() => open()} type={"primary"} icon={<PlusOutlined />}>
+          新增角色
+        </Button>
       </Header>
       <ErrorBox error={error} />
       <Table
@@ -56,17 +59,15 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
           },
           {
             title: "添加时间",
-            render: (value, user) => (
+            render: (value, role) => (
               <span>
-                {user.created_at
-                  ? dayjs(Number(user.created_at) * 1000).format(
-                      "YYYY-MM-DD HH:mm:ss"
-                    )
+                {role.createdAt
+                  ? dayjs(role.createdAt).format("YYYY-MM-DD HH:mm:ss")
                   : "无"}
               </span>
             ),
             width: "18rem",
-            sorter: (a, b) => Number(a.created_at) - Number(b.created_at),
+            sorter: (a, b) => Number(a.createdAt) - Number(b.createdAt),
           },
           {
             title: "操作",

@@ -7,7 +7,7 @@ export interface RoleItem {
   id: number;
   name: string;
   desc: string;
-  created_at: string;
+  createdAt: string;
 }
 
 export interface RolesResult {

@@ -11,7 +11,7 @@ import { cleanObject } from "utils/index";
 export const useRoles = (params: Partial<RolesSearchParams>) => {
   const client = useHttp();
   return useQuery<RolesResult>(["roles", params], () =>
-    client("/admin/role/list", { data: params })
+    client("/admin/role/list", { data: params, method: "POST" })
   );
 };
 

@@ -66,3 +66,24 @@ export const Row = styled.div<{
         : undefined};
   }
 `;
+
+export const PageTitle = styled.div`
+  position: relative;
+  margin: 4.8rem 0 2.4rem;
+  padding-left: 1rem;
+  height: 1.6rem;
+  font-size: 1.6rem;
+  font-weight: bold;
+  line-height: 1;
+  &::after {
+    position: absolute;
+    left: 0;
+    content: "";
+    width: 0.4rem;
+    height: 1.6rem;
+    background: #1890ff;
+  }
+  &:first-of-type {
+    margin-top: 0;
+  }
+`;
