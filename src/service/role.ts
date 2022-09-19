@@ -15,6 +15,17 @@ export const useRoles = (params: Partial<RolesSearchParams>) => {
   );
 };
 
+export const useRole = (id: number) => {
+  const client = useHttp();
+  return useQuery<Partial<RoleItem>>(
+    ["role", { id }],
+    () => client(`/admin/role/detail?id=${id}`),
+    {
+      enabled: Boolean(id),
+    }
+  );
+};
+
 export const useAddRole = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(

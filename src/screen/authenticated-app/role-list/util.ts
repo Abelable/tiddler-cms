@@ -1,5 +1,6 @@
 import { useSetUrlSearchParams, useUrlQueryParams } from "utils/url";
 import { useCallback, useMemo } from "react";
+import { useRole } from "service/role";
 
 export const useRolesSearchParams = () => {
   const [params, setParams] = useUrlQueryParams(["page", "limit"]);
@@ -26,6 +27,7 @@ export const useRoleModal = () => {
     "editingRoleId",
   ]);
   const setUrlParams = useSetUrlSearchParams();
+  const { data: editingRole, isLoading } = useRole(Number(editingRoleId));
 
   const open = useCallback(
     () => setRoleModalOpen({ roleCreate: true }),
@@ -41,8 +43,10 @@ export const useRoleModal = () => {
   );
 
   return {
-    RoleModalOpen: roleCreate === "true" || !!editingRoleId,
+    roleModalOpen: roleCreate === "true" || !!editingRoleId,
     editingRoleId,
+    editingRole,
+    isLoading,
     open,
     startEdit,
     close,
