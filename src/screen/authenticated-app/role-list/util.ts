@@ -38,7 +38,7 @@ export const useRoleModal = () => {
     [setEditingRoleId]
   );
   const close = useCallback(
-    () => setUrlParams({ RoleCreate: "", editingRoleId: "" }),
+    () => setUrlParams({ roleCreate: "", editingRoleId: "" }),
     [setUrlParams]
   );
 

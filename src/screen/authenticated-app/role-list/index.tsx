@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { useRoles } from "service/role";
 import { toNumber, useDebounce } from "utils";
 import { List } from "./components/list";
+import { RoleModal } from "./components/role-modal";
 import { useRolesSearchParams } from "./util";
 
 export const RoleList = () => {
@@ -24,6 +25,7 @@ export const RoleList = () => {
           }}
         />
       </Main>
+      <RoleModal />
     </Container>
   );
 };

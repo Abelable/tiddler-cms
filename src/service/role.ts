@@ -19,7 +19,7 @@ export const useRole = (id: number) => {
   const client = useHttp();
   return useQuery<Partial<RoleItem>>(
     ["role", { id }],
-    () => client(`/admin/role/detail?id=${id}`),
+    () => client(`/admin/role/detail`, { data: { id } }),
     {
       enabled: Boolean(id),
     }
