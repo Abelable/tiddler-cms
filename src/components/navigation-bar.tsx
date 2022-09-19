@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 
 const breadcrumbNameMap: { [key: string]: string } = {
   "/auth": "权限管理",
-  "/auth/role_list": "角色管理",
+  "/auth/role_list": "角色列表",
   "/auth/admin_list": "管理员列表",
   "/user_list": "用户列表",
 };

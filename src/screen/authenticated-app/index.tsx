@@ -68,7 +68,7 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
       icon: <LockOutlined />,
       children: [
         {
-          label: <Link to={"auth/role_list"}>角色管理</Link>,
+          label: <Link to={"auth/role_list"}>角色列表</Link>,
           key: "role_list",
           icon: <KeyOutlined />,
         },
