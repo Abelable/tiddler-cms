@@ -25,7 +25,7 @@ export const RoleModal = () => {
 
   const confirm = () => {
     form.validateFields().then(async () => {
-      await mutateAsync(form.getFieldsValue());
+      await mutateAsync({ ...editingRole, ...form.getFieldsValue() });
       closeModal();
     });
   };
@@ -37,6 +37,7 @@ export const RoleModal = () => {
 
   return (
     <Modal
+      forceRender={true}
       title={editingRoleId ? "编辑角色" : "新增角色"}
       open={roleModalOpen}
       confirmLoading={mutateLoading}
