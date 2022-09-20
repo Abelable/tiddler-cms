@@ -23,12 +23,12 @@ export const useAddConfig = (queryKey: QueryKey) =>
     old
       ? {
           ...old,
-          data: [
+          list: [
             {
-              id: old.data[0] ? `${Number(old.data[0].id) + 1}` : "1",
+              id: old.list[0] ? `${Number(old.list[0].id) + 1}` : "1",
               ...target,
             },
-            ...old.data,
+            ...old.list,
           ],
         }
       : null
@@ -39,7 +39,7 @@ export const useEditConfig = (queryKey: QueryKey) =>
     old
       ? {
           ...old,
-          data: old.data.map((item: any) =>
+          list: old.list.map((item: any) =>
             item.id === target.id ? { ...item, ...target } : item
           ),
         }
@@ -49,7 +49,7 @@ export const useEditConfig = (queryKey: QueryKey) =>
 export const useDeleteConfig = (queryKey: QueryKey) =>
   useConfig(queryKey, (target, old) => ({
     ...old,
-    data: old.data.filter((item: any) => item.id !== target) || [],
+    list: old.list.filter((item: any) => item.id !== target) || [],
   }));
 
 export const useEditDefaultWarningSettingConfig = () =>
@@ -63,7 +63,7 @@ export const useEditDeliversConfig = (queryKey: QueryKey) =>
     old
       ? {
           ...old,
-          data: old.data.map((item: any) =>
+          list: old.list.map((item: any) =>
             target.ids.includes(`${item.id}`) ? { ...item, ...target } : item
           ),
         }
