@@ -1,10 +1,9 @@
-import { Form, Input, Modal, Spin } from "antd";
+import { Form, Input, Modal } from "antd";
 import { useForm } from "antd/lib/form/Form";
-import { ErrorBox } from "components/lib";
+import { ErrorBox, ModalLoading } from "components/lib";
 import { useAddRole } from "service/role";
 import { useRoleModal, useRolesQueryKey } from "../util";
 import { useEditRole } from "service/role";
-import styled from "@emotion/styled";
 import { useEffect } from "react";
 
 export const RoleModal = () => {
@@ -46,9 +45,7 @@ export const RoleModal = () => {
     >
       <ErrorBox error={error} />
       {isLoading ? (
-        <Loading>
-          <Spin size={"large"} />
-        </Loading>
+        <ModalLoading />
       ) : (
         <Form form={form} layout="vertical">
           <Form.Item
@@ -70,11 +67,3 @@ export const RoleModal = () => {
     </Modal>
   );
 };
-
-const Loading = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
