@@ -48,7 +48,7 @@ export const OssUpload = (props: OssUploadProps) => {
         )}
       </Upload>
       <Modal
-        visible={!!previewImage}
+        open={!!previewImage}
         footer={null}
         onCancel={() => setPreviewImage("")}
       >
