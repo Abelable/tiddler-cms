@@ -12,11 +12,11 @@ import {
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
 import dayjs from "dayjs";
 import { useDeleteRole } from "service/role";
-import { RoleItem, RolesSearchParams } from "types/role";
+import { Role, RolesSearchParams } from "types/role";
 import { useRoleModal, useRolesQueryKey } from "../util";
 import { PlusOutlined } from "@ant-design/icons";
 
-interface ListProps extends TableProps<RoleItem> {
+interface ListProps extends TableProps<Role> {
   params: Partial<RolesSearchParams>;
   setParams: (params: Partial<RolesSearchParams>) => void;
   error: Error | unknown;

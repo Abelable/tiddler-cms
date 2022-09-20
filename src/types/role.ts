@@ -3,7 +3,7 @@ export interface RolesSearchParams {
   limit: number;
 }
 
-export interface RoleItem {
+export interface Role {
   id: number;
   name: string;
   desc: string;
@@ -11,7 +11,7 @@ export interface RoleItem {
 }
 
 export interface RolesResult {
-  list: RoleItem[];
+  list: Role[];
   page: string;
   limit: string;
   total: string;

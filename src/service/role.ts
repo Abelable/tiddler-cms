@@ -1,6 +1,6 @@
 import { QueryKey, useMutation, useQuery } from "react-query";
 import { useHttp } from "./http";
-import type { RoleItem, RolesResult, RolesSearchParams } from "types/role";
+import type { Role, RolesResult, RolesSearchParams } from "types/role";
 import {
   useAddConfig,
   useDeleteConfig,
@@ -17,7 +17,7 @@ export const useRoles = (params: Partial<RolesSearchParams>) => {
 
 export const useRole = (id: number) => {
   const client = useHttp();
-  return useQuery<Partial<RoleItem>>(
+  return useQuery<Partial<Role>>(
     ["role", { id }],
     () => client(`/admin/role/detail`, { data: { id } }),
     {
@@ -29,7 +29,7 @@ export const useRole = (id: number) => {
 export const useAddRole = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
-    (params: Partial<RoleItem>) =>
+    (params: Partial<Role>) =>
       client("/admin/role/add", {
         data: cleanObject(params),
         method: "POST",
@@ -41,7 +41,7 @@ export const useAddRole = (queryKey: QueryKey) => {
 export const useEditRole = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
-    (params: Partial<RoleItem>) =>
+    (params: Partial<Role>) =>
       client("/admin/role/edit", {
         data: cleanObject(params),
         method: "POST",
