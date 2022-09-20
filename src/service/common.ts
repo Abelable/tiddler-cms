@@ -4,5 +4,5 @@ import { OssConfig } from "types/ossConfig";
 
 export const useOssConfig = () => {
   const client = useHttp();
-  return useQuery<OssConfig>(["ossConfig"], () => client("/api/admin/oss/ali"));
+  return useQuery<OssConfig>(["ossConfig"], () => client("/admin/oss_config"));
 };
