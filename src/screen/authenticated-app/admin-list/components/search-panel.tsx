@@ -11,17 +11,17 @@ interface SearchPanelProps {
   setParams: (params: Partial<AdminsSearchParams>) => void;
 }
 
+const defaultParmas: Partial<AdminsSearchParams> = {
+  nickname: "",
+  account: "",
+  roleId: undefined,
+};
+
 export const SearchPanel = ({
   roleOptions,
   params,
   setParams,
 }: SearchPanelProps) => {
-  const defaultParmas: Partial<AdminsSearchParams> = {
-    nickname: "",
-    account: "",
-    roleId: undefined,
-  };
-
   const [tempParams, setTempParams] = useState(defaultParmas);
 
   const setNickname = (evt: any) => {
@@ -85,11 +85,11 @@ export const SearchPanel = ({
         />
       </Item>
       <Item>
-        <div>操作模块：</div>
+        <div>管理员角色：</div>
         <Select
           style={{ width: "20rem" }}
           value={tempParams.roleId}
-          placeholder="请选择操作模块"
+          placeholder="请选择管理员角色"
           allowClear={true}
           onSelect={setRole}
           onClear={clearRole}
