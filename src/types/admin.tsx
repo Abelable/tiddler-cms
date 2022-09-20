@@ -1,7 +1,7 @@
 export interface AdminsSearchParams {
   nickname: string;
   account: string;
-  roleId: number;
+  roleId: number | undefined;
   page: number;
   limit: number;
 }

@@ -7,6 +7,7 @@ import {
   useEditConfig,
 } from "./use-optimistic-options";
 import { cleanObject } from "utils/index";
+import { RoleOption } from "../types/role";
 
 export const useRoles = (params: Partial<RolesSearchParams>) => {
   const client = useHttp();
@@ -21,7 +22,7 @@ export const useRole = (id: number) => {
     ["role", { id }],
     () => client(`/admin/role/detail`, { data: { id } }),
     {
-      enabled: Boolean(id),
+      enabled: !!id,
     }
   );
 };
@@ -59,5 +60,12 @@ export const useDeleteRole = (queryKey: QueryKey) => {
         method: "POST",
       }),
     useDeleteConfig(queryKey)
+  );
+};
+
+export const useRoleOptions = () => {
+  const client = useHttp();
+  return useQuery<RoleOption[]>(["role_options"], () =>
+    client("/admin/role/options")
   );
 };

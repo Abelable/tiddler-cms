@@ -16,3 +16,8 @@ export interface RolesResult {
   limit: string;
   total: string;
 }
+
+export interface RoleOption {
+  id: number;
+  name: string;
+}
