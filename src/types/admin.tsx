@@ -12,7 +12,8 @@ export interface Admin {
   nickname: string;
   account: string;
   roleId: number;
-  created_at: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface AdminsResult {

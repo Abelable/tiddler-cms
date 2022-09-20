@@ -24,21 +24,6 @@ export const SearchPanel = ({
 }: SearchPanelProps) => {
   const [tempParams, setTempParams] = useState(defaultParmas);
 
-  const setNickname = (evt: any) => {
-    if (!evt.target.value && evt.type !== "change") {
-      setTempParams({
-        ...tempParams,
-        nickname: "",
-      });
-      return;
-    }
-
-    setTempParams({
-      ...tempParams,
-      nickname: evt.target.value,
-    });
-  };
-
   const setAccount = (evt: any) => {
     if (!evt.target.value && evt.type !== "change") {
       setTempParams({
@@ -54,6 +39,21 @@ export const SearchPanel = ({
     });
   };
 
+  const setNickname = (evt: any) => {
+    if (!evt.target.value && evt.type !== "change") {
+      setTempParams({
+        ...tempParams,
+        nickname: "",
+      });
+      return;
+    }
+
+    setTempParams({
+      ...tempParams,
+      nickname: evt.target.value,
+    });
+  };
+
   const setRole = (roleId: number) => setTempParams({ ...tempParams, roleId });
   const clearRole = () => setTempParams({ ...tempParams, roleId: undefined });
 
@@ -65,22 +65,22 @@ export const SearchPanel = ({
   return (
     <Container>
       <Item>
-        <div>管理员昵称：</div>
-        <Input
-          style={{ width: "20rem" }}
-          value={tempParams.nickname}
-          onChange={setNickname}
-          placeholder="请输入管理员昵称"
-          allowClear={true}
-        />
-      </Item>
-      <Item>
         <div>管理员账号：</div>
         <Input
           style={{ width: "20rem" }}
           value={tempParams.account}
           onChange={setAccount}
           placeholder="请输入管理员账号"
+          allowClear={true}
+        />
+      </Item>
+      <Item>
+        <div>管理员昵称：</div>
+        <Input
+          style={{ width: "20rem" }}
+          value={tempParams.nickname}
+          onChange={setNickname}
+          placeholder="请输入管理员昵称"
           allowClear={true}
         />
       </Item>
