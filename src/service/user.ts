@@ -6,7 +6,7 @@ import type { User, UsersResult, UsersSearchParams } from "types/user";
 export const useUsers = (params: Partial<UsersSearchParams>) => {
   const client = useHttp();
   return useQuery<UsersResult>(["users", params], () =>
-    client("/admin/user/list", { data: params, method: "POST" })
+    client("user/list", { data: params, method: "POST" })
   );
 };
 
@@ -14,7 +14,7 @@ export const useUser = (id: number) => {
   const client = useHttp();
   return useQuery<Partial<User>>(
     ["user", { id }],
-    () => client(`/admin/user/detail`, { data: { id } }),
+    () => client(`user/detail`, { data: { id } }),
     {
       enabled: !!id,
     }
@@ -25,7 +25,7 @@ export const useDeleteUser = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (id: number) =>
-      client("/admin/user/delete", {
+      client("user/delete", {
         data: { id },
         method: "POST",
       }),

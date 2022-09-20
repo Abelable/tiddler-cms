@@ -12,7 +12,7 @@ import { RoleOption } from "../types/role";
 export const useRoles = (params: Partial<RolesSearchParams>) => {
   const client = useHttp();
   return useQuery<RolesResult>(["roles", params], () =>
-    client("/admin/role/list", { data: params, method: "POST" })
+    client("role/list", { data: params, method: "POST" })
   );
 };
 
@@ -20,7 +20,7 @@ export const useRole = (id: number) => {
   const client = useHttp();
   return useQuery<Partial<Role>>(
     ["role", { id }],
-    () => client(`/admin/role/detail`, { data: { id } }),
+    () => client(`role/detail`, { data: { id } }),
     {
       enabled: !!id,
     }
@@ -31,7 +31,7 @@ export const useAddRole = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (params: Partial<Role>) =>
-      client("/admin/role/add", {
+      client("role/add", {
         data: cleanObject(params),
         method: "POST",
       }),
@@ -43,7 +43,7 @@ export const useEditRole = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (params: Partial<Role>) =>
-      client("/admin/role/edit", {
+      client("role/edit", {
         data: cleanObject(params),
         method: "POST",
       }),
@@ -55,7 +55,7 @@ export const useDeleteRole = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (id: number) =>
-      client("/admin/role/delete", {
+      client("role/delete", {
         data: { id },
         method: "POST",
       }),
@@ -65,7 +65,5 @@ export const useDeleteRole = (queryKey: QueryKey) => {
 
 export const useRoleOptions = () => {
   const client = useHttp();
-  return useQuery<RoleOption[]>(["role_options"], () =>
-    client("/admin/role/options")
-  );
+  return useQuery<RoleOption[]>(["role_options"], () => client("role/options"));
 };

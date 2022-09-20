@@ -9,7 +9,7 @@ export const removeToken = () =>
   window.localStorage.removeItem(localStorageKey);
 
 export const login = async (form: AuthForm) => {
-  const token = await http("/admin/auth/login", {
+  const token = await http("auth/login", {
     method: "POST",
     data: form,
   });
@@ -18,16 +18,16 @@ export const login = async (form: AuthForm) => {
 };
 
 export const logout = async () => {
-  await http("/admin/auth/logout", { token: getToken() as string });
+  await http("auth/logout", { token: getToken() as string });
   return removeToken();
 };
 
 export const refreshToken = async () => {
-  const token = await http("/admin/auth/token_refresh");
+  const token = await http("auth/token_refresh");
   window.localStorage.setItem(localStorageKey, token);
 };
 
 export const useUserInfo = () => {
   const client = useHttp();
-  return useQuery<UserInfo>(["useInfo"], () => client("/admin/auth/me"));
+  return useQuery<UserInfo>(["useInfo"], () => client("auth/me"));
 };

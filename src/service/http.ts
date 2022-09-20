@@ -14,7 +14,7 @@ interface Config extends RequestInit {
 
 const fetch = (endpoint: string, config: Config): void | any =>
   window
-    .fetch(`${API_URL}/api/${VERSION}${endpoint}`, config)
+    .fetch(`${API_URL}/api/${VERSION}/admin/${endpoint}`, config)
     .then(async (response) => {
       const result = await response.json();
       if ([200, 201, 204].includes(response.status)) {

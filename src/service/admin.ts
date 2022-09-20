@@ -11,7 +11,7 @@ import type { Admin, AdminsResult, AdminsSearchParams } from "types/admin";
 export const useAdmins = (params: Partial<AdminsSearchParams>) => {
   const client = useHttp();
   return useQuery<AdminsResult>(["admins", params], () =>
-    client("/admin/list", { data: params, method: "POST" })
+    client("list", { data: params, method: "POST" })
   );
 };
 
@@ -19,7 +19,7 @@ export const useAdmin = (id: number) => {
   const client = useHttp();
   return useQuery<Partial<Admin>>(
     ["admin", { id }],
-    () => client(`/admin/detail`, { data: { id } }),
+    () => client(`detail`, { data: { id } }),
     {
       enabled: !!id,
     }
@@ -30,7 +30,7 @@ export const useAddAdmin = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (params: Partial<Admin>) =>
-      client("/admin/add", {
+      client("add", {
         data: cleanObject(params),
         method: "POST",
       }),
@@ -42,7 +42,7 @@ export const useEditAdmin = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (params: Partial<Admin>) =>
-      client("/admin/edit", {
+      client("edit", {
         data: cleanObject(params),
         method: "POST",
       }),
@@ -54,7 +54,7 @@ export const useDeleteAdmin = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (id: number) =>
-      client("/admin/delete", {
+      client("delete", {
         data: { id },
         method: "POST",
       }),
