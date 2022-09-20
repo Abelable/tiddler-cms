@@ -1,4 +1,4 @@
-import { Button, Col, Drawer, Form, Input, Row, Space } from "antd";
+import { Button, Col, Drawer, Form, Input, Row, Select, Space } from "antd";
 import { useForm } from "antd/lib/form/Form";
 import { ErrorBox, ModalLoading } from "components/lib";
 import { useAddAdmin } from "service/admin";
@@ -6,13 +6,14 @@ import { useAdminModal, useAdminsQueryKey } from "../util";
 import { useEditAdmin } from "service/admin";
 import { useEffect } from "react";
 import { OssUpload } from "components/oss-upload";
+import type { RoleOption } from "types/role";
 
 const normFile = (e: any) => {
   if (Array.isArray(e)) return e;
   return e && e.fileList;
 };
 
-export const AdminModal = () => {
+export const AdminModal = ({ roleOptions }: { roleOptions: RoleOption[] }) => {
   const [form] = useForm();
   const { adminModalOpen, editingAdminId, editingAdmin, isLoading, close } =
     useAdminModal();
@@ -25,12 +26,20 @@ export const AdminModal = () => {
   } = useMutateAdmin(useAdminsQueryKey());
 
   useEffect(() => {
-    form.setFieldsValue(editingAdmin);
+    if (editingAdmin) {
+      const { avatar, ...rest } = editingAdmin;
+      form.setFieldsValue({ avatar: avatar ? [{ url: avatar }] : [], ...rest });
+    }
   }, [editingAdmin, form]);
 
   const confirm = () => {
     form.validateFields().then(async () => {
-      await mutateAsync({ ...editingAdmin, ...form.getFieldsValue() });
+      const { avatar, ...rest } = form.getFieldsValue();
+      await mutateAsync({
+        ...editingAdmin,
+        ...rest,
+        avatar: avatar && avatar.length ? avatar[0].url : "",
+      });
       closeModal();
     });
   };
@@ -101,12 +110,23 @@ export const AdminModal = () => {
           )}
           <Row gutter={16}>
             <Col span={12}>
-              <Form.Item
-                name="nickname"
-                label="管理员昵称"
-                rules={[{ required: true, message: "请输入管理员昵称" }]}
-              >
+              <Form.Item name="nickname" label="管理员昵称">
                 <Input placeholder="请输入管理员昵称" />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                name="roleId"
+                label="管理员角色"
+                rules={[{ required: true, message: "请选择管理员角色" }]}
+              >
+                <Select placeholder="请选择管理员角色">
+                  {roleOptions.map((item) => (
+                    <Select.Option key={item.id} value={item.id}>
+                      {item.name}
+                    </Select.Option>
+                  ))}
+                </Select>
               </Form.Item>
             </Col>
           </Row>

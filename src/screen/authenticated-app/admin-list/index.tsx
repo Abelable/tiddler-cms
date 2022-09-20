@@ -34,7 +34,7 @@ export const AdminList = () => {
           }}
         />
       </Main>
-      <AdminModal />
+      <AdminModal roleOptions={roleOptions || []} />
     </Container>
   );
 };

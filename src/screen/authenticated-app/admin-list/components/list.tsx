@@ -22,7 +22,13 @@ interface ListProps extends TableProps<Admin>, SearchPanelProps {
   error: Error | unknown;
 }
 
-export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
+export const List = ({
+  roleOptions,
+  error,
+  params,
+  setParams,
+  ...restProps
+}: ListProps) => {
   const { open } = useAdminModal();
 
   const setPagination = (pagination: TablePaginationConfig) =>
@@ -50,17 +56,24 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
             width: "8rem",
           },
           {
-            title: "管理员账号",
+            title: "账号",
             dataIndex: "account",
           },
           {
-            title: "管理员头像",
+            title: "头像",
             dataIndex: "avatar",
             render: (value) => <Avatar src={value} icon={<UserOutlined />} />,
           },
           {
-            title: "管理员昵称",
+            title: "昵称",
             dataIndex: "nickname",
+          },
+          {
+            title: "角色",
+            dataIndex: "roleId",
+            render: (value) => (
+              <>{roleOptions.find((item) => item.id === value)?.name}</>
+            ),
           },
           {
             title: "修改时间",
