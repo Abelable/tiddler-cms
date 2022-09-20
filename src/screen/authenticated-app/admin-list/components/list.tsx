@@ -13,13 +13,12 @@ import {
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
 import dayjs from "dayjs";
 import { useDeleteAdmin } from "service/admin";
-import { Admin, AdminsSearchParams } from "types/admin";
+import { Admin } from "types/admin";
 import { useAdminModal, useAdminsQueryKey } from "../util";
 import { PlusOutlined, UserOutlined } from "@ant-design/icons";
+import { SearchPanelProps } from "./search-panel";
 
-interface ListProps extends TableProps<Admin> {
-  params: Partial<AdminsSearchParams>;
-  setParams: (params: Partial<AdminsSearchParams>) => void;
+interface ListProps extends TableProps<Admin>, SearchPanelProps {
   error: Error | unknown;
 }
 

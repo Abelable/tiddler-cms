@@ -1,13 +1,13 @@
 import styled from "@emotion/styled";
 import { useRoles } from "service/role";
-import { toNumber, useDebounce } from "utils";
+import { toNumber } from "utils";
 import { List } from "./components/list";
 import { RoleModal } from "./components/role-modal";
 import { useRolesSearchParams } from "./util";
 
 export const RoleList = () => {
   const [params, setParams] = useRolesSearchParams();
-  const { isLoading, error, data } = useRoles(useDebounce(params, 200));
+  const { isLoading, error, data } = useRoles(params);
 
   return (
     <Container>

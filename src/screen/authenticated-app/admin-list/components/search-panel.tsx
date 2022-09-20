@@ -5,7 +5,7 @@ import styled from "@emotion/styled";
 import { Row } from "components/lib";
 import { Button, Input, Select } from "antd";
 
-interface SearchPanelProps {
+export interface SearchPanelProps {
   roleOptions: RoleOption[];
   params: Partial<AdminsSearchParams>;
   setParams: (params: Partial<AdminsSearchParams>) => void;
