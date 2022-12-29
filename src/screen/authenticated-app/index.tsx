@@ -91,7 +91,7 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
       <Link to={"/"}>
         <Logo collapsed={collapsed}>
           <LogoImg src={logo} />
-          <div>小鱼儿后台管理系统</div>
+          <div>小鱼儿管理后台</div>
         </Logo>
       </Link>
       <Menu
