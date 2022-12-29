@@ -11,6 +11,7 @@ import { NavigationBar } from "components/navigation-bar";
 import { RoleList } from "./role-list";
 import { AdminList } from "./admin-list";
 import { UserList } from "./user-list";
+import { ShopCategoryList } from "./shop-category-list/index";
 
 import {
   LockOutlined,
@@ -19,6 +20,8 @@ import {
   CaretDownOutlined,
   KeyOutlined,
   TeamOutlined,
+  ShopOutlined,
+  ApartmentOutlined,
 } from "@ant-design/icons";
 import logo from "assets/images/logo.png";
 import { UserInfo } from "types/auth";
@@ -46,6 +49,7 @@ export const AuthenticatedApp = () => {
               <Route path="auth/role_list" element={<RoleList />} />
               <Route path="auth/admin_list" element={<AdminList />} />
               <Route path="user_list" element={<UserList />} />
+              <Route path="shop/category_list" element={<ShopCategoryList />} />
               <Route
                 path={"*"}
                 element={<Navigate to={"user_list"} replace={true} />}
@@ -83,6 +87,18 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
       label: <Link to={"user_list"}>用户列表</Link>,
       key: "user_list",
       icon: <TeamOutlined />,
+    },
+    {
+      label: "店铺管理",
+      key: "shop",
+      icon: <ShopOutlined />,
+      children: [
+        {
+          label: <Link to={"shop/category_list"}>分类列表</Link>,
+          key: "shop_category_list",
+          icon: <ApartmentOutlined />,
+        },
+      ],
     },
   ];
 

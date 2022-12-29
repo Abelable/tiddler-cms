@@ -1,9 +1,8 @@
 import { Form, Input, Modal } from "antd";
 import { useForm } from "antd/lib/form/Form";
 import { ErrorBox, ModalLoading } from "components/lib";
-import { useAddRole } from "service/role";
+import { useAddRole, useEditRole } from "service/role";
 import { useRoleModal, useRolesQueryKey } from "../util";
-import { useEditRole } from "service/role";
 import { useEffect } from "react";
 
 export const RoleModal = () => {
