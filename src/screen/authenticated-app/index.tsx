@@ -11,7 +11,7 @@ import { NavigationBar } from "components/navigation-bar";
 import { RoleList } from "./role-list";
 import { AdminList } from "./admin-list";
 import { UserList } from "./user-list";
-import { ShopCategoryList } from "./shop-category-list/index";
+import { ShopCategoryList } from "./shop/category-list/index";
 
 import {
   LockOutlined,
