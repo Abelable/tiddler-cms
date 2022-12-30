@@ -1,5 +1,5 @@
 export interface OssConfig {
-  OSSAccessKeyId: string;
+  accessId: string;
   callback: string;
   dir: string;
   expire: number;

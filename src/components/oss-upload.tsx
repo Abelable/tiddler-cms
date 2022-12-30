@@ -12,7 +12,7 @@ export const OssUpload = (props: OssUploadProps) => {
   const getExtraData = (file: any) => {
     return {
       key: file.key,
-      OSSAccessKeyId: ossConfig?.OSSAccessKeyId,
+      OSSAccessKeyId: ossConfig?.accessId,
       policy: ossConfig?.policy,
       Signature: ossConfig?.signature,
     };

@@ -67,6 +67,11 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
 
   const items: MenuProps["items"] = [
     {
+      label: <Link to={"user_list"}>用户列表</Link>,
+      key: "user_list",
+      icon: <TeamOutlined />,
+    },
+    {
       label: "权限管理",
       key: "auth",
       icon: <LockOutlined />,
@@ -82,11 +87,6 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
           icon: <TeamOutlined />,
         },
       ],
-    },
-    {
-      label: <Link to={"user_list"}>用户列表</Link>,
-      key: "user_list",
-      icon: <TeamOutlined />,
     },
     {
       label: "店铺管理",
