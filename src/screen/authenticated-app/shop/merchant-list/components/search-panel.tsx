@@ -55,7 +55,7 @@ export const SearchPanel = ({ params, setParams }: SearchPanelProps) => {
   return (
     <Container>
       <Item>
-        <div>联系人/法人姓名：</div>
+        <div>联系人姓名：</div>
         <Input
           style={{ width: "20rem" }}
           value={tempParams.name}
@@ -65,7 +65,7 @@ export const SearchPanel = ({ params, setParams }: SearchPanelProps) => {
         />
       </Item>
       <Item>
-        <div>联系人/法人手机号：</div>
+        <div>联系人手机号：</div>
         <Input
           style={{ width: "20rem" }}
           value={tempParams.mobile}

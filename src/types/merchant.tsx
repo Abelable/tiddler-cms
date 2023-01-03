@@ -31,7 +31,7 @@ export interface MerchantDetail extends Merchant {
   bankCardOwnerName: string;
   bankName: string;
   shopName: string;
-  shopCategoryId: string;
+  shopCategoryId: number;
 }
 
 export interface MerchantsResult {

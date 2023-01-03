@@ -1,11 +1,20 @@
-import { Descriptions, Drawer, Image } from "antd";
+import { Descriptions, Drawer, Image, Space, Button } from "antd";
 import { ErrorBox, ModalLoading } from "components/lib";
 import dayjs from "dayjs";
-import { useMerchantModal } from "../util";
+import { useMerchantModal, useMerchantsQueryKey } from "../util";
+import { ShopCategoryOption } from "types/shopCategory";
+import { useApprovedMerchant } from "service/merchant";
 
-export const MerchantModal = () => {
+export const MerchantModal = ({
+  shopCategoryOptions,
+}: {
+  shopCategoryOptions: ShopCategoryOption[];
+}) => {
   const { close, merchantModalOpen, editingMerchant, error, isLoading } =
     useMerchantModal();
+  const { mutate: approvedMerchant } = useApprovedMerchant(
+    useMerchantsQueryKey()
+  );
 
   return (
     <Drawer
@@ -15,6 +24,29 @@ export const MerchantModal = () => {
       onClose={close}
       open={merchantModalOpen}
       bodyStyle={{ paddingBottom: 80 }}
+      extra={
+        editingMerchant?.status === 0 ? (
+          <Space>
+            <Button
+              onClick={() =>
+                editingMerchant && approvedMerchant(editingMerchant?.id)
+              }
+              type="primary"
+            >
+              审核通过
+            </Button>
+            <Button
+              onClick={() =>
+                editingMerchant && approvedMerchant(editingMerchant?.id)
+              }
+            >
+              驳回
+            </Button>
+          </Space>
+        ) : (
+          <></>
+        )
+      }
     >
       <ErrorBox error={error} />
       {isLoading ? (
@@ -189,7 +221,11 @@ export const MerchantModal = () => {
               {editingMerchant?.shopName}
             </Descriptions.Item>
             <Descriptions.Item label="店铺分类">
-              {editingMerchant?.shopCategoryId}
+              {
+                shopCategoryOptions.find(
+                  (item) => item.id === editingMerchant?.shopCategoryId
+                )?.name
+              }
             </Descriptions.Item>
           </Descriptions>
         </>

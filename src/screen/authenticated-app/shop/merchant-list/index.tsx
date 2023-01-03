@@ -1,7 +1,9 @@
 import styled from "@emotion/styled";
 import { useMerchants } from "service/merchant";
+import { useShopCategoryOptions } from "service/shopCategory";
 import { toNumber } from "utils";
 import { useMerchantsSearchParams } from "./util";
+
 import { MerchantModal } from "./components/merchant-modal";
 import { List } from "./components/list";
 import { SearchPanel } from "./components/search-panel";
@@ -9,6 +11,7 @@ import { SearchPanel } from "./components/search-panel";
 export const MerchantList = () => {
   const [params, setParams] = useMerchantsSearchParams();
   const { isLoading, error, data } = useMerchants(params);
+  const { data: shopCategoryOptions } = useShopCategoryOptions();
 
   return (
     <Container>
@@ -27,7 +30,7 @@ export const MerchantList = () => {
           }}
         />
       </Main>
-      <MerchantModal />
+      <MerchantModal shopCategoryOptions={shopCategoryOptions || []} />
     </Container>
   );
 };

@@ -30,7 +30,7 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
   return (
     <Container>
       <Header between={true}>
-        <PageTitle>管理员列表</PageTitle>
+        <PageTitle>商家列表</PageTitle>
       </Header>
       <ErrorBox error={error} />
       <Table
@@ -140,8 +140,12 @@ const More = ({ id }: { id: number }) => {
       key: "detail",
     },
     {
-      label: <div onClick={() => confirmApproved(id)}>审核通过</div>,
+      label: <div onClick={() => confirmApproved(id)}>通过</div>,
       key: "approved",
+    },
+    {
+      label: <div onClick={() => confirmApproved(id)}>驳回</div>,
+      key: "reject",
     },
   ];
 
