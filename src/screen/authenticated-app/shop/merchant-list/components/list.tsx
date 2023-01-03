@@ -61,7 +61,7 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
           },
           {
             title: "状态",
-            dataIndex: "type",
+            dataIndex: "status",
             render: (value) => (
               <>
                 {["待审核", "待支付", "支付成功", "审核失败"].find(
@@ -127,7 +127,7 @@ const More = ({ id }: { id: number }) => {
   const confirmApproved = (id: number) => {
     Modal.confirm({
       title: "商家审核通过确认",
-      content: "请确保已核实商家信息，在信息无误的情况下进行该操作",
+      content: "请确保在商家信息无误的情况下进行该操作",
       okText: "确定",
       cancelText: "取消",
       onOk: () => approvedMerchant(id),

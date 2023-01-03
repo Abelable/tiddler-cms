@@ -12,6 +12,7 @@ import { RoleList } from "./role-list";
 import { AdminList } from "./admin-list";
 import { UserList } from "./user-list";
 import { ShopCategoryList } from "./shop/category-list/index";
+import { MerchantList } from "./shop/merchant-list/index";
 
 import {
   LockOutlined,
@@ -50,6 +51,7 @@ export const AuthenticatedApp = () => {
               <Route path="auth/admin_list" element={<AdminList />} />
               <Route path="user_list" element={<UserList />} />
               <Route path="shop/category_list" element={<ShopCategoryList />} />
+              <Route path="shop/merchant_list" element={<MerchantList />} />
               <Route
                 path={"*"}
                 element={<Navigate to={"user_list"} replace={true} />}
@@ -97,6 +99,11 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
           label: <Link to={"shop/category_list"}>分类列表</Link>,
           key: "shop_category_list",
           icon: <ApartmentOutlined />,
+        },
+        {
+          label: <Link to={"shop/merchant_list"}>商家列表</Link>,
+          key: "merchant_list",
+          icon: <TeamOutlined />,
         },
       ],
     },
