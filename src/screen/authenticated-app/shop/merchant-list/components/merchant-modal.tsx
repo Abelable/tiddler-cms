@@ -62,7 +62,7 @@ export const MerchantModal = () => {
                   {editingMerchant?.email}
                 </Descriptions.Item>
                 <Descriptions.Item label="联系地址">
-                  {editingMerchant?.regionList}
+                  {editingMerchant?.regionCodeList}
                 </Descriptions.Item>
                 <Descriptions.Item label="详细地址">
                   {editingMerchant?.addressDetail}
@@ -76,7 +76,7 @@ export const MerchantModal = () => {
                   {editingMerchant?.companyName}
                 </Descriptions.Item>
                 <Descriptions.Item label="企业经营地址">
-                  {editingMerchant?.regionList}
+                  {editingMerchant?.regionCodeList}
                 </Descriptions.Item>
                 <Descriptions.Item label="企业地址详情">
                   {editingMerchant?.addressDetail}
@@ -113,6 +113,25 @@ export const MerchantModal = () => {
               </Descriptions>
             </>
           )}
+          <Descriptions title="银行信息" size={"small"} column={3}>
+            <Descriptions.Item label="持卡人姓名">
+              {editingMerchant?.bankCardOwnerName}
+            </Descriptions.Item>
+            <Descriptions.Item label="银行账号">
+              {editingMerchant?.bankCardNumber}
+            </Descriptions.Item>
+            <Descriptions.Item label="开户银行及支行名称">
+              {editingMerchant?.bankName}
+            </Descriptions.Item>
+          </Descriptions>
+          <Descriptions title="店铺信息" size={"small"} column={3}>
+            <Descriptions.Item label="店铺名称">
+              {editingMerchant?.shopName}
+            </Descriptions.Item>
+            <Descriptions.Item label="店铺分类">
+              {editingMerchant?.shopCategoryId}
+            </Descriptions.Item>
+          </Descriptions>
         </>
       )}
     </Drawer>

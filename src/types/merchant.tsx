@@ -18,7 +18,8 @@ export interface Merchant {
 
 export interface MerchantDetail extends Merchant {
   companyName: string;
-  regionList: string[];
+  regionDesc: string;
+  regionCodeList: string[];
   addressDetail: string;
   businessLicensePhoto: string;
   email: string;
