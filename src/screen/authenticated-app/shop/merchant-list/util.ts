@@ -57,3 +57,26 @@ export const useMerchantModal = () => {
     close,
   };
 };
+
+export const useRejectModal = () => {
+  const [{ rejectMerchantId }, setRejectMerchantId] = useUrlQueryParams([
+    "rejectMerchantId",
+  ]);
+  const setUrlParams = useSetUrlSearchParams();
+
+  const open = useCallback(
+    (id: number) => setRejectMerchantId({ rejectMerchantId: `${id}` }),
+    [setRejectMerchantId]
+  );
+  const close = useCallback(
+    () => setUrlParams({ rejectMerchantId: "" }),
+    [setUrlParams]
+  );
+
+  return {
+    merchantModalOpen: !!rejectMerchantId,
+    rejectMerchantId,
+    open,
+    close,
+  };
+};

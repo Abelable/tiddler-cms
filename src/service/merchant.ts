@@ -44,7 +44,7 @@ export const useRejectMerchant = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (params: { id: number; failureReason: string }) =>
-      client("role/edit", {
+      client("shop/merchant/reject", {
         data: params,
         method: "POST",
       }),

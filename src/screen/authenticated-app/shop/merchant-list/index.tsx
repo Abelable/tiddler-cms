@@ -7,6 +7,7 @@ import { useMerchantsSearchParams } from "./util";
 import { MerchantModal } from "./components/merchant-modal";
 import { List } from "./components/list";
 import { SearchPanel } from "./components/search-panel";
+import { RejectModal } from "./components/reject-modal";
 
 export const MerchantList = () => {
   const [params, setParams] = useMerchantsSearchParams();
@@ -31,6 +32,7 @@ export const MerchantList = () => {
         />
       </Main>
       <MerchantModal shopCategoryOptions={shopCategoryOptions || []} />
+      <RejectModal />
     </Container>
   );
 };

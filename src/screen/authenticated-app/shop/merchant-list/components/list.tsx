@@ -11,7 +11,11 @@ import {
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
 import dayjs from "dayjs";
 import { Merchant } from "types/merchant";
-import { useMerchantModal, useMerchantsQueryKey } from "../util";
+import {
+  useMerchantModal,
+  useMerchantsQueryKey,
+  useRejectModal,
+} from "../util";
 import { SearchPanelProps } from "./search-panel";
 import { useApprovedMerchant } from "service/merchant";
 
@@ -64,7 +68,7 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
             dataIndex: "status",
             render: (value) => (
               <>
-                {["待审核", "待支付", "支付成功", "审核失败"].find(
+                {["待审核", "待支付", "已完成", "已驳回"].find(
                   (item, index) => index === value
                 )}
               </>
@@ -72,8 +76,8 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
             filters: [
               { text: "待审核", value: 0 },
               { text: "待支付", value: 1 },
-              { text: "支付成功", value: 2 },
-              { text: "审核失败", value: 3 },
+              { text: "已完成", value: 2 },
+              { text: "已驳回", value: 3 },
             ],
             onFilter: (value, merchant) => merchant.status === value,
           },
@@ -106,7 +110,7 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
           {
             title: "操作",
             render(value, merchant) {
-              return <More id={merchant.id} />;
+              return <More id={merchant.id} status={merchant.status} />;
             },
             width: "8rem",
           },
@@ -118,11 +122,12 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
   );
 };
 
-const More = ({ id }: { id: number }) => {
+const More = ({ id, status }: { id: number; status: number }) => {
   const { open } = useMerchantModal();
   const { mutate: approvedMerchant } = useApprovedMerchant(
     useMerchantsQueryKey()
   );
+  const { open: openRejectModal } = useRejectModal();
 
   const confirmApproved = (id: number) => {
     Modal.confirm({
@@ -134,20 +139,28 @@ const More = ({ id }: { id: number }) => {
     });
   };
 
-  const items: MenuProps["items"] = [
-    {
-      label: <div onClick={() => open(id)}>详情</div>,
-      key: "detail",
-    },
-    {
-      label: <div onClick={() => confirmApproved(id)}>通过</div>,
-      key: "approved",
-    },
-    {
-      label: <div onClick={() => confirmApproved(id)}>驳回</div>,
-      key: "reject",
-    },
-  ];
+  const items: MenuProps["items"] =
+    status === 0
+      ? [
+          {
+            label: <div onClick={() => open(id)}>详情</div>,
+            key: "detail",
+          },
+          {
+            label: <div onClick={() => confirmApproved(id)}>通过</div>,
+            key: "approved",
+          },
+          {
+            label: <div onClick={() => openRejectModal(id)}>驳回</div>,
+            key: "reject",
+          },
+        ]
+      : [
+          {
+            label: <div onClick={() => open(id)}>详情</div>,
+            key: "detail",
+          },
+        ];
 
   return (
     <Dropdown overlay={<Menu items={items} />}>
