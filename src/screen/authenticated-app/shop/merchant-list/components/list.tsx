@@ -10,10 +10,10 @@ import {
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
 import dayjs from "dayjs";
-import { useDeleteMerchant } from "service/merchant";
 import { Merchant } from "types/merchant";
 import { useMerchantModal, useMerchantsQueryKey } from "../util";
 import { SearchPanelProps } from "./search-panel";
+import { useApprovedMerchant } from "service/merchant";
 
 interface ListProps extends TableProps<Merchant>, SearchPanelProps {
   error: Error | unknown;
@@ -120,15 +120,17 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
 
 const More = ({ id }: { id: number }) => {
   const { open } = useMerchantModal();
-  const { mutate: deleteMerchant } = useDeleteMerchant(useMerchantsQueryKey());
+  const { mutate: approvedMerchant } = useApprovedMerchant(
+    useMerchantsQueryKey()
+  );
 
-  const confirmDelete = (id: number) => {
+  const confirmApproved = (id: number) => {
     Modal.confirm({
-      title: "确定删除该用户吗？",
-      content: "点击确定删除",
+      title: "商家审核通过确认",
+      content: "请确保已核实商家信息，在信息无误的情况下进行该操作",
       okText: "确定",
       cancelText: "取消",
-      onOk: () => deleteMerchant(id),
+      onOk: () => approvedMerchant(id),
     });
   };
 
@@ -138,8 +140,8 @@ const More = ({ id }: { id: number }) => {
       key: "detail",
     },
     {
-      label: <div onClick={() => confirmDelete(id)}>删除</div>,
-      key: "delete",
+      label: <div onClick={() => confirmApproved(id)}>审核通过</div>,
+      key: "approved",
     },
   ];
 

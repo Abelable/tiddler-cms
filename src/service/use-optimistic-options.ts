@@ -52,19 +52,13 @@ export const useDeleteConfig = (queryKey: QueryKey) =>
     list: old.list.filter((item: any) => item.id !== target) || [],
   }));
 
-export const useEditDefaultWarningSettingConfig = () =>
-  useConfig(["default_warning_setting"], (target, old) => ({
-    ...old,
-    ...target,
-  }));
-
-export const useEditDeliversConfig = (queryKey: QueryKey) =>
-  useConfig(queryKey, (target, old) =>
+export const useApprovedMerchantConfig = (queryKey: QueryKey) =>
+  useConfig(queryKey, (id, old) =>
     old
       ? {
           ...old,
           list: old.list.map((item: any) =>
-            target.ids.includes(`${item.id}`) ? { ...item, ...target } : item
+            item.id === id ? { ...item, status: 1 } : item
           ),
         }
       : null

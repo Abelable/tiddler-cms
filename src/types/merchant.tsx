@@ -16,6 +16,23 @@ export interface Merchant {
   updatedAt: string;
 }
 
+export interface MerchantDetail extends Merchant {
+  companyName: string;
+  regionList: string[];
+  addressDetail: string;
+  businessLicensePhoto: string;
+  email: string;
+  idCardNumber: string;
+  idCardFrontPhoto: string;
+  idCardBackPhoto: string;
+  holdIdCardPhoto: string;
+  bankCardNumber: string;
+  bankCardOwnerName: string;
+  bankName: string;
+  shopName: string;
+  shopCategoryId: string;
+}
+
 export interface MerchantsResult {
   list: Merchant[];
   page: string;

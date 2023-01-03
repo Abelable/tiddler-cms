@@ -1,8 +1,11 @@
 import { QueryKey, useMutation, useQuery } from "react-query";
 import { useHttp } from "./http";
-import { useDeleteConfig } from "./use-optimistic-options";
+import {
+  useApprovedMerchantConfig,
+  useEditConfig,
+} from "./use-optimistic-options";
 import type {
-  Merchant,
+  MerchantDetail,
   MerchantsResult,
   MerchantsSearchParams,
 } from "types/merchant";
@@ -10,29 +13,41 @@ import type {
 export const useMerchants = (params: Partial<MerchantsSearchParams>) => {
   const client = useHttp();
   return useQuery<MerchantsResult>(["merchants", params], () =>
-    client("merchant/list", { data: params, method: "POST" })
+    client("shop/merchant/list", { data: params, method: "POST" })
   );
 };
 
 export const useMerchant = (id: number) => {
   const client = useHttp();
-  return useQuery<Partial<Merchant>>(
+  return useQuery<MerchantDetail>(
     ["merchant", { id }],
-    () => client(`merchant/detail`, { data: { id } }),
+    () => client(`shop/merchant/detail`, { data: { id } }),
     {
       enabled: !!id,
     }
   );
 };
 
-export const useDeleteMerchant = (queryKey: QueryKey) => {
+export const useApprovedMerchant = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (id: number) =>
-      client("merchant/delete", {
+      client("shop/merchant/approved", {
         data: { id },
         method: "POST",
       }),
-    useDeleteConfig(queryKey)
+    useApprovedMerchantConfig(queryKey)
+  );
+};
+
+export const useRejectMerchant = (queryKey: QueryKey) => {
+  const client = useHttp();
+  return useMutation(
+    (params: { id: number; failureReason: string }) =>
+      client("role/edit", {
+        data: params,
+        method: "POST",
+      }),
+    useEditConfig(queryKey)
   );
 };
