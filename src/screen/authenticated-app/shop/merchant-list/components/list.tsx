@@ -52,11 +52,11 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
             onFilter: (value, merchant) => merchant.type === value,
           },
           {
-            title: "联系人/法人姓名",
+            title: "联系人姓名",
             dataIndex: "name",
           },
           {
-            title: "联系人/法人手机号",
+            title: "联系人手机号",
             dataIndex: "mobile",
           },
           {
