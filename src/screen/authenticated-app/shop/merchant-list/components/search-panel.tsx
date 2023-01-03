@@ -1,16 +1,16 @@
-import type { UsersSearchParams } from "types/user";
+import type { MerchantsSearchParams } from "types/merchant";
 import { useState } from "react";
 import styled from "@emotion/styled";
 import { Row } from "components/lib";
 import { Button, Input } from "antd";
 
 export interface SearchPanelProps {
-  params: Partial<UsersSearchParams>;
-  setParams: (params: Partial<UsersSearchParams>) => void;
+  params: Partial<MerchantsSearchParams>;
+  setParams: (params: Partial<MerchantsSearchParams>) => void;
 }
 
-const defaultParmas: Partial<UsersSearchParams> = {
-  nickname: "",
+const defaultParmas: Partial<MerchantsSearchParams> = {
+  name: "",
   mobile: "",
 };
 
@@ -21,14 +21,14 @@ export const SearchPanel = ({ params, setParams }: SearchPanelProps) => {
     if (!evt.target.value && evt.type !== "change") {
       setTempParams({
         ...tempParams,
-        nickname: "",
+        name: "",
       });
       return;
     }
 
     setTempParams({
       ...tempParams,
-      nickname: evt.target.value,
+      name: evt.target.value,
     });
   };
 
@@ -55,22 +55,22 @@ export const SearchPanel = ({ params, setParams }: SearchPanelProps) => {
   return (
     <Container>
       <Item>
-        <div>用户昵称：</div>
+        <div>联系人/法人姓名：</div>
         <Input
           style={{ width: "20rem" }}
-          value={tempParams.nickname}
+          value={tempParams.name}
           onChange={setNickname}
-          placeholder="请输入用户昵称"
+          placeholder="请输入姓名"
           allowClear={true}
         />
       </Item>
       <Item>
-        <div>用户手机号：</div>
+        <div>联系人/法人手机号：</div>
         <Input
           style={{ width: "20rem" }}
           value={tempParams.mobile}
           onChange={setMobile}
-          placeholder="请输入用户手机号"
+          placeholder="请输入手机号"
           allowClear={true}
         />
       </Item>

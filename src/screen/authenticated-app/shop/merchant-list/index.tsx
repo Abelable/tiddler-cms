@@ -1,14 +1,14 @@
 import styled from "@emotion/styled";
-import { useUsers } from "service/user";
+import { useMerchants } from "service/merchant";
 import { toNumber } from "utils";
-import { useUsersSearchParams } from "./util";
-import { UserModal } from "./components/user-modal";
+import { useMerchantsSearchParams } from "./util";
+import { MerchantModal } from "./components/merchant-modal";
 import { List } from "./components/list";
 import { SearchPanel } from "./components/search-panel";
 
-export const UserList = () => {
-  const [params, setParams] = useUsersSearchParams();
-  const { isLoading, error, data } = useUsers(params);
+export const MerchantList = () => {
+  const [params, setParams] = useMerchantsSearchParams();
+  const { isLoading, error, data } = useMerchants(params);
 
   return (
     <Container>
@@ -27,7 +27,7 @@ export const UserList = () => {
           }}
         />
       </Main>
-      <UserModal />
+      <MerchantModal />
     </Container>
   );
 };

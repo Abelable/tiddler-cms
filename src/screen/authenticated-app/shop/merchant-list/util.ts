@@ -1,8 +1,8 @@
 import { useSetUrlSearchParams, useUrlQueryParams } from "utils/url";
 import { useCallback, useMemo } from "react";
-import { useUser } from "service/user";
+import { useMerchant } from "service/merchant";
 
-export const useUsersSearchParams = () => {
+export const useMerchantsSearchParams = () => {
   const [params, setParams] = useUrlQueryParams([
     "nickname",
     "mobile",
@@ -22,35 +22,35 @@ export const useUsersSearchParams = () => {
   ] as const;
 };
 
-export const useUsersQueryKey = () => {
-  const [params] = useUsersSearchParams();
-  return ["users", params];
+export const useMerchantsQueryKey = () => {
+  const [params] = useMerchantsSearchParams();
+  return ["merchants", params];
 };
 
-export const useUserModal = () => {
-  const [{ editingUserId }, setEditingUserId] = useUrlQueryParams([
-    "editingUserId",
+export const useMerchantModal = () => {
+  const [{ editingMerchantId }, setEditingMerchantId] = useUrlQueryParams([
+    "editingMerchantId",
   ]);
   const setUrlParams = useSetUrlSearchParams();
   const {
-    data: editingUser,
+    data: editingMerchant,
     isLoading,
     error,
-  } = useUser(Number(editingUserId));
+  } = useMerchant(Number(editingMerchantId));
 
   const open = useCallback(
-    (id: number) => setEditingUserId({ editingUserId: `${id}` }),
-    [setEditingUserId]
+    (id: number) => setEditingMerchantId({ editingMerchantId: `${id}` }),
+    [setEditingMerchantId]
   );
   const close = useCallback(
-    () => setUrlParams({ userCreate: "", editingUserId: "" }),
+    () => setUrlParams({ merchantCreate: "", editingMerchantId: "" }),
     [setUrlParams]
   );
 
   return {
-    userModalOpen: !!editingUserId,
-    editingUserId,
-    editingUser,
+    merchantModalOpen: !!editingMerchantId,
+    editingMerchantId,
+    editingMerchant,
     isLoading,
     error,
     open,

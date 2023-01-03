@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import {
-  Avatar,
   Dropdown,
   Menu,
   MenuProps,
@@ -11,13 +10,12 @@ import {
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
 import dayjs from "dayjs";
-import { useDeleteUser } from "service/user";
-import { User } from "types/user";
-import { useUserModal, useUsersQueryKey } from "../util";
-import { UserOutlined } from "@ant-design/icons";
+import { useDeleteMerchant } from "service/merchant";
+import { Merchant } from "types/merchant";
+import { useMerchantModal, useMerchantsQueryKey } from "../util";
 import { SearchPanelProps } from "./search-panel";
 
-interface ListProps extends TableProps<User>, SearchPanelProps {
+interface ListProps extends TableProps<Merchant>, SearchPanelProps {
   error: Error | unknown;
 }
 
@@ -44,37 +42,47 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
             width: "8rem",
           },
           {
-            title: "头像",
-            dataIndex: "avatar",
-            render: (value) => <Avatar src={value} icon={<UserOutlined />} />,
+            title: "商家类型",
+            dataIndex: "type",
+            render: (value) => <>{value === 1 ? "个人" : "企业"}</>,
+            filters: [
+              { text: "个人", value: 1 },
+              { text: "企业", value: 2 },
+            ],
+            onFilter: (value, merchant) => merchant.type === value,
           },
           {
-            title: "昵称",
-            dataIndex: "nickname",
+            title: "联系人/法人姓名",
+            dataIndex: "name",
           },
           {
-            title: "手机号",
+            title: "联系人/法人手机号",
             dataIndex: "mobile",
           },
           {
-            title: "性别",
-            dataIndex: "gender",
+            title: "状态",
+            dataIndex: "type",
             render: (value) => (
-              <>{value === 1 ? "男" : value === 2 ? "女" : "未知"}</>
+              <>
+                {["待审核", "待支付", "支付成功", "审核失败"].find(
+                  (item, index) => index === value
+                )}
+              </>
             ),
             filters: [
-              { text: "未知", value: 0 },
-              { text: "男", value: 1 },
-              { text: "女", value: 2 },
+              { text: "待审核", value: 0 },
+              { text: "待支付", value: 1 },
+              { text: "支付成功", value: 2 },
+              { text: "审核失败", value: 3 },
             ],
-            onFilter: (value, user) => user.gender === value,
+            onFilter: (value, merchant) => merchant.status === value,
           },
           {
-            title: "注册时间",
-            render: (value, user) => (
+            title: "入驻时间",
+            render: (value, merchant) => (
               <span>
-                {user.createdAt
-                  ? dayjs(user.createdAt).format("YYYY-MM-DD HH:mm:ss")
+                {merchant.createdAt
+                  ? dayjs(merchant.createdAt).format("YYYY-MM-DD HH:mm:ss")
                   : "无"}
               </span>
             ),
@@ -83,9 +91,22 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
               dayjs(a.createdAt).valueOf() - dayjs(b.createdAt).valueOf(),
           },
           {
+            title: "更新时间",
+            render: (value, merchant) => (
+              <span>
+                {merchant.updatedAt
+                  ? dayjs(merchant.updatedAt).format("YYYY-MM-DD HH:mm:ss")
+                  : "无"}
+              </span>
+            ),
+            width: "20rem",
+            sorter: (a, b) =>
+              dayjs(a.updatedAt).valueOf() - dayjs(b.updatedAt).valueOf(),
+          },
+          {
             title: "操作",
-            render(value, user) {
-              return <More id={user.id} />;
+            render(value, merchant) {
+              return <More id={merchant.id} />;
             },
             width: "8rem",
           },
@@ -98,8 +119,8 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
 };
 
 const More = ({ id }: { id: number }) => {
-  const { open } = useUserModal();
-  const { mutate: deleteUser } = useDeleteUser(useUsersQueryKey());
+  const { open } = useMerchantModal();
+  const { mutate: deleteMerchant } = useDeleteMerchant(useMerchantsQueryKey());
 
   const confirmDelete = (id: number) => {
     Modal.confirm({
@@ -107,7 +128,7 @@ const More = ({ id }: { id: number }) => {
       content: "点击确定删除",
       okText: "确定",
       cancelText: "取消",
-      onOk: () => deleteUser(id),
+      onOk: () => deleteMerchant(id),
     });
   };
 
