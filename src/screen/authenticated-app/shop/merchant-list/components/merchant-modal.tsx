@@ -1,13 +1,8 @@
-import { Descriptions, Drawer, Image, Space, Button } from "antd";
+import { Descriptions, Drawer, Image } from "antd";
 import { ErrorBox, ModalLoading } from "components/lib";
 import dayjs from "dayjs";
-import {
-  useMerchantModal,
-  useMerchantsQueryKey,
-  useRejectModal,
-} from "../util";
+import { useMerchantModal } from "../util";
 import { ShopCategoryOption } from "types/shopCategory";
-import { useApprovedMerchant } from "service/merchant";
 
 export const MerchantModal = ({
   shopCategoryOptions,
@@ -16,15 +11,6 @@ export const MerchantModal = ({
 }) => {
   const { close, merchantModalOpen, editingMerchant, error, isLoading } =
     useMerchantModal();
-  const { mutate: approvedMerchant } = useApprovedMerchant(
-    useMerchantsQueryKey()
-  );
-  const { open: openRejectModal } = useRejectModal();
-
-  const approved = (id: number) => {
-    approvedMerchant(id);
-    close();
-  };
 
   return (
     <Drawer
@@ -34,27 +20,6 @@ export const MerchantModal = ({
       onClose={close}
       open={merchantModalOpen}
       bodyStyle={{ paddingBottom: 80 }}
-      extra={
-        editingMerchant?.status === 0 ? (
-          <Space>
-            <Button
-              onClick={() => editingMerchant && approved(editingMerchant?.id)}
-              type="primary"
-            >
-              审核通过
-            </Button>
-            <Button
-              onClick={() =>
-                editingMerchant && openRejectModal(editingMerchant?.id)
-              }
-            >
-              驳回
-            </Button>
-          </Space>
-        ) : (
-          <></>
-        )
-      }
     >
       <ErrorBox error={error} />
       {isLoading ? (
