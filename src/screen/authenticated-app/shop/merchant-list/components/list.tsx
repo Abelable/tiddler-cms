@@ -69,14 +69,16 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
             dataIndex: "status",
             render: (value, merchant) =>
               value === 0 ? (
-                <span style={{ color: "green" }}>待审核</span>
+                <span style={{ color: "#87d068" }}>待审核</span>
               ) : value === 1 ? (
-                <span style={{ color: "blue" }}>待付款</span>
+                <span style={{ color: "#296BEF" }}>待付款</span>
               ) : value === 2 ? (
                 <span>已完成</span>
               ) : (
                 <Tooltip title={merchant.failureReason}>
-                  <span style={{ color: "red" }}>已驳回</span>
+                  <span style={{ color: "#f50", cursor: "pointer" }}>
+                    已驳回
+                  </span>
                 </Tooltip>
               ),
             filters: [
