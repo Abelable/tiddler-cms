@@ -74,7 +74,7 @@ export const useRejectModal = () => {
   );
 
   return {
-    merchantModalOpen: !!rejectMerchantId,
+    rejectModalOpen: !!rejectMerchantId,
     rejectMerchantId,
     open,
     close,

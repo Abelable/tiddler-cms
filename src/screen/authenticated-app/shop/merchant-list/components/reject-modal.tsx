@@ -5,7 +5,7 @@ import { useRejectModal, useMerchantsQueryKey } from "../util";
 
 export const RejectModal = () => {
   const [form] = useForm();
-  const { merchantModalOpen, rejectMerchantId, close } = useRejectModal();
+  const { rejectModalOpen, rejectMerchantId, close } = useRejectModal();
 
   const { mutateAsync, isLoading: mutateLoading } = useRejectMerchant(
     useMerchantsQueryKey()
@@ -27,7 +27,7 @@ export const RejectModal = () => {
     <Modal
       forceRender={true}
       title={"驳回商家申请"}
-      open={merchantModalOpen}
+      open={rejectModalOpen}
       confirmLoading={mutateLoading}
       onOk={confirm}
       onCancel={closeModal}
