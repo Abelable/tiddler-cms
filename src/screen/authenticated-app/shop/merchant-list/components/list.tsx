@@ -7,6 +7,7 @@ import {
   Table,
   TablePaginationConfig,
   TableProps,
+  Tooltip,
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
 import dayjs from "dayjs";
@@ -66,13 +67,18 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
           {
             title: "状态",
             dataIndex: "status",
-            render: (value) => (
-              <>
-                {["待审核", "待支付", "已完成", "已驳回"].find(
-                  (item, index) => index === value
-                )}
-              </>
-            ),
+            render: (value, merchant) =>
+              value === 0 ? (
+                <div style={{ color: "green" }}>待审核</div>
+              ) : value === 1 ? (
+                <div style={{ color: "blue" }}>待付款</div>
+              ) : value === 2 ? (
+                <>已完成</>
+              ) : (
+                <Tooltip title={merchant.failureReason}>
+                  <span style={{ color: "red" }}>已驳回</span>
+                </Tooltip>
+              ),
             filters: [
               { text: "待审核", value: 0 },
               { text: "待支付", value: 1 },
