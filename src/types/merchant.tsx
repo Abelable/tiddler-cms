@@ -41,3 +41,25 @@ export interface MerchantsResult {
   limit: string;
   total: string;
 }
+
+export interface MerchantOrdersSearchParams {
+  page: number;
+  limit: number;
+}
+
+export interface MerchantOrder {
+  id: number;
+  orderSn: string;
+  paymentAmount: string;
+  status: number;
+  payId: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface MerchantOrdersResult {
+  list: MerchantOrder[];
+  page: string;
+  limit: string;
+  total: string;
+}

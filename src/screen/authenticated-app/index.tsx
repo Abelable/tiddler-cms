@@ -13,6 +13,7 @@ import { AdminList } from "./admin-list";
 import { UserList } from "./user-list";
 import { ShopCategoryList } from "./shop/category-list/index";
 import { MerchantList } from "./shop/merchant-list/index";
+import { MerchantOrderList } from "./shop/merchant-order-list";
 
 import {
   LockOutlined,
@@ -23,6 +24,7 @@ import {
   TeamOutlined,
   ShopOutlined,
   ApartmentOutlined,
+  FileDoneOutlined,
 } from "@ant-design/icons";
 import logo from "assets/images/logo.png";
 import { UserInfo } from "types/auth";
@@ -52,6 +54,10 @@ export const AuthenticatedApp = () => {
               <Route path="user_list" element={<UserList />} />
               <Route path="shop/category_list" element={<ShopCategoryList />} />
               <Route path="shop/merchant_list" element={<MerchantList />} />
+              <Route
+                path="shop/merchant_order_list"
+                element={<MerchantOrderList />}
+              />
               <Route
                 path={"*"}
                 element={<Navigate to={"user_list"} replace={true} />}
@@ -104,6 +110,11 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
           label: <Link to={"shop/merchant_list"}>商家列表</Link>,
           key: "merchant_list",
           icon: <TeamOutlined />,
+        },
+        {
+          label: <Link to={"shop/merchant_order_list"}>订单列表</Link>,
+          key: "merchant_order_list",
+          icon: <FileDoneOutlined />,
         },
       ],
     },

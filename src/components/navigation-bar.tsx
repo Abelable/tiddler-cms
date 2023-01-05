@@ -10,6 +10,7 @@ const breadcrumbNameMap: { [key: string]: string } = {
   "/shop": "店铺管理",
   "/shop/category_list": "店铺分类列表",
   "/shop/merchant_list": "商家列表",
+  "/shop/merchant_order_list": "商家订单列表",
 };
 
 export const NavigationBar = () => {

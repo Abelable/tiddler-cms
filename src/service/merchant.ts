@@ -6,6 +6,8 @@ import {
 } from "./use-optimistic-options";
 import type {
   MerchantDetail,
+  MerchantOrdersResult,
+  MerchantOrdersSearchParams,
   MerchantsResult,
   MerchantsSearchParams,
 } from "types/merchant";
@@ -49,5 +51,14 @@ export const useRejectMerchant = (queryKey: QueryKey) => {
         method: "POST",
       }),
     useEditConfig(queryKey)
+  );
+};
+
+export const useMerchantOrders = (
+  params: Partial<MerchantOrdersSearchParams>
+) => {
+  const client = useHttp();
+  return useQuery<MerchantOrdersResult>(["merchant_orders", params], () =>
+    client("shop/merchant/order_list", { data: params, method: "POST" })
   );
 };
