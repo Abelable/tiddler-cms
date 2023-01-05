@@ -3,7 +3,6 @@ import { Table, TablePaginationConfig, TableProps, Tooltip } from "antd";
 import { ErrorBox, Row, PageTitle } from "components/lib";
 import dayjs from "dayjs";
 import { MerchantOrder } from "types/merchant";
-import { useMerchantOrdersQueryKey } from "../util";
 import { SearchPanelProps } from "./search-panel";
 
 interface ListProps extends TableProps<MerchantOrder>, SearchPanelProps {
