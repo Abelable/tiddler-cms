@@ -34,11 +34,11 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
           },
           {
             title: "订单编号",
-            dataIndex: "order_sn",
+            dataIndex: "orderSn",
           },
           {
             title: "支付金额（元）",
-            dataIndex: "payment_amount",
+            dataIndex: "paymentAmount",
           },
           {
             title: "状态",
@@ -92,7 +92,6 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
 };
 
 const Container = styled.div`
-  margin-top: 2.4rem;
   padding: 2.4rem;
   background: #fff;
 `;
