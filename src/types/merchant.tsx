@@ -11,6 +11,7 @@ export interface Merchant {
   name: string;
   mobile: string;
   status: number;
+  orderId: string;
   failureReason: string;
   createdAt: string;
   updatedAt: string;

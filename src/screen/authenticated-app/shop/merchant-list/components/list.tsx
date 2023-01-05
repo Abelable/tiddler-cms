@@ -71,9 +71,15 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
               value === 0 ? (
                 <span style={{ color: "#87d068" }}>待审核</span>
               ) : value === 1 ? (
-                <span style={{ color: "#296BEF" }}>待付款</span>
+                <Tooltip title={`订单id：${merchant.orderId}`}>
+                  <span style={{ color: "#296BEF", cursor: "pointer" }}>
+                    待付款
+                  </span>
+                </Tooltip>
               ) : value === 2 ? (
-                <span>已完成</span>
+                <Tooltip title={`订单id：${merchant.orderId}`}>
+                  <span style={{ cursor: "pointer" }}>已完成</span>
+                </Tooltip>
               ) : (
                 <Tooltip title={merchant.failureReason}>
                   <span style={{ color: "#f50", cursor: "pointer" }}>
