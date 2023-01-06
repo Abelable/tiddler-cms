@@ -1,5 +1,6 @@
 export interface ShopsSearchParams {
   name: string;
+  categoryId: number;
   page: number;
   limit: number;
 }

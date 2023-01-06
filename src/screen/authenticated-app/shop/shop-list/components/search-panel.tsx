@@ -1,22 +1,26 @@
-import type { MerchantsSearchParams } from "types/merchant";
+import type { ShopsSearchParams } from "types/shop";
 import { useState } from "react";
 import styled from "@emotion/styled";
 import { Row } from "components/lib";
-import { Button, Input } from "antd";
+import { Button, Input, Select } from "antd";
 import { ShopCategoryOption } from "types/shopCategory";
 
 export interface SearchPanelProps {
   shopCategoryOptions: ShopCategoryOption[];
-  params: Partial<MerchantsSearchParams>;
-  setParams: (params: Partial<MerchantsSearchParams>) => void;
+  params: Partial<ShopsSearchParams>;
+  setParams: (params: Partial<ShopsSearchParams>) => void;
 }
 
-const defaultParmas: Partial<MerchantsSearchParams> = {
+const defaultParmas: Partial<ShopsSearchParams> = {
   name: "",
-  mobile: "",
+  categoryId: undefined,
 };
 
-export const SearchPanel = ({ params, setParams }: SearchPanelProps) => {
+export const SearchPanel = ({
+  shopCategoryOptions,
+  params,
+  setParams,
+}: SearchPanelProps) => {
   const [tempParams, setTempParams] = useState(defaultParmas);
 
   const setNickname = (evt: any) => {
@@ -34,20 +38,10 @@ export const SearchPanel = ({ params, setParams }: SearchPanelProps) => {
     });
   };
 
-  const setMobile = (evt: any) => {
-    if (!evt.target.value && evt.type !== "change") {
-      setTempParams({
-        ...tempParams,
-        mobile: "",
-      });
-      return;
-    }
-
-    setTempParams({
-      ...tempParams,
-      mobile: evt.target.value,
-    });
-  };
+  const setCategory = (categoryId: number) =>
+    setTempParams({ ...tempParams, categoryId });
+  const clearCategory = () =>
+    setTempParams({ ...tempParams, categoryId: undefined });
 
   const clear = () => {
     setParams({ ...params, ...defaultParmas });
@@ -57,24 +51,31 @@ export const SearchPanel = ({ params, setParams }: SearchPanelProps) => {
   return (
     <Container>
       <Item>
-        <div>联系人姓名：</div>
+        <div>店铺名称：</div>
         <Input
           style={{ width: "20rem" }}
           value={tempParams.name}
           onChange={setNickname}
-          placeholder="请输入姓名"
+          placeholder="请输入店铺名称"
           allowClear={true}
         />
       </Item>
       <Item>
-        <div>联系人手机号：</div>
-        <Input
+        <div>店铺分类：</div>
+        <Select
           style={{ width: "20rem" }}
-          value={tempParams.mobile}
-          onChange={setMobile}
-          placeholder="请输入手机号"
+          value={tempParams.categoryId}
           allowClear={true}
-        />
+          onSelect={setCategory}
+          onClear={clearCategory}
+          placeholder="请选择店铺分类"
+        >
+          {shopCategoryOptions.map(({ id, name }) => (
+            <Select.Option key={id} value={id}>
+              {name}
+            </Select.Option>
+          ))}
+        </Select>
       </Item>
 
       <ButtonWrap gap={true}>
