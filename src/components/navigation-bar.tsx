@@ -7,10 +7,12 @@ const breadcrumbNameMap: { [key: string]: string } = {
   "/auth/role_list": "角色列表",
   "/auth/admin_list": "管理员列表",
   "/user_list": "用户列表",
+  "/merchant": "商家管理",
+  "/merchant/list": "商家列表",
+  "/merchant/order_list": "订单列表",
   "/shop": "店铺管理",
-  "/shop/category_list": "店铺分类列表",
-  "/shop/merchant_list": "商家列表",
-  "/shop/merchant_order_list": "商家订单列表",
+  "/shop/category_list": "分类列表",
+  "/shop/list": "店铺列表",
 };
 
 export const NavigationBar = () => {

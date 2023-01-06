@@ -11,9 +11,9 @@ import { NavigationBar } from "components/navigation-bar";
 import { RoleList } from "./role-list";
 import { AdminList } from "./admin-list";
 import { UserList } from "./user-list";
+import { MerchantList } from "./merchant/merchant-list/index";
+import { MerchantOrderList } from "./merchant/merchant-order-list/index";
 import { ShopCategoryList } from "./shop/category-list/index";
-import { MerchantList } from "./shop/merchant-list/index";
-import { MerchantOrderList } from "./shop/merchant-order-list";
 
 import {
   LockOutlined,
@@ -52,12 +52,12 @@ export const AuthenticatedApp = () => {
               <Route path="auth/role_list" element={<RoleList />} />
               <Route path="auth/admin_list" element={<AdminList />} />
               <Route path="user_list" element={<UserList />} />
-              <Route path="shop/category_list" element={<ShopCategoryList />} />
-              <Route path="shop/merchant_list" element={<MerchantList />} />
+              <Route path="merchant/list" element={<MerchantList />} />
               <Route
-                path="shop/merchant_order_list"
+                path="merchant/order_list"
                 element={<MerchantOrderList />}
               />
+              <Route path="shop/category_list" element={<ShopCategoryList />} />
               <Route
                 path={"*"}
                 element={<Navigate to={"user_list"} replace={true} />}
@@ -97,6 +97,23 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
       ],
     },
     {
+      label: "商家管理",
+      key: "merchant",
+      icon: <TeamOutlined />,
+      children: [
+        {
+          label: <Link to={"merchant/list"}>商家列表</Link>,
+          key: "merchant_list",
+          icon: <TeamOutlined />,
+        },
+        {
+          label: <Link to={"merchant/order_list"}>订单列表</Link>,
+          key: "merchant_order_list",
+          icon: <FileDoneOutlined />,
+        },
+      ],
+    },
+    {
       label: "店铺管理",
       key: "shop",
       icon: <ShopOutlined />,
@@ -107,14 +124,9 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
           icon: <ApartmentOutlined />,
         },
         {
-          label: <Link to={"shop/merchant_list"}>商家列表</Link>,
-          key: "merchant_list",
-          icon: <TeamOutlined />,
-        },
-        {
-          label: <Link to={"shop/merchant_order_list"}>订单列表</Link>,
-          key: "merchant_order_list",
-          icon: <FileDoneOutlined />,
+          label: <Link to={"shop/list"}>店铺列表</Link>,
+          key: "shop_list",
+          icon: <ShopOutlined />,
         },
       ],
     },

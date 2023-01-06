@@ -21,7 +21,7 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
   return (
     <Container>
       <Header between={true}>
-        <PageTitle>商家订单列表</PageTitle>
+        <PageTitle>订单列表</PageTitle>
       </Header>
       <ErrorBox error={error} />
       <Table
