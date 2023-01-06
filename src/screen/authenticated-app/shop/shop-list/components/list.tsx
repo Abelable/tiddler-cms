@@ -34,7 +34,7 @@ export const List = ({
   return (
     <Container>
       <Header between={true}>
-        <PageTitle>商家列表</PageTitle>
+        <PageTitle>店铺列表</PageTitle>
       </Header>
       <ErrorBox error={error} />
       <Table

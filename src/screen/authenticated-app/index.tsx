@@ -14,6 +14,7 @@ import { UserList } from "./user-list";
 import { MerchantList } from "./merchant/merchant-list/index";
 import { MerchantOrderList } from "./merchant/merchant-order-list/index";
 import { ShopCategoryList } from "./shop/category-list/index";
+import { ShopList } from "./shop/shop-list";
 
 import {
   LockOutlined,
@@ -58,6 +59,7 @@ export const AuthenticatedApp = () => {
                 element={<MerchantOrderList />}
               />
               <Route path="shop/category_list" element={<ShopCategoryList />} />
+              <Route path="shop/list" element={<ShopList />} />
               <Route
                 path={"*"}
                 element={<Navigate to={"user_list"} replace={true} />}
