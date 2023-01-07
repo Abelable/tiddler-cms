@@ -10,7 +10,6 @@ import {
   TableProps,
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
-import dayjs from "dayjs";
 import { useDeleteRole } from "service/role";
 import { Role, RolesSearchParams } from "types/role";
 import { useRoleModal, useRolesQueryKey } from "../util";
@@ -56,19 +55,6 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
           {
             title: "角色描述",
             dataIndex: "desc",
-          },
-          {
-            title: "添加时间",
-            render: (value, role) => (
-              <span>
-                {role.createdAt
-                  ? dayjs(role.createdAt).format("YYYY-MM-DD HH:mm:ss")
-                  : "无"}
-              </span>
-            ),
-            width: "20rem",
-            sorter: (a, b) =>
-              dayjs(a.createdAt).valueOf() - dayjs(b.createdAt).valueOf(),
           },
           {
             title: "操作",

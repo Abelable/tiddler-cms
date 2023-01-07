@@ -8,13 +8,14 @@ import { Routes, Route, Navigate } from "react-router";
 import { Avatar, Button, Dropdown, Layout, Menu, MenuProps } from "antd";
 import { NavigationBar } from "components/navigation-bar";
 
-import { RoleList } from "./role-list";
-import { AdminList } from "./admin-list";
+import { RoleList } from "./admin/role-list";
+import { AdminList } from "./admin/admin-list";
 import { UserList } from "./user-list";
 import { MerchantList } from "./merchant/merchant-list/index";
 import { MerchantOrderList } from "./merchant/merchant-order-list/index";
 import { ShopCategoryList } from "./shop/category-list/index";
 import { ShopList } from "./shop/shop-list";
+import { ExpressList } from "./goods/express-list";
 
 import {
   LockOutlined,
@@ -26,6 +27,8 @@ import {
   ShopOutlined,
   ApartmentOutlined,
   FileDoneOutlined,
+  ShoppingOutlined,
+  CarOutlined,
 } from "@ant-design/icons";
 import logo from "assets/images/logo.png";
 import { UserInfo } from "types/auth";
@@ -60,6 +63,7 @@ export const AuthenticatedApp = () => {
               />
               <Route path="shop/category_list" element={<ShopCategoryList />} />
               <Route path="shop/list" element={<ShopList />} />
+              <Route path="goods/express_list" element={<ExpressList />} />
               <Route
                 path={"*"}
                 element={<Navigate to={"user_list"} replace={true} />}
@@ -129,6 +133,18 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
           label: <Link to={"shop/list"}>店铺列表</Link>,
           key: "shop_list",
           icon: <ShopOutlined />,
+        },
+      ],
+    },
+    {
+      label: "商品管理",
+      key: "goods",
+      icon: <ShoppingOutlined />,
+      children: [
+        {
+          label: <Link to={"goods/express_list"}>快递列表</Link>,
+          key: "goods_express_list",
+          icon: <CarOutlined />,
         },
       ],
     },
