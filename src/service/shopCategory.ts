@@ -4,6 +4,7 @@ import type {
   ShopCategory,
   ShopCategoriesResult,
   ShopCategoriesSearchParams,
+  ShopCategoryOption,
 } from "types/shopCategory";
 import {
   useAddConfig,
@@ -11,7 +12,6 @@ import {
   useEditConfig,
 } from "./use-optimistic-options";
 import { cleanObject } from "utils/index";
-import { ShopCategoryOption } from "../types/shopCategory";
 
 export const useShopCategories = (
   params: Partial<ShopCategoriesSearchParams>
