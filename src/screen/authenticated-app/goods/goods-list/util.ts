@@ -4,9 +4,9 @@ import { useGoods } from "service/goods";
 
 export const useGoodsListSearchParams = () => {
   const [params, setParams] = useUrlQueryParams([
-    "nickname",
-    "account",
-    "roleId",
+    "name",
+    "categoryId",
+    "status",
     "page",
     "limit",
   ]);
