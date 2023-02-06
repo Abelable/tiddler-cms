@@ -19,7 +19,7 @@ export const GoodsList = () => {
   const { data: shopCategoryOptions } = useShopCategoryOptions();
   const statusOptions = [
     { text: "待审核", value: 0 },
-    { text: "售卖中", value: 1 },
+    { text: "出售中", value: 1 },
     { text: "未过审", value: 2 },
   ];
 

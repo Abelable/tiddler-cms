@@ -96,7 +96,7 @@ export const List = ({
               value === 0 ? (
                 <span style={{ color: "#87d068" }}>待审核</span>
               ) : value === 1 ? (
-                <span>售卖中</span>
+                <span>出售中</span>
               ) : (
                 <Tooltip title={goods.failureReason}>
                   <span style={{ color: "#f50", cursor: "pointer" }}>
@@ -106,7 +106,7 @@ export const List = ({
               ),
             filters: [
               { text: "待审核", value: 0 },
-              { text: "售卖中", value: 1 },
+              { text: "出售中", value: 1 },
               { text: "未过审", value: 2 },
             ],
             onFilter: (value, goods) => goods.status === value,
