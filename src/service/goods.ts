@@ -5,6 +5,7 @@ import {
   useApprovedConfig,
   useDeleteConfig,
   useEditConfig,
+  useRejectConfig,
 } from "./use-optimistic-options";
 import { cleanObject } from "utils/index";
 import type {
@@ -41,6 +42,18 @@ export const useApprovedGoods = (queryKey: QueryKey) => {
         method: "POST",
       }),
     useApprovedConfig(queryKey)
+  );
+};
+
+export const useRejectGoods = (queryKey: QueryKey) => {
+  const client = useHttp();
+  return useMutation(
+    (data: { id: number; failureReason: string }) =>
+      client("goods/reject", {
+        data,
+        method: "POST",
+      }),
+    useRejectConfig(queryKey)
   );
 };
 

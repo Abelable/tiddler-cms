@@ -9,6 +9,7 @@ import { useGoodsListSearchParams } from "./util";
 import { GoodsModal } from "./components/goods-modal";
 import { List } from "./components/list";
 import { SearchPanel } from "./components/search-panel";
+import { RejectModal } from "./components/reject-modal";
 
 export const GoodsList = () => {
   const [params, setParams] = useGoodsListSearchParams();
@@ -50,6 +51,7 @@ export const GoodsList = () => {
         goodsCategoryOptions={goodsCategoryOptions || []}
         shopCategoryOptions={shopCategoryOptions || []}
       />
+      <RejectModal />
     </Container>
   );
 };

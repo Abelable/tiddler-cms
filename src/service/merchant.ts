@@ -1,6 +1,10 @@
 import { QueryKey, useMutation, useQuery } from "react-query";
 import { useHttp } from "./http";
-import { useApprovedConfig, useEditConfig } from "./use-optimistic-options";
+import {
+  useApprovedConfig,
+  useEditConfig,
+  useRejectConfig,
+} from "./use-optimistic-options";
 import type {
   MerchantDetail,
   MerchantOrdersResult,
@@ -42,12 +46,12 @@ export const useApprovedMerchant = (queryKey: QueryKey) => {
 export const useRejectMerchant = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
-    (params: { id: number; failureReason: string }) =>
+    (data: { id: number; failureReason: string }) =>
       client("merchant/reject", {
-        data: params,
+        data,
         method: "POST",
       }),
-    useEditConfig(queryKey)
+    useRejectConfig(queryKey)
   );
 };
 
