@@ -1,9 +1,6 @@
 import { QueryKey, useMutation, useQuery } from "react-query";
 import { useHttp } from "./http";
-import {
-  useApprovedMerchantConfig,
-  useEditConfig,
-} from "./use-optimistic-options";
+import { useApprovedConfig, useEditConfig } from "./use-optimistic-options";
 import type {
   MerchantDetail,
   MerchantOrdersResult,
@@ -38,7 +35,7 @@ export const useApprovedMerchant = (queryKey: QueryKey) => {
         data: { id },
         method: "POST",
       }),
-    useApprovedMerchantConfig(queryKey)
+    useApprovedConfig(queryKey)
   );
 };
 
