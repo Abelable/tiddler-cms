@@ -17,6 +17,7 @@ import { ShopCategoryList } from "./shop/category-list/index";
 import { ShopList } from "./shop/shop-list";
 import { ExpressList } from "./goods/express-list";
 import { GoodsCategoryList } from "./goods/category-list";
+import { GoodsList } from "./goods/goods-list";
 
 import {
   LockOutlined,
@@ -69,6 +70,7 @@ export const AuthenticatedApp = () => {
                 path="goods/category_list"
                 element={<GoodsCategoryList />}
               />
+              <Route path="goods/list" element={<GoodsList />} />
               <Route
                 path={"*"}
                 element={<Navigate to={"user_list"} replace={true} />}
@@ -155,6 +157,11 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
           label: <Link to={"goods/category_list"}>分类列表</Link>,
           key: "goods_category_list",
           icon: <ApartmentOutlined />,
+        },
+        {
+          label: <Link to={"goods/list"}>商品列表</Link>,
+          key: "goods_list",
+          icon: <ShoppingOutlined />,
         },
       ],
     },

@@ -45,11 +45,13 @@ export const List = ({
       <ErrorBox error={error} />
       <Table
         rowKey={"id"}
+        scroll={{ x: 1500 }}
         columns={[
           {
             title: "id",
             dataIndex: "id",
             width: "8rem",
+            fixed: "left",
           },
           {
             title: "图片",
@@ -59,6 +61,7 @@ export const List = ({
           {
             title: "名称",
             dataIndex: "name",
+            width: "24rem",
           },
           {
             title: "分类",
@@ -84,13 +87,7 @@ export const List = ({
           {
             title: "销量",
             dataIndex: "salesVolume",
-          },
-          {
-            title: "状态",
-            dataIndex: "status",
-            render: (value) => (
-              <>{statusOptions.find((item) => item.value === value)?.text}</>
-            ),
+            sorter: (a, b) => Number(a) - Number(b),
           },
           {
             title: "状态",
@@ -114,7 +111,7 @@ export const List = ({
               { text: "售卖中", value: 1 },
               { text: "未过审", value: 2 },
             ],
-            onFilter: (value, merchant) => merchant.status === value,
+            onFilter: (value, goods) => goods.status === value,
           },
           {
             title: "添加时间",
@@ -148,6 +145,7 @@ export const List = ({
               return <More id={goods.id} status={goods.status} />;
             },
             width: "8rem",
+            fixed: "right",
           },
         ]}
         onChange={setPagination}
