@@ -40,7 +40,7 @@ export const GoodsModal = ({
                 <span style={{ color: "#87d068" }}>待审核</span>
               ) : editingGoods?.status === 1 ? (
                 <span style={{ color: "#296BEF", cursor: "pointer" }}>
-                  出售中
+                  售卖中
                 </span>
               ) : (
                 <Tooltip title={editingGoods?.failureReason}>
