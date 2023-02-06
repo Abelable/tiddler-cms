@@ -1,4 +1,6 @@
-import { Descriptions, Drawer, Image } from "antd";
+import { Descriptions, Divider, Drawer, Image, Avatar, Tooltip } from "antd";
+import { UserOutlined } from "@ant-design/icons";
+
 import { ErrorBox, ModalLoading } from "components/lib";
 import dayjs from "dayjs";
 import { useGoodsModal } from "../util";
@@ -30,188 +32,120 @@ export const GoodsModal = ({
         <ModalLoading />
       ) : (
         <>
+          <Divider orientation="left">商品信息</Divider>
+          <Descriptions size={"small"} column={2}>
+            <Descriptions.Item label="ID">{editingGoods?.id}</Descriptions.Item>
+            <Descriptions.Item label="状态">
+              {editingGoods?.status === 0 ? (
+                <span style={{ color: "#87d068" }}>待审核</span>
+              ) : editingGoods?.status === 1 ? (
+                <span style={{ color: "#296BEF", cursor: "pointer" }}>
+                  售卖中
+                </span>
+              ) : (
+                <Tooltip title={editingGoods?.failureReason}>
+                  <span style={{ color: "#f50", cursor: "pointer" }}>
+                    未过审
+                  </span>
+                </Tooltip>
+              )}
+            </Descriptions.Item>
+            <Descriptions.Item label="图片">
+              <Image width={68} src={editingGoods?.image} />
+            </Descriptions.Item>
+            <Descriptions.Item label="名称">
+              {editingGoods?.name}
+            </Descriptions.Item>
+            <Descriptions.Item label="分类">
+              {
+                goodsCategoryOptions.find(
+                  (item) => item.id === editingGoods?.categoryId
+                )?.name
+              }
+            </Descriptions.Item>
+            <Descriptions.Item label="价格">
+              {`¥${editingGoods?.price}`}
+            </Descriptions.Item>
+            <Descriptions.Item label="库存">
+              {editingGoods?.stock}
+            </Descriptions.Item>
+            <Descriptions.Item label="分佣">
+              {`${(editingGoods?.commissionRate as number) * 100}%`}
+            </Descriptions.Item>
+            <Descriptions.Item label="销量">
+              {editingGoods?.salesVolume}
+            </Descriptions.Item>
+            <Descriptions.Item label=""> </Descriptions.Item>
+            <Descriptions.Item label="添加时间">
+              {dayjs(editingGoods?.shopInfo?.createdAt).format(
+                "YYYY-MM-DD HH:mm:ss"
+              )}
+            </Descriptions.Item>
+            <Descriptions.Item label="更新时间">
+              {dayjs(editingGoods?.shopInfo?.updatedAt).format(
+                "YYYY-MM-DD HH:mm:ss"
+              )}
+            </Descriptions.Item>
+          </Descriptions>
+
+          <Divider orientation="left">店铺信息</Divider>
+          <Descriptions size={"small"} column={2}>
+            <Descriptions.Item label="ID">
+              {editingGoods?.shopInfo?.id}
+            </Descriptions.Item>
+            <Descriptions.Item label="店铺头像">
+              <Avatar
+                src={editingGoods?.shopInfo?.avatar}
+                icon={<UserOutlined />}
+                size="small"
+              />
+            </Descriptions.Item>
+            <Descriptions.Item label="店铺名称">
+              {editingGoods?.shopInfo?.name}
+            </Descriptions.Item>
+            <Descriptions.Item label="店铺分类">
+              {
+                shopCategoryOptions.find(
+                  (item) => item.id === editingGoods?.shopInfo?.categoryId
+                )?.name
+              }
+            </Descriptions.Item>
+            <Descriptions.Item label="注册时间">
+              {dayjs(editingGoods?.shopInfo?.createdAt).format(
+                "YYYY-MM-DD HH:mm:ss"
+              )}
+            </Descriptions.Item>
+            <Descriptions.Item label="更新时间">
+              {dayjs(editingGoods?.shopInfo?.updatedAt).format(
+                "YYYY-MM-DD HH:mm:ss"
+              )}
+            </Descriptions.Item>
+          </Descriptions>
+
+          <Divider orientation="left">商家信息</Divider>
           <Descriptions
             style={{ marginBottom: "3.2rem" }}
-            title="商家信息"
             size={"small"}
             column={2}
           >
-            <Descriptions
-              style={{ marginBottom: "3.2rem" }}
-              title="基础信息"
-              size={"small"}
-              column={2}
-            >
-              <Descriptions.Item label="ID">
-                {editingGoods?.id}
-              </Descriptions.Item>
-              <Descriptions.Item label="商家类型">
-                {editingGoods?.merchanctInfo?.type === 1 ? "个人" : "企业"}
-              </Descriptions.Item>
-              <Descriptions.Item label="入驻时间">
-                {dayjs(editingGoods?.createdAt).format("YYYY-MM-DD HH:mm:ss")}
-              </Descriptions.Item>
-              <Descriptions.Item label="更新时间">
-                {dayjs(editingGoods?.updatedAt).format("YYYY-MM-DD HH:mm:ss")}
-              </Descriptions.Item>
-            </Descriptions>
-            {editingGoods?.merchanctInfo?.type === 1 ? (
-              <>
-                <Descriptions
-                  style={{ marginBottom: "3.2rem" }}
-                  title="个人信息"
-                  size={"small"}
-                  column={2}
-                >
-                  <Descriptions.Item label="姓名">
-                    {editingGoods?.name}
-                  </Descriptions.Item>
-                  <Descriptions.Item label="身份证号">
-                    {editingGoods?.merchanctInfo.idCardNumber}
-                  </Descriptions.Item>
-                  <Descriptions.Item label="身份证正面照片">
-                    <Image
-                      width={132}
-                      height={86}
-                      src={editingGoods?.merchanctInfo.idCardFrontPhoto}
-                    />
-                  </Descriptions.Item>
-                  <Descriptions.Item label="身份证反面照片">
-                    <Image
-                      width={132}
-                      height={86}
-                      src={editingGoods?.merchanctInfo.idCardFrontPhoto}
-                    />
-                  </Descriptions.Item>
-                  <Descriptions.Item label="手持身份证照片">
-                    <Image
-                      width={132}
-                      height={86}
-                      src={editingGoods?.merchanctInfo.holdIdCardPhoto}
-                    />
-                  </Descriptions.Item>
-                </Descriptions>
-                <Descriptions
-                  style={{ marginBottom: "3.2rem" }}
-                  title="联系方式"
-                  size={"small"}
-                  column={2}
-                >
-                  <Descriptions.Item label="手机号">
-                    {editingGoods?.merchanctInfo.mobile}
-                  </Descriptions.Item>
-                  <Descriptions.Item label="邮箱">
-                    {editingGoods?.merchanctInfo.email}
-                  </Descriptions.Item>
-                  <Descriptions.Item label="联系地址">
-                    {editingGoods?.merchanctInfo.regionDesc}
-                  </Descriptions.Item>
-                  <Descriptions.Item label="详细地址">
-                    {editingGoods?.merchanctInfo.addressDetail}
-                  </Descriptions.Item>
-                </Descriptions>
-              </>
-            ) : (
-              <>
-                <Descriptions
-                  style={{ marginBottom: "3.2rem" }}
-                  title="企业信息"
-                  size={"small"}
-                  column={2}
-                >
-                  <Descriptions.Item label="企业名称">
-                    {editingGoods?.merchanctInfo?.companyName}
-                  </Descriptions.Item>
-                  <Descriptions.Item label="企业经营地址">
-                    {editingGoods?.merchanctInfo?.regionDesc}
-                  </Descriptions.Item>
-                  <Descriptions.Item label="企业地址详情">
-                    {editingGoods?.merchanctInfo?.addressDetail}
-                  </Descriptions.Item>
-                  <Descriptions.Item label="营业执照照片">
-                    <Image
-                      width={132}
-                      height={86}
-                      src={editingGoods?.merchanctInfo?.businessLicensePhoto}
-                    />
-                  </Descriptions.Item>
-                </Descriptions>
-                <Descriptions
-                  style={{ marginBottom: "3.2rem" }}
-                  title="法人信息"
-                  size={"small"}
-                  column={2}
-                >
-                  <Descriptions.Item label="姓名">
-                    {editingGoods?.merchanctInfo?.name}
-                  </Descriptions.Item>
-                  <Descriptions.Item label="手机号">
-                    {editingGoods?.merchanctInfo?.mobile}
-                  </Descriptions.Item>
-                  <Descriptions.Item label="邮箱">
-                    {editingGoods?.merchanctInfo?.email}
-                  </Descriptions.Item>
-                  <Descriptions.Item label="身份证号">
-                    {editingGoods?.merchanctInfo?.idCardNumber}
-                  </Descriptions.Item>
-                  <Descriptions.Item label="身份证正面照片">
-                    <Image
-                      width={132}
-                      height={86}
-                      src={editingGoods?.merchanctInfo?.idCardFrontPhoto}
-                    />
-                  </Descriptions.Item>
-                  <Descriptions.Item label="身份证反面照片">
-                    <Image
-                      width={132}
-                      height={86}
-                      src={editingGoods?.merchanctInfo?.idCardFrontPhoto}
-                    />
-                  </Descriptions.Item>
-                  <Descriptions.Item label="手持身份证照片">
-                    <Image
-                      width={132}
-                      height={86}
-                      src={editingGoods?.merchanctInfo?.holdIdCardPhoto}
-                    />
-                  </Descriptions.Item>
-                </Descriptions>
-              </>
-            )}
-            <Descriptions
-              style={{ marginBottom: "3.2rem" }}
-              title="银行信息"
-              size={"small"}
-              column={2}
-            >
-              <Descriptions.Item label="持卡人姓名">
-                {editingGoods?.merchanctInfo?.bankCardOwnerName}
-              </Descriptions.Item>
-              <Descriptions.Item label="银行账号">
-                {editingGoods?.merchanctInfo?.bankCardNumber}
-              </Descriptions.Item>
-              <Descriptions.Item label="开户银行及支行名称">
-                {editingGoods?.merchanctInfo?.bankName}
-              </Descriptions.Item>
-            </Descriptions>
-            <Descriptions
-              style={{ marginBottom: "3.2rem" }}
-              title="店铺信息"
-              size={"small"}
-              column={2}
-            >
-              <Descriptions.Item label="店铺名称">
-                {editingGoods?.merchanctInfo?.shopName}
-              </Descriptions.Item>
-              <Descriptions.Item label="店铺分类">
-                {
-                  shopCategoryOptions.find(
-                    (item) =>
-                      item.id === editingGoods?.merchanctInfo?.shopCategoryId
-                  )?.name
-                }
-              </Descriptions.Item>
-            </Descriptions>
+            <Descriptions.Item label="ID">
+              {editingGoods?.merchantInfo?.id}
+            </Descriptions.Item>
+            <Descriptions.Item label="商家类型">
+              {editingGoods?.merchantInfo?.type === 1 ? "个人" : "企业"}
+            </Descriptions.Item>
+            <Descriptions.Item label="联系人姓名">
+              {editingGoods?.merchantInfo?.name}
+            </Descriptions.Item>
+            <Descriptions.Item label="手机号">
+              {editingGoods?.merchantInfo?.mobile}
+            </Descriptions.Item>
+            <Descriptions.Item label="入驻时间">
+              {dayjs(editingGoods?.createdAt).format("YYYY-MM-DD HH:mm:ss")}
+            </Descriptions.Item>
+            <Descriptions.Item label="更新时间">
+              {dayjs(editingGoods?.updatedAt).format("YYYY-MM-DD HH:mm:ss")}
+            </Descriptions.Item>
           </Descriptions>
         </>
       )}

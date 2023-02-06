@@ -32,6 +32,6 @@ export interface GoodsListResult {
 }
 
 export interface GoodsDetail extends Goods {
-  shopInfo: Shop;
-  merchanctInfo: MerchantDetail;
+  shopInfo: Partial<Shop>;
+  merchantInfo: Partial<MerchantDetail>;
 }

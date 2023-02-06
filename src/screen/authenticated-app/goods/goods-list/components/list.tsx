@@ -56,7 +56,7 @@ export const List = ({
           {
             title: "图片",
             dataIndex: "image",
-            render: (value) => <Image width={68} height={68} src={value} />,
+            render: (value) => <Image width={68} src={value} />,
           },
           {
             title: "名称",
@@ -96,9 +96,7 @@ export const List = ({
               value === 0 ? (
                 <span style={{ color: "#87d068" }}>待审核</span>
               ) : value === 1 ? (
-                <span style={{ color: "#296BEF", cursor: "pointer" }}>
-                  售卖中
-                </span>
+                <span>售卖中</span>
               ) : (
                 <Tooltip title={goods.failureReason}>
                   <span style={{ color: "#f50", cursor: "pointer" }}>
