@@ -1,10 +1,6 @@
 import { QueryKey, useMutation, useQuery } from "react-query";
 import { useHttp } from "./http";
-import {
-  useApprovedConfig,
-  useEditConfig,
-  useRejectConfig,
-} from "./use-optimistic-options";
+import { useApprovedConfig, useRejectConfig } from "./use-optimistic-options";
 import type {
   MerchantDetail,
   MerchantOrdersResult,
