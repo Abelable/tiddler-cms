@@ -25,7 +25,7 @@ export const useGoodsListSearchParams = () => {
 
 export const useGoodsListQueryKey = () => {
   const [params] = useGoodsListSearchParams();
-  return ["goodss", params];
+  return ["goods_list", params];
 };
 
 export const useGoodsModal = () => {
