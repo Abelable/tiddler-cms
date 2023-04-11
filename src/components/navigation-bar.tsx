@@ -17,6 +17,8 @@ const breadcrumbNameMap: { [key: string]: string } = {
   "/goods/express_list": "快递列表",
   "/goods/category_list": "商品分类",
   "/goods/list": "商品列表",
+  "/scenic_spot": "景点管理",
+  "/scenic_spot/category_list": "景点分类",
 };
 
 export const NavigationBar = () => {

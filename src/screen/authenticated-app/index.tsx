@@ -18,6 +18,7 @@ import { ShopList } from "./shop/shop-list";
 import { ExpressList } from "./goods/express-list";
 import { GoodsCategoryList } from "./goods/category-list";
 import { GoodsList } from "./goods/goods-list";
+import { ScenicCategoryList } from "./scenic-spot/category-list";
 
 import {
   LockOutlined,
@@ -31,10 +32,10 @@ import {
   FileDoneOutlined,
   ShoppingOutlined,
 } from "@ant-design/icons";
+import { ExpressIcon, ScenicSpotIcon } from "assets/icon";
 import logo from "assets/images/logo.png";
 import { UserInfo } from "types/auth";
 import { Row } from "components/lib";
-import { ExpressIcon } from "assets/icon";
 
 export const AuthenticatedApp = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -71,6 +72,10 @@ export const AuthenticatedApp = () => {
                 element={<GoodsCategoryList />}
               />
               <Route path="goods/list" element={<GoodsList />} />
+              <Route
+                path="scenic_spot/category_list"
+                element={<ScenicCategoryList />}
+              />
               <Route
                 path={"*"}
                 element={<Navigate to={"user_list"} replace={true} />}
@@ -155,6 +160,18 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
           label: <Link to={"goods/list"}>商品列表</Link>,
           key: "goods_list",
           icon: <ShoppingOutlined />,
+        },
+      ],
+    },
+    {
+      label: "景点管理",
+      key: "scenic_spot",
+      icon: <ScenicSpotIcon />,
+      children: [
+        {
+          label: <Link to={"scenic_spot/category_list"}>景点分类</Link>,
+          key: "scenic_category_list",
+          icon: <AppstoreOutlined />,
         },
       ],
     },
