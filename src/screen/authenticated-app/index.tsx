@@ -19,6 +19,7 @@ import { ExpressList } from "./goods/express-list";
 import { GoodsCategoryList } from "./goods/category-list";
 import { GoodsList } from "./goods/goods-list";
 import { ScenicCategoryList } from "./scenic-spot/category-list";
+import { ScenicTicketCategoryList } from "./scenic-ticket/category-list";
 
 import {
   LockOutlined,
@@ -32,7 +33,7 @@ import {
   FileDoneOutlined,
   ShoppingOutlined,
 } from "@ant-design/icons";
-import { ExpressIcon, ScenicSpotIcon } from "assets/icon";
+import { ExpressIcon, ScenicSpotIcon, TicketIcon } from "assets/icon";
 import logo from "assets/images/logo.png";
 import { UserInfo } from "types/auth";
 import { Row } from "components/lib";
@@ -75,6 +76,10 @@ export const AuthenticatedApp = () => {
               <Route
                 path="scenic_spot/category_list"
                 element={<ScenicCategoryList />}
+              />
+              <Route
+                path="scenic_ticket/category_list"
+                element={<ScenicTicketCategoryList />}
               />
               <Route
                 path={"*"}
@@ -171,6 +176,18 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
         {
           label: <Link to={"scenic_spot/category_list"}>景点分类</Link>,
           key: "scenic_category_list",
+          icon: <AppstoreOutlined />,
+        },
+      ],
+    },
+    {
+      label: "门票管理",
+      key: "scenic_ticket",
+      icon: <TicketIcon />,
+      children: [
+        {
+          label: <Link to={"scenic_ticket/category_list"}>门票分类</Link>,
+          key: "scenic_ticket_category_list",
           icon: <AppstoreOutlined />,
         },
       ],

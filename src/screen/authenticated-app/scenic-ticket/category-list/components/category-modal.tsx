@@ -52,9 +52,7 @@ export const ScenicTicketCategoryModal = () => {
   return (
     <Modal
       forceRender={true}
-      title={
-        editingScenicTicketCategoryId ? "编辑景点门票分类" : "新增景点门票分类"
-      }
+      title={editingScenicTicketCategoryId ? "编辑门票分类" : "新增门票分类"}
       open={scenicTicketCategoryModalOpen}
       confirmLoading={mutateLoading}
       onOk={confirm}
@@ -66,11 +64,11 @@ export const ScenicTicketCategoryModal = () => {
       ) : (
         <Form form={form} layout="vertical">
           <Form.Item
-            label={"景点门票分类名称"}
+            label={"门票分类名称"}
             name={"name"}
-            rules={[{ required: true, message: "请输入景点门票分类名称" }]}
+            rules={[{ required: true, message: "请输入门票分类名称" }]}
           >
-            <Input placeholder={"请输入景点门票分类名称"} />
+            <Input placeholder={"请输入门票分类名称"} />
           </Form.Item>
         </Form>
       )}
