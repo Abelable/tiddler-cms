@@ -27,15 +27,14 @@ import {
   MehOutlined,
   TeamOutlined,
   ShopOutlined,
-  ApartmentOutlined,
+  AppstoreOutlined,
   FileDoneOutlined,
   ShoppingOutlined,
-  CarOutlined,
 } from "@ant-design/icons";
 import logo from "assets/images/logo.png";
 import { UserInfo } from "types/auth";
 import { Row } from "components/lib";
-import { ShopManagementIcon } from "assets/icon";
+import { ExpressIcon } from "assets/icon";
 
 export const AuthenticatedApp = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -113,7 +112,7 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
     {
       label: "店铺管理",
       key: "shop",
-      icon: <ShopManagementIcon style={{ color: "#fff" }} />,
+      icon: <ShopOutlined />,
       children: [
         {
           label: <Link to={"shop/merchant_list"}>商家列表</Link>,
@@ -128,7 +127,7 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
         {
           label: <Link to={"shop/category_list"}>店铺分类</Link>,
           key: "shop_category_list",
-          icon: <ApartmentOutlined />,
+          icon: <AppstoreOutlined />,
         },
         {
           label: <Link to={"shop/list"}>店铺列表</Link>,
@@ -145,12 +144,12 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
         {
           label: <Link to={"goods/express_list"}>快递列表</Link>,
           key: "goods_express_list",
-          icon: <CarOutlined />,
+          icon: <ExpressIcon />,
         },
         {
-          label: <Link to={"goods/category_list"}>分类列表</Link>,
+          label: <Link to={"goods/category_list"}>商品分类</Link>,
           key: "goods_category_list",
-          icon: <ApartmentOutlined />,
+          icon: <AppstoreOutlined />,
         },
         {
           label: <Link to={"goods/list"}>商品列表</Link>,

@@ -11,11 +11,11 @@ const breadcrumbNameMap: { [key: string]: string } = {
   "/shop": "店铺管理",
   "shop/merchant_list": "商家列表",
   "shop/merchant_order_list": "订单列表",
-  "/shop/category_list": "分类列表",
+  "/shop/category_list": "店铺分类",
   "/shop/list": "店铺列表",
   "/goods": "商品管理",
   "/goods/express_list": "快递列表",
-  "/goods/category_list": "分类列表",
+  "/goods/category_list": "商品分类",
   "/goods/list": "商品列表",
 };
 
