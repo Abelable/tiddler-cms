@@ -11,9 +11,12 @@ import {
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
 import dayjs from "dayjs";
-import { useDeleteGoodsCategory } from "service/goodsCategory";
+import { useDeleteScenicTicketCategory } from "service/scenicTicketCategory";
 import { Category, CategoriesSearchParams } from "types/category";
-import { useGoodsCategoryModal, useGoodsCategoriesQueryKey } from "../util";
+import {
+  useScenicTicketCategoryModal,
+  useScenicTicketCategoriesQueryKey,
+} from "../util";
 import { PlusOutlined } from "@ant-design/icons";
 
 interface ListProps extends TableProps<Category> {
@@ -23,7 +26,7 @@ interface ListProps extends TableProps<Category> {
 }
 
 export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
-  const { open } = useGoodsCategoryModal();
+  const { open } = useScenicTicketCategoryModal();
 
   const setPagination = (pagination: TablePaginationConfig) =>
     setParams({
@@ -35,7 +38,7 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
   return (
     <Container>
       <Header between={true}>
-        <PageTitle>商品分类</PageTitle>
+        <PageTitle>景点门票分类</PageTitle>
         <Button onClick={() => open()} type={"primary"} icon={<PlusOutlined />}>
           新增
         </Button>
@@ -50,7 +53,7 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
             width: "8rem",
           },
           {
-            title: "商品分类名称",
+            title: "景点门票分类名称",
             dataIndex: "name",
           },
           {
@@ -82,14 +85,14 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
 };
 
 const More = ({ id }: { id: number }) => {
-  const { startEdit } = useGoodsCategoryModal();
-  const { mutate: deleteRole } = useDeleteGoodsCategory(
-    useGoodsCategoriesQueryKey()
+  const { startEdit } = useScenicTicketCategoryModal();
+  const { mutate: deleteRole } = useDeleteScenicTicketCategory(
+    useScenicTicketCategoriesQueryKey()
   );
 
   const confirmDelete = (id: number) => {
     Modal.confirm({
-      title: "确定删除该商品分类吗？",
+      title: "确定删除该景点门票分类吗？",
       content: "点击确定删除",
       okText: "确定",
       cancelText: "取消",

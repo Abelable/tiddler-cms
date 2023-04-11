@@ -1,8 +1,8 @@
 import { useSetUrlSearchParams, useUrlQueryParams } from "utils/url";
 import { useCallback, useMemo } from "react";
-import { useGoodsCategory } from "service/goodsCategory";
+import { useScenicTicketCategory } from "service/scenicTicketCategory";
 
-export const useGoodsCategoriesSearchParams = () => {
+export const useScenicTicketCategoriesSearchParams = () => {
   const [params, setParams] = useUrlQueryParams(["page", "limit"]);
   return [
     useMemo(
@@ -16,40 +16,46 @@ export const useGoodsCategoriesSearchParams = () => {
   ] as const;
 };
 
-export const useGoodsCategoriesQueryKey = () => {
-  const [params] = useGoodsCategoriesSearchParams();
-  return ["goods_categories", params];
+export const useScenicTicketCategoriesQueryKey = () => {
+  const [params] = useScenicTicketCategoriesSearchParams();
+  return ["scenic_ticket_categories", params];
 };
 
-export const useGoodsCategoryModal = () => {
-  const [{ goodsCategoryCreate }, setGoodsCategoryModalOpen] =
-    useUrlQueryParams(["goodsCategoryCreate"]);
-  const [{ editingGoodsCategoryId }, setEditingGoodsCategoryId] =
-    useUrlQueryParams(["editingGoodsCategoryId"]);
+export const useScenicTicketCategoryModal = () => {
+  const [{ scenicTicketCategoryCreate }, setScenicTicketCategoryModalOpen] =
+    useUrlQueryParams(["scenicTicketCategoryCreate"]);
+  const [{ editingScenicTicketCategoryId }, setEditingScenicTicketCategoryId] =
+    useUrlQueryParams(["editingScenicTicketCategoryId"]);
   const setUrlParams = useSetUrlSearchParams();
-  const { data: editingGoodsCategory, isLoading } = useGoodsCategory(
-    Number(editingGoodsCategoryId)
-  );
+  const { data: editingScenicTicketCategory, isLoading } =
+    useScenicTicketCategory(Number(editingScenicTicketCategoryId));
 
   const open = useCallback(
-    () => setGoodsCategoryModalOpen({ goodsCategoryCreate: true }),
-    [setGoodsCategoryModalOpen]
+    () =>
+      setScenicTicketCategoryModalOpen({ scenicTicketCategoryCreate: true }),
+    [setScenicTicketCategoryModalOpen]
   );
   const startEdit = useCallback(
     (id: number) =>
-      setEditingGoodsCategoryId({ editingGoodsCategoryId: `${id}` }),
-    [setEditingGoodsCategoryId]
+      setEditingScenicTicketCategoryId({
+        editingScenicTicketCategoryId: `${id}`,
+      }),
+    [setEditingScenicTicketCategoryId]
   );
   const close = useCallback(
-    () => setUrlParams({ goodsCategoryCreate: "", editingGoodsCategoryId: "" }),
+    () =>
+      setUrlParams({
+        scenicTicketCategoryCreate: "",
+        editingScenicTicketCategoryId: "",
+      }),
     [setUrlParams]
   );
 
   return {
-    goodsCategoryModalOpen:
-      goodsCategoryCreate === "true" || !!editingGoodsCategoryId,
-    editingGoodsCategoryId,
-    editingGoodsCategory,
+    scenicTicketCategoryModalOpen:
+      scenicTicketCategoryCreate === "true" || !!editingScenicTicketCategoryId,
+    editingScenicTicketCategoryId,
+    editingScenicTicketCategory,
     isLoading,
     open,
     startEdit,

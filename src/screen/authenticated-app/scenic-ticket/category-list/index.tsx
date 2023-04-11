@@ -1,13 +1,13 @@
 import styled from "@emotion/styled";
-import { useGoodsCategories } from "service/goodsCategory";
+import { useScenicTicketCategories } from "service/scenicTicketCategory";
 import { toNumber } from "utils";
 import { List } from "./components/list";
-import { GoodsCategoryModal } from "./components/category-modal";
-import { useGoodsCategoriesSearchParams } from "./util";
+import { ScenicTicketCategoryModal } from "./components/category-modal";
+import { useScenicTicketCategoriesSearchParams } from "./util";
 
-export const GoodsCategoryList = () => {
-  const [params, setParams] = useGoodsCategoriesSearchParams();
-  const { isLoading, error, data } = useGoodsCategories(params);
+export const ScenicTicketCategoryList = () => {
+  const [params, setParams] = useScenicTicketCategoriesSearchParams();
+  const { isLoading, error, data } = useScenicTicketCategories(params);
 
   return (
     <Container>
@@ -25,7 +25,7 @@ export const GoodsCategoryList = () => {
           }}
         />
       </Main>
-      <GoodsCategoryModal />
+      <ScenicTicketCategoryModal />
     </Container>
   );
 };

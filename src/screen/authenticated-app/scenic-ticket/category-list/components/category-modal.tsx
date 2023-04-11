@@ -2,38 +2,44 @@ import { Form, Input, Modal } from "antd";
 import { useForm } from "antd/lib/form/Form";
 import { ErrorBox, ModalLoading } from "components/lib";
 import {
-  useAddGoodsCategory,
-  useEditGoodsCategory,
-} from "service/goodsCategory";
-import { useGoodsCategoryModal, useGoodsCategoriesQueryKey } from "../util";
+  useAddScenicTicketCategory,
+  useEditScenicTicketCategory,
+} from "service/scenicTicketCategory";
+import {
+  useScenicTicketCategoryModal,
+  useScenicTicketCategoriesQueryKey,
+} from "../util";
 import { useEffect } from "react";
 
-export const GoodsCategoryModal = () => {
+export const ScenicTicketCategoryModal = () => {
   const [form] = useForm();
   const {
-    goodsCategoryModalOpen,
-    editingGoodsCategory,
-    editingGoodsCategoryId,
+    scenicTicketCategoryModalOpen,
+    editingScenicTicketCategory,
+    editingScenicTicketCategoryId,
     isLoading,
     close,
-  } = useGoodsCategoryModal();
+  } = useScenicTicketCategoryModal();
 
-  const useMutateRole = editingGoodsCategoryId
-    ? useEditGoodsCategory
-    : useAddGoodsCategory;
+  const useMutateRole = editingScenicTicketCategoryId
+    ? useEditScenicTicketCategory
+    : useAddScenicTicketCategory;
   const {
     mutateAsync,
     isLoading: mutateLoading,
     error,
-  } = useMutateRole(useGoodsCategoriesQueryKey());
+  } = useMutateRole(useScenicTicketCategoriesQueryKey());
 
   useEffect(() => {
-    form.setFieldsValue(editingGoodsCategory);
-  }, [editingGoodsCategory, form]);
+    form.setFieldsValue(editingScenicTicketCategory);
+  }, [editingScenicTicketCategory, form]);
 
   const confirm = () => {
     form.validateFields().then(async () => {
-      await mutateAsync({ ...editingGoodsCategory, ...form.getFieldsValue() });
+      await mutateAsync({
+        ...editingScenicTicketCategory,
+        ...form.getFieldsValue(),
+      });
       closeModal();
     });
   };
@@ -46,8 +52,10 @@ export const GoodsCategoryModal = () => {
   return (
     <Modal
       forceRender={true}
-      title={editingGoodsCategoryId ? "编辑商品分类" : "新增商品分类"}
-      open={goodsCategoryModalOpen}
+      title={
+        editingScenicTicketCategoryId ? "编辑景点门票分类" : "新增景点门票分类"
+      }
+      open={scenicTicketCategoryModalOpen}
       confirmLoading={mutateLoading}
       onOk={confirm}
       onCancel={closeModal}
@@ -58,11 +66,11 @@ export const GoodsCategoryModal = () => {
       ) : (
         <Form form={form} layout="vertical">
           <Form.Item
-            label={"商品分类名称"}
+            label={"景点门票分类名称"}
             name={"name"}
-            rules={[{ required: true, message: "请输入商品分类名称" }]}
+            rules={[{ required: true, message: "请输入景点门票分类名称" }]}
           >
-            <Input placeholder={"请输入商品分类名称"} />
+            <Input placeholder={"请输入景点门票分类名称"} />
           </Form.Item>
         </Form>
       )}
