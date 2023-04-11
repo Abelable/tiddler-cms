@@ -4,10 +4,10 @@ import { Row } from "components/lib";
 import { Button, Input, Select } from "antd";
 
 import type { GoodsListSearchParams } from "types/goods";
-import type { GoodsCategoryOption } from "types/goodsCategory";
+import type { CategoryOption } from "types/category";
 
 export interface SearchPanelProps {
-  categoryOptions: GoodsCategoryOption[];
+  categoryOptions: CategoryOption[];
   statusOptions: { text: string; value: number }[];
   params: Partial<GoodsListSearchParams>;
   setParams: (params: Partial<GoodsListSearchParams>) => void;

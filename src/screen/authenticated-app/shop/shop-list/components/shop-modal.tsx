@@ -3,12 +3,12 @@ import { ErrorBox, ModalLoading } from "components/lib";
 import { UserOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
 import { useShopModal } from "../util";
-import { ShopCategoryOption } from "types/shopCategory";
+import { CategoryOption } from "types/category";
 
 export const ShopModal = ({
   shopCategoryOptions,
 }: {
-  shopCategoryOptions: ShopCategoryOption[];
+  shopCategoryOptions: CategoryOption[];
 }) => {
   const { close, shopModalOpen, editingShop, error, isLoading } =
     useShopModal();

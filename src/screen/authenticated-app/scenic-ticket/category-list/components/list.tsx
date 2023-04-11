@@ -12,16 +12,13 @@ import {
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
 import dayjs from "dayjs";
 import { useDeleteGoodsCategory } from "service/goodsCategory";
-import {
-  GoodsCategory,
-  GoodsCategoriesSearchParams,
-} from "types/goodsCategory";
+import { Category, CategoriesSearchParams } from "types/category";
 import { useGoodsCategoryModal, useGoodsCategoriesQueryKey } from "../util";
 import { PlusOutlined } from "@ant-design/icons";
 
-interface ListProps extends TableProps<GoodsCategory> {
-  params: Partial<GoodsCategoriesSearchParams>;
-  setParams: (params: Partial<GoodsCategoriesSearchParams>) => void;
+interface ListProps extends TableProps<Category> {
+  params: Partial<CategoriesSearchParams>;
+  setParams: (params: Partial<CategoriesSearchParams>) => void;
   error: Error | unknown;
 }
 

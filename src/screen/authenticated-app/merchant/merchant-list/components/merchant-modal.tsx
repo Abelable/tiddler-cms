@@ -2,12 +2,12 @@ import { Descriptions, Drawer, Image } from "antd";
 import { ErrorBox, ModalLoading } from "components/lib";
 import dayjs from "dayjs";
 import { useMerchantModal } from "../util";
-import { ShopCategoryOption } from "types/shopCategory";
+import { CategoryOption } from "types/category";
 
 export const MerchantModal = ({
   shopCategoryOptions,
 }: {
-  shopCategoryOptions: ShopCategoryOption[];
+  shopCategoryOptions: CategoryOption[];
 }) => {
   const { close, merchantModalOpen, editingMerchant, error, isLoading } =
     useMerchantModal();

@@ -1,11 +1,11 @@
 import { QueryKey, useMutation, useQuery } from "react-query";
 import { useHttp } from "./http";
 import type {
-  ShopCategory,
-  ShopCategoriesResult,
-  ShopCategoriesSearchParams,
-  ShopCategoryOption,
-} from "types/shopCategory";
+  Category,
+  CategoriesResult,
+  CategoriesSearchParams,
+  CategoryOption,
+} from "types/category";
 import {
   useAddConfig,
   useDeleteConfig,
@@ -13,18 +13,16 @@ import {
 } from "./use-optimistic-options";
 import { cleanObject } from "utils/index";
 
-export const useShopCategories = (
-  params: Partial<ShopCategoriesSearchParams>
-) => {
+export const useShopCategories = (params: Partial<CategoriesSearchParams>) => {
   const client = useHttp();
-  return useQuery<ShopCategoriesResult>(["shop_categories", params], () =>
+  return useQuery<CategoriesResult>(["shop_categories", params], () =>
     client("shop/category/list", { data: params, method: "POST" })
   );
 };
 
 export const useShopCategory = (id: number) => {
   const client = useHttp();
-  return useQuery<Partial<ShopCategory>>(
+  return useQuery<Partial<Category>>(
     ["shop_category", { id }],
     () => client(`shop/category/detail`, { data: { id } }),
     {
@@ -36,7 +34,7 @@ export const useShopCategory = (id: number) => {
 export const useAddShopCategory = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
-    (params: Partial<ShopCategory>) =>
+    (params: Partial<Category>) =>
       client("shop/category/add", {
         data: cleanObject(params),
         method: "POST",
@@ -48,7 +46,7 @@ export const useAddShopCategory = (queryKey: QueryKey) => {
 export const useEditShopCategory = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
-    (params: Partial<ShopCategory>) =>
+    (params: Partial<Category>) =>
       client("shop/category/edit", {
         data: cleanObject(params),
         method: "POST",
@@ -71,7 +69,7 @@ export const useDeleteShopCategory = (queryKey: QueryKey) => {
 
 export const useShopCategoryOptions = () => {
   const client = useHttp();
-  return useQuery<ShopCategoryOption[]>(["shop_category_options"], () =>
+  return useQuery<CategoryOption[]>(["shop_category_options"], () =>
     client("shop/category/options")
   );
 };

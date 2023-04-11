@@ -4,7 +4,6 @@ import type {
   Category,
   CategoriesResult,
   CategoriesSearchParams,
-  CategoryOption,
 } from "types/category";
 import {
   useAddConfig,
@@ -13,31 +12,31 @@ import {
 } from "./use-optimistic-options";
 import { cleanObject } from "utils/index";
 
-export const useScenicCategories = (
+export const useScenicTicketCategories = (
   params: Partial<CategoriesSearchParams>
 ) => {
   const client = useHttp();
-  return useQuery<CategoriesResult>(["scenic_categories", params], () =>
-    client("scenic/category/list", { data: params, method: "POST" })
+  return useQuery<CategoriesResult>(["scenic_ticket_categories", params], () =>
+    client("scenic/ticket/category/list", { data: params, method: "POST" })
   );
 };
 
-export const useScenicCategory = (id: number) => {
+export const useScenicTicketCategory = (id: number) => {
   const client = useHttp();
   return useQuery<Partial<Category>>(
-    ["scenic_category", { id }],
-    () => client(`scenic/category/detail`, { data: { id } }),
+    ["scenic_ticket_category", { id }],
+    () => client(`scenic/ticket/category/detail`, { data: { id } }),
     {
       enabled: !!id,
     }
   );
 };
 
-export const useAddScenicCategory = (queryKey: QueryKey) => {
+export const useAddScenicTicketCategory = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (params: Partial<Category>) =>
-      client("scenic/category/add", {
+      client("scenic/ticket/category/add", {
         data: cleanObject(params),
         method: "POST",
       }),
@@ -45,11 +44,11 @@ export const useAddScenicCategory = (queryKey: QueryKey) => {
   );
 };
 
-export const useEditScenicCategory = (queryKey: QueryKey) => {
+export const useEditScenicTicketCategory = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (params: Partial<Category>) =>
-      client("scenic/category/edit", {
+      client("scenic/ticket/category/edit", {
         data: cleanObject(params),
         method: "POST",
       }),
@@ -57,21 +56,14 @@ export const useEditScenicCategory = (queryKey: QueryKey) => {
   );
 };
 
-export const useDeleteScenicCategory = (queryKey: QueryKey) => {
+export const useDeleteScenicTicketCategory = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (id: number) =>
-      client("scenic/category/delete", {
+      client("scenic/ticket/category/delete", {
         data: { id },
         method: "POST",
       }),
     useDeleteConfig(queryKey)
-  );
-};
-
-export const useScenicCategoryOptions = () => {
-  const client = useHttp();
-  return useQuery<CategoryOption[]>(["scenic_category_options"], () =>
-    client("scenic/category/options")
   );
 };

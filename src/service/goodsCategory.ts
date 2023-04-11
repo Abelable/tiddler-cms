@@ -1,11 +1,11 @@
 import { QueryKey, useMutation, useQuery } from "react-query";
 import { useHttp } from "./http";
 import type {
-  GoodsCategory,
-  GoodsCategoriesResult,
-  GoodsCategoriesSearchParams,
-  GoodsCategoryOption,
-} from "types/goodsCategory";
+  Category,
+  CategoriesResult,
+  CategoriesSearchParams,
+  CategoryOption,
+} from "types/category";
 import {
   useAddConfig,
   useDeleteConfig,
@@ -13,18 +13,16 @@ import {
 } from "./use-optimistic-options";
 import { cleanObject } from "utils/index";
 
-export const useGoodsCategories = (
-  params: Partial<GoodsCategoriesSearchParams>
-) => {
+export const useGoodsCategories = (params: Partial<CategoriesSearchParams>) => {
   const client = useHttp();
-  return useQuery<GoodsCategoriesResult>(["goods_categories", params], () =>
+  return useQuery<CategoriesResult>(["goods_categories", params], () =>
     client("goods/category/list", { data: params, method: "POST" })
   );
 };
 
 export const useGoodsCategory = (id: number) => {
   const client = useHttp();
-  return useQuery<Partial<GoodsCategory>>(
+  return useQuery<Partial<Category>>(
     ["goods_category", { id }],
     () => client(`goods/category/detail`, { data: { id } }),
     {
@@ -36,7 +34,7 @@ export const useGoodsCategory = (id: number) => {
 export const useAddGoodsCategory = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
-    (params: Partial<GoodsCategory>) =>
+    (params: Partial<Category>) =>
       client("goods/category/add", {
         data: cleanObject(params),
         method: "POST",
@@ -48,7 +46,7 @@ export const useAddGoodsCategory = (queryKey: QueryKey) => {
 export const useEditGoodsCategory = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
-    (params: Partial<GoodsCategory>) =>
+    (params: Partial<Category>) =>
       client("goods/category/edit", {
         data: cleanObject(params),
         method: "POST",
@@ -71,7 +69,7 @@ export const useDeleteGoodsCategory = (queryKey: QueryKey) => {
 
 export const useGoodsCategoryOptions = () => {
   const client = useHttp();
-  return useQuery<GoodsCategoryOption[]>(["goods_category_options"], () =>
+  return useQuery<CategoryOption[]>(["goods_category_options"], () =>
     client("goods/category/options")
   );
 };

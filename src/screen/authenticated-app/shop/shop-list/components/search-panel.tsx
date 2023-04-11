@@ -3,10 +3,10 @@ import { useState } from "react";
 import styled from "@emotion/styled";
 import { Row } from "components/lib";
 import { Button, Input, Select } from "antd";
-import { ShopCategoryOption } from "types/shopCategory";
+import { CategoryOption } from "types/category";
 
 export interface SearchPanelProps {
-  shopCategoryOptions: ShopCategoryOption[];
+  shopCategoryOptions: CategoryOption[];
   params: Partial<ShopsSearchParams>;
   setParams: (params: Partial<ShopsSearchParams>) => void;
 }

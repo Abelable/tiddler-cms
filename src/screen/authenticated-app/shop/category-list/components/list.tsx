@@ -12,13 +12,13 @@ import {
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
 import dayjs from "dayjs";
 import { useDeleteShopCategory } from "service/shopCategory";
-import { ShopCategory, ShopCategoriesSearchParams } from "types/shopCategory";
+import { Category, CategoriesSearchParams } from "types/category";
 import { useShopCategoryModal, useShopCategoriesQueryKey } from "../util";
 import { PlusOutlined } from "@ant-design/icons";
 
-interface ListProps extends TableProps<ShopCategory> {
-  params: Partial<ShopCategoriesSearchParams>;
-  setParams: (params: Partial<ShopCategoriesSearchParams>) => void;
+interface ListProps extends TableProps<Category> {
+  params: Partial<CategoriesSearchParams>;
+  setParams: (params: Partial<CategoriesSearchParams>) => void;
   error: Error | unknown;
 }
 
