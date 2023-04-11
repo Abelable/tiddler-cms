@@ -35,6 +35,7 @@ import {
 import logo from "assets/images/logo.png";
 import { UserInfo } from "types/auth";
 import { Row } from "components/lib";
+import { ShopManagementIcon } from "assets/icon";
 
 export const AuthenticatedApp = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -112,7 +113,7 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
     {
       label: "店铺管理",
       key: "shop",
-      icon: <ShopOutlined />,
+      icon: <ShopManagementIcon style={{ color: "#fff" }} />,
       children: [
         {
           label: <Link to={"shop/merchant_list"}>商家列表</Link>,
