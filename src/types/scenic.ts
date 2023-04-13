@@ -54,9 +54,9 @@ export interface Scenic {
   id: number;
   status: number;
   failureReason: string;
-  categoryId: number;
   name: string;
   level: string;
+  categoryId: number;
   rate: number;
   createdAt: string;
   updatedAt: string;

@@ -59,21 +59,21 @@ export const SearchPanel = ({
   return (
     <Container>
       <Item>
-        <div>商品名称：</div>
+        <div>景点名称：</div>
         <Input
           style={{ width: "20rem" }}
           value={tempParams.name}
           onChange={setName}
-          placeholder="请输入商品名称"
+          placeholder="请输入景点名称"
           allowClear={true}
         />
       </Item>
       <Item>
-        <div>商品分类：</div>
+        <div>景点分类：</div>
         <Select
           style={{ width: "20rem" }}
           value={tempParams.categoryId}
-          placeholder="请选择商品分类"
+          placeholder="请选择景点分类"
           allowClear={true}
           onSelect={setCategory}
           onClear={clearCategory}
@@ -86,11 +86,11 @@ export const SearchPanel = ({
         </Select>
       </Item>
       <Item>
-        <div>商品状态：</div>
+        <div>景点状态：</div>
         <Select
           style={{ width: "20rem" }}
           value={tempParams.status}
-          placeholder="请选择商品分类"
+          placeholder="请选择景点分类"
           allowClear={true}
           onSelect={setStatus}
           onClear={clearStatus}

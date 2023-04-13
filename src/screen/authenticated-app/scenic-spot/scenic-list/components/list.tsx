@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import {
-  Image,
   Dropdown,
   Menu,
   MenuProps,
@@ -40,7 +39,7 @@ export const List = ({
   return (
     <Container>
       <Header between={true}>
-        <PageTitle>商品列表</PageTitle>
+        <PageTitle>景点列表</PageTitle>
       </Header>
       <ErrorBox error={error} />
       <Table
@@ -52,11 +51,6 @@ export const List = ({
             dataIndex: "id",
             width: "8rem",
             fixed: "left",
-          },
-          {
-            title: "图片",
-            dataIndex: "image",
-            render: (value) => <Image width={68} src={value} />,
           },
           {
             title: "名称",
@@ -71,32 +65,13 @@ export const List = ({
             ),
           },
           {
-            title: "价格",
-            dataIndex: "price",
-            render: (value) => <>{`¥${value}`}</>,
-          },
-          {
-            title: "库存",
-            dataIndex: "stock",
-          },
-          {
-            title: "分佣",
-            dataIndex: "commissionRate",
-            render: (value) => <>{`${value * 100}%`}</>,
-          },
-          {
-            title: "销量",
-            dataIndex: "salesVolume",
-            sorter: (a, b) => Number(a) - Number(b),
-          },
-          {
             title: "状态",
             dataIndex: "status",
             render: (value, scenic) =>
               value === 0 ? (
                 <span style={{ color: "#87d068" }}>待审核</span>
               ) : value === 1 ? (
-                <span>售卖中</span>
+                <span>开放中</span>
               ) : (
                 <Tooltip title={scenic.failureReason}>
                   <span style={{ color: "#f50", cursor: "pointer" }}>
@@ -106,7 +81,7 @@ export const List = ({
               ),
             filters: [
               { text: "待审核", value: 0 },
-              { text: "售卖中", value: 1 },
+              { text: "开放中", value: 1 },
               { text: "未过审", value: 2 },
             ],
             onFilter: (value, scenic) => scenic.status === value,
@@ -161,7 +136,7 @@ const More = ({ id, status }: { id: number; status: number }) => {
 
   const confirmDelete = (id: number) => {
     Modal.confirm({
-      title: "确定删除该商品吗？",
+      title: "确定删除该景点吗？",
       content: "点击确定删除",
       okText: "确定",
       cancelText: "取消",
@@ -171,8 +146,8 @@ const More = ({ id, status }: { id: number; status: number }) => {
 
   const confirmApproved = (id: number) => {
     Modal.confirm({
-      title: "商品审核通过确认",
-      content: "请确保在商品信息无误的情况下进行该操作",
+      title: "景点审核通过确认",
+      content: "请确保在景点信息无误的情况下进行该操作",
       okText: "确定",
       cancelText: "取消",
       onOk: () => approvedScenic(id),

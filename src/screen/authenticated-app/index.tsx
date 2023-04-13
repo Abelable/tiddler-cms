@@ -20,6 +20,7 @@ import { GoodsCategoryList } from "./goods/category-list";
 import { GoodsList } from "./goods/goods-list";
 import { ScenicCategoryList } from "./scenic-spot/category-list";
 import { ScenicTicketCategoryList } from "./scenic-ticket/category-list";
+import { ScenicList } from "./scenic-spot/scenic-list";
 
 import {
   LockOutlined,
@@ -77,6 +78,7 @@ export const AuthenticatedApp = () => {
                 path="scenic_spot/category_list"
                 element={<ScenicCategoryList />}
               />
+              <Route path="scenic_spot/list" element={<ScenicList />} />
               <Route
                 path="scenic_ticket/category_list"
                 element={<ScenicTicketCategoryList />}
@@ -177,6 +179,11 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
           label: <Link to={"scenic_spot/category_list"}>景点分类</Link>,
           key: "scenic_category_list",
           icon: <AppstoreOutlined />,
+        },
+        {
+          label: <Link to={"scenic_spot/list"}>景点列表</Link>,
+          key: "scenic_spot_list",
+          icon: <ScenicSpotIcon />,
         },
       ],
     },
