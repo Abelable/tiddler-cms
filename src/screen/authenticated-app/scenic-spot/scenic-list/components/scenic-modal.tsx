@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { useForm } from "antd/lib/form/Form";
 import { useAddScenic, useEditScenic } from "service/scenic";
 import { useScenicModal, useScenicListQueryKey } from "../util";
@@ -7,7 +8,6 @@ import { OssUpload } from "components/oss-upload";
 import { OssVideoUpload } from "components/oss-video-upload";
 import { ErrorBox } from "components/lib";
 import { Map } from "components/map";
-import { useState, useEffect } from "react";
 
 import type { CategoryOption } from "types/category";
 
@@ -38,7 +38,9 @@ export const ScenicModal = ({
     if (editingScenic) {
       const { video, imageList, ...rest } = editingScenic;
       form.setFieldsValue({
-        video: video ? [{ url: video }] : [],
+        video: video
+          ? [{ url: video, cover: `${video}?x-oss-process=video/snapshot,t_0` }]
+          : [],
         imageList: imageList?.map((item) => ({ url: item })),
         ...rest,
       });
