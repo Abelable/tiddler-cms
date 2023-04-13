@@ -7,6 +7,7 @@ import { Button, Col, Drawer, Form, Input, Row, Select, Space } from "antd";
 import { OssUpload } from "components/oss-upload";
 import { ErrorBox } from "components/lib";
 import { Map } from "components/map";
+import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 
 import type { CategoryOption } from "types/category";
 
@@ -53,16 +54,17 @@ export const ScenicModal = ({
     });
 
   const submit = () => {
-    form.validateFields().then(async () => {
-      const { video, imageList, ...rest } = form.getFieldsValue();
-      await mutateAsync({
-        ...editingScenic,
-        ...rest,
-        video: video && video.length ? video[0].url : "",
-        imageList: imageList.map((item: { url: string }) => item.url),
-      });
-      closeModal();
-    });
+    console.log("form", form.getFieldsValue());
+    // form.validateFields().then(async () => {
+    //   const { video, imageList, ...rest } = form.getFieldsValue();
+    //   await mutateAsync({
+    //     ...editingScenic,
+    //     ...rest,
+    //     video: video && video.length ? video[0].url : "",
+    //     imageList: imageList.map((item: { url: string }) => item.url),
+    //   });
+    //   closeModal();
+    // });
   };
 
   const closeModal = () => {
@@ -196,7 +198,52 @@ export const ScenicModal = ({
             </Form.Item>
           </Col>
         </Row>
-        <Map setLng={setLng} setLat={setLat} />
+        <Row gutter={16}>
+          <Col span={24}>
+            <Map setLng={setLng} setLat={setLat} />
+          </Col>
+        </Row>
+        <Row gutter={16}>
+          <Col span={12}>
+            <Form.Item label="咨询热线">
+              <Form.List name="hotlineList">
+                {(fields, { add, remove }) => (
+                  <>
+                    {fields.map((field) => (
+                      <Space
+                        key={field.key}
+                        style={{ display: "flex" }}
+                        align="baseline"
+                      >
+                        <Form.Item
+                          {...field}
+                          rules={[
+                            { required: true, message: "请输入咨询热线" },
+                          ]}
+                        >
+                          <Input placeholder="请输入咨询热线" />
+                        </Form.Item>
+                        <MinusCircleOutlined
+                          onClick={() => remove(field.name)}
+                        />
+                      </Space>
+                    ))}
+                    <Form.Item>
+                      <Button
+                        type="dashed"
+                        onClick={() => add()}
+                        block
+                        icon={<PlusOutlined />}
+                      >
+                        添加咨询热线
+                      </Button>
+                    </Form.Item>
+                  </>
+                )}
+              </Form.List>
+            </Form.Item>
+          </Col>
+        </Row>
       </Form>
     </Drawer>
   );
