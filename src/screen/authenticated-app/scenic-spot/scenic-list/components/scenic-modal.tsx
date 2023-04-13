@@ -209,23 +209,21 @@ export const ScenicModal = ({
               <Form.List name="hotlineList">
                 {(fields, { add, remove }) => (
                   <>
-                    {fields.map((field) => (
+                    {fields.map(({ key, name, ...restField }) => (
                       <Space
-                        key={field.key}
+                        key={key}
                         style={{ display: "flex" }}
                         align="baseline"
                       >
                         <Form.Item
-                          {...field}
+                          {...restField}
                           rules={[
                             { required: true, message: "请输入咨询热线" },
                           ]}
                         >
                           <Input placeholder="请输入咨询热线" />
                         </Form.Item>
-                        <MinusCircleOutlined
-                          onClick={() => remove(field.name)}
-                        />
+                        <MinusCircleOutlined onClick={() => remove(name)} />
                       </Space>
                     ))}
                     <Form.Item>
@@ -248,15 +246,15 @@ export const ScenicModal = ({
               <Form.List name="facilityList">
                 {(fields, { add, remove }) => (
                   <>
-                    {fields.map((field, index) => (
+                    {fields.map(({ key, name, ...restField }) => (
                       <Space
-                        key={field.key}
+                        key={key}
                         style={{ display: "flex" }}
                         align="baseline"
                       >
                         <Form.Item
-                          {...field}
-                          name={[field.name, index, "facilityId"]}
+                          {...restField}
+                          name={[name, "facilityId"]}
                           rules={[{ required: true, message: "请选择设施" }]}
                         >
                           <Select placeholder="选择设施">
@@ -265,25 +263,26 @@ export const ScenicModal = ({
                               { id: 2, name: "卫生间" },
                               { id: 3, name: "商店" },
                               { id: 4, name: "餐厅" },
-                            ].map(({ id, name }) => (
-                              <Select.Option key={id} value={id}>
-                                {name}
+                            ].map((facilityOption) => (
+                              <Select.Option
+                                key={facilityOption.id}
+                                value={facilityOption.id}
+                              >
+                                {facilityOption.name}
                               </Select.Option>
                             ))}
                           </Select>
                         </Form.Item>
                         <Form.Item
-                          {...field}
-                          name={[field.name, index, "content"]}
+                          {...restField}
+                          name={[name, "content"]}
                           rules={[
                             { required: true, message: "请输入设施描述" },
                           ]}
                         >
                           <Input placeholder="请输入设施描述" />
                         </Form.Item>
-                        <MinusCircleOutlined
-                          onClick={() => remove(field.name)}
-                        />
+                        <MinusCircleOutlined onClick={() => remove(name)} />
                       </Space>
                     ))}
                     <Form.Item>
