@@ -1,13 +1,13 @@
-import { Modal, Upload } from "antd";
+import { Upload } from "antd";
 import { useOssConfig } from "service/common";
-import { PlusOutlined } from "@ant-design/icons";
-import { useState } from "react";
+import { PlusOutlined, VideoCameraAddOutlined } from "@ant-design/icons";
 
 interface OssUploadProps extends React.ComponentProps<typeof Upload> {
+  accept?: string;
   maxCount?: number;
 }
 
-export const OssUpload = (props: OssUploadProps) => {
+export const OssUpload = ({ accept, maxCount, ...props }: OssUploadProps) => {
   const { data: ossConfig } = useOssConfig();
   const getExtraData = (file: any) => {
     return {
@@ -22,39 +22,35 @@ export const OssUpload = (props: OssUploadProps) => {
     const filename = Date.now() + suffix;
     file.key = ossConfig?.dir + filename;
     file.url = `${ossConfig?.host}/${ossConfig?.dir}${filename}`;
+    if (accept === ".mp4") {
+      file.thumbUrl = `${ossConfig?.host}/${ossConfig?.dir}${filename}?x-oss-process=video/snapshot,t_0`;
+    }
     return file;
   };
-
-  const [previewImage, setPreviewImage] = useState("");
-  const preview = (file: any) => setPreviewImage(file.url);
 
   return (
     <>
       <Upload
-        accept="image/*"
+        accept={accept || "image/*"}
         beforeUpload={beforeUpload}
         action={ossConfig?.host}
         data={getExtraData}
-        onPreview={preview}
         listType="picture-card"
         {...props}
       >
-        {props.maxCount &&
+        {maxCount &&
         props.fileList &&
-        props.fileList.length >= props.maxCount ? null : (
+        props.fileList.length >= maxCount ? null : (
           <div>
-            <PlusOutlined />
+            {accept === ".mp4" ? (
+              <VideoCameraAddOutlined style={{ fontSize: "1.2em" }} />
+            ) : (
+              <PlusOutlined />
+            )}
             <div style={{ marginTop: 8 }}>点击上传</div>
           </div>
         )}
       </Upload>
-      <Modal
-        open={!!previewImage}
-        footer={null}
-        onCancel={() => setPreviewImage("")}
-      >
-        <img alt="example" style={{ width: "100%" }} src={previewImage} />
-      </Modal>
     </>
   );
 };

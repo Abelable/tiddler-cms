@@ -5,7 +5,6 @@ import { useScenicModal, useScenicListQueryKey } from "../util";
 
 import { Button, Col, Drawer, Form, Input, Row, Select, Space } from "antd";
 import { OssUpload } from "components/oss-upload";
-import { OssVideoUpload } from "components/oss-video-upload";
 import { ErrorBox } from "components/lib";
 import { Map } from "components/map";
 
@@ -125,7 +124,7 @@ export const ScenicModal = ({
               valuePropName="fileList"
               getValueFromEvent={normFile}
             >
-              <OssVideoUpload />
+              <OssUpload accept=".mp4" maxCount={1} />
             </Form.Item>
           </Col>
         </Row>
