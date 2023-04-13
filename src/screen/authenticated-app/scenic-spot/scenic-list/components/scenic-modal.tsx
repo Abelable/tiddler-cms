@@ -226,16 +226,14 @@ export const ScenicModal = ({
                         <MinusCircleOutlined onClick={() => remove(name)} />
                       </Space>
                     ))}
-                    <Form.Item>
-                      <Button
-                        type="dashed"
-                        onClick={() => add()}
-                        block
-                        icon={<PlusOutlined />}
-                      >
-                        添加咨询热线
-                      </Button>
-                    </Form.Item>
+                    <Button
+                      type="dashed"
+                      onClick={() => add()}
+                      block
+                      icon={<PlusOutlined />}
+                    >
+                      添加咨询热线
+                    </Button>
                   </>
                 )}
               </Form.List>
@@ -291,16 +289,14 @@ export const ScenicModal = ({
                         <MinusCircleOutlined onClick={() => remove(name)} />
                       </Space>
                     ))}
-                    <Form.Item>
-                      <Button
-                        type="dashed"
-                        onClick={() => add()}
-                        block
-                        icon={<PlusOutlined />}
-                      >
-                        添加景区设施
-                      </Button>
-                    </Form.Item>
+                    <Button
+                      type="dashed"
+                      onClick={() => add()}
+                      block
+                      icon={<PlusOutlined />}
+                    >
+                      添加景区设施
+                    </Button>
                   </>
                 )}
               </Form.List>
@@ -346,16 +342,14 @@ export const ScenicModal = ({
                         <MinusCircleOutlined onClick={() => remove(name)} />
                       </Space>
                     ))}
-                    <Form.Item>
-                      <Button
-                        type="dashed"
-                        onClick={() => add()}
-                        block
-                        icon={<PlusOutlined />}
-                      >
-                        添加游玩贴士
-                      </Button>
-                    </Form.Item>
+                    <Button
+                      type="dashed"
+                      onClick={() => add()}
+                      block
+                      icon={<PlusOutlined />}
+                    >
+                      添加游玩贴士
+                    </Button>
                   </>
                 )}
               </Form.List>
