@@ -307,6 +307,61 @@ export const ScenicModal = ({
             </Form.Item>
           </Col>
         </Row>
+        <Row gutter={16}>
+          <Col span={12}>
+            <Form.Item label="游玩贴士">
+              <Form.List name="tipsList">
+                {(fields, { add, remove }) => (
+                  <>
+                    {fields.map(({ key, name, ...restField }) => (
+                      <Space
+                        key={key}
+                        style={{ display: "flex" }}
+                        align="baseline"
+                      >
+                        <Form.Item
+                          {...restField}
+                          name={[name, "title"]}
+                          rules={[
+                            { required: true, message: "请输入贴士标题" },
+                          ]}
+                        >
+                          <Input
+                            style={{ width: "10rem" }}
+                            placeholder="请输入标题"
+                          />
+                        </Form.Item>
+                        <Form.Item
+                          {...restField}
+                          name={[name, "content"]}
+                          rules={[
+                            { required: true, message: "请输入贴士内容" },
+                          ]}
+                        >
+                          <Input
+                            style={{ width: "20rem" }}
+                            placeholder="请输入内容"
+                          />
+                        </Form.Item>
+                        <MinusCircleOutlined onClick={() => remove(name)} />
+                      </Space>
+                    ))}
+                    <Form.Item>
+                      <Button
+                        type="dashed"
+                        onClick={() => add()}
+                        block
+                        icon={<PlusOutlined />}
+                      >
+                        添加游玩贴士
+                      </Button>
+                    </Form.Item>
+                  </>
+                )}
+              </Form.List>
+            </Form.Item>
+          </Col>
+        </Row>
       </Form>
     </Drawer>
   );
