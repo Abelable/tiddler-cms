@@ -9,10 +9,10 @@ export interface OperatorOption {
   name: string;
 }
 
-export interface RegionOption {
-  id: number;
-  name: string;
-  children?: RegionOption[];
+export interface Region {
+  label: string;
+  value: string;
+  children?: Region[];
 }
 
 export interface RegionItem {

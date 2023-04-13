@@ -32,7 +32,7 @@ export const AdminModal = ({ roleOptions }: { roleOptions: RoleOption[] }) => {
     }
   }, [editingAdmin, form]);
 
-  const confirm = () => {
+  const submit = () => {
     form.validateFields().then(async () => {
       const { avatar, ...rest } = form.getFieldsValue();
       await mutateAsync({
@@ -60,7 +60,7 @@ export const AdminModal = ({ roleOptions }: { roleOptions: RoleOption[] }) => {
       extra={
         <Space>
           <Button onClick={closeModal}>取消</Button>
-          <Button onClick={confirm} loading={mutateLoading} type="primary">
+          <Button onClick={submit} loading={mutateLoading} type="primary">
             提交
           </Button>
         </Space>
