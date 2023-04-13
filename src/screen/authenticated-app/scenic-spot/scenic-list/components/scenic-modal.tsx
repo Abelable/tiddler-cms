@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useForm } from "antd/lib/form/Form";
 import { useAddScenic, useEditScenic } from "service/scenic";
 import { useScenicModal, useScenicListQueryKey } from "../util";
@@ -22,9 +22,6 @@ export const ScenicModal = ({
 }) => {
   const [form] = useForm();
 
-  const [lng, setLng] = useState<undefined | number>();
-  const [lat, setLat] = useState<undefined | number>();
-
   const { scenicModalOpen, editingScenicId, editingScenic, close } =
     useScenicModal();
 
@@ -45,6 +42,15 @@ export const ScenicModal = ({
       });
     }
   }, [editingScenic, form]);
+
+  const setLng = (longitude: number | undefined) =>
+    form.setFieldsValue({
+      longitude,
+    });
+  const setLat = (latitude: number | undefined) =>
+    form.setFieldsValue({
+      latitude,
+    });
 
   const submit = () => {
     form.validateFields().then(async () => {
@@ -180,8 +186,17 @@ export const ScenicModal = ({
               </Input.Group>
             </Form.Item>
           </Col>
+          <Col span={12}>
+            <Form.Item
+              name="address"
+              label="景点地址详情"
+              rules={[{ required: true, message: "请输入景点地址详情" }]}
+            >
+              <Input placeholder="请输入景点地址详情" />
+            </Form.Item>
+          </Col>
         </Row>
-        <Map lng={lng} lat={lat} setLng={setLng} setLat={setLat} />
+        <Map setLng={setLng} setLat={setLat} />
       </Form>
     </Drawer>
   );

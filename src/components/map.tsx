@@ -5,13 +5,9 @@ import { Input } from "antd";
 import _ from "lodash";
 
 export const Map = ({
-  lng,
-  lat,
   setLng,
   setLat,
 }: {
-  lng: number | undefined;
-  lat: number | undefined;
   setLng: (v: number | undefined) => void;
   setLat: (v: number | undefined) => void;
 }) => {
@@ -54,7 +50,7 @@ export const Map = ({
           }
         });
     });
-  }, [address, lat, lng, makers, setLat, setLng]);
+  }, [address, makers, setLat, setLng]);
 
   return (
     <MapContainer>
@@ -63,7 +59,7 @@ export const Map = ({
         <Input
           style={{ width: "40rem" }}
           onChange={_.debounce((e: any) => setAddress(e.target.value), 500)}
-          placeholder="请输入具体地址"
+          placeholder="请输入具体地址，获取经纬度"
         />
       </MapSearch>
     </MapContainer>
