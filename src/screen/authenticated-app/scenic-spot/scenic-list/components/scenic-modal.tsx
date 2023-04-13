@@ -243,6 +243,64 @@ export const ScenicModal = ({
               </Form.List>
             </Form.Item>
           </Col>
+          <Col span={12}>
+            <Form.Item label="景区设施">
+              <Form.List name="facilityList">
+                {(fields, { add, remove }) => (
+                  <>
+                    {fields.map((field, index) => (
+                      <Space
+                        key={field.key}
+                        style={{ display: "flex" }}
+                        align="baseline"
+                      >
+                        <Form.Item
+                          {...field}
+                          name={[field.name, index, "facilityId"]}
+                          rules={[{ required: true, message: "请选择设施" }]}
+                        >
+                          <Select placeholder="选择设施">
+                            {[
+                              { id: 1, name: "停车场" },
+                              { id: 2, name: "卫生间" },
+                              { id: 3, name: "商店" },
+                              { id: 4, name: "餐厅" },
+                            ].map(({ id, name }) => (
+                              <Select.Option key={id} value={id}>
+                                {name}
+                              </Select.Option>
+                            ))}
+                          </Select>
+                        </Form.Item>
+                        <Form.Item
+                          {...field}
+                          name={[field.name, index, "content"]}
+                          rules={[
+                            { required: true, message: "请输入设施描述" },
+                          ]}
+                        >
+                          <Input placeholder="请输入设施描述" />
+                        </Form.Item>
+                        <MinusCircleOutlined
+                          onClick={() => remove(field.name)}
+                        />
+                      </Space>
+                    ))}
+                    <Form.Item>
+                      <Button
+                        type="dashed"
+                        onClick={() => add()}
+                        block
+                        icon={<PlusOutlined />}
+                      >
+                        添加景区设施
+                      </Button>
+                    </Form.Item>
+                  </>
+                )}
+              </Form.List>
+            </Form.Item>
+          </Col>
         </Row>
       </Form>
     </Drawer>
