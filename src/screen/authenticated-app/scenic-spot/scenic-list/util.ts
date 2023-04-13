@@ -29,6 +29,9 @@ export const useScenicListQueryKey = () => {
 };
 
 export const useScenicModal = () => {
+  const [{ scenicCreate }, setAdminModalOpen] = useUrlQueryParams([
+    "scenicCreate",
+  ]);
   const [{ editingScenicId }, setEditingScenicId] = useUrlQueryParams([
     "editingScenicId",
   ]);
@@ -40,6 +43,10 @@ export const useScenicModal = () => {
   } = useScenic(Number(editingScenicId));
 
   const open = useCallback(
+    () => setAdminModalOpen({ scenicCreate: true }),
+    [setAdminModalOpen]
+  );
+  const startEdit = useCallback(
     (id: number) => setEditingScenicId({ editingScenicId: `${id}` }),
     [setEditingScenicId]
   );
@@ -49,12 +56,13 @@ export const useScenicModal = () => {
   );
 
   return {
-    scenicModalOpen: !!editingScenicId,
+    scenicModalOpen: scenicCreate === "true" || !!editingScenicId,
     editingScenicId,
     editingScenic,
     isLoading,
     error,
     open,
+    startEdit,
     close,
   };
 };

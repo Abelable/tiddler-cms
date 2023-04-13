@@ -150,7 +150,7 @@ export const ScenicModal = ({
               label="景点简介"
               rules={[{ required: true, message: "请输入景点简介" }]}
             >
-              <Input.TextArea rows={4} placeholder="请输入景点简介" />
+              <Input.TextArea rows={6} placeholder="请输入景点简介" />
             </Form.Item>
           </Col>
         </Row>

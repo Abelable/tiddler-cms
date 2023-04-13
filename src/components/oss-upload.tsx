@@ -21,7 +21,7 @@ export const OssUpload = (props: OssUploadProps) => {
     const suffix = file.name.slice(file.name.lastIndexOf("."));
     const filename = Date.now() + suffix;
     file.key = ossConfig?.dir + filename;
-    file.url = `https:${ossConfig?.host}/${ossConfig?.dir}${filename}`;
+    file.url = `${ossConfig?.host}/${ossConfig?.dir}${filename}`;
     return file;
   };
 
@@ -31,6 +31,7 @@ export const OssUpload = (props: OssUploadProps) => {
   return (
     <>
       <Upload
+        accept="image/*"
         beforeUpload={beforeUpload}
         action={ossConfig?.host}
         data={getExtraData}

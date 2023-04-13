@@ -22,8 +22,8 @@ export const OssVideoUpload = (props: OssUploadProps) => {
     const suffix = file.name.slice(file.name.lastIndexOf("."));
     const filename = Date.now() + suffix;
     file.key = ossConfig?.dir + filename;
-    file.url = `https:${ossConfig?.host}/${ossConfig?.dir}${filename}`;
-    file.cover = `https:${ossConfig?.host}/${ossConfig?.dir}${filename}?x-oss-process=video/snapshot,t_0`;
+    file.url = `${ossConfig?.host}/${ossConfig?.dir}${filename}`;
+    file.cover = `${ossConfig?.host}/${ossConfig?.dir}${filename}?x-oss-process=video/snapshot,t_0`;
     return file;
   };
 

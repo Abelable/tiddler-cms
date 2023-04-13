@@ -1,4 +1,7 @@
+import dayjs from "dayjs";
 import styled from "@emotion/styled";
+import { useScenicModal, useScenicListQueryKey, useRejectModal } from "../util";
+
 import {
   Dropdown,
   Menu,
@@ -8,11 +11,11 @@ import {
   TablePaginationConfig,
   TableProps,
   Tooltip,
+  Button,
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
-import dayjs from "dayjs";
 import { useApprovedScenic, useDeleteScenic } from "service/scenic";
-import { useScenicModal, useScenicListQueryKey, useRejectModal } from "../util";
+import { PlusOutlined } from "@ant-design/icons";
 import { SearchPanelProps } from "./search-panel";
 
 import type { Scenic } from "types/scenic";
@@ -29,6 +32,7 @@ export const List = ({
   setParams,
   ...restProps
 }: ListProps) => {
+  const { open } = useScenicModal();
   const setPagination = (pagination: TablePaginationConfig) =>
     setParams({
       ...params,
@@ -40,6 +44,9 @@ export const List = ({
     <Container>
       <Header between={true}>
         <PageTitle>景点列表</PageTitle>
+        <Button onClick={() => open()} type={"primary"} icon={<PlusOutlined />}>
+          新增
+        </Button>
       </Header>
       <ErrorBox error={error} />
       <Table
@@ -129,7 +136,7 @@ export const List = ({
 };
 
 const More = ({ id, status }: { id: number; status: number }) => {
-  const { open } = useScenicModal();
+  const { startEdit } = useScenicModal();
   const { mutate: deleteScenic } = useDeleteScenic(useScenicListQueryKey());
   const { mutate: approvedScenic } = useApprovedScenic(useScenicListQueryKey());
   const { open: openRejectModal } = useRejectModal();
@@ -159,7 +166,7 @@ const More = ({ id, status }: { id: number; status: number }) => {
     case 0:
       items = [
         {
-          label: <div onClick={() => open(id)}>详情</div>,
+          label: <div onClick={() => startEdit(id)}>详情</div>,
           key: "detail",
         },
         {
@@ -181,7 +188,7 @@ const More = ({ id, status }: { id: number; status: number }) => {
     case 1:
       items = [
         {
-          label: <div onClick={() => open(id)}>详情</div>,
+          label: <div onClick={() => startEdit(id)}>详情</div>,
           key: "detail",
         },
         {
@@ -198,7 +205,7 @@ const More = ({ id, status }: { id: number; status: number }) => {
     case 2:
       items = [
         {
-          label: <div onClick={() => open(id)}>详情</div>,
+          label: <div onClick={() => startEdit(id)}>详情</div>,
           key: "detail",
         },
         {
