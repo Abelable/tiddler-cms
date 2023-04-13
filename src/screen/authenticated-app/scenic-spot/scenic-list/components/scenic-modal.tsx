@@ -257,7 +257,10 @@ export const ScenicModal = ({
                           name={[name, "facilityId"]}
                           rules={[{ required: true, message: "请选择设施" }]}
                         >
-                          <Select placeholder="选择设施">
+                          <Select
+                            style={{ width: "10rem" }}
+                            placeholder="选择设施"
+                          >
                             {[
                               { id: 1, name: "停车场" },
                               { id: 2, name: "卫生间" },
@@ -280,7 +283,10 @@ export const ScenicModal = ({
                             { required: true, message: "请输入设施描述" },
                           ]}
                         >
-                          <Input placeholder="请输入设施描述" />
+                          <Input
+                            style={{ width: "20rem" }}
+                            placeholder="请输入设施描述"
+                          />
                         </Form.Item>
                         <MinusCircleOutlined onClick={() => remove(name)} />
                       </Space>
