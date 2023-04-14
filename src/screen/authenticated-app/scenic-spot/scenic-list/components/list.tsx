@@ -12,6 +12,8 @@ import {
   TableProps,
   Tooltip,
   Button,
+  Rate,
+  Tag,
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
 import { useApprovedScenic, useDeleteScenic } from "service/scenic";
@@ -61,19 +63,36 @@ export const List = ({
           },
           {
             title: "名称",
-            dataIndex: "name",
-            width: "24rem",
+            render: (value, spot) => (
+              <Row gap={1}>
+                <span>{spot.name}</span>
+                <Tag color="gold">{spot.level}</Tag>
+              </Row>
+            ),
           },
           {
             title: "分类",
             dataIndex: "categoryId",
+            width: "18rem",
             render: (value) => (
               <>{categoryOptions.find((item) => item.id === value)?.name}</>
             ),
           },
           {
+            title: "评分",
+            dataIndex: "rate",
+            width: "22rem",
+            render: (value) => (
+              <>
+                <Rate allowHalf value={value} />
+                <span style={{ marginLeft: "1rem" }}>{value}</span>
+              </>
+            ),
+          },
+          {
             title: "状态",
             dataIndex: "status",
+            width: "12rem",
             render: (value, scenic) =>
               value === 0 ? (
                 <span style={{ color: "#87d068" }}>待审核</span>
