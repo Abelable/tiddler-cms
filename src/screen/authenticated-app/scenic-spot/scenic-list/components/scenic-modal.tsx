@@ -5,7 +5,7 @@ import { useScenicModal, useScenicListQueryKey } from "../util";
 
 import { Button, Col, Drawer, Form, Input, Row, Select, Space } from "antd";
 import { OssUpload } from "components/oss-upload";
-import { ErrorBox } from "components/lib";
+import { ErrorBox, Row as CustomRow } from "components/lib";
 import { Map } from "components/map";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 
@@ -264,24 +264,34 @@ export const ScenicModal = ({
         </Row>
         <Row gutter={16}>
           <Col span={12}>
-            <Form.Item label="咨询热线">
-              <Form.List name="hotlineList">
+            <Form.Item label="景区项目">
+              <Form.List name="projectList">
                 {(fields, { add, remove }) => (
                   <>
                     {fields.map(({ key, name, ...restField }) => (
-                      <Space
-                        key={key}
-                        style={{ display: "flex" }}
-                        align="baseline"
-                      >
-                        <Form.Item
-                          {...restField}
-                          rules={[
-                            { required: true, message: "请输入咨询热线" },
-                          ]}
-                        >
-                          <Input placeholder="请输入咨询热线" />
-                        </Form.Item>
+                      <Space key={key}>
+                        <CustomRow>
+                          <Form.Item
+                            {...restField}
+                            name={[name, "image"]}
+                            valuePropName="fileList"
+                            getValueFromEvent={normFile}
+                            rules={[
+                              { required: true, message: "请上传项目照片" },
+                            ]}
+                          >
+                            <OssUpload maxCount={1} />
+                          </Form.Item>
+                          <Form.Item
+                            {...restField}
+                            name={[name, "name"]}
+                            rules={[
+                              { required: true, message: "请输入项目名称" },
+                            ]}
+                          >
+                            <Input placeholder="请输入项目名称" />
+                          </Form.Item>
+                        </CustomRow>
                         <MinusCircleOutlined onClick={() => remove(name)} />
                       </Space>
                     ))}
@@ -291,7 +301,7 @@ export const ScenicModal = ({
                       block
                       icon={<PlusOutlined />}
                     >
-                      添加咨询热线
+                      添加景区项目
                     </Button>
                   </>
                 )}
@@ -363,6 +373,41 @@ export const ScenicModal = ({
           </Col>
         </Row>
         <Row gutter={16}>
+          <Col span={12}>
+            <Form.Item label="咨询热线">
+              <Form.List name="hotlineList">
+                {(fields, { add, remove }) => (
+                  <>
+                    {fields.map(({ key, name, ...restField }) => (
+                      <Space
+                        key={key}
+                        style={{ display: "flex" }}
+                        align="baseline"
+                      >
+                        <Form.Item
+                          {...restField}
+                          rules={[
+                            { required: true, message: "请输入咨询热线" },
+                          ]}
+                        >
+                          <Input placeholder="请输入咨询热线" />
+                        </Form.Item>
+                        <MinusCircleOutlined onClick={() => remove(name)} />
+                      </Space>
+                    ))}
+                    <Button
+                      type="dashed"
+                      onClick={() => add()}
+                      block
+                      icon={<PlusOutlined />}
+                    >
+                      添加咨询热线
+                    </Button>
+                  </>
+                )}
+              </Form.List>
+            </Form.Item>
+          </Col>
           <Col span={12}>
             <Form.Item label="游玩贴士">
               <Form.List name="tipsList">

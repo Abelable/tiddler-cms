@@ -31,12 +31,12 @@ export const OssUpload = ({ accept, maxCount, ...props }: OssUploadProps) => {
   return (
     <>
       <Upload
+        {...props}
         accept={accept || "image/*"}
         beforeUpload={beforeUpload}
         action={ossConfig?.host}
         data={getExtraData}
         listType="picture-card"
-        {...props}
       >
         {maxCount &&
         props.fileList &&
