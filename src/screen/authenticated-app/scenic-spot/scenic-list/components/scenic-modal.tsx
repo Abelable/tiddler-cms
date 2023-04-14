@@ -3,13 +3,44 @@ import { useForm } from "antd/lib/form/Form";
 import { useAddScenic, useEditScenic } from "service/scenic";
 import { useScenicModal, useScenicListQueryKey } from "../util";
 
-import { Button, Col, Drawer, Form, Input, Row, Select, Space } from "antd";
+import {
+  Button,
+  Col,
+  Drawer,
+  Form,
+  Input,
+  Row,
+  Select,
+  Space,
+  TimePicker,
+} from "antd";
 import { OssUpload } from "components/oss-upload";
 import { ErrorBox, Row as CustomRow } from "components/lib";
 import { Map } from "components/map";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 
 import type { CategoryOption } from "types/category";
+
+const facilityOptions = [
+  { id: 1, name: "停车场" },
+  { id: 2, name: "卫生间" },
+  { id: 3, name: "商店" },
+  { id: 4, name: "餐厅" },
+];
+const monthOptions = [
+  { id: 1, name: "1月" },
+  { id: 2, name: "2月" },
+  { id: 3, name: "3月" },
+  { id: 4, name: "4月" },
+  { id: 5, name: "5月" },
+  { id: 6, name: "6月" },
+  { id: 7, name: "7月" },
+  { id: 8, name: "8月" },
+  { id: 9, name: "9月" },
+  { id: 10, name: "10月" },
+  { id: 11, name: "11月" },
+  { id: 12, name: "12月" },
+];
 
 const normFile = (e: any) => {
   if (Array.isArray(e)) return e;
@@ -222,6 +253,98 @@ export const ScenicModal = ({
         </Row>
         <Row gutter={16}>
           <Col span={24}>
+            <Form.Item label="开放时间">
+              <Form.List name="openTimeList">
+                {(fields, { add, remove }) => (
+                  <>
+                    {fields.map(({ key, name, ...restField }) => (
+                      <Space
+                        key={key}
+                        style={{ display: "flex" }}
+                        align="baseline"
+                      >
+                        <Form.Item
+                          {...restField}
+                          name={[name, "openMonth"]}
+                          rules={[
+                            { required: true, message: "请选择开始月份" },
+                          ]}
+                        >
+                          <Select
+                            style={{ width: "10rem" }}
+                            placeholder="开始月份"
+                          >
+                            {monthOptions.map((monthOption) => (
+                              <Select.Option
+                                key={monthOption.id}
+                                value={monthOption.id}
+                              >
+                                {monthOption.name}
+                              </Select.Option>
+                            ))}
+                          </Select>
+                        </Form.Item>
+                        <Form.Item
+                          {...restField}
+                          name={[name, "closeMonth"]}
+                          rules={[
+                            { required: true, message: "请选择结束月份" },
+                          ]}
+                        >
+                          <Select
+                            style={{ width: "10rem" }}
+                            placeholder="结束月份"
+                          >
+                            {monthOptions.map((monthOption) => (
+                              <Select.Option
+                                key={monthOption.id}
+                                value={monthOption.id}
+                              >
+                                {monthOption.name}
+                              </Select.Option>
+                            ))}
+                          </Select>
+                        </Form.Item>
+                        <Form.Item
+                          {...restField}
+                          name={[name, "openTime"]}
+                          rules={[
+                            { required: true, message: "请选择开始时间" },
+                          ]}
+                        >
+                          <TimePicker format="HH:mm" placeholder="开始时间" />
+                        </Form.Item>
+                        <Form.Item
+                          {...restField}
+                          name={[name, "closeTime"]}
+                          rules={[
+                            { required: true, message: "请选择结束时间" },
+                          ]}
+                        >
+                          <TimePicker format="HH:mm" placeholder="结束时间" />
+                        </Form.Item>
+                        <Form.Item {...restField} name={[name, "tips"]}>
+                          <Input placeholder="补充时间提示" />
+                        </Form.Item>
+                        <MinusCircleOutlined onClick={() => remove(name)} />
+                      </Space>
+                    ))}
+                    <Button
+                      type="dashed"
+                      onClick={() => add()}
+                      block
+                      icon={<PlusOutlined />}
+                    >
+                      添加开放时间
+                    </Button>
+                  </>
+                )}
+              </Form.List>
+            </Form.Item>
+          </Col>
+        </Row>
+        <Row gutter={16}>
+          <Col span={24}>
             <Form.Item label="优待政策">
               <Form.List name="policyList">
                 {(fields, { add, remove }) => (
@@ -345,12 +468,7 @@ export const ScenicModal = ({
                             style={{ width: "10rem" }}
                             placeholder="选择设施"
                           >
-                            {[
-                              { id: 1, name: "停车场" },
-                              { id: 2, name: "卫生间" },
-                              { id: 3, name: "商店" },
-                              { id: 4, name: "餐厅" },
-                            ].map((facilityOption) => (
+                            {facilityOptions.map((facilityOption) => (
                               <Select.Option
                                 key={facilityOption.id}
                                 value={facilityOption.id}

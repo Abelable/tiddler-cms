@@ -7,8 +7,8 @@ export interface ScenicListSearchParams {
 }
 
 interface OpenTime {
-  openDate: string;
-  closeData: string;
+  openMonth: string;
+  closeMonth: string;
   openTime: string;
   closeTime: string;
   tips: string;
