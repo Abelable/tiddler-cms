@@ -110,6 +110,7 @@ export const ScenicModal = ({
     form.validateFields().then(async () => {
       const { video, imageList, projectList, ...rest } = form.getFieldsValue();
       await mutateAsync({
+        ...editingScenic,
         ...rest,
         video: video && video.length ? video[0].url : "",
         imageList: imageList.map((item: { url: string }) => item.url),
@@ -532,6 +533,7 @@ export const ScenicModal = ({
                       >
                         <Form.Item
                           {...restField}
+                          name={name}
                           rules={[
                             { required: true, message: "请输入咨询热线" },
                           ]}
