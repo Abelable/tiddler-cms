@@ -54,17 +54,16 @@ export const ScenicModal = ({
     });
 
   const submit = () => {
-    console.log("form", form.getFieldsValue());
-    // form.validateFields().then(async () => {
-    //   const { video, imageList, ...rest } = form.getFieldsValue();
-    //   await mutateAsync({
-    //     ...editingScenic,
-    //     ...rest,
-    //     video: video && video.length ? video[0].url : "",
-    //     imageList: imageList.map((item: { url: string }) => item.url),
-    //   });
-    //   closeModal();
-    // });
+    form.validateFields().then(async () => {
+      const { video, imageList, ...rest } = form.getFieldsValue();
+      await mutateAsync({
+        ...editingScenic,
+        ...rest,
+        video: video && video.length ? video[0].url : "",
+        imageList: imageList.map((item: { url: string }) => item.url),
+      });
+      closeModal();
+    });
   };
 
   const closeModal = () => {
