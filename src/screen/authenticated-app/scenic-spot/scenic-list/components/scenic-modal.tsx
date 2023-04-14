@@ -33,12 +33,23 @@ export const ScenicModal = ({
 
   useEffect(() => {
     if (editingScenic) {
-      const { video, imageList, ...rest } = editingScenic;
+      const { video, imageList, projectList, ...rest } = editingScenic;
       form.setFieldsValue({
         video: video
-          ? [{ url: video, cover: `${video}?x-oss-process=video/snapshot,t_0` }]
+          ? [
+              {
+                url: video,
+                thumbUrl: `${video}?x-oss-process=video/snapshot,t_0`,
+              },
+            ]
           : [],
         imageList: imageList?.map((item) => ({ url: item })),
+        projectList: projectList?.length
+          ? projectList.map((item) => ({
+              ...item,
+              image: [{ url: item.image }],
+            }))
+          : projectList,
         ...rest,
       });
     }
