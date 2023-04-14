@@ -151,17 +151,6 @@ export const ScenicModal = ({
           </Col>
         </Row>
         <Row gutter={16}>
-          <Col span={24}>
-            <Form.Item
-              name="brief"
-              label="景点简介"
-              rules={[{ required: true, message: "请输入景点简介" }]}
-            >
-              <Input.TextArea rows={6} placeholder="请输入景点简介" />
-            </Form.Item>
-          </Col>
-        </Row>
-        <Row gutter={16}>
           <Col span={12}>
             <Form.Item label="景点所在经纬度" required>
               <Input.Group>
@@ -201,6 +190,76 @@ export const ScenicModal = ({
         <Row gutter={16}>
           <Col span={24}>
             <Map setLng={setLng} setLat={setLat} />
+          </Col>
+        </Row>
+        <Row gutter={16}>
+          <Col span={24}>
+            <Form.Item
+              name="brief"
+              label="景点简介"
+              rules={[{ required: true, message: "请输入景点简介" }]}
+            >
+              <Input.TextArea rows={6} placeholder="请输入景点简介" />
+            </Form.Item>
+          </Col>
+        </Row>
+        <Row gutter={16}>
+          <Col span={24}>
+            <Form.Item label="优待政策">
+              <Form.List name="policyList">
+                {(fields, { add, remove }) => (
+                  <>
+                    {fields.map(({ key, name, ...restField }) => (
+                      <Space
+                        key={key}
+                        style={{ display: "flex" }}
+                        align="baseline"
+                      >
+                        <Form.Item
+                          {...restField}
+                          name={[name, "crowd"]}
+                          rules={[
+                            { required: true, message: "请输入适用人群" },
+                          ]}
+                        >
+                          <Input placeholder="请输入适用人群" />
+                        </Form.Item>
+                        <Form.Item
+                          {...restField}
+                          name={[name, "condition"]}
+                          rules={[
+                            { required: true, message: "请输入适用条件" },
+                          ]}
+                        >
+                          <Input
+                            style={{ width: "30rem" }}
+                            placeholder="请输入适用条件"
+                          />
+                        </Form.Item>
+                        <Form.Item
+                          {...restField}
+                          name={[name, "content"]}
+                          rules={[
+                            { required: true, message: "请输入政策内容" },
+                          ]}
+                        >
+                          <Input placeholder="请输入政策内容" />
+                        </Form.Item>
+                        <MinusCircleOutlined onClick={() => remove(name)} />
+                      </Space>
+                    ))}
+                    <Button
+                      type="dashed"
+                      onClick={() => add()}
+                      block
+                      icon={<PlusOutlined />}
+                    >
+                      添加优待政策
+                    </Button>
+                  </>
+                )}
+              </Form.List>
+            </Form.Item>
           </Col>
         </Row>
         <Row gutter={16}>
