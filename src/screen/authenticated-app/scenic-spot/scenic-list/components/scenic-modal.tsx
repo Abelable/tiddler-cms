@@ -66,12 +66,19 @@ export const ScenicModal = ({
 
   const submit = () => {
     form.validateFields().then(async () => {
-      const { video, imageList, ...rest } = form.getFieldsValue();
+      const { video, imageList, projectList, ...rest } = form.getFieldsValue();
       await mutateAsync({
-        ...editingScenic,
         ...rest,
         video: video && video.length ? video[0].url : "",
         imageList: imageList.map((item: { url: string }) => item.url),
+        projectList: projectList.length
+          ? projectList.map(
+              (item: { image: { url: string }[]; name: string }) => ({
+                ...item,
+                image: item.image[0].url,
+              })
+            )
+          : projectList,
       });
       closeModal();
     });
