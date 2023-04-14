@@ -166,7 +166,7 @@ const More = ({ id, status }: { id: number; status: number }) => {
     case 0:
       items = [
         {
-          label: <div onClick={() => startEdit(id)}>详情</div>,
+          label: <div onClick={() => startEdit(id)}>编辑</div>,
           key: "detail",
         },
         {
@@ -188,7 +188,7 @@ const More = ({ id, status }: { id: number; status: number }) => {
     case 1:
       items = [
         {
-          label: <div onClick={() => startEdit(id)}>详情</div>,
+          label: <div onClick={() => startEdit(id)}>编辑</div>,
           key: "detail",
         },
         {
@@ -205,7 +205,7 @@ const More = ({ id, status }: { id: number; status: number }) => {
     case 2:
       items = [
         {
-          label: <div onClick={() => startEdit(id)}>详情</div>,
+          label: <div onClick={() => startEdit(id)}>编辑</div>,
           key: "detail",
         },
         {

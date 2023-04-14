@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useForm } from "antd/lib/form/Form";
+import moment from "moment";
 import { useAddScenic, useEditScenic } from "service/scenic";
 import { useScenicModal, useScenicListQueryKey } from "../util";
 
@@ -64,7 +65,8 @@ export const ScenicModal = ({
 
   useEffect(() => {
     if (editingScenic) {
-      const { video, imageList, projectList, ...rest } = editingScenic;
+      const { video, imageList, openTimeList, projectList, ...rest } =
+        editingScenic;
       form.setFieldsValue({
         video: video
           ? [
@@ -74,7 +76,16 @@ export const ScenicModal = ({
               },
             ]
           : [],
-        imageList: imageList?.map((item) => ({ url: item })),
+        imageList: imageList?.length
+          ? imageList?.map((item) => ({ url: item }))
+          : imageList,
+        openTimeList: openTimeList?.length
+          ? openTimeList.map((item) => ({
+              ...item,
+              openTime: moment(item.openTime),
+              closeTime: moment(item.openTime),
+            }))
+          : openTimeList,
         projectList: projectList?.length
           ? projectList.map((item) => ({
               ...item,
