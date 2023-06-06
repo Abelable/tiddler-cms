@@ -57,21 +57,21 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
           {
             title: "状态",
             dataIndex: "status",
-            render: (value, merchant) =>
+            render: (value, provider) =>
               value === 0 ? (
                 <span style={{ color: "#87d068" }}>待审核</span>
               ) : value === 1 ? (
-                <Tooltip title={`订单id：${merchant.orderId}`}>
+                <Tooltip title={`订单id：${provider.orderId}`}>
                   <span style={{ color: "#296BEF", cursor: "pointer" }}>
                     待付款
                   </span>
                 </Tooltip>
               ) : value === 2 ? (
-                <Tooltip title={`订单id：${merchant.orderId}`}>
+                <Tooltip title={`订单id：${provider.orderId}`}>
                   <span style={{ cursor: "pointer" }}>已完成</span>
                 </Tooltip>
               ) : (
-                <Tooltip title={merchant.failureReason}>
+                <Tooltip title={provider.failureReason}>
                   <span style={{ color: "#f50", cursor: "pointer" }}>
                     已驳回
                   </span>
@@ -83,14 +83,14 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
               { text: "已完成", value: 2 },
               { text: "已驳回", value: 3 },
             ],
-            onFilter: (value, merchant) => merchant.status === value,
+            onFilter: (value, provider) => provider.status === value,
           },
           {
             title: "入驻时间",
-            render: (value, merchant) => (
+            render: (value, provider) => (
               <span>
-                {merchant.createdAt
-                  ? dayjs(merchant.createdAt).format("YYYY-MM-DD HH:mm:ss")
+                {provider.createdAt
+                  ? dayjs(provider.createdAt).format("YYYY-MM-DD HH:mm:ss")
                   : "无"}
               </span>
             ),
@@ -100,10 +100,10 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
           },
           {
             title: "更新时间",
-            render: (value, merchant) => (
+            render: (value, provider) => (
               <span>
-                {merchant.updatedAt
-                  ? dayjs(merchant.updatedAt).format("YYYY-MM-DD HH:mm:ss")
+                {provider.updatedAt
+                  ? dayjs(provider.updatedAt).format("YYYY-MM-DD HH:mm:ss")
                   : "无"}
               </span>
             ),
@@ -113,8 +113,8 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
           },
           {
             title: "操作",
-            render(value, merchant) {
-              return <More id={merchant.id} status={merchant.status} />;
+            render(value, provider) {
+              return <More id={provider.id} status={provider.status} />;
             },
             width: "8rem",
           },

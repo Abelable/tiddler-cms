@@ -50,13 +50,6 @@ export const List = ({
             dataIndex: "name",
           },
           {
-            title: "店铺分类",
-            dataIndex: "categoryId",
-            render: (value) => (
-              <>{shopCategoryOptions.find((item) => item.id === value)?.name}</>
-            ),
-          },
-          {
             title: "商家类型",
             dataIndex: "type",
             render: (value) => <>{value === 1 ? "个人" : "企业"}</>,
