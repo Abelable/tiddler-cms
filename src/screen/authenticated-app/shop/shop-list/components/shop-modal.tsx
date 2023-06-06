@@ -27,7 +27,7 @@ export const ShopModal = ({
         <ModalLoading />
       ) : (
         <>
-          <Descriptions title="基础信息" size={"small"} column={2}>
+          <Descriptions size={"small"} column={1} bordered>
             <Descriptions.Item label="ID">{editingShop?.id}</Descriptions.Item>
             <Descriptions.Item label="店铺名称">
               {editingShop?.name}
@@ -49,9 +49,13 @@ export const ShopModal = ({
                 size="small"
               />
             </Descriptions.Item>
-            <Descriptions.Item label="店铺封面">
-              <Image width={132} height={86} src={editingShop?.cover} />
-            </Descriptions.Item>
+            {editingShop?.cover ? (
+              <Descriptions.Item label="店铺封面">
+                <Image width={132} height={86} src={editingShop?.cover} />
+              </Descriptions.Item>
+            ) : (
+              <></>
+            )}
             <Descriptions.Item label="注册时间">
               {dayjs(editingShop?.createdAt).format("YYYY-MM-DD HH:mm:ss")}
             </Descriptions.Item>
