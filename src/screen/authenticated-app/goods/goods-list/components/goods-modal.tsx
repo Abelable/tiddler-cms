@@ -68,8 +68,11 @@ export const GoodsModal = ({
             <Descriptions.Item label="库存">
               {editingGoods?.stock}
             </Descriptions.Item>
-            <Descriptions.Item label="分佣">
-              {`${(editingGoods?.commissionRate as number) * 100}%`}
+            <Descriptions.Item label="销售佣金比例">
+              {`${(editingGoods?.salesCommissionRate as number) * 100}%`}
+            </Descriptions.Item>
+            <Descriptions.Item label="推广佣金比例">
+              {`${(editingGoods?.promotionCommissionRate as number) * 100}%`}
             </Descriptions.Item>
             <Descriptions.Item label="销量">
               {editingGoods?.salesVolume}

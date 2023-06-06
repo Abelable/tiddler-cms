@@ -16,7 +16,8 @@ export interface Goods {
   categoryId: number;
   price: number;
   stock: number;
-  commissionRate: number;
+  salesCommissionRate: number;
+  promotionCommissionRate: number;
   salesVolume: number;
   status: number;
   failureReason: string;

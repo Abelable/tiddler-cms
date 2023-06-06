@@ -45,7 +45,7 @@ export const List = ({
       <ErrorBox error={error} />
       <Table
         rowKey={"id"}
-        scroll={{ x: 1500 }}
+        scroll={{ x: 1800 }}
         columns={[
           {
             title: "id",
@@ -57,11 +57,12 @@ export const List = ({
             title: "图片",
             dataIndex: "image",
             render: (value) => <Image width={68} src={value} />,
+            width: "14rem",
           },
           {
             title: "名称",
             dataIndex: "name",
-            width: "24rem",
+            width: "32rem",
           },
           {
             title: "分类",
@@ -69,6 +70,7 @@ export const List = ({
             render: (value) => (
               <>{categoryOptions.find((item) => item.id === value)?.name}</>
             ),
+            width: "12rem",
           },
           {
             title: "价格",
@@ -80,9 +82,16 @@ export const List = ({
             dataIndex: "stock",
           },
           {
-            title: "分佣",
-            dataIndex: "commissionRate",
+            title: "销售佣金比例",
+            dataIndex: "salesCommissionRate",
             render: (value) => <>{`${value * 100}%`}</>,
+            width: "16rem",
+          },
+          {
+            title: "推广佣金比例",
+            dataIndex: "promotionCommissionRate",
+            render: (value) => <>{`${value * 100}%`}</>,
+            width: "16rem",
           },
           {
             title: "销量",
