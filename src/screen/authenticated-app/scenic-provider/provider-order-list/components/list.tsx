@@ -2,11 +2,14 @@ import styled from "@emotion/styled";
 import { Table, TablePaginationConfig, TableProps, Tooltip } from "antd";
 import { ErrorBox, Row, PageTitle } from "components/lib";
 import dayjs from "dayjs";
-import { MerchantOrder, MerchantOrdersSearchParams } from "types/merchant";
+import {
+  ProviderOrder,
+  ProviderOrdersSearchParams,
+} from "types/scenicProvider";
 
-interface ListProps extends TableProps<MerchantOrder> {
-  params: Partial<MerchantOrdersSearchParams>;
-  setParams: (params: Partial<MerchantOrdersSearchParams>) => void;
+interface ListProps extends TableProps<ProviderOrder> {
+  params: Partial<ProviderOrdersSearchParams>;
+  setParams: (params: Partial<ProviderOrdersSearchParams>) => void;
   error: Error | unknown;
 }
 

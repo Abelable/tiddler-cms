@@ -1,13 +1,13 @@
 import styled from "@emotion/styled";
-import { useMerchantOrders } from "service/merchant";
+import { useProviderOrders } from "service/scenicProvider";
 import { toNumber } from "utils";
-import { useMerchantOrdersSearchParams } from "./util";
+import { useProviderOrdersSearchParams } from "./util";
 
 import { List } from "./components/list";
 
-export const MerchantOrderList = () => {
-  const [params, setParams] = useMerchantOrdersSearchParams();
-  const { isLoading, error, data } = useMerchantOrders(params);
+export const ScenicProviderOrderList = () => {
+  const [params, setParams] = useProviderOrdersSearchParams();
+  const { isLoading, error, data } = useProviderOrders(params);
 
   return (
     <Container>

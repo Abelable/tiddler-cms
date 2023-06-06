@@ -1,7 +1,7 @@
 import { useUrlQueryParams } from "utils/url";
 import { useMemo } from "react";
 
-export const useMerchantOrdersSearchParams = () => {
+export const useProviderOrdersSearchParams = () => {
   const [params, setParams] = useUrlQueryParams(["page", "limit"]);
   return [
     useMemo(
@@ -15,7 +15,7 @@ export const useMerchantOrdersSearchParams = () => {
   ] as const;
 };
 
-export const useMerchantOrdersQueryKey = () => {
-  const [params] = useMerchantOrdersSearchParams();
-  return ["merchant_orders", params];
+export const useProviderOrdersQueryKey = () => {
+  const [params] = useProviderOrdersSearchParams();
+  return ["scenic_provider_orders", params];
 };

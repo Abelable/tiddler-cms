@@ -1,22 +1,28 @@
 import styled from "@emotion/styled";
-import { useProviders } from "service/scenicProvider";
+import { useShops } from "service/shop";
+import { useShopCategoryOptions } from "service/shopCategory";
 import { toNumber } from "utils";
-import { useProvidersSearchParams } from "./util";
+import { useShopsSearchParams } from "./util";
 
-import { ProviderModal } from "./components/provider-modal";
+import { ShopModal } from "./components/shop-modal";
 import { List } from "./components/list";
 import { SearchPanel } from "./components/search-panel";
-import { RejectModal } from "./components/reject-modal";
 
-export const ScenicProviderList = () => {
-  const [params, setParams] = useProvidersSearchParams();
-  const { isLoading, error, data } = useProviders(params);
+export const ScenicShopList = () => {
+  const [params, setParams] = useShopsSearchParams();
+  const { isLoading, error, data } = useShops(params);
+  const { data: shopCategoryOptions } = useShopCategoryOptions();
 
   return (
     <Container>
       <Main>
-        <SearchPanel params={params} setParams={setParams} />
+        <SearchPanel
+          shopCategoryOptions={shopCategoryOptions || []}
+          params={params}
+          setParams={setParams}
+        />
         <List
+          shopCategoryOptions={shopCategoryOptions || []}
           params={params}
           setParams={setParams}
           error={error}
@@ -29,8 +35,7 @@ export const ScenicProviderList = () => {
           }}
         />
       </Main>
-      <ProviderModal />
-      <RejectModal />
+      <ShopModal shopCategoryOptions={shopCategoryOptions || []} />
     </Container>
   );
 };

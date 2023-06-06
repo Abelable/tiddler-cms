@@ -21,6 +21,9 @@ import { GoodsList } from "./goods/goods-list";
 import { ScenicCategoryList } from "./scenic-spot/category-list";
 import { ScenicTicketCategoryList } from "./scenic-ticket/category-list";
 import { ScenicList } from "./scenic-spot/scenic-list";
+import { ScenicProviderList } from "./scenic-provider/provider-list";
+import { ScenicProviderOrderList } from "./scenic-provider/provider-order-list";
+import { ScenicShopList } from "./scenic-shop-list";
 
 import {
   LockOutlined,
@@ -79,6 +82,18 @@ export const AuthenticatedApp = () => {
                 element={<ScenicCategoryList />}
               />
               <Route path="scenic_spot/list" element={<ScenicList />} />
+              <Route
+                path="scenic_spot/provider_list"
+                element={<ScenicProviderList />}
+              />
+              <Route
+                path="scenic_spot/provider_order_list"
+                element={<ScenicProviderOrderList />}
+              />
+              <Route
+                path="scenic_spot/shop_list"
+                element={<ScenicShopList />}
+              />
               <Route
                 path="scenic_ticket/category_list"
                 element={<ScenicTicketCategoryList />}
@@ -184,6 +199,23 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
           label: <Link to={"scenic_spot/list"}>景点列表</Link>,
           key: "scenic_spot_list",
           icon: <ScenicSpotIcon />,
+        },
+        {
+          label: <Link to={"scenic_spot/provider_list"}>服务商列表</Link>,
+          key: "scenic_provider_list",
+          icon: <TeamOutlined />,
+        },
+        {
+          label: (
+            <Link to={"scenic_spot/provider_order_list"}>服务商入驻订单</Link>
+          ),
+          key: "scenic_provider_order_list",
+          icon: <FileDoneOutlined />,
+        },
+        {
+          label: <Link to={"scenic_spot/shop_list"}>店铺列表</Link>,
+          key: "scenic_shop_list",
+          icon: <ShopOutlined />,
         },
       ],
     },
