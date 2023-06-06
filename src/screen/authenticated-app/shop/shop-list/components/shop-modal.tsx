@@ -29,16 +29,6 @@ export const ShopModal = ({
         <>
           <Descriptions size={"small"} column={1} bordered>
             <Descriptions.Item label="ID">{editingShop?.id}</Descriptions.Item>
-            <Descriptions.Item label="店铺名称">
-              {editingShop?.name}
-            </Descriptions.Item>
-            <Descriptions.Item label="店铺分类">
-              {
-                shopCategoryOptions.find(
-                  (item) => item.id === editingShop?.categoryId
-                )?.name
-              }
-            </Descriptions.Item>
             <Descriptions.Item label="商家类型">
               {editingShop?.type === 1 ? "个人" : "企业"}
             </Descriptions.Item>
@@ -48,6 +38,16 @@ export const ShopModal = ({
                 icon={<UserOutlined />}
                 size="small"
               />
+            </Descriptions.Item>
+            <Descriptions.Item label="店铺名称">
+              {editingShop?.name}
+            </Descriptions.Item>
+            <Descriptions.Item label="店铺分类">
+              {
+                shopCategoryOptions.find(
+                  (item) => item.id === editingShop?.categoryId
+                )?.name
+              }
             </Descriptions.Item>
             {editingShop?.cover ? (
               <Descriptions.Item label="店铺封面">
