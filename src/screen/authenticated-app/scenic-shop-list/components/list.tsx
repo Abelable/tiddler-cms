@@ -17,6 +17,16 @@ interface ListProps extends TableProps<Shop>, SearchPanelProps {
   error: Error | unknown;
 }
 
+const shopStatusOptions = [
+  { text: "未支付保证金", value: 0 },
+  { text: "已支付保证金", value: 1 },
+];
+const shopTypeOptions = [
+  { text: "景区官方", value: 1 },
+  { text: "旅行社", value: 2 },
+  { text: "平台自营", value: 3 },
+];
+
 export const List = ({
   shopCategoryOptions,
   error,
@@ -50,13 +60,26 @@ export const List = ({
             dataIndex: "name",
           },
           {
-            title: "商家类型",
+            title: "店铺状态",
+            dataIndex: "status",
+            render: (value) =>
+              value === 0 ? (
+                <span style={{ color: "#f50" }}>未支付保证金</span>
+              ) : (
+                <span style={{ color: "#87d068", cursor: "pointer" }}>
+                  已支付保证金
+                </span>
+              ),
+            filters: shopStatusOptions,
+            onFilter: (value, shop) => shop.status === value,
+          },
+          {
+            title: "店铺类型",
             dataIndex: "type",
-            render: (value) => <>{value === 1 ? "个人" : "企业"}</>,
-            filters: [
-              { text: "个人", value: 1 },
-              { text: "企业", value: 2 },
-            ],
+            render: (value) => (
+              <>{shopTypeOptions.find((item) => item.value === value)?.text}</>
+            ),
+            filters: shopTypeOptions,
             onFilter: (value, shop) => shop.type === value,
           },
           {
