@@ -7,6 +7,7 @@ export interface ProvidersSearchParams {
 
 export interface Provider {
   id: number;
+  companyName: string;
   name: string;
   mobile: string;
   status: number;
@@ -17,7 +18,6 @@ export interface Provider {
 }
 
 export interface ProviderDetail extends Provider {
-  companyName: string;
   regionDesc: string;
   regionCodeList: string[];
   addressDetail: string;

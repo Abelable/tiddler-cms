@@ -47,6 +47,10 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
             width: "8rem",
           },
           {
+            title: "公司名称",
+            dataIndex: "companyName",
+          },
+          {
             title: "联系人姓名",
             dataIndex: "name",
           },

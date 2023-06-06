@@ -24,7 +24,7 @@ export const useProvidersSearchParams = () => {
 
 export const useProvidersQueryKey = () => {
   const [params] = useProvidersSearchParams();
-  return ["merchants", params];
+  return ["scenic_providers", params];
 };
 
 export const useProviderModal = () => {
