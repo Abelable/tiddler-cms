@@ -25,7 +25,8 @@ export const ProviderModal = () => {
             style={{ marginBottom: "3.2rem" }}
             title="基础信息"
             size={"small"}
-            column={2}
+            column={1}
+            bordered
           >
             <Descriptions.Item label="ID">
               {editingProvider?.id}
@@ -39,23 +40,24 @@ export const ProviderModal = () => {
           </Descriptions>
           <Descriptions
             style={{ marginBottom: "3.2rem" }}
-            title="企业信息"
+            title="公司信息"
             size={"small"}
-            column={2}
+            column={1}
+            bordered
           >
-            <Descriptions.Item label="企业名称">
+            <Descriptions.Item label="公司名称">
               {editingProvider?.companyName}
             </Descriptions.Item>
-            <Descriptions.Item label="企业经营地址">
+            <Descriptions.Item label="公司经营地址">
               {editingProvider?.regionDesc}
             </Descriptions.Item>
-            <Descriptions.Item label="企业地址详情">
+            <Descriptions.Item label="公司地址详情">
               {editingProvider?.addressDetail}
             </Descriptions.Item>
             <Descriptions.Item label="营业执照照片">
               <Image
-                width={132}
-                height={86}
+                width={66}
+                height={43}
                 src={editingProvider?.businessLicensePhoto}
               />
             </Descriptions.Item>
@@ -64,7 +66,8 @@ export const ProviderModal = () => {
             style={{ marginBottom: "3.2rem" }}
             title="法人信息"
             size={"small"}
-            column={2}
+            column={1}
+            bordered
           >
             <Descriptions.Item label="姓名">
               {editingProvider?.name}
@@ -80,22 +83,22 @@ export const ProviderModal = () => {
             </Descriptions.Item>
             <Descriptions.Item label="身份证正面照片">
               <Image
-                width={132}
-                height={86}
+                width={66}
+                height={43}
                 src={editingProvider?.idCardFrontPhoto}
               />
             </Descriptions.Item>
             <Descriptions.Item label="身份证反面照片">
               <Image
-                width={132}
-                height={86}
+                width={66}
+                height={43}
                 src={editingProvider?.idCardFrontPhoto}
               />
             </Descriptions.Item>
             <Descriptions.Item label="手持身份证照片">
               <Image
-                width={132}
-                height={86}
+                width={66}
+                height={43}
                 src={editingProvider?.holdIdCardPhoto}
               />
             </Descriptions.Item>
@@ -104,7 +107,8 @@ export const ProviderModal = () => {
             style={{ marginBottom: "3.2rem" }}
             title="银行信息"
             size={"small"}
-            column={2}
+            column={1}
+            bordered
           >
             <Descriptions.Item label="持卡人姓名">
               {editingProvider?.bankCardOwnerName}

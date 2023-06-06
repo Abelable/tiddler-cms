@@ -29,7 +29,7 @@ export const ShopModal = ({
         <ModalLoading />
       ) : (
         <>
-          <Descriptions title="基础信息" size={"small"} column={2}>
+          <Descriptions size={"small"} column={1} bordered>
             <Descriptions.Item label="ID">{editingShop?.id}</Descriptions.Item>
             <Descriptions.Item label="店铺名称">
               {editingShop?.name}
@@ -58,7 +58,7 @@ export const ShopModal = ({
             </Descriptions.Item>
             {editingShop?.cover ? (
               <Descriptions.Item label="店铺封面">
-                <Image width={132} height={86} src={editingShop?.cover} />
+                <Image width={66} height={43} src={editingShop?.cover} />
               </Descriptions.Item>
             ) : (
               <></>
