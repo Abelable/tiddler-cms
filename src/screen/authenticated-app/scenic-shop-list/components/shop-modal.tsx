@@ -1,14 +1,16 @@
 import { Descriptions, Drawer, Image, Avatar } from "antd";
 import { ErrorBox, ModalLoading } from "components/lib";
 import { UserOutlined } from "@ant-design/icons";
+
 import dayjs from "dayjs";
 import { useShopModal } from "../util";
-import { CategoryOption } from "types/category";
+
+import type { Option } from "types/common";
 
 export const ShopModal = ({
-  shopCategoryOptions,
+  shopTypeOptions,
 }: {
-  shopCategoryOptions: CategoryOption[];
+  shopTypeOptions: Option[];
 }) => {
   const { close, shopModalOpen, editingShop, error, isLoading } =
     useShopModal();
@@ -32,15 +34,20 @@ export const ShopModal = ({
             <Descriptions.Item label="店铺名称">
               {editingShop?.name}
             </Descriptions.Item>
-            <Descriptions.Item label="店铺分类">
-              {
-                shopCategoryOptions.find(
-                  (item) => item.id === editingShop?.categoryId
-                )?.name
-              }
+            <Descriptions.Item label="店铺状态">
+              {editingShop?.status === 0 ? (
+                <span style={{ color: "#f50" }}>未支付保证金</span>
+              ) : (
+                <span style={{ color: "#87d068", cursor: "pointer" }}>
+                  已支付保证金
+                </span>
+              )}
             </Descriptions.Item>
-            <Descriptions.Item label="商家类型">
-              {editingShop?.type === 1 ? "个人" : "企业"}
+            <Descriptions.Item label="店铺类型">
+              {
+                shopTypeOptions.find((item) => item.value === editingShop?.type)
+                  ?.text
+              }
             </Descriptions.Item>
             <Descriptions.Item label="店铺头像">
               <Avatar
@@ -49,9 +56,14 @@ export const ShopModal = ({
                 size="small"
               />
             </Descriptions.Item>
-            <Descriptions.Item label="店铺封面">
-              <Image width={132} height={86} src={editingShop?.cover} />
-            </Descriptions.Item>
+            {editingShop?.cover ? (
+              <Descriptions.Item label="店铺封面">
+                <Image width={132} height={86} src={editingShop?.cover} />
+              </Descriptions.Item>
+            ) : (
+              <></>
+            )}
+
             <Descriptions.Item label="注册时间">
               {dayjs(editingShop?.createdAt).format("YYYY-MM-DD HH:mm:ss")}
             </Descriptions.Item>

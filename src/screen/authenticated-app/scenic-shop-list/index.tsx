@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import { useShops } from "service/scenicShop";
-import { useShopCategoryOptions } from "service/shopCategory";
 import { toNumber } from "utils";
 import { useShopsSearchParams } from "./util";
 
@@ -9,20 +8,20 @@ import { List } from "./components/list";
 import { SearchPanel } from "./components/search-panel";
 
 export const ScenicShopList = () => {
+  const shopTypeOptions = [
+    { text: "景区官方", value: 1 },
+    { text: "旅行社", value: 2 },
+    { text: "平台自营", value: 3 },
+  ];
   const [params, setParams] = useShopsSearchParams();
   const { isLoading, error, data } = useShops(params);
-  const { data: shopCategoryOptions } = useShopCategoryOptions();
 
   return (
     <Container>
       <Main>
-        <SearchPanel
-          shopCategoryOptions={shopCategoryOptions || []}
-          params={params}
-          setParams={setParams}
-        />
+        <SearchPanel params={params} setParams={setParams} />
         <List
-          shopCategoryOptions={shopCategoryOptions || []}
+          shopTypeOptions={shopTypeOptions}
           params={params}
           setParams={setParams}
           error={error}
@@ -35,7 +34,7 @@ export const ScenicShopList = () => {
           }}
         />
       </Main>
-      <ShopModal shopCategoryOptions={shopCategoryOptions || []} />
+      <ShopModal shopTypeOptions={shopTypeOptions} />
     </Container>
   );
 };

@@ -1,4 +1,3 @@
-import styled from "@emotion/styled";
 import {
   Dropdown,
   Menu,
@@ -8,27 +7,27 @@ import {
   TableProps,
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
+
+import styled from "@emotion/styled";
 import dayjs from "dayjs";
-import { Shop } from "types/shop";
 import { useShopModal } from "../util";
 import { SearchPanelProps } from "./search-panel";
 
+import type { Option } from "types/common";
+import type { Shop } from "types/scenicShop";
+
 interface ListProps extends TableProps<Shop>, SearchPanelProps {
   error: Error | unknown;
+  shopTypeOptions: Option[];
 }
 
 const shopStatusOptions = [
   { text: "未支付保证金", value: 0 },
   { text: "已支付保证金", value: 1 },
 ];
-const shopTypeOptions = [
-  { text: "景区官方", value: 1 },
-  { text: "旅行社", value: 2 },
-  { text: "平台自营", value: 3 },
-];
 
 export const List = ({
-  shopCategoryOptions,
+  shopTypeOptions,
   error,
   params,
   setParams,

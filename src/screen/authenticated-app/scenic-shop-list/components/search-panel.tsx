@@ -1,26 +1,21 @@
-import type { ShopsSearchParams } from "types/shop";
+import { Row } from "components/lib";
+import { Button, Input } from "antd";
+
 import { useState } from "react";
 import styled from "@emotion/styled";
-import { Row } from "components/lib";
-import { Button, Input, Select } from "antd";
-import { CategoryOption } from "types/category";
+
+import type { ShopsSearchParams } from "types/scenicShop";
 
 export interface SearchPanelProps {
-  shopCategoryOptions: CategoryOption[];
   params: Partial<ShopsSearchParams>;
   setParams: (params: Partial<ShopsSearchParams>) => void;
 }
 
 const defaultParmas: Partial<ShopsSearchParams> = {
   name: "",
-  categoryId: undefined,
 };
 
-export const SearchPanel = ({
-  shopCategoryOptions,
-  params,
-  setParams,
-}: SearchPanelProps) => {
+export const SearchPanel = ({ params, setParams }: SearchPanelProps) => {
   const [tempParams, setTempParams] = useState(defaultParmas);
 
   const setNickname = (evt: any) => {
@@ -38,11 +33,6 @@ export const SearchPanel = ({
     });
   };
 
-  const setCategory = (categoryId: number) =>
-    setTempParams({ ...tempParams, categoryId });
-  const clearCategory = () =>
-    setTempParams({ ...tempParams, categoryId: undefined });
-
   const clear = () => {
     setParams({ ...params, ...defaultParmas });
     setTempParams({ ...tempParams, ...defaultParmas });
@@ -59,23 +49,6 @@ export const SearchPanel = ({
           placeholder="请输入店铺名称"
           allowClear={true}
         />
-      </Item>
-      <Item>
-        <div>店铺分类：</div>
-        <Select
-          style={{ width: "20rem" }}
-          value={tempParams.categoryId}
-          allowClear={true}
-          onSelect={setCategory}
-          onClear={clearCategory}
-          placeholder="请选择店铺分类"
-        >
-          {shopCategoryOptions.map(({ id, name }) => (
-            <Select.Option key={id} value={id}>
-              {name}
-            </Select.Option>
-          ))}
-        </Select>
       </Item>
 
       <ButtonWrap gap={true}>

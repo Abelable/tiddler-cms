@@ -26,3 +26,8 @@ export interface WarningSetting {
   phone_repeated_prewarn_num: string;
   phone_repeated_prewarn_num_check_period: string;
 }
+
+export interface Option {
+  text: string;
+  value: number;
+}
