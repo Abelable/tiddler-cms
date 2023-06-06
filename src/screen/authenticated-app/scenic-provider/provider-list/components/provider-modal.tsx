@@ -56,8 +56,8 @@ export const ProviderModal = () => {
             </Descriptions.Item>
             <Descriptions.Item label="营业执照照片">
               <Image
-                width={66}
-                height={43}
+                width={132}
+                height={84}
                 src={editingProvider?.businessLicensePhoto}
               />
             </Descriptions.Item>
@@ -83,22 +83,22 @@ export const ProviderModal = () => {
             </Descriptions.Item>
             <Descriptions.Item label="身份证正面照片">
               <Image
-                width={66}
-                height={43}
+                width={132}
+                height={84}
                 src={editingProvider?.idCardFrontPhoto}
               />
             </Descriptions.Item>
             <Descriptions.Item label="身份证反面照片">
               <Image
-                width={66}
-                height={43}
+                width={132}
+                height={84}
                 src={editingProvider?.idCardFrontPhoto}
               />
             </Descriptions.Item>
             <Descriptions.Item label="手持身份证照片">
               <Image
-                width={66}
-                height={43}
+                width={132}
+                height={84}
                 src={editingProvider?.holdIdCardPhoto}
               />
             </Descriptions.Item>

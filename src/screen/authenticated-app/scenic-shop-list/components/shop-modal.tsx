@@ -58,7 +58,7 @@ export const ShopModal = ({
             </Descriptions.Item>
             {editingShop?.cover ? (
               <Descriptions.Item label="店铺封面">
-                <Image width={66} height={43} src={editingShop?.cover} />
+                <Image width={132} height={86} src={editingShop?.cover} />
               </Descriptions.Item>
             ) : (
               <></>

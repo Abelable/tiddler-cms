@@ -72,7 +72,7 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
                 </Tooltip>
               ) : value === 2 ? (
                 <Tooltip title={`订单id：${provider.orderId}`}>
-                  <span style={{ cursor: "pointer" }}>已完成</span>
+                  <span style={{ cursor: "pointer" }}>已支付</span>
                 </Tooltip>
               ) : (
                 <Tooltip title={provider.failureReason}>
@@ -84,7 +84,7 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
             filters: [
               { text: "待审核", value: 0 },
               { text: "待支付", value: 1 },
-              { text: "已完成", value: 2 },
+              { text: "已支付", value: 2 },
               { text: "已驳回", value: 3 },
             ],
             onFilter: (value, provider) => provider.status === value,

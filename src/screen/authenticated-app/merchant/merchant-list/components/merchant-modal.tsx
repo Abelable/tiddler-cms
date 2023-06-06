@@ -2,13 +2,8 @@ import { Descriptions, Drawer, Image } from "antd";
 import { ErrorBox, ModalLoading } from "components/lib";
 import dayjs from "dayjs";
 import { useMerchantModal } from "../util";
-import { CategoryOption } from "types/category";
 
-export const MerchantModal = ({
-  shopCategoryOptions,
-}: {
-  shopCategoryOptions: CategoryOption[];
-}) => {
+export const MerchantModal = () => {
   const { close, merchantModalOpen, editingMerchant, error, isLoading } =
     useMerchantModal();
 
@@ -30,7 +25,8 @@ export const MerchantModal = ({
             style={{ marginBottom: "3.2rem" }}
             title="基础信息"
             size={"small"}
-            column={2}
+            column={1}
+            bordered
           >
             <Descriptions.Item label="ID">
               {editingMerchant?.id}
@@ -51,7 +47,8 @@ export const MerchantModal = ({
                 style={{ marginBottom: "3.2rem" }}
                 title="个人信息"
                 size={"small"}
-                column={2}
+                column={1}
+                bordered
               >
                 <Descriptions.Item label="姓名">
                   {editingMerchant?.name}
@@ -85,7 +82,8 @@ export const MerchantModal = ({
                 style={{ marginBottom: "3.2rem" }}
                 title="联系方式"
                 size={"small"}
-                column={2}
+                column={1}
+                bordered
               >
                 <Descriptions.Item label="手机号">
                   {editingMerchant?.mobile}
@@ -107,7 +105,8 @@ export const MerchantModal = ({
                 style={{ marginBottom: "3.2rem" }}
                 title="企业信息"
                 size={"small"}
-                column={2}
+                column={1}
+                bordered
               >
                 <Descriptions.Item label="企业名称">
                   {editingMerchant?.companyName}
@@ -172,7 +171,8 @@ export const MerchantModal = ({
             style={{ marginBottom: "3.2rem" }}
             title="银行信息"
             size={"small"}
-            column={2}
+            column={1}
+            bordered
           >
             <Descriptions.Item label="持卡人姓名">
               {editingMerchant?.bankCardOwnerName}
@@ -182,23 +182,6 @@ export const MerchantModal = ({
             </Descriptions.Item>
             <Descriptions.Item label="开户银行及支行名称">
               {editingMerchant?.bankName}
-            </Descriptions.Item>
-          </Descriptions>
-          <Descriptions
-            style={{ marginBottom: "3.2rem" }}
-            title="店铺信息"
-            size={"small"}
-            column={2}
-          >
-            <Descriptions.Item label="店铺名称">
-              {editingMerchant?.shopName}
-            </Descriptions.Item>
-            <Descriptions.Item label="店铺分类">
-              {
-                shopCategoryOptions.find(
-                  (item) => item.id === editingMerchant?.shopCategoryId
-                )?.name
-              }
             </Descriptions.Item>
           </Descriptions>
         </>

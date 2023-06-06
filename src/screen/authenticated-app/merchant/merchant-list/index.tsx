@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import { useMerchants } from "service/merchant";
-import { useShopCategoryOptions } from "service/shopCategory";
 import { toNumber } from "utils";
 import { useMerchantsSearchParams } from "./util";
 
@@ -12,7 +11,6 @@ import { RejectModal } from "./components/reject-modal";
 export const MerchantList = () => {
   const [params, setParams] = useMerchantsSearchParams();
   const { isLoading, error, data } = useMerchants(params);
-  const { data: shopCategoryOptions } = useShopCategoryOptions();
 
   return (
     <Container>
@@ -31,7 +29,7 @@ export const MerchantList = () => {
           }}
         />
       </Main>
-      <MerchantModal shopCategoryOptions={shopCategoryOptions || []} />
+      <MerchantModal />
       <RejectModal />
     </Container>
   );
