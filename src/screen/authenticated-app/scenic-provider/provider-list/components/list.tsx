@@ -51,11 +51,11 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
             dataIndex: "companyName",
           },
           {
-            title: "联系人姓名",
+            title: "法人姓名",
             dataIndex: "name",
           },
           {
-            title: "联系人手机号",
+            title: "法人手机号",
             dataIndex: "mobile",
           },
           {
