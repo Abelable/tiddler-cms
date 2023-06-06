@@ -11,16 +11,16 @@ import {
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
 import dayjs from "dayjs";
-import { Merchant } from "types/merchant";
+import { Provider } from "types/scenicProvider";
 import {
-  useMerchantModal,
-  useMerchantsQueryKey,
+  useProviderModal,
+  useProvidersQueryKey,
   useRejectModal,
 } from "../util";
 import { SearchPanelProps } from "./search-panel";
-import { useApprovedMerchant } from "service/merchant";
+import { useApprovedProvider } from "service/scenicProvider";
 
-interface ListProps extends TableProps<Merchant>, SearchPanelProps {
+interface ListProps extends TableProps<Provider>, SearchPanelProps {
   error: Error | unknown;
 }
 
@@ -45,16 +45,6 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
             title: "id",
             dataIndex: "id",
             width: "8rem",
-          },
-          {
-            title: "商家类型",
-            dataIndex: "type",
-            render: (value) => <>{value === 1 ? "个人" : "企业"}</>,
-            filters: [
-              { text: "个人", value: 1 },
-              { text: "企业", value: 2 },
-            ],
-            onFilter: (value, merchant) => merchant.type === value,
           },
           {
             title: "联系人姓名",
@@ -137,9 +127,9 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
 };
 
 const More = ({ id, status }: { id: number; status: number }) => {
-  const { open } = useMerchantModal();
-  const { mutate: approvedMerchant } = useApprovedMerchant(
-    useMerchantsQueryKey()
+  const { open } = useProviderModal();
+  const { mutate: approvedProvider } = useApprovedProvider(
+    useProvidersQueryKey()
   );
   const { open: openRejectModal } = useRejectModal();
 
@@ -149,7 +139,7 @@ const More = ({ id, status }: { id: number; status: number }) => {
       content: "请确保在商家信息无误的情况下进行该操作",
       okText: "确定",
       cancelText: "取消",
-      onOk: () => approvedMerchant(id),
+      onOk: () => approvedProvider(id),
     });
   };
 

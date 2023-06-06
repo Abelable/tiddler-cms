@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import { useProviders } from "service/scenicProvider";
-import { useShopCategoryOptions } from "service/shopCategory";
 import { toNumber } from "utils";
 import { useProvidersSearchParams } from "./util";
 
@@ -12,7 +11,6 @@ import { RejectModal } from "./components/reject-modal";
 export const ProviderList = () => {
   const [params, setParams] = useProvidersSearchParams();
   const { isLoading, error, data } = useProviders(params);
-  const { data: shopCategoryOptions } = useShopCategoryOptions();
 
   return (
     <Container>
@@ -31,7 +29,7 @@ export const ProviderList = () => {
           }}
         />
       </Main>
-      <ProviderModal shopCategoryOptions={shopCategoryOptions || []} />
+      <ProviderModal />
       <RejectModal />
     </Container>
   );
