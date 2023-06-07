@@ -64,9 +64,9 @@ export const AuthenticatedApp = () => {
               <Route path="auth/role_list" element={<RoleList />} />
               <Route path="auth/admin_list" element={<AdminList />} />
               <Route path="user_list" element={<UserList />} />
-              <Route path="shop/merchant_list" element={<MerchantList />} />
+              <Route path="merchant/list" element={<MerchantList />} />
               <Route
-                path="shop/merchant_order_list"
+                path="merchant/order_list"
                 element={<MerchantOrderList />}
               />
               <Route path="shop/category_list" element={<ShopCategoryList />} />
@@ -137,20 +137,27 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
       ],
     },
     {
+      label: "商家管理",
+      key: "merchant",
+      icon: <TeamOutlined />,
+      children: [
+        {
+          label: <Link to={"merchant/list"}>商家列表</Link>,
+          key: "merchant_list",
+          icon: <TeamOutlined />,
+        },
+        {
+          label: <Link to={"merchant/order_list"}>入驻订单列表</Link>,
+          key: "merchant_order_list",
+          icon: <FileDoneOutlined />,
+        },
+      ],
+    },
+    {
       label: "店铺管理",
       key: "shop",
       icon: <ShopOutlined />,
       children: [
-        {
-          label: <Link to={"shop/merchant_list"}>商家列表</Link>,
-          key: "shop_merchant_list",
-          icon: <TeamOutlined />,
-        },
-        {
-          label: <Link to={"shop/merchant_order_list"}>商家入驻订单</Link>,
-          key: "shop_merchant_order_list",
-          icon: <FileDoneOutlined />,
-        },
         {
           label: <Link to={"shop/category_list"}>店铺分类</Link>,
           key: "shop_category_list",
