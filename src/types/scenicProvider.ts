@@ -46,6 +46,7 @@ export interface ProviderOrdersSearchParams {
 
 export interface ProviderOrder {
   id: number;
+  companyName: string;
   orderSn: string;
   paymentAmount: string;
   status: number;

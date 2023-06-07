@@ -36,6 +36,10 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
             width: "8rem",
           },
           {
+            title: "入驻服务商",
+            dataIndex: "companyName",
+          },
+          {
             title: "订单编号",
             dataIndex: "orderSn",
           },
@@ -48,10 +52,12 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
             dataIndex: "status",
             render: (value, order) =>
               value === 0 ? (
-                <span>待支付</span>
+                <span style={{ color: "#f50" }}>待支付</span>
               ) : (
                 <Tooltip title={`支付id：${order.payId}`}>
-                  <span style={{ cursor: "pointer" }}>支付成功</span>
+                  <span style={{ color: "#87d068", cursor: "pointer" }}>
+                    支付成功
+                  </span>
                 </Tooltip>
               ),
             filters: [
