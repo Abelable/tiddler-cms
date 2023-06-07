@@ -26,7 +26,7 @@ export const RejectModal = () => {
   return (
     <Modal
       forceRender={true}
-      title={"景点驳回重审"}
+      title={"景区驳回重审"}
       open={rejectModalOpen}
       confirmLoading={mutateLoading}
       onOk={confirm}

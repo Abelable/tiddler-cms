@@ -45,7 +45,7 @@ export const List = ({
   return (
     <Container>
       <Header between={true}>
-        <PageTitle>景点列表</PageTitle>
+        <PageTitle>景区列表</PageTitle>
         <Button onClick={() => open()} type={"primary"} icon={<PlusOutlined />}>
           新增
         </Button>
@@ -162,7 +162,7 @@ const More = ({ id, status }: { id: number; status: number }) => {
 
   const confirmDelete = (id: number) => {
     Modal.confirm({
-      title: "确定删除该景点吗？",
+      title: "确定删除该景区吗？",
       content: "点击确定删除",
       okText: "确定",
       cancelText: "取消",
@@ -172,8 +172,8 @@ const More = ({ id, status }: { id: number; status: number }) => {
 
   const confirmApproved = (id: number) => {
     Modal.confirm({
-      title: "景点审核通过确认",
-      content: "请确保在景点信息无误的情况下进行该操作",
+      title: "景区审核通过确认",
+      content: "请确保在景区信息无误的情况下进行该操作",
       okText: "确定",
       cancelText: "取消",
       onOk: () => approvedScenic(id),

@@ -136,7 +136,7 @@ export const ScenicModal = ({
 
   return (
     <Drawer
-      title={editingScenicId ? "编辑景点" : "新增景点"}
+      title={editingScenicId ? "编辑景区" : "新增景区"}
       size={"large"}
       forceRender={true}
       onClose={closeModal}
@@ -161,15 +161,15 @@ export const ScenicModal = ({
             <Col span={12}>
               <Form.Item
                 name="name"
-                label="景点名称"
-                rules={[{ required: true, message: "请输入景点名称" }]}
+                label="景区名称"
+                rules={[{ required: true, message: "请输入景区名称" }]}
               >
-                <Input placeholder="请输入景点名称" />
+                <Input placeholder="请输入景区名称" />
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item name="level" label="景点等级">
-                <Input placeholder="请输入景点等级，例：5A" />
+              <Form.Item name="level" label="景区等级">
+                <Input placeholder="请输入景区等级，例：5A" />
               </Form.Item>
             </Col>
           </Row>
@@ -177,10 +177,10 @@ export const ScenicModal = ({
             <Col span={12}>
               <Form.Item
                 name="categoryId"
-                label="景点类型"
-                rules={[{ required: true, message: "请选择景点类型" }]}
+                label="景区类型"
+                rules={[{ required: true, message: "请选择景区类型" }]}
               >
-                <Select placeholder="请选择景点类型">
+                <Select placeholder="请选择景区类型">
                   {categoryOptions.map(({ id, name }) => (
                     <Select.Option key={id} value={id}>
                       {name}
@@ -194,7 +194,7 @@ export const ScenicModal = ({
             <Col span={24}>
               <Form.Item
                 name="video"
-                label="上传景点视频"
+                label="上传景区视频"
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
               >
@@ -206,11 +206,11 @@ export const ScenicModal = ({
             <Col span={24}>
               <Form.Item
                 name="imageList"
-                label="上传景点照片"
+                label="上传景区照片"
                 tooltip="图片大小不能超过10MB"
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
-                rules={[{ required: true, message: "请上传景点照片" }]}
+                rules={[{ required: true, message: "请上传景区照片" }]}
               >
                 <OssUpload />
               </Form.Item>
@@ -218,7 +218,7 @@ export const ScenicModal = ({
           </Row>
           <Row gutter={16}>
             <Col span={12}>
-              <Form.Item label="景点所在经纬度" required>
+              <Form.Item label="景区所在经纬度" required>
                 <Input.Group>
                   <Row gutter={8}>
                     <Col span={12}>
@@ -246,10 +246,10 @@ export const ScenicModal = ({
             <Col span={12}>
               <Form.Item
                 name="address"
-                label="景点地址详情"
-                rules={[{ required: true, message: "请输入景点地址详情" }]}
+                label="景区地址详情"
+                rules={[{ required: true, message: "请输入景区地址详情" }]}
               >
-                <Input placeholder="请输入景点地址详情" />
+                <Input placeholder="请输入景区地址详情" />
               </Form.Item>
             </Col>
           </Row>
@@ -262,10 +262,10 @@ export const ScenicModal = ({
             <Col span={24}>
               <Form.Item
                 name="brief"
-                label="景点简介"
-                rules={[{ required: true, message: "请输入景点简介" }]}
+                label="景区简介"
+                rules={[{ required: true, message: "请输入景区简介" }]}
               >
-                <Input.TextArea rows={6} placeholder="请输入景点简介" />
+                <Input.TextArea rows={6} placeholder="请输入景区简介" />
               </Form.Item>
             </Col>
           </Row>

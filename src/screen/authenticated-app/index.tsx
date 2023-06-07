@@ -83,15 +83,15 @@ export const AuthenticatedApp = () => {
               />
               <Route path="scenic_spot/list" element={<ScenicList />} />
               <Route
-                path="scenic_spot/provider_list"
+                path="scenic_provider/list"
                 element={<ScenicProviderList />}
               />
               <Route
-                path="scenic_spot/provider_order_list"
+                path="scenic_provider/order_list"
                 element={<ScenicProviderOrderList />}
               />
               <Route
-                path="scenic_spot/shop_list"
+                path="scenic_provider/shop_list"
                 element={<ScenicShopList />}
               />
               <Route
@@ -186,34 +186,39 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
       ],
     },
     {
-      label: "景点管理",
+      label: "景区管理",
       key: "scenic_spot",
       icon: <ScenicSpotIcon />,
       children: [
         {
-          label: <Link to={"scenic_spot/category_list"}>景点分类</Link>,
+          label: <Link to={"scenic_spot/category_list"}>景区分类</Link>,
           key: "scenic_category_list",
           icon: <AppstoreOutlined />,
         },
         {
-          label: <Link to={"scenic_spot/list"}>景点列表</Link>,
+          label: <Link to={"scenic_spot/list"}>景区列表</Link>,
           key: "scenic_spot_list",
           icon: <ScenicSpotIcon />,
         },
+      ],
+    },
+    {
+      label: "景区服务商管理",
+      key: "scenic_provider",
+      icon: <TeamOutlined />,
+      children: [
         {
-          label: <Link to={"scenic_spot/provider_list"}>服务商列表</Link>,
+          label: <Link to={"scenic_provider/list"}>服务商列表</Link>,
           key: "scenic_provider_list",
           icon: <TeamOutlined />,
         },
         {
-          label: (
-            <Link to={"scenic_spot/provider_order_list"}>服务商入驻订单</Link>
-          ),
+          label: <Link to={"scenic_provider/order_list"}>入驻订单列表</Link>,
           key: "scenic_provider_order_list",
           icon: <FileDoneOutlined />,
         },
         {
-          label: <Link to={"scenic_spot/shop_list"}>店铺列表</Link>,
+          label: <Link to={"scenic_provider/shop_list"}>店铺列表</Link>,
           key: "scenic_shop_list",
           icon: <ShopOutlined />,
         },
