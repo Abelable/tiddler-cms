@@ -47,6 +47,9 @@ export interface MerchantOrdersSearchParams {
 
 export interface MerchantOrder {
   id: number;
+  merchantType: number;
+  name?: string;
+  companyName?: string;
   orderSn: string;
   paymentAmount: string;
   status: number;

@@ -33,6 +33,16 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
             width: "8rem",
           },
           {
+            title: "入驻商家",
+            dataIndex: "merchantType",
+            render: (value, order) =>
+              value === 1 ? (
+                <>{order.name}（个人）</>
+              ) : (
+                <>{order.companyName}（企业）</>
+              ),
+          },
+          {
             title: "订单编号",
             dataIndex: "orderSn",
           },
