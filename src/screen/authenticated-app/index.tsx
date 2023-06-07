@@ -234,7 +234,12 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
   ];
 
   return (
-    <Layout.Sider trigger={null} collapsible collapsed={collapsed}>
+    <Layout.Sider
+      style={{ overflowY: "scroll" }}
+      trigger={null}
+      collapsible
+      collapsed={collapsed}
+    >
       <Link to={"/"}>
         <Logo collapsed={collapsed}>
           <LogoImg src={logo} />
