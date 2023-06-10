@@ -45,11 +45,13 @@ export const List = ({
       <ErrorBox error={error} />
       <Table
         rowKey={"id"}
+        scroll={{ x: 1600 }}
         columns={[
           {
             title: "id",
             dataIndex: "id",
             width: "8rem",
+            fixed: "left",
           },
           {
             title: "景点图片",
@@ -60,10 +62,12 @@ export const List = ({
           {
             title: "景点名称",
             dataIndex: "scenicName",
+            width: "32rem",
           },
           {
             title: "申请服务商",
             dataIndex: "providerCompanyName",
+            width: "32rem",
           },
           {
             title: "服务商资质",
@@ -81,6 +85,7 @@ export const List = ({
             ),
             filters: statusOptions,
             onFilter: (value, scenic) => scenic.status === value,
+            width: "12rem",
           },
           {
             title: "申请时间",
@@ -114,6 +119,7 @@ export const List = ({
               return <More id={provider.id} status={provider.status} />;
             },
             width: "8rem",
+            fixed: "right",
           },
         ]}
         onChange={setPagination}
@@ -134,8 +140,8 @@ const More = ({ id, status }: { id: number; status: number }) => {
 
   const confirmApproved = (id: number) => {
     Modal.confirm({
-      title: "商家审核通过确认",
-      content: "请确保在商家信息无误的情况下进行该操作",
+      title: "景点申请通过确认",
+      content: "请确保在服务商有景区相关资质的情况下进行该操作",
       okText: "确定",
       cancelText: "取消",
       onOk: () => approvedProviderScenic(id),
@@ -144,8 +150,8 @@ const More = ({ id, status }: { id: number; status: number }) => {
 
   const confirmDelete = (id: number) => {
     Modal.confirm({
-      title: "商家审核通过确认",
-      content: "请确保在商家信息无误的情况下进行该操作",
+      title: "确定删除该景点申请吗？",
+      content: "点击确定删除",
       okText: "确定",
       cancelText: "取消",
       onOk: () => deleteProviderScenic(id),
