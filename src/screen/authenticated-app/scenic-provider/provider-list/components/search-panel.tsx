@@ -1,15 +1,17 @@
-import type { MerchantsSearchParams } from "types/merchant";
 import { useState } from "react";
 import styled from "@emotion/styled";
+
 import { Row } from "components/lib";
 import { Button, Input } from "antd";
 
+import type { ProvidersSearchParams } from "types/scenicProvider";
+
 export interface SearchPanelProps {
-  params: Partial<MerchantsSearchParams>;
-  setParams: (params: Partial<MerchantsSearchParams>) => void;
+  params: Partial<ProvidersSearchParams>;
+  setParams: (params: Partial<ProvidersSearchParams>) => void;
 }
 
-const defaultParmas: Partial<MerchantsSearchParams> = {
+const defaultParmas: Partial<ProvidersSearchParams> = {
   name: "",
   mobile: "",
 };

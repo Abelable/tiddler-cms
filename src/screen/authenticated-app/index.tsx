@@ -24,6 +24,7 @@ import { ScenicList } from "./scenic-spot/scenic-list";
 import { ScenicProviderList } from "./scenic-provider/provider-list";
 import { ScenicProviderOrderList } from "./scenic-provider/provider-order-list";
 import { ScenicShopList } from "./scenic-shop-list";
+import { ProviderScenicList } from "./scenic-provider/provider-scenic-list";
 
 import {
   LockOutlined,
@@ -93,6 +94,10 @@ export const AuthenticatedApp = () => {
               <Route
                 path="scenic_provider/shop_list"
                 element={<ScenicShopList />}
+              />
+              <Route
+                path="scenic_provider/scenic_list"
+                element={<ProviderScenicList />}
               />
               <Route
                 path="scenic_ticket/category_list"
@@ -228,6 +233,11 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
           label: <Link to={"scenic_provider/shop_list"}>店铺列表</Link>,
           key: "scenic_shop_list",
           icon: <ShopOutlined />,
+        },
+        {
+          label: <Link to={"scenic_provider/scenic_list"}>景点列表</Link>,
+          key: "scenic_provider_scenic_list",
+          icon: <ScenicSpotIcon />,
         },
       ],
     },
