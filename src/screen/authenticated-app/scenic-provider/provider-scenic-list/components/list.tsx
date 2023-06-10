@@ -7,6 +7,7 @@ import {
   Table,
   TablePaginationConfig,
   TableProps,
+  Image,
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
 import dayjs from "dayjs";
@@ -39,7 +40,7 @@ export const List = ({
   return (
     <Container>
       <Header between={true}>
-        <PageTitle>商家列表</PageTitle>
+        <PageTitle>景点申请列表</PageTitle>
       </Header>
       <ErrorBox error={error} />
       <Table
@@ -51,16 +52,24 @@ export const List = ({
             width: "8rem",
           },
           {
-            title: "公司名称",
-            dataIndex: "companyName",
+            title: "景点图片",
+            dataIndex: "scenicImage",
+            render: (value) => <Image width={68} src={value} />,
+            width: "14rem",
           },
           {
-            title: "法人姓名",
-            dataIndex: "name",
+            title: "景点名称",
+            dataIndex: "scenicName",
           },
           {
-            title: "法人手机号",
-            dataIndex: "mobile",
+            title: "申请服务商",
+            dataIndex: "providerCompanyName",
+          },
+          {
+            title: "服务商资质",
+            dataIndex: "providerBusinessLicensePhoto",
+            render: (value) => <Image width={68} src={value} />,
+            width: "14rem",
           },
           {
             title: "状态",
@@ -74,7 +83,7 @@ export const List = ({
             onFilter: (value, scenic) => scenic.status === value,
           },
           {
-            title: "入驻时间",
+            title: "申请时间",
             render: (value, provider) => (
               <span>
                 {provider.createdAt

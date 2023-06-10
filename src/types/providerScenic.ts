@@ -8,7 +8,9 @@ export interface ProviderScenic {
   id: number;
   status: number;
   failureReason: string;
-  name: string;
+  scenicId: number;
+  scenicName: string;
+  scenicImage: string;
   providerCompanyName: string;
   providerBusinessLicensePhoto: string;
   createdAt: string;
