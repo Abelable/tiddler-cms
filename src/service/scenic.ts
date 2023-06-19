@@ -13,6 +13,7 @@ import type {
   ScenicListResult,
   ScenicListSearchParams,
   ScenicDetail,
+  ScenicOption,
 } from "types/scenic";
 
 export const useScenicList = (params: Partial<ScenicListSearchParams>) => {
@@ -90,5 +91,12 @@ export const useDeleteScenic = (queryKey: QueryKey) => {
         method: "POST",
       }),
     useDeleteConfig(queryKey)
+  );
+};
+
+export const useScenicOptions = () => {
+  const client = useHttp();
+  return useQuery<ScenicOption[]>(["scenic_options"], () =>
+    client("scenic/options")
   );
 };

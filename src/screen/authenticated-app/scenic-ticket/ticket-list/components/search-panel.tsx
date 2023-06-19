@@ -3,24 +3,28 @@ import styled from "@emotion/styled";
 import { Row } from "components/lib";
 import { Button, Input, Select } from "antd";
 
-import type { GoodsListSearchParams } from "types/goods";
-import type { CategoryOption } from "types/category";
+import type { TicketListSearchParams } from "types/scenicTicket";
+import type { ScenicOption } from "types/scenic";
+import type { Option } from "types/common";
 
 export interface SearchPanelProps {
-  categoryOptions: CategoryOption[];
-  statusOptions: { text: string; value: number }[];
-  params: Partial<GoodsListSearchParams>;
-  setParams: (params: Partial<GoodsListSearchParams>) => void;
+  scenicOptions: ScenicOption[];
+  typeOptions: Option[];
+  statusOptions: Option[];
+  params: Partial<TicketListSearchParams>;
+  setParams: (params: Partial<TicketListSearchParams>) => void;
 }
 
-const defaultParmas: Partial<GoodsListSearchParams> = {
+const defaultParmas: Partial<TicketListSearchParams> = {
   name: "",
-  categoryId: undefined,
+  type: undefined,
+  scenicId: undefined,
   status: undefined,
 };
 
 export const SearchPanel = ({
-  categoryOptions,
+  scenicOptions,
+  typeOptions,
   statusOptions,
   params,
   setParams,
@@ -42,10 +46,13 @@ export const SearchPanel = ({
     });
   };
 
-  const setCategory = (categoryId: number) =>
-    setTempParams({ ...tempParams, categoryId });
-  const clearCategory = () =>
-    setTempParams({ ...tempParams, categoryId: undefined });
+  const setType = (type: number) => setTempParams({ ...tempParams, type });
+  const clearType = () => setTempParams({ ...tempParams, type: undefined });
+
+  const setScenicId = (scenicId: number) =>
+    setTempParams({ ...tempParams, scenicId });
+  const clearScenicId = () =>
+    setTempParams({ ...tempParams, scenicId: undefined });
 
   const setStatus = (status: number) =>
     setTempParams({ ...tempParams, status });
@@ -59,7 +66,7 @@ export const SearchPanel = ({
   return (
     <Container>
       <Item>
-        <div>商品名称：</div>
+        <div>门票名称：</div>
         <Input
           style={{ width: "20rem" }}
           value={tempParams.name}
@@ -69,16 +76,33 @@ export const SearchPanel = ({
         />
       </Item>
       <Item>
-        <div>商品分类：</div>
+        <div>门票类型：</div>
         <Select
           style={{ width: "20rem" }}
-          value={tempParams.categoryId}
+          value={tempParams.type}
+          placeholder="请选择商品类型"
+          allowClear={true}
+          onSelect={setType}
+          onClear={clearType}
+        >
+          {typeOptions?.map(({ text, value }) => (
+            <Select.Option key={value} value={value}>
+              {text}
+            </Select.Option>
+          ))}
+        </Select>
+      </Item>
+      <Item>
+        <div>关联景点：</div>
+        <Select
+          style={{ width: "20rem" }}
+          value={tempParams.scenicId}
           placeholder="请选择商品分类"
           allowClear={true}
-          onSelect={setCategory}
-          onClear={clearCategory}
+          onSelect={setScenicId}
+          onClear={clearScenicId}
         >
-          {categoryOptions?.map(({ id, name }) => (
+          {scenicOptions?.map(({ id, name }) => (
             <Select.Option key={id} value={id}>
               {name}
             </Select.Option>
@@ -86,7 +110,7 @@ export const SearchPanel = ({
         </Select>
       </Item>
       <Item>
-        <div>商品状态：</div>
+        <div>门票状态：</div>
         <Select
           style={{ width: "20rem" }}
           value={tempParams.status}

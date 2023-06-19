@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import {
-  Image,
   Dropdown,
   Menu,
   MenuProps,
@@ -16,14 +15,15 @@ import { useApprovedTicket, useDeleteTicket } from "service/scenicTicket";
 import { useTicketModal, useTicketListQueryKey, useRejectModal } from "../util";
 import { SearchPanelProps } from "./search-panel";
 
-import type { Ticket } from "types/ticket";
+import type { Ticket } from "types/scenicTicket";
 
 interface ListProps extends TableProps<Ticket>, SearchPanelProps {
   error: Error | unknown;
 }
 
 export const List = ({
-  categoryOptions,
+  typeOptions,
+  scenicOptions,
   statusOptions,
   error,
   params,
@@ -54,21 +54,15 @@ export const List = ({
             fixed: "left",
           },
           {
-            title: "图片",
-            dataIndex: "image",
-            render: (value) => <Image width={68} src={value} />,
-            width: "14rem",
-          },
-          {
             title: "名称",
             dataIndex: "name",
             width: "32rem",
           },
           {
-            title: "分类",
+            title: "类型",
             dataIndex: "categoryId",
             render: (value) => (
-              <>{categoryOptions.find((item) => item.id === value)?.name}</>
+              <>{typeOptions.find((item) => item.value === value)?.text}</>
             ),
             width: "12rem",
           },
@@ -76,10 +70,6 @@ export const List = ({
             title: "价格",
             dataIndex: "price",
             render: (value) => <>{`¥${value}`}</>,
-          },
-          {
-            title: "库存",
-            dataIndex: "stock",
           },
           {
             title: "销售佣金比例",

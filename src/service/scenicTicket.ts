@@ -9,7 +9,7 @@ import type {
   TicketListResult,
   TicketListSearchParams,
   TicketDetail,
-} from "types/ticket";
+} from "types/scenicTicket";
 
 export const useTicketList = (params: Partial<TicketListSearchParams>) => {
   const client = useHttp();

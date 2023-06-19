@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-import { useTicketCategoryOptions } from "service/ticketCategory";
+import { useScenicOptions } from "service/scenic";
 import { useShopCategoryOptions } from "service/shopCategory";
 import { useTicketList } from "service/scenicTicket";
 import { toNumber } from "utils";
@@ -14,9 +14,12 @@ import { RejectModal } from "./components/reject-modal";
 export const ScenicTicketList = () => {
   const [params, setParams] = useTicketListSearchParams();
   const { isLoading, error, data } = useTicketList(params);
-  const { data: ticketCategoryOptions, error: ticketOptionsError } =
-    useTicketCategoryOptions();
+  const { data: scenicOptions, error: scenicOptionsError } = useScenicOptions();
   const { data: shopCategoryOptions } = useShopCategoryOptions();
+  const typeOptions = [
+    { text: "单景点门票", value: 1 },
+    { text: "多景点联票", value: 2 },
+  ];
   const statusOptions = [
     { text: "待审核", value: 0 },
     { text: "售卖中", value: 1 },
@@ -27,17 +30,19 @@ export const ScenicTicketList = () => {
     <Container>
       <Main>
         <SearchPanel
-          categoryOptions={ticketCategoryOptions || []}
+          typeOptions={typeOptions}
+          scenicOptions={scenicOptions || []}
           statusOptions={statusOptions}
           params={params}
           setParams={setParams}
         />
         <List
-          categoryOptions={ticketCategoryOptions || []}
+          typeOptions={typeOptions}
+          scenicOptions={scenicOptions || []}
           statusOptions={statusOptions}
           params={params}
           setParams={setParams}
-          error={error || ticketOptionsError}
+          error={error || scenicOptionsError}
           loading={isLoading}
           dataSource={data?.list}
           pagination={{

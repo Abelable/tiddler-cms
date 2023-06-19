@@ -68,3 +68,8 @@ export interface ScenicListResult {
   limit: string;
   total: string;
 }
+
+export interface ScenicOption {
+  id: number;
+  name: string;
+}
