@@ -1,6 +1,6 @@
 import { Form, Input, Modal } from "antd";
 import { useForm } from "antd/lib/form/Form";
-import { useRejectTicket } from "service/ticket";
+import { useRejectTicket } from "service/scenicTicket";
 import { useRejectModal, useTicketListQueryKey } from "../util";
 
 export const RejectModal = () => {

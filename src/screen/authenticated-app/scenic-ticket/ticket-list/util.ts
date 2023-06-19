@@ -1,6 +1,6 @@
 import { useSetUrlSearchParams, useUrlQueryParams } from "utils/url";
 import { useCallback, useMemo } from "react";
-import { useTicket } from "service/ticket";
+import { useTicket } from "service/scenicTicket";
 
 export const useTicketListSearchParams = () => {
   const [params, setParams] = useUrlQueryParams([

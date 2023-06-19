@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 import { useTicketCategoryOptions } from "service/ticketCategory";
 import { useShopCategoryOptions } from "service/shopCategory";
-import { useTicketList } from "service/ticket";
+import { useTicketList } from "service/scenicTicket";
 import { toNumber } from "utils";
 import { useTicketListSearchParams } from "./util";
 
