@@ -50,7 +50,10 @@ export const ScenicTicketList = () => {
           }}
         />
       </Main>
-      <TicketModal />
+      <TicketModal
+        typeOptions={typeOptions}
+        scenicOptions={scenicOptions || []}
+      />
       <RejectModal />
     </Container>
   );

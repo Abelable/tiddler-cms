@@ -1,13 +1,17 @@
-import { Descriptions, Divider, Drawer, Tooltip, Tag } from "antd";
+import { Descriptions, Divider, Drawer, Tooltip, Tag, Image } from "antd";
 
 import { ErrorBox, ModalLoading } from "components/lib";
 import dayjs from "dayjs";
 import { useTicketModal } from "../util";
-import { ScenicOption } from "types/scenic";
+
+import type { ScenicOption } from "types/scenic";
+import type { Option } from "types/common";
 
 export const TicketModal = ({
+  typeOptions,
   scenicOptions,
 }: {
+  typeOptions: Option[];
   scenicOptions: ScenicOption[];
 }) => {
   const { close, ticketModalOpen, editingTicket, error, isLoading } =
@@ -29,7 +33,7 @@ export const TicketModal = ({
         <>
           <Divider orientation="left">商品信息</Divider>
           <Descriptions size={"small"} column={2}>
-            <Descriptions.Item label="ID">
+            <Descriptions.Item label="门票id">
               {editingTicket?.id}
             </Descriptions.Item>
             <Descriptions.Item label="状态">
@@ -49,7 +53,10 @@ export const TicketModal = ({
               {editingTicket?.name}
             </Descriptions.Item>
             <Descriptions.Item label="类型">
-              {editingTicket?.type}
+              {
+                typeOptions.find((item) => item.value === editingTicket?.type)
+                  ?.text
+              }
             </Descriptions.Item>
             <Descriptions.Item label="关联景点">
               {editingTicket?.scenicIds?.length &&
@@ -86,15 +93,25 @@ export const TicketModal = ({
             size={"small"}
             column={2}
           >
-            <Descriptions.Item label="ID">
+            <Descriptions.Item label="服务商id">
               {editingTicket?.providerInfo?.id}
+            </Descriptions.Item>
+            <Descriptions.Item label="公司名称">
+              {editingTicket?.providerInfo?.companyName}
+            </Descriptions.Item>
+            <Descriptions.Item label="营业执照照片">
+              <Image
+                width={68}
+                src={editingTicket?.providerInfo?.businessLicensePhoto}
+              />
             </Descriptions.Item>
             <Descriptions.Item label="联系人姓名">
               {editingTicket?.providerInfo?.name}
             </Descriptions.Item>
-            <Descriptions.Item label="手机号">
+            <Descriptions.Item label="联系人手机号">
               {editingTicket?.providerInfo?.mobile}
             </Descriptions.Item>
+            <Descriptions.Item label=""> </Descriptions.Item>
             <Descriptions.Item label="入驻时间">
               {dayjs(editingTicket?.createdAt).format("YYYY-MM-DD HH:mm:ss")}
             </Descriptions.Item>

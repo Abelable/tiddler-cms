@@ -5,7 +5,8 @@ import { useTicket } from "service/scenicTicket";
 export const useTicketListSearchParams = () => {
   const [params, setParams] = useUrlQueryParams([
     "name",
-    "categoryId",
+    "type",
+    "scenicId",
     "status",
     "page",
     "limit",
@@ -25,7 +26,7 @@ export const useTicketListSearchParams = () => {
 
 export const useTicketListQueryKey = () => {
   const [params] = useTicketListSearchParams();
-  return ["ticket_list", params];
+  return ["scenic_ticket_list", params];
 };
 
 export const useTicketModal = () => {

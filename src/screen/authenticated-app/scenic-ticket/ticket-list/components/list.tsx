@@ -176,7 +176,7 @@ const More = ({ id, status }: { id: number; status: number }) => {
 
   const confirmDelete = (id: number) => {
     Modal.confirm({
-      title: "确定删除该商品吗？",
+      title: "确定删除该门票吗？",
       content: "点击确定删除",
       okText: "确定",
       cancelText: "取消",
@@ -186,8 +186,8 @@ const More = ({ id, status }: { id: number; status: number }) => {
 
   const confirmApproved = (id: number) => {
     Modal.confirm({
-      title: "商品审核通过确认",
-      content: "请确保在商品信息无误的情况下进行该操作",
+      title: "门票审核通过确认",
+      content: "请确保在门票信息无误的情况下进行该操作",
       okText: "确定",
       cancelText: "取消",
       onOk: () => approvedTicket(id),
