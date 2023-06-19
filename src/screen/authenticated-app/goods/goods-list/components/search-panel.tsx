@@ -90,7 +90,7 @@ export const SearchPanel = ({
         <Select
           style={{ width: "20rem" }}
           value={tempParams.status}
-          placeholder="请选择商品分类"
+          placeholder="请选择商品状态"
           allowClear={true}
           onSelect={setStatus}
           onClear={clearStatus}

@@ -71,7 +71,7 @@ export const SearchPanel = ({
           style={{ width: "20rem" }}
           value={tempParams.name}
           onChange={setName}
-          placeholder="请输入商品名称"
+          placeholder="请输入门票名称"
           allowClear={true}
         />
       </Item>
@@ -80,7 +80,7 @@ export const SearchPanel = ({
         <Select
           style={{ width: "20rem" }}
           value={tempParams.type}
-          placeholder="请选择商品类型"
+          placeholder="请选择门票类型"
           allowClear={true}
           onSelect={setType}
           onClear={clearType}
@@ -97,7 +97,7 @@ export const SearchPanel = ({
         <Select
           style={{ width: "20rem" }}
           value={tempParams.scenicId}
-          placeholder="请选择商品分类"
+          placeholder="请选择关联景点"
           allowClear={true}
           onSelect={setScenicId}
           onClear={clearScenicId}
@@ -114,7 +114,7 @@ export const SearchPanel = ({
         <Select
           style={{ width: "20rem" }}
           value={tempParams.status}
-          placeholder="请选择商品分类"
+          placeholder="请选择门票状态"
           allowClear={true}
           onSelect={setStatus}
           onClear={clearStatus}

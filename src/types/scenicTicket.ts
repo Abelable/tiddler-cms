@@ -13,7 +13,7 @@ export interface Ticket {
   id: number;
   name: string;
   type: number;
-  scenicIds: number;
+  scenicIds: number[];
   price: number;
   salesCommissionRate: number;
   promotionCommissionRate: number;

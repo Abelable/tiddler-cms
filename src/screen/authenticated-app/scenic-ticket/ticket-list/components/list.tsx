@@ -8,6 +8,7 @@ import {
   TablePaginationConfig,
   TableProps,
   Tooltip,
+  Tag,
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
 import dayjs from "dayjs";
@@ -40,7 +41,7 @@ export const List = ({
   return (
     <Container>
       <Header between={true}>
-        <PageTitle>商品列表</PageTitle>
+        <PageTitle>门票列表</PageTitle>
       </Header>
       <ErrorBox error={error} />
       <Table
@@ -56,20 +57,37 @@ export const List = ({
           {
             title: "名称",
             dataIndex: "name",
-            width: "32rem",
+            width: "28rem",
           },
           {
             title: "类型",
-            dataIndex: "categoryId",
+            dataIndex: "type",
             render: (value) => (
               <>{typeOptions.find((item) => item.value === value)?.text}</>
             ),
-            width: "12rem",
+            filters: typeOptions,
+            onFilter: (value, ticket) => ticket.type === value,
+            width: "16rem",
+          },
+          {
+            title: "关联景点",
+            dataIndex: "scenicIds",
+            render: (scenicIds) => (
+              <>
+                {scenicIds.map((id: number) => (
+                  <Tag color="success">
+                    {scenicOptions.find((item) => item.id === id)?.name}
+                  </Tag>
+                ))}
+              </>
+            ),
+            width: "36rem",
           },
           {
             title: "价格",
             dataIndex: "price",
-            render: (value) => <>{`¥${value}`}</>,
+            render: (value) => <>{`¥${value}起`}</>,
+            width: "16rem",
           },
           {
             title: "销售佣金比例",
@@ -87,6 +105,7 @@ export const List = ({
             title: "销量",
             dataIndex: "salesVolume",
             sorter: (a, b) => Number(a) - Number(b),
+            width: "16rem",
           },
           {
             title: "状态",
@@ -103,12 +122,9 @@ export const List = ({
                   </span>
                 </Tooltip>
               ),
-            filters: [
-              { text: "待审核", value: 0 },
-              { text: "售卖中", value: 1 },
-              { text: "未过审", value: 2 },
-            ],
+            filters: statusOptions,
             onFilter: (value, ticket) => ticket.status === value,
+            width: "16rem",
           },
           {
             title: "添加时间",
