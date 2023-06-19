@@ -1,17 +1,22 @@
-import { Descriptions, Divider, Drawer, Tooltip } from "antd";
+import { Descriptions, Divider, Drawer, Tooltip, Tag } from "antd";
 
 import { ErrorBox, ModalLoading } from "components/lib";
 import dayjs from "dayjs";
 import { useTicketModal } from "../util";
+import { ScenicOption } from "types/scenic";
 
-export const TicketModal = () => {
+export const TicketModal = ({
+  scenicOptions,
+}: {
+  scenicOptions: ScenicOption[];
+}) => {
   const { close, ticketModalOpen, editingTicket, error, isLoading } =
     useTicketModal();
 
   return (
     <Drawer
       forceRender={true}
-      title="商品详情"
+      title="门票详情"
       size={"large"}
       onClose={close}
       open={ticketModalOpen}
@@ -31,9 +36,7 @@ export const TicketModal = () => {
               {editingTicket?.status === 0 ? (
                 <span style={{ color: "#87d068" }}>待审核</span>
               ) : editingTicket?.status === 1 ? (
-                <span style={{ color: "#296BEF", cursor: "pointer" }}>
-                  售卖中
-                </span>
+                <span style={{ color: "#296BEF" }}>售卖中</span>
               ) : (
                 <Tooltip title={editingTicket?.failureReason}>
                   <span style={{ color: "#f50", cursor: "pointer" }}>
@@ -45,8 +48,19 @@ export const TicketModal = () => {
             <Descriptions.Item label="名称">
               {editingTicket?.name}
             </Descriptions.Item>
+            <Descriptions.Item label="类型">
+              {editingTicket?.type}
+            </Descriptions.Item>
+            <Descriptions.Item label="关联景点">
+              {editingTicket?.scenicIds?.length &&
+                editingTicket?.scenicIds.map((id: number) => (
+                  <Tag color="success" key={id}>
+                    {scenicOptions.find((item) => item.id === id)?.name}
+                  </Tag>
+                ))}
+            </Descriptions.Item>
             <Descriptions.Item label="价格">
-              {`¥${editingTicket?.price}`}
+              {`¥${editingTicket?.price}起`}
             </Descriptions.Item>
             <Descriptions.Item label="销售佣金比例">
               {`${(editingTicket?.salesCommissionRate as number) * 100}%`}

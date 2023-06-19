@@ -75,7 +75,7 @@ export const List = ({
             render: (scenicIds) => (
               <>
                 {scenicIds.map((id: number) => (
-                  <Tag color="success">
+                  <Tag color="success" key={id}>
                     {scenicOptions.find((item) => item.id === id)?.name}
                   </Tag>
                 ))}
@@ -114,7 +114,7 @@ export const List = ({
               value === 0 ? (
                 <span style={{ color: "#87d068" }}>待审核</span>
               ) : value === 1 ? (
-                <span>售卖中</span>
+                <span style={{ color: "#296BEF" }}>售卖中</span>
               ) : (
                 <Tooltip title={ticket.failureReason}>
                   <span style={{ color: "#f50", cursor: "pointer" }}>
