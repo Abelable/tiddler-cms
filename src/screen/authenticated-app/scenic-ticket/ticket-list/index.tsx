@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
 
 import { useScenicOptions } from "service/scenic";
-import { useShopCategoryOptions } from "service/shopCategory";
 import { useTicketList } from "service/scenicTicket";
 import { toNumber } from "utils";
 import { useTicketListSearchParams } from "./util";
@@ -15,7 +14,6 @@ export const ScenicTicketList = () => {
   const [params, setParams] = useTicketListSearchParams();
   const { isLoading, error, data } = useTicketList(params);
   const { data: scenicOptions, error: scenicOptionsError } = useScenicOptions();
-  const { data: shopCategoryOptions } = useShopCategoryOptions();
   const typeOptions = [
     { text: "单景点门票", value: 1 },
     { text: "多景点联票", value: 2 },
@@ -52,10 +50,7 @@ export const ScenicTicketList = () => {
           }}
         />
       </Main>
-      <TicketModal
-        ticketCategoryOptions={ticketCategoryOptions || []}
-        shopCategoryOptions={shopCategoryOptions || []}
-      />
+      <TicketModal />
       <RejectModal />
     </Container>
   );

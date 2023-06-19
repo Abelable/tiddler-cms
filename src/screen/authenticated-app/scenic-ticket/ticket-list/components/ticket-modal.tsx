@@ -4,15 +4,7 @@ import { ErrorBox, ModalLoading } from "components/lib";
 import dayjs from "dayjs";
 import { useTicketModal } from "../util";
 
-import type { CategoryOption } from "types/category";
-
-export const TicketModal = ({
-  ticketCategoryOptions,
-  shopCategoryOptions,
-}: {
-  ticketCategoryOptions: CategoryOption[];
-  shopCategoryOptions: CategoryOption[];
-}) => {
+export const TicketModal = () => {
   const { close, ticketModalOpen, editingTicket, error, isLoading } =
     useTicketModal();
 
