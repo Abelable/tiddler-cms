@@ -11,7 +11,7 @@ import { List } from "./components/list";
 import { SearchPanel } from "./components/search-panel";
 import { RejectModal } from "./components/reject-modal";
 
-export const TicketList = () => {
+export const ScenicTicketList = () => {
   const [params, setParams] = useTicketListSearchParams();
   const { isLoading, error, data } = useTicketList(params);
   const { data: ticketCategoryOptions, error: ticketOptionsError } =

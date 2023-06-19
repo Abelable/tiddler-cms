@@ -19,12 +19,13 @@ import { ExpressList } from "./goods/express-list";
 import { GoodsCategoryList } from "./goods/category-list";
 import { GoodsList } from "./goods/goods-list";
 import { ScenicCategoryList } from "./scenic-spot/category-list";
-import { ScenicTicketCategoryList } from "./scenic-ticket/category-list";
 import { ScenicList } from "./scenic-spot/scenic-list";
 import { ScenicProviderList } from "./scenic-provider/provider-list";
 import { ScenicProviderOrderList } from "./scenic-provider/provider-order-list";
 import { ScenicShopList } from "./scenic-shop-list";
 import { ProviderScenicList } from "./scenic-provider/provider-scenic-list";
+import { ScenicTicketCategoryList } from "./scenic-ticket/category-list";
+import { ScenicTicketList } from "./scenic-ticket/ticket-list";
 
 import {
   LockOutlined,
@@ -103,6 +104,7 @@ export const AuthenticatedApp = () => {
                 path="scenic_ticket/category_list"
                 element={<ScenicTicketCategoryList />}
               />
+              <Route path="scenic_ticket/list" element={<ScenicTicketList />} />
               <Route
                 path={"*"}
                 element={<Navigate to={"user_list"} replace={true} />}
@@ -250,6 +252,11 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
           label: <Link to={"scenic_ticket/category_list"}>门票分类</Link>,
           key: "scenic_ticket_category_list",
           icon: <AppstoreOutlined />,
+        },
+        {
+          label: <Link to={"scenic_ticket/list"}>门票列表</Link>,
+          key: "scenic_ticket_list",
+          icon: <TicketIcon />,
         },
       ],
     },

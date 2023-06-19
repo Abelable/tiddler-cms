@@ -27,6 +27,7 @@ const breadcrumbNameMap: { [key: string]: string } = {
   "/scenic_provider/scenic_list": "景点申请列表",
   "/scenic_ticket": "门票管理",
   "/scenic_ticket/category_list": "门票分类",
+  "/scenic_ticket/list": "门票列表",
 };
 
 export const NavigationBar = () => {
