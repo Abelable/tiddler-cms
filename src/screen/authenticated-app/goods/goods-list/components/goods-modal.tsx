@@ -79,14 +79,10 @@ export const GoodsModal = ({
             </Descriptions.Item>
             <Descriptions.Item label=""> </Descriptions.Item>
             <Descriptions.Item label="添加时间">
-              {dayjs(editingGoods?.shopInfo?.createdAt).format(
-                "YYYY-MM-DD HH:mm:ss"
-              )}
+              {dayjs(editingGoods?.createdAt).format("YYYY-MM-DD HH:mm:ss")}
             </Descriptions.Item>
             <Descriptions.Item label="更新时间">
-              {dayjs(editingGoods?.shopInfo?.updatedAt).format(
-                "YYYY-MM-DD HH:mm:ss"
-              )}
+              {dayjs(editingGoods?.updatedAt).format("YYYY-MM-DD HH:mm:ss")}
             </Descriptions.Item>
           </Descriptions>
 

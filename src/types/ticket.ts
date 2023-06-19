@@ -1,9 +1,9 @@
-import type { Shop } from "./shop";
-import type { MerchantDetail } from "./merchant";
+import type { ProviderDetail } from "./scenicProvider";
 
 export interface TicketListSearchParams {
   name: string;
-  categoryId: number | undefined;
+  type: number | undefined;
+  scenicId: number | undefined;
   status: number | undefined;
   page: number;
   limit: number;
@@ -11,11 +11,10 @@ export interface TicketListSearchParams {
 
 export interface Ticket {
   id: number;
-  image: string;
   name: string;
-  categoryId: number;
+  type: number;
+  scenicIds: number;
   price: number;
-  stock: number;
   salesCommissionRate: number;
   promotionCommissionRate: number;
   salesVolume: number;
@@ -33,6 +32,5 @@ export interface TicketListResult {
 }
 
 export interface TicketDetail extends Ticket {
-  shopInfo: Partial<Shop>;
-  merchantInfo: Partial<MerchantDetail>;
+  providerInfo: Partial<ProviderDetail>;
 }
