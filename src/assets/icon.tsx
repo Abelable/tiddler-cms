@@ -34,6 +34,16 @@ const TicketSvg = () => (
   </svg>
 );
 
+const HotelSvg = () => (
+  <svg viewBox="0 0 1024 1024" width="1em" height="1em">
+    <path
+      d="M896 896h42.666667v42.666667H85.333333v-42.666667h42.666667V170.730667A42.666667 42.666667 0 0 1 170.602667 128h469.461333C663.594667 128 682.666667 147.242667 682.666667 170.730667V896h170.666666V426.666667h-128v-42.666667h149.333334a21.333333 21.333333 0 0 1 21.333333 21.333333v490.666667z m-256 0V170.730667L170.602667 170.666667 170.666667 896h469.333333zM277.333333 298.666667h256v42.666666H277.333333v-42.666666z m0 256h256v42.666666H277.333333v-42.666666z m0-128h256v42.666666H277.333333v-42.666666z m0 256h256v42.666666H277.333333v-42.666666z"
+      fill="#ffffff"
+      p-id="4272"
+    />
+  </svg>
+);
+
 export const ExpressIcon = (props: Partial<CustomIconComponentProps>) => (
   <Icon component={ExpressSvg} {...props} />
 );
@@ -44,4 +54,8 @@ export const ScenicSpotIcon = (props: Partial<CustomIconComponentProps>) => (
 
 export const TicketIcon = (props: Partial<CustomIconComponentProps>) => (
   <Icon component={TicketSvg} {...props} />
+);
+
+export const HotelIcon = (props: Partial<CustomIconComponentProps>) => (
+  <Icon component={HotelSvg} {...props} />
 );

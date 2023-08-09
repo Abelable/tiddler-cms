@@ -26,6 +26,7 @@ import { ScenicShopList } from "./scenic-shop-list";
 import { ProviderScenicList } from "./scenic-provider/provider-scenic-list";
 import { ScenicTicketCategoryList } from "./scenic-ticket/category-list";
 import { ScenicTicketList } from "./scenic-ticket/ticket-list";
+import { HotelCategoryList } from "./hotel/category-list";
 
 import {
   LockOutlined,
@@ -39,7 +40,12 @@ import {
   FileDoneOutlined,
   ShoppingOutlined,
 } from "@ant-design/icons";
-import { ExpressIcon, ScenicSpotIcon, TicketIcon } from "assets/icon";
+import {
+  ExpressIcon,
+  ScenicSpotIcon,
+  TicketIcon,
+  HotelIcon,
+} from "assets/icon";
 import logo from "assets/images/logo.png";
 import { UserInfo } from "types/auth";
 import { Row } from "components/lib";
@@ -105,6 +111,10 @@ export const AuthenticatedApp = () => {
                 element={<ScenicTicketCategoryList />}
               />
               <Route path="scenic_ticket/list" element={<ScenicTicketList />} />
+              <Route
+                path="Hotel/category_list"
+                element={<HotelCategoryList />}
+              />
               <Route
                 path={"*"}
                 element={<Navigate to={"user_list"} replace={true} />}
@@ -257,6 +267,23 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
           label: <Link to={"scenic_ticket/list"}>门票列表</Link>,
           key: "scenic_ticket_list",
           icon: <TicketIcon />,
+        },
+      ],
+    },
+    {
+      label: "酒店管理",
+      key: "Hotel",
+      icon: <HotelIcon />,
+      children: [
+        {
+          label: <Link to={"hotel/category_list"}>酒店分类</Link>,
+          key: "hotel_category_list",
+          icon: <AppstoreOutlined />,
+        },
+        {
+          label: <Link to={"hotel/list"}>酒店列表</Link>,
+          key: "hotel_list",
+          icon: <HotelIcon />,
         },
       ],
     },
