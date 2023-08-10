@@ -1,19 +1,19 @@
 import { Form, Input, Modal } from "antd";
 import { useForm } from "antd/lib/form/Form";
-import { useRejectScenic } from "service/scenic";
-import { useRejectModal, useScenicListQueryKey } from "../util";
+import { useRejectHotel } from "service/hotel";
+import { useRejectModal, useHotelListQueryKey } from "../util";
 
 export const RejectModal = () => {
   const [form] = useForm();
-  const { rejectModalOpen, rejectScenicId, close } = useRejectModal();
+  const { rejectModalOpen, rejectHotelId, close } = useRejectModal();
 
-  const { mutateAsync, isLoading: mutateLoading } = useRejectScenic(
-    useScenicListQueryKey()
+  const { mutateAsync, isLoading: mutateLoading } = useRejectHotel(
+    useHotelListQueryKey()
   );
 
   const confirm = () => {
     form.validateFields().then(async () => {
-      await mutateAsync({ id: +rejectScenicId, ...form.getFieldsValue() });
+      await mutateAsync({ id: +rejectHotelId, ...form.getFieldsValue() });
       closeModal();
     });
   };
@@ -26,7 +26,7 @@ export const RejectModal = () => {
   return (
     <Modal
       forceRender={true}
-      title={"景区驳回重审"}
+      title={"酒店驳回重审"}
       open={rejectModalOpen}
       confirmLoading={mutateLoading}
       onOk={confirm}

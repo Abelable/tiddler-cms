@@ -3,17 +3,17 @@ import styled from "@emotion/styled";
 import { Row } from "components/lib";
 import { Button, Input, Select } from "antd";
 
-import type { ScenicListSearchParams } from "types/scenic";
+import type { HotelListSearchParams } from "types/hotel";
 import type { CategoryOption } from "types/category";
 
 export interface SearchPanelProps {
   categoryOptions: CategoryOption[];
   statusOptions: { text: string; value: number }[];
-  params: Partial<ScenicListSearchParams>;
-  setParams: (params: Partial<ScenicListSearchParams>) => void;
+  params: Partial<HotelListSearchParams>;
+  setParams: (params: Partial<HotelListSearchParams>) => void;
 }
 
-const defaultParmas: Partial<ScenicListSearchParams> = {
+const defaultParmas: Partial<HotelListSearchParams> = {
   name: "",
   categoryId: undefined,
   status: undefined,
@@ -59,21 +59,21 @@ export const SearchPanel = ({
   return (
     <Container>
       <Item>
-        <div>景区名称：</div>
+        <div>酒店名称：</div>
         <Input
           style={{ width: "20rem" }}
           value={tempParams.name}
           onChange={setName}
-          placeholder="请输入景区名称"
+          placeholder="请输入酒店名称"
           allowClear={true}
         />
       </Item>
       <Item>
-        <div>景区分类：</div>
+        <div>酒店分类：</div>
         <Select
           style={{ width: "20rem" }}
           value={tempParams.categoryId}
-          placeholder="请选择景区分类"
+          placeholder="请选择酒店分类"
           allowClear={true}
           onSelect={setCategory}
           onClear={clearCategory}
@@ -86,11 +86,11 @@ export const SearchPanel = ({
         </Select>
       </Item>
       <Item>
-        <div>景区状态：</div>
+        <div>酒店状态：</div>
         <Select
           style={{ width: "20rem" }}
           value={tempParams.status}
-          placeholder="请选择景区分类"
+          placeholder="请选择酒店分类"
           allowClear={true}
           onSelect={setStatus}
           onClear={clearStatus}
