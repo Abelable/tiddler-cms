@@ -50,7 +50,7 @@ export const HotelModal = ({
 
   useEffect(() => {
     if (editingHotel) {
-      const { video, imageList, ...rest } = editingHotel;
+      const { video, cover, appearanceImageList, ...rest } = editingHotel;
       form.setFieldsValue({
         video: video
           ? [
@@ -60,9 +60,16 @@ export const HotelModal = ({
               },
             ]
           : [],
-        imageList: imageList?.length
-          ? imageList?.map((item) => ({ url: item }))
-          : imageList,
+        cover: cover
+          ? [
+              {
+                url: cover,
+              },
+            ]
+          : [],
+        appearanceImageList: appearanceImageList?.length
+          ? appearanceImageList?.map((item) => ({ url: item }))
+          : appearanceImageList,
         ...rest,
       });
     }
@@ -183,7 +190,7 @@ export const HotelModal = ({
             </Col>
           </Row>
           <Row gutter={16}>
-            <Col span={24}>
+            <Col span={12}>
               <Form.Item
                 name="video"
                 label="上传酒店视频"
@@ -193,16 +200,26 @@ export const HotelModal = ({
                 <OssUpload accept=".mp4" maxCount={1} />
               </Form.Item>
             </Col>
+            <Col span={12}>
+              <Form.Item
+                name="cover"
+                label="上传酒店封面照片"
+                tooltip="图片大小不能超过10MB"
+                valuePropName="fileList"
+                getValueFromEvent={normFile}
+                rules={[{ required: true, message: "请上传酒店封面照片" }]}
+              >
+                <OssUpload maxCount={1} />
+              </Form.Item>
+            </Col>
           </Row>
           <Row gutter={16}>
             <Col span={24}>
               <Form.Item
-                name="imageList"
-                label="上传酒店照片"
-                tooltip="图片大小不能超过10MB"
+                name="appearanceImageList"
+                label="上传酒店外观照片"
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
-                rules={[{ required: true, message: "请上传酒店照片" }]}
               >
                 <OssUpload />
               </Form.Item>

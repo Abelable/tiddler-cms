@@ -14,7 +14,12 @@ export interface HotelDetail {
   categoryId: number;
   price: number;
   video: string;
-  imageList: string[];
+  cover: string;
+  appearanceImageList: string[];
+  interiorImageList: string[];
+  roomImageList: string[];
+  environmentImageList: string[];
+  restaurantImageList: string[];
   longitude: number;
   latitude: number;
   address: string;
