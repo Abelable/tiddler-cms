@@ -12,7 +12,6 @@ import {
   TableProps,
   Tooltip,
   Button,
-  Rate,
   Tag,
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
@@ -86,6 +85,12 @@ export const List = ({
             render: (value) => (
               <>{categoryOptions.find((item) => item.id === value)?.name}</>
             ),
+          },
+          {
+            title: "价格",
+            dataIndex: "price",
+            width: "12rem",
+            render: (value) => <>`¥${value}起`</>,
           },
           {
             title: "评分",

@@ -12,6 +12,7 @@ export interface HotelDetail {
   name: string;
   grade: number;
   categoryId: number;
+  price: number;
   video: string;
   imageList: string[];
   longitude: number;
