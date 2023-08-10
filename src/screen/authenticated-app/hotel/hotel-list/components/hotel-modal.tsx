@@ -50,7 +50,16 @@ export const HotelModal = ({
 
   useEffect(() => {
     if (editingHotel) {
-      const { video, cover, appearanceImageList, ...rest } = editingHotel;
+      const {
+        video,
+        cover,
+        appearanceImageList,
+        interiorImageList,
+        roomImageList,
+        environmentImageList,
+        restaurantImageList,
+        ...rest
+      } = editingHotel;
       form.setFieldsValue({
         video: video
           ? [
@@ -60,16 +69,22 @@ export const HotelModal = ({
               },
             ]
           : [],
-        cover: cover
-          ? [
-              {
-                url: cover,
-              },
-            ]
-          : [],
+        cover: cover ? [{ url: cover }] : [],
         appearanceImageList: appearanceImageList?.length
           ? appearanceImageList?.map((item) => ({ url: item }))
           : appearanceImageList,
+        interiorImageList: interiorImageList?.length
+          ? interiorImageList?.map((item) => ({ url: item }))
+          : interiorImageList,
+        roomImageList: roomImageList?.length
+          ? roomImageList?.map((item) => ({ url: item }))
+          : roomImageList,
+        environmentImageList: environmentImageList?.length
+          ? environmentImageList?.map((item) => ({ url: item }))
+          : environmentImageList,
+        restaurantImageList: restaurantImageList?.length
+          ? restaurantImageList?.map((item) => ({ url: item }))
+          : restaurantImageList,
         ...rest,
       });
     }
@@ -218,6 +233,54 @@ export const HotelModal = ({
               <Form.Item
                 name="appearanceImageList"
                 label="上传酒店外观照片"
+                valuePropName="fileList"
+                getValueFromEvent={normFile}
+              >
+                <OssUpload />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={24}>
+              <Form.Item
+                name="interiorImageList"
+                label="上传酒店内景照片"
+                valuePropName="fileList"
+                getValueFromEvent={normFile}
+              >
+                <OssUpload />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={24}>
+              <Form.Item
+                name="roomImageList"
+                label="上传酒店房间照片"
+                valuePropName="fileList"
+                getValueFromEvent={normFile}
+              >
+                <OssUpload />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={24}>
+              <Form.Item
+                name="environmentImageList"
+                label="上传酒店环境照片"
+                valuePropName="fileList"
+                getValueFromEvent={normFile}
+              >
+                <OssUpload />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={24}>
+              <Form.Item
+                name="restaurantImageList"
+                label="上传酒店餐厅照片"
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
               >
