@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useForm } from "antd/lib/form/Form";
-import moment from "moment";
 import { useAddHotel, useEditHotel } from "service/hotel";
 import { useHotelModal, useHotelListQueryKey } from "../util";
 
@@ -359,11 +358,459 @@ export const HotelModal = ({
             </Col>
           </Row>
           <Divider orientation="left" plain>
+            酒店设施
+          </Divider>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item label="娱乐设施">
+                <Form.List name="recreationFacility">
+                  {(fields, { add, remove }) => (
+                    <>
+                      {fields.map(({ key, name, ...restField }) => (
+                        <Space
+                          key={key}
+                          style={{ display: "flex" }}
+                          align="baseline"
+                        >
+                          <Form.Item
+                            {...restField}
+                            name={name}
+                            rules={[
+                              { required: true, message: "请输入设施名称" },
+                            ]}
+                          >
+                            <Input
+                              style={{ width: "31rem" }}
+                              placeholder="请输入设施名称"
+                            />
+                          </Form.Item>
+                          <MinusCircleOutlined onClick={() => remove(name)} />
+                        </Space>
+                      ))}
+                      <Button
+                        type="dashed"
+                        onClick={() => add()}
+                        block
+                        icon={<PlusOutlined />}
+                      >
+                        添加娱乐设施
+                      </Button>
+                    </>
+                  )}
+                </Form.List>
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item label="康体设施">
+                <Form.List name="healthFacility">
+                  {(fields, { add, remove }) => (
+                    <>
+                      {fields.map(({ key, name, ...restField }) => (
+                        <Space
+                          key={key}
+                          style={{ display: "flex" }}
+                          align="baseline"
+                        >
+                          <Form.Item
+                            {...restField}
+                            name={name}
+                            rules={[
+                              { required: true, message: "请输入设施名称" },
+                            ]}
+                          >
+                            <Input
+                              style={{ width: "31rem" }}
+                              placeholder="请输入设施名称"
+                            />
+                          </Form.Item>
+                          <MinusCircleOutlined onClick={() => remove(name)} />
+                        </Space>
+                      ))}
+                      <Button
+                        type="dashed"
+                        onClick={() => add()}
+                        block
+                        icon={<PlusOutlined />}
+                      >
+                        添加康体设施
+                      </Button>
+                    </>
+                  )}
+                </Form.List>
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item label="儿童设施">
+                <Form.List name="childrenFacility">
+                  {(fields, { add, remove }) => (
+                    <>
+                      {fields.map(({ key, name, ...restField }) => (
+                        <Space
+                          key={key}
+                          style={{ display: "flex" }}
+                          align="baseline"
+                        >
+                          <Form.Item
+                            {...restField}
+                            name={name}
+                            rules={[
+                              { required: true, message: "请输入设施名称" },
+                            ]}
+                          >
+                            <Input
+                              style={{ width: "31rem" }}
+                              placeholder="请输入设施名称"
+                            />
+                          </Form.Item>
+                          <MinusCircleOutlined onClick={() => remove(name)} />
+                        </Space>
+                      ))}
+                      <Button
+                        type="dashed"
+                        onClick={() => add()}
+                        block
+                        icon={<PlusOutlined />}
+                      >
+                        添加儿童设施
+                      </Button>
+                    </>
+                  )}
+                </Form.List>
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item label="通用设施">
+                <Form.List name="commonFacility">
+                  {(fields, { add, remove }) => (
+                    <>
+                      {fields.map(({ key, name, ...restField }) => (
+                        <Space
+                          key={key}
+                          style={{ display: "flex" }}
+                          align="baseline"
+                        >
+                          <Form.Item
+                            {...restField}
+                            name={name}
+                            rules={[
+                              { required: true, message: "请输入设施名称" },
+                            ]}
+                          >
+                            <Input
+                              style={{ width: "31rem" }}
+                              placeholder="请输入设施名称"
+                            />
+                          </Form.Item>
+                          <MinusCircleOutlined onClick={() => remove(name)} />
+                        </Space>
+                      ))}
+                      <Button
+                        type="dashed"
+                        onClick={() => add()}
+                        block
+                        icon={<PlusOutlined />}
+                      >
+                        添加通用设施
+                      </Button>
+                    </>
+                  )}
+                </Form.List>
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item label="公共区设施">
+                <Form.List name="publicAreaFacility">
+                  {(fields, { add, remove }) => (
+                    <>
+                      {fields.map(({ key, name, ...restField }) => (
+                        <Space
+                          key={key}
+                          style={{ display: "flex" }}
+                          align="baseline"
+                        >
+                          <Form.Item
+                            {...restField}
+                            name={name}
+                            rules={[
+                              { required: true, message: "请输入设施名称" },
+                            ]}
+                          >
+                            <Input
+                              style={{ width: "31rem" }}
+                              placeholder="请输入设施名称"
+                            />
+                          </Form.Item>
+                          <MinusCircleOutlined onClick={() => remove(name)} />
+                        </Space>
+                      ))}
+                      <Button
+                        type="dashed"
+                        onClick={() => add()}
+                        block
+                        icon={<PlusOutlined />}
+                      >
+                        添加公共区设施
+                      </Button>
+                    </>
+                  )}
+                </Form.List>
+              </Form.Item>
+            </Col>
+          </Row>
+          <Divider orientation="left" plain>
+            酒店服务
+          </Divider>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item label="交通服务">
+                <Form.List name="trafficService">
+                  {(fields, { add, remove }) => (
+                    <>
+                      {fields.map(({ key, name, ...restField }) => (
+                        <Space
+                          key={key}
+                          style={{ display: "flex" }}
+                          align="baseline"
+                        >
+                          <Form.Item
+                            {...restField}
+                            name={name}
+                            rules={[
+                              { required: true, message: "请输入服务名称" },
+                            ]}
+                          >
+                            <Input
+                              style={{ width: "31rem" }}
+                              placeholder="请输入服务名称"
+                            />
+                          </Form.Item>
+                          <MinusCircleOutlined onClick={() => remove(name)} />
+                        </Space>
+                      ))}
+                      <Button
+                        type="dashed"
+                        onClick={() => add()}
+                        block
+                        icon={<PlusOutlined />}
+                      >
+                        添加交通服务
+                      </Button>
+                    </>
+                  )}
+                </Form.List>
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item label="餐饮服务">
+                <Form.List name="cateringService">
+                  {(fields, { add, remove }) => (
+                    <>
+                      {fields.map(({ key, name, ...restField }) => (
+                        <Space
+                          key={key}
+                          style={{ display: "flex" }}
+                          align="baseline"
+                        >
+                          <Form.Item
+                            {...restField}
+                            name={name}
+                            rules={[
+                              { required: true, message: "请输入服务名称" },
+                            ]}
+                          >
+                            <Input
+                              style={{ width: "31rem" }}
+                              placeholder="请输入服务名称"
+                            />
+                          </Form.Item>
+                          <MinusCircleOutlined onClick={() => remove(name)} />
+                        </Space>
+                      ))}
+                      <Button
+                        type="dashed"
+                        onClick={() => add()}
+                        block
+                        icon={<PlusOutlined />}
+                      >
+                        添加餐饮服务
+                      </Button>
+                    </>
+                  )}
+                </Form.List>
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item label="前台服务">
+                <Form.List name="receptionService">
+                  {(fields, { add, remove }) => (
+                    <>
+                      {fields.map(({ key, name, ...restField }) => (
+                        <Space
+                          key={key}
+                          style={{ display: "flex" }}
+                          align="baseline"
+                        >
+                          <Form.Item
+                            {...restField}
+                            name={name}
+                            rules={[
+                              { required: true, message: "请输入服务名称" },
+                            ]}
+                          >
+                            <Input
+                              style={{ width: "31rem" }}
+                              placeholder="请输入服务名称"
+                            />
+                          </Form.Item>
+                          <MinusCircleOutlined onClick={() => remove(name)} />
+                        </Space>
+                      ))}
+                      <Button
+                        type="dashed"
+                        onClick={() => add()}
+                        block
+                        icon={<PlusOutlined />}
+                      >
+                        添加前台服务
+                      </Button>
+                    </>
+                  )}
+                </Form.List>
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item label="清洁服务">
+                <Form.List name="cleanService">
+                  {(fields, { add, remove }) => (
+                    <>
+                      {fields.map(({ key, name, ...restField }) => (
+                        <Space
+                          key={key}
+                          style={{ display: "flex" }}
+                          align="baseline"
+                        >
+                          <Form.Item
+                            {...restField}
+                            name={name}
+                            rules={[
+                              { required: true, message: "请输入服务名称" },
+                            ]}
+                          >
+                            <Input
+                              style={{ width: "31rem" }}
+                              placeholder="请输入服务名称"
+                            />
+                          </Form.Item>
+                          <MinusCircleOutlined onClick={() => remove(name)} />
+                        </Space>
+                      ))}
+                      <Button
+                        type="dashed"
+                        onClick={() => add()}
+                        block
+                        icon={<PlusOutlined />}
+                      >
+                        添加清洁服务
+                      </Button>
+                    </>
+                  )}
+                </Form.List>
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item label="商务服务">
+                <Form.List name="businessService">
+                  {(fields, { add, remove }) => (
+                    <>
+                      {fields.map(({ key, name, ...restField }) => (
+                        <Space
+                          key={key}
+                          style={{ display: "flex" }}
+                          align="baseline"
+                        >
+                          <Form.Item
+                            {...restField}
+                            name={name}
+                            rules={[
+                              { required: true, message: "请输入服务名称" },
+                            ]}
+                          >
+                            <Input
+                              style={{ width: "31rem" }}
+                              placeholder="请输入服务名称"
+                            />
+                          </Form.Item>
+                          <MinusCircleOutlined onClick={() => remove(name)} />
+                        </Space>
+                      ))}
+                      <Button
+                        type="dashed"
+                        onClick={() => add()}
+                        block
+                        icon={<PlusOutlined />}
+                      >
+                        添加商务服务
+                      </Button>
+                    </>
+                  )}
+                </Form.List>
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item label="其他服务">
+                <Form.List name="otherService">
+                  {(fields, { add, remove }) => (
+                    <>
+                      {fields.map(({ key, name, ...restField }) => (
+                        <Space
+                          key={key}
+                          style={{ display: "flex" }}
+                          align="baseline"
+                        >
+                          <Form.Item
+                            {...restField}
+                            name={name}
+                            rules={[
+                              { required: true, message: "请输入服务名称" },
+                            ]}
+                          >
+                            <Input
+                              style={{ width: "31rem" }}
+                              placeholder="请输入服务名称"
+                            />
+                          </Form.Item>
+                          <MinusCircleOutlined onClick={() => remove(name)} />
+                        </Space>
+                      ))}
+                      <Button
+                        type="dashed"
+                        onClick={() => add()}
+                        block
+                        icon={<PlusOutlined />}
+                      >
+                        添加其他服务
+                      </Button>
+                    </>
+                  )}
+                </Form.List>
+              </Form.Item>
+            </Col>
+          </Row>
+
+          <Divider orientation="left" plain>
             酒店政策
           </Divider>
           <Row gutter={16}>
             <Col span={12}>
-              <Form.Item label="酒店政策-重要提醒">
+              <Form.Item label="重要提醒">
                 <Form.List name="remindList">
                   {(fields, { add, remove }) => (
                     <>
@@ -402,7 +849,7 @@ export const HotelModal = ({
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item label="酒店政策-入住必读">
+              <Form.Item label="入住必读">
                 <Form.List name="checkInTipList">
                   {(fields, { add, remove }) => (
                     <>
@@ -443,7 +890,7 @@ export const HotelModal = ({
           </Row>
           <Row gutter={16}>
             <Col span={12}>
-              <Form.Item label="酒店政策-预定须知">
+              <Form.Item label="预定须知">
                 <Form.List name="preorderTipList">
                   {(fields, { add, remove }) => (
                     <>

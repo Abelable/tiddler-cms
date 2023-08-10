@@ -7,16 +7,6 @@ export interface HotelListSearchParams {
   limit: number;
 }
 
-interface Facility {
-  facilityId: number;
-  content: string;
-}
-
-interface Service {
-  serviceId: number;
-  content: string;
-}
-
 export interface HotelDetail {
   id: number;
   name: string;
@@ -33,8 +23,17 @@ export interface HotelDetail {
   roomNum: number;
   tel: string;
   brief: string;
-  facilityList: Facility[];
-  serviceList: Service[];
+  recreationFacility: string[];
+  healthFacility: string[];
+  childrenFacility: string[];
+  commonFacility: string[];
+  publicAreaFacility: string[];
+  trafficService: string[];
+  cateringService: string[];
+  receptionService: string[];
+  cleanService: string[];
+  businessService: string[];
+  otherService: string[];
   remindList: string[];
   checkInTipList: string[];
   preorderTipList: string[];
