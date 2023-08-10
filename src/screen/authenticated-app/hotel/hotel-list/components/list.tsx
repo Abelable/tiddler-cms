@@ -90,13 +90,7 @@ export const List = ({
           {
             title: "评分",
             dataIndex: "rate",
-            width: "22rem",
-            render: (value) => (
-              <>
-                <Rate allowHalf value={value} />
-                <span style={{ marginLeft: "1rem" }}>{value}</span>
-              </>
-            ),
+            width: "12rem",
           },
           {
             title: "状态",

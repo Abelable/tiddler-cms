@@ -31,9 +31,9 @@ export const HotelList = () => {
     <Container>
       <Main>
         <SearchPanel
+          gradeOptions={gradeOptions}
           categoryOptions={hotelCategoryOptions || []}
           statusOptions={statusOptions}
-          gradeOptions={gradeOptions}
           params={params}
           setParams={setParams}
         />
@@ -53,7 +53,10 @@ export const HotelList = () => {
           }}
         />
       </Main>
-      <HotelModal categoryOptions={hotelCategoryOptions || []} />
+      <HotelModal
+        gradeOptions={gradeOptions}
+        categoryOptions={hotelCategoryOptions || []}
+      />
       <RejectModal />
     </Container>
   );

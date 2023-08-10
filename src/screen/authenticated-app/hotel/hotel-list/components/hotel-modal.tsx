@@ -14,6 +14,9 @@ import {
   Select,
   Space,
   TimePicker,
+  DatePicker,
+  InputNumber,
+  Divider,
 } from "antd";
 import { OssUpload } from "components/oss-upload";
 import { ErrorBox, Row as CustomRow, ModalLoading } from "components/lib";
@@ -21,6 +24,7 @@ import { Map } from "components/map";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 
 import type { CategoryOption } from "types/category";
+import type { Option } from "types/common";
 
 const facilityOptions = [
   { id: 1, name: "停车场" },
@@ -49,8 +53,10 @@ const normFile = (e: any) => {
 };
 
 export const HotelModal = ({
+  gradeOptions,
   categoryOptions,
 }: {
+  gradeOptions: Option[];
   categoryOptions: CategoryOption[];
 }) => {
   const [form] = useForm();
@@ -154,8 +160,18 @@ export const HotelModal = ({
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item name="level" label="酒店等级">
-                <Input placeholder="请输入酒店等级，例：5A" />
+              <Form.Item
+                name="grade"
+                label="酒店档次"
+                rules={[{ required: true, message: "请选择酒店档次" }]}
+              >
+                <Select placeholder="请选择酒店档次">
+                  {gradeOptions.map(({ text, value }) => (
+                    <Select.Option key={value} value={value}>
+                      {text}
+                    </Select.Option>
+                  ))}
+                </Select>
               </Form.Item>
             </Col>
           </Row>
@@ -245,13 +261,224 @@ export const HotelModal = ({
             </Col>
           </Row>
           <Row gutter={16}>
-            <Col span={24}>
+            <Col span={12}>
               <Form.Item
-                name="brief"
-                label="酒店简介"
-                rules={[{ required: true, message: "请输入酒店简介" }]}
+                name="openingYear"
+                label="开业年份"
+                rules={[{ required: true, message: "请选择开业年份" }]}
               >
+                <DatePicker
+                  style={{ width: "33.6rem" }}
+                  picker="year"
+                  placeholder="请选择开业年份"
+                />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item name="lastDecorationYear" label="装修年份">
+                <DatePicker
+                  style={{ width: "33.6rem" }}
+                  picker="year"
+                  placeholder="请选择装修年份"
+                />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item
+                name="roomNum"
+                label="房间数量"
+                rules={[{ required: true, message: "请填写房间数量" }]}
+              >
+                <InputNumber
+                  style={{ width: "33.6rem" }}
+                  placeholder="请填写房间数量"
+                />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                name="tel"
+                label="联系电话"
+                rules={[{ required: true, message: "请输入酒店联系电话" }]}
+              >
+                <Input
+                  style={{ width: "33.6rem" }}
+                  placeholder="请输入酒店联系电话"
+                />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item label="酒店特色标签">
+                <Form.List name="featureTagList">
+                  {(fields, { add, remove }) => (
+                    <>
+                      {fields.map(({ key, name, ...restField }) => (
+                        <Space
+                          key={key}
+                          style={{ display: "flex" }}
+                          align="baseline"
+                        >
+                          <Form.Item
+                            {...restField}
+                            name={name}
+                            rules={[
+                              { required: true, message: "请输入标签内容" },
+                            ]}
+                          >
+                            <Input
+                              style={{ width: "31rem" }}
+                              placeholder="请输入标签内容"
+                            />
+                          </Form.Item>
+                          <MinusCircleOutlined onClick={() => remove(name)} />
+                        </Space>
+                      ))}
+                      <Button
+                        type="dashed"
+                        onClick={() => add()}
+                        block
+                        icon={<PlusOutlined />}
+                      >
+                        添加特色标签
+                      </Button>
+                    </>
+                  )}
+                </Form.List>
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={24}>
+              <Form.Item name="brief" label="酒店简介">
                 <Input.TextArea rows={6} placeholder="请输入酒店简介" />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Divider orientation="left" plain>
+            酒店政策
+          </Divider>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item label="酒店政策-重要提醒">
+                <Form.List name="remindList">
+                  {(fields, { add, remove }) => (
+                    <>
+                      {fields.map(({ key, name, ...restField }) => (
+                        <Space
+                          key={key}
+                          style={{ display: "flex" }}
+                          align="baseline"
+                        >
+                          <Form.Item
+                            {...restField}
+                            name={name}
+                            rules={[
+                              { required: true, message: "请输入提醒事项" },
+                            ]}
+                          >
+                            <Input
+                              style={{ width: "31rem" }}
+                              placeholder="请输入提醒事项"
+                            />
+                          </Form.Item>
+                          <MinusCircleOutlined onClick={() => remove(name)} />
+                        </Space>
+                      ))}
+                      <Button
+                        type="dashed"
+                        onClick={() => add()}
+                        block
+                        icon={<PlusOutlined />}
+                      >
+                        添加提醒事项
+                      </Button>
+                    </>
+                  )}
+                </Form.List>
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item label="酒店政策-入住必读">
+                <Form.List name="checkInTipList">
+                  {(fields, { add, remove }) => (
+                    <>
+                      {fields.map(({ key, name, ...restField }) => (
+                        <Space
+                          key={key}
+                          style={{ display: "flex" }}
+                          align="baseline"
+                        >
+                          <Form.Item
+                            {...restField}
+                            name={name}
+                            rules={[
+                              { required: true, message: "请输入必读事项" },
+                            ]}
+                          >
+                            <Input
+                              style={{ width: "31rem" }}
+                              placeholder="请输入必读事项"
+                            />
+                          </Form.Item>
+                          <MinusCircleOutlined onClick={() => remove(name)} />
+                        </Space>
+                      ))}
+                      <Button
+                        type="dashed"
+                        onClick={() => add()}
+                        block
+                        icon={<PlusOutlined />}
+                      >
+                        添加必读事项
+                      </Button>
+                    </>
+                  )}
+                </Form.List>
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item label="酒店政策-预定须知">
+                <Form.List name="preorderTipList">
+                  {(fields, { add, remove }) => (
+                    <>
+                      {fields.map(({ key, name, ...restField }) => (
+                        <Space
+                          key={key}
+                          style={{ display: "flex" }}
+                          align="baseline"
+                        >
+                          <Form.Item
+                            {...restField}
+                            name={name}
+                            rules={[
+                              { required: true, message: "请输入预定须知" },
+                            ]}
+                          >
+                            <Input
+                              style={{ width: "31rem" }}
+                              placeholder="请输入预定须知"
+                            />
+                          </Form.Item>
+                          <MinusCircleOutlined onClick={() => remove(name)} />
+                        </Space>
+                      ))}
+                      <Button
+                        type="dashed"
+                        onClick={() => add()}
+                        block
+                        icon={<PlusOutlined />}
+                      >
+                        添加预定须知
+                      </Button>
+                    </>
+                  )}
+                </Form.List>
               </Form.Item>
             </Col>
           </Row>
