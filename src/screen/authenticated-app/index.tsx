@@ -72,47 +72,53 @@ export const AuthenticatedApp = () => {
               <Route path="auth/role_list" element={<RoleList />} />
               <Route path="auth/admin_list" element={<AdminList />} />
               <Route path="user_list" element={<UserList />} />
-              <Route path="merchant/list" element={<MerchantList />} />
+              <Route path="merchant/merchant_list" element={<MerchantList />} />
               <Route
-                path="merchant/order_list"
+                path="merchant/merchant_order_list"
                 element={<MerchantOrderList />}
               />
-              <Route path="shop/category_list" element={<ShopCategoryList />} />
-              <Route path="shop/list" element={<ShopList />} />
+              <Route
+                path="shop/shop_category_list"
+                element={<ShopCategoryList />}
+              />
+              <Route path="shop/shop_list" element={<ShopList />} />
               <Route path="goods/express_list" element={<ExpressList />} />
               <Route
-                path="goods/category_list"
+                path="goods/goods_category_list"
                 element={<GoodsCategoryList />}
               />
-              <Route path="goods/list" element={<GoodsList />} />
+              <Route path="goods/goods_list" element={<GoodsList />} />
               <Route
-                path="scenic_spot/category_list"
+                path="scenic_spot/scenic_category_list"
                 element={<ScenicCategoryList />}
               />
-              <Route path="scenic_spot/list" element={<ScenicList />} />
+              <Route path="scenic_spot/scenic_list" element={<ScenicList />} />
               <Route
-                path="scenic_provider/list"
+                path="scenic_provider/scenic_provider_list"
                 element={<ScenicProviderList />}
               />
               <Route
-                path="scenic_provider/order_list"
+                path="scenic_provider/scenic_provider_order_list"
                 element={<ScenicProviderOrderList />}
               />
               <Route
-                path="scenic_provider/shop_list"
+                path="scenic_provider/scenic_shop_list"
                 element={<ScenicShopList />}
               />
               <Route
-                path="scenic_provider/scenic_list"
+                path="scenic_provider/provider_scenic_list"
                 element={<ProviderScenicList />}
               />
               <Route
-                path="scenic_ticket/category_list"
+                path="scenic_ticket/scenic_ticket_category_list"
                 element={<ScenicTicketCategoryList />}
               />
-              <Route path="scenic_ticket/list" element={<ScenicTicketList />} />
               <Route
-                path="Hotel/category_list"
+                path="scenic_ticket/scenic_ticket_list"
+                element={<ScenicTicketList />}
+              />
+              <Route
+                path="hotel/hotel_category_list"
                 element={<HotelCategoryList />}
               />
               <Route
@@ -159,12 +165,12 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
       icon: <TeamOutlined />,
       children: [
         {
-          label: <Link to={"merchant/list"}>商家列表</Link>,
+          label: <Link to={"merchant/merchant_list"}>商家列表</Link>,
           key: "merchant_list",
           icon: <TeamOutlined />,
         },
         {
-          label: <Link to={"merchant/order_list"}>入驻订单列表</Link>,
+          label: <Link to={"merchant/merchant_order_list"}>入驻订单列表</Link>,
           key: "merchant_order_list",
           icon: <FileDoneOutlined />,
         },
@@ -176,12 +182,12 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
       icon: <ShopOutlined />,
       children: [
         {
-          label: <Link to={"shop/category_list"}>店铺分类</Link>,
+          label: <Link to={"shop/shop_category_list"}>店铺分类</Link>,
           key: "shop_category_list",
           icon: <AppstoreOutlined />,
         },
         {
-          label: <Link to={"shop/list"}>店铺列表</Link>,
+          label: <Link to={"shop/shop_list"}>店铺列表</Link>,
           key: "shop_list",
           icon: <ShopOutlined />,
         },
@@ -194,16 +200,16 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
       children: [
         {
           label: <Link to={"goods/express_list"}>快递列表</Link>,
-          key: "goods_express_list",
+          key: "express_list",
           icon: <ExpressIcon />,
         },
         {
-          label: <Link to={"goods/category_list"}>商品分类</Link>,
+          label: <Link to={"goods/goods_category_list"}>商品分类</Link>,
           key: "goods_category_list",
           icon: <AppstoreOutlined />,
         },
         {
-          label: <Link to={"goods/list"}>商品列表</Link>,
+          label: <Link to={"goods/goods_list"}>商品列表</Link>,
           key: "goods_list",
           icon: <ShoppingOutlined />,
         },
@@ -215,13 +221,13 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
       icon: <ScenicSpotIcon />,
       children: [
         {
-          label: <Link to={"scenic_spot/category_list"}>景区分类</Link>,
+          label: <Link to={"scenic_spot/scenic_category_list"}>景区分类</Link>,
           key: "scenic_category_list",
           icon: <AppstoreOutlined />,
         },
         {
-          label: <Link to={"scenic_spot/list"}>景区列表</Link>,
-          key: "scenic_spot_list",
+          label: <Link to={"scenic_spot/scenic_list"}>景区列表</Link>,
+          key: "scenic_list",
           icon: <ScenicSpotIcon />,
         },
       ],
@@ -232,23 +238,33 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
       icon: <TeamOutlined />,
       children: [
         {
-          label: <Link to={"scenic_provider/list"}>服务商列表</Link>,
+          label: (
+            <Link to={"scenic_provider/scenic_provider_list"}>服务商列表</Link>
+          ),
           key: "scenic_provider_list",
           icon: <TeamOutlined />,
         },
         {
-          label: <Link to={"scenic_provider/order_list"}>入驻订单列表</Link>,
+          label: (
+            <Link to={"scenic_provider/scenic_provider_order_list"}>
+              入驻订单列表
+            </Link>
+          ),
           key: "scenic_provider_order_list",
           icon: <FileDoneOutlined />,
         },
         {
-          label: <Link to={"scenic_provider/shop_list"}>店铺列表</Link>,
+          label: <Link to={"scenic_provider/scenic_shop_list"}>店铺列表</Link>,
           key: "scenic_shop_list",
           icon: <ShopOutlined />,
         },
         {
-          label: <Link to={"scenic_provider/scenic_list"}>景点申请列表</Link>,
-          key: "scenic_provider_scenic_list",
+          label: (
+            <Link to={"scenic_provider/provider_scenic_list"}>
+              景点申请列表
+            </Link>
+          ),
+          key: "provider_scenic_list",
           icon: <ScenicSpotIcon />,
         },
       ],
@@ -259,12 +275,16 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
       icon: <TicketIcon />,
       children: [
         {
-          label: <Link to={"scenic_ticket/category_list"}>门票分类</Link>,
+          label: (
+            <Link to={"scenic_ticket/scenic_ticket_category_list"}>
+              门票分类
+            </Link>
+          ),
           key: "scenic_ticket_category_list",
           icon: <AppstoreOutlined />,
         },
         {
-          label: <Link to={"scenic_ticket/list"}>门票列表</Link>,
+          label: <Link to={"scenic_ticket/scenic_ticket_list"}>门票列表</Link>,
           key: "scenic_ticket_list",
           icon: <TicketIcon />,
         },
@@ -272,16 +292,16 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
     },
     {
       label: "酒店管理",
-      key: "Hotel",
+      key: "hotel",
       icon: <HotelIcon />,
       children: [
         {
-          label: <Link to={"hotel/category_list"}>酒店分类</Link>,
+          label: <Link to={"hotel/hotel_category_list"}>酒店分类</Link>,
           key: "hotel_category_list",
           icon: <AppstoreOutlined />,
         },
         {
-          label: <Link to={"hotel/list"}>酒店列表</Link>,
+          label: <Link to={"hotel/hotel_list"}>酒店列表</Link>,
           key: "hotel_list",
           icon: <HotelIcon />,
         },
