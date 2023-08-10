@@ -1,53 +1,43 @@
 export interface HotelListSearchParams {
   name: string;
+  grade: number | undefined;
   categoryId: number | undefined;
   status: number | undefined;
   page: number;
   limit: number;
 }
 
-interface OpenTime {
-  openMonth: string;
-  closeMonth: string;
-  openTime: string;
-  closeTime: string;
-  tips: string;
-}
-interface Policy {
-  crowd: string;
-  condition: string;
-  content: string;
-}
 interface Facility {
   facilityId: number;
   content: string;
 }
-interface Project {
-  image: string;
-  name: string;
-}
-interface Tips {
-  title: string;
+
+interface Service {
+  serviceId: number;
   content: string;
 }
 
 export interface HotelDetail {
   id: number;
   name: string;
-  level: string;
+  grade: number;
   categoryId: number;
   video: string;
   imageList: string[];
   longitude: number;
   latitude: number;
   address: string;
+  featureTagList: string[];
+  openingYear: string;
+  lastDecorationYear: string;
+  roomNum: number;
+  tel: string;
   brief: string;
-  openTimeList: OpenTime[];
-  policyList: Policy[];
-  hotlineList: string[];
   facilityList: Facility[];
-  projectList: Project[];
-  tipsList: Tips[];
+  serviceList: Service[];
+  remindList: string[];
+  checkInTipList: string[];
+  preorderTipList: string[];
 }
 
 export interface Hotel {

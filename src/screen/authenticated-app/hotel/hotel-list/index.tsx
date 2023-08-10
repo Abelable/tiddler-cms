@@ -20,6 +20,12 @@ export const HotelList = () => {
     { text: "开放中", value: 1 },
     { text: "未过审", value: 2 },
   ];
+  const gradeOptions = [
+    { text: "经济酒店", value: 1 },
+    { text: "舒适酒店", value: 2 },
+    { text: "高档酒店", value: 3 },
+    { text: "豪华酒店", value: 4 },
+  ];
 
   return (
     <Container>
@@ -27,10 +33,12 @@ export const HotelList = () => {
         <SearchPanel
           categoryOptions={hotelCategoryOptions || []}
           statusOptions={statusOptions}
+          gradeOptions={gradeOptions}
           params={params}
           setParams={setParams}
         />
         <List
+          gradeOptions={gradeOptions}
           categoryOptions={hotelCategoryOptions || []}
           statusOptions={statusOptions}
           params={params}

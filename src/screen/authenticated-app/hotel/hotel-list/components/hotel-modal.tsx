@@ -67,8 +67,7 @@ export const HotelModal = ({
 
   useEffect(() => {
     if (editingHotel) {
-      const { video, imageList, openTimeList, projectList, ...rest } =
-        editingHotel;
+      const { video, imageList, ...rest } = editingHotel;
       form.setFieldsValue({
         video: video
           ? [
@@ -81,19 +80,6 @@ export const HotelModal = ({
         imageList: imageList?.length
           ? imageList?.map((item) => ({ url: item }))
           : imageList,
-        openTimeList: openTimeList?.length
-          ? openTimeList.map((item) => ({
-              ...item,
-              openTime: moment(item.openTime),
-              closeTime: moment(item.openTime),
-            }))
-          : openTimeList,
-        projectList: projectList?.length
-          ? projectList.map((item) => ({
-              ...item,
-              image: [{ url: item.image }],
-            }))
-          : projectList,
         ...rest,
       });
     }

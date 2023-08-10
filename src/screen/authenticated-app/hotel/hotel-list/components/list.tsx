@@ -27,6 +27,7 @@ interface ListProps extends TableProps<Hotel>, SearchPanelProps {
 }
 
 export const List = ({
+  gradeOptions,
   categoryOptions,
   statusOptions,
   error,
@@ -68,6 +69,14 @@ export const List = ({
                 <span>{spot.name}</span>
                 <Tag color="gold">{spot.level}</Tag>
               </Row>
+            ),
+          },
+          {
+            title: "档次",
+            dataIndex: "grade",
+            width: "18rem",
+            render: (value) => (
+              <>{gradeOptions.find((item) => item.value === value)?.text}</>
             ),
           },
           {

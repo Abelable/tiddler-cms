@@ -5,21 +5,25 @@ import { Button, Input, Select } from "antd";
 
 import type { HotelListSearchParams } from "types/hotel";
 import type { CategoryOption } from "types/category";
+import type { Option } from "types/common";
 
 export interface SearchPanelProps {
+  gradeOptions: Option[];
   categoryOptions: CategoryOption[];
-  statusOptions: { text: string; value: number }[];
+  statusOptions: Option[];
   params: Partial<HotelListSearchParams>;
   setParams: (params: Partial<HotelListSearchParams>) => void;
 }
 
 const defaultParmas: Partial<HotelListSearchParams> = {
   name: "",
+  grade: undefined,
   categoryId: undefined,
   status: undefined,
 };
 
 export const SearchPanel = ({
+  gradeOptions,
   categoryOptions,
   statusOptions,
   params,
@@ -41,6 +45,9 @@ export const SearchPanel = ({
       name: evt.target.value,
     });
   };
+
+  const setGrade = (grade: number) => setTempParams({ ...tempParams, grade });
+  const clearGrade = () => setTempParams({ ...tempParams, grade: undefined });
 
   const setCategory = (categoryId: number) =>
     setTempParams({ ...tempParams, categoryId });
@@ -67,6 +74,23 @@ export const SearchPanel = ({
           placeholder="请输入酒店名称"
           allowClear={true}
         />
+      </Item>
+      <Item>
+        <div>酒店档次：</div>
+        <Select
+          style={{ width: "20rem" }}
+          value={tempParams.grade}
+          placeholder="请选择酒店档次"
+          allowClear={true}
+          onSelect={setGrade}
+          onClear={clearGrade}
+        >
+          {gradeOptions?.map(({ text, value }) => (
+            <Select.Option key={value} value={value}>
+              {text}
+            </Select.Option>
+          ))}
+        </Select>
       </Item>
       <Item>
         <div>酒店分类：</div>
