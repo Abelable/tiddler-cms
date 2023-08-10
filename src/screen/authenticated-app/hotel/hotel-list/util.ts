@@ -1,8 +1,8 @@
 import { useSetUrlSearchParams, useUrlQueryParams } from "utils/url";
 import { useCallback, useMemo } from "react";
-import { useScenic } from "service/scenic";
+import { useHotel } from "service/hotel";
 
-export const useScenicListSearchParams = () => {
+export const useHotelListSearchParams = () => {
   const [params, setParams] = useUrlQueryParams([
     "name",
     "categoryId",
@@ -23,42 +23,42 @@ export const useScenicListSearchParams = () => {
   ] as const;
 };
 
-export const useScenicListQueryKey = () => {
-  const [params] = useScenicListSearchParams();
-  return ["scenic_list", params];
+export const useHotelListQueryKey = () => {
+  const [params] = useHotelListSearchParams();
+  return ["hotel_list", params];
 };
 
-export const useScenicModal = () => {
-  const [{ scenicCreate }, setAdminModalOpen] = useUrlQueryParams([
-    "scenicCreate",
+export const useHotelModal = () => {
+  const [{ hotelCreate }, setAdminModalOpen] = useUrlQueryParams([
+    "hotelCreate",
   ]);
-  const [{ editingScenicId }, setEditingScenicId] = useUrlQueryParams([
-    "editingScenicId",
+  const [{ editingHotelId }, setEditingHotelId] = useUrlQueryParams([
+    "editingHotelId",
   ]);
   const setUrlParams = useSetUrlSearchParams();
   const {
-    data: editingScenic,
+    data: editingHotel,
     isLoading,
     error,
-  } = useScenic(Number(editingScenicId));
+  } = useHotel(Number(editingHotelId));
 
   const open = useCallback(
-    () => setAdminModalOpen({ scenicCreate: true }),
+    () => setAdminModalOpen({ hotelCreate: true }),
     [setAdminModalOpen]
   );
   const startEdit = useCallback(
-    (id: number) => setEditingScenicId({ editingScenicId: `${id}` }),
-    [setEditingScenicId]
+    (id: number) => setEditingHotelId({ editingHotelId: `${id}` }),
+    [setEditingHotelId]
   );
   const close = useCallback(
-    () => setUrlParams({ scenicCreate: "", editingScenicId: "" }),
+    () => setUrlParams({ hotelCreate: "", editingHotelId: "" }),
     [setUrlParams]
   );
 
   return {
-    scenicModalOpen: scenicCreate === "true" || !!editingScenicId,
-    editingScenicId,
-    editingScenic,
+    hotelModalOpen: hotelCreate === "true" || !!editingHotelId,
+    editingHotelId,
+    editingHotel,
     isLoading,
     error,
     open,
@@ -68,23 +68,23 @@ export const useScenicModal = () => {
 };
 
 export const useRejectModal = () => {
-  const [{ rejectScenicId }, setRejectScenicId] = useUrlQueryParams([
-    "rejectScenicId",
+  const [{ rejectHotelId }, setRejectHotelId] = useUrlQueryParams([
+    "rejectHotelId",
   ]);
   const setUrlParams = useSetUrlSearchParams();
 
   const open = useCallback(
-    (id: number) => setRejectScenicId({ rejectScenicId: `${id}` }),
-    [setRejectScenicId]
+    (id: number) => setRejectHotelId({ rejectHotelId: `${id}` }),
+    [setRejectHotelId]
   );
   const close = useCallback(
-    () => setUrlParams({ rejectScenicId: "" }),
+    () => setUrlParams({ rejectHotelId: "" }),
     [setUrlParams]
   );
 
   return {
-    rejectModalOpen: !!rejectScenicId,
-    rejectScenicId,
+    rejectModalOpen: !!rejectHotelId,
+    rejectHotelId,
     open,
     close,
   };

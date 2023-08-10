@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useForm } from "antd/lib/form/Form";
 import moment from "moment";
-import { useAddScenic, useEditScenic } from "service/scenic";
-import { useScenicModal, useScenicListQueryKey } from "../util";
+import { useAddHotel, useEditHotel } from "service/hotel";
+import { useHotelModal, useHotelListQueryKey } from "../util";
 
 import {
   Button,
@@ -48,27 +48,27 @@ const normFile = (e: any) => {
   return e && e.fileList;
 };
 
-export const ScenicModal = ({
+export const HotelModal = ({
   categoryOptions,
 }: {
   categoryOptions: CategoryOption[];
 }) => {
   const [form] = useForm();
 
-  const { scenicModalOpen, editingScenicId, editingScenic, isLoading, close } =
-    useScenicModal();
+  const { hotelModalOpen, editingHotelId, editingHotel, isLoading, close } =
+    useHotelModal();
 
-  const useMutationScenic = editingScenicId ? useEditScenic : useAddScenic;
+  const useMutationHotel = editingHotelId ? useEditHotel : useAddHotel;
   const {
     mutateAsync,
     error,
     isLoading: mutateLoading,
-  } = useMutationScenic(useScenicListQueryKey());
+  } = useMutationHotel(useHotelListQueryKey());
 
   useEffect(() => {
-    if (editingScenic) {
+    if (editingHotel) {
       const { video, imageList, openTimeList, projectList, ...rest } =
-        editingScenic;
+        editingHotel;
       form.setFieldsValue({
         video: video
           ? [
@@ -97,7 +97,7 @@ export const ScenicModal = ({
         ...rest,
       });
     }
-  }, [editingScenic, form]);
+  }, [editingHotel, form]);
 
   const setLng = (longitude: number | undefined) =>
     form.setFieldsValue({
@@ -112,7 +112,7 @@ export const ScenicModal = ({
     form.validateFields().then(async () => {
       const { video, imageList, projectList, ...rest } = form.getFieldsValue();
       await mutateAsync({
-        ...editingScenic,
+        ...editingHotel,
         ...rest,
         video: video && video.length ? video[0].url : "",
         imageList: imageList.map((item: { url: string }) => item.url),
@@ -136,11 +136,11 @@ export const ScenicModal = ({
 
   return (
     <Drawer
-      title={editingScenicId ? "编辑景区" : "新增景区"}
+      title={editingHotelId ? "编辑景区" : "新增景区"}
       size={"large"}
       forceRender={true}
       onClose={closeModal}
-      open={scenicModalOpen}
+      open={hotelModalOpen}
       bodyStyle={{ paddingBottom: 80 }}
       extra={
         <Space>

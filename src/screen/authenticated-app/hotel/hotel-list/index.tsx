@@ -1,20 +1,20 @@
 import styled from "@emotion/styled";
 
-import { useScenicCategoryOptions } from "service/scenicCategory";
-import { useScenicList } from "service/scenic";
+import { useHotelCategoryOptions } from "service/hotelCategory";
+import { useHotelList } from "service/hotel";
 import { toNumber } from "utils";
-import { useScenicListSearchParams } from "./util";
+import { useHotelListSearchParams } from "./util";
 
-import { ScenicModal } from "./components/scenic-modal";
+import { HotelModal } from "./components/hotel-modal";
 import { List } from "./components/list";
 import { SearchPanel } from "./components/search-panel";
 import { RejectModal } from "./components/reject-modal";
 
-export const ScenicList = () => {
-  const [params, setParams] = useScenicListSearchParams();
-  const { isLoading, error, data } = useScenicList(params);
-  const { data: scenicCategoryOptions, error: scenicOptionsError } =
-    useScenicCategoryOptions();
+export const HotelList = () => {
+  const [params, setParams] = useHotelListSearchParams();
+  const { isLoading, error, data } = useHotelList(params);
+  const { data: hotelCategoryOptions, error: hotelOptionsError } =
+    useHotelCategoryOptions();
   const statusOptions = [
     { text: "待审核", value: 0 },
     { text: "开放中", value: 1 },
@@ -25,17 +25,17 @@ export const ScenicList = () => {
     <Container>
       <Main>
         <SearchPanel
-          categoryOptions={scenicCategoryOptions || []}
+          categoryOptions={hotelCategoryOptions || []}
           statusOptions={statusOptions}
           params={params}
           setParams={setParams}
         />
         <List
-          categoryOptions={scenicCategoryOptions || []}
+          categoryOptions={hotelCategoryOptions || []}
           statusOptions={statusOptions}
           params={params}
           setParams={setParams}
-          error={error || scenicOptionsError}
+          error={error || hotelOptionsError}
           loading={isLoading}
           dataSource={data?.list}
           pagination={{
@@ -45,7 +45,7 @@ export const ScenicList = () => {
           }}
         />
       </Main>
-      <ScenicModal categoryOptions={scenicCategoryOptions || []} />
+      <HotelModal categoryOptions={hotelCategoryOptions || []} />
       <RejectModal />
     </Container>
   );

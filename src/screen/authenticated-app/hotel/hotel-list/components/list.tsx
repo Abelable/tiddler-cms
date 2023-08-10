@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import styled from "@emotion/styled";
-import { useScenicModal, useScenicListQueryKey, useRejectModal } from "../util";
+import { useHotelModal, useHotelListQueryKey, useRejectModal } from "../util";
 
 import {
   Dropdown,
@@ -16,13 +16,13 @@ import {
   Tag,
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
-import { useApprovedScenic, useDeleteScenic } from "service/scenic";
+import { useApprovedHotel, useDeleteHotel } from "service/hotel";
 import { PlusOutlined } from "@ant-design/icons";
 import { SearchPanelProps } from "./search-panel";
 
-import type { Scenic } from "types/scenic";
+import type { Hotel } from "types/hotel";
 
-interface ListProps extends TableProps<Scenic>, SearchPanelProps {
+interface ListProps extends TableProps<Hotel>, SearchPanelProps {
   error: Error | unknown;
 }
 
@@ -34,7 +34,7 @@ export const List = ({
   setParams,
   ...restProps
 }: ListProps) => {
-  const { open } = useScenicModal();
+  const { open } = useHotelModal();
   const setPagination = (pagination: TablePaginationConfig) =>
     setParams({
       ...params,
@@ -93,13 +93,13 @@ export const List = ({
             title: "状态",
             dataIndex: "status",
             width: "12rem",
-            render: (value, scenic) =>
+            render: (value, hotel) =>
               value === 0 ? (
                 <span style={{ color: "#87d068" }}>待审核</span>
               ) : value === 1 ? (
                 <span>开放中</span>
               ) : (
-                <Tooltip title={scenic.failureReason}>
+                <Tooltip title={hotel.failureReason}>
                   <span style={{ color: "#f50", cursor: "pointer" }}>
                     未过审
                   </span>
@@ -110,14 +110,14 @@ export const List = ({
               { text: "开放中", value: 1 },
               { text: "未过审", value: 2 },
             ],
-            onFilter: (value, scenic) => scenic.status === value,
+            onFilter: (value, hotel) => hotel.status === value,
           },
           {
             title: "添加时间",
-            render: (value, scenic) => (
+            render: (value, hotel) => (
               <span>
-                {scenic.createdAt
-                  ? dayjs(scenic.createdAt).format("YYYY-MM-DD HH:mm:ss")
+                {hotel.createdAt
+                  ? dayjs(hotel.createdAt).format("YYYY-MM-DD HH:mm:ss")
                   : "无"}
               </span>
             ),
@@ -127,10 +127,10 @@ export const List = ({
           },
           {
             title: "修改时间",
-            render: (value, scenic) => (
+            render: (value, hotel) => (
               <span>
-                {scenic.updatedAt
-                  ? dayjs(scenic.updatedAt).format("YYYY-MM-DD HH:mm:ss")
+                {hotel.updatedAt
+                  ? dayjs(hotel.updatedAt).format("YYYY-MM-DD HH:mm:ss")
                   : "无"}
               </span>
             ),
@@ -140,8 +140,8 @@ export const List = ({
           },
           {
             title: "操作",
-            render(value, scenic) {
-              return <More id={scenic.id} status={scenic.status} />;
+            render(value, hotel) {
+              return <More id={hotel.id} status={hotel.status} />;
             },
             width: "8rem",
             fixed: "right",
@@ -155,9 +155,9 @@ export const List = ({
 };
 
 const More = ({ id, status }: { id: number; status: number }) => {
-  const { startEdit } = useScenicModal();
-  const { mutate: deleteScenic } = useDeleteScenic(useScenicListQueryKey());
-  const { mutate: approvedScenic } = useApprovedScenic(useScenicListQueryKey());
+  const { startEdit } = useHotelModal();
+  const { mutate: deleteHotel } = useDeleteHotel(useHotelListQueryKey());
+  const { mutate: approvedHotel } = useApprovedHotel(useHotelListQueryKey());
   const { open: openRejectModal } = useRejectModal();
 
   const confirmDelete = (id: number) => {
@@ -166,7 +166,7 @@ const More = ({ id, status }: { id: number; status: number }) => {
       content: "点击确定删除",
       okText: "确定",
       cancelText: "取消",
-      onOk: () => deleteScenic(id),
+      onOk: () => deleteHotel(id),
     });
   };
 
@@ -176,7 +176,7 @@ const More = ({ id, status }: { id: number; status: number }) => {
       content: "请确保在景区信息无误的情况下进行该操作",
       okText: "确定",
       cancelText: "取消",
-      onOk: () => approvedScenic(id),
+      onOk: () => approvedHotel(id),
     });
   };
 
