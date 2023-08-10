@@ -37,6 +37,6 @@ export const useSetUrlSearchParams = () => {
 export const useRouteType = () => {
   const units = useLocation().pathname.split("/");
   const defaultOpenKey = units[1];
-  const selectedKey = units[units.length - 1];
+  const selectedKey = units.filter((key) => !!key).join("_");
   return { defaultOpenKey, selectedKey };
 };
