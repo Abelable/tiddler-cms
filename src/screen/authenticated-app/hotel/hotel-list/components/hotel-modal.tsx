@@ -148,6 +148,7 @@ export const HotelModal = ({
         <ModalLoading />
       ) : (
         <Form form={form} layout="vertical">
+          <Divider orientation="left">基础信息</Divider>
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item
@@ -202,132 +203,6 @@ export const HotelModal = ({
                   placeholder="请填写房间基础价格"
                 />
               </Form.Item>
-            </Col>
-          </Row>
-          <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item
-                name="video"
-                label="上传酒店视频"
-                valuePropName="fileList"
-                getValueFromEvent={normFile}
-              >
-                <OssUpload accept=".mp4" maxCount={1} />
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item
-                name="cover"
-                label="上传酒店封面照片"
-                tooltip="图片大小不能超过10MB"
-                valuePropName="fileList"
-                getValueFromEvent={normFile}
-                rules={[{ required: true, message: "请上传酒店封面照片" }]}
-              >
-                <OssUpload maxCount={1} />
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row gutter={16}>
-            <Col span={24}>
-              <Form.Item
-                name="appearanceImageList"
-                label="上传酒店外观照片"
-                valuePropName="fileList"
-                getValueFromEvent={normFile}
-              >
-                <OssUpload />
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row gutter={16}>
-            <Col span={24}>
-              <Form.Item
-                name="interiorImageList"
-                label="上传酒店内景照片"
-                valuePropName="fileList"
-                getValueFromEvent={normFile}
-              >
-                <OssUpload />
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row gutter={16}>
-            <Col span={24}>
-              <Form.Item
-                name="roomImageList"
-                label="上传酒店房间照片"
-                valuePropName="fileList"
-                getValueFromEvent={normFile}
-              >
-                <OssUpload />
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row gutter={16}>
-            <Col span={24}>
-              <Form.Item
-                name="environmentImageList"
-                label="上传酒店环境照片"
-                valuePropName="fileList"
-                getValueFromEvent={normFile}
-              >
-                <OssUpload />
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row gutter={16}>
-            <Col span={24}>
-              <Form.Item
-                name="restaurantImageList"
-                label="上传酒店餐厅照片"
-                valuePropName="fileList"
-                getValueFromEvent={normFile}
-              >
-                <OssUpload />
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item label="酒店所在经纬度" required>
-                <Input.Group>
-                  <Row gutter={8}>
-                    <Col span={12}>
-                      <Form.Item
-                        style={{ marginBottom: 0 }}
-                        name="longitude"
-                        rules={[{ required: true, message: "请输入经度" }]}
-                      >
-                        <Input placeholder="请输入经度" />
-                      </Form.Item>
-                    </Col>
-                    <Col span={12}>
-                      <Form.Item
-                        style={{ marginBottom: 0 }}
-                        name="latitude"
-                        rules={[{ required: true, message: "请输入纬度" }]}
-                      >
-                        <Input placeholder="请输入纬度" />
-                      </Form.Item>
-                    </Col>
-                  </Row>
-                </Input.Group>
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item
-                name="address"
-                label="酒店地址详情"
-                rules={[{ required: true, message: "请输入酒店地址详情" }]}
-              >
-                <Input placeholder="请输入酒店地址详情" />
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row gutter={16}>
-            <Col span={24}>
-              <Map setLng={setLng} setLat={setLat} />
             </Col>
           </Row>
           <Row gutter={16}>
@@ -428,9 +303,132 @@ export const HotelModal = ({
               </Form.Item>
             </Col>
           </Row>
-          <Divider orientation="left" plain>
-            酒店设施
-          </Divider>
+          <Divider orientation="left">视频及照片</Divider>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item
+                name="video"
+                label="上传酒店视频"
+                valuePropName="fileList"
+                getValueFromEvent={normFile}
+              >
+                <OssUpload accept=".mp4" maxCount={1} />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                name="cover"
+                label="上传酒店封面照片"
+                tooltip="图片大小不能超过10MB"
+                valuePropName="fileList"
+                getValueFromEvent={normFile}
+                rules={[{ required: true, message: "请上传酒店封面照片" }]}
+              >
+                <OssUpload maxCount={1} />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item
+                name="appearanceImageList"
+                label="上传酒店外观照片"
+                valuePropName="fileList"
+                getValueFromEvent={normFile}
+              >
+                <OssUpload />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                name="interiorImageList"
+                label="上传酒店内景照片"
+                valuePropName="fileList"
+                getValueFromEvent={normFile}
+              >
+                <OssUpload />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item
+                name="roomImageList"
+                label="上传酒店房间照片"
+                valuePropName="fileList"
+                getValueFromEvent={normFile}
+              >
+                <OssUpload />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                name="restaurantImageList"
+                label="上传酒店餐厅照片"
+                valuePropName="fileList"
+                getValueFromEvent={normFile}
+              >
+                <OssUpload />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item
+                name="environmentImageList"
+                label="上传酒店环境照片"
+                valuePropName="fileList"
+                getValueFromEvent={normFile}
+              >
+                <OssUpload />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Divider orientation="left">酒店地址</Divider>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item label="酒店所在经纬度" required>
+                <Input.Group>
+                  <Row gutter={8}>
+                    <Col span={12}>
+                      <Form.Item
+                        style={{ marginBottom: 0 }}
+                        name="longitude"
+                        rules={[{ required: true, message: "请输入经度" }]}
+                      >
+                        <Input placeholder="请输入经度" />
+                      </Form.Item>
+                    </Col>
+                    <Col span={12}>
+                      <Form.Item
+                        style={{ marginBottom: 0 }}
+                        name="latitude"
+                        rules={[{ required: true, message: "请输入纬度" }]}
+                      >
+                        <Input placeholder="请输入纬度" />
+                      </Form.Item>
+                    </Col>
+                  </Row>
+                </Input.Group>
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                name="address"
+                label="酒店地址详情"
+                rules={[{ required: true, message: "请输入酒店地址详情" }]}
+              >
+                <Input placeholder="请输入酒店地址详情" />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={24}>
+              <Map setLng={setLng} setLat={setLat} />
+            </Col>
+          </Row>
+
+          <Divider orientation="left">酒店设施</Divider>
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item label="娱乐设施">
@@ -632,9 +630,7 @@ export const HotelModal = ({
               </Form.Item>
             </Col>
           </Row>
-          <Divider orientation="left" plain>
-            酒店服务
-          </Divider>
+          <Divider orientation="left">酒店服务</Divider>
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item label="交通服务">
@@ -876,9 +872,7 @@ export const HotelModal = ({
             </Col>
           </Row>
 
-          <Divider orientation="left" plain>
-            酒店政策
-          </Divider>
+          <Divider orientation="left">酒店政策</Divider>
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item label="重要提醒">
