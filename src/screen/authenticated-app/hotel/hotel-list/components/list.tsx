@@ -12,6 +12,7 @@ import {
   TableProps,
   Tooltip,
   Button,
+  Image,
   Tag,
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
@@ -61,19 +62,21 @@ export const List = ({
             width: "8rem",
             fixed: "left",
           },
+
+          {
+            title: "图片",
+            dataIndex: "cover",
+            render: (value) => <Image width={68} src={value} />,
+            width: "14rem",
+          },
           {
             title: "名称",
-            render: (value, spot) => (
-              <Row gap={1}>
-                <span>{spot.name}</span>
-                <Tag color="gold">{spot.level}</Tag>
-              </Row>
-            ),
+            dataIndex: "name",
           },
           {
             title: "档次",
             dataIndex: "grade",
-            width: "18rem",
+            width: "14rem",
             render: (value) => (
               <>{gradeOptions.find((item) => item.value === value)?.text}</>
             ),
@@ -81,7 +84,7 @@ export const List = ({
           {
             title: "分类",
             dataIndex: "categoryId",
-            width: "18rem",
+            width: "14rem",
             render: (value) => (
               <>{categoryOptions.find((item) => item.id === value)?.name}</>
             ),
@@ -89,8 +92,8 @@ export const List = ({
           {
             title: "价格",
             dataIndex: "price",
-            width: "12rem",
-            render: (value) => <>`¥${value}起`</>,
+            width: "14rem",
+            render: (value) => <>{`¥${value}起`}</>,
           },
           {
             title: "评分",
@@ -103,14 +106,12 @@ export const List = ({
             width: "12rem",
             render: (value, hotel) =>
               value === 0 ? (
-                <span style={{ color: "#87d068" }}>待审核</span>
+                <Tag color="green">待审核</Tag>
               ) : value === 1 ? (
-                <span>开放中</span>
+                <Tag color="blue">营业中</Tag>
               ) : (
                 <Tooltip title={hotel.failureReason}>
-                  <span style={{ color: "#f50", cursor: "pointer" }}>
-                    未过审
-                  </span>
+                  <Tag color="red">未过审</Tag>
                 </Tooltip>
               ),
             filters: [

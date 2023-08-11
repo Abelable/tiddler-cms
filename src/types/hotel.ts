@@ -47,10 +47,11 @@ export interface HotelDetail {
 
 export interface Hotel {
   id: number;
+  cover: string;
   status: number;
   failureReason: string;
   name: string;
-  level: string;
+  grade: number;
   categoryId: number;
   rate: number;
   createdAt: string;

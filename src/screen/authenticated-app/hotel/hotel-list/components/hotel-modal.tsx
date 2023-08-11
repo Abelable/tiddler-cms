@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useForm } from "antd/lib/form/Form";
+import moment from "moment";
 import { useAddHotel, useEditHotel } from "service/hotel";
 import { useHotelModal, useHotelListQueryKey } from "../util";
 
@@ -58,6 +59,8 @@ export const HotelModal = ({
         roomImageList,
         environmentImageList,
         restaurantImageList,
+        openingYear,
+        lastDecorationYear,
         ...rest
       } = editingHotel;
       form.setFieldsValue({
@@ -85,6 +88,10 @@ export const HotelModal = ({
         restaurantImageList: restaurantImageList?.length
           ? restaurantImageList?.map((item) => ({ url: item }))
           : restaurantImageList,
+        openingYear: moment(openingYear),
+        lastDecorationYear: lastDecorationYear
+          ? moment(lastDecorationYear)
+          : "",
         ...rest,
       });
     }
@@ -101,20 +108,34 @@ export const HotelModal = ({
 
   const submit = () => {
     form.validateFields().then(async () => {
-      const { video, imageList, projectList, ...rest } = form.getFieldsValue();
+      const {
+        video,
+        cover,
+        appearanceImageList,
+        interiorImageList,
+        roomImageList,
+        environmentImageList,
+        restaurantImageList,
+        ...rest
+      } = form.getFieldsValue();
       await mutateAsync({
         ...editingHotel,
         ...rest,
         video: video && video.length ? video[0].url : "",
-        imageList: imageList.map((item: { url: string }) => item.url),
-        projectList: projectList.length
-          ? projectList.map(
-              (item: { image: { url: string }[]; name: string }) => ({
-                ...item,
-                image: item.image[0].url,
-              })
-            )
-          : projectList,
+        cover: cover && cover.length ? cover[0].url : "",
+        appearanceImageList: appearanceImageList.map(
+          (item: { url: string }) => item.url
+        ),
+        interiorImageList: interiorImageList.map(
+          (item: { url: string }) => item.url
+        ),
+        roomImageList: roomImageList.map((item: { url: string }) => item.url),
+        environmentImageList: environmentImageList.map(
+          (item: { url: string }) => item.url
+        ),
+        restaurantImageList: restaurantImageList.map(
+          (item: { url: string }) => item.url
+        ),
       });
       closeModal();
     });
@@ -329,7 +350,7 @@ export const HotelModal = ({
             </Col>
           </Row>
           <Row gutter={16}>
-            <Col span={12}>
+            <Col span={24}>
               <Form.Item
                 name="appearanceImageList"
                 label="上传酒店外观照片"
@@ -339,7 +360,9 @@ export const HotelModal = ({
                 <OssUpload />
               </Form.Item>
             </Col>
-            <Col span={12}>
+          </Row>
+          <Row gutter={16}>
+            <Col span={24}>
               <Form.Item
                 name="interiorImageList"
                 label="上传酒店内景照片"
@@ -351,7 +374,7 @@ export const HotelModal = ({
             </Col>
           </Row>
           <Row gutter={16}>
-            <Col span={12}>
+            <Col span={24}>
               <Form.Item
                 name="roomImageList"
                 label="上传酒店房间照片"
@@ -361,7 +384,9 @@ export const HotelModal = ({
                 <OssUpload />
               </Form.Item>
             </Col>
-            <Col span={12}>
+          </Row>
+          <Row gutter={16}>
+            <Col span={24}>
               <Form.Item
                 name="restaurantImageList"
                 label="上传酒店餐厅照片"
@@ -373,7 +398,7 @@ export const HotelModal = ({
             </Col>
           </Row>
           <Row gutter={16}>
-            <Col span={12}>
+            <Col span={24}>
               <Form.Item
                 name="environmentImageList"
                 label="上传酒店环境照片"
@@ -430,7 +455,7 @@ export const HotelModal = ({
 
           <Divider orientation="left">酒店设施</Divider>
           <Row gutter={16}>
-            <Col span={12}>
+            <Col span={8}>
               <Form.Item label="娱乐设施">
                 <Form.List name="recreationFacility">
                   {(fields, { add, remove }) => (
@@ -449,7 +474,7 @@ export const HotelModal = ({
                             ]}
                           >
                             <Input
-                              style={{ width: "31rem" }}
+                              style={{ width: "19rem" }}
                               placeholder="请输入设施名称"
                             />
                           </Form.Item>
@@ -469,7 +494,7 @@ export const HotelModal = ({
                 </Form.List>
               </Form.Item>
             </Col>
-            <Col span={12}>
+            <Col span={8}>
               <Form.Item label="康体设施">
                 <Form.List name="healthFacility">
                   {(fields, { add, remove }) => (
@@ -488,7 +513,7 @@ export const HotelModal = ({
                             ]}
                           >
                             <Input
-                              style={{ width: "31rem" }}
+                              style={{ width: "19rem" }}
                               placeholder="请输入设施名称"
                             />
                           </Form.Item>
@@ -508,9 +533,7 @@ export const HotelModal = ({
                 </Form.List>
               </Form.Item>
             </Col>
-          </Row>
-          <Row gutter={16}>
-            <Col span={12}>
+            <Col span={8}>
               <Form.Item label="儿童设施">
                 <Form.List name="childrenFacility">
                   {(fields, { add, remove }) => (
@@ -529,7 +552,7 @@ export const HotelModal = ({
                             ]}
                           >
                             <Input
-                              style={{ width: "31rem" }}
+                              style={{ width: "19rem" }}
                               placeholder="请输入设施名称"
                             />
                           </Form.Item>
@@ -549,7 +572,9 @@ export const HotelModal = ({
                 </Form.List>
               </Form.Item>
             </Col>
-            <Col span={12}>
+          </Row>
+          <Row gutter={16}>
+            <Col span={8}>
               <Form.Item label="通用设施">
                 <Form.List name="commonFacility">
                   {(fields, { add, remove }) => (
@@ -568,7 +593,7 @@ export const HotelModal = ({
                             ]}
                           >
                             <Input
-                              style={{ width: "31rem" }}
+                              style={{ width: "19rem" }}
                               placeholder="请输入设施名称"
                             />
                           </Form.Item>
@@ -588,9 +613,7 @@ export const HotelModal = ({
                 </Form.List>
               </Form.Item>
             </Col>
-          </Row>
-          <Row gutter={16}>
-            <Col span={12}>
+            <Col span={8}>
               <Form.Item label="公共区设施">
                 <Form.List name="publicAreaFacility">
                   {(fields, { add, remove }) => (
@@ -609,7 +632,7 @@ export const HotelModal = ({
                             ]}
                           >
                             <Input
-                              style={{ width: "31rem" }}
+                              style={{ width: "19rem" }}
                               placeholder="请输入设施名称"
                             />
                           </Form.Item>
@@ -632,7 +655,7 @@ export const HotelModal = ({
           </Row>
           <Divider orientation="left">酒店服务</Divider>
           <Row gutter={16}>
-            <Col span={12}>
+            <Col span={8}>
               <Form.Item label="交通服务">
                 <Form.List name="trafficService">
                   {(fields, { add, remove }) => (
@@ -651,7 +674,7 @@ export const HotelModal = ({
                             ]}
                           >
                             <Input
-                              style={{ width: "31rem" }}
+                              style={{ width: "19rem" }}
                               placeholder="请输入服务名称"
                             />
                           </Form.Item>
@@ -671,7 +694,7 @@ export const HotelModal = ({
                 </Form.List>
               </Form.Item>
             </Col>
-            <Col span={12}>
+            <Col span={8}>
               <Form.Item label="餐饮服务">
                 <Form.List name="cateringService">
                   {(fields, { add, remove }) => (
@@ -690,7 +713,7 @@ export const HotelModal = ({
                             ]}
                           >
                             <Input
-                              style={{ width: "31rem" }}
+                              style={{ width: "19rem" }}
                               placeholder="请输入服务名称"
                             />
                           </Form.Item>
@@ -710,9 +733,7 @@ export const HotelModal = ({
                 </Form.List>
               </Form.Item>
             </Col>
-          </Row>
-          <Row gutter={16}>
-            <Col span={12}>
+            <Col span={8}>
               <Form.Item label="前台服务">
                 <Form.List name="receptionService">
                   {(fields, { add, remove }) => (
@@ -731,7 +752,7 @@ export const HotelModal = ({
                             ]}
                           >
                             <Input
-                              style={{ width: "31rem" }}
+                              style={{ width: "19rem" }}
                               placeholder="请输入服务名称"
                             />
                           </Form.Item>
@@ -751,7 +772,9 @@ export const HotelModal = ({
                 </Form.List>
               </Form.Item>
             </Col>
-            <Col span={12}>
+          </Row>
+          <Row gutter={16}>
+            <Col span={8}>
               <Form.Item label="清洁服务">
                 <Form.List name="cleanService">
                   {(fields, { add, remove }) => (
@@ -770,7 +793,7 @@ export const HotelModal = ({
                             ]}
                           >
                             <Input
-                              style={{ width: "31rem" }}
+                              style={{ width: "19rem" }}
                               placeholder="请输入服务名称"
                             />
                           </Form.Item>
@@ -790,9 +813,7 @@ export const HotelModal = ({
                 </Form.List>
               </Form.Item>
             </Col>
-          </Row>
-          <Row gutter={16}>
-            <Col span={12}>
+            <Col span={8}>
               <Form.Item label="商务服务">
                 <Form.List name="businessService">
                   {(fields, { add, remove }) => (
@@ -811,7 +832,7 @@ export const HotelModal = ({
                             ]}
                           >
                             <Input
-                              style={{ width: "31rem" }}
+                              style={{ width: "19rem" }}
                               placeholder="请输入服务名称"
                             />
                           </Form.Item>
@@ -831,7 +852,7 @@ export const HotelModal = ({
                 </Form.List>
               </Form.Item>
             </Col>
-            <Col span={12}>
+            <Col span={8}>
               <Form.Item label="其他服务">
                 <Form.List name="otherService">
                   {(fields, { add, remove }) => (
@@ -850,7 +871,7 @@ export const HotelModal = ({
                             ]}
                           >
                             <Input
-                              style={{ width: "31rem" }}
+                              style={{ width: "19rem" }}
                               placeholder="请输入服务名称"
                             />
                           </Form.Item>
@@ -871,10 +892,9 @@ export const HotelModal = ({
               </Form.Item>
             </Col>
           </Row>
-
           <Divider orientation="left">酒店政策</Divider>
           <Row gutter={16}>
-            <Col span={12}>
+            <Col span={24}>
               <Form.Item label="重要提醒">
                 <Form.List name="remindList">
                   {(fields, { add, remove }) => (
@@ -893,7 +913,7 @@ export const HotelModal = ({
                             ]}
                           >
                             <Input
-                              style={{ width: "31rem" }}
+                              style={{ width: "66rem" }}
                               placeholder="请输入提醒事项"
                             />
                           </Form.Item>
@@ -913,7 +933,9 @@ export const HotelModal = ({
                 </Form.List>
               </Form.Item>
             </Col>
-            <Col span={12}>
+          </Row>
+          <Row gutter={16}>
+            <Col span={24}>
               <Form.Item label="入住必读">
                 <Form.List name="checkInTipList">
                   {(fields, { add, remove }) => (
@@ -932,7 +954,7 @@ export const HotelModal = ({
                             ]}
                           >
                             <Input
-                              style={{ width: "31rem" }}
+                              style={{ width: "66rem" }}
                               placeholder="请输入必读事项"
                             />
                           </Form.Item>
@@ -954,7 +976,7 @@ export const HotelModal = ({
             </Col>
           </Row>
           <Row gutter={16}>
-            <Col span={12}>
+            <Col span={24}>
               <Form.Item label="预定须知">
                 <Form.List name="preorderTipList">
                   {(fields, { add, remove }) => (
@@ -973,7 +995,7 @@ export const HotelModal = ({
                             ]}
                           >
                             <Input
-                              style={{ width: "31rem" }}
+                              style={{ width: "66rem" }}
                               placeholder="请输入预定须知"
                             />
                           </Form.Item>

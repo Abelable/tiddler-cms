@@ -17,7 +17,7 @@ export const HotelList = () => {
     useHotelCategoryOptions();
   const statusOptions = [
     { text: "待审核", value: 0 },
-    { text: "开放中", value: 1 },
+    { text: "营业中", value: 1 },
     { text: "未过审", value: 2 },
   ];
   const gradeOptions = [
