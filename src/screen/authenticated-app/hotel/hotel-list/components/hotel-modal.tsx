@@ -182,6 +182,17 @@ export const HotelModal = ({
             </Col>
             <Col span={12}>
               <Form.Item
+                name="englishName"
+                label="酒店英文名称"
+                rules={[{ required: true, message: "请输入酒店英文名称" }]}
+              >
+                <Input placeholder="请输入酒店英文名称" />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item
                 name="grade"
                 label="酒店档次"
                 rules={[{ required: true, message: "请选择酒店档次" }]}
@@ -195,8 +206,6 @@ export const HotelModal = ({
                 </Select>
               </Form.Item>
             </Col>
-          </Row>
-          <Row gutter={16}>
             <Col span={12}>
               <Form.Item
                 name="categoryId"
@@ -212,6 +221,8 @@ export const HotelModal = ({
                 </Select>
               </Form.Item>
             </Col>
+          </Row>
+          <Row gutter={16}>
             <Col span={12}>
               <Form.Item
                 name="price"
@@ -225,8 +236,6 @@ export const HotelModal = ({
                 />
               </Form.Item>
             </Col>
-          </Row>
-          <Row gutter={16}>
             <Col span={12}>
               <Form.Item
                 name="openingYear"
@@ -240,6 +249,8 @@ export const HotelModal = ({
                 />
               </Form.Item>
             </Col>
+          </Row>
+          <Row gutter={16}>
             <Col span={12}>
               <Form.Item name="lastDecorationYear" label="装修年份">
                 <DatePicker
@@ -249,8 +260,6 @@ export const HotelModal = ({
                 />
               </Form.Item>
             </Col>
-          </Row>
-          <Row gutter={16}>
             <Col span={12}>
               <Form.Item
                 name="roomNum"
@@ -263,6 +272,8 @@ export const HotelModal = ({
                 />
               </Form.Item>
             </Col>
+          </Row>
+          <Row gutter={16}>
             <Col span={12}>
               <Form.Item
                 name="tel"
@@ -275,8 +286,6 @@ export const HotelModal = ({
                 />
               </Form.Item>
             </Col>
-          </Row>
-          <Row gutter={16}>
             <Col span={12}>
               <Form.Item label="酒店特色标签">
                 <Form.List name="featureTagList">

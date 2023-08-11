@@ -10,6 +10,7 @@ export interface HotelListSearchParams {
 export interface HotelDetail {
   id: number;
   name: string;
+  englishName: string;
   grade: number;
   categoryId: number;
   price: number;
