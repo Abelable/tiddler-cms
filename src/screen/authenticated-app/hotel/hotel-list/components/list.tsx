@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
 import styled from "@emotion/styled";
+import { useNavigate } from "react-router-dom";
 import { useHotelModal, useHotelListQueryKey, useRejectModal } from "../util";
 
 import {
@@ -114,11 +115,7 @@ export const List = ({
                   <Tag color="red">未过审</Tag>
                 </Tooltip>
               ),
-            filters: [
-              { text: "待审核", value: 0 },
-              { text: "开放中", value: 1 },
-              { text: "未过审", value: 2 },
-            ],
+            filters: statusOptions,
             onFilter: (value, hotel) => hotel.status === value,
           },
           {
@@ -164,6 +161,9 @@ export const List = ({
 };
 
 const More = ({ id, status }: { id: number; status: number }) => {
+  const navigate = useNavigate();
+  const link = (id: string) => navigate(`/hotel/room_type_list?hotel_id=${id}`);
+
   const { startEdit } = useHotelModal();
   const { mutate: deleteHotel } = useDeleteHotel(useHotelListQueryKey());
   const { mutate: approvedHotel } = useApprovedHotel(useHotelListQueryKey());
@@ -226,6 +226,10 @@ const More = ({ id, status }: { id: number; status: number }) => {
         {
           label: <div onClick={() => confirmDelete(id)}>删除</div>,
           key: "delete",
+        },
+        {
+          label: <div onClick={() => link(`${id}`)}>查看房型</div>,
+          key: "room_type",
         },
       ];
       break;
