@@ -79,7 +79,7 @@ export const TicketModal = ({
               {editingTicket?.salesVolume}
             </Descriptions.Item>
             <Descriptions.Item label=""> </Descriptions.Item>
-            <Descriptions.Item label="添加时间">
+            <Descriptions.Item label="创建时间">
               {dayjs(editingTicket?.createdAt).format("YYYY-MM-DD HH:mm:ss")}
             </Descriptions.Item>
             <Descriptions.Item label="更新时间">

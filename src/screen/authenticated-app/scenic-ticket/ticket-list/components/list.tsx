@@ -127,7 +127,7 @@ export const List = ({
             width: "16rem",
           },
           {
-            title: "添加时间",
+            title: "创建时间",
             render: (value, ticket) => (
               <span>
                 {ticket.createdAt
@@ -140,7 +140,7 @@ export const List = ({
               dayjs(a.createdAt).valueOf() - dayjs(b.createdAt).valueOf(),
           },
           {
-            title: "修改时间",
+            title: "更新时间",
             render: (value, ticket) => (
               <span>
                 {ticket.updatedAt

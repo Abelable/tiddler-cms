@@ -63,7 +63,6 @@ export const List = ({
             width: "8rem",
             fixed: "left",
           },
-
           {
             title: "图片",
             dataIndex: "cover",
@@ -119,7 +118,7 @@ export const List = ({
             onFilter: (value, hotel) => hotel.status === value,
           },
           {
-            title: "添加时间",
+            title: "创建时间",
             render: (value, hotel) => (
               <span>
                 {hotel.createdAt
@@ -132,7 +131,7 @@ export const List = ({
               dayjs(a.createdAt).valueOf() - dayjs(b.createdAt).valueOf(),
           },
           {
-            title: "修改时间",
+            title: "更新时间",
             render: (value, hotel) => (
               <span>
                 {hotel.updatedAt
@@ -147,7 +146,9 @@ export const List = ({
           {
             title: "操作",
             render(value, hotel) {
-              return <More id={hotel.id} status={hotel.status} />;
+              return (
+                <More id={hotel.id} status={hotel.status} name={hotel.name} />
+              );
             },
             width: "8rem",
             fixed: "right",
@@ -160,9 +161,18 @@ export const List = ({
   );
 };
 
-const More = ({ id, status }: { id: number; status: number }) => {
+const More = ({
+  id,
+  status,
+  name,
+}: {
+  id: number;
+  status: number;
+  name: string;
+}) => {
   const navigate = useNavigate();
-  const link = (id: string) => navigate(`/hotel/room_type_list?hotel_id=${id}`);
+  const link = (id: string, name: string) =>
+    navigate(`/hotel/room_type_list?hotelId=${id}&hotelName=${name}`);
 
   const { startEdit } = useHotelModal();
   const { mutate: deleteHotel } = useDeleteHotel(useHotelListQueryKey());
@@ -228,7 +238,7 @@ const More = ({ id, status }: { id: number; status: number }) => {
           key: "delete",
         },
         {
-          label: <div onClick={() => link(`${id}`)}>查看房型</div>,
+          label: <div onClick={() => link(`${id}`, name)}>查看房型</div>,
           key: "room_type",
         },
       ];

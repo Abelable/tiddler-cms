@@ -149,11 +149,8 @@ export const HotelModal = ({
   return (
     <Drawer
       title={editingHotelId ? "编辑酒店" : "新增酒店"}
-      size={"large"}
-      forceRender={true}
-      onClose={closeModal}
       open={hotelModalOpen}
-      bodyStyle={{ paddingBottom: 80 }}
+      onClose={closeModal}
       extra={
         <Space>
           <Button onClick={closeModal}>取消</Button>
@@ -162,6 +159,9 @@ export const HotelModal = ({
           </Button>
         </Space>
       }
+      forceRender={true}
+      size={"large"}
+      bodyStyle={{ paddingBottom: 80 }}
     >
       <ErrorBox error={error} />
 

@@ -8,25 +8,26 @@ import {
   Table,
   TablePaginationConfig,
   TableProps,
+  Image,
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
 import dayjs from "dayjs";
-import { useDeleteScenicTicketCategory } from "service/scenicTicketCategory";
-import { Category, CategoriesSearchParams } from "types/category";
+import { useDeleteHotelRoomType } from "service/hotelRoomType";
 import {
-  useScenicTicketCategoryModal,
-  useScenicTicketCategoriesQueryKey,
-} from "../util";
+  HotelRoomType,
+  HotelRoomTypeListSearchParams,
+} from "types/hotelRoomType";
+import { useHotelRoomTypeModal, useHotelRoomTypeListQueryKey } from "../util";
 import { PlusOutlined } from "@ant-design/icons";
 
-interface ListProps extends TableProps<Category> {
-  params: Partial<CategoriesSearchParams>;
-  setParams: (params: Partial<CategoriesSearchParams>) => void;
+interface ListProps extends TableProps<HotelRoomType> {
+  params: Partial<HotelRoomTypeListSearchParams>;
+  setParams: (params: Partial<HotelRoomTypeListSearchParams>) => void;
   error: Error | unknown;
 }
 
 export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
-  const { open } = useScenicTicketCategoryModal();
+  const { open } = useHotelRoomTypeModal();
 
   const setPagination = (pagination: TablePaginationConfig) =>
     setParams({
@@ -38,7 +39,7 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
   return (
     <Container>
       <Header between={true}>
-        <PageTitle>门票分类</PageTitle>
+        <PageTitle>房型列表（{params.hotelName}）</PageTitle>
         <Button onClick={() => open()} type={"primary"} icon={<PlusOutlined />}>
           新增
         </Button>
@@ -53,7 +54,13 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
             width: "8rem",
           },
           {
-            title: "门票分类名称",
+            title: "图片",
+            dataIndex: "imageList",
+            render: (value) => <Image width={68} src={value[0]} />,
+            width: "14rem",
+          },
+          {
+            title: "名称",
             dataIndex: "name",
           },
           {
@@ -68,6 +75,19 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
             width: "20rem",
             sorter: (a, b) =>
               dayjs(a.createdAt).valueOf() - dayjs(b.createdAt).valueOf(),
+          },
+          {
+            title: "更新时间",
+            render: (value, hotel) => (
+              <span>
+                {hotel.updatedAt
+                  ? dayjs(hotel.updatedAt).format("YYYY-MM-DD HH:mm:ss")
+                  : "无"}
+              </span>
+            ),
+            width: "20rem",
+            sorter: (a, b) =>
+              dayjs(a.updatedAt).valueOf() - dayjs(b.updatedAt).valueOf(),
           },
           {
             title: "操作",
@@ -85,14 +105,14 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
 };
 
 const More = ({ id }: { id: number }) => {
-  const { startEdit } = useScenicTicketCategoryModal();
-  const { mutate: deleteRole } = useDeleteScenicTicketCategory(
-    useScenicTicketCategoriesQueryKey()
+  const { startEdit } = useHotelRoomTypeModal();
+  const { mutate: deleteRole } = useDeleteHotelRoomType(
+    useHotelRoomTypeListQueryKey()
   );
 
   const confirmDelete = (id: number) => {
     Modal.confirm({
-      title: "确定删除该门票分类吗？",
+      title: "确定删除该酒店分类吗？",
       content: "点击确定删除",
       okText: "确定",
       cancelText: "取消",

@@ -121,7 +121,7 @@ export const List = ({
             onFilter: (value, goods) => goods.status === value,
           },
           {
-            title: "添加时间",
+            title: "创建时间",
             render: (value, goods) => (
               <span>
                 {goods.createdAt
@@ -134,7 +134,7 @@ export const List = ({
               dayjs(a.createdAt).valueOf() - dayjs(b.createdAt).valueOf(),
           },
           {
-            title: "修改时间",
+            title: "更新时间",
             render: (value, goods) => (
               <span>
                 {goods.updatedAt

@@ -76,7 +76,7 @@ export const List = ({
             ),
           },
           {
-            title: "修改时间",
+            title: "更新时间",
             render: (value, admin) => (
               <span>
                 {admin.updatedAt
@@ -89,7 +89,7 @@ export const List = ({
               dayjs(a.updatedAt).valueOf() - dayjs(b.updatedAt).valueOf(),
           },
           {
-            title: "添加时间",
+            title: "创建时间",
             render: (value, admin) => (
               <span>
                 {admin.createdAt

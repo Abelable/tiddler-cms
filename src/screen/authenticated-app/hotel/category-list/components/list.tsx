@@ -54,7 +54,7 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
             dataIndex: "name",
           },
           {
-            title: "添加时间",
+            title: "创建时间",
             render: (value, role) => (
               <span>
                 {role.createdAt
