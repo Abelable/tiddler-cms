@@ -3,13 +3,19 @@ import { useCallback, useMemo } from "react";
 import { useHotelRoomType } from "service/hotelRoomType";
 
 export const useHotelRoomTypeListSearchParams = () => {
-  const [params, setParams] = useUrlQueryParams(["hotelId", "page", "limit"]);
+  const [params, setParams] = useUrlQueryParams([
+    "hotelName",
+    "hotelId",
+    "page",
+    "limit",
+  ]);
   return [
     useMemo(
       () => ({
         page: Number(params.page) || 1,
         limit: Number(params.limit) || 10,
         hotelId: Number(params.hotelId) || undefined,
+        hotelName: params.hotelName || undefined,
       }),
       [params]
     ),

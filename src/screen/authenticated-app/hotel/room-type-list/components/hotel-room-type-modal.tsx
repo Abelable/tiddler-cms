@@ -5,11 +5,8 @@ import {
   Form,
   Input,
   Row,
-  Select,
   Space,
-  DatePicker,
   InputNumber,
-  Divider,
 } from "antd";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import { OssUpload } from "components/oss-upload";
@@ -105,6 +102,8 @@ export const HotelRoomTypeModal = () => {
                 label="上传房间照片"
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
+                tooltip="图片大小不能超过10MB"
+                rules={[{ required: true, message: "请上传房间照片" }]}
               >
                 <OssUpload />
               </Form.Item>
@@ -137,7 +136,10 @@ export const HotelRoomTypeModal = () => {
                 label="房间面积（m²）"
                 rules={[{ required: true, message: "请输入房间面积" }]}
               >
-                <InputNumber placeholder="请输入房间面积" />
+                <InputNumber
+                  style={{ width: "100%" }}
+                  placeholder="请输入房间面积"
+                />
               </Form.Item>
             </Col>
             <Col span={12}>

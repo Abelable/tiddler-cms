@@ -28,6 +28,7 @@ import { ScenicTicketCategoryList } from "./scenic-ticket/category-list";
 import { ScenicTicketList } from "./scenic-ticket/ticket-list";
 import { HotelCategoryList } from "./hotel/category-list";
 import { HotelList } from "./hotel/hotel-list";
+import { HotelRoomTypeList } from "./hotel/room-type-list";
 
 import {
   LockOutlined,
@@ -117,6 +118,10 @@ export const AuthenticatedApp = () => {
                 element={<HotelCategoryList />}
               />
               <Route path="hotel/list" element={<HotelList />} />
+              <Route
+                path="hotel/list/room_type_list"
+                element={<HotelRoomTypeList />}
+              />
               <Route
                 path={"*"}
                 element={<Navigate to={"user_list"} replace={true} />}
