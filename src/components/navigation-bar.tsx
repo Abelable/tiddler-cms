@@ -32,6 +32,11 @@ const breadcrumbNameMap: { [key: string]: string } = {
   "/hotel/category_list": "酒店分类",
   "/hotel/list": "酒店列表",
   "/hotel/list/room_type_list": "房型列表",
+  "/hotel_provider": "酒店服务商管理",
+  "/hotel_provider/list": "服务商列表",
+  "/hotel_provider/order_list": "入驻订单列表",
+  "/hotel_provider/shop_list": "店铺列表",
+  "/hotel_provider/hotel_list": "酒店申请列表",
 };
 
 export const NavigationBar = () => {

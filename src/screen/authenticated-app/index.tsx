@@ -29,6 +29,10 @@ import { ScenicTicketList } from "./scenic-ticket/ticket-list";
 import { HotelCategoryList } from "./hotel/category-list";
 import { HotelList } from "./hotel/hotel-list";
 import { HotelRoomTypeList } from "./hotel/room-type-list";
+import { HotelProviderList } from "./hotel-provider/provider-list";
+import { HotelProviderOrderList } from "./hotel-provider/provider-order-list";
+import { HotelShopList } from "./hotel-shop-list";
+import { ProviderHotelList } from "./hotel-provider/provider-hotel-list";
 
 import {
   LockOutlined,
@@ -121,6 +125,22 @@ export const AuthenticatedApp = () => {
               <Route
                 path="hotel/list/room_type_list"
                 element={<HotelRoomTypeList />}
+              />
+              <Route
+                path="hotel_provider/list"
+                element={<HotelProviderList />}
+              />
+              <Route
+                path="hotel_provider/order_list"
+                element={<HotelProviderOrderList />}
+              />
+              <Route
+                path="hotel_provider/shop_list"
+                element={<HotelShopList />}
+              />
+              <Route
+                path="hotel_provider/hotel_list"
+                element={<ProviderHotelList />}
               />
               <Route
                 path={"*"}
@@ -290,6 +310,33 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
         {
           label: <Link to={"hotel/list"}>酒店列表</Link>,
           key: "hotel_list",
+          icon: <HotelIcon />,
+        },
+      ],
+    },
+    {
+      label: "酒店服务商管理",
+      key: "hotel_provider",
+      icon: <TeamOutlined />,
+      children: [
+        {
+          label: <Link to={"hotel_provider/list"}>服务商列表</Link>,
+          key: "hotel_provider_list",
+          icon: <TeamOutlined />,
+        },
+        {
+          label: <Link to={"hotel_provider/order_list"}>入驻订单列表</Link>,
+          key: "hotel_provider_order_list",
+          icon: <FileDoneOutlined />,
+        },
+        {
+          label: <Link to={"hotel_provider/shop_list"}>店铺列表</Link>,
+          key: "hotel_provider_shop_list",
+          icon: <ShopOutlined />,
+        },
+        {
+          label: <Link to={"hotel_provider/hotel_list"}>酒店申请列表</Link>,
+          key: "hotel_provider_hotel_list",
           icon: <HotelIcon />,
         },
       ],
