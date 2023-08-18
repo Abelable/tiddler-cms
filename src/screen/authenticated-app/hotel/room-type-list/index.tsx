@@ -25,7 +25,7 @@ export const HotelRoomTypeList = () => {
           }}
         />
       </Main>
-      <HotelRoomTypeModal />
+      <HotelRoomTypeModal hotelId={+(params.hotelId || 0)} />
     </Container>
   );
 };

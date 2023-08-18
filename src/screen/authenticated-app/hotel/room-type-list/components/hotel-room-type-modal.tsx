@@ -25,7 +25,7 @@ const normFile = (e: any) => {
   return e && e.fileList;
 };
 
-export const HotelRoomTypeModal = () => {
+export const HotelRoomTypeModal = ({ hotelId }: { hotelId: number }) => {
   const [form] = useForm();
   const {
     hotelRoomTypeModalOpen,
@@ -60,6 +60,7 @@ export const HotelRoomTypeModal = () => {
     form.validateFields().then(async () => {
       const { imageList, ...rest } = form.getFieldsValue();
       await mutateAsync({
+        hotelId,
         ...editingHotelRoomType,
         ...rest,
         imageList: imageList.map((item: { url: string }) => item.url),
