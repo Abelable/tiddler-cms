@@ -171,13 +171,13 @@ const More = ({ id, status }: { id: number; status: number }) => {
           },
           {
             label: <div onClick={() => confirmDelete(id)}>删除</div>,
-            key: "reject",
+            key: "delete",
           },
         ]
       : [
           {
             label: <div onClick={() => confirmDelete(id)}>删除</div>,
-            key: "reject",
+            key: "delete",
           },
         ];
 
