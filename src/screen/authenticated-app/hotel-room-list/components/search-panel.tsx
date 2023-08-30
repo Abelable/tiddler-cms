@@ -30,7 +30,7 @@ export const SearchPanel = ({
 
   const { data: hotelOptions, error: hotelOptionsError } = useHotelOptions();
   const { data: typeOptions, error: typeOptionsError } =
-    useHotelRoomTypeOptions(tempParams?.hotelId || 0);
+    useHotelRoomTypeOptions(tempParams?.hotelId);
 
   const setTypeId = (typeId: number) =>
     setTempParams({ ...tempParams, typeId });
