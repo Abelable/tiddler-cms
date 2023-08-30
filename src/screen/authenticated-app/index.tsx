@@ -28,6 +28,7 @@ import { ScenicTicketCategoryList } from "./scenic-ticket/category-list";
 import { ScenicTicketList } from "./scenic-ticket/ticket-list";
 import { HotelCategoryList } from "./hotel/category-list";
 import { HotelList } from "./hotel/hotel-list";
+import { HotelRoomList } from "./hotel-room-list";
 import { HotelRoomTypeList } from "./hotel/room-type-list";
 import { HotelProviderList } from "./hotel-provider/provider-list";
 import { HotelProviderOrderList } from "./hotel-provider/provider-order-list";
@@ -122,6 +123,7 @@ export const AuthenticatedApp = () => {
                 element={<HotelCategoryList />}
               />
               <Route path="hotel/list" element={<HotelList />} />
+              <Route path="hotel/room_list" element={<HotelRoomList />} />
               <Route
                 path="hotel/list/room_type_list"
                 element={<HotelRoomTypeList />}
@@ -310,6 +312,11 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
         {
           label: <Link to={"hotel/list"}>酒店列表</Link>,
           key: "hotel_list",
+          icon: <HotelIcon />,
+        },
+        {
+          label: <Link to={"hotel/room_list"}>房间列表</Link>,
+          key: "hotel_room_list",
           icon: <HotelIcon />,
         },
       ],
