@@ -71,9 +71,13 @@ export const useDeleteHotelRoomType = (queryKey: QueryKey) => {
   );
 };
 
-export const useHotelRoomTypeOptions = () => {
+export const useHotelRoomTypeOptions = (hotelId: number) => {
   const client = useHttp();
-  return useQuery<Option[]>(["hotel_room_type_options"], () =>
-    client("hotel/room_type/options")
+  return useQuery<Option[]>(
+    ["hotel_room_type_options", { hotelId }],
+    () => client("hotel/room_type/options", { data: { hotelId } }),
+    {
+      enabled: !!hotelId,
+    }
   );
 };

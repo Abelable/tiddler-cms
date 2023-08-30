@@ -2,28 +2,19 @@ import { Descriptions, Divider, Drawer, Tooltip, Tag, Image } from "antd";
 
 import { ErrorBox, ModalLoading } from "components/lib";
 import dayjs from "dayjs";
-import { useTicketModal } from "../util";
+import { useRoomModal } from "../util";
 
-import type { ScenicOption } from "types/scenic";
-import type { Option } from "types/common";
-
-export const TicketModal = ({
-  typeOptions,
-  scenicOptions,
-}: {
-  typeOptions: Option[];
-  scenicOptions: ScenicOption[];
-}) => {
-  const { close, ticketModalOpen, editingTicket, error, isLoading } =
-    useTicketModal();
+export const RoomModal = () => {
+  const { close, roomModalOpen, editingRoom, error, isLoading } =
+    useRoomModal();
 
   return (
     <Drawer
       forceRender={true}
-      title="门票详情"
+      title="房间详情"
       size={"large"}
       onClose={close}
-      open={ticketModalOpen}
+      open={roomModalOpen}
       bodyStyle={{ paddingBottom: 80 }}
     >
       <ErrorBox error={error} />
@@ -31,59 +22,48 @@ export const TicketModal = ({
         <ModalLoading />
       ) : (
         <>
-          <Divider orientation="left">门票信息</Divider>
+          <Divider orientation="left">房间信息</Divider>
           <Descriptions size={"small"} column={2}>
-            <Descriptions.Item label="门票id">
-              {editingTicket?.id}
+            <Descriptions.Item label="房间id">
+              {editingRoom?.id}
             </Descriptions.Item>
             <Descriptions.Item label="状态">
-              {editingTicket?.status === 0 ? (
+              {editingRoom?.status === 0 ? (
                 <span style={{ color: "#87d068" }}>待审核</span>
-              ) : editingTicket?.status === 1 ? (
+              ) : editingRoom?.status === 1 ? (
                 <span style={{ color: "#296BEF" }}>售卖中</span>
               ) : (
-                <Tooltip title={editingTicket?.failureReason}>
+                <Tooltip title={editingRoom?.failureReason}>
                   <span style={{ color: "#f50", cursor: "pointer" }}>
                     未过审
                   </span>
                 </Tooltip>
               )}
             </Descriptions.Item>
-            <Descriptions.Item label="名称">
-              {editingTicket?.name}
-            </Descriptions.Item>
             <Descriptions.Item label="类型">
-              {
-                typeOptions.find((item) => item.value === editingTicket?.type)
-                  ?.text
-              }
+              {editingRoom?.typeName}
             </Descriptions.Item>
             <Descriptions.Item label="关联景点">
-              {editingTicket?.scenicIds?.length &&
-                editingTicket?.scenicIds.map((id: number) => (
-                  <Tag color="success" key={id}>
-                    {scenicOptions.find((item) => item.id === id)?.name}
-                  </Tag>
-                ))}
+              <Tag color="success">{editingRoom?.hotelName}</Tag>
             </Descriptions.Item>
             <Descriptions.Item label="价格">
-              {`¥${editingTicket?.price}起`}
+              {`¥${editingRoom?.price}起`}
             </Descriptions.Item>
             <Descriptions.Item label="销售佣金比例">
-              {`${(editingTicket?.salesCommissionRate as number) * 100}%`}
+              {`${(editingRoom?.salesCommissionRate as number) * 100}%`}
             </Descriptions.Item>
             <Descriptions.Item label="推广佣金比例">
-              {`${(editingTicket?.promotionCommissionRate as number) * 100}%`}
+              {`${(editingRoom?.promotionCommissionRate as number) * 100}%`}
             </Descriptions.Item>
             <Descriptions.Item label="销量">
-              {editingTicket?.salesVolume}
+              {editingRoom?.salesVolume}
             </Descriptions.Item>
             <Descriptions.Item label=""> </Descriptions.Item>
             <Descriptions.Item label="创建时间">
-              {dayjs(editingTicket?.createdAt).format("YYYY-MM-DD HH:mm:ss")}
+              {dayjs(editingRoom?.createdAt).format("YYYY-MM-DD HH:mm:ss")}
             </Descriptions.Item>
             <Descriptions.Item label="更新时间">
-              {dayjs(editingTicket?.updatedAt).format("YYYY-MM-DD HH:mm:ss")}
+              {dayjs(editingRoom?.updatedAt).format("YYYY-MM-DD HH:mm:ss")}
             </Descriptions.Item>
           </Descriptions>
 
@@ -94,29 +74,29 @@ export const TicketModal = ({
             column={2}
           >
             <Descriptions.Item label="服务商id">
-              {editingTicket?.providerInfo?.id}
+              {editingRoom?.providerInfo?.id}
             </Descriptions.Item>
             <Descriptions.Item label="公司名称">
-              {editingTicket?.providerInfo?.companyName}
+              {editingRoom?.providerInfo?.companyName}
             </Descriptions.Item>
             <Descriptions.Item label="营业执照照片">
               <Image
                 width={68}
-                src={editingTicket?.providerInfo?.businessLicensePhoto}
+                src={editingRoom?.providerInfo?.businessLicensePhoto}
               />
             </Descriptions.Item>
             <Descriptions.Item label="联系人姓名">
-              {editingTicket?.providerInfo?.name}
+              {editingRoom?.providerInfo?.name}
             </Descriptions.Item>
             <Descriptions.Item label="联系人手机号">
-              {editingTicket?.providerInfo?.mobile}
+              {editingRoom?.providerInfo?.mobile}
             </Descriptions.Item>
             <Descriptions.Item label=""> </Descriptions.Item>
             <Descriptions.Item label="入驻时间">
-              {dayjs(editingTicket?.createdAt).format("YYYY-MM-DD HH:mm:ss")}
+              {dayjs(editingRoom?.createdAt).format("YYYY-MM-DD HH:mm:ss")}
             </Descriptions.Item>
             <Descriptions.Item label="更新时间">
-              {dayjs(editingTicket?.updatedAt).format("YYYY-MM-DD HH:mm:ss")}
+              {dayjs(editingRoom?.updatedAt).format("YYYY-MM-DD HH:mm:ss")}
             </Descriptions.Item>
           </Descriptions>
         </>
