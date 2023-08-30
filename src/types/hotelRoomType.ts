@@ -1,3 +1,8 @@
+export interface TypeOption {
+  id: number;
+  name: string;
+}
+
 export interface HotelRoomTypeListSearchParams {
   hotelId: number;
   hotelName: string;

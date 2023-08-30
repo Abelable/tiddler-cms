@@ -80,9 +80,9 @@ export const SearchPanel = ({
           onSelect={setTypeId}
           onClear={clearTypeId}
         >
-          {typeOptions?.map(({ text, value }) => (
-            <Select.Option key={value} value={value}>
-              {text}
+          {typeOptions?.map(({ id, name }) => (
+            <Select.Option key={id} value={id}>
+              {name}
             </Select.Option>
           ))}
         </Select>

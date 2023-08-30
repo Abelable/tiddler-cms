@@ -7,11 +7,11 @@ import {
 } from "./use-optimistic-options";
 import { cleanObject } from "utils/index";
 
-import type { Option } from "types/common";
 import type {
   HotelRoomType,
   HotelRoomTypeListResult,
   HotelRoomTypeListSearchParams,
+  TypeOption,
 } from "types/hotelRoomType";
 
 export const useHotelRoomTypeList = (
@@ -73,7 +73,7 @@ export const useDeleteHotelRoomType = (queryKey: QueryKey) => {
 
 export const useHotelRoomTypeOptions = (hotelId: number | undefined) => {
   const client = useHttp();
-  return useQuery<Option[]>(
+  return useQuery<TypeOption[]>(
     ["hotel_room_type_options", { hotelId }],
     () => client("hotel/room_type/options", { data: { hotelId } }),
     {
