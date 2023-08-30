@@ -17,9 +17,7 @@ import { SearchPanelProps } from "./search-panel";
 
 import type { Room } from "types/hotelRoom";
 
-interface ListProps
-  extends TableProps<Room>,
-    Omit<SearchPanelProps, "hotelOptions" | "typeOptions"> {
+interface ListProps extends TableProps<Room>, SearchPanelProps {
   error: Error | unknown;
 }
 
