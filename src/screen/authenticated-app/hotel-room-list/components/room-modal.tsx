@@ -1,4 +1,4 @@
-import { Descriptions, Divider, Drawer, Tooltip, Tag, Image } from "antd";
+import { Descriptions, Drawer, Tooltip, Image } from "antd";
 
 import { ErrorBox, ModalLoading } from "components/lib";
 import dayjs from "dayjs";
@@ -22,8 +22,7 @@ export const RoomModal = () => {
         <ModalLoading />
       ) : (
         <>
-          <Divider orientation="left">房间信息</Divider>
-          <Descriptions size={"small"} column={2}>
+          <Descriptions size={"small"} title="房间信息" column={1} bordered>
             <Descriptions.Item label="房间id">
               {editingRoom?.id}
             </Descriptions.Item>
@@ -40,11 +39,26 @@ export const RoomModal = () => {
                 </Tooltip>
               )}
             </Descriptions.Item>
-            <Descriptions.Item label="类型">
+            <Descriptions.Item label="房间类型">
               {editingRoom?.typeName}
             </Descriptions.Item>
-            <Descriptions.Item label="关联景点">
-              <Tag color="success">{editingRoom?.hotelName}</Tag>
+            <Descriptions.Item label="关联酒店">
+              {editingRoom?.hotelName}
+            </Descriptions.Item>
+            <Descriptions.Item label="早餐">
+              {editingRoom?.breakfastNum
+                ? `${editingRoom?.breakfastNum}份早餐`
+                : "不含早餐"}
+            </Descriptions.Item>
+            <Descriptions.Item label="入住人数">
+              {editingRoom?.guestNum}
+            </Descriptions.Item>
+            <Descriptions.Item label="免费取消">
+              {editingRoom?.cancellable ? (
+                <span style={{ color: "#87d068" }}>可免费取消</span>
+              ) : (
+                <span style={{ color: "#f50" }}>不可取消</span>
+              )}
             </Descriptions.Item>
             <Descriptions.Item label="价格">
               {`¥${editingRoom?.price}起`}
@@ -58,7 +72,6 @@ export const RoomModal = () => {
             <Descriptions.Item label="销量">
               {editingRoom?.salesVolume}
             </Descriptions.Item>
-            <Descriptions.Item label=""> </Descriptions.Item>
             <Descriptions.Item label="创建时间">
               {dayjs(editingRoom?.createdAt).format("YYYY-MM-DD HH:mm:ss")}
             </Descriptions.Item>
@@ -67,11 +80,12 @@ export const RoomModal = () => {
             </Descriptions.Item>
           </Descriptions>
 
-          <Divider orientation="left">服务商信息</Divider>
           <Descriptions
             style={{ marginBottom: "3.2rem" }}
             size={"small"}
-            column={2}
+            title="服务商信息"
+            column={1}
+            bordered
           >
             <Descriptions.Item label="服务商id">
               {editingRoom?.providerInfo?.id}
@@ -91,7 +105,6 @@ export const RoomModal = () => {
             <Descriptions.Item label="联系人手机号">
               {editingRoom?.providerInfo?.mobile}
             </Descriptions.Item>
-            <Descriptions.Item label=""> </Descriptions.Item>
             <Descriptions.Item label="入驻时间">
               {dayjs(editingRoom?.createdAt).format("YYYY-MM-DD HH:mm:ss")}
             </Descriptions.Item>

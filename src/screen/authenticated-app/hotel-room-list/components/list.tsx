@@ -54,12 +54,34 @@ export const List = ({
           {
             title: "房型名称",
             dataIndex: "typeName",
-            width: "36rem",
+            width: "24rem",
           },
           {
             title: "关联酒店",
             dataIndex: "hotelName",
-            width: "36rem",
+            width: "24rem",
+          },
+          {
+            title: "早餐数量",
+            dataIndex: "breakfastNum",
+            render: (value) => <>{value ? `${value}份早餐` : "不含早餐"}</>,
+            width: "16rem",
+          },
+          {
+            title: "入住人数",
+            dataIndex: "guestNum",
+            width: "16rem",
+          },
+          {
+            title: "免费取消",
+            dataIndex: "cancellable",
+            render: (value) =>
+              value ? (
+                <span style={{ color: "#87d068" }}>可免费取消</span>
+              ) : (
+                <span style={{ color: "#f50" }}>不可取消</span>
+              ),
+            width: "16rem",
           },
           {
             title: "价格",
