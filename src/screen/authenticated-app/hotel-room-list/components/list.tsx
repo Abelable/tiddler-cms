@@ -38,7 +38,7 @@ export const List = ({
   return (
     <Container>
       <Header between={true}>
-        <PageTitle>门票列表</PageTitle>
+        <PageTitle>房间列表</PageTitle>
       </Header>
       <ErrorBox error={error} />
       <Table
@@ -62,25 +62,22 @@ export const List = ({
             width: "24rem",
           },
           {
-            title: "早餐数量",
-            dataIndex: "breakfastNum",
-            render: (value) => <>{value ? `${value}份早餐` : "不含早餐"}</>,
-            width: "16rem",
-          },
-          {
-            title: "入住人数",
-            dataIndex: "guestNum",
-            width: "16rem",
-          },
-          {
-            title: "免费取消",
-            dataIndex: "cancellable",
-            render: (value) =>
-              value ? (
-                <span style={{ color: "#87d068" }}>可免费取消</span>
+            title: "状态",
+            dataIndex: "status",
+            render: (value, ticket) =>
+              value === 0 ? (
+                <span style={{ color: "#87d068" }}>待审核</span>
+              ) : value === 1 ? (
+                <span style={{ color: "#296BEF" }}>售卖中</span>
               ) : (
-                <span style={{ color: "#f50" }}>不可取消</span>
+                <Tooltip title={ticket.failureReason}>
+                  <span style={{ color: "#f50", cursor: "pointer" }}>
+                    未过审
+                  </span>
+                </Tooltip>
               ),
+            filters: statusOptions,
+            onFilter: (value, ticket) => ticket.status === value,
             width: "16rem",
           },
           {
@@ -108,22 +105,25 @@ export const List = ({
             width: "16rem",
           },
           {
-            title: "状态",
-            dataIndex: "status",
-            render: (value, ticket) =>
-              value === 0 ? (
-                <span style={{ color: "#87d068" }}>待审核</span>
-              ) : value === 1 ? (
-                <span style={{ color: "#296BEF" }}>售卖中</span>
+            title: "早餐数量",
+            dataIndex: "breakfastNum",
+            render: (value) => <>{value ? `${value}份早餐` : "不含早餐"}</>,
+            width: "16rem",
+          },
+          {
+            title: "入住人数",
+            dataIndex: "guestNum",
+            width: "16rem",
+          },
+          {
+            title: "免费取消",
+            dataIndex: "cancellable",
+            render: (value) =>
+              value ? (
+                <span style={{ color: "#87d068" }}>可免费取消</span>
               ) : (
-                <Tooltip title={ticket.failureReason}>
-                  <span style={{ color: "#f50", cursor: "pointer" }}>
-                    未过审
-                  </span>
-                </Tooltip>
+                <span style={{ color: "#f50" }}>不可取消</span>
               ),
-            filters: statusOptions,
-            onFilter: (value, ticket) => ticket.status === value,
             width: "16rem",
           },
           {
@@ -176,7 +176,7 @@ const More = ({ id, status }: { id: number; status: number }) => {
 
   const confirmDelete = (id: number) => {
     Modal.confirm({
-      title: "确定删除该门票吗？",
+      title: "确定删除该房间吗？",
       content: "点击确定删除",
       okText: "确定",
       cancelText: "取消",
@@ -186,8 +186,8 @@ const More = ({ id, status }: { id: number; status: number }) => {
 
   const confirmApproved = (id: number) => {
     Modal.confirm({
-      title: "门票审核通过确认",
-      content: "请确保在门票信息无误的情况下进行该操作",
+      title: "房间审核通过确认",
+      content: "请确保在房间信息无误的情况下进行该操作",
       okText: "确定",
       cancelText: "取消",
       onOk: () => approvedRoom(id),
