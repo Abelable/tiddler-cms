@@ -24,13 +24,13 @@ import { ScenicShopList } from "./scenic/provider/shop-list";
 import { ProviderScenicList } from "./scenic/provider/spot-apply-list";
 import { ScenicTicketCategoryList } from "./scenic/ticket/category-list";
 import { ScenicTicketList } from "./scenic/ticket/ticket-list";
-import { HotelCategoryList } from "./hotel/category-list";
-import { HotelList } from "./hotel/hotel-list";
-import { HotelRoomList } from "./hotel-room-list";
-import { HotelRoomTypeList } from "./hotel/room-type-list";
-import { HotelProviderList } from "./hotel-provider/provider-list";
-import { HotelShopList } from "./hotel-shop-list";
-import { ProviderHotelList } from "./hotel-provider/provider-hotel-list";
+import { HotelCategoryList } from "./hotel/store/category-list";
+import { HotelList } from "./hotel/store/store-list";
+import { HotelRoomList } from "./hotel/store/room-list";
+import { HotelRoomTypeList } from "./hotel/store/room-type-list";
+import { HotelProviderList } from "./hotel/provider/provider-list";
+import { HotelShopList } from "./hotel/provider/shop-list";
+import { ProviderHotelList } from "./hotel/provider/hotel-apply-list";
 
 import {
   LockOutlined,

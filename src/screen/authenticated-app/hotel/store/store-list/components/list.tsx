@@ -172,7 +172,9 @@ const More = ({
 }) => {
   const navigate = useNavigate();
   const link = (id: string, name: string) =>
-    navigate(`/hotel/list/room_type_list?hotelId=${id}&hotelName=${name}`);
+    navigate(
+      `/hotel/store/list/room_type_list?hotelId=${id}&hotelName=${name}`
+    );
 
   const { startEdit } = useHotelModal();
   const { mutate: deleteHotel } = useDeleteHotel(useHotelListQueryKey());

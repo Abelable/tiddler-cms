@@ -3,8 +3,6 @@ import { useHttp } from "./http";
 import { useApprovedConfig, useRejectConfig } from "./use-optimistic-options";
 import type {
   ProviderDetail,
-  ProviderOrdersResult,
-  ProviderOrdersSearchParams,
   ProvidersResult,
   ProvidersSearchParams,
 } from "types/hotelProvider";
@@ -48,14 +46,5 @@ export const useRejectProvider = (queryKey: QueryKey) => {
         method: "POST",
       }),
     useRejectConfig(queryKey)
-  );
-};
-
-export const useProviderOrders = (
-  params: Partial<ProviderOrdersSearchParams>
-) => {
-  const client = useHttp();
-  return useQuery<ProviderOrdersResult>(["hotel_provider_orders", params], () =>
-    client("hotel/provider/order_list", { data: params, method: "POST" })
   );
 };
