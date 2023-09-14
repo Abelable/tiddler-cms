@@ -350,7 +350,7 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
       children: [
         {
           label: <Link to={"catering/provider_list"}>商家列表</Link>,
-          key: "catering/provider_list",
+          key: "catering_provider_list",
           icon: <TeamOutlined />,
         },
       ],
