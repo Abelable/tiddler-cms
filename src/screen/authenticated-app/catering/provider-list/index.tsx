@@ -9,7 +9,7 @@ import { SearchPanel } from "./components/search-panel";
 import { RejectModal } from "./components/reject-modal";
 
 const typeOptions = [
-  { text: "个人", value: 1 },
+  { text: "个体", value: 1 },
   { text: "企业", value: 2 },
 ];
 const statusOptions = [
