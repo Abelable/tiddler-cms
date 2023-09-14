@@ -93,11 +93,11 @@ export const SearchPanel = ({
         </Select>
       </Item>
       <Item>
-        <div>关联景点：</div>
+        <div>关联景区：</div>
         <Select
           style={{ width: "20rem" }}
           value={tempParams.scenicId}
-          placeholder="请选择关联景点"
+          placeholder="请选择关联景区"
           allowClear={true}
           onSelect={setScenicId}
           onClear={clearScenicId}

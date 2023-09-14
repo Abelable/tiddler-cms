@@ -70,7 +70,7 @@ export const List = ({
             width: "16rem",
           },
           {
-            title: "关联景点",
+            title: "关联景区",
             dataIndex: "scenicIds",
             render: (scenicIds) => (
               <>

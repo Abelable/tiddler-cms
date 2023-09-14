@@ -271,7 +271,7 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
           icon: <ShopOutlined />,
         },
         {
-          label: <Link to={"scenic_provider/scenic_list"}>景点申请列表</Link>,
+          label: <Link to={"scenic_provider/scenic_list"}>景区申请列表</Link>,
           key: "scenic_provider_scenic_list",
           icon: <ScenicSpotIcon />,
         },
