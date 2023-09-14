@@ -11,13 +11,12 @@ import { NavigationBar } from "components/navigation-bar";
 import { RoleList } from "./admin/role-list";
 import { AdminList } from "./admin/admin-list";
 import { UserList } from "./user-list";
-import { MerchantList } from "./merchant/merchant-list/index";
-import { MerchantOrderList } from "./merchant/merchant-order-list/index";
-import { ShopCategoryList } from "./shop/category-list/index";
-import { ShopList } from "./shop/shop-list";
-import { ExpressList } from "./goods/express-list";
-import { GoodsCategoryList } from "./goods/category-list";
-import { GoodsList } from "./goods/goods-list";
+import { MerchantList } from "./shopping/merchant-list/index";
+import { ShopCategoryList } from "./shopping/shop/category-list/index";
+import { ShopList } from "./shopping/shop/shop-list";
+import { ExpressList } from "./shopping/express-list";
+import { GoodsCategoryList } from "./shopping/goods/category-list";
+import { GoodsList } from "./shopping/goods/goods-list";
 import { ScenicCategoryList } from "./scenic-spot/category-list";
 import { ScenicList } from "./scenic-spot/scenic-list";
 import { ScenicProviderList } from "./scenic-provider/provider-list";
@@ -46,6 +45,8 @@ import {
   AppstoreOutlined,
   FileDoneOutlined,
   ShoppingOutlined,
+  UnorderedListOutlined,
+  ShoppingCartOutlined,
 } from "@ant-design/icons";
 import {
   ExpressIcon,
@@ -79,19 +80,18 @@ export const AuthenticatedApp = () => {
               <Route path="auth/role_list" element={<RoleList />} />
               <Route path="auth/admin_list" element={<AdminList />} />
               <Route path="user_list" element={<UserList />} />
-              <Route path="merchant/list" element={<MerchantList />} />
+              <Route path="shopping/merchant_list" element={<MerchantList />} />
               <Route
-                path="merchant/order_list"
-                element={<MerchantOrderList />}
+                path="shopping/shop/category_list"
+                element={<ShopCategoryList />}
               />
-              <Route path="shop/category_list" element={<ShopCategoryList />} />
-              <Route path="shop/list" element={<ShopList />} />
-              <Route path="goods/express_list" element={<ExpressList />} />
+              <Route path="shopping/shop/list" element={<ShopList />} />
+              <Route path="shopping/express_list" element={<ExpressList />} />
               <Route
-                path="goods/category_list"
+                path="shopping/goods/category_list"
                 element={<GoodsCategoryList />}
               />
-              <Route path="goods/list" element={<GoodsList />} />
+              <Route path="shopping/goods/list" element={<GoodsList />} />
               <Route
                 path="scenic_spot/category_list"
                 element={<ScenicCategoryList />}
@@ -183,58 +183,53 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
       ],
     },
     {
-      label: "商家管理",
-      key: "merchant",
-      icon: <TeamOutlined />,
+      label: "电商模块",
+      key: "shopping",
+      icon: <ShoppingCartOutlined />,
       children: [
         {
-          label: <Link to={"merchant/list"}>商家列表</Link>,
-          key: "merchant_list",
+          label: <Link to={"shopping/merchant_list"}>商家列表</Link>,
+          key: "shopping_merchant_list",
           icon: <TeamOutlined />,
         },
         {
-          label: <Link to={"merchant/order_list"}>入驻订单列表</Link>,
-          key: "merchant_order_list",
-          icon: <FileDoneOutlined />,
-        },
-      ],
-    },
-    {
-      label: "店铺管理",
-      key: "shop",
-      icon: <ShopOutlined />,
-      children: [
-        {
-          label: <Link to={"shop/category_list"}>店铺分类</Link>,
-          key: "shop_category_list",
-          icon: <AppstoreOutlined />,
-        },
-        {
-          label: <Link to={"shop/list"}>店铺列表</Link>,
-          key: "shop_list",
+          label: "店铺管理",
+          key: "shopping_shop",
           icon: <ShopOutlined />,
+          children: [
+            {
+              label: <Link to={"shopping/shop/category_list"}>店铺分类</Link>,
+              key: "shopping_shop_category_list",
+              icon: <AppstoreOutlined />,
+            },
+            {
+              label: <Link to={"shopping/shop/list"}>店铺列表</Link>,
+              key: "shopping_shop_list",
+              icon: <UnorderedListOutlined />,
+            },
+          ],
         },
-      ],
-    },
-    {
-      label: "商品管理",
-      key: "goods",
-      icon: <ShoppingOutlined />,
-      children: [
         {
-          label: <Link to={"goods/express_list"}>快递列表</Link>,
-          key: "goods_express_list",
+          label: <Link to={"shopping/express_list"}>快递列表</Link>,
+          key: "shopping_express_list",
           icon: <ExpressIcon />,
         },
         {
-          label: <Link to={"goods/category_list"}>商品分类</Link>,
-          key: "goods_category_list",
-          icon: <AppstoreOutlined />,
-        },
-        {
-          label: <Link to={"goods/list"}>商品列表</Link>,
-          key: "goods_list",
+          label: "商品管理",
+          key: "shopping_goods",
           icon: <ShoppingOutlined />,
+          children: [
+            {
+              label: <Link to={"shopping/goods/category_list"}>商品分类</Link>,
+              key: "shopping_goods_category_list",
+              icon: <AppstoreOutlined />,
+            },
+            {
+              label: <Link to={"shopping/goods/list"}>商品列表</Link>,
+              key: "shopping_goods_list",
+              icon: <UnorderedListOutlined />,
+            },
+          ],
         },
       ],
     },
