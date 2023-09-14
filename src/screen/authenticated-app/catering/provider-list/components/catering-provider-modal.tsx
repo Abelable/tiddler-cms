@@ -37,7 +37,7 @@ export const CateringProviderModal = () => {
               {editingCateringProvider?.id}
             </Descriptions.Item>
             <Descriptions.Item label="商家类型">
-              {editingCateringProvider?.type === 1 ? "个人" : "企业"}
+              {editingCateringProvider?.type === 1 ? "个体" : "企业"}
             </Descriptions.Item>
             <Descriptions.Item label="入驻时间">
               {dayjs(editingCateringProvider?.createdAt).format(
@@ -54,17 +54,11 @@ export const CateringProviderModal = () => {
             <>
               <Descriptions
                 style={{ marginBottom: "3.2rem" }}
-                title="个人信息"
+                title="个体信息"
                 size={"small"}
                 column={1}
                 bordered
               >
-                <Descriptions.Item label="姓名">
-                  {editingCateringProvider?.name}
-                </Descriptions.Item>
-                <Descriptions.Item label="身份证号">
-                  {editingCateringProvider?.idCardNumber}
-                </Descriptions.Item>
                 <Descriptions.Item label="身份证正面照片">
                   <Image
                     width={132}
@@ -77,6 +71,26 @@ export const CateringProviderModal = () => {
                     width={132}
                     height={86}
                     src={editingCateringProvider?.idCardFrontPhoto}
+                  />
+                </Descriptions.Item>
+                <Descriptions.Item label="姓名">
+                  {editingCateringProvider?.name}
+                </Descriptions.Item>
+                <Descriptions.Item label="身份证号">
+                  {editingCateringProvider?.idCardNumber}
+                </Descriptions.Item>
+                <Descriptions.Item label="营业执照照片">
+                  <Image
+                    width={132}
+                    height={86}
+                    src={editingCateringProvider?.businessLicensePhoto}
+                  />
+                </Descriptions.Item>
+                <Descriptions.Item label="卫生许可证照片">
+                  <Image
+                    width={132}
+                    height={86}
+                    src={editingCateringProvider?.hygienicLicensePhoto}
                   />
                 </Descriptions.Item>
               </Descriptions>
@@ -124,6 +138,13 @@ export const CateringProviderModal = () => {
                     width={132}
                     height={86}
                     src={editingCateringProvider?.businessLicensePhoto}
+                  />
+                </Descriptions.Item>
+                <Descriptions.Item label="卫生许可证照片">
+                  <Image
+                    width={132}
+                    height={86}
+                    src={editingCateringProvider?.hygienicLicensePhoto}
                   />
                 </Descriptions.Item>
               </Descriptions>

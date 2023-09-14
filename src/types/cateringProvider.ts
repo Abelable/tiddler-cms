@@ -27,6 +27,7 @@ export interface CateringProviderDetail extends CateringProvider {
   regionCodeList: string[];
   addressDetail: string;
   businessLicensePhoto: string;
+  hygienicLicensePhoto: string;
   email: string;
   idCardNumber: string;
   idCardFrontPhoto: string;
