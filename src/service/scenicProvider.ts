@@ -3,8 +3,6 @@ import { useHttp } from "./http";
 import { useApprovedConfig, useRejectConfig } from "./use-optimistic-options";
 import type {
   ProviderDetail,
-  ProviderOrdersResult,
-  ProviderOrdersSearchParams,
   ProvidersResult,
   ProvidersSearchParams,
 } from "types/scenicProvider";
@@ -48,15 +46,5 @@ export const useRejectProvider = (queryKey: QueryKey) => {
         method: "POST",
       }),
     useRejectConfig(queryKey)
-  );
-};
-
-export const useProviderOrders = (
-  params: Partial<ProviderOrdersSearchParams>
-) => {
-  const client = useHttp();
-  return useQuery<ProviderOrdersResult>(
-    ["scenic_provider_orders", params],
-    () => client("scenic/provider/order_list", { data: params, method: "POST" })
   );
 };

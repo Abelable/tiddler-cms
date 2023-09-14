@@ -38,26 +38,3 @@ export interface ProvidersResult {
   limit: string;
   total: string;
 }
-
-export interface ProviderOrdersSearchParams {
-  page: number;
-  limit: number;
-}
-
-export interface ProviderOrder {
-  id: number;
-  companyName: string;
-  orderSn: string;
-  paymentAmount: string;
-  status: number;
-  payId: number;
-  createdAt: string;
-  updatedAt: string;
-}
-
-export interface ProviderOrdersResult {
-  list: ProviderOrder[];
-  page: string;
-  limit: string;
-  total: string;
-}

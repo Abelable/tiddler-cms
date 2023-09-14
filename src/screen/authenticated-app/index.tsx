@@ -17,14 +17,13 @@ import { ShopList } from "./shopping/shop/shop-list";
 import { ExpressList } from "./shopping/express-list";
 import { GoodsCategoryList } from "./shopping/goods/category-list";
 import { GoodsList } from "./shopping/goods/goods-list";
-import { ScenicCategoryList } from "./scenic-spot/category-list";
-import { ScenicList } from "./scenic-spot/scenic-list";
-import { ScenicProviderList } from "./scenic-provider/provider-list";
-import { ScenicProviderOrderList } from "./scenic-provider/provider-order-list";
-import { ScenicShopList } from "./scenic-shop-list";
-import { ProviderScenicList } from "./scenic-provider/provider-scenic-list";
-import { ScenicTicketCategoryList } from "./scenic-ticket/category-list";
-import { ScenicTicketList } from "./scenic-ticket/ticket-list";
+import { ScenicCategoryList } from "./scenic/spot/category-list";
+import { ScenicList } from "./scenic/spot/spot-list";
+import { ScenicProviderList } from "./scenic/provider/provider-list";
+import { ScenicShopList } from "./scenic/provider/shop-list";
+import { ProviderScenicList } from "./scenic/provider/spot-apply-list";
+import { ScenicTicketCategoryList } from "./scenic/ticket/category-list";
+import { ScenicTicketList } from "./scenic/ticket/ticket-list";
 import { HotelCategoryList } from "./hotel/category-list";
 import { HotelList } from "./hotel/hotel-list";
 import { HotelRoomList } from "./hotel-room-list";
@@ -46,7 +45,7 @@ import {
   FileDoneOutlined,
   ShoppingOutlined,
   UnorderedListOutlined,
-  ShoppingCartOutlined,
+  FileAddOutlined,
 } from "@ant-design/icons";
 import {
   ExpressIcon,
@@ -93,31 +92,27 @@ export const AuthenticatedApp = () => {
               />
               <Route path="shopping/goods/list" element={<GoodsList />} />
               <Route
-                path="scenic_spot/category_list"
+                path="scenic/spot/category_list"
                 element={<ScenicCategoryList />}
               />
-              <Route path="scenic_spot/list" element={<ScenicList />} />
+              <Route path="scenic/spot/list" element={<ScenicList />} />
               <Route
-                path="scenic_provider/list"
+                path="scenic/provider/list"
                 element={<ScenicProviderList />}
               />
               <Route
-                path="scenic_provider/order_list"
-                element={<ScenicProviderOrderList />}
-              />
-              <Route
-                path="scenic_provider/shop_list"
+                path="scenic/provider/shop_list"
                 element={<ScenicShopList />}
               />
               <Route
-                path="scenic_provider/scenic_list"
+                path="scenic/provider/spot_apply_list"
                 element={<ProviderScenicList />}
               />
               <Route
-                path="scenic_ticket/category_list"
+                path="scenic/ticket/category_list"
                 element={<ScenicTicketCategoryList />}
               />
-              <Route path="scenic_ticket/list" element={<ScenicTicketList />} />
+              <Route path="scenic/ticket/list" element={<ScenicTicketList />} />
               <Route
                 path="hotel/category_list"
                 element={<HotelCategoryList />}
@@ -185,7 +180,7 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
     {
       label: "电商模块",
       key: "shopping",
-      icon: <ShoppingCartOutlined />,
+      icon: <ShoppingOutlined />,
       children: [
         {
           label: <Link to={"shopping/merchant_list"}>商家列表</Link>,
@@ -234,63 +229,67 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
       ],
     },
     {
-      label: "景区管理",
-      key: "scenic_spot",
+      label: "景区模块",
+      key: "scenic",
       icon: <ScenicSpotIcon />,
       children: [
         {
-          label: <Link to={"scenic_spot/category_list"}>景区分类</Link>,
-          key: "scenic_spot_category_list",
-          icon: <AppstoreOutlined />,
-        },
-        {
-          label: <Link to={"scenic_spot/list"}>景区列表</Link>,
-          key: "scenic_spot_list",
+          label: "景区管理",
+          key: "scenic_spot",
           icon: <ScenicSpotIcon />,
+          children: [
+            {
+              label: <Link to={"scenic/spot/category_list"}>景区分类</Link>,
+              key: "scenic_spot_category_list",
+              icon: <AppstoreOutlined />,
+            },
+            {
+              label: <Link to={"scenic/spot/list"}>景区列表</Link>,
+              key: "scenic_spot_list",
+              icon: <UnorderedListOutlined />,
+            },
+          ],
         },
-      ],
-    },
-    {
-      label: "景区服务商管理",
-      key: "scenic_provider",
-      icon: <TeamOutlined />,
-      children: [
         {
-          label: <Link to={"scenic_provider/list"}>服务商列表</Link>,
-          key: "scenic_provider_list",
+          label: "服务商管理",
+          key: "scenic_provider",
           icon: <TeamOutlined />,
+          children: [
+            {
+              label: <Link to={"scenic/provider/list"}>服务商列表</Link>,
+              key: "scenic_provider_list",
+              icon: <TeamOutlined />,
+            },
+            {
+              label: <Link to={"scenic/provider/shop_list"}>店铺列表</Link>,
+              key: "scenic_provider_shop_list",
+              icon: <ShopOutlined />,
+            },
+            {
+              label: (
+                <Link to={"scenic/provider/spot_apply_list"}>景区申请</Link>
+              ),
+              key: "scenic_provider_spot_apply_list",
+              icon: <FileAddOutlined />,
+            },
+          ],
         },
         {
-          label: <Link to={"scenic_provider/order_list"}>入驻订单列表</Link>,
-          key: "scenic_provider_order_list",
-          icon: <FileDoneOutlined />,
-        },
-        {
-          label: <Link to={"scenic_provider/shop_list"}>店铺列表</Link>,
-          key: "scenic_provider_shop_list",
-          icon: <ShopOutlined />,
-        },
-        {
-          label: <Link to={"scenic_provider/scenic_list"}>景区申请列表</Link>,
-          key: "scenic_provider_scenic_list",
-          icon: <ScenicSpotIcon />,
-        },
-      ],
-    },
-    {
-      label: "门票管理",
-      key: "scenic_ticket",
-      icon: <TicketIcon />,
-      children: [
-        {
-          label: <Link to={"scenic_ticket/category_list"}>门票分类</Link>,
-          key: "scenic_ticket_category_list",
-          icon: <AppstoreOutlined />,
-        },
-        {
-          label: <Link to={"scenic_ticket/list"}>门票列表</Link>,
-          key: "scenic_ticket_list",
+          label: "门票管理",
+          key: "scenic_ticket",
           icon: <TicketIcon />,
+          children: [
+            {
+              label: <Link to={"scenic/ticket/category_list"}>门票分类</Link>,
+              key: "scenic_ticket_category_list",
+              icon: <AppstoreOutlined />,
+            },
+            {
+              label: <Link to={"scenic/ticket/list"}>门票列表</Link>,
+              key: "scenic_ticket_list",
+              icon: <UnorderedListOutlined />,
+            },
+          ],
         },
       ],
     },
