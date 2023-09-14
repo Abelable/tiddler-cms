@@ -31,6 +31,7 @@ import { HotelRoomTypeList } from "./hotel/store/room-type-list";
 import { HotelProviderList } from "./hotel/provider/provider-list";
 import { HotelShopList } from "./hotel/provider/shop-list";
 import { ProviderHotelList } from "./hotel/provider/hotel-apply-list";
+import { CateringProviderList } from "./catering/provider-list";
 
 import {
   LockOutlined,
@@ -51,6 +52,7 @@ import {
   TicketIcon,
   HotelIcon,
   BedIcon,
+  CateringIcon,
 } from "assets/icon";
 import logo from "assets/images/logo.png";
 import { UserInfo } from "types/auth";
@@ -133,6 +135,10 @@ export const AuthenticatedApp = () => {
               <Route
                 path="hotel/provider/hotel_apply"
                 element={<ProviderHotelList />}
+              />
+              <Route
+                path="catering/provider_list"
+                element={<CateringProviderList />}
               />
               <Route
                 path={"*"}
@@ -334,6 +340,18 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
               icon: <FileAddOutlined />,
             },
           ],
+        },
+      ],
+    },
+    {
+      label: "餐饮模块",
+      key: "catering",
+      icon: <CateringIcon />,
+      children: [
+        {
+          label: <Link to={"catering/provider_list"}>商家列表</Link>,
+          key: "catering/provider_list",
+          icon: <TeamOutlined />,
         },
       ],
     },
