@@ -1,8 +1,19 @@
 export interface MerchantsSearchParams {
+  status: number;
+  type: number;
   name: string;
   mobile: string;
   page: number;
   limit: number;
+}
+
+interface depositInfo {
+  orderSn: string;
+  payId: number;
+  paymentAmount: string;
+  status: number;
+  updatedAt: string;
+  createdAt: string;
 }
 
 export interface Merchant {
@@ -11,7 +22,7 @@ export interface Merchant {
   name: string;
   mobile: string;
   status: number;
-  orderId: string;
+  depositInfo: depositInfo;
   failureReason: string;
   createdAt: string;
   updatedAt: string;

@@ -4,6 +4,8 @@ import { useMerchant } from "service/merchant";
 
 export const useMerchantsSearchParams = () => {
   const [params, setParams] = useUrlQueryParams([
+    "status",
+    "type",
     "name",
     "mobile",
     "page",

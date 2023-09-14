@@ -8,6 +8,17 @@ import { List } from "./components/list";
 import { SearchPanel } from "./components/search-panel";
 import { RejectModal } from "./components/reject-modal";
 
+const typeOptions = [
+  { text: "个人", value: 1 },
+  { text: "企业", value: 2 },
+];
+const statusOptions = [
+  { text: "待审核", value: 0 },
+  { text: "待支付保证金", value: 1 },
+  { text: "入驻成功", value: 2 },
+  { text: "已驳回", value: 3 },
+];
+
 export const MerchantList = () => {
   const [params, setParams] = useMerchantsSearchParams();
   const { isLoading, error, data } = useMerchants(params);
@@ -15,8 +26,15 @@ export const MerchantList = () => {
   return (
     <Container>
       <Main>
-        <SearchPanel params={params} setParams={setParams} />
+        <SearchPanel
+          statusOptions={statusOptions}
+          typeOptions={typeOptions}
+          params={params}
+          setParams={setParams}
+        />
         <List
+          statusOptions={statusOptions}
+          typeOptions={typeOptions}
           params={params}
           setParams={setParams}
           error={error}

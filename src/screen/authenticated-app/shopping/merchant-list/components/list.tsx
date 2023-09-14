@@ -8,6 +8,8 @@ import {
   TablePaginationConfig,
   TableProps,
   Tooltip,
+  Tag,
+  Popover,
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
 import dayjs from "dayjs";
@@ -24,7 +26,14 @@ interface ListProps extends TableProps<Merchant>, SearchPanelProps {
   error: Error | unknown;
 }
 
-export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
+export const List = ({
+  statusOptions,
+  typeOptions,
+  error,
+  params,
+  setParams,
+  ...restProps
+}: ListProps) => {
   const setPagination = (pagination: TablePaginationConfig) =>
     setParams({
       ...params,
@@ -50,10 +59,7 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
             title: "商家类型",
             dataIndex: "type",
             render: (value) => <>{value === 1 ? "个人" : "企业"}</>,
-            filters: [
-              { text: "个人", value: 1 },
-              { text: "企业", value: 2 },
-            ],
+            filters: typeOptions,
             onFilter: (value, merchant) => merchant.type === value,
           },
           {
@@ -69,30 +75,46 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
             dataIndex: "status",
             render: (value, merchant) =>
               value === 0 ? (
-                <span style={{ color: "#87d068" }}>待审核</span>
+                <span style={{ color: "#faad14" }}>待审核</span>
               ) : value === 1 ? (
-                <Tooltip title={`订单id：${merchant.orderId}`}>
-                  <span style={{ color: "#296BEF", cursor: "pointer" }}>
-                    待付款
-                  </span>
-                </Tooltip>
+                <span style={{ color: "#1890ff" }}>待支付保证金</span>
               ) : value === 2 ? (
-                <Tooltip title={`订单id：${merchant.orderId}`}>
-                  <span style={{ cursor: "pointer" }}>已支付</span>
-                </Tooltip>
+                <Popover
+                  title="保证金支付信息"
+                  content={
+                    <div>
+                      <p>支付金额：{merchant.depositInfo.paymentAmount}</p>
+                      <p>
+                        支付状态：
+                        {merchant.depositInfo.status === 1 ? (
+                          <Tag color="success">已支付</Tag>
+                        ) : (
+                          <Tag color="error">已支付</Tag>
+                        )}
+                      </p>
+                      <p>支付Id：{merchant.depositInfo.payId}</p>
+                      <p>支付编号：{merchant.depositInfo.orderSn}</p>
+                      <p>
+                        支付时间：
+                        {dayjs(merchant.depositInfo.updatedAt).format(
+                          "YYYY-MM-DD HH:mm:ss"
+                        )}
+                      </p>
+                    </div>
+                  }
+                >
+                  <span style={{ color: "#52c41a", cursor: "pointer" }}>
+                    入驻成功
+                  </span>
+                </Popover>
               ) : (
                 <Tooltip title={merchant.failureReason}>
-                  <span style={{ color: "#f50", cursor: "pointer" }}>
+                  <span style={{ color: "#ff4d4f", cursor: "pointer" }}>
                     已驳回
                   </span>
                 </Tooltip>
               ),
-            filters: [
-              { text: "待审核", value: 0 },
-              { text: "待支付", value: 1 },
-              { text: "已支付", value: 2 },
-              { text: "已驳回", value: 3 },
-            ],
+            filters: statusOptions,
             onFilter: (value, merchant) => merchant.status === value,
           },
           {
