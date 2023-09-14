@@ -70,7 +70,7 @@ export const useRejectConfig = (queryKey: QueryKey) =>
       ? {
           ...old,
           list: old.list.map((item: any) =>
-            item.id === target.id ? { ...item, ...target, status: 2 } : item
+            item.id === target.id ? { ...item, ...target, status: 3 } : item
           ),
         }
       : null
