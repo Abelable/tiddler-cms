@@ -2,24 +2,35 @@ import { useState } from "react";
 import styled from "@emotion/styled";
 
 import { Row } from "components/lib";
-import { Button, Input } from "antd";
+import { Button, Input, Select } from "antd";
 
 import type { ProvidersSearchParams } from "types/hotelProvider";
+import type { Option } from "types/common";
 
 export interface SearchPanelProps {
+  statusOptions: Option[];
   params: Partial<ProvidersSearchParams>;
   setParams: (params: Partial<ProvidersSearchParams>) => void;
 }
 
 const defaultParmas: Partial<ProvidersSearchParams> = {
+  status: undefined,
   name: "",
   mobile: "",
 };
 
-export const SearchPanel = ({ params, setParams }: SearchPanelProps) => {
+export const SearchPanel = ({
+  statusOptions,
+  params,
+  setParams,
+}: SearchPanelProps) => {
   const [tempParams, setTempParams] = useState(defaultParmas);
 
-  const setNickname = (evt: any) => {
+  const setStatus = (status: number) =>
+    setTempParams({ ...tempParams, status });
+  const clearStatus = () => setTempParams({ ...tempParams, status: undefined });
+
+  const setName = (evt: any) => {
     if (!evt.target.value && evt.type !== "change") {
       setTempParams({
         ...tempParams,
@@ -57,11 +68,28 @@ export const SearchPanel = ({ params, setParams }: SearchPanelProps) => {
   return (
     <Container>
       <Item>
+        <div>服务商状态：</div>
+        <Select
+          style={{ width: "20rem" }}
+          value={tempParams.status}
+          placeholder="请选择服务商状态"
+          allowClear={true}
+          onSelect={setStatus}
+          onClear={clearStatus}
+        >
+          {statusOptions?.map(({ text, value }) => (
+            <Select.Option key={value} value={value}>
+              {text}
+            </Select.Option>
+          ))}
+        </Select>
+      </Item>
+      <Item>
         <div>联系人姓名：</div>
         <Input
           style={{ width: "20rem" }}
           value={tempParams.name}
-          onChange={setNickname}
+          onChange={setName}
           placeholder="请输入姓名"
           allowClear={true}
         />

@@ -8,6 +8,8 @@ import {
   TablePaginationConfig,
   TableProps,
   Tooltip,
+  Popover,
+  Tag,
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
 
@@ -26,7 +28,13 @@ interface ListProps extends TableProps<Provider>, SearchPanelProps {
   error: Error | unknown;
 }
 
-export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
+export const List = ({
+  statusOptions,
+  error,
+  params,
+  setParams,
+  ...restProps
+}: ListProps) => {
   const setPagination = (pagination: TablePaginationConfig) =>
     setParams({
       ...params,
@@ -37,7 +45,7 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
   return (
     <Container>
       <Header between={true}>
-        <PageTitle>商家列表</PageTitle>
+        <PageTitle>服务商列表</PageTitle>
       </Header>
       <ErrorBox error={error} />
       <Table
@@ -65,30 +73,46 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
             dataIndex: "status",
             render: (value, provider) =>
               value === 0 ? (
-                <span style={{ color: "#87d068" }}>待审核</span>
+                <span style={{ color: "#faad14" }}>待审核</span>
               ) : value === 1 ? (
-                <Tooltip title={`订单id：${provider.orderId}`}>
-                  <span style={{ color: "#296BEF", cursor: "pointer" }}>
-                    待付款
-                  </span>
-                </Tooltip>
+                <span style={{ color: "#1890ff" }}>待支付保证金</span>
               ) : value === 2 ? (
-                <Tooltip title={`订单id：${provider.orderId}`}>
-                  <span style={{ cursor: "pointer" }}>已支付</span>
-                </Tooltip>
+                <Popover
+                  title="保证金支付信息"
+                  content={
+                    <div>
+                      <p>支付金额：{provider.depositInfo.paymentAmount}元</p>
+                      <p>
+                        支付状态：
+                        {provider.depositInfo.status === 1 ? (
+                          <Tag color="success">已支付</Tag>
+                        ) : (
+                          <Tag color="error">未支付</Tag>
+                        )}
+                      </p>
+                      <p>支付Id：{provider.depositInfo.payId}</p>
+                      <p>支付编号：{provider.depositInfo.orderSn}</p>
+                      <p>
+                        支付时间：
+                        {dayjs(provider.depositInfo.updatedAt).format(
+                          "YYYY-MM-DD HH:mm:ss"
+                        )}
+                      </p>
+                    </div>
+                  }
+                >
+                  <span style={{ color: "#52c41a", cursor: "pointer" }}>
+                    入驻成功
+                  </span>
+                </Popover>
               ) : (
                 <Tooltip title={provider.failureReason}>
-                  <span style={{ color: "#f50", cursor: "pointer" }}>
+                  <span style={{ color: "#ff4d4f", cursor: "pointer" }}>
                     已驳回
                   </span>
                 </Tooltip>
               ),
-            filters: [
-              { text: "待审核", value: 0 },
-              { text: "待支付", value: 1 },
-              { text: "已支付", value: 2 },
-              { text: "已驳回", value: 3 },
-            ],
+            filters: statusOptions,
             onFilter: (value, provider) => provider.status === value,
           },
           {
@@ -141,8 +165,8 @@ const More = ({ id, status }: { id: number; status: number }) => {
 
   const confirmApproved = (id: number) => {
     Modal.confirm({
-      title: "商家审核通过确认",
-      content: "请确保在商家信息无误的情况下进行该操作",
+      title: "服务商审核通过确认",
+      content: "请确保在服务商信息无误的情况下进行该操作",
       okText: "确定",
       cancelText: "取消",
       onOk: () => approvedProvider(id),

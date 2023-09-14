@@ -43,7 +43,7 @@ export const List = ({
   return (
     <Container>
       <Header between={true}>
-        <PageTitle>商家列表</PageTitle>
+        <PageTitle>服务商列表</PageTitle>
       </Header>
       <ErrorBox error={error} />
       <Table
@@ -163,8 +163,8 @@ const More = ({ id, status }: { id: number; status: number }) => {
 
   const confirmApproved = (id: number) => {
     Modal.confirm({
-      title: "商家审核通过确认",
-      content: "请确保在商家信息无误的情况下进行该操作",
+      title: "服务商审核通过确认",
+      content: "请确保在服务商信息无误的情况下进行该操作",
       okText: "确定",
       cancelText: "取消",
       onOk: () => approvedProvider(id),

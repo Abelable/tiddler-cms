@@ -4,6 +4,7 @@ import { useProvider } from "service/scenicProvider";
 
 export const useProvidersSearchParams = () => {
   const [params, setParams] = useUrlQueryParams([
+    "status",
     "name",
     "mobile",
     "page",
