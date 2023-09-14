@@ -29,7 +29,6 @@ import { HotelList } from "./hotel/hotel-list";
 import { HotelRoomList } from "./hotel-room-list";
 import { HotelRoomTypeList } from "./hotel/room-type-list";
 import { HotelProviderList } from "./hotel-provider/provider-list";
-import { HotelProviderOrderList } from "./hotel-provider/provider-order-list";
 import { HotelShopList } from "./hotel-shop-list";
 import { ProviderHotelList } from "./hotel-provider/provider-hotel-list";
 
@@ -42,7 +41,6 @@ import {
   TeamOutlined,
   ShopOutlined,
   AppstoreOutlined,
-  FileDoneOutlined,
   ShoppingOutlined,
   UnorderedListOutlined,
   FileAddOutlined,
@@ -52,6 +50,7 @@ import {
   ScenicSpotIcon,
   TicketIcon,
   HotelIcon,
+  BedIcon,
 } from "assets/icon";
 import logo from "assets/images/logo.png";
 import { UserInfo } from "types/auth";
@@ -105,7 +104,7 @@ export const AuthenticatedApp = () => {
                 element={<ScenicShopList />}
               />
               <Route
-                path="scenic/provider/spot_apply_list"
+                path="scenic/provider/spot_apply"
                 element={<ProviderScenicList />}
               />
               <Route
@@ -114,29 +113,25 @@ export const AuthenticatedApp = () => {
               />
               <Route path="scenic/ticket/list" element={<ScenicTicketList />} />
               <Route
-                path="hotel/category_list"
+                path="hotel/store/category_list"
                 element={<HotelCategoryList />}
               />
-              <Route path="hotel/list" element={<HotelList />} />
-              <Route path="hotel/room_list" element={<HotelRoomList />} />
+              <Route path="hotel/store/list" element={<HotelList />} />
               <Route
-                path="hotel/list/room_type_list"
+                path="hotel/store/list/room_type_list"
                 element={<HotelRoomTypeList />}
               />
+              <Route path="hotel/store/room_list" element={<HotelRoomList />} />
               <Route
-                path="hotel_provider/list"
+                path="hotel/provider/list"
                 element={<HotelProviderList />}
               />
               <Route
-                path="hotel_provider/order_list"
-                element={<HotelProviderOrderList />}
-              />
-              <Route
-                path="hotel_provider/shop_list"
+                path="hotel/provider/shop_list"
                 element={<HotelShopList />}
               />
               <Route
-                path="hotel_provider/hotel_list"
+                path="hotel/provider/hotel_apply"
                 element={<ProviderHotelList />}
               />
               <Route
@@ -266,10 +261,8 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
               icon: <ShopOutlined />,
             },
             {
-              label: (
-                <Link to={"scenic/provider/spot_apply_list"}>景区申请</Link>
-              ),
-              key: "scenic_provider_spot_apply_list",
+              label: <Link to={"scenic/provider/spot_apply"}>景区申请</Link>,
+              key: "scenic_provider_spot_apply",
               icon: <FileAddOutlined />,
             },
           ],
@@ -294,51 +287,53 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
       ],
     },
     {
-      label: "酒店管理",
+      label: "酒店模块",
       key: "hotel",
       icon: <HotelIcon />,
       children: [
         {
-          label: <Link to={"hotel/category_list"}>酒店分类</Link>,
-          key: "hotel_category_list",
-          icon: <AppstoreOutlined />,
-        },
-        {
-          label: <Link to={"hotel/list"}>酒店列表</Link>,
-          key: "hotel_list",
+          label: "酒店管理",
+          key: "hotel_store",
           icon: <HotelIcon />,
+          children: [
+            {
+              label: <Link to={"hotel/store/category_list"}>酒店分类</Link>,
+              key: "hotel_store_category_list",
+              icon: <AppstoreOutlined />,
+            },
+            {
+              label: <Link to={"hotel/store/list"}>酒店列表</Link>,
+              key: "hotel_store_list",
+              icon: <HotelIcon />,
+            },
+            {
+              label: <Link to={"hotel/store/room_list"}>房间列表</Link>,
+              key: "hotel_store_room_list",
+              icon: <BedIcon />,
+            },
+          ],
         },
         {
-          label: <Link to={"hotel/room_list"}>房间列表</Link>,
-          key: "hotel_room_list",
-          icon: <HotelIcon />,
-        },
-      ],
-    },
-    {
-      label: "酒店服务商管理",
-      key: "hotel_provider",
-      icon: <TeamOutlined />,
-      children: [
-        {
-          label: <Link to={"hotel_provider/list"}>服务商列表</Link>,
-          key: "hotel_provider_list",
+          label: "服务商管理",
+          key: "hotel_provider",
           icon: <TeamOutlined />,
-        },
-        {
-          label: <Link to={"hotel_provider/order_list"}>入驻订单列表</Link>,
-          key: "hotel_provider_order_list",
-          icon: <FileDoneOutlined />,
-        },
-        {
-          label: <Link to={"hotel_provider/shop_list"}>店铺列表</Link>,
-          key: "hotel_provider_shop_list",
-          icon: <ShopOutlined />,
-        },
-        {
-          label: <Link to={"hotel_provider/hotel_list"}>酒店申请列表</Link>,
-          key: "hotel_provider_hotel_list",
-          icon: <HotelIcon />,
+          children: [
+            {
+              label: <Link to={"hotel/provider/list"}>服务商列表</Link>,
+              key: "hotel_provider_list",
+              icon: <TeamOutlined />,
+            },
+            {
+              label: <Link to={"hotel/provider/shop_list"}>店铺列表</Link>,
+              key: "hotel_provider_shop_list",
+              icon: <ShopOutlined />,
+            },
+            {
+              label: <Link to={"hotel/provider/hotel_apply"}>酒店申请</Link>,
+              key: "hotel_provider_hotel_apply",
+              icon: <FileAddOutlined />,
+            },
+          ],
         },
       ],
     },
