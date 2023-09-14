@@ -8,6 +8,13 @@ import { List } from "./components/list";
 import { SearchPanel } from "./components/search-panel";
 import { RejectModal } from "./components/reject-modal";
 
+const statusOptions = [
+  { text: "待审核", value: 0 },
+  { text: "待支付保证金", value: 1 },
+  { text: "入驻成功", value: 2 },
+  { text: "已驳回", value: 3 },
+];
+
 export const ScenicProviderList = () => {
   const [params, setParams] = useProvidersSearchParams();
   const { isLoading, error, data } = useProviders(params);
@@ -15,8 +22,13 @@ export const ScenicProviderList = () => {
   return (
     <Container>
       <Main>
-        <SearchPanel params={params} setParams={setParams} />
+        <SearchPanel
+          statusOptions={statusOptions}
+          params={params}
+          setParams={setParams}
+        />
         <List
+          statusOptions={statusOptions}
           params={params}
           setParams={setParams}
           error={error}

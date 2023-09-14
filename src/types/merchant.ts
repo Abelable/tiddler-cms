@@ -1,3 +1,5 @@
+import type { depositInfo } from "./common";
+
 export interface MerchantsSearchParams {
   status: number;
   type: number;
@@ -5,15 +7,6 @@ export interface MerchantsSearchParams {
   mobile: string;
   page: number;
   limit: number;
-}
-
-interface depositInfo {
-  orderSn: string;
-  payId: number;
-  paymentAmount: string;
-  status: number;
-  updatedAt: string;
-  createdAt: string;
 }
 
 export interface Merchant {

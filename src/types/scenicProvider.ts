@@ -1,4 +1,7 @@
+import type { depositInfo } from "./common";
+
 export interface ProvidersSearchParams {
+  status: number;
   name: string;
   mobile: string;
   page: number;
@@ -12,7 +15,7 @@ export interface Provider {
   mobile: string;
   status: number;
   failureReason: string;
-  orderId: string;
+  depositInfo: depositInfo;
   createdAt: string;
   updatedAt: string;
 }

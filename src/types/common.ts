@@ -31,3 +31,12 @@ export interface Option {
   text: string;
   value: number;
 }
+
+export interface depositInfo {
+  orderSn: string;
+  payId: number;
+  paymentAmount: string;
+  status: number;
+  updatedAt: string;
+  createdAt: string;
+}
