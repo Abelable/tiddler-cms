@@ -8,7 +8,6 @@ import { useRestaurantListSearchParams } from "./util";
 import { RestaurantModal } from "./components/restaurant-modal";
 import { List } from "./components/list";
 import { SearchPanel } from "./components/search-panel";
-import { RejectModal } from "./components/reject-modal";
 
 export const RestaurantList = () => {
   const [params, setParams] = useRestaurantListSearchParams();
@@ -16,9 +15,8 @@ export const RestaurantList = () => {
   const { data: restaurantCategoryOptions, error: restaurantOptionsError } =
     useRestaurantCategoryOptions();
   const statusOptions = [
-    { text: "待审核", value: 0 },
-    { text: "开放中", value: 1 },
-    { text: "未过审", value: 2 },
+    { text: "暂停营业", value: 0 },
+    { text: "正在营业", value: 1 },
   ];
 
   return (
@@ -46,7 +44,6 @@ export const RestaurantList = () => {
         />
       </Main>
       <RestaurantModal categoryOptions={restaurantCategoryOptions || []} />
-      <RejectModal />
     </Container>
   );
 };

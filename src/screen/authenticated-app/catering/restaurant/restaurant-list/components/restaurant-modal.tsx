@@ -143,7 +143,7 @@ export const RestaurantModal = ({
 
   return (
     <Drawer
-      title={editingRestaurantId ? "编辑景区" : "新增景区"}
+      title={editingRestaurantId ? "编辑门店" : "新增门店"}
       size={"large"}
       forceRender={true}
       onClose={closeModal}
@@ -168,15 +168,15 @@ export const RestaurantModal = ({
             <Col span={12}>
               <Form.Item
                 name="name"
-                label="景区名称"
-                rules={[{ required: true, message: "请输入景区名称" }]}
+                label="门店名称"
+                rules={[{ required: true, message: "请输入门店名称" }]}
               >
-                <Input placeholder="请输入景区名称" />
+                <Input placeholder="请输入门店名称" />
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item name="level" label="景区等级">
-                <Input placeholder="请输入景区等级，例：5A" />
+              <Form.Item name="level" label="门店等级">
+                <Input placeholder="请输入门店等级，例：5A" />
               </Form.Item>
             </Col>
           </Row>
@@ -184,10 +184,10 @@ export const RestaurantModal = ({
             <Col span={12}>
               <Form.Item
                 name="categoryId"
-                label="景区类型"
-                rules={[{ required: true, message: "请选择景区类型" }]}
+                label="门店类型"
+                rules={[{ required: true, message: "请选择门店类型" }]}
               >
-                <Select placeholder="请选择景区类型">
+                <Select placeholder="请选择门店类型">
                   {categoryOptions.map(({ id, name }) => (
                     <Select.Option key={id} value={id}>
                       {name}
@@ -201,7 +201,7 @@ export const RestaurantModal = ({
             <Col span={24}>
               <Form.Item
                 name="video"
-                label="上传景区视频"
+                label="上传门店视频"
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
               >
@@ -213,11 +213,11 @@ export const RestaurantModal = ({
             <Col span={24}>
               <Form.Item
                 name="imageList"
-                label="上传景区照片"
+                label="上传门店照片"
                 tooltip="图片大小不能超过10MB"
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
-                rules={[{ required: true, message: "请上传景区照片" }]}
+                rules={[{ required: true, message: "请上传门店照片" }]}
               >
                 <OssUpload />
               </Form.Item>
@@ -225,7 +225,7 @@ export const RestaurantModal = ({
           </Row>
           <Row gutter={16}>
             <Col span={12}>
-              <Form.Item label="景区所在经纬度" required>
+              <Form.Item label="门店所在经纬度" required>
                 <Input.Group>
                   <Row gutter={8}>
                     <Col span={12}>
@@ -253,10 +253,10 @@ export const RestaurantModal = ({
             <Col span={12}>
               <Form.Item
                 name="address"
-                label="景区地址详情"
-                rules={[{ required: true, message: "请输入景区地址详情" }]}
+                label="门店地址详情"
+                rules={[{ required: true, message: "请输入门店地址详情" }]}
               >
-                <Input placeholder="请输入景区地址详情" />
+                <Input placeholder="请输入门店地址详情" />
               </Form.Item>
             </Col>
           </Row>
@@ -269,10 +269,10 @@ export const RestaurantModal = ({
             <Col span={24}>
               <Form.Item
                 name="brief"
-                label="景区简介"
-                rules={[{ required: true, message: "请输入景区简介" }]}
+                label="门店简介"
+                rules={[{ required: true, message: "请输入门店简介" }]}
               >
-                <Input.TextArea rows={6} placeholder="请输入景区简介" />
+                <Input.TextArea rows={6} placeholder="请输入门店简介" />
               </Form.Item>
             </Col>
           </Row>
@@ -429,7 +429,7 @@ export const RestaurantModal = ({
           </Row>
           <Row gutter={16}>
             <Col span={12}>
-              <Form.Item label="景区项目">
+              <Form.Item label="门店项目">
                 <Form.List name="projectList">
                   {(fields, { add, remove }) => (
                     <>
@@ -466,7 +466,7 @@ export const RestaurantModal = ({
                         block
                         icon={<PlusOutlined />}
                       >
-                        添加景区项目
+                        添加门店项目
                       </Button>
                     </>
                   )}
@@ -474,7 +474,7 @@ export const RestaurantModal = ({
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item label="景区设施">
+              <Form.Item label="门店设施">
                 <Form.List name="facilityList">
                   {(fields, { add, remove }) => (
                     <>
@@ -524,7 +524,7 @@ export const RestaurantModal = ({
                         block
                         icon={<PlusOutlined />}
                       >
-                        添加景区设施
+                        添加门店设施
                       </Button>
                     </>
                   )}
