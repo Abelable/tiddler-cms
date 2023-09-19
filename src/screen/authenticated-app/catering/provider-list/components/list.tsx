@@ -58,7 +58,7 @@ export const List = ({
           {
             title: "商家类型",
             dataIndex: "type",
-            render: (value) => <>{value === 1 ? "个人" : "企业"}</>,
+            render: (value) => <>{value === 1 ? "个体" : "企业"}</>,
             filters: typeOptions,
             onFilter: (value, provider) => provider.type === value,
           },

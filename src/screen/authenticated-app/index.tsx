@@ -32,6 +32,8 @@ import { HotelProviderList } from "./hotel/provider/provider-list";
 import { HotelShopList } from "./hotel/provider/shop-list";
 import { ProviderHotelList } from "./hotel/provider/hotel-apply-list";
 import { CateringProviderList } from "./catering/provider-list";
+import { RestaurantCategoryList } from "./catering/restaurant/category-list";
+import { RestaurantList } from "./catering/restaurant/restaurant-list";
 
 import {
   LockOutlined,
@@ -139,6 +141,14 @@ export const AuthenticatedApp = () => {
               <Route
                 path="catering/provider_list"
                 element={<CateringProviderList />}
+              />
+              <Route
+                path="catering/restaurant/category_list"
+                element={<RestaurantCategoryList />}
+              />
+              <Route
+                path="catering/restaurant/list"
+                element={<RestaurantList />}
               />
               <Route
                 path={"*"}
@@ -352,6 +362,25 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
           label: <Link to={"catering/provider_list"}>商家列表</Link>,
           key: "catering_provider_list",
           icon: <TeamOutlined />,
+        },
+        {
+          label: "门店管理",
+          key: "catering_restaurant",
+          icon: <ShopOutlined />,
+          children: [
+            {
+              label: (
+                <Link to={"catering/restaurant/category_list"}>门店分类</Link>
+              ),
+              key: "catering_restaurant_category_list",
+              icon: <AppstoreOutlined />,
+            },
+            {
+              label: <Link to={"catering/restaurant/list"}>门店列表</Link>,
+              key: "catering_restaurant_list",
+              icon: <UnorderedListOutlined />,
+            },
+          ],
         },
       ],
     },
