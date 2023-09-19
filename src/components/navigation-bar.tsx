@@ -39,6 +39,9 @@ const breadcrumbNameMap: { [key: string]: string } = {
   "/hotel/provider/hotel_apply": "酒店申请",
   "/catering": "餐饮模块",
   "/catering/provider_list": "商家列表",
+  "/catering/restaurant": "门店管理",
+  "/catering/restaurant/category_list": "门店分类",
+  "/catering/restaurant/list": "门店列表",
 };
 
 export const NavigationBar = () => {
