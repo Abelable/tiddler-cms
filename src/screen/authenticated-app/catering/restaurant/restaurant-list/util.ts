@@ -66,26 +66,3 @@ export const useRestaurantModal = () => {
     close,
   };
 };
-
-export const useRejectModal = () => {
-  const [{ rejectRestaurantId }, setRejectRestaurantId] = useUrlQueryParams([
-    "rejectRestaurantId",
-  ]);
-  const setUrlParams = useSetUrlSearchParams();
-
-  const open = useCallback(
-    (id: number) => setRejectRestaurantId({ rejectRestaurantId: `${id}` }),
-    [setRejectRestaurantId]
-  );
-  const close = useCallback(
-    () => setUrlParams({ rejectRestaurantId: "" }),
-    [setUrlParams]
-  );
-
-  return {
-    rejectModalOpen: !!rejectRestaurantId,
-    rejectRestaurantId,
-    open,
-    close,
-  };
-};

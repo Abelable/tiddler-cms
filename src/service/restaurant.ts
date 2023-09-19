@@ -2,10 +2,8 @@ import { QueryKey, useMutation, useQuery } from "react-query";
 import { useHttp } from "./http";
 import {
   useAddConfig,
-  useApprovedConfig,
   useDeleteConfig,
   useEditConfig,
-  useRejectConfig,
 } from "./use-optimistic-options";
 import { cleanObject } from "utils/index";
 import type {
@@ -33,30 +31,6 @@ export const useRestaurant = (id: number) => {
     {
       enabled: !!id,
     }
-  );
-};
-
-export const useApprovedRestaurant = (queryKey: QueryKey) => {
-  const client = useHttp();
-  return useMutation(
-    (id: number) =>
-      client("catering/restaurant/up", {
-        data: { id },
-        method: "POST",
-      }),
-    useApprovedConfig(queryKey)
-  );
-};
-
-export const useRejectRestaurant = (queryKey: QueryKey) => {
-  const client = useHttp();
-  return useMutation(
-    (data: { id: number; failureReason: string }) =>
-      client("catering/restaurant/reject", {
-        data,
-        method: "POST",
-      }),
-    useRejectConfig(queryKey)
   );
 };
 

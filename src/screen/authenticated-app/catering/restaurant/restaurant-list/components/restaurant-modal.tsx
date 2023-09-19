@@ -14,6 +14,7 @@ import {
   Select,
   Space,
   TimePicker,
+  InputNumber,
 } from "antd";
 import { OssUpload } from "components/oss-upload";
 import { ErrorBox, Row as CustomRow, ModalLoading } from "components/lib";
@@ -74,9 +75,18 @@ export const RestaurantModal = ({
 
   useEffect(() => {
     if (editingRestaurant) {
-      const { video, imageList, openTimeList, projectList, ...rest } =
-        editingRestaurant;
+      const {
+        logo,
+        video,
+        cover,
+        foodImageList,
+        environmentImageList,
+        priceImageList,
+        openTimeList,
+        ...rest
+      } = editingRestaurant;
       form.setFieldsValue({
+        logo: logo ? [{ url: logo }] : [],
         video: video
           ? [
               {
@@ -85,9 +95,16 @@ export const RestaurantModal = ({
               },
             ]
           : [],
-        imageList: imageList?.length
-          ? imageList?.map((item) => ({ url: item }))
-          : imageList,
+        cover: cover ? [{ url: cover }] : [],
+        foodImageList: foodImageList?.length
+          ? foodImageList?.map((item) => ({ url: item }))
+          : foodImageList,
+        environmentImageList: environmentImageList?.length
+          ? environmentImageList?.map((item) => ({ url: item }))
+          : environmentImageList,
+        priceImageList: priceImageList?.length
+          ? priceImageList?.map((item) => ({ url: item }))
+          : priceImageList,
         openTimeList: openTimeList?.length
           ? openTimeList.map((item) => ({
               ...item,
@@ -95,12 +112,6 @@ export const RestaurantModal = ({
               closeTime: moment(item.openTime),
             }))
           : openTimeList,
-        projectList: projectList?.length
-          ? projectList.map((item) => ({
-              ...item,
-              image: [{ url: item.image }],
-            }))
-          : projectList,
         ...rest,
       });
     }
@@ -117,20 +128,26 @@ export const RestaurantModal = ({
 
   const submit = () => {
     form.validateFields().then(async () => {
-      const { video, imageList, projectList, ...rest } = form.getFieldsValue();
+      const {
+        logo,
+        video,
+        cover,
+        foodImageList,
+        environmentImageList,
+        priceImageList,
+        ...rest
+      } = form.getFieldsValue();
       await mutateAsync({
         ...editingRestaurant,
         ...rest,
+        logo: logo && logo.length ? logo[0].url : "",
         video: video && video.length ? video[0].url : "",
-        imageList: imageList.map((item: { url: string }) => item.url),
-        projectList: projectList.length
-          ? projectList.map(
-              (item: { image: { url: string }[]; name: string }) => ({
-                ...item,
-                image: item.image[0].url,
-              })
-            )
-          : projectList,
+        cover: cover && cover.length ? cover[0].url : "",
+        foodImageList: foodImageList.map((item: { url: string }) => item.url),
+        environmentImageList: environmentImageList.map(
+          (item: { url: string }) => item.url
+        ),
+        priceImageList: priceImageList.map((item: { url: string }) => item.url),
       });
       closeModal();
     });
@@ -167,22 +184,6 @@ export const RestaurantModal = ({
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item
-                name="name"
-                label="门店名称"
-                rules={[{ required: true, message: "请输入门店名称" }]}
-              >
-                <Input placeholder="请输入门店名称" />
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item name="level" label="门店等级">
-                <Input placeholder="请输入门店等级，例：5A" />
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item
                 name="categoryId"
                 label="门店类型"
                 rules={[{ required: true, message: "请选择门店类型" }]}
@@ -198,7 +199,31 @@ export const RestaurantModal = ({
             </Col>
           </Row>
           <Row gutter={16}>
-            <Col span={24}>
+            <Col span={12}>
+              <Form.Item
+                name="name"
+                label="门店名称"
+                rules={[{ required: true, message: "请输入门店名称" }]}
+              >
+                <Input placeholder="请输入门店名称" />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                name="price"
+                label="人均消费价格"
+                rules={[{ required: true, message: "请填写人均消费价格" }]}
+              >
+                <InputNumber
+                  prefix="￥"
+                  style={{ width: "100%" }}
+                  placeholder="请填写人均消费价格"
+                />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={12}>
               <Form.Item
                 name="video"
                 label="上传门店视频"
@@ -206,6 +231,18 @@ export const RestaurantModal = ({
                 getValueFromEvent={normFile}
               >
                 <OssUpload accept=".mp4" maxCount={1} />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                name="cover"
+                label="上传门店封面照片"
+                tooltip="图片大小不能超过10MB"
+                valuePropName="fileList"
+                getValueFromEvent={normFile}
+                rules={[{ required: true, message: "请上传门店封面照片" }]}
+              >
+                <OssUpload maxCount={1} />
               </Form.Item>
             </Col>
           </Row>

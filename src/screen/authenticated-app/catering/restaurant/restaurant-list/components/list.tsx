@@ -1,26 +1,19 @@
 import dayjs from "dayjs";
 import styled from "@emotion/styled";
-import {
-  useRestaurantModal,
-  useRestaurantListQueryKey,
-  useRejectModal,
-} from "../util";
+import { useRestaurantModal, useRestaurantListQueryKey } from "../util";
 
 import {
   Dropdown,
   Menu,
-  MenuProps,
   Modal,
   Table,
   TablePaginationConfig,
   TableProps,
-  Tooltip,
   Button,
   Rate,
-  Tag,
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
-import { useApprovedRestaurant, useDeleteRestaurant } from "service/restaurant";
+import { useDeleteRestaurant } from "service/restaurant";
 import { PlusOutlined } from "@ant-design/icons";
 import { SearchPanelProps } from "./search-panel";
 
@@ -67,12 +60,7 @@ export const List = ({
           },
           {
             title: "名称",
-            render: (value, spot) => (
-              <Row gap={1}>
-                <span>{spot.name}</span>
-                <Tag color="gold">{spot.level}</Tag>
-              </Row>
-            ),
+            dataIndex: "name",
           },
           {
             title: "分类",
@@ -94,27 +82,17 @@ export const List = ({
             ),
           },
           {
-            title: "状态",
-            dataIndex: "status",
+            title: "营业状态",
+            dataIndex: "openStatus",
             width: "12rem",
             render: (value, restaurant) =>
               value === 0 ? (
-                <span style={{ color: "#87d068" }}>待审核</span>
-              ) : value === 1 ? (
-                <span>开放中</span>
+                <span style={{ color: "#f50" }}>暂停营业</span>
               ) : (
-                <Tooltip title={restaurant.failureReason}>
-                  <span style={{ color: "#f50", cursor: "pointer" }}>
-                    未过审
-                  </span>
-                </Tooltip>
+                <span style={{ color: "#87d068" }}>正在营业</span>
               ),
-            filters: [
-              { text: "待审核", value: 0 },
-              { text: "开放中", value: 1 },
-              { text: "未过审", value: 2 },
-            ],
-            onFilter: (value, restaurant) => restaurant.status === value,
+            filters: statusOptions,
+            onFilter: (value, restaurant) => restaurant.openStatus === value,
           },
           {
             title: "创建时间",
@@ -145,7 +123,7 @@ export const List = ({
           {
             title: "操作",
             render(value, restaurant) {
-              return <More id={restaurant.id} status={restaurant.status} />;
+              return <More id={restaurant.id} />;
             },
             width: "8rem",
             fixed: "right",
@@ -158,15 +136,11 @@ export const List = ({
   );
 };
 
-const More = ({ id, status }: { id: number; status: number }) => {
+const More = ({ id }: { id: number }) => {
   const { startEdit } = useRestaurantModal();
   const { mutate: deleteRestaurant } = useDeleteRestaurant(
     useRestaurantListQueryKey()
   );
-  const { mutate: approvedRestaurant } = useApprovedRestaurant(
-    useRestaurantListQueryKey()
-  );
-  const { open: openRejectModal } = useRejectModal();
 
   const confirmDelete = (id: number) => {
     Modal.confirm({
@@ -178,73 +152,23 @@ const More = ({ id, status }: { id: number; status: number }) => {
     });
   };
 
-  const confirmApproved = (id: number) => {
-    Modal.confirm({
-      title: "景区审核通过确认",
-      content: "请确保在景区信息无误的情况下进行该操作",
-      okText: "确定",
-      cancelText: "取消",
-      onOk: () => approvedRestaurant(id),
-    });
-  };
-
-  let items: MenuProps["items"];
-  switch (status) {
-    case 0:
-      items = [
-        {
-          label: <div onClick={() => startEdit(id)}>编辑</div>,
-          key: "detail",
-        },
-        {
-          label: <div onClick={() => confirmApproved(id)}>通过</div>,
-          key: "approved",
-        },
-        {
-          label: <div onClick={() => openRejectModal(id)}>驳回</div>,
-          key: "reject",
-        },
-
-        {
-          label: <div onClick={() => confirmDelete(id)}>删除</div>,
-          key: "delete",
-        },
-      ];
-      break;
-
-    case 1:
-      items = [
-        {
-          label: <div onClick={() => startEdit(id)}>编辑</div>,
-          key: "detail",
-        },
-        {
-          label: <div onClick={() => openRejectModal(id)}>驳回重审</div>,
-          key: "reject",
-        },
-        {
-          label: <div onClick={() => confirmDelete(id)}>删除</div>,
-          key: "delete",
-        },
-      ];
-      break;
-
-    case 2:
-      items = [
-        {
-          label: <div onClick={() => startEdit(id)}>编辑</div>,
-          key: "detail",
-        },
-        {
-          label: <div onClick={() => confirmDelete(id)}>删除</div>,
-          key: "delete",
-        },
-      ];
-      break;
-  }
-
   return (
-    <Dropdown overlay={<Menu items={items} />}>
+    <Dropdown
+      overlay={
+        <Menu
+          items={[
+            {
+              label: <div onClick={() => startEdit(id)}>编辑</div>,
+              key: "detail",
+            },
+            {
+              label: <div onClick={() => confirmDelete(id)}>删除</div>,
+              key: "delete",
+            },
+          ]}
+        />
+      }
+    >
       <ButtonNoPadding type={"link"}>...</ButtonNoPadding>
     </Dropdown>
   );

@@ -13,51 +13,33 @@ interface OpenTime {
   closeTime: string;
   tips: string;
 }
-interface Policy {
-  crowd: string;
-  condition: string;
-  content: string;
-}
-interface Facility {
-  facilityId: number;
-  content: string;
-}
-interface Project {
-  image: string;
-  name: string;
-}
-interface Tips {
-  title: string;
-  content: string;
-}
 
 export interface RestaurantDetail {
   id: number;
-  name: string;
-  level: string;
   categoryId: number;
+  openStatus: number;
+  name: string;
+  price: number;
+  logo: string;
   video: string;
-  imageList: string[];
+  cover: string;
+  foodImageList: string[];
+  environmentImageList: string[];
+  priceImageList: string[];
   longitude: number;
   latitude: number;
   address: string;
-  brief: string;
+  telList: string[];
   openTimeList: OpenTime[];
-  policyList: Policy[];
-  hotlineList: string[];
-  facilityList: Facility[];
-  projectList: Project[];
-  tipsList: Tips[];
+  facilityList: string[];
 }
 
 export interface Restaurant {
   id: number;
-  status: number;
-  failureReason: string;
-  name: string;
-  level: string;
   categoryId: number;
+  name: string;
   rate: number;
+  openStatus: number;
   createdAt: string;
   updatedAt: string;
 }
