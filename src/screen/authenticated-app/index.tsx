@@ -31,7 +31,8 @@ import { HotelRoomTypeList } from "./hotel/store/room-type-list";
 import { HotelProviderList } from "./hotel/provider/provider-list";
 import { HotelShopList } from "./hotel/provider/shop-list";
 import { ProviderHotelList } from "./hotel/provider/hotel-apply-list";
-import { CateringProviderList } from "./catering/provider-list";
+import { CateringProviderList } from "./catering/provider/provider-list";
+import { ProviderRestaurantList } from "./catering/provider/restaurant-apply-list";
 import { RestaurantCategoryList } from "./catering/restaurant/category-list";
 import { RestaurantList } from "./catering/restaurant/restaurant-list";
 
@@ -141,6 +142,14 @@ export const AuthenticatedApp = () => {
               <Route
                 path="catering/provider_list"
                 element={<CateringProviderList />}
+              />
+              <Route
+                path="catering/provider/list"
+                element={<CateringProviderList />}
+              />
+              <Route
+                path="catering/provider/restaurant_apply"
+                element={<ProviderRestaurantList />}
               />
               <Route
                 path="catering/restaurant/category_list"
@@ -359,9 +368,23 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
       icon: <CateringIcon />,
       children: [
         {
-          label: <Link to={"catering/provider_list"}>商家列表</Link>,
-          key: "catering_provider_list",
+          label: "服务商管理",
+          key: "catering_provider",
           icon: <TeamOutlined />,
+          children: [
+            {
+              label: <Link to={"catering/provider/list"}>服务商列表</Link>,
+              key: "catering_provider_list",
+              icon: <TeamOutlined />,
+            },
+            {
+              label: (
+                <Link to={"catering/provider/restaurant_apply"}>门店申请</Link>
+              ),
+              key: "catering_provider_restaurant_apply",
+              icon: <FileAddOutlined />,
+            },
+          ],
         },
         {
           label: "门店管理",
