@@ -17,18 +17,13 @@ import {
   InputNumber,
 } from "antd";
 import { OssUpload } from "components/oss-upload";
-import { ErrorBox, Row as CustomRow, ModalLoading } from "components/lib";
+import { ErrorBox, ModalLoading } from "components/lib";
 import { Map } from "components/map";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 
 import type { CategoryOption } from "types/category";
+import type { Option } from "types/common";
 
-const facilityOptions = [
-  { id: 1, name: "停车场" },
-  { id: 2, name: "卫生间" },
-  { id: 3, name: "商店" },
-  { id: 4, name: "餐厅" },
-];
 const monthOptions = [
   { id: 1, name: "1月" },
   { id: 2, name: "2月" },
@@ -51,8 +46,10 @@ const normFile = (e: any) => {
 
 export const RestaurantModal = ({
   categoryOptions,
+  statusOptions,
 }: {
   categoryOptions: CategoryOption[];
+  statusOptions: Option[];
 }) => {
   const [form] = useForm();
 
@@ -197,8 +194,6 @@ export const RestaurantModal = ({
                 </Select>
               </Form.Item>
             </Col>
-          </Row>
-          <Row gutter={16}>
             <Col span={12}>
               <Form.Item
                 name="name"
@@ -208,6 +203,8 @@ export const RestaurantModal = ({
                 <Input placeholder="请输入门店名称" />
               </Form.Item>
             </Col>
+          </Row>
+          <Row gutter={16}>
             <Col span={12}>
               <Form.Item
                 name="price"
@@ -221,16 +218,33 @@ export const RestaurantModal = ({
                 />
               </Form.Item>
             </Col>
+            <Col span={12}>
+              <Form.Item
+                name="openStatus"
+                label="营业状态"
+                rules={[{ required: true, message: "请选择营业状态" }]}
+              >
+                <Select placeholder="请选择营业状态">
+                  {statusOptions?.map(({ text, value }) => (
+                    <Select.Option key={value} value={value}>
+                      {text}
+                    </Select.Option>
+                  ))}
+                </Select>
+              </Form.Item>
+            </Col>
           </Row>
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item
-                name="video"
-                label="上传门店视频"
+                name="logo"
+                label="上传门店logo照片"
+                tooltip="图片大小不能超过10MB"
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
+                rules={[{ required: true, message: "请上传门店logo照片" }]}
               >
-                <OssUpload accept=".mp4" maxCount={1} />
+                <OssUpload maxCount={1} />
               </Form.Item>
             </Col>
             <Col span={12}>
@@ -247,14 +261,51 @@ export const RestaurantModal = ({
             </Col>
           </Row>
           <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item
+                name="video"
+                label="上传门店视频"
+                valuePropName="fileList"
+                getValueFromEvent={normFile}
+              >
+                <OssUpload accept=".mp4" maxCount={1} />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
             <Col span={24}>
               <Form.Item
-                name="imageList"
-                label="上传门店照片"
+                name="foodImageList"
+                label="上传菜品照片"
                 tooltip="图片大小不能超过10MB"
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
-                rules={[{ required: true, message: "请上传门店照片" }]}
+              >
+                <OssUpload />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={24}>
+              <Form.Item
+                name="environmentImageList"
+                label="上传环境照片"
+                tooltip="图片大小不能超过10MB"
+                valuePropName="fileList"
+                getValueFromEvent={normFile}
+              >
+                <OssUpload />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={24}>
+              <Form.Item
+                name="priceImageList"
+                label="上传价目表照片"
+                tooltip="图片大小不能超过10MB"
+                valuePropName="fileList"
+                getValueFromEvent={normFile}
               >
                 <OssUpload />
               </Form.Item>
@@ -304,18 +355,7 @@ export const RestaurantModal = ({
           </Row>
           <Row gutter={16}>
             <Col span={24}>
-              <Form.Item
-                name="brief"
-                label="门店简介"
-                rules={[{ required: true, message: "请输入门店简介" }]}
-              >
-                <Input.TextArea rows={6} placeholder="请输入门店简介" />
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row gutter={16}>
-            <Col span={24}>
-              <Form.Item label="开放时间">
+              <Form.Item label="营业时间">
                 <Form.List name="openTimeList">
                   {(fields, { add, remove }) => (
                     <>
@@ -406,173 +446,9 @@ export const RestaurantModal = ({
             </Col>
           </Row>
           <Row gutter={16}>
-            <Col span={24}>
-              <Form.Item label="优待政策">
-                <Form.List name="policyList">
-                  {(fields, { add, remove }) => (
-                    <>
-                      {fields.map(({ key, name, ...restField }) => (
-                        <Space
-                          key={key}
-                          style={{ display: "flex" }}
-                          align="baseline"
-                        >
-                          <Form.Item
-                            {...restField}
-                            name={[name, "crowd"]}
-                            rules={[
-                              { required: true, message: "请输入适用人群" },
-                            ]}
-                          >
-                            <Input placeholder="请输入适用人群" />
-                          </Form.Item>
-                          <Form.Item
-                            {...restField}
-                            name={[name, "condition"]}
-                            rules={[
-                              { required: true, message: "请输入适用条件" },
-                            ]}
-                          >
-                            <Input
-                              style={{ width: "30rem" }}
-                              placeholder="请输入适用条件"
-                            />
-                          </Form.Item>
-                          <Form.Item
-                            {...restField}
-                            name={[name, "content"]}
-                            rules={[
-                              { required: true, message: "请输入政策内容" },
-                            ]}
-                          >
-                            <Input placeholder="请输入政策内容" />
-                          </Form.Item>
-                          <MinusCircleOutlined onClick={() => remove(name)} />
-                        </Space>
-                      ))}
-                      <Button
-                        type="dashed"
-                        onClick={() => add()}
-                        block
-                        icon={<PlusOutlined />}
-                      >
-                        添加优待政策
-                      </Button>
-                    </>
-                  )}
-                </Form.List>
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row gutter={16}>
             <Col span={12}>
-              <Form.Item label="门店项目">
-                <Form.List name="projectList">
-                  {(fields, { add, remove }) => (
-                    <>
-                      {fields.map(({ key, name, ...restField }) => (
-                        <Space key={key}>
-                          <CustomRow>
-                            <Form.Item
-                              {...restField}
-                              name={[name, "image"]}
-                              valuePropName="fileList"
-                              getValueFromEvent={normFile}
-                              rules={[
-                                { required: true, message: "请上传项目照片" },
-                              ]}
-                            >
-                              <OssUpload maxCount={1} />
-                            </Form.Item>
-                            <Form.Item
-                              {...restField}
-                              name={[name, "name"]}
-                              rules={[
-                                { required: true, message: "请输入项目名称" },
-                              ]}
-                            >
-                              <Input placeholder="请输入项目名称" />
-                            </Form.Item>
-                          </CustomRow>
-                          <MinusCircleOutlined onClick={() => remove(name)} />
-                        </Space>
-                      ))}
-                      <Button
-                        type="dashed"
-                        onClick={() => add()}
-                        block
-                        icon={<PlusOutlined />}
-                      >
-                        添加门店项目
-                      </Button>
-                    </>
-                  )}
-                </Form.List>
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item label="门店设施">
-                <Form.List name="facilityList">
-                  {(fields, { add, remove }) => (
-                    <>
-                      {fields.map(({ key, name, ...restField }) => (
-                        <Space
-                          key={key}
-                          style={{ display: "flex" }}
-                          align="baseline"
-                        >
-                          <Form.Item
-                            {...restField}
-                            name={[name, "facilityId"]}
-                            rules={[{ required: true, message: "请选择设施" }]}
-                          >
-                            <Select
-                              style={{ width: "10rem" }}
-                              placeholder="选择设施"
-                            >
-                              {facilityOptions.map((facilityOption) => (
-                                <Select.Option
-                                  key={facilityOption.id}
-                                  value={facilityOption.id}
-                                >
-                                  {facilityOption.name}
-                                </Select.Option>
-                              ))}
-                            </Select>
-                          </Form.Item>
-                          <Form.Item
-                            {...restField}
-                            name={[name, "content"]}
-                            rules={[
-                              { required: true, message: "请输入设施描述" },
-                            ]}
-                          >
-                            <Input
-                              style={{ width: "20rem" }}
-                              placeholder="请输入设施描述"
-                            />
-                          </Form.Item>
-                          <MinusCircleOutlined onClick={() => remove(name)} />
-                        </Space>
-                      ))}
-                      <Button
-                        type="dashed"
-                        onClick={() => add()}
-                        block
-                        icon={<PlusOutlined />}
-                      >
-                        添加门店设施
-                      </Button>
-                    </>
-                  )}
-                </Form.List>
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item label="咨询热线">
-                <Form.List name="hotlineList">
+              <Form.Item label="联系电话">
+                <Form.List name="telList">
                   {(fields, { add, remove }) => (
                     <>
                       {fields.map(({ key, name, ...restField }) => (
@@ -585,10 +461,13 @@ export const RestaurantModal = ({
                             {...restField}
                             name={name}
                             rules={[
-                              { required: true, message: "请输入咨询热线" },
+                              { required: true, message: "请输入联系电话" },
                             ]}
                           >
-                            <Input placeholder="请输入咨询热线" />
+                            <Input
+                              style={{ width: "31rem" }}
+                              placeholder="请输入联系电话"
+                            />
                           </Form.Item>
                           <MinusCircleOutlined onClick={() => remove(name)} />
                         </Space>
@@ -599,7 +478,7 @@ export const RestaurantModal = ({
                         block
                         icon={<PlusOutlined />}
                       >
-                        添加咨询热线
+                        添加联系电话
                       </Button>
                     </>
                   )}
@@ -607,8 +486,8 @@ export const RestaurantModal = ({
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item label="游玩贴士">
-                <Form.List name="tipsList">
+              <Form.Item label="服务设施">
+                <Form.List name="facilityList">
                   {(fields, { add, remove }) => (
                     <>
                       {fields.map(({ key, name, ...restField }) => (
@@ -619,26 +498,14 @@ export const RestaurantModal = ({
                         >
                           <Form.Item
                             {...restField}
-                            name={[name, "title"]}
+                            name={name}
                             rules={[
-                              { required: true, message: "请输入贴士标题" },
+                              { required: true, message: "请输入设施名称" },
                             ]}
                           >
                             <Input
-                              style={{ width: "10rem" }}
-                              placeholder="请输入标题"
-                            />
-                          </Form.Item>
-                          <Form.Item
-                            {...restField}
-                            name={[name, "content"]}
-                            rules={[
-                              { required: true, message: "请输入贴士内容" },
-                            ]}
-                          >
-                            <Input
-                              style={{ width: "20rem" }}
-                              placeholder="请输入内容"
+                              style={{ width: "31rem" }}
+                              placeholder="请输入设施名称"
                             />
                           </Form.Item>
                           <MinusCircleOutlined onClick={() => remove(name)} />
@@ -650,7 +517,7 @@ export const RestaurantModal = ({
                         block
                         icon={<PlusOutlined />}
                       >
-                        添加游玩贴士
+                        添加服务设施
                       </Button>
                     </>
                   )}

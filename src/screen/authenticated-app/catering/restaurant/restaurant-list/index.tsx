@@ -43,7 +43,10 @@ export const RestaurantList = () => {
           }}
         />
       </Main>
-      <RestaurantModal categoryOptions={restaurantCategoryOptions || []} />
+      <RestaurantModal
+        categoryOptions={restaurantCategoryOptions || []}
+        statusOptions={statusOptions}
+      />
     </Container>
   );
 };

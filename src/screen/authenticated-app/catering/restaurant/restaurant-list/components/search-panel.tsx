@@ -3,12 +3,13 @@ import styled from "@emotion/styled";
 import { Row } from "components/lib";
 import { Button, Input, Select } from "antd";
 
+import type { Option } from "types/common";
 import type { ScenicListSearchParams } from "types/scenic";
 import type { CategoryOption } from "types/category";
 
 export interface SearchPanelProps {
   categoryOptions: CategoryOption[];
-  statusOptions: { text: string; value: number }[];
+  statusOptions: Option[];
   params: Partial<ScenicListSearchParams>;
   setParams: (params: Partial<ScenicListSearchParams>) => void;
 }
