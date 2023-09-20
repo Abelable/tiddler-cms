@@ -11,9 +11,9 @@ export const useProviderRestaurantList = (
 ) => {
   const client = useHttp();
   return useQuery<ProviderRestaurantListResult>(
-    ["provider_resraurant_list", params],
+    ["provider_restaurant_list", params],
     () =>
-      client("catering/provider/resraurant/list", {
+      client("catering/provider/restaurant/list", {
         data: params,
         method: "POST",
       })
@@ -24,7 +24,7 @@ export const useApprovedProviderRestaurant = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (id: number) =>
-      client("catering/provider/resraurant/approved", {
+      client("catering/provider/restaurant/approved", {
         data: { id },
         method: "POST",
       }),
@@ -36,7 +36,7 @@ export const useRejectProviderRestaurant = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (data: { id: number; failureReason: string }) =>
-      client("catering/provider/resraurant/reject", {
+      client("catering/provider/restaurant/reject", {
         data,
         method: "POST",
       }),
@@ -48,7 +48,7 @@ export const useDeleteProviderRestaurant = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (id: number) =>
-      client("catering/provider/resraurant/delete", {
+      client("catering/provider/restaurant/delete", {
         data: { id },
         method: "POST",
       }),
