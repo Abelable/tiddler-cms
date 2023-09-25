@@ -22,21 +22,15 @@ import { Map } from "components/map";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 
 import type { CategoryOption } from "types/category";
-import type { Option } from "types/common";
 
-const monthOptions = [
-  { id: 1, name: "1月" },
-  { id: 2, name: "2月" },
-  { id: 3, name: "3月" },
-  { id: 4, name: "4月" },
-  { id: 5, name: "5月" },
-  { id: 6, name: "6月" },
-  { id: 7, name: "7月" },
-  { id: 8, name: "8月" },
-  { id: 9, name: "9月" },
-  { id: 10, name: "10月" },
-  { id: 11, name: "11月" },
-  { id: 12, name: "12月" },
+const weekDayOptions = [
+  { text: "周一", value: 1 },
+  { text: "周二", value: 2 },
+  { text: "周三", value: 3 },
+  { text: "周四", value: 4 },
+  { text: "周五", value: 5 },
+  { text: "周六", value: 6 },
+  { text: "周日", value: 7 },
 ];
 
 const normFile = (e: any) => {
@@ -46,10 +40,8 @@ const normFile = (e: any) => {
 
 export const RestaurantModal = ({
   categoryOptions,
-  statusOptions,
 }: {
   categoryOptions: CategoryOption[];
-  statusOptions: Option[];
 }) => {
   const [form] = useForm();
 
@@ -73,7 +65,6 @@ export const RestaurantModal = ({
   useEffect(() => {
     if (editingRestaurant) {
       const {
-        logo,
         video,
         cover,
         foodImageList,
@@ -83,7 +74,6 @@ export const RestaurantModal = ({
         ...rest
       } = editingRestaurant;
       form.setFieldsValue({
-        logo: logo ? [{ url: logo }] : [],
         video: video
           ? [
               {
@@ -137,7 +127,6 @@ export const RestaurantModal = ({
       await mutateAsync({
         ...editingRestaurant,
         ...rest,
-        logo: logo && logo.length ? logo[0].url : "",
         video: video && video.length ? video[0].url : "",
         cover: cover && cover.length ? cover[0].url : "",
         foodImageList: foodImageList.map((item: { url: string }) => item.url),
@@ -181,6 +170,15 @@ export const RestaurantModal = ({
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item
+                name="name"
+                label="门店名称"
+                rules={[{ required: true, message: "请输入门店名称" }]}
+              >
+                <Input placeholder="请输入门店名称" />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
                 name="categoryId"
                 label="门店类型"
                 rules={[{ required: true, message: "请选择门店类型" }]}
@@ -192,15 +190,6 @@ export const RestaurantModal = ({
                     </Select.Option>
                   ))}
                 </Select>
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item
-                name="name"
-                label="门店名称"
-                rules={[{ required: true, message: "请输入门店名称" }]}
-              >
-                <Input placeholder="请输入门店名称" />
               </Form.Item>
             </Col>
           </Row>
@@ -218,35 +207,8 @@ export const RestaurantModal = ({
                 />
               </Form.Item>
             </Col>
-            <Col span={12}>
-              <Form.Item
-                name="openStatus"
-                label="营业状态"
-                rules={[{ required: true, message: "请选择营业状态" }]}
-              >
-                <Select placeholder="请选择营业状态">
-                  {statusOptions?.map(({ text, value }) => (
-                    <Select.Option key={value} value={value}>
-                      {text}
-                    </Select.Option>
-                  ))}
-                </Select>
-              </Form.Item>
-            </Col>
           </Row>
           <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item
-                name="logo"
-                label="上传门店logo照片"
-                tooltip="图片大小不能超过10MB"
-                valuePropName="fileList"
-                getValueFromEvent={normFile}
-                rules={[{ required: true, message: "请上传门店logo照片" }]}
-              >
-                <OssUpload maxCount={1} />
-              </Form.Item>
-            </Col>
             <Col span={12}>
               <Form.Item
                 name="cover"
@@ -367,42 +329,36 @@ export const RestaurantModal = ({
                         >
                           <Form.Item
                             {...restField}
-                            name={[name, "openMonth"]}
+                            name={[name, "startWeekDay"]}
                             rules={[
-                              { required: true, message: "请选择开始月份" },
+                              { required: true, message: "请选择开始时间" },
                             ]}
                           >
                             <Select
                               style={{ width: "10rem" }}
-                              placeholder="开始月份"
+                              placeholder="开始时间"
                             >
-                              {monthOptions.map((monthOption) => (
-                                <Select.Option
-                                  key={monthOption.id}
-                                  value={monthOption.id}
-                                >
-                                  {monthOption.name}
+                              {weekDayOptions.map(({ text, value }) => (
+                                <Select.Option key={value} value={value}>
+                                  {text}
                                 </Select.Option>
                               ))}
                             </Select>
                           </Form.Item>
                           <Form.Item
                             {...restField}
-                            name={[name, "closeMonth"]}
+                            name={[name, "endWeekDay"]}
                             rules={[
-                              { required: true, message: "请选择结束月份" },
+                              { required: true, message: "请选择结束时间" },
                             ]}
                           >
                             <Select
                               style={{ width: "10rem" }}
-                              placeholder="结束月份"
+                              placeholder="结束时间"
                             >
-                              {monthOptions.map((monthOption) => (
-                                <Select.Option
-                                  key={monthOption.id}
-                                  value={monthOption.id}
-                                >
-                                  {monthOption.name}
+                              {weekDayOptions.map(({ text, value }) => (
+                                <Select.Option key={value} value={value}>
+                                  {text}
                                 </Select.Option>
                               ))}
                             </Select>

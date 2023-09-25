@@ -17,10 +17,8 @@ interface OpenTime {
 export interface RestaurantDetail {
   id: number;
   categoryId: number;
-  openStatus: number;
   name: string;
   price: number;
-  logo: string;
   video: string;
   cover: string;
   foodImageList: string[];

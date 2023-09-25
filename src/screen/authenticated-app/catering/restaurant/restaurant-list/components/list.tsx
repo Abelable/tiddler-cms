@@ -26,7 +26,6 @@ interface ListProps extends TableProps<Restaurant>, SearchPanelProps {
 
 export const List = ({
   categoryOptions,
-  statusOptions,
   error,
   params,
   setParams,

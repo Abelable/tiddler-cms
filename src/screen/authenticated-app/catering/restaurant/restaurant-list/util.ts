@@ -6,7 +6,6 @@ export const useRestaurantListSearchParams = () => {
   const [params, setParams] = useUrlQueryParams([
     "name",
     "categoryId",
-    "status",
     "page",
     "limit",
   ]);

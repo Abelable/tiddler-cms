@@ -14,23 +14,17 @@ export const RestaurantList = () => {
   const { isLoading, error, data } = useRestaurantList(params);
   const { data: restaurantCategoryOptions, error: restaurantOptionsError } =
     useRestaurantCategoryOptions();
-  const statusOptions = [
-    { text: "暂停营业", value: 0 },
-    { text: "正在营业", value: 1 },
-  ];
 
   return (
     <Container>
       <Main>
         <SearchPanel
           categoryOptions={restaurantCategoryOptions || []}
-          statusOptions={statusOptions}
           params={params}
           setParams={setParams}
         />
         <List
           categoryOptions={restaurantCategoryOptions || []}
-          statusOptions={statusOptions}
           params={params}
           setParams={setParams}
           error={error || restaurantOptionsError}
@@ -43,10 +37,7 @@ export const RestaurantList = () => {
           }}
         />
       </Main>
-      <RestaurantModal
-        categoryOptions={restaurantCategoryOptions || []}
-        statusOptions={statusOptions}
-      />
+      <RestaurantModal categoryOptions={restaurantCategoryOptions || []} />
     </Container>
   );
 };

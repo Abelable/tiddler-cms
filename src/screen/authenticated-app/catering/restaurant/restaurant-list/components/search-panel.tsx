@@ -3,13 +3,11 @@ import styled from "@emotion/styled";
 import { Row } from "components/lib";
 import { Button, Input, Select } from "antd";
 
-import type { Option } from "types/common";
 import type { ScenicListSearchParams } from "types/scenic";
 import type { CategoryOption } from "types/category";
 
 export interface SearchPanelProps {
   categoryOptions: CategoryOption[];
-  statusOptions: Option[];
   params: Partial<ScenicListSearchParams>;
   setParams: (params: Partial<ScenicListSearchParams>) => void;
 }
@@ -22,7 +20,6 @@ const defaultParmas: Partial<ScenicListSearchParams> = {
 
 export const SearchPanel = ({
   categoryOptions,
-  statusOptions,
   params,
   setParams,
 }: SearchPanelProps) => {
@@ -47,10 +44,6 @@ export const SearchPanel = ({
     setTempParams({ ...tempParams, categoryId });
   const clearCategory = () =>
     setTempParams({ ...tempParams, categoryId: undefined });
-
-  const setStatus = (status: number) =>
-    setTempParams({ ...tempParams, status });
-  const clearStatus = () => setTempParams({ ...tempParams, status: undefined });
 
   const clear = () => {
     setParams({ ...params, ...defaultParmas });
@@ -82,23 +75,6 @@ export const SearchPanel = ({
           {categoryOptions?.map(({ id, name }) => (
             <Select.Option key={id} value={id}>
               {name}
-            </Select.Option>
-          ))}
-        </Select>
-      </Item>
-      <Item>
-        <div>门店状态：</div>
-        <Select
-          style={{ width: "20rem" }}
-          value={tempParams.status}
-          placeholder="请选择门店分类"
-          allowClear={true}
-          onSelect={setStatus}
-          onClear={clearStatus}
-        >
-          {statusOptions?.map(({ text, value }) => (
-            <Select.Option key={value} value={value}>
-              {text}
             </Select.Option>
           ))}
         </Select>
