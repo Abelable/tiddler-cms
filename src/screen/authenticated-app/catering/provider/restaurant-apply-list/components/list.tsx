@@ -68,6 +68,7 @@ export const List = ({
             title: "申请服务商",
             dataIndex: "providerCompanyName",
             width: "32rem",
+            render: (value) => <>{value || "个体商户"}</>,
           },
           {
             title: "服务商资质",

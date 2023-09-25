@@ -11,6 +11,7 @@ import {
   TableProps,
   Button,
   Rate,
+  Image,
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
 import { useDeleteRestaurant } from "service/restaurant";
@@ -42,7 +43,7 @@ export const List = ({
   return (
     <Container>
       <Header between={true}>
-        <PageTitle>景区列表</PageTitle>
+        <PageTitle>门店列表</PageTitle>
         <Button onClick={() => open()} type={"primary"} icon={<PlusOutlined />}>
           新增
         </Button>
@@ -59,6 +60,12 @@ export const List = ({
             fixed: "left",
           },
           {
+            title: "图片",
+            dataIndex: "cover",
+            render: (value) => <Image width={68} src={value} />,
+            width: "14rem",
+          },
+          {
             title: "名称",
             dataIndex: "name",
           },
@@ -71,7 +78,7 @@ export const List = ({
             ),
           },
           {
-            title: "评分",
+            title: "综合评分",
             dataIndex: "rate",
             width: "22rem",
             render: (value) => (
@@ -80,19 +87,6 @@ export const List = ({
                 <span style={{ marginLeft: "1rem" }}>{value}</span>
               </>
             ),
-          },
-          {
-            title: "营业状态",
-            dataIndex: "openStatus",
-            width: "12rem",
-            render: (value, restaurant) =>
-              value === 0 ? (
-                <span style={{ color: "#f50" }}>暂停营业</span>
-              ) : (
-                <span style={{ color: "#87d068" }}>正在营业</span>
-              ),
-            filters: statusOptions,
-            onFilter: (value, restaurant) => restaurant.openStatus === value,
           },
           {
             title: "创建时间",
@@ -144,7 +138,7 @@ const More = ({ id }: { id: number }) => {
 
   const confirmDelete = (id: number) => {
     Modal.confirm({
-      title: "确定删除该景区吗？",
+      title: "确定删除该门店吗？",
       content: "点击确定删除",
       okText: "确定",
       cancelText: "取消",
