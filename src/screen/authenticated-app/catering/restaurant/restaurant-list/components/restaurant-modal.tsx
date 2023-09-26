@@ -24,7 +24,6 @@ import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 
 import type { CategoryOption } from "types/category";
 import type { OpenTime } from "types/restaurant";
-import type { Moment } from "moment";
 
 const weekDayOptions = [
   { text: "周一", value: 1 },
