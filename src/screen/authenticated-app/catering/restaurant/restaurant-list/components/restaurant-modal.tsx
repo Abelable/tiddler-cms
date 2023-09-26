@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useForm } from "antd/lib/form/Form";
 import moment from "moment";
+import styled from "@emotion/styled";
 import { useAddRestaurant, useEditRestaurant } from "service/restaurant";
 import { useRestaurantModal, useRestaurantListQueryKey } from "../util";
 
@@ -17,7 +18,7 @@ import {
   InputNumber,
 } from "antd";
 import { OssUpload } from "components/oss-upload";
-import { ErrorBox, ModalLoading } from "components/lib";
+import { ErrorBox, ModalLoading, Row as CustomRow } from "components/lib";
 import { Map } from "components/map";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 
@@ -316,76 +317,108 @@ export const RestaurantModal = ({
             </Col>
           </Row>
           <Row gutter={16}>
-            <Col span={24}>
+            <Col span={12}>
               <Form.Item label="营业时间">
                 <Form.List name="openTimeList">
                   {(fields, { add, remove }) => (
                     <>
                       {fields.map(({ key, name, ...restField }) => (
-                        <Space
-                          key={key}
-                          style={{ display: "flex" }}
-                          align="baseline"
-                        >
-                          <Form.Item
-                            {...restField}
-                            name={[name, "startWeekDay"]}
-                            rules={[
-                              { required: true, message: "请选择开始时间" },
-                            ]}
-                          >
-                            <Select
-                              style={{ width: "10rem" }}
-                              placeholder="开始时间"
-                            >
-                              {weekDayOptions.map(({ text, value }) => (
-                                <Select.Option key={value} value={value}>
-                                  {text}
-                                </Select.Option>
-                              ))}
-                            </Select>
-                          </Form.Item>
-                          <Form.Item
-                            {...restField}
-                            name={[name, "endWeekDay"]}
-                            rules={[
-                              { required: true, message: "请选择结束时间" },
-                            ]}
-                          >
-                            <Select
-                              style={{ width: "10rem" }}
-                              placeholder="结束时间"
-                            >
-                              {weekDayOptions.map(({ text, value }) => (
-                                <Select.Option key={value} value={value}>
-                                  {text}
-                                </Select.Option>
-                              ))}
-                            </Select>
-                          </Form.Item>
-                          <Form.Item
-                            {...restField}
-                            name={[name, "openTime"]}
-                            rules={[
-                              { required: true, message: "请选择开始时间" },
-                            ]}
-                          >
-                            <TimePicker format="HH:mm" placeholder="开始时间" />
-                          </Form.Item>
-                          <Form.Item
-                            {...restField}
-                            name={[name, "closeTime"]}
-                            rules={[
-                              { required: true, message: "请选择结束时间" },
-                            ]}
-                          >
-                            <TimePicker format="HH:mm" placeholder="结束时间" />
-                          </Form.Item>
-                          <Form.Item {...restField} name={[name, "tips"]}>
-                            <Input placeholder="补充时间提示" />
-                          </Form.Item>
+                        <CustomRow key={key} style={{ marginBottom: "2rem" }}>
+                          <Card>
+                            <CustomRow between>
+                              <Form.Item
+                                {...restField}
+                                name={[name, "startWeekDay"]}
+                                rules={[
+                                  { required: true, message: "请选择开始时间" },
+                                ]}
+                              >
+                                <Select
+                                  style={{ width: "13.8rem" }}
+                                  placeholder="开始时间"
+                                >
+                                  {weekDayOptions.map(({ text, value }) => (
+                                    <Select.Option key={value} value={value}>
+                                      {text}
+                                    </Select.Option>
+                                  ))}
+                                </Select>
+                              </Form.Item>
+                              <Form.Item
+                                {...restField}
+                                name={[name, "endWeekDay"]}
+                                rules={[
+                                  { required: true, message: "请选择结束时间" },
+                                ]}
+                              >
+                                <Select
+                                  style={{ width: "13.8rem" }}
+                                  placeholder="结束时间"
+                                >
+                                  {weekDayOptions.map(({ text, value }) => (
+                                    <Select.Option key={value} value={value}>
+                                      {text}
+                                    </Select.Option>
+                                  ))}
+                                </Select>
+                              </Form.Item>
+                            </CustomRow>
+                            <Form.List name={[name, "timeFrameList"]}>
+                              {(
+                                fieldsInside,
+                                { add: addInSide, remove: reoveInside }
+                              ) => (
+                                <Card style={{ marginTop: "1.2rem" }}>
+                                  {fieldsInside.map((fieldInside) => (
+                                    <CustomRow between>
+                                      <Form.Item
+                                        {...fieldInside}
+                                        key={fieldInside.key}
+                                        name={[fieldInside.name, "openTime"]}
+                                        rules={[
+                                          {
+                                            required: true,
+                                            message: "请选择开业时间",
+                                          },
+                                        ]}
+                                      >
+                                        <TimePicker
+                                          format="HH:mm"
+                                          placeholder="开业时间"
+                                        />
+                                      </Form.Item>
+                                      <Form.Item
+                                        {...fieldInside}
+                                        key={fieldInside.key}
+                                        name={[fieldInside.name, "closeTime"]}
+                                        rules={[
+                                          {
+                                            required: true,
+                                            message: "请选择休息时间",
+                                          },
+                                        ]}
+                                      >
+                                        <TimePicker
+                                          format="HH:mm"
+                                          placeholder="休息时间"
+                                        />
+                                      </Form.Item>
+                                    </CustomRow>
+                                  ))}
+                                  <Button
+                                    type="dashed"
+                                    onClick={() => addInSide()}
+                                    block
+                                    icon={<PlusOutlined />}
+                                  >
+                                    添加营业时间段
+                                  </Button>
+                                </Card>
+                              )}
+                            </Form.List>
+                          </Card>
                           <MinusCircleOutlined onClick={() => remove(name)} />
-                        </Space>
+                        </CustomRow>
                       ))}
                       <Button
                         type="dashed"
@@ -393,7 +426,7 @@ export const RestaurantModal = ({
                         block
                         icon={<PlusOutlined />}
                       >
-                        添加开放时间
+                        添加营业时间
                       </Button>
                     </>
                   )}
@@ -486,3 +519,11 @@ export const RestaurantModal = ({
     </Drawer>
   );
 };
+
+const Card = styled.div`
+  margin-right: 1rem;
+  padding: 1.2rem;
+  flex: 1;
+  border: 1px solid #ddd;
+  border-radius: 1rem;
+`;
