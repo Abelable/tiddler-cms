@@ -369,14 +369,17 @@ export const RestaurantModal = ({
                             <Form.List name={[name, "timeFrameList"]}>
                               {(
                                 fieldsInside,
-                                { add: addInSide, remove: reoveInside }
+                                { add: addInSide, remove: removeInside }
                               ) => (
-                                <Card style={{ marginTop: "1.2rem" }}>
+                                <TimeFrameWrap>
                                   {fieldsInside.map((fieldInside) => (
-                                    <CustomRow between>
+                                    <Space
+                                      key={fieldInside.key}
+                                      style={{ display: "flex" }}
+                                      align="baseline"
+                                    >
                                       <Form.Item
                                         {...fieldInside}
-                                        key={fieldInside.key}
                                         name={[fieldInside.name, "openTime"]}
                                         rules={[
                                           {
@@ -391,7 +394,6 @@ export const RestaurantModal = ({
                                         />
                                       </Form.Item>
                                       <Form.Item
-                                        {...fieldInside}
                                         key={fieldInside.key}
                                         name={[fieldInside.name, "closeTime"]}
                                         rules={[
@@ -406,7 +408,12 @@ export const RestaurantModal = ({
                                           placeholder="休息时间"
                                         />
                                       </Form.Item>
-                                    </CustomRow>
+                                      <MinusCircleOutlined
+                                        onClick={() =>
+                                          removeInside(fieldInside.name)
+                                        }
+                                      />
+                                    </Space>
                                   ))}
                                   <Button
                                     type="dashed"
@@ -416,7 +423,7 @@ export const RestaurantModal = ({
                                   >
                                     添加营业时间段
                                   </Button>
-                                </Card>
+                                </TimeFrameWrap>
                               )}
                             </Form.List>
                           </Card>
@@ -528,4 +535,9 @@ const Card = styled.div`
   flex: 1;
   border: 1px solid #ddd;
   border-radius: 1rem;
+`;
+const TimeFrameWrap = styled.div`
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #ddd;
 `;
