@@ -394,7 +394,7 @@ export const RestaurantModal = ({
                                         />
                                       </Form.Item>
                                       <Form.Item
-                                        key={fieldInside.key}
+                                        {...fieldInside}
                                         name={[fieldInside.name, "closeTime"]}
                                         rules={[
                                           {
@@ -421,7 +421,7 @@ export const RestaurantModal = ({
                                     block
                                     icon={<PlusOutlined />}
                                   >
-                                    添加营业时间段
+                                    添加时间段
                                   </Button>
                                 </TimeFrameWrap>
                               )}
