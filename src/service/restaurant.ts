@@ -25,7 +25,7 @@ export const useRestaurantList = (
 
 export const useRestaurant = (id: number) => {
   const client = useHttp();
-  return useQuery<Partial<RestaurantDetail>>(
+  return useQuery<RestaurantDetail>(
     ["restaurant", { id }],
     () => client(`catering/restaurant/detail`, { data: { id } }),
     {

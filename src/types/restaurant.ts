@@ -6,7 +6,7 @@ export interface RestaurantListSearchParams {
   limit: number;
 }
 
-interface OpenTime {
+export interface OpenTime {
   startWeekDay: number;
   endWeekDay: number;
   timeFrameList: { openTime: string; closeTime: string }[];

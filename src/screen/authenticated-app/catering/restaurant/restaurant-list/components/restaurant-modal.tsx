@@ -23,6 +23,8 @@ import { Map } from "components/map";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 
 import type { CategoryOption } from "types/category";
+import type { OpenTime } from "types/restaurant";
+import type { Moment } from "moment";
 
 const weekDayOptions = [
   { text: "周一", value: 1 },
@@ -84,25 +86,19 @@ export const RestaurantModal = ({
             ]
           : [],
         cover: cover ? [{ url: cover }] : [],
-        foodImageList: foodImageList?.length
-          ? foodImageList?.map((item) => ({ url: item }))
-          : foodImageList,
-        environmentImageList: environmentImageList?.length
-          ? environmentImageList?.map((item) => ({ url: item }))
-          : environmentImageList,
-        priceImageList: priceImageList?.length
-          ? priceImageList?.map((item) => ({ url: item }))
-          : priceImageList,
-        openTimeList: openTimeList?.length
-          ? openTimeList.map((item) => ({
-              startWeekDay: +item.startWeekDay,
-              endWeekDay: +item.endWeekDay,
-              timeFrameList: item.timeFrameList.map((_item) => ({
-                openTime: moment(_item.openTime, "HH:mm"),
-                closeTime: moment(_item.closeTime, "HH:mm"),
-              })),
-            }))
-          : openTimeList,
+        foodImageList: foodImageList?.map((item) => ({ url: item })),
+        environmentImageList: environmentImageList?.map((item) => ({
+          url: item,
+        })),
+        priceImageList: priceImageList?.map((item) => ({ url: item })),
+        openTimeList: openTimeList.map((item) => ({
+          startWeekDay: +item.startWeekDay,
+          endWeekDay: +item.endWeekDay,
+          timeFrameList: item.timeFrameList.map((_item) => ({
+            openTime: moment(_item.openTime, "HH:mm"),
+            closeTime: moment(_item.closeTime, "HH:mm"),
+          })),
+        })),
         ...rest,
       });
     }
@@ -126,6 +122,7 @@ export const RestaurantModal = ({
         foodImageList,
         environmentImageList,
         priceImageList,
+        openTimeList,
         ...rest
       } = form.getFieldsValue();
       await mutateAsync({
@@ -138,6 +135,13 @@ export const RestaurantModal = ({
           (item: { url: string }) => item.url
         ),
         priceImageList: priceImageList.map((item: { url: string }) => item.url),
+        openTimeList: openTimeList.map((item: OpenTime) => ({
+          ...item,
+          timeFrameList: item.timeFrameList.map((_item) => ({
+            openTime: moment(_item.openTime).format("HH:mm"),
+            closeTime: moment(_item.closeTime).format("HH:mm"),
+          })),
+        })),
       });
       closeModal();
     });
