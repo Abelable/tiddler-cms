@@ -7,11 +7,9 @@ export interface RestaurantListSearchParams {
 }
 
 interface OpenTime {
-  openMonth: string;
-  closeMonth: string;
-  openTime: string;
-  closeTime: string;
-  tips: string;
+  startWeekDay: number;
+  endWeekDay: number;
+  timeFrameList: { openTime: string; closeTime: string }[];
 }
 
 export interface RestaurantDetail {

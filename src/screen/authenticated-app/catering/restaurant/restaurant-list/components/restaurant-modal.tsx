@@ -95,9 +95,12 @@ export const RestaurantModal = ({
           : priceImageList,
         openTimeList: openTimeList?.length
           ? openTimeList.map((item) => ({
-              ...item,
-              openTime: moment(item.openTime),
-              closeTime: moment(item.openTime),
+              startWeekDay: +item.startWeekDay,
+              endWeekDay: +item.endWeekDay,
+              timeFrameList: item.timeFrameList.map((_item) => ({
+                openTime: moment(_item.openTime, "HH:mm"),
+                closeTime: moment(_item.closeTime, "HH:mm"),
+              })),
             }))
           : openTimeList,
         ...rest,
@@ -324,7 +327,7 @@ export const RestaurantModal = ({
                     <>
                       {fields.map(({ key, name, ...restField }) => (
                         <CustomRow key={key} style={{ marginBottom: "2rem" }}>
-                          <Card>
+                          <Card style={{ marginRight: "1rem" }}>
                             <CustomRow between>
                               <Form.Item
                                 {...restField}
@@ -521,8 +524,7 @@ export const RestaurantModal = ({
 };
 
 const Card = styled.div`
-  margin-right: 1rem;
-  padding: 1.2rem;
+  padding: 1rem;
   flex: 1;
   border: 1px solid #ddd;
   border-radius: 1rem;
