@@ -369,55 +369,61 @@ export const RestaurantModal = ({
                             <Form.List name={[name, "timeFrameList"]}>
                               {(
                                 fieldsInside,
-                                { add: addInSide, remove: removeInside }
+                                { add: addInside, remove: removeInside }
                               ) => (
                                 <TimeFrameWrap>
-                                  {fieldsInside.map((fieldInside) => (
-                                    <Space
-                                      key={fieldInside.key}
-                                      style={{ display: "flex" }}
-                                      align="baseline"
-                                    >
-                                      <Form.Item
-                                        {...fieldInside}
-                                        name={[fieldInside.name, "openTime"]}
-                                        rules={[
-                                          {
-                                            required: true,
-                                            message: "请选择开业时间",
-                                          },
-                                        ]}
+                                  {fieldsInside.map(
+                                    ({
+                                      key: insideKey,
+                                      name: insideName,
+                                      ...insideRestField
+                                    }) => (
+                                      <Space
+                                        key={insideKey}
+                                        style={{ display: "flex" }}
+                                        align="baseline"
                                       >
-                                        <TimePicker
-                                          format="HH:mm"
-                                          placeholder="开业时间"
+                                        <Form.Item
+                                          {...insideRestField}
+                                          name={[insideName, "openTime"]}
+                                          rules={[
+                                            {
+                                              required: true,
+                                              message: "请选择开业时间",
+                                            },
+                                          ]}
+                                        >
+                                          <TimePicker
+                                            format="HH:mm"
+                                            placeholder="开业时间"
+                                          />
+                                        </Form.Item>
+                                        <Form.Item
+                                          {...insideRestField}
+                                          name={[insideName, "closeTime"]}
+                                          rules={[
+                                            {
+                                              required: true,
+                                              message: "请选择休息时间",
+                                            },
+                                          ]}
+                                        >
+                                          <TimePicker
+                                            format="HH:mm"
+                                            placeholder="休息时间"
+                                          />
+                                        </Form.Item>
+                                        <MinusCircleOutlined
+                                          onClick={() =>
+                                            removeInside(insideName)
+                                          }
                                         />
-                                      </Form.Item>
-                                      <Form.Item
-                                        {...fieldInside}
-                                        name={[fieldInside.name, "closeTime"]}
-                                        rules={[
-                                          {
-                                            required: true,
-                                            message: "请选择休息时间",
-                                          },
-                                        ]}
-                                      >
-                                        <TimePicker
-                                          format="HH:mm"
-                                          placeholder="休息时间"
-                                        />
-                                      </Form.Item>
-                                      <MinusCircleOutlined
-                                        onClick={() =>
-                                          removeInside(fieldInside.name)
-                                        }
-                                      />
-                                    </Space>
-                                  ))}
+                                      </Space>
+                                    )
+                                  )}
                                   <Button
                                     type="dashed"
-                                    onClick={() => addInSide()}
+                                    onClick={() => addInside()}
                                     block
                                     icon={<PlusOutlined />}
                                   >
