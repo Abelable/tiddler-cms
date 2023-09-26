@@ -177,7 +177,10 @@ export const HotelRoomTypeModal = ({ hotelId }: { hotelId: number }) => {
                               placeholder="请输入设施名称"
                             />
                           </Form.Item>
-                          <MinusCircleOutlined onClick={() => remove(name)} />
+                          <MinusCircleOutlined
+                            style={{ color: "#ff4d4f" }}
+                            onClick={() => remove(name)}
+                          />
                         </Space>
                       ))}
                       <Button

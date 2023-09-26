@@ -417,6 +417,7 @@ export const RestaurantModal = ({
                                           />
                                         </Form.Item>
                                         <MinusCircleOutlined
+                                          style={{ color: "#ff4d4f" }}
                                           onClick={() =>
                                             removeInside(insideName)
                                           }
@@ -436,7 +437,10 @@ export const RestaurantModal = ({
                               )}
                             </Form.List>
                           </Card>
-                          <MinusCircleOutlined onClick={() => remove(name)} />
+                          <MinusCircleOutlined
+                            style={{ color: "#ff4d4f" }}
+                            onClick={() => remove(name)}
+                          />
                         </CustomRow>
                       ))}
                       <Button
@@ -452,8 +456,6 @@ export const RestaurantModal = ({
                 </Form.List>
               </Form.Item>
             </Col>
-          </Row>
-          <Row gutter={16}>
             <Col span={12}>
               <Form.Item label="联系电话">
                 <Form.List name="telList">
@@ -477,7 +479,10 @@ export const RestaurantModal = ({
                               placeholder="请输入联系电话"
                             />
                           </Form.Item>
-                          <MinusCircleOutlined onClick={() => remove(name)} />
+                          <MinusCircleOutlined
+                            style={{ color: "#ff4d4f" }}
+                            onClick={() => remove(name)}
+                          />
                         </Space>
                       ))}
                       <Button
@@ -493,6 +498,8 @@ export const RestaurantModal = ({
                 </Form.List>
               </Form.Item>
             </Col>
+          </Row>
+          <Row gutter={16}>
             <Col span={12}>
               <Form.Item label="服务设施">
                 <Form.List name="facilityList">
@@ -516,7 +523,10 @@ export const RestaurantModal = ({
                               placeholder="请输入设施名称"
                             />
                           </Form.Item>
-                          <MinusCircleOutlined onClick={() => remove(name)} />
+                          <MinusCircleOutlined
+                            style={{ color: "#ff4d4f" }}
+                            onClick={() => remove(name)}
+                          />
                         </Space>
                       ))}
                       <Button

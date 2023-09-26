@@ -344,7 +344,10 @@ export const ScenicModal = ({
                           <Form.Item {...restField} name={[name, "tips"]}>
                             <Input placeholder="补充时间提示" />
                           </Form.Item>
-                          <MinusCircleOutlined onClick={() => remove(name)} />
+                          <MinusCircleOutlined
+                            style={{ color: "#ff4d4f" }}
+                            onClick={() => remove(name)}
+                          />
                         </Space>
                       ))}
                       <Button
@@ -403,7 +406,10 @@ export const ScenicModal = ({
                           >
                             <Input placeholder="请输入政策内容" />
                           </Form.Item>
-                          <MinusCircleOutlined onClick={() => remove(name)} />
+                          <MinusCircleOutlined
+                            style={{ color: "#ff4d4f" }}
+                            onClick={() => remove(name)}
+                          />
                         </Space>
                       ))}
                       <Button
@@ -450,7 +456,10 @@ export const ScenicModal = ({
                               <Input placeholder="请输入项目名称" />
                             </Form.Item>
                           </CustomRow>
-                          <MinusCircleOutlined onClick={() => remove(name)} />
+                          <MinusCircleOutlined
+                            style={{ color: "#ff4d4f" }}
+                            onClick={() => remove(name)}
+                          />
                         </Space>
                       ))}
                       <Button
@@ -508,7 +517,10 @@ export const ScenicModal = ({
                               placeholder="请输入设施描述"
                             />
                           </Form.Item>
-                          <MinusCircleOutlined onClick={() => remove(name)} />
+                          <MinusCircleOutlined
+                            style={{ color: "#ff4d4f" }}
+                            onClick={() => remove(name)}
+                          />
                         </Space>
                       ))}
                       <Button
@@ -546,7 +558,10 @@ export const ScenicModal = ({
                           >
                             <Input placeholder="请输入咨询热线" />
                           </Form.Item>
-                          <MinusCircleOutlined onClick={() => remove(name)} />
+                          <MinusCircleOutlined
+                            style={{ color: "#ff4d4f" }}
+                            onClick={() => remove(name)}
+                          />
                         </Space>
                       ))}
                       <Button
@@ -597,7 +612,10 @@ export const ScenicModal = ({
                               placeholder="请输入内容"
                             />
                           </Form.Item>
-                          <MinusCircleOutlined onClick={() => remove(name)} />
+                          <MinusCircleOutlined
+                            style={{ color: "#ff4d4f" }}
+                            onClick={() => remove(name)}
+                          />
                         </Space>
                       ))}
                       <Button

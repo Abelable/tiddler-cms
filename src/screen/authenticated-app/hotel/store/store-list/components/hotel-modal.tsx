@@ -309,7 +309,10 @@ export const HotelModal = ({
                               placeholder="请输入标签内容"
                             />
                           </Form.Item>
-                          <MinusCircleOutlined onClick={() => remove(name)} />
+                          <MinusCircleOutlined
+                            style={{ color: "#ff4d4f" }}
+                            onClick={() => remove(name)}
+                          />
                         </Space>
                       ))}
                       <Button
@@ -487,7 +490,10 @@ export const HotelModal = ({
                               placeholder="请输入设施名称"
                             />
                           </Form.Item>
-                          <MinusCircleOutlined onClick={() => remove(name)} />
+                          <MinusCircleOutlined
+                            style={{ color: "#ff4d4f" }}
+                            onClick={() => remove(name)}
+                          />
                         </Space>
                       ))}
                       <Button
@@ -526,7 +532,10 @@ export const HotelModal = ({
                               placeholder="请输入设施名称"
                             />
                           </Form.Item>
-                          <MinusCircleOutlined onClick={() => remove(name)} />
+                          <MinusCircleOutlined
+                            style={{ color: "#ff4d4f" }}
+                            onClick={() => remove(name)}
+                          />
                         </Space>
                       ))}
                       <Button
@@ -565,7 +574,10 @@ export const HotelModal = ({
                               placeholder="请输入设施名称"
                             />
                           </Form.Item>
-                          <MinusCircleOutlined onClick={() => remove(name)} />
+                          <MinusCircleOutlined
+                            style={{ color: "#ff4d4f" }}
+                            onClick={() => remove(name)}
+                          />
                         </Space>
                       ))}
                       <Button
@@ -606,7 +618,10 @@ export const HotelModal = ({
                               placeholder="请输入设施名称"
                             />
                           </Form.Item>
-                          <MinusCircleOutlined onClick={() => remove(name)} />
+                          <MinusCircleOutlined
+                            style={{ color: "#ff4d4f" }}
+                            onClick={() => remove(name)}
+                          />
                         </Space>
                       ))}
                       <Button
@@ -645,7 +660,10 @@ export const HotelModal = ({
                               placeholder="请输入设施名称"
                             />
                           </Form.Item>
-                          <MinusCircleOutlined onClick={() => remove(name)} />
+                          <MinusCircleOutlined
+                            style={{ color: "#ff4d4f" }}
+                            onClick={() => remove(name)}
+                          />
                         </Space>
                       ))}
                       <Button
@@ -687,7 +705,10 @@ export const HotelModal = ({
                               placeholder="请输入服务名称"
                             />
                           </Form.Item>
-                          <MinusCircleOutlined onClick={() => remove(name)} />
+                          <MinusCircleOutlined
+                            style={{ color: "#ff4d4f" }}
+                            onClick={() => remove(name)}
+                          />
                         </Space>
                       ))}
                       <Button
@@ -726,7 +747,10 @@ export const HotelModal = ({
                               placeholder="请输入服务名称"
                             />
                           </Form.Item>
-                          <MinusCircleOutlined onClick={() => remove(name)} />
+                          <MinusCircleOutlined
+                            style={{ color: "#ff4d4f" }}
+                            onClick={() => remove(name)}
+                          />
                         </Space>
                       ))}
                       <Button
@@ -765,7 +789,10 @@ export const HotelModal = ({
                               placeholder="请输入服务名称"
                             />
                           </Form.Item>
-                          <MinusCircleOutlined onClick={() => remove(name)} />
+                          <MinusCircleOutlined
+                            style={{ color: "#ff4d4f" }}
+                            onClick={() => remove(name)}
+                          />
                         </Space>
                       ))}
                       <Button
@@ -806,7 +833,10 @@ export const HotelModal = ({
                               placeholder="请输入服务名称"
                             />
                           </Form.Item>
-                          <MinusCircleOutlined onClick={() => remove(name)} />
+                          <MinusCircleOutlined
+                            style={{ color: "#ff4d4f" }}
+                            onClick={() => remove(name)}
+                          />
                         </Space>
                       ))}
                       <Button
@@ -845,7 +875,10 @@ export const HotelModal = ({
                               placeholder="请输入服务名称"
                             />
                           </Form.Item>
-                          <MinusCircleOutlined onClick={() => remove(name)} />
+                          <MinusCircleOutlined
+                            style={{ color: "#ff4d4f" }}
+                            onClick={() => remove(name)}
+                          />
                         </Space>
                       ))}
                       <Button
@@ -884,7 +917,10 @@ export const HotelModal = ({
                               placeholder="请输入服务名称"
                             />
                           </Form.Item>
-                          <MinusCircleOutlined onClick={() => remove(name)} />
+                          <MinusCircleOutlined
+                            style={{ color: "#ff4d4f" }}
+                            onClick={() => remove(name)}
+                          />
                         </Space>
                       ))}
                       <Button
@@ -926,7 +962,10 @@ export const HotelModal = ({
                               placeholder="请输入提醒事项"
                             />
                           </Form.Item>
-                          <MinusCircleOutlined onClick={() => remove(name)} />
+                          <MinusCircleOutlined
+                            style={{ color: "#ff4d4f" }}
+                            onClick={() => remove(name)}
+                          />
                         </Space>
                       ))}
                       <Button
@@ -967,7 +1006,10 @@ export const HotelModal = ({
                               placeholder="请输入必读事项"
                             />
                           </Form.Item>
-                          <MinusCircleOutlined onClick={() => remove(name)} />
+                          <MinusCircleOutlined
+                            style={{ color: "#ff4d4f" }}
+                            onClick={() => remove(name)}
+                          />
                         </Space>
                       ))}
                       <Button
@@ -1008,7 +1050,10 @@ export const HotelModal = ({
                               placeholder="请输入预定须知"
                             />
                           </Form.Item>
-                          <MinusCircleOutlined onClick={() => remove(name)} />
+                          <MinusCircleOutlined
+                            style={{ color: "#ff4d4f" }}
+                            onClick={() => remove(name)}
+                          />
                         </Space>
                       ))}
                       <Button
