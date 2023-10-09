@@ -30,7 +30,7 @@ export const TicketModal = ({
         <>
           <Divider orientation="left">代金券信息</Divider>
           <Descriptions size={"small"} column={2}>
-            <Descriptions.Item label="代金券id">
+            <Descriptions.Item label="ID">
               {editingTicket?.id}
             </Descriptions.Item>
             <Descriptions.Item label="状态">
@@ -47,18 +47,15 @@ export const TicketModal = ({
               )}
             </Descriptions.Item>
             <Descriptions.Item label="名称">
-              {editingTicket?.name}
+              {`${editingTicket?.price}代${editingTicket?.originalPrice}代金券`}
             </Descriptions.Item>
             <Descriptions.Item label="关联门店">
-              {editingTicket?.scenicIds?.length &&
-                editingTicket?.scenicIds.map((id: number) => (
+              {editingTicket?.restaurantIds?.length &&
+                editingTicket?.restaurantIds.map((id: number) => (
                   <Tag color="success" key={id}>
                     {restaurantOptions.find((item) => item.id === id)?.name}
                   </Tag>
                 ))}
-            </Descriptions.Item>
-            <Descriptions.Item label="价格">
-              {`¥${editingTicket?.price}起`}
             </Descriptions.Item>
             <Descriptions.Item label="销售佣金比例">
               {`${(editingTicket?.salesCommissionRate as number) * 100}%`}

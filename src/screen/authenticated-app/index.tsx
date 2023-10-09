@@ -57,6 +57,7 @@ import {
   HotelIcon,
   BedIcon,
   CateringIcon,
+  CouponIcon,
 } from "assets/icon";
 import logo from "assets/images/logo.png";
 import { UserInfo } from "types/auth";
@@ -413,7 +414,7 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
         {
           label: <Link to={"catering/meal_ticket_list"}>代金券列表</Link>,
           key: "catering_meal_ticket_list",
-          icon: <UnorderedListOutlined />,
+          icon: <CouponIcon />,
         },
       ],
     },

@@ -2,7 +2,7 @@ import type { CateringProviderDetail } from "./cateringProvider";
 
 export interface TicketListSearchParams {
   name: string;
-  restarantId: number | undefined;
+  restaurantId: number | undefined;
   status: number | undefined;
   page: number;
   limit: number;
@@ -11,7 +11,7 @@ export interface TicketListSearchParams {
 export interface Ticket {
   id: number;
   name: string;
-  restarantIds: number[];
+  restaurantIds: number[];
   price: number;
   originalPrice: number;
   salesCommissionRate: number;

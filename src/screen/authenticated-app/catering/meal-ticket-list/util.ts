@@ -1,11 +1,11 @@
 import { useSetUrlSearchParams, useUrlQueryParams } from "utils/url";
 import { useCallback, useMemo } from "react";
-import { useTicket } from "service/scenicTicket";
+import { useTicket } from "service/mealTicket";
 
 export const useTicketListSearchParams = () => {
   const [params, setParams] = useUrlQueryParams([
     "name",
-    "scenicId",
+    "restaurantId",
     "status",
     "page",
     "limit",
@@ -25,7 +25,7 @@ export const useTicketListSearchParams = () => {
 
 export const useTicketListQueryKey = () => {
   const [params] = useTicketListSearchParams();
-  return ["scenic_ticket_list", params];
+  return ["meal_ticket_list", params];
 };
 
 export const useTicketModal = () => {
