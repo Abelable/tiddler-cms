@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 import { useRestaurantOptions } from "service/restaurant";
-import { useTicketList } from "service/scenicTicket";
+import { useTicketList } from "service/mealTicket";
 import { toNumber } from "utils";
 import { useTicketListSearchParams } from "./util";
 
@@ -10,7 +10,7 @@ import { List } from "./components/list";
 import { SearchPanel } from "./components/search-panel";
 import { RejectModal } from "./components/reject-modal";
 
-export const ScenicTicketList = () => {
+export const MealTicketList = () => {
   const [params, setParams] = useTicketListSearchParams();
   const { isLoading, error, data } = useTicketList(params);
   const { data: restaurantOptions, error: restaurantOptionsError } =

@@ -35,6 +35,7 @@ import { CateringProviderList } from "./catering/provider/provider-list";
 import { ProviderRestaurantList } from "./catering/provider/restaurant-apply-list";
 import { RestaurantCategoryList } from "./catering/restaurant/category-list";
 import { RestaurantList } from "./catering/restaurant/restaurant-list";
+import { MealTicketList } from "./catering/meal-ticket-list";
 
 import {
   LockOutlined,
@@ -158,6 +159,10 @@ export const AuthenticatedApp = () => {
               <Route
                 path="catering/restaurant/list"
                 element={<RestaurantList />}
+              />
+              <Route
+                path="catering/meal_ticket_list"
+                element={<MealTicketList />}
               />
               <Route
                 path={"*"}
@@ -404,6 +409,11 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
               icon: <UnorderedListOutlined />,
             },
           ],
+        },
+        {
+          label: <Link to={"catering/meal_ticket_list"}>代金券列表</Link>,
+          key: "catering_meal_ticket_list",
+          icon: <UnorderedListOutlined />,
         },
       ],
     },

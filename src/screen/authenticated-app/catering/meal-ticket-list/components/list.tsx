@@ -12,11 +12,11 @@ import {
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
 import dayjs from "dayjs";
-import { useApprovedTicket, useDeleteTicket } from "service/scenicTicket";
+import { useApprovedTicket, useDeleteTicket } from "service/mealTicket";
 import { useTicketModal, useTicketListQueryKey, useRejectModal } from "../util";
 import { SearchPanelProps } from "./search-panel";
 
-import type { Ticket } from "types/scenicTicket";
+import type { Ticket } from "types/mealTicket";
 
 interface ListProps extends TableProps<Ticket>, SearchPanelProps {
   error: Error | unknown;
@@ -55,15 +55,17 @@ export const List = ({
           },
           {
             title: "名称",
-            dataIndex: "name",
             width: "28rem",
+            render: (value, ticket) => (
+              <>{`${ticket.price}代${ticket.originalPrice}代金券`}</>
+            ),
           },
           {
             title: "关联门店",
-            dataIndex: "scenicIds",
-            render: (scenicIds) => (
+            dataIndex: "restaurantIds",
+            render: (restaurantIds) => (
               <>
-                {scenicIds.map((id: number) => (
+                {restaurantIds.map((id: number) => (
                   <Tag color="success" key={id}>
                     {restaurantOptions.find((item) => item.id === id)?.name}
                   </Tag>
@@ -71,12 +73,6 @@ export const List = ({
               </>
             ),
             width: "36rem",
-          },
-          {
-            title: "价格",
-            dataIndex: "price",
-            render: (value) => <>{`¥${value}起`}</>,
-            width: "16rem",
           },
           {
             title: "销售佣金比例",
