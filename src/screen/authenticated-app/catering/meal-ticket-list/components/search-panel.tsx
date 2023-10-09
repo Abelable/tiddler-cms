@@ -7,8 +7,7 @@ import type { TicketListSearchParams } from "types/scenicTicket";
 import type { Option, OperatorOption } from "types/common";
 
 export interface SearchPanelProps {
-  scenicOptions: OperatorOption[];
-  typeOptions: Option[];
+  restaurantOptions: OperatorOption[];
   statusOptions: Option[];
   params: Partial<TicketListSearchParams>;
   setParams: (params: Partial<TicketListSearchParams>) => void;
@@ -22,8 +21,7 @@ const defaultParmas: Partial<TicketListSearchParams> = {
 };
 
 export const SearchPanel = ({
-  scenicOptions,
-  typeOptions,
+  restaurantOptions,
   statusOptions,
   params,
   setParams,
@@ -45,9 +43,6 @@ export const SearchPanel = ({
     });
   };
 
-  const setType = (type: number) => setTempParams({ ...tempParams, type });
-  const clearType = () => setTempParams({ ...tempParams, type: undefined });
-
   const setScenicId = (scenicId: number) =>
     setTempParams({ ...tempParams, scenicId });
   const clearScenicId = () =>
@@ -65,43 +60,26 @@ export const SearchPanel = ({
   return (
     <Container>
       <Item>
-        <div>门票名称：</div>
+        <div>代金券名称：</div>
         <Input
           style={{ width: "20rem" }}
           value={tempParams.name}
           onChange={setName}
-          placeholder="请输入门票名称"
+          placeholder="请输入代金券名称"
           allowClear={true}
         />
       </Item>
       <Item>
-        <div>门票类型：</div>
-        <Select
-          style={{ width: "20rem" }}
-          value={tempParams.type}
-          placeholder="请选择门票类型"
-          allowClear={true}
-          onSelect={setType}
-          onClear={clearType}
-        >
-          {typeOptions?.map(({ text, value }) => (
-            <Select.Option key={value} value={value}>
-              {text}
-            </Select.Option>
-          ))}
-        </Select>
-      </Item>
-      <Item>
-        <div>关联景区：</div>
+        <div>关联门店：</div>
         <Select
           style={{ width: "20rem" }}
           value={tempParams.scenicId}
-          placeholder="请选择关联景区"
+          placeholder="请选择关联门店"
           allowClear={true}
           onSelect={setScenicId}
           onClear={clearScenicId}
         >
-          {scenicOptions?.map(({ id, name }) => (
+          {restaurantOptions?.map(({ id, name }) => (
             <Select.Option key={id} value={id}>
               {name}
             </Select.Option>
@@ -109,11 +87,11 @@ export const SearchPanel = ({
         </Select>
       </Item>
       <Item>
-        <div>门票状态：</div>
+        <div>代金券状态：</div>
         <Select
           style={{ width: "20rem" }}
           value={tempParams.status}
-          placeholder="请选择门票状态"
+          placeholder="请选择代金券状态"
           allowClear={true}
           onSelect={setStatus}
           onClear={clearStatus}

@@ -4,11 +4,6 @@ export interface Pagination {
   per_page: number;
 }
 
-export interface OperatorOption {
-  id: number;
-  name: string;
-}
-
 export interface Region {
   label: string;
   value: string;
@@ -32,7 +27,12 @@ export interface Option {
   value: number;
 }
 
-export interface depositInfo {
+export interface OperatorOption {
+  id: number;
+  name: string;
+}
+
+export interface DepositInfo {
   orderSn: string;
   payId: number;
   paymentAmount: string;

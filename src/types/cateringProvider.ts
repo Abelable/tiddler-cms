@@ -1,4 +1,4 @@
-import type { depositInfo } from "./common";
+import type { DepositInfo } from "./common";
 
 export interface CateringProvidersSearchParams {
   status: number;
@@ -15,7 +15,7 @@ export interface CateringProvider {
   name: string;
   mobile: string;
   status: number;
-  depositInfo: depositInfo;
+  depositInfo: DepositInfo;
   failureReason: string;
   createdAt: string;
   updatedAt: string;

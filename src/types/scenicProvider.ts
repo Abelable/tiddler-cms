@@ -1,4 +1,4 @@
-import type { depositInfo } from "./common";
+import type { DepositInfo } from "./common";
 
 export interface ProvidersSearchParams {
   status: number;
@@ -15,7 +15,7 @@ export interface Provider {
   mobile: string;
   status: number;
   failureReason: string;
-  depositInfo: depositInfo;
+  depositInfo: DepositInfo;
   createdAt: string;
   updatedAt: string;
 }

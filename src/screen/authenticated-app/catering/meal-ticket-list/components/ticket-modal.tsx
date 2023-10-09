@@ -4,14 +4,12 @@ import { ErrorBox, ModalLoading } from "components/lib";
 import dayjs from "dayjs";
 import { useTicketModal } from "../util";
 
-import type { Option, OperatorOption } from "types/common";
+import type { OperatorOption } from "types/common";
 
 export const TicketModal = ({
-  typeOptions,
-  scenicOptions,
+  restaurantOptions,
 }: {
-  typeOptions: Option[];
-  scenicOptions: OperatorOption[];
+  restaurantOptions: OperatorOption[];
 }) => {
   const { close, ticketModalOpen, editingTicket, error, isLoading } =
     useTicketModal();
@@ -19,7 +17,7 @@ export const TicketModal = ({
   return (
     <Drawer
       forceRender={true}
-      title="门票详情"
+      title="代金券详情"
       size={"large"}
       onClose={close}
       open={ticketModalOpen}
@@ -30,9 +28,9 @@ export const TicketModal = ({
         <ModalLoading />
       ) : (
         <>
-          <Divider orientation="left">门票信息</Divider>
+          <Divider orientation="left">代金券信息</Divider>
           <Descriptions size={"small"} column={2}>
-            <Descriptions.Item label="门票id">
+            <Descriptions.Item label="代金券id">
               {editingTicket?.id}
             </Descriptions.Item>
             <Descriptions.Item label="状态">
@@ -51,17 +49,11 @@ export const TicketModal = ({
             <Descriptions.Item label="名称">
               {editingTicket?.name}
             </Descriptions.Item>
-            <Descriptions.Item label="类型">
-              {
-                typeOptions.find((item) => item.value === editingTicket?.type)
-                  ?.text
-              }
-            </Descriptions.Item>
-            <Descriptions.Item label="关联景区">
+            <Descriptions.Item label="关联门店">
               {editingTicket?.scenicIds?.length &&
                 editingTicket?.scenicIds.map((id: number) => (
                   <Tag color="success" key={id}>
-                    {scenicOptions.find((item) => item.id === id)?.name}
+                    {restaurantOptions.find((item) => item.id === id)?.name}
                   </Tag>
                 ))}
             </Descriptions.Item>

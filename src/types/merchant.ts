@@ -1,4 +1,4 @@
-import type { depositInfo } from "./common";
+import type { DepositInfo } from "./common";
 
 export interface MerchantsSearchParams {
   status: number;
@@ -15,7 +15,7 @@ export interface Merchant {
   name: string;
   mobile: string;
   status: number;
-  depositInfo: depositInfo;
+  depositInfo: DepositInfo;
   failureReason: string;
   createdAt: string;
   updatedAt: string;

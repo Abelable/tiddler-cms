@@ -8,12 +8,13 @@ import {
   useRejectConfig,
 } from "./use-optimistic-options";
 import { cleanObject } from "utils/index";
+
+import type { OperatorOption } from "types/common";
 import type {
   Scenic,
   ScenicListResult,
   ScenicListSearchParams,
   ScenicDetail,
-  ScenicOption,
 } from "types/scenic";
 
 export const useScenicList = (params: Partial<ScenicListSearchParams>) => {
@@ -96,7 +97,7 @@ export const useDeleteScenic = (queryKey: QueryKey) => {
 
 export const useScenicOptions = () => {
   const client = useHttp();
-  return useQuery<ScenicOption[]>(["scenic_options"], () =>
+  return useQuery<OperatorOption[]>(["scenic_options"], () =>
     client("scenic/options")
   );
 };
