@@ -57,7 +57,7 @@ export const List = ({
             title: "名称",
             width: "28rem",
             render: (value, ticket) => (
-              <>{`${ticket.price}代${ticket.originalPrice}代金券`}</>
+              <>{`${ticket.price}代${ticket.originalPrice}元代金券`}</>
             ),
           },
           {
