@@ -1,19 +1,19 @@
 import { Form, Input, Modal } from "antd";
 import { useForm } from "antd/lib/form/Form";
-import { useRejectTicket } from "service/mealTicket";
-import { useRejectModal, useTicketListQueryKey } from "../util";
+import { useRejectSetMeal } from "service/setMeal";
+import { useRejectModal, useSetMealListQueryKey } from "../util";
 
 export const RejectModal = () => {
   const [form] = useForm();
-  const { rejectModalOpen, rejectTicketId, close } = useRejectModal();
+  const { rejectModalOpen, rejectSetMealId, close } = useRejectModal();
 
-  const { mutateAsync, isLoading: mutateLoading } = useRejectTicket(
-    useTicketListQueryKey()
+  const { mutateAsync, isLoading: mutateLoading } = useRejectSetMeal(
+    useSetMealListQueryKey()
   );
 
   const confirm = () => {
     form.validateFields().then(async () => {
-      await mutateAsync({ id: +rejectTicketId, ...form.getFieldsValue() });
+      await mutateAsync({ id: +rejectSetMealId, ...form.getFieldsValue() });
       closeModal();
     });
   };
@@ -26,7 +26,7 @@ export const RejectModal = () => {
   return (
     <Modal
       forceRender={true}
-      title={"代金券驳回重审"}
+      title={"套餐驳回重审"}
       open={rejectModalOpen}
       confirmLoading={mutateLoading}
       onOk={confirm}

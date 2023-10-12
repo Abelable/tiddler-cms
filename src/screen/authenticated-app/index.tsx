@@ -416,6 +416,11 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
           key: "catering_meal_ticket_list",
           icon: <CouponIcon />,
         },
+        // {
+        //   label: <Link to={"catering/meal_ticket_list"}>代金券列表</Link>,
+        //   key: "catering_meal_ticket_list",
+        //   icon: <CouponIcon />,
+        // },
       ],
     },
   ];

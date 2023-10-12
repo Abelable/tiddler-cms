@@ -1,6 +1,6 @@
 import type { CateringProviderDetail } from "./cateringProvider";
 
-export interface TicketListSearchParams {
+export interface SetMealListSearchParams {
   name: string;
   restaurantId: number | undefined;
   status: number | undefined;
@@ -8,8 +8,10 @@ export interface TicketListSearchParams {
   limit: number;
 }
 
-export interface Ticket {
+export interface SetMeal {
   id: number;
+  cover: string;
+  name: string;
   restaurantIds: number[];
   price: number;
   originalPrice: number;
@@ -22,13 +24,13 @@ export interface Ticket {
   updatedAt: string;
 }
 
-export interface TicketListResult {
-  list: Ticket[];
+export interface SetMealListResult {
+  list: SetMeal[];
   page: string;
   limit: string;
   total: string;
 }
 
-export interface TicketDetail extends Ticket {
+export interface SetMealDetail extends SetMeal {
   providerInfo: Partial<CateringProviderDetail>;
 }
