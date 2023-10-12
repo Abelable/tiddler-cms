@@ -124,3 +124,7 @@ export const CateringIcon = (props: Partial<CustomIconComponentProps>) => (
 export const CouponIcon = (props: Partial<CustomIconComponentProps>) => (
   <Icon component={CouponSvg} {...props} />
 );
+
+export const SetMealIcon = (props: Partial<CustomIconComponentProps>) => (
+  <Icon component={SetMealSvg} {...props} />
+);

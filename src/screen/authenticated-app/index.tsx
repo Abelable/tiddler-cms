@@ -36,6 +36,7 @@ import { ProviderRestaurantList } from "./catering/provider/restaurant-apply-lis
 import { RestaurantCategoryList } from "./catering/restaurant/category-list";
 import { RestaurantList } from "./catering/restaurant/restaurant-list";
 import { MealTicketList } from "./catering/meal-ticket-list";
+import { SetMealList } from "./catering/set-meal-list";
 
 import {
   LockOutlined,
@@ -58,6 +59,7 @@ import {
   BedIcon,
   CateringIcon,
   CouponIcon,
+  SetMealIcon,
 } from "assets/icon";
 import logo from "assets/images/logo.png";
 import { UserInfo } from "types/auth";
@@ -165,6 +167,7 @@ export const AuthenticatedApp = () => {
                 path="catering/meal_ticket_list"
                 element={<MealTicketList />}
               />
+              <Route path="catering/set_meal_list" element={<SetMealList />} />
               <Route
                 path={"*"}
                 element={<Navigate to={"user_list"} replace={true} />}
@@ -416,11 +419,11 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
           key: "catering_meal_ticket_list",
           icon: <CouponIcon />,
         },
-        // {
-        //   label: <Link to={"catering/meal_ticket_list"}>代金券列表</Link>,
-        //   key: "catering_meal_ticket_list",
-        //   icon: <CouponIcon />,
-        // },
+        {
+          label: <Link to={"catering/set_meal_list"}>套餐列表</Link>,
+          key: "catering_set_meal_list",
+          icon: <SetMealIcon />,
+        },
       ],
     },
   ];

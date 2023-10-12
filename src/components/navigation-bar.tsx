@@ -45,6 +45,7 @@ const breadcrumbNameMap: { [key: string]: string } = {
   "/catering/restaurant/category_list": "门店分类",
   "/catering/restaurant/list": "门店列表",
   "/catering/meal_ticket_list": "代金券列表",
+  "/catering/set_meal_list": "套餐列表",
 };
 
 export const NavigationBar = () => {
