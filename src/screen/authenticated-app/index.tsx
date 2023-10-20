@@ -51,6 +51,8 @@ import {
   ShoppingOutlined,
   UnorderedListOutlined,
   FileAddOutlined,
+  VerifiedOutlined,
+  UserOutlined,
 } from "@ant-design/icons";
 import {
   ExpressIcon,
@@ -172,7 +174,7 @@ export const AuthenticatedApp = () => {
               <Route path="catering/set_meal_list" element={<SetMealList />} />
               <Route
                 path={"*"}
-                element={<Navigate to={"user_list"} replace={true} />}
+                element={<Navigate to={"user/list"} replace={true} />}
               />
             </Routes>
           </Content>
@@ -206,17 +208,17 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
     {
       label: "用户管理",
       key: "user",
-      icon: <TeamOutlined />,
+      icon: <UserOutlined />,
       children: [
         {
           label: <Link to={"user/list"}>用户列表</Link>,
           key: "user_list",
-          icon: <MehOutlined />,
+          icon: <TeamOutlined />,
         },
         {
           label: <Link to={"user/auth_info_list"}>实名认证</Link>,
           key: "user_auth_info_list",
-          icon: <TeamOutlined />,
+          icon: <VerifiedOutlined />,
         },
       ],
     },

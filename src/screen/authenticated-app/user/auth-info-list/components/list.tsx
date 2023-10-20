@@ -133,8 +133,8 @@ const More = ({ id, status }: { id: number; status: number }) => {
 
   const confirmApproved = (id: number) => {
     Modal.confirm({
-      title: "服务商审核通过确认",
-      content: "请确保在服务商信息无误的情况下进行该操作",
+      title: "实名认证审核通过确认",
+      content: "请确保在实名认证信息无误的情况下进行该操作",
       okText: "确定",
       cancelText: "取消",
       onOk: () => approvedAuthInfo(id),
