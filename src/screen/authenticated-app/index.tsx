@@ -10,7 +10,8 @@ import { NavigationBar } from "components/navigation-bar";
 
 import { RoleList } from "./admin/role-list";
 import { AdminList } from "./admin/admin-list";
-import { UserList } from "./user-list";
+import { UserList } from "./user/user-list";
+import { AuthInfoList } from "./user/auth-info-list";
 import { MerchantList } from "./shopping/merchant-list/index";
 import { ShopCategoryList } from "./shopping/shop/category-list/index";
 import { ShopList } from "./shopping/shop/shop-list";
@@ -86,7 +87,8 @@ export const AuthenticatedApp = () => {
             <Routes>
               <Route path="auth/role_list" element={<RoleList />} />
               <Route path="auth/admin_list" element={<AdminList />} />
-              <Route path="user_list" element={<UserList />} />
+              <Route path="user/list" element={<UserList />} />
+              <Route path="user/auth_info_list" element={<AuthInfoList />} />
               <Route path="shopping/merchant_list" element={<MerchantList />} />
               <Route
                 path="shopping/shop/category_list"
@@ -185,11 +187,6 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
 
   const items: MenuProps["items"] = [
     {
-      label: <Link to={"user_list"}>用户列表</Link>,
-      key: "user_list",
-      icon: <TeamOutlined />,
-    },
-    {
       label: "权限管理",
       key: "auth",
       icon: <LockOutlined />,
@@ -202,6 +199,23 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
         {
           label: <Link to={"auth/admin_list"}>管理员列表</Link>,
           key: "auth_admin_list",
+          icon: <TeamOutlined />,
+        },
+      ],
+    },
+    {
+      label: "用户管理",
+      key: "user",
+      icon: <TeamOutlined />,
+      children: [
+        {
+          label: <Link to={"user/list"}>用户列表</Link>,
+          key: "user_list",
+          icon: <MehOutlined />,
+        },
+        {
+          label: <Link to={"user/auth_info_list"}>实名认证</Link>,
+          key: "user_auth_info_list",
           icon: <TeamOutlined />,
         },
       ],
