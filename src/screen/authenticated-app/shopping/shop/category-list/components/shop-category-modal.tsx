@@ -81,7 +81,12 @@ export const ShopCategoryModal = ({
             name="adaptedMerchantTypes"
             rules={[{ required: true, message: "请选择适配商家类型" }]}
           >
-            <Select mode="multiple" allowClear options={merchantTypeOptions} />
+            <Select
+              mode="multiple"
+              allowClear
+              options={merchantTypeOptions}
+              placeholder={"请选择适配商家类型"}
+            />
           </Form.Item>
         </Form>
       )}
