@@ -1,11 +1,16 @@
-import { Form, Input, Modal } from "antd";
+import { Modal, Form, Input, InputNumber, Select } from "antd";
 import { useForm } from "antd/lib/form/Form";
 import { ErrorBox, ModalLoading } from "components/lib";
 import { useAddShopCategory, useEditShopCategory } from "service/shopCategory";
 import { useShopCategoryModal, useShopCategoriesQueryKey } from "../util";
 import { useEffect } from "react";
+import type { MerchantTypeOption } from "types/shopCategory";
 
-export const ShopCategoryModal = () => {
+export const ShopCategoryModal = ({
+  merchantTypeOptions,
+}: {
+  merchantTypeOptions: MerchantTypeOption[];
+}) => {
   const [form] = useForm();
   const {
     shopCategoryModalOpen,
@@ -55,11 +60,28 @@ export const ShopCategoryModal = () => {
       ) : (
         <Form form={form} layout="vertical">
           <Form.Item
-            label={"店铺分类名称"}
-            name={"name"}
+            label="店铺分类名称"
+            name="name"
             rules={[{ required: true, message: "请输入店铺分类名称" }]}
           >
             <Input placeholder={"请输入店铺分类名称"} />
+          </Form.Item>
+          <Form.Item
+            label="店铺保证金"
+            name="deposit"
+            rules={[{ required: true, message: "请输入店铺保证金" }]}
+          >
+            <InputNumber
+              style={{ width: "100%" }}
+              placeholder={"请输入店铺保证金"}
+            />
+          </Form.Item>
+          <Form.Item
+            label="店铺适配商家类型"
+            name="adaptedMerchantTypes"
+            rules={[{ required: true, message: "请选择适配商家类型" }]}
+          >
+            <Select mode="multiple" allowClear options={merchantTypeOptions} />
           </Form.Item>
         </Form>
       )}

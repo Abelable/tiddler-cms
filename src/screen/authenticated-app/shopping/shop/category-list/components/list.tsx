@@ -8,21 +8,31 @@ import {
   Table,
   TablePaginationConfig,
   TableProps,
+  Tag,
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
 import dayjs from "dayjs";
 import { useDeleteShopCategory } from "service/shopCategory";
-import { Category, CategoriesSearchParams } from "types/category";
 import { useShopCategoryModal, useShopCategoriesQueryKey } from "../util";
 import { PlusOutlined } from "@ant-design/icons";
 
+import type { Category, CategoriesSearchParams } from "types/category";
+import type { MerchantTypeOption } from "types/shopCategory";
+
 interface ListProps extends TableProps<Category> {
+  merchantTypeOptions: MerchantTypeOption[];
   params: Partial<CategoriesSearchParams>;
   setParams: (params: Partial<CategoriesSearchParams>) => void;
   error: Error | unknown;
 }
 
-export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
+export const List = ({
+  merchantTypeOptions,
+  error,
+  params,
+  setParams,
+  ...restProps
+}: ListProps) => {
   const { open } = useShopCategoryModal();
 
   const setPagination = (pagination: TablePaginationConfig) =>
@@ -52,6 +62,23 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
           {
             title: "店铺分类名称",
             dataIndex: "name",
+          },
+          {
+            title: "店铺保证金",
+            dataIndex: "deposit",
+          },
+          {
+            title: "适配商家类型",
+            dataIndex: "adaptedMerchantTypes",
+            render: (value) =>
+              value.map((item: number) => (
+                <Tag>
+                  {
+                    merchantTypeOptions.find((type) => type.value === item)
+                      ?.label
+                  }
+                </Tag>
+              )),
           },
           {
             title: "创建时间",

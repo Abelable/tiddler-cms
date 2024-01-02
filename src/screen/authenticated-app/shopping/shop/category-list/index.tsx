@@ -5,6 +5,11 @@ import { List } from "./components/list";
 import { ShopCategoryModal } from "./components/shop-category-modal";
 import { useShopCategoriesSearchParams } from "./util";
 
+const merchantTypeOptions = [
+  { label: "个人", value: 1 },
+  { label: "企业", value: 2 },
+];
+
 export const ShopCategoryList = () => {
   const [params, setParams] = useShopCategoriesSearchParams();
   const { isLoading, error, data } = useShopCategories(params);
@@ -13,6 +18,7 @@ export const ShopCategoryList = () => {
     <Container>
       <Main>
         <List
+          merchantTypeOptions={merchantTypeOptions}
           params={params}
           setParams={setParams}
           error={error}
@@ -25,7 +31,7 @@ export const ShopCategoryList = () => {
           }}
         />
       </Main>
-      <ShopCategoryModal />
+      <ShopCategoryModal merchantTypeOptions={merchantTypeOptions} />
     </Container>
   );
 };
