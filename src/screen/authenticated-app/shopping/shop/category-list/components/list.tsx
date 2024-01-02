@@ -16,10 +16,10 @@ import { useDeleteShopCategory } from "service/shopCategory";
 import { useShopCategoryModal, useShopCategoriesQueryKey } from "../util";
 import { PlusOutlined } from "@ant-design/icons";
 
-import type { Category, CategoriesSearchParams } from "types/category";
-import type { MerchantTypeOption } from "types/shopCategory";
+import type { CategoriesSearchParams } from "types/category";
+import type { MerchantTypeOption, ShopCategory } from "types/shopCategory";
 
-interface ListProps extends TableProps<Category> {
+interface ListProps extends TableProps<ShopCategory> {
   merchantTypeOptions: MerchantTypeOption[];
   params: Partial<CategoriesSearchParams>;
   setParams: (params: Partial<CategoriesSearchParams>) => void;
@@ -72,7 +72,7 @@ export const List = ({
             dataIndex: "adaptedMerchantTypes",
             render: (value) =>
               value.map((item: number) => (
-                <Tag>
+                <Tag key={item}>
                   {
                     merchantTypeOptions.find((type) => type.value === item)
                       ?.label
