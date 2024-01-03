@@ -82,6 +82,32 @@ export const GoodsCategoryModal = ({
               ))}
             </Select>
           </Form.Item>
+
+          <Input.Group compact>
+            <Input
+              style={{ width: 100, textAlign: "center" }}
+              placeholder="Minimum"
+            />
+            <Input
+              className="site-input-split"
+              style={{
+                width: 30,
+                borderLeft: 0,
+                borderRight: 0,
+                pointerEvents: "none",
+              }}
+              placeholder="~"
+              disabled
+            />
+            <Input
+              className="site-input-right"
+              style={{
+                width: 100,
+                textAlign: "center",
+              }}
+              placeholder="Maximum"
+            />
+          </Input.Group>
         </Form>
       )}
     </Modal>
