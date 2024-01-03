@@ -5,9 +5,11 @@ import { Button, Input, Select } from "antd";
 
 import type { GoodsListSearchParams } from "types/goods";
 import type { CategoryOption } from "types/category";
+import type { GoodsCategoryOption } from "types/goodsCategory";
 
 export interface SearchPanelProps {
-  categoryOptions: CategoryOption[];
+  shopCategoryOptions: CategoryOption[];
+  categoryOptions: GoodsCategoryOption[];
   statusOptions: { text: string; value: number }[];
   params: Partial<GoodsListSearchParams>;
   setParams: (params: Partial<GoodsListSearchParams>) => void;
@@ -15,11 +17,13 @@ export interface SearchPanelProps {
 
 const defaultParmas: Partial<GoodsListSearchParams> = {
   name: "",
+  shopCategoryId: undefined,
   categoryId: undefined,
   status: undefined,
 };
 
 export const SearchPanel = ({
+  shopCategoryOptions,
   categoryOptions,
   statusOptions,
   params,
@@ -41,6 +45,11 @@ export const SearchPanel = ({
       name: evt.target.value,
     });
   };
+
+  const setShopCategory = (shopCategoryId: number) =>
+    setTempParams({ ...tempParams, shopCategoryId });
+  const clearShopCategory = () =>
+    setTempParams({ ...tempParams, shopCategoryId: undefined });
 
   const setCategory = (categoryId: number) =>
     setTempParams({ ...tempParams, categoryId });
@@ -69,20 +78,43 @@ export const SearchPanel = ({
         />
       </Item>
       <Item>
-        <div>商品分类：</div>
+        <div>商品一级分类：</div>
         <Select
           style={{ width: "20rem" }}
-          value={tempParams.categoryId}
-          placeholder="请选择商品分类"
+          value={tempParams.shopCategoryId}
+          placeholder="请选择一级商品分类"
           allowClear={true}
-          onSelect={setCategory}
-          onClear={clearCategory}
+          onSelect={setShopCategory}
+          onClear={clearShopCategory}
         >
-          {categoryOptions?.map(({ id, name }) => (
+          {shopCategoryOptions?.map(({ id, name }) => (
             <Select.Option key={id} value={id}>
               {name}
             </Select.Option>
           ))}
+        </Select>
+      </Item>
+      <Item>
+        <div>商品二级分类：</div>
+        <Select
+          style={{ width: "20rem" }}
+          value={tempParams.categoryId}
+          placeholder="请选择二级商品分类"
+          allowClear={true}
+          onSelect={setCategory}
+          onClear={clearCategory}
+        >
+          {categoryOptions
+            .filter((item) =>
+              tempParams.shopCategoryId
+                ? item.shopCategoryId === tempParams.shopCategoryId
+                : true
+            )
+            ?.map(({ id, name }) => (
+              <Select.Option key={id} value={id}>
+                {name}
+              </Select.Option>
+            ))}
         </Select>
       </Item>
       <Item>

@@ -23,6 +23,7 @@ interface ListProps extends TableProps<Goods>, SearchPanelProps {
 }
 
 export const List = ({
+  shopCategoryOptions,
   categoryOptions,
   statusOptions,
   error,
@@ -54,58 +55,13 @@ export const List = ({
             fixed: "left",
           },
           {
-            title: "图片",
-            dataIndex: "image",
-            render: (value) => <Image width={68} src={value} />,
-            width: "14rem",
-          },
-          {
-            title: "名称",
-            dataIndex: "name",
-            width: "32rem",
-          },
-          {
-            title: "分类",
-            dataIndex: "categoryId",
-            render: (value) => (
-              <>{categoryOptions.find((item) => item.id === value)?.name}</>
-            ),
-            width: "12rem",
-          },
-          {
-            title: "价格",
-            dataIndex: "price",
-            render: (value) => <>{`¥${value}`}</>,
-          },
-          {
-            title: "库存",
-            dataIndex: "stock",
-          },
-          {
-            title: "销售佣金比例",
-            dataIndex: "salesCommissionRate",
-            render: (value) => <>{`${value * 100}%`}</>,
-            width: "16rem",
-          },
-          {
-            title: "推广佣金比例",
-            dataIndex: "promotionCommissionRate",
-            render: (value) => <>{`${value * 100}%`}</>,
-            width: "16rem",
-          },
-          {
-            title: "销量",
-            dataIndex: "salesVolume",
-            sorter: (a, b) => Number(a) - Number(b),
-          },
-          {
             title: "状态",
             dataIndex: "status",
             render: (value, goods) =>
               value === 0 ? (
                 <span style={{ color: "#87d068" }}>待审核</span>
               ) : value === 1 ? (
-                <span>售卖中</span>
+                <span style={{ color: "#296BEF" }}>售卖中</span>
               ) : (
                 <Tooltip title={goods.failureReason}>
                   <span style={{ color: "#f50", cursor: "pointer" }}>
@@ -119,6 +75,60 @@ export const List = ({
               { text: "未过审", value: 2 },
             ],
             onFilter: (value, goods) => goods.status === value,
+          },
+          {
+            title: "图片",
+            dataIndex: "image",
+            render: (value) => <Image width={68} src={value} />,
+            width: "14rem",
+          },
+          {
+            title: "名称",
+            dataIndex: "name",
+            width: "32rem",
+          },
+
+          {
+            title: "价格",
+            dataIndex: "price",
+            render: (value) => <>{`¥${value}`}</>,
+          },
+          {
+            title: "销量",
+            dataIndex: "salesVolume",
+            sorter: (a, b) => Number(a) - Number(b),
+          },
+          {
+            title: "库存",
+            dataIndex: "stock",
+          },
+          {
+            title: "一级分类",
+            dataIndex: "shopCategoryId",
+            render: (value) => (
+              <>{shopCategoryOptions.find((item) => item.id === value)?.name}</>
+            ),
+            width: "12rem",
+          },
+          {
+            title: "二级分类",
+            dataIndex: "categoryId",
+            render: (value) => (
+              <>{categoryOptions.find((item) => item.id === value)?.name}</>
+            ),
+            width: "12rem",
+          },
+          {
+            title: "销售佣金比例",
+            dataIndex: "salesCommissionRate",
+            render: (value) => <>{`${value * 100}%`}</>,
+            width: "12rem",
+          },
+          {
+            title: "推广佣金比例",
+            dataIndex: "promotionCommissionRate",
+            render: (value) => <>{`${value * 100}%`}</>,
+            width: "12rem",
           },
           {
             title: "创建时间",

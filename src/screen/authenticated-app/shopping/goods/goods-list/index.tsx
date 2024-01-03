@@ -14,9 +14,10 @@ import { RejectModal } from "./components/reject-modal";
 export const GoodsList = () => {
   const [params, setParams] = useGoodsListSearchParams();
   const { isLoading, error, data } = useGoodsList(params);
-  const { data: goodsCategoryOptions, error: goodsOptionsError } =
+  const { data: goodsCategoryOptions, error: goodsCategoryOptionsError } =
     useGoodsCategoryOptions();
-  const { data: shopCategoryOptions } = useShopCategoryOptions();
+  const { data: shopCategoryOptions, error: shopCategoryOptionsError } =
+    useShopCategoryOptions();
   const statusOptions = [
     { text: "待审核", value: 0 },
     { text: "售卖中", value: 1 },
@@ -27,17 +28,19 @@ export const GoodsList = () => {
     <Container>
       <Main>
         <SearchPanel
+          shopCategoryOptions={shopCategoryOptions || []}
           categoryOptions={goodsCategoryOptions || []}
           statusOptions={statusOptions}
           params={params}
           setParams={setParams}
         />
         <List
+          shopCategoryOptions={shopCategoryOptions || []}
           categoryOptions={goodsCategoryOptions || []}
           statusOptions={statusOptions}
           params={params}
           setParams={setParams}
-          error={error || goodsOptionsError}
+          error={error || goodsCategoryOptionsError || shopCategoryOptionsError}
           loading={isLoading}
           dataSource={data?.list}
           pagination={{
@@ -48,8 +51,8 @@ export const GoodsList = () => {
         />
       </Main>
       <GoodsModal
-        goodsCategoryOptions={goodsCategoryOptions || []}
         shopCategoryOptions={shopCategoryOptions || []}
+        goodsCategoryOptions={goodsCategoryOptions || []}
       />
       <RejectModal />
     </Container>

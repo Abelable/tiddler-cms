@@ -12,6 +12,7 @@ import type {
   GoodsCategoriesResult,
   GoodsCategoriesSearchParams,
   GoodsCategory,
+  GoodsCategoryOption,
 } from "types/goodsCategory";
 
 export const useGoodsCategories = (
@@ -72,7 +73,14 @@ export const useDeleteGoodsCategory = (queryKey: QueryKey) => {
 
 export const useGoodsCategoryOptions = () => {
   const client = useHttp();
-  return useQuery<CategoryOption[]>(["goods_category_options"], () =>
+  return useQuery<GoodsCategoryOption[]>(["goods_category_options"], () =>
     client("goods/category/options")
+  );
+};
+
+export const useFilterGoodsCategoryOptions = () => {
+  const client = useHttp();
+  return useQuery<CategoryOption[]>(["filter_goods_category_options"], () =>
+    client("goods/category/filteroptions")
   );
 };

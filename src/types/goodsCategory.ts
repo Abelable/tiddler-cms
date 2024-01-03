@@ -1,3 +1,9 @@
+export interface GoodsCategoryOption {
+  id: number;
+  shopCategoryId: number;
+  name: string;
+}
+
 export interface GoodsCategoriesSearchParams {
   shopCategoryId: number | undefined;
   page: number;
