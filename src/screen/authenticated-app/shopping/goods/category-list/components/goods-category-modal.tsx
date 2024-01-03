@@ -1,4 +1,4 @@
-import { Form, Input, Modal } from "antd";
+import { Form, Input, Select, Modal } from "antd";
 import { useForm } from "antd/lib/form/Form";
 import { ErrorBox, ModalLoading } from "components/lib";
 import {
@@ -7,8 +7,13 @@ import {
 } from "service/goodsCategory";
 import { useGoodsCategoryModal, useGoodsCategoriesQueryKey } from "../util";
 import { useEffect } from "react";
+import { CategoryOption } from "types/category";
 
-export const GoodsCategoryModal = () => {
+export const GoodsCategoryModal = ({
+  shopCategoryOptions,
+}: {
+  shopCategoryOptions: CategoryOption[];
+}) => {
   const [form] = useForm();
   const {
     goodsCategoryModalOpen,
@@ -63,6 +68,19 @@ export const GoodsCategoryModal = () => {
             rules={[{ required: true, message: "请输入商品分类名称" }]}
           >
             <Input placeholder={"请输入商品分类名称"} />
+          </Form.Item>
+          <Form.Item
+            name="roleId"
+            label="管理员角色"
+            rules={[{ required: true, message: "请选择管理员角色" }]}
+          >
+            <Select placeholder="请选择管理员角色">
+              {shopCategoryOptions.map((item) => (
+                <Select.Option key={item.id} value={item.id}>
+                  {item.name}
+                </Select.Option>
+              ))}
+            </Select>
           </Form.Item>
         </Form>
       )}
