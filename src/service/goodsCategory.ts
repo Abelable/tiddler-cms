@@ -1,28 +1,31 @@
 import { QueryKey, useMutation, useQuery } from "react-query";
 import { useHttp } from "./http";
-import type {
-  Category,
-  CategoriesResult,
-  CategoriesSearchParams,
-  CategoryOption,
-} from "types/category";
+
 import {
   useAddConfig,
   useDeleteConfig,
   useEditConfig,
 } from "./use-optimistic-options";
 import { cleanObject } from "utils/index";
+import type { CategoryOption } from "types/category";
+import type {
+  GoodsCategoriesResult,
+  GoodsCategoriesSearchParams,
+  GoodsCategory,
+} from "types/goodsCategory";
 
-export const useGoodsCategories = (params: Partial<CategoriesSearchParams>) => {
+export const useGoodsCategories = (
+  params: Partial<GoodsCategoriesSearchParams>
+) => {
   const client = useHttp();
-  return useQuery<CategoriesResult>(["goods_categories", params], () =>
+  return useQuery<GoodsCategoriesResult>(["goods_categories", params], () =>
     client("goods/category/list", { data: params, method: "POST" })
   );
 };
 
 export const useGoodsCategory = (id: number) => {
   const client = useHttp();
-  return useQuery<Partial<Category>>(
+  return useQuery<Partial<GoodsCategory>>(
     ["goods_category", { id }],
     () => client(`goods/category/detail`, { data: { id } }),
     {
@@ -34,7 +37,7 @@ export const useGoodsCategory = (id: number) => {
 export const useAddGoodsCategory = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
-    (params: Partial<Category>) =>
+    (params: Partial<GoodsCategory>) =>
       client("goods/category/add", {
         data: cleanObject(params),
         method: "POST",
@@ -46,7 +49,7 @@ export const useAddGoodsCategory = (queryKey: QueryKey) => {
 export const useEditGoodsCategory = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
-    (params: Partial<Category>) =>
+    (params: Partial<GoodsCategory>) =>
       client("goods/category/edit", {
         data: cleanObject(params),
         method: "POST",

@@ -1,18 +1,28 @@
 import styled from "@emotion/styled";
-import { useGoodsCategories } from "service/goodsCategory";
 import { toNumber } from "utils";
+import { useGoodsCategoriesSearchParams } from "./util";
+import { useShopCategoryOptions } from "service/shopCategory";
+import { useGoodsCategories } from "service/goodsCategory";
+
+import { SearchPanel } from "./components/search-panel";
 import { List } from "./components/list";
 import { GoodsCategoryModal } from "./components/goods-category-modal";
-import { useGoodsCategoriesSearchParams } from "./util";
 
 export const GoodsCategoryList = () => {
+  const { data: shopCategoryOptions } = useShopCategoryOptions();
   const [params, setParams] = useGoodsCategoriesSearchParams();
   const { isLoading, error, data } = useGoodsCategories(params);
 
   return (
     <Container>
       <Main>
+        <SearchPanel
+          shopCategoryOptions={shopCategoryOptions || []}
+          params={params}
+          setParams={setParams}
+        />
         <List
+          shopCategoryOptions={shopCategoryOptions || []}
           params={params}
           setParams={setParams}
           error={error}

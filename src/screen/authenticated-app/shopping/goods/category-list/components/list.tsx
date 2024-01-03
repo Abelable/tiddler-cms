@@ -12,17 +12,23 @@ import {
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
 import dayjs from "dayjs";
 import { useDeleteGoodsCategory } from "service/goodsCategory";
-import { Category, CategoriesSearchParams } from "types/category";
 import { useGoodsCategoryModal, useGoodsCategoriesQueryKey } from "../util";
 import { PlusOutlined } from "@ant-design/icons";
 
-interface ListProps extends TableProps<Category> {
-  params: Partial<CategoriesSearchParams>;
-  setParams: (params: Partial<CategoriesSearchParams>) => void;
+import type { GoodsCategory } from "types/goodsCategory";
+import type { SearchPanelProps } from "./search-panel";
+
+interface ListProps extends TableProps<GoodsCategory>, SearchPanelProps {
   error: Error | unknown;
 }
 
-export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
+export const List = ({
+  shopCategoryOptions,
+  error,
+  params,
+  setParams,
+  ...restProps
+}: ListProps) => {
   const { open } = useGoodsCategoryModal();
 
   const setPagination = (pagination: TablePaginationConfig) =>
@@ -52,6 +58,24 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
           {
             title: "商品分类名称",
             dataIndex: "name",
+          },
+          {
+            title: "所属店铺分类",
+            dataIndex: "shopCategoryId",
+            render: (value) =>
+              shopCategoryOptions.find((item) => item.id === value)?.name,
+          },
+          {
+            title: "销售佣金比例范围",
+            render: (value, category) => (
+              <>{`${category.minSalesCommissionRate}% ~ ${category.maxSalesCommissionRate}%`}</>
+            ),
+          },
+          {
+            title: "推广佣金比例范围",
+            render: (value, category) => (
+              <>{`${category.minPromotionCommissionRate}% ~ ${category.maxPromotionCommissionRate}%`}</>
+            ),
           },
           {
             title: "创建时间",
