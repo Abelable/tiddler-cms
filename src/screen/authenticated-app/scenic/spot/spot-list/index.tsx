@@ -39,7 +39,7 @@ export const ScenicList = () => {
           loading={isLoading}
           dataSource={data?.list}
           pagination={{
-            current: toNumber(data?.page),
+            current: toNumber(data?.page) || 1,
             pageSize: toNumber(data?.limit),
             total: toNumber(data?.total),
           }}

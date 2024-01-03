@@ -33,7 +33,7 @@ export const ProviderRestaurantList = () => {
           loading={isLoading}
           dataSource={data?.list}
           pagination={{
-            current: toNumber(data?.page) || 1,
+            current: toNumber(data?.page) || 1 || 1,
             pageSize: toNumber(data?.limit),
             total: toNumber(data?.total),
           }}
