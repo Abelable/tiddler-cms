@@ -8,7 +8,6 @@ import type { CategoryOption } from "types/category";
 
 export interface SearchPanelProps {
   categoryOptions: CategoryOption[];
-  statusOptions: { text: string; value: number }[];
   params: Partial<ScenicListSearchParams>;
   setParams: (params: Partial<ScenicListSearchParams>) => void;
 }
@@ -16,12 +15,10 @@ export interface SearchPanelProps {
 const defaultParmas: Partial<ScenicListSearchParams> = {
   name: "",
   categoryId: undefined,
-  status: undefined,
 };
 
 export const SearchPanel = ({
   categoryOptions,
-  statusOptions,
   params,
   setParams,
 }: SearchPanelProps) => {
@@ -46,10 +43,6 @@ export const SearchPanel = ({
     setTempParams({ ...tempParams, categoryId });
   const clearCategory = () =>
     setTempParams({ ...tempParams, categoryId: undefined });
-
-  const setStatus = (status: number) =>
-    setTempParams({ ...tempParams, status });
-  const clearStatus = () => setTempParams({ ...tempParams, status: undefined });
 
   const clear = () => {
     setParams({ ...params, ...defaultParmas });
@@ -81,23 +74,6 @@ export const SearchPanel = ({
           {categoryOptions?.map(({ id, name }) => (
             <Select.Option key={id} value={id}>
               {name}
-            </Select.Option>
-          ))}
-        </Select>
-      </Item>
-      <Item>
-        <div>景区状态：</div>
-        <Select
-          style={{ width: "20rem" }}
-          value={tempParams.status}
-          placeholder="请选择景区分类"
-          allowClear={true}
-          onSelect={setStatus}
-          onClear={clearStatus}
-        >
-          {statusOptions?.map(({ text, value }) => (
-            <Select.Option key={value} value={value}>
-              {text}
             </Select.Option>
           ))}
         </Select>

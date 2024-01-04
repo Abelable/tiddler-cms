@@ -3,19 +3,18 @@ import styled from "@emotion/styled";
 import { Row } from "components/lib";
 import { Button, Input, Select } from "antd";
 
-import type { ScenicListSearchParams } from "types/scenic";
+import type { RestaurantListSearchParams } from "types/restaurant";
 import type { CategoryOption } from "types/category";
 
 export interface SearchPanelProps {
   categoryOptions: CategoryOption[];
-  params: Partial<ScenicListSearchParams>;
-  setParams: (params: Partial<ScenicListSearchParams>) => void;
+  params: Partial<RestaurantListSearchParams>;
+  setParams: (params: Partial<RestaurantListSearchParams>) => void;
 }
 
-const defaultParmas: Partial<ScenicListSearchParams> = {
+const defaultParmas: Partial<RestaurantListSearchParams> = {
   name: "",
   categoryId: undefined,
-  status: undefined,
 };
 
 export const SearchPanel = ({

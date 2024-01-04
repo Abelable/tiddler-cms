@@ -1,7 +1,6 @@
 export interface RestaurantListSearchParams {
   name: string;
   categoryId: number | undefined;
-  status: number | undefined;
   page: number;
   limit: number;
 }

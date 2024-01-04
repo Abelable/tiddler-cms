@@ -2,10 +2,8 @@ import { QueryKey, useMutation, useQuery } from "react-query";
 import { useHttp } from "./http";
 import {
   useAddConfig,
-  useApprovedConfig,
   useDeleteConfig,
   useEditConfig,
-  useRejectConfig,
 } from "./use-optimistic-options";
 import { cleanObject } from "utils/index";
 
@@ -32,30 +30,6 @@ export const useScenic = (id: number) => {
     {
       enabled: !!id,
     }
-  );
-};
-
-export const useApprovedScenic = (queryKey: QueryKey) => {
-  const client = useHttp();
-  return useMutation(
-    (id: number) =>
-      client("scenic/up", {
-        data: { id },
-        method: "POST",
-      }),
-    useApprovedConfig(queryKey)
-  );
-};
-
-export const useRejectScenic = (queryKey: QueryKey) => {
-  const client = useHttp();
-  return useMutation(
-    (data: { id: number; failureReason: string }) =>
-      client("scenic/reject", {
-        data,
-        method: "POST",
-      }),
-    useRejectConfig(queryKey)
   );
 };
 

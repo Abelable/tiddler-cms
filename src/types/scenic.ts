@@ -1,7 +1,6 @@
 export interface ScenicListSearchParams {
   name: string;
   categoryId: number | undefined;
-  status: number | undefined;
   page: number;
   limit: number;
 }
@@ -52,8 +51,6 @@ export interface ScenicDetail {
 
 export interface Scenic {
   id: number;
-  status: number;
-  failureReason: string;
   name: string;
   level: string;
   categoryId: number;

@@ -6,7 +6,6 @@ export const useScenicListSearchParams = () => {
   const [params, setParams] = useUrlQueryParams([
     "name",
     "categoryId",
-    "status",
     "page",
     "limit",
   ]);
@@ -63,29 +62,6 @@ export const useScenicModal = () => {
     error,
     open,
     startEdit,
-    close,
-  };
-};
-
-export const useRejectModal = () => {
-  const [{ rejectScenicId }, setRejectScenicId] = useUrlQueryParams([
-    "rejectScenicId",
-  ]);
-  const setUrlParams = useSetUrlSearchParams();
-
-  const open = useCallback(
-    (id: number) => setRejectScenicId({ rejectScenicId: `${id}` }),
-    [setRejectScenicId]
-  );
-  const close = useCallback(
-    () => setUrlParams({ rejectScenicId: "" }),
-    [setUrlParams]
-  );
-
-  return {
-    rejectModalOpen: !!rejectScenicId,
-    rejectScenicId,
-    open,
     close,
   };
 };
