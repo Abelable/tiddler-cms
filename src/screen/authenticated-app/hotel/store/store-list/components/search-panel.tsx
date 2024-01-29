@@ -10,7 +10,6 @@ import type { Option } from "types/common";
 export interface SearchPanelProps {
   gradeOptions: Option[];
   categoryOptions: CategoryOption[];
-  statusOptions: Option[];
   params: Partial<HotelListSearchParams>;
   setParams: (params: Partial<HotelListSearchParams>) => void;
 }
@@ -19,13 +18,11 @@ const defaultParmas: Partial<HotelListSearchParams> = {
   name: "",
   grade: undefined,
   categoryId: undefined,
-  status: undefined,
 };
 
 export const SearchPanel = ({
   gradeOptions,
   categoryOptions,
-  statusOptions,
   params,
   setParams,
 }: SearchPanelProps) => {
@@ -53,10 +50,6 @@ export const SearchPanel = ({
     setTempParams({ ...tempParams, categoryId });
   const clearCategory = () =>
     setTempParams({ ...tempParams, categoryId: undefined });
-
-  const setStatus = (status: number) =>
-    setTempParams({ ...tempParams, status });
-  const clearStatus = () => setTempParams({ ...tempParams, status: undefined });
 
   const clear = () => {
     setParams({ ...params, ...defaultParmas });
@@ -105,23 +98,6 @@ export const SearchPanel = ({
           {categoryOptions?.map(({ id, name }) => (
             <Select.Option key={id} value={id}>
               {name}
-            </Select.Option>
-          ))}
-        </Select>
-      </Item>
-      <Item>
-        <div>酒店状态：</div>
-        <Select
-          style={{ width: "20rem" }}
-          value={tempParams.status}
-          placeholder="请选择酒店分类"
-          allowClear={true}
-          onSelect={setStatus}
-          onClear={clearStatus}
-        >
-          {statusOptions?.map(({ text, value }) => (
-            <Select.Option key={value} value={value}>
-              {text}
             </Select.Option>
           ))}
         </Select>

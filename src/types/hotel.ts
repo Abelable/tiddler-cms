@@ -2,7 +2,6 @@ export interface HotelListSearchParams {
   name: string;
   grade: number | undefined;
   categoryId: number | undefined;
-  status: number | undefined;
   page: number;
   limit: number;
 }
@@ -49,7 +48,6 @@ export interface HotelDetail {
 export interface Hotel {
   id: number;
   cover: string;
-  status: number;
   failureReason: string;
   name: string;
   grade: number;

@@ -8,18 +8,12 @@ import { useHotelListSearchParams } from "./util";
 import { HotelModal } from "./components/hotel-modal";
 import { List } from "./components/list";
 import { SearchPanel } from "./components/search-panel";
-import { RejectModal } from "./components/reject-modal";
 
 export const HotelList = () => {
   const [params, setParams] = useHotelListSearchParams();
   const { isLoading, error, data } = useHotelList(params);
   const { data: hotelCategoryOptions, error: hotelOptionsError } =
     useHotelCategoryOptions();
-  const statusOptions = [
-    { text: "待审核", value: 0 },
-    { text: "营业中", value: 1 },
-    { text: "未过审", value: 2 },
-  ];
   const gradeOptions = [
     { text: "经济酒店", value: 1 },
     { text: "舒适酒店", value: 2 },
@@ -33,14 +27,12 @@ export const HotelList = () => {
         <SearchPanel
           gradeOptions={gradeOptions}
           categoryOptions={hotelCategoryOptions || []}
-          statusOptions={statusOptions}
           params={params}
           setParams={setParams}
         />
         <List
           gradeOptions={gradeOptions}
           categoryOptions={hotelCategoryOptions || []}
-          statusOptions={statusOptions}
           params={params}
           setParams={setParams}
           error={error || hotelOptionsError}
@@ -57,7 +49,6 @@ export const HotelList = () => {
         gradeOptions={gradeOptions}
         categoryOptions={hotelCategoryOptions || []}
       />
-      <RejectModal />
     </Container>
   );
 };

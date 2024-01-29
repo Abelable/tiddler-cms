@@ -2,10 +2,8 @@ import { QueryKey, useMutation, useQuery } from "react-query";
 import { useHttp } from "./http";
 import {
   useAddConfig,
-  useApprovedConfig,
   useDeleteConfig,
   useEditConfig,
-  useRejectConfig,
 } from "./use-optimistic-options";
 import { cleanObject } from "utils/index";
 import type {
@@ -31,30 +29,6 @@ export const useHotel = (id: number) => {
     {
       enabled: !!id,
     }
-  );
-};
-
-export const useApprovedHotel = (queryKey: QueryKey) => {
-  const client = useHttp();
-  return useMutation(
-    (id: number) =>
-      client("hotel/up", {
-        data: { id },
-        method: "POST",
-      }),
-    useApprovedConfig(queryKey)
-  );
-};
-
-export const useRejectHotel = (queryKey: QueryKey) => {
-  const client = useHttp();
-  return useMutation(
-    (data: { id: number; failureReason: string }) =>
-      client("hotel/reject", {
-        data,
-        method: "POST",
-      }),
-    useRejectConfig(queryKey)
   );
 };
 

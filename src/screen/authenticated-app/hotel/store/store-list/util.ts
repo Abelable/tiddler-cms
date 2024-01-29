@@ -66,26 +66,3 @@ export const useHotelModal = () => {
     close,
   };
 };
-
-export const useRejectModal = () => {
-  const [{ rejectHotelId }, setRejectHotelId] = useUrlQueryParams([
-    "rejectHotelId",
-  ]);
-  const setUrlParams = useSetUrlSearchParams();
-
-  const open = useCallback(
-    (id: number) => setRejectHotelId({ rejectHotelId: `${id}` }),
-    [setRejectHotelId]
-  );
-  const close = useCallback(
-    () => setUrlParams({ rejectHotelId: "" }),
-    [setUrlParams]
-  );
-
-  return {
-    rejectModalOpen: !!rejectHotelId,
-    rejectHotelId,
-    open,
-    close,
-  };
-};
