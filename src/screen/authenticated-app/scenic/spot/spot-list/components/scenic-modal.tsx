@@ -21,6 +21,7 @@ import { Map } from "components/map";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 
 import type { CategoryOption } from "types/category";
+import type { OpenTime } from "types/scenic";
 
 const facilityOptions = [
   { id: 1, name: "停车场" },
@@ -42,6 +43,7 @@ const monthOptions = [
   { id: 11, name: "11月" },
   { id: 12, name: "12月" },
 ];
+const format = "HH:mm";
 
 const normFile = (e: any) => {
   if (Array.isArray(e)) return e;
@@ -84,8 +86,8 @@ export const ScenicModal = ({
         openTimeList: openTimeList?.length
           ? openTimeList.map((item) => ({
               ...item,
-              openTime: moment(item.openTime),
-              closeTime: moment(item.openTime),
+              openTime: moment(item.openTime, format),
+              closeTime: moment(item.closeTime, format),
             }))
           : openTimeList,
         projectList: projectList?.length
@@ -110,12 +112,18 @@ export const ScenicModal = ({
 
   const submit = () => {
     form.validateFields().then(async () => {
-      const { video, imageList, projectList, ...rest } = form.getFieldsValue();
+      const { video, imageList, projectList, openTimeList, ...rest } =
+        form.getFieldsValue();
       await mutateAsync({
         ...editingScenic,
         ...rest,
         video: video && video.length ? video[0].url : "",
         imageList: imageList.map((item: { url: string }) => item.url),
+        openTimeList: openTimeList.map((item: OpenTime) => ({
+          ...item,
+          openTime: moment(item.openTime).format(format),
+          closeTime: moment(item.closeTime).format(format),
+        })),
         projectList: projectList.length
           ? projectList.map(
               (item: { image: { url: string }[]; name: string }) => ({
@@ -330,7 +338,10 @@ export const ScenicModal = ({
                               { required: true, message: "请选择开始时间" },
                             ]}
                           >
-                            <TimePicker format="HH:mm" placeholder="开始时间" />
+                            <TimePicker
+                              format={format}
+                              placeholder="开始时间"
+                            />
                           </Form.Item>
                           <Form.Item
                             {...restField}
@@ -339,7 +350,10 @@ export const ScenicModal = ({
                               { required: true, message: "请选择结束时间" },
                             ]}
                           >
-                            <TimePicker format="HH:mm" placeholder="结束时间" />
+                            <TimePicker
+                              format={format}
+                              placeholder="结束时间"
+                            />
                           </Form.Item>
                           <Form.Item {...restField} name={[name, "tips"]}>
                             <Input placeholder="补充时间提示" />

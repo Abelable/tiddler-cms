@@ -5,7 +5,7 @@ export interface ScenicListSearchParams {
   limit: number;
 }
 
-interface OpenTime {
+export interface OpenTime {
   openMonth: string;
   closeMonth: string;
   openTime: string;
