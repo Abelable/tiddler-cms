@@ -116,6 +116,8 @@ export const HotelModal = ({
         roomImageList,
         environmentImageList,
         restaurantImageList,
+        openingYear,
+        lastDecorationYear,
         ...rest
       } = form.getFieldsValue();
       await mutateAsync({
@@ -136,6 +138,10 @@ export const HotelModal = ({
         restaurantImageList: restaurantImageList.map(
           (item: { url: string }) => item.url
         ),
+        openingYear: moment(openingYear).format("YYYY"),
+        lastDecorationYear: lastDecorationYear
+          ? moment(lastDecorationYear).format("YYYY")
+          : "",
       });
       closeModal();
     });
