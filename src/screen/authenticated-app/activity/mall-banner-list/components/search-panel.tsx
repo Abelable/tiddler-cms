@@ -24,6 +24,9 @@ export const SearchPanel = ({
 }: SearchPanelProps) => {
   const [tempParams, setTempParams] = useState(defaultParmas);
 
+  const setScene = (scene: number) => setTempParams({ ...tempParams, scene });
+  const clearScene = () => setTempParams({ ...tempParams, scene: undefined });
+
   const setStatus = (status: number) =>
     setTempParams({ ...tempParams, status });
   const clearStatus = () => setTempParams({ ...tempParams, status: undefined });
@@ -42,8 +45,8 @@ export const SearchPanel = ({
           value={tempParams.scene}
           placeholder="请选择场景"
           allowClear={true}
-          onSelect={setStatus}
-          onClear={clearStatus}
+          onSelect={setScene}
+          onClear={clearScene}
         >
           {sceneOptions?.map(({ text, value }) => (
             <Select.Option key={value} value={value}>

@@ -70,7 +70,7 @@ export const List = ({
             dataIndex: "status",
             render: (value) =>
               value === 1 ? (
-                <span style={{ color: "#296BEF" }}>进行中</span>
+                <span style={{ color: "#87d068" }}>进行中</span>
               ) : (
                 <span style={{ color: "#999" }}>已结束</span>
               ),
@@ -162,7 +162,7 @@ const More = ({ id, status }: { id: number; status: number }) => {
           {status === 1 ? "结束活动" : "恢复活动"}
         </div>
       ),
-      key: "edit",
+      key: "status",
     },
     {
       label: <div onClick={() => startEdit(id)}>编辑</div>,
