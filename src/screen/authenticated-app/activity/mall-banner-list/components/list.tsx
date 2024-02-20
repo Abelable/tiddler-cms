@@ -12,7 +12,11 @@ import {
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
 import dayjs from "dayjs";
-import { useDeleteMallBanner } from "service/mallBanner";
+import {
+  useDeleteMallBanner,
+  useDownMallBanner,
+  useUpMallBanner,
+} from "service/mallBanner";
 import { MallBanner } from "types/mallBanner";
 import { useMallBannerModal, useMallBannerListQueryKey } from "../util";
 import { PlusOutlined } from "@ant-design/icons";
@@ -117,7 +121,7 @@ export const List = ({
           {
             title: "操作",
             render(value, mallBanner) {
-              return <More id={mallBanner.id} />;
+              return <More id={mallBanner.id} status={mallBanner.status} />;
             },
             width: "8rem",
           },
@@ -129,15 +133,19 @@ export const List = ({
   );
 };
 
-const More = ({ id }: { id: number }) => {
+const More = ({ id, status }: { id: number; status: number }) => {
   const { startEdit } = useMallBannerModal();
+  const { mutate: upMallBanner } = useUpMallBanner(useMallBannerListQueryKey());
+  const { mutate: downMallBanner } = useDownMallBanner(
+    useMallBannerListQueryKey()
+  );
   const { mutate: deleteMallBanner } = useDeleteMallBanner(
     useMallBannerListQueryKey()
   );
 
   const confirmDelete = (id: number) => {
     Modal.confirm({
-      title: "确定删除该管理员吗？",
+      title: "确定删除该banner吗？",
       content: "点击确定删除",
       okText: "确定",
       cancelText: "取消",
@@ -145,16 +153,36 @@ const More = ({ id }: { id: number }) => {
     });
   };
 
-  const items: MenuProps["items"] = [
-    {
-      label: <div onClick={() => startEdit(id)}>编辑</div>,
-      key: "edit",
-    },
-    {
-      label: <div onClick={() => confirmDelete(id)}>删除</div>,
-      key: "delete",
-    },
-  ];
+  const items: MenuProps["items"] =
+    status === 1
+      ? [
+          {
+            label: <div onClick={() => downMallBanner(id)}>结束活动</div>,
+            key: "edit",
+          },
+          {
+            label: <div onClick={() => startEdit(id)}>编辑</div>,
+            key: "edit",
+          },
+          {
+            label: <div onClick={() => confirmDelete(id)}>删除</div>,
+            key: "delete",
+          },
+        ]
+      : [
+          {
+            label: <div onClick={() => downMallBanner(id)}>恢复活动</div>,
+            key: "edit",
+          },
+          {
+            label: <div onClick={() => startEdit(id)}>编辑</div>,
+            key: "edit",
+          },
+          {
+            label: <div onClick={() => confirmDelete(id)}>删除</div>,
+            key: "delete",
+          },
+        ];
 
   return (
     <Dropdown overlay={<Menu items={items} />}>
