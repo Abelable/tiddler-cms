@@ -58,23 +58,8 @@ export const List = ({
           {
             title: "封面",
             dataIndex: "cover",
-            render: (value) => <Image width={68} src={value} />,
+            render: (value) => <Image width={88} src={value} />,
             width: "14rem",
-          },
-          {
-            title: "描述",
-            dataIndex: "nickname",
-          },
-          {
-            title: "活动跳转场景",
-            dataIndex: "scene",
-            render: (value) => (
-              <>{sceneOptions.find((item) => item.value === value)?.text}</>
-            ),
-          },
-          {
-            title: "活动链接/id",
-            dataIndex: "value",
           },
           {
             title: "活动状态",
@@ -85,6 +70,23 @@ export const List = ({
               ) : (
                 <span style={{ color: "#999" }}>已结束</span>
               ),
+            width: "14rem",
+          },
+          {
+            title: "活动跳转场景",
+            dataIndex: "scene",
+            render: (value) => (
+              <>{sceneOptions.find((item) => item.value === value)?.text}</>
+            ),
+            width: "14rem",
+          },
+          {
+            title: "活动链接/id",
+            dataIndex: "value",
+          },
+          {
+            title: "描述",
+            dataIndex: "nickname",
           },
           {
             title: "更新时间",

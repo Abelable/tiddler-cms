@@ -233,7 +233,7 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
       children: [
         {
           label: <Link to={"activity/mall_banner"}>商城Banner</Link>,
-          key: "mall_banner",
+          key: "activity_mall_banner",
           icon: <PictureOutlined />,
         },
       ],
