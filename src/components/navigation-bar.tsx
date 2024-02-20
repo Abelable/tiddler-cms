@@ -9,6 +9,8 @@ const breadcrumbNameMap: { [key: string]: string } = {
   "/user": "用户管理",
   "/user/list": "用户列表",
   "/user/auth_info_list": "实名认证",
+  "/activity": "活动管理",
+  "/activity/mall_banner": "商城banner",
   "/shopping": "电商模块",
   "/shopping/merchant_list": "商家列表",
   "/shopping/shop": "店铺管理",

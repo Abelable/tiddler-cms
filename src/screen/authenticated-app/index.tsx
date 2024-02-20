@@ -38,6 +38,7 @@ import { RestaurantCategoryList } from "./catering/restaurant/category-list";
 import { RestaurantList } from "./catering/restaurant/restaurant-list";
 import { MealTicketList } from "./catering/meal-ticket-list";
 import { SetMealList } from "./catering/set-meal-list";
+import { MallBannerList } from "./activity/mall-banner-list";
 
 import {
   LockOutlined,
@@ -53,6 +54,8 @@ import {
   FileAddOutlined,
   VerifiedOutlined,
   UserOutlined,
+  GiftOutlined,
+  PictureOutlined,
 } from "@ant-design/icons";
 import {
   ExpressIcon,
@@ -91,6 +94,7 @@ export const AuthenticatedApp = () => {
               <Route path="auth/admin_list" element={<AdminList />} />
               <Route path="user/list" element={<UserList />} />
               <Route path="user/auth_info_list" element={<AuthInfoList />} />
+              <Route path="activity/mall_banner" element={<MallBannerList />} />
               <Route path="shopping/merchant_list" element={<MerchantList />} />
               <Route
                 path="shopping/shop/category_list"
@@ -219,6 +223,18 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
           label: <Link to={"user/auth_info_list"}>实名认证</Link>,
           key: "user_auth_info_list",
           icon: <VerifiedOutlined />,
+        },
+      ],
+    },
+    {
+      label: "活动管理",
+      key: "activity",
+      icon: <GiftOutlined />,
+      children: [
+        {
+          label: <Link to={"activity/mall_banner"}>商城Banner</Link>,
+          key: "mall_banner",
+          icon: <PictureOutlined />,
         },
       ],
     },
