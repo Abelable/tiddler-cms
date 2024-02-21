@@ -11,7 +11,7 @@ export interface MallBanner {
   cover: string;
   desc: string;
   scene: number;
-  value: string;
+  param: string;
   createdAt: string;
   updatedAt: string;
 }

@@ -86,7 +86,7 @@ export const List = ({
           },
           {
             title: "活动链接/id",
-            dataIndex: "value",
+            dataIndex: "param",
           },
           {
             title: "描述",

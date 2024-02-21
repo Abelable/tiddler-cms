@@ -114,7 +114,7 @@ export const MallBannerModal = ({
             </Col>
             <Col span={12}>
               <Form.Item
-                name="value"
+                name="param"
                 label="活动链接/id"
                 rules={[{ required: true, message: "请输入活动链接/id" }]}
               >
