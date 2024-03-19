@@ -33,7 +33,7 @@ export interface Restaurant {
   id: number;
   categoryId: number;
   name: string;
-  rate: number;
+  score: number;
   openStatus: number;
   createdAt: string;
   updatedAt: string;
