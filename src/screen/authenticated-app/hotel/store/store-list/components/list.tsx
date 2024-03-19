@@ -94,7 +94,7 @@ export const List = ({
           },
           {
             title: "评分",
-            dataIndex: "rate",
+            dataIndex: "score",
             width: "12rem",
           },
           {

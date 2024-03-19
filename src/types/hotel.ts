@@ -52,7 +52,7 @@ export interface Hotel {
   name: string;
   grade: number;
   categoryId: number;
-  rate: number;
+  score: number;
   createdAt: string;
   updatedAt: string;
 }

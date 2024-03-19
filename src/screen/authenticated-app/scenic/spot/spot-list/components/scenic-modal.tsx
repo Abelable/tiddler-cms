@@ -14,6 +14,7 @@ import {
   Select,
   Space,
   TimePicker,
+  InputNumber,
 } from "antd";
 import { OssUpload } from "components/oss-upload";
 import { ErrorBox, Row as CustomRow, ModalLoading } from "components/lib";
@@ -195,6 +196,19 @@ export const ScenicModal = ({
                     </Select.Option>
                   ))}
                 </Select>
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                name="price"
+                label="门票起始价格"
+                rules={[{ required: true, message: "请填写门票起始价格" }]}
+              >
+                <InputNumber
+                  prefix="￥"
+                  style={{ width: "100%" }}
+                  placeholder="请填写门票起始价格"
+                />
               </Form.Item>
             </Col>
           </Row>

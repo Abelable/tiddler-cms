@@ -35,6 +35,7 @@ export interface ScenicDetail {
   name: string;
   level: string;
   categoryId: number;
+  price: number;
   video: string;
   imageList: string[];
   longitude: number;
@@ -54,7 +55,7 @@ export interface Scenic {
   name: string;
   level: string;
   categoryId: number;
-  rate: number;
+  score: number;
   createdAt: string;
   updatedAt: string;
 }

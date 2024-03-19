@@ -78,7 +78,7 @@ export const List = ({
           },
           {
             title: "评分",
-            dataIndex: "rate",
+            dataIndex: "score",
             width: "22rem",
             render: (value) => (
               <>
