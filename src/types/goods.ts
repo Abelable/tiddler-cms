@@ -12,7 +12,7 @@ export interface GoodsListSearchParams {
 
 export interface Goods {
   id: number;
-  image: string;
+  cover: string;
   name: string;
   categoryId: number;
   price: number;

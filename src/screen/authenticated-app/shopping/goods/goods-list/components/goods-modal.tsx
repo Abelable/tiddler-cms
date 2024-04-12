@@ -50,7 +50,7 @@ export const GoodsModal = ({
               )}
             </Descriptions.Item>
             <Descriptions.Item label="图片">
-              <Image width={68} src={editingGoods?.image} />
+              <Image width={68} src={editingGoods?.cover} />
             </Descriptions.Item>
             <Descriptions.Item label="名称">
               {editingGoods?.name}
