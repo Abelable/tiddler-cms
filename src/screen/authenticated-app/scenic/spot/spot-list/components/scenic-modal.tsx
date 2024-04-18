@@ -659,50 +659,50 @@ export const ScenicModal = ({
                 </Form.List>
               </Form.Item>
             </Col>
-            <Row gutter={16}>
-              <Col span={12}>
-                <Form.Item label="特色标签">
-                  <Form.List name="featureTagList">
-                    {(fields, { add, remove }) => (
-                      <>
-                        {fields.map(({ key, name, ...restField }) => (
-                          <Space
-                            key={key}
-                            style={{ display: "flex" }}
-                            align="baseline"
-                          >
-                            <Form.Item
-                              {...restField}
-                              name={name}
-                              rules={[
-                                { required: true, message: "请输入标签内容" },
-                              ]}
-                            >
-                              <Input
-                                style={{ width: "31rem" }}
-                                placeholder="请输入标签内容"
-                              />
-                            </Form.Item>
-                            <MinusCircleOutlined
-                              style={{ color: "#ff4d4f" }}
-                              onClick={() => remove(name)}
-                            />
-                          </Space>
-                        ))}
-                        <Button
-                          type="dashed"
-                          onClick={() => add()}
-                          block
-                          icon={<PlusOutlined />}
+          </Row>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item label="特色标签">
+                <Form.List name="featureTagList">
+                  {(fields, { add, remove }) => (
+                    <>
+                      {fields.map(({ key, name, ...restField }) => (
+                        <Space
+                          key={key}
+                          style={{ display: "flex" }}
+                          align="baseline"
                         >
-                          添加特色标签
-                        </Button>
-                      </>
-                    )}
-                  </Form.List>
-                </Form.Item>
-              </Col>
-            </Row>
+                          <Form.Item
+                            {...restField}
+                            name={name}
+                            rules={[
+                              { required: true, message: "请输入标签内容" },
+                            ]}
+                          >
+                            <Input
+                              style={{ width: "31rem" }}
+                              placeholder="请输入标签内容"
+                            />
+                          </Form.Item>
+                          <MinusCircleOutlined
+                            style={{ color: "#ff4d4f" }}
+                            onClick={() => remove(name)}
+                          />
+                        </Space>
+                      ))}
+                      <Button
+                        type="dashed"
+                        onClick={() => add()}
+                        block
+                        icon={<PlusOutlined />}
+                      >
+                        添加特色标签
+                      </Button>
+                    </>
+                  )}
+                </Form.List>
+              </Form.Item>
+            </Col>
           </Row>
         </Form>
       )}

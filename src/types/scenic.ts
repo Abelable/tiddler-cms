@@ -48,6 +48,7 @@ export interface ScenicDetail {
   facilityList: Facility[];
   projectList: Project[];
   tipsList: Tips[];
+  featureTagList: string[];
 }
 
 export interface Scenic {
