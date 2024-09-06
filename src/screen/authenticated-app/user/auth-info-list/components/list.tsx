@@ -41,7 +41,7 @@ export const List = ({
   return (
     <Container>
       <Header between={true}>
-        <PageTitle>服务商列表</PageTitle>
+        <PageTitle>实名认证</PageTitle>
       </Header>
       <ErrorBox error={error} />
       <Table
