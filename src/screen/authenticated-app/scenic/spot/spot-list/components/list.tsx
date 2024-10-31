@@ -64,7 +64,7 @@ export const List = ({
             render: (value, spot) => (
               <Row gap={1}>
                 <span>{spot.name}</span>
-                <Tag color="gold">{spot.level}</Tag>
+                {spot.level ? <Tag color="gold">{spot.level}</Tag> : <></>}
               </Row>
             ),
           },
