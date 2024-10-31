@@ -113,8 +113,13 @@ export const ScenicModal = ({
 
   const submit = () => {
     form.validateFields().then(async () => {
-      const { video, imageList, projectList, openTimeList, ...rest } =
-        form.getFieldsValue();
+      const {
+        video,
+        imageList,
+        projectList = [],
+        openTimeList,
+        ...rest
+      } = form.getFieldsValue();
       await mutateAsync({
         ...editingScenic,
         ...rest,
