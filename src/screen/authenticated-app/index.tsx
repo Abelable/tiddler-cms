@@ -418,6 +418,11 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
           icon: <TeamOutlined />,
         },
         {
+          label: <Link to={"shopping/express_list"}>快递列表</Link>,
+          key: "shopping_express_list",
+          icon: <ExpressIcon />,
+        },
+        {
           label: "店铺管理",
           key: "shopping_shop",
           icon: <ShopOutlined />,
@@ -433,11 +438,6 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
               icon: <UnorderedListOutlined />,
             },
           ],
-        },
-        {
-          label: <Link to={"shopping/express_list"}>快递列表</Link>,
-          key: "shopping_express_list",
-          icon: <ExpressIcon />,
         },
         {
           label: "商品管理",
