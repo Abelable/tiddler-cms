@@ -547,41 +547,24 @@ export const GoodsModal = ({
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item
-                name="shopCategoryId"
-                label="商品一级分类"
-                rules={[{ required: true, message: "请选择商品一级分类" }]}
+                name="price"
+                label="起始价格"
+                rules={[{ required: true, message: "请填写起始价格" }]}
               >
-                <Select
-                  placeholder="请选择商品一级分类"
-                  onChange={(value) => setShopCategoryId(value || undefined)}
-                >
-                  {shopCategoryOptions.map(({ id, name }) => (
-                    <Select.Option key={id} value={id}>
-                      {name}
-                    </Select.Option>
-                  ))}
-                </Select>
+                <InputNumber
+                  prefix="￥"
+                  style={{ width: "100%" }}
+                  placeholder="请填写起始价格"
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item
-                name="categoryId"
-                label="商品二级分类"
-                rules={[{ required: true, message: "请选择商品二级分类" }]}
-              >
-                <Select placeholder="请选择商品二级分类">
-                  {goodsCategoryOptions
-                    .filter((item) =>
-                      shopCategoryId
-                        ? item.shopCategoryId === shopCategoryId
-                        : true
-                    )
-                    .map(({ id, name }) => (
-                      <Select.Option key={id} value={id}>
-                        {name}
-                      </Select.Option>
-                    ))}
-                </Select>
+              <Form.Item name="marketPrice" label="市场原价">
+                <InputNumber
+                  prefix="￥"
+                  style={{ width: "100%" }}
+                  placeholder="请填写市场原价"
+                />
               </Form.Item>
             </Col>
           </Row>
@@ -603,30 +586,6 @@ export const GoodsModal = ({
             </Col>
             <Col span={12}>
               <Form.Item
-                name="price"
-                label="起始价格"
-                rules={[{ required: true, message: "请填写起始价格" }]}
-              >
-                <InputNumber
-                  prefix="￥"
-                  style={{ width: "100%" }}
-                  placeholder="请填写起始价格"
-                />
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item name="marketPrice" label="市场原价">
-                <InputNumber
-                  prefix="￥"
-                  style={{ width: "100%" }}
-                  placeholder="请填写市场原价"
-                />
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item
                 name="refundStatus"
                 label="7天无理由退换货"
                 rules={[{ required: true, message: "请选择是否支持7天无理由" }]}
@@ -638,6 +597,60 @@ export const GoodsModal = ({
                     </Select.Option>
                   ))}
                 </Select>
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item
+                name="shopCategoryId"
+                label="商品一级分类"
+                rules={[{ required: true, message: "请选择商品一级分类" }]}
+              >
+                <Select
+                  placeholder="请选择商品一级分类"
+                  onChange={(value) => setShopCategoryId(value || undefined)}
+                >
+                  {shopCategoryOptions.map(({ id, name }) => (
+                    <Select.Option key={id} value={id}>
+                      {name}
+                    </Select.Option>
+                  ))}
+                </Select>
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                noStyle
+                shouldUpdate={(prevValues, currentValues) =>
+                  prevValues.shopCategoryId !== currentValues.shopCategoryId
+                }
+              >
+                {({ getFieldValue }) =>
+                  getFieldValue("shopCategoryId") && (
+                    <Form.Item
+                      name="categoryId"
+                      label="商品二级分类"
+                      rules={[
+                        { required: true, message: "请选择商品二级分类" },
+                      ]}
+                    >
+                      <Select placeholder="请选择商品二级分类">
+                        {goodsCategoryOptions
+                          .filter((item) =>
+                            shopCategoryId
+                              ? item.shopCategoryId === shopCategoryId
+                              : true
+                          )
+                          .map(({ id, name }) => (
+                            <Select.Option key={id} value={id}>
+                              {name}
+                            </Select.Option>
+                          ))}
+                      </Select>
+                    </Form.Item>
+                  )
+                }
               </Form.Item>
             </Col>
           </Row>
