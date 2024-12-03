@@ -10,7 +10,7 @@ export interface Shop {
   status: number;
   type: number;
   name: string;
-  categoryId: number;
+  categoryIds: number[];
   avatar: string;
   cover: string;
   createdAt: string;

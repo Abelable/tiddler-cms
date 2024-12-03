@@ -1,4 +1,12 @@
-import { Descriptions, Divider, Drawer, Image, Avatar, Tooltip } from "antd";
+import {
+  Descriptions,
+  Divider,
+  Drawer,
+  Image,
+  Avatar,
+  Tooltip,
+  Tag,
+} from "antd";
 import { UserOutlined } from "@ant-design/icons";
 
 import { ErrorBox, ModalLoading } from "components/lib";
@@ -32,8 +40,10 @@ export const DetailModal = ({
       ) : (
         <>
           <Divider orientation="left">商品信息</Divider>
-          <Descriptions size={"small"} column={2}>
-            <Descriptions.Item label="ID">{editingGoods?.id}</Descriptions.Item>
+          <Descriptions size={"small"} column={2} bordered>
+            <Descriptions.Item label="商品ID">
+              {editingGoods?.id}
+            </Descriptions.Item>
             <Descriptions.Item label="状态">
               {editingGoods?.status === 0 ? (
                 <span style={{ color: "#87d068" }}>待审核</span>
@@ -65,19 +75,18 @@ export const DetailModal = ({
             <Descriptions.Item label="价格">
               {`¥${editingGoods?.price}`}
             </Descriptions.Item>
-            <Descriptions.Item label="库存">
-              {editingGoods?.stock}
-            </Descriptions.Item>
             <Descriptions.Item label="销售佣金比例">
               {`${editingGoods?.salesCommissionRate}%`}
             </Descriptions.Item>
             <Descriptions.Item label="推广佣金比例">
               {`${editingGoods?.promotionCommissionRate}%`}
             </Descriptions.Item>
+            <Descriptions.Item label="库存">
+              {editingGoods?.stock}
+            </Descriptions.Item>
             <Descriptions.Item label="销量">
               {editingGoods?.salesVolume}
             </Descriptions.Item>
-            <Descriptions.Item label=""> </Descriptions.Item>
             <Descriptions.Item label="创建时间">
               {dayjs(editingGoods?.createdAt).format("YYYY-MM-DD HH:mm:ss")}
             </Descriptions.Item>
@@ -87,8 +96,8 @@ export const DetailModal = ({
           </Descriptions>
 
           <Divider orientation="left">店铺信息</Divider>
-          <Descriptions size={"small"} column={2}>
-            <Descriptions.Item label="ID">
+          <Descriptions size={"small"} column={2} bordered>
+            <Descriptions.Item label="店铺ID">
               {editingGoods?.shopInfo?.id}
             </Descriptions.Item>
             <Descriptions.Item label="店铺头像">
@@ -102,11 +111,11 @@ export const DetailModal = ({
               {editingGoods?.shopInfo?.name}
             </Descriptions.Item>
             <Descriptions.Item label="店铺分类">
-              {
-                shopCategoryOptions.find(
-                  (item) => item.id === editingGoods?.shopInfo?.categoryId
-                )?.name
-              }
+              {(editingGoods?.shopInfo?.categoryIds as []).map((id, index) => (
+                <Tag key={index}>
+                  {shopCategoryOptions.find((item) => item.id === id)?.name}
+                </Tag>
+              ))}
             </Descriptions.Item>
             <Descriptions.Item label="注册时间">
               {dayjs(editingGoods?.shopInfo?.createdAt).format(
@@ -125,6 +134,7 @@ export const DetailModal = ({
             style={{ marginBottom: "3.2rem" }}
             size={"small"}
             column={2}
+            bordered
           >
             <Descriptions.Item label="ID">
               {editingGoods?.merchantInfo?.id}

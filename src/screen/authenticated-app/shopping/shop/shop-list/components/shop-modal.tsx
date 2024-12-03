@@ -1,4 +1,4 @@
-import { Descriptions, Drawer, Image, Avatar } from "antd";
+import { Descriptions, Drawer, Image, Avatar, Tag } from "antd";
 import { ErrorBox, ModalLoading } from "components/lib";
 import { UserOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
@@ -43,11 +43,11 @@ export const ShopModal = ({
               {editingShop?.name}
             </Descriptions.Item>
             <Descriptions.Item label="店铺分类">
-              {
-                shopCategoryOptions.find(
-                  (item) => item.id === editingShop?.categoryId
-                )?.name
-              }
+              {(editingShop?.categoryIds as []).map((id, index) => (
+                <Tag key={index}>
+                  {shopCategoryOptions.find((item) => item.id === id)?.name}
+                </Tag>
+              ))}
             </Descriptions.Item>
             {editingShop?.cover ? (
               <Descriptions.Item label="店铺封面">
