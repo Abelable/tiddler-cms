@@ -26,8 +26,9 @@ export interface Sku {
 
 export interface Goods {
   id: number;
-  video: string;
+  shopId: number;
   cover: string;
+  video: string;
   imageList: string[];
   detailImageList: string[];
   defaultSpecImage: string;

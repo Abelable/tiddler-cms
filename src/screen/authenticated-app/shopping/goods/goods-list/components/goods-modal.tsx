@@ -484,17 +484,6 @@ export const GoodsModal = ({
                 <OssUpload maxCount={1} />
               </Form.Item>
             </Col>
-            <Col span={12}>
-              <Form.Item
-                name="activityCover"
-                label="活动封面"
-                tooltip="图片尺寸：355 * 194"
-                valuePropName="fileList"
-                getValueFromEvent={normFile}
-              >
-                <OssUpload maxCount={1} />
-              </Form.Item>
-            </Col>
           </Row>
           <Row gutter={16}>
             <Col span={24}>
