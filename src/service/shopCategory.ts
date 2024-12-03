@@ -70,3 +70,27 @@ export const useShopCategoryOptions = () => {
     client("shop/category/options")
   );
 };
+
+export const useEditShopCategorySort = (queryKey: QueryKey) => {
+  const client = useHttp();
+  return useMutation(
+    ({ id, sort }: { id: number; sort: number }) =>
+      client("shop/category/edit_sort", {
+        data: { id, sort },
+        method: "POST",
+      }),
+    useEditConfig(queryKey)
+  );
+};
+
+export const useEditShopCategoryVisible = (queryKey: QueryKey) => {
+  const client = useHttp();
+  return useMutation(
+    ({ id, visible }: { id: number; visible: number }) =>
+      client("shop/category/edit_visible", {
+        data: { id, visible },
+        method: "POST",
+      }),
+    useEditConfig(queryKey)
+  );
+};

@@ -8,6 +8,8 @@ export interface ShopCategory {
   name: string;
   deposit: number;
   adaptedMerchantTypes: number[];
+  sort: number;
+  visible: number;
   createdAt: string;
 }
 

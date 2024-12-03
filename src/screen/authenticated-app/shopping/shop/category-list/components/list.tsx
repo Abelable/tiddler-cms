@@ -2,9 +2,11 @@ import styled from "@emotion/styled";
 import {
   Button,
   Dropdown,
+  InputNumber,
   Menu,
   MenuProps,
   Modal,
+  Switch,
   Table,
   TablePaginationConfig,
   TableProps,
@@ -12,7 +14,11 @@ import {
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
 import dayjs from "dayjs";
-import { useDeleteShopCategory } from "service/shopCategory";
+import {
+  useDeleteShopCategory,
+  useEditShopCategorySort,
+  useEditShopCategoryVisible,
+} from "service/shopCategory";
 import { useShopCategoryModal, useShopCategoriesQueryKey } from "../util";
 import { PlusOutlined } from "@ant-design/icons";
 
@@ -41,6 +47,13 @@ export const List = ({
       page: pagination.current,
       limit: pagination.pageSize,
     });
+
+  const { mutate: editSort } = useEditShopCategorySort(
+    useShopCategoriesQueryKey()
+  );
+  const { mutate: editVisible } = useEditShopCategoryVisible(
+    useShopCategoriesQueryKey()
+  );
 
   return (
     <Container>
@@ -79,6 +92,29 @@ export const List = ({
                   }
                 </Tag>
               )),
+          },
+          {
+            title: "排序",
+            dataIndex: "sort",
+            render: (value, category) => (
+              <InputNumber
+                value={value}
+                onChange={(sort) => editSort({ id: category.id, sort })}
+              />
+            ),
+            sorter: (a, b) => a.sort - b.sort,
+          },
+          {
+            title: "显示",
+            dataIndex: "visible",
+            render: (value, category) => (
+              <Switch
+                checked={value === 1}
+                onChange={(truthy) =>
+                  editVisible({ id: category.id, visible: truthy ? 1 : 0 })
+                }
+              />
+            ),
           },
           {
             title: "创建时间",
