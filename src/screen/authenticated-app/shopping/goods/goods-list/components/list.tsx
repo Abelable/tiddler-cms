@@ -14,8 +14,6 @@ import {
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
 import { PlusOutlined } from "@ant-design/icons";
 
-import { useState } from "react";
-import { useGoodsCategoryOptions } from "service/goodsCategory";
 import dayjs from "dayjs";
 import { useApprovedGoods, useDeleteGoods } from "service/goods";
 import {
@@ -27,24 +25,22 @@ import {
 import { SearchPanelProps } from "./search-panel";
 
 import type { Goods } from "types/goods";
+import type { CategoryOption } from "types/category";
 
 interface ListProps extends TableProps<Goods>, SearchPanelProps {
+  goodsCategoryOptions: CategoryOption[];
   error: Error | unknown;
 }
 
 export const List = ({
   shopCategoryOptions,
+  goodsCategoryOptions,
   statusOptions,
   error,
   params,
   setParams,
   ...restProps
 }: ListProps) => {
-  const [shopCategoryId, setShopCategoryId] = useState<undefined | number>(
-    undefined
-  );
-  const { data: categoryOptions = [] } =
-    useGoodsCategoryOptions(shopCategoryId);
   const { open } = useGoodsModal();
 
   const setPagination = (pagination: TablePaginationConfig) =>
@@ -133,7 +129,9 @@ export const List = ({
             title: "二级分类",
             dataIndex: "categoryId",
             render: (value) => (
-              <>{categoryOptions.find((item) => item.id === value)?.name}</>
+              <>
+                {goodsCategoryOptions.find((item) => item.id === value)?.name}
+              </>
             ),
             width: "12rem",
           },

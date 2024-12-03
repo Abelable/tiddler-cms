@@ -29,6 +29,7 @@ import { ErrorBox, ModalLoading } from "components/lib";
 import type { CategoryOption } from "types/category";
 import type { OperatorOption } from "types/common";
 import type { Sku, Spec } from "types/goods";
+import { useGoodsCategoryOptions } from "service/goodsCategory";
 
 interface TableSku extends Sku {
   [x: string]: string | number | object;
@@ -46,15 +47,17 @@ const normFile = (e: any) => {
 
 export const GoodsModal = ({
   shopCategoryOptions,
-  goodsCategoryOptions,
   freightTemplateOptions,
 }: {
   shopCategoryOptions: CategoryOption[];
-  goodsCategoryOptions: CategoryOption[];
   freightTemplateOptions: OperatorOption[];
 }) => {
   const [form] = useForm();
-
+  const [shopCategoryId, setShopCategoryId] = useState<undefined | number>(
+    undefined
+  );
+  const { data: categoryOptions = [] } =
+    useGoodsCategoryOptions(shopCategoryId);
   const { goodsModalOpen, editingGoodsId, editingGoods, isLoading, close } =
     useGoodsModal();
 
@@ -559,17 +562,37 @@ export const GoodsModal = ({
             </Col>
             <Col span={12}>
               <Form.Item
-                name="categoryId"
-                label="商品二级分类"
-                rules={[{ required: true, message: "请选择商品二级分类" }]}
+                noStyle
+                shouldUpdate={(prevValues, currentValues) => {
+                  // 监听formItem值变化
+                  return prevValues.status !== currentValues.status;
+                }}
               >
-                <Select mode="multiple" placeholder="请选择商品二级分类">
-                  {goodsCategoryOptions.map(({ id, name }) => (
-                    <Select.Option key={id} value={id}>
-                      {name}
-                    </Select.Option>
-                  ))}
-                </Select>
+                {({ getFieldValue }) => {
+                  if (getFieldValue("shopCategoryId")) {
+                    setShopCategoryId(getFieldValue("shopCategoryId"));
+                    return (
+                      <Form.Item
+                        name="categoryId"
+                        label="商品二级分类"
+                        rules={[
+                          { required: true, message: "请选择商品二级分类" },
+                        ]}
+                      >
+                        <Select
+                          mode="multiple"
+                          placeholder="请选择商品二级分类"
+                        >
+                          {categoryOptions.map(({ id, name }) => (
+                            <Select.Option key={id} value={id}>
+                              {name}
+                            </Select.Option>
+                          ))}
+                        </Select>
+                      </Form.Item>
+                    );
+                  }
+                }}
               </Form.Item>
             </Col>
           </Row>
