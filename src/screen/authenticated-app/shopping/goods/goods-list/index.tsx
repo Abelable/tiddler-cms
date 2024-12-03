@@ -21,10 +21,12 @@ const statusOptions = [
 export const GoodsList = () => {
   const [params, setParams] = useGoodsListSearchParams();
   const { isLoading, error, data } = useGoodsList(params);
-  const { data: goodsCategoryOptions, error: goodsCategoryOptionsError } =
-    useGoodsCategoryOptions();
   const { data: shopCategoryOptions, error: shopCategoryOptionsError } =
     useShopCategoryOptions();
+
+  const { data: goodsCategoryOptions, error: goodsCategoryOptionsError } =
+    useGoodsCategoryOptions();
+
   const {
     data: originalFreightTemplateOptions = [],
     error: freightTemplateOptionsError,
@@ -39,14 +41,12 @@ export const GoodsList = () => {
       <Main>
         <SearchPanel
           shopCategoryOptions={shopCategoryOptions || []}
-          categoryOptions={goodsCategoryOptions || []}
           statusOptions={statusOptions}
           params={params}
           setParams={setParams}
         />
         <List
           shopCategoryOptions={shopCategoryOptions || []}
-          categoryOptions={goodsCategoryOptions || []}
           statusOptions={statusOptions}
           params={params}
           setParams={setParams}

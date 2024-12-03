@@ -14,6 +14,8 @@ import {
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
 import { PlusOutlined } from "@ant-design/icons";
 
+import { useState } from "react";
+import { useGoodsCategoryOptions } from "service/goodsCategory";
 import dayjs from "dayjs";
 import { useApprovedGoods, useDeleteGoods } from "service/goods";
 import {
@@ -32,13 +34,17 @@ interface ListProps extends TableProps<Goods>, SearchPanelProps {
 
 export const List = ({
   shopCategoryOptions,
-  categoryOptions,
   statusOptions,
   error,
   params,
   setParams,
   ...restProps
 }: ListProps) => {
+  const [shopCategoryId, setShopCategoryId] = useState<undefined | number>(
+    undefined
+  );
+  const { data: categoryOptions = [] } =
+    useGoodsCategoryOptions(shopCategoryId);
   const { open } = useGoodsModal();
 
   const setPagination = (pagination: TablePaginationConfig) =>

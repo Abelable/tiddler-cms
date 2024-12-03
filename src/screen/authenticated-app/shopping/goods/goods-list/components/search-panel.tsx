@@ -2,14 +2,13 @@ import { useState } from "react";
 import styled from "@emotion/styled";
 import { Row } from "components/lib";
 import { Button, Input, Select } from "antd";
+import { useGoodsCategoryOptions } from "service/goodsCategory";
 
 import type { GoodsListSearchParams } from "types/goods";
 import type { CategoryOption } from "types/category";
-import type { GoodsCategoryOption } from "types/goodsCategory";
 
 export interface SearchPanelProps {
   shopCategoryOptions: CategoryOption[];
-  categoryOptions: GoodsCategoryOption[];
   statusOptions: { text: string; value: number }[];
   params: Partial<GoodsListSearchParams>;
   setParams: (params: Partial<GoodsListSearchParams>) => void;
@@ -24,11 +23,15 @@ const defaultParmas: Partial<GoodsListSearchParams> = {
 
 export const SearchPanel = ({
   shopCategoryOptions,
-  categoryOptions,
   statusOptions,
   params,
   setParams,
 }: SearchPanelProps) => {
+  const [shopCategoryId, setShopCategoryId] = useState<undefined | number>(
+    undefined
+  );
+  const { data: categoryOptions = [] } =
+    useGoodsCategoryOptions(shopCategoryId);
   const [tempParams, setTempParams] = useState(defaultParmas);
 
   const setName = (evt: any) => {
@@ -46,10 +49,14 @@ export const SearchPanel = ({
     });
   };
 
-  const setShopCategory = (shopCategoryId: number) =>
+  const setShopCategory = (shopCategoryId: number) => {
     setTempParams({ ...tempParams, shopCategoryId });
-  const clearShopCategory = () =>
+    setShopCategoryId(shopCategoryId);
+  };
+  const clearShopCategory = () => {
     setTempParams({ ...tempParams, shopCategoryId: undefined });
+    setShopCategoryId(undefined);
+  };
 
   const setCategory = (categoryId: number) =>
     setTempParams({ ...tempParams, categoryId });
@@ -103,6 +110,12 @@ export const SearchPanel = ({
           allowClear={true}
           onSelect={setCategory}
           onClear={clearCategory}
+          showSearch
+          filterOption={(input, option) =>
+            (option!.children as unknown as string)
+              .toLowerCase()
+              .includes(input.toLowerCase())
+          }
         >
           {categoryOptions
             .filter((item) =>

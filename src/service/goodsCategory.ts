@@ -7,7 +7,6 @@ import {
   useEditConfig,
 } from "./use-optimistic-options";
 import { cleanObject } from "utils/index";
-import type { CategoryOption } from "types/category";
 import type {
   GoodsCategoriesResult,
   GoodsCategoriesSearchParams,
@@ -71,16 +70,11 @@ export const useDeleteGoodsCategory = (queryKey: QueryKey) => {
   );
 };
 
-export const useGoodsCategoryOptions = () => {
+export const useGoodsCategoryOptions = (
+  shopCategoryId?: number | undefined
+) => {
   const client = useHttp();
   return useQuery<GoodsCategoryOption[]>(["goods_category_options"], () =>
-    client("goods/category/options")
-  );
-};
-
-export const useFilterGoodsCategoryOptions = () => {
-  const client = useHttp();
-  return useQuery<CategoryOption[]>(["filter_goods_category_options"], () =>
-    client("goods/category/filteroptions")
+    client("goods/category/options", { data: cleanObject({ shopCategoryId }) })
   );
 };
