@@ -144,7 +144,7 @@ export const GoodsModal = ({
       },
     },
     {
-      title: "佣金比例",
+      title: "推广佣金比例",
       render: (item: TableSku, _: TableSku, index: number) => {
         return (
           <InputNumber
@@ -614,13 +614,17 @@ export const GoodsModal = ({
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item name="commissionRate" label="佣金比例">
+              <Form.Item
+                name="commissionRate"
+                label="推广佣金比例"
+                rules={[{ required: true, message: "请填写推广佣金比例" }]}
+              >
                 <InputNumber
                   min={0}
                   max={100}
                   formatter={(value) => `${value}%`}
                   style={{ width: "100%" }}
-                  placeholder="请填写佣金比例"
+                  placeholder="请填写推广佣金比例"
                 />
               </Form.Item>
             </Col>
