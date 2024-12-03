@@ -627,23 +627,6 @@ export const GoodsModal = ({
             </Col>
             <Col span={12}>
               <Form.Item
-                name="commissionRate"
-                label="推广佣金比例"
-                rules={[{ required: true, message: "请填写推广佣金比例" }]}
-              >
-                <InputNumber
-                  min={0}
-                  max={100}
-                  formatter={(value) => `${value}%`}
-                  style={{ width: "100%" }}
-                  placeholder="请填写推广佣金比例"
-                />
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item
                 name="refundStatus"
                 label="7天无理由退换货"
                 rules={[{ required: true, message: "请选择是否支持7天无理由" }]}
@@ -655,6 +638,47 @@ export const GoodsModal = ({
                     </Select.Option>
                   ))}
                 </Select>
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item
+                noStyle
+                shouldUpdate={(prevValues, currentValues) =>
+                  prevValues.categoryId !== currentValues.categoryId
+                }
+              >
+                {({ getFieldValue }) => {
+                  const categoryId = getFieldValue("categoryId");
+                  if (categoryId) {
+                    const {
+                      minPromotionCommissionRate,
+                      maxPromotionCommissionRate,
+                    } =
+                      goodsCategoryOptions.find(
+                        (item) => item.id === getFieldValue("categoryId")
+                      ) || {};
+                    return (
+                      <Form.Item
+                        name="commissionRate"
+                        label="推广佣金比例"
+                        tooltip={`佣金范围${minPromotionCommissionRate}%~${maxPromotionCommissionRate}%`}
+                        rules={[
+                          { required: true, message: "请填写推广佣金比例" },
+                        ]}
+                      >
+                        <InputNumber
+                          min={minPromotionCommissionRate}
+                          max={maxPromotionCommissionRate}
+                          formatter={(value) => `${value}%`}
+                          style={{ width: "100%" }}
+                          placeholder="请填写推广佣金比例"
+                        />
+                      </Form.Item>
+                    );
+                  }
+                }}
               </Form.Item>
             </Col>
           </Row>
