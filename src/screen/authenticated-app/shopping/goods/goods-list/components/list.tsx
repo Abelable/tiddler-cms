@@ -13,7 +13,11 @@ import {
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
 import dayjs from "dayjs";
 import { useApprovedGoods, useDeleteGoods } from "service/goods";
-import { useGoodsModal, useGoodsListQueryKey, useRejectModal } from "../util";
+import {
+  useGoodsDetailModal,
+  useGoodsListQueryKey,
+  useRejectModal,
+} from "../util";
 import { SearchPanelProps } from "./search-panel";
 
 import type { Goods } from "types/goods";
@@ -173,7 +177,7 @@ export const List = ({
 };
 
 const More = ({ id, status }: { id: number; status: number }) => {
-  const { open } = useGoodsModal();
+  const { open } = useGoodsDetailModal();
   const { mutate: deleteGoods } = useDeleteGoods(useGoodsListQueryKey());
   const { mutate: approvedGoods } = useApprovedGoods(useGoodsListQueryKey());
   const { open: openRejectModal } = useRejectModal();

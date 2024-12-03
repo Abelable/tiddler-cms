@@ -3,11 +3,11 @@ import { UserOutlined } from "@ant-design/icons";
 
 import { ErrorBox, ModalLoading } from "components/lib";
 import dayjs from "dayjs";
-import { useGoodsModal } from "../util";
+import { useGoodsDetailModal } from "../util";
 
 import type { CategoryOption } from "types/category";
 
-export const GoodsModal = ({
+export const DetailModal = ({
   goodsCategoryOptions,
   shopCategoryOptions,
 }: {
@@ -15,7 +15,7 @@ export const GoodsModal = ({
   shopCategoryOptions: CategoryOption[];
 }) => {
   const { close, goodsModalOpen, editingGoods, error, isLoading } =
-    useGoodsModal();
+    useGoodsDetailModal();
 
   return (
     <Drawer

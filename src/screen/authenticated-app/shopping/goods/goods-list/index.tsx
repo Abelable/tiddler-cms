@@ -6,7 +6,7 @@ import { useGoodsList } from "service/goods";
 import { toNumber } from "utils";
 import { useGoodsListSearchParams } from "./util";
 
-import { GoodsModal } from "./components/goods-modal";
+import { DetailModal } from "./components/detail-modal";
 import { List } from "./components/list";
 import { SearchPanel } from "./components/search-panel";
 import { RejectModal } from "./components/reject-modal";
@@ -50,7 +50,7 @@ export const GoodsList = () => {
           }}
         />
       </Main>
-      <GoodsModal
+      <DetailModal
         shopCategoryOptions={shopCategoryOptions || []}
         goodsCategoryOptions={goodsCategoryOptions || []}
       />

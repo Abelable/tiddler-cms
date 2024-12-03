@@ -29,29 +29,23 @@ export const useGoodsListQueryKey = () => {
   return ["goods_list", params];
 };
 
-export const useGoodsModal = () => {
-  const [{ editingGoodsId }, setEditingGoodsId] = useUrlQueryParams([
-    "editingGoodsId",
-  ]);
+export const useGoodsDetailModal = () => {
+  const [{ curGoodsId }, setCurGoodsId] = useUrlQueryParams(["curGoodsId"]);
   const setUrlParams = useSetUrlSearchParams();
-  const {
-    data: editingGoods,
-    isLoading,
-    error,
-  } = useGoods(Number(editingGoodsId));
+  const { data: editingGoods, isLoading, error } = useGoods(Number(curGoodsId));
 
   const open = useCallback(
-    (id: number) => setEditingGoodsId({ editingGoodsId: `${id}` }),
-    [setEditingGoodsId]
+    (id: number) => setCurGoodsId({ curGoodsId: `${id}` }),
+    [setCurGoodsId]
   );
   const close = useCallback(
-    () => setUrlParams({ goodsCreate: "", editingGoodsId: "" }),
+    () => setUrlParams({ goodsCreate: "", curGoodsId: "" }),
     [setUrlParams]
   );
 
   return {
-    goodsModalOpen: !!editingGoodsId,
-    editingGoodsId,
+    goodsModalOpen: !!curGoodsId,
+    curGoodsId,
     editingGoods,
     isLoading,
     error,

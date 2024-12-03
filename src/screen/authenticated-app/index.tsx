@@ -239,57 +239,6 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
       ],
     },
     {
-      label: "电商模块",
-      key: "shopping",
-      icon: <ShoppingOutlined />,
-      children: [
-        {
-          label: <Link to={"shopping/merchant_list"}>商家列表</Link>,
-          key: "shopping_merchant_list",
-          icon: <TeamOutlined />,
-        },
-        {
-          label: "店铺管理",
-          key: "shopping_shop",
-          icon: <ShopOutlined />,
-          children: [
-            {
-              label: <Link to={"shopping/shop/category_list"}>店铺分类</Link>,
-              key: "shopping_shop_category_list",
-              icon: <AppstoreOutlined />,
-            },
-            {
-              label: <Link to={"shopping/shop/list"}>店铺列表</Link>,
-              key: "shopping_shop_list",
-              icon: <UnorderedListOutlined />,
-            },
-          ],
-        },
-        {
-          label: <Link to={"shopping/express_list"}>快递列表</Link>,
-          key: "shopping_express_list",
-          icon: <ExpressIcon />,
-        },
-        {
-          label: "商品管理",
-          key: "shopping_goods",
-          icon: <ShoppingOutlined />,
-          children: [
-            {
-              label: <Link to={"shopping/goods/category_list"}>商品分类</Link>,
-              key: "shopping_goods_category_list",
-              icon: <AppstoreOutlined />,
-            },
-            {
-              label: <Link to={"shopping/goods/list"}>商品列表</Link>,
-              key: "shopping_goods_list",
-              icon: <UnorderedListOutlined />,
-            },
-          ],
-        },
-      ],
-    },
-    {
       label: "景区模块",
       key: "scenic",
       icon: <ScenicSpotIcon />,
@@ -455,6 +404,57 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
           label: <Link to={"catering/set_meal_list"}>套餐列表</Link>,
           key: "catering_set_meal_list",
           icon: <SetMealIcon />,
+        },
+      ],
+    },
+    {
+      label: "电商模块",
+      key: "shopping",
+      icon: <ShoppingOutlined />,
+      children: [
+        {
+          label: <Link to={"shopping/merchant_list"}>商家列表</Link>,
+          key: "shopping_merchant_list",
+          icon: <TeamOutlined />,
+        },
+        {
+          label: "店铺管理",
+          key: "shopping_shop",
+          icon: <ShopOutlined />,
+          children: [
+            {
+              label: <Link to={"shopping/shop/category_list"}>店铺分类</Link>,
+              key: "shopping_shop_category_list",
+              icon: <AppstoreOutlined />,
+            },
+            {
+              label: <Link to={"shopping/shop/list"}>店铺列表</Link>,
+              key: "shopping_shop_list",
+              icon: <UnorderedListOutlined />,
+            },
+          ],
+        },
+        {
+          label: <Link to={"shopping/express_list"}>快递列表</Link>,
+          key: "shopping_express_list",
+          icon: <ExpressIcon />,
+        },
+        {
+          label: "商品管理",
+          key: "shopping_goods",
+          icon: <ShoppingOutlined />,
+          children: [
+            {
+              label: <Link to={"shopping/goods/category_list"}>商品分类</Link>,
+              key: "shopping_goods_category_list",
+              icon: <AppstoreOutlined />,
+            },
+            {
+              label: <Link to={"shopping/goods/list"}>商品列表</Link>,
+              key: "shopping_goods_list",
+              icon: <UnorderedListOutlined />,
+            },
+          ],
         },
       ],
     },
