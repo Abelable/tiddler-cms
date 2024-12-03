@@ -2,6 +2,8 @@ export interface GoodsCategoryOption {
   id: number;
   shopCategoryId: number;
   name: string;
+  minPromotionCommissionRate: number;
+  maxPromotionCommissionRate: number;
 }
 
 export interface GoodsCategoriesSearchParams {

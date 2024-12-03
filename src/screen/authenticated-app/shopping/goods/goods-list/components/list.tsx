@@ -25,10 +25,8 @@ import {
 import { SearchPanelProps } from "./search-panel";
 
 import type { Goods } from "types/goods";
-import type { CategoryOption } from "types/category";
 
 interface ListProps extends TableProps<Goods>, SearchPanelProps {
-  goodsCategoryOptions: CategoryOption[];
   error: Error | unknown;
 }
 

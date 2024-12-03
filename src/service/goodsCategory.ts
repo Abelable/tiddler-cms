@@ -70,11 +70,9 @@ export const useDeleteGoodsCategory = (queryKey: QueryKey) => {
   );
 };
 
-export const useGoodsCategoryOptions = (
-  shopCategoryId?: number | undefined
-) => {
+export const useGoodsCategoryOptions = () => {
   const client = useHttp();
   return useQuery<GoodsCategoryOption[]>(["goods_category_options"], () =>
-    client("goods/category/options", { data: cleanObject({ shopCategoryId }) })
+    client("goods/category/options")
   );
 };

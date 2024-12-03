@@ -29,7 +29,7 @@ import { ErrorBox, ModalLoading } from "components/lib";
 import type { CategoryOption } from "types/category";
 import type { OperatorOption } from "types/common";
 import type { Sku, Spec } from "types/goods";
-import { useGoodsCategoryOptions } from "service/goodsCategory";
+import type { GoodsCategoryOption } from "types/goodsCategory";
 
 interface TableSku extends Sku {
   [x: string]: string | number | object;
@@ -47,17 +47,17 @@ const normFile = (e: any) => {
 
 export const GoodsModal = ({
   shopCategoryOptions,
+  goodsCategoryOptions,
   freightTemplateOptions,
 }: {
   shopCategoryOptions: CategoryOption[];
+  goodsCategoryOptions: GoodsCategoryOption[];
   freightTemplateOptions: OperatorOption[];
 }) => {
   const [form] = useForm();
   const [shopCategoryId, setShopCategoryId] = useState<undefined | number>(
     undefined
   );
-  const { data: categoryOptions = [] } =
-    useGoodsCategoryOptions(shopCategoryId);
   const { goodsModalOpen, editingGoodsId, editingGoods, isLoading, close } =
     useGoodsModal();
 
@@ -551,7 +551,10 @@ export const GoodsModal = ({
                 label="商品一级分类"
                 rules={[{ required: true, message: "请选择商品一级分类" }]}
               >
-                <Select placeholder="请选择商品一级分类">
+                <Select
+                  placeholder="请选择商品一级分类"
+                  onChange={(value) => setShopCategoryId(value || undefined)}
+                >
                   {shopCategoryOptions.map(({ id, name }) => (
                     <Select.Option key={id} value={id}>
                       {name}
@@ -567,11 +570,17 @@ export const GoodsModal = ({
                 rules={[{ required: true, message: "请选择商品二级分类" }]}
               >
                 <Select placeholder="请选择商品二级分类">
-                  {categoryOptions.map(({ id, name }) => (
-                    <Select.Option key={id} value={id}>
-                      {name}
-                    </Select.Option>
-                  ))}
+                  {goodsCategoryOptions
+                    .filter((item) =>
+                      shopCategoryId
+                        ? item.shopCategoryId === shopCategoryId
+                        : true
+                    )
+                    .map(({ id, name }) => (
+                      <Select.Option key={id} value={id}>
+                        {name}
+                      </Select.Option>
+                    ))}
                 </Select>
               </Form.Item>
             </Col>

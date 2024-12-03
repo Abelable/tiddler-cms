@@ -41,6 +41,7 @@ export const GoodsList = () => {
       <Main>
         <SearchPanel
           shopCategoryOptions={shopCategoryOptions || []}
+          goodsCategoryOptions={goodsCategoryOptions || []}
           statusOptions={statusOptions}
           params={params}
           setParams={setParams}
@@ -68,6 +69,7 @@ export const GoodsList = () => {
       </Main>
       <GoodsModal
         shopCategoryOptions={shopCategoryOptions || []}
+        goodsCategoryOptions={goodsCategoryOptions || []}
         freightTemplateOptions={freightTemplateOptions}
       />
       <DetailModal
