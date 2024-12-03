@@ -16,11 +16,11 @@ import { useGoodsDetailModal } from "../util";
 import type { CategoryOption } from "types/category";
 
 export const DetailModal = ({
-  goodsCategoryOptions,
   shopCategoryOptions,
+  goodsCategoryOptions,
 }: {
-  goodsCategoryOptions: CategoryOption[];
   shopCategoryOptions: CategoryOption[];
+  goodsCategoryOptions: CategoryOption[];
 }) => {
   const { close, goodsModalOpen, editingGoods, error, isLoading } =
     useGoodsDetailModal();
@@ -111,7 +111,7 @@ export const DetailModal = ({
               {editingGoods?.shopInfo?.name}
             </Descriptions.Item>
             <Descriptions.Item label="店铺分类">
-              {(editingGoods?.shopInfo?.categoryIds as []).map((id, index) => (
+              {(editingGoods?.shopInfo?.categoryIds || []).map((id, index) => (
                 <Tag key={index}>
                   {shopCategoryOptions.find((item) => item.id === id)?.name}
                 </Tag>

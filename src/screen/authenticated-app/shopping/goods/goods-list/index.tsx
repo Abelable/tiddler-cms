@@ -1,15 +1,22 @@
 import styled from "@emotion/styled";
-
 import { useGoodsCategoryOptions } from "service/goodsCategory";
 import { useShopCategoryOptions } from "service/shopCategory";
 import { useGoodsList } from "service/goods";
 import { toNumber } from "utils";
 import { useGoodsListSearchParams } from "./util";
 
-import { DetailModal } from "./components/detail-modal";
 import { List } from "./components/list";
 import { SearchPanel } from "./components/search-panel";
+import { GoodsModal } from "./components/goods-modal";
+import { DetailModal } from "./components/detail-modal";
 import { RejectModal } from "./components/reject-modal";
+import { useFreightTemplateOptions } from "service/freightTemplate";
+
+const statusOptions = [
+  { text: "待审核", value: 0 },
+  { text: "售卖中", value: 1 },
+  { text: "未过审", value: 2 },
+];
 
 export const GoodsList = () => {
   const [params, setParams] = useGoodsListSearchParams();
@@ -18,10 +25,13 @@ export const GoodsList = () => {
     useGoodsCategoryOptions();
   const { data: shopCategoryOptions, error: shopCategoryOptionsError } =
     useShopCategoryOptions();
-  const statusOptions = [
-    { text: "待审核", value: 0 },
-    { text: "售卖中", value: 1 },
-    { text: "未过审", value: 2 },
+  const {
+    data: originalFreightTemplateOptions = [],
+    error: freightTemplateOptionsError,
+  } = useFreightTemplateOptions();
+  const freightTemplateOptions = [
+    { id: 0, name: "全国包邮" },
+    ...originalFreightTemplateOptions,
   ];
 
   return (
@@ -40,7 +50,12 @@ export const GoodsList = () => {
           statusOptions={statusOptions}
           params={params}
           setParams={setParams}
-          error={error || goodsCategoryOptionsError || shopCategoryOptionsError}
+          error={
+            error ||
+            goodsCategoryOptionsError ||
+            shopCategoryOptionsError ||
+            freightTemplateOptionsError
+          }
           loading={isLoading}
           dataSource={data?.list}
           pagination={{
@@ -50,6 +65,11 @@ export const GoodsList = () => {
           }}
         />
       </Main>
+      <GoodsModal
+        shopCategoryOptions={shopCategoryOptions || []}
+        goodsCategoryOptions={goodsCategoryOptions || []}
+        freightTemplateOptions={freightTemplateOptions}
+      />
       <DetailModal
         shopCategoryOptions={shopCategoryOptions || []}
         goodsCategoryOptions={goodsCategoryOptions || []}

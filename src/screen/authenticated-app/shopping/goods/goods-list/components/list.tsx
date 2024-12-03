@@ -19,6 +19,7 @@ import { useApprovedGoods, useDeleteGoods } from "service/goods";
 import {
   useGoodsDetailModal,
   useGoodsListQueryKey,
+  useGoodsModal,
   useRejectModal,
 } from "../util";
 import { SearchPanelProps } from "./search-panel";
@@ -38,6 +39,8 @@ export const List = ({
   setParams,
   ...restProps
 }: ListProps) => {
+  const { open } = useGoodsModal();
+
   const setPagination = (pagination: TablePaginationConfig) =>
     setParams({
       ...params,
@@ -49,7 +52,7 @@ export const List = ({
     <Container>
       <Header between={true}>
         <PageTitle>商品列表</PageTitle>
-        <Button onClick={() => {}} type={"primary"} icon={<PlusOutlined />}>
+        <Button onClick={() => open()} type={"primary"} icon={<PlusOutlined />}>
           新增自营商品
         </Button>
       </Header>

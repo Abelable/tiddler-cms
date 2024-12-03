@@ -45,13 +45,13 @@ const normFile = (e: any) => {
 };
 
 export const GoodsModal = ({
-  categoryOptions,
+  shopCategoryOptions,
+  goodsCategoryOptions,
   freightTemplateOptions,
-  merchantOptions,
 }: {
-  categoryOptions: CategoryOption[];
+  shopCategoryOptions: CategoryOption[];
+  goodsCategoryOptions: CategoryOption[];
   freightTemplateOptions: OperatorOption[];
-  merchantOptions: OperatorOption[];
 }) => {
   const [form] = useForm();
 
@@ -544,12 +544,12 @@ export const GoodsModal = ({
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item
-                name="categoryIds"
-                label="商品分类"
-                rules={[{ required: true, message: "请选择商品分类" }]}
+                name="shopCategoryId"
+                label="商品一级分类"
+                rules={[{ required: true, message: "请选择商品一级分类" }]}
               >
-                <Select mode="multiple" placeholder="请选择商品分类">
-                  {categoryOptions.map(({ id, name }) => (
+                <Select mode="multiple" placeholder="请选择商品一级分类">
+                  {shopCategoryOptions.map(({ id, name }) => (
                     <Select.Option key={id} value={id}>
                       {name}
                     </Select.Option>
@@ -559,12 +559,12 @@ export const GoodsModal = ({
             </Col>
             <Col span={12}>
               <Form.Item
-                name="merchantId"
-                label="商家"
-                rules={[{ required: true, message: "请选择商家" }]}
+                name="categoryId"
+                label="商品二级分类"
+                rules={[{ required: true, message: "请选择商品二级分类" }]}
               >
-                <Select placeholder="请选择商家">
-                  {merchantOptions.map(({ id, name }) => (
+                <Select mode="multiple" placeholder="请选择商品二级分类">
+                  {goodsCategoryOptions.map(({ id, name }) => (
                     <Select.Option key={id} value={id}>
                       {name}
                     </Select.Option>

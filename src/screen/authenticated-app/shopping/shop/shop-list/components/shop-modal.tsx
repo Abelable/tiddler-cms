@@ -43,7 +43,7 @@ export const ShopModal = ({
               {editingShop?.name}
             </Descriptions.Item>
             <Descriptions.Item label="店铺分类">
-              {(editingShop?.categoryIds as []).map((id, index) => (
+              {(editingShop?.categoryIds || []).map((id, index) => (
                 <Tag key={index}>
                   {shopCategoryOptions.find((item) => item.id === id)?.name}
                 </Tag>
