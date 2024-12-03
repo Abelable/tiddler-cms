@@ -9,8 +9,11 @@ import {
   TablePaginationConfig,
   TableProps,
   Tooltip,
+  Button,
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
+import { PlusOutlined } from "@ant-design/icons";
+
 import dayjs from "dayjs";
 import { useApprovedGoods, useDeleteGoods } from "service/goods";
 import {
@@ -46,6 +49,9 @@ export const List = ({
     <Container>
       <Header between={true}>
         <PageTitle>商品列表</PageTitle>
+        <Button onClick={() => {}} type={"primary"} icon={<PlusOutlined />}>
+          新增自营商品
+        </Button>
       </Header>
       <ErrorBox error={error} />
       <Table

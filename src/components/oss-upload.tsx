@@ -5,9 +5,15 @@ import { PlusOutlined, VideoCameraAddOutlined } from "@ant-design/icons";
 interface OssUploadProps extends React.ComponentProps<typeof Upload> {
   accept?: string;
   maxCount?: number;
+  zoom?: number;
 }
 
-export const OssUpload = ({ accept, maxCount, ...props }: OssUploadProps) => {
+export const OssUpload = ({
+  accept,
+  maxCount,
+  zoom,
+  ...props
+}: OssUploadProps) => {
   const { data: ossConfig } = useOssConfig();
   const getExtraData = (file: any) => {
     return {
@@ -29,7 +35,7 @@ export const OssUpload = ({ accept, maxCount, ...props }: OssUploadProps) => {
   };
 
   return (
-    <>
+    <div style={{ zoom: zoom || 1 }}>
       <Upload
         {...props}
         accept={accept || "image/*"}
@@ -51,6 +57,6 @@ export const OssUpload = ({ accept, maxCount, ...props }: OssUploadProps) => {
           </div>
         )}
       </Upload>
-    </>
+    </div>
   );
 };

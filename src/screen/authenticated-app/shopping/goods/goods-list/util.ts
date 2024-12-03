@@ -29,6 +29,45 @@ export const useGoodsListQueryKey = () => {
   return ["goods_list", params];
 };
 
+export const useGoodsModal = () => {
+  const [{ goodsCreate }, setGoodsModalOpen] = useUrlQueryParams([
+    "goodsCreate",
+  ]);
+  const [{ editingGoodsId }, setEditingGoodsId] = useUrlQueryParams([
+    "editingGoodsId",
+  ]);
+  const setUrlParams = useSetUrlSearchParams();
+  const {
+    data: editingGoods,
+    isLoading,
+    error,
+  } = useGoods(Number(editingGoodsId));
+
+  const open = useCallback(
+    () => setGoodsModalOpen({ goodsCreate: true }),
+    [setGoodsModalOpen]
+  );
+  const startEdit = useCallback(
+    (id: number) => setEditingGoodsId({ editingGoodsId: `${id}` }),
+    [setEditingGoodsId]
+  );
+  const close = useCallback(
+    () => setUrlParams({ goodsCreate: "", editingGoodsId: "" }),
+    [setUrlParams]
+  );
+
+  return {
+    goodsModalOpen: goodsCreate === "true" || !!editingGoodsId,
+    editingGoodsId,
+    editingGoods,
+    isLoading,
+    error,
+    open,
+    startEdit,
+    close,
+  };
+};
+
 export const useGoodsDetailModal = () => {
   const [{ curGoodsId }, setCurGoodsId] = useUrlQueryParams(["curGoodsId"]);
   const setUrlParams = useSetUrlSearchParams();

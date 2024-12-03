@@ -10,9 +10,27 @@ export interface GoodsListSearchParams {
   limit: number;
 }
 
+export interface Spec {
+  name: string;
+  options: string[];
+}
+
+export interface Sku {
+  image: string;
+  name: string;
+  price: number;
+  originalPrice: number;
+  commissionRate: number;
+  stock: number;
+}
+
 export interface Goods {
   id: number;
+  video: string;
   cover: string;
+  imageList: string[];
+  detailImageList: string[];
+  defaultSpecImage: string;
   name: string;
   categoryId: number;
   price: number;
@@ -22,6 +40,8 @@ export interface Goods {
   salesVolume: number;
   status: number;
   failureReason: string;
+  specList: Spec[];
+  skuList: Sku[];
   createdAt: string;
   updatedAt: string;
 }
