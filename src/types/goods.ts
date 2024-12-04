@@ -26,6 +26,8 @@ export interface Sku {
 
 export interface Goods {
   id: number;
+  status: number;
+  failureReason: string;
   shopId: number;
   cover: string;
   video: string;
@@ -39,8 +41,7 @@ export interface Goods {
   salesCommissionRate: number;
   promotionCommissionRate: number;
   salesVolume: number;
-  status: number;
-  failureReason: string;
+  refundSupport: number;
   specList: Spec[];
   skuList: Sku[];
   createdAt: string;

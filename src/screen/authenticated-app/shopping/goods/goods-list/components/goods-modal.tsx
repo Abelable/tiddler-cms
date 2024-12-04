@@ -374,7 +374,6 @@ export const GoodsModal = ({
       const {
         video,
         cover,
-        activityCover,
         imageList,
         detailImageList,
         defaultSpecImage,
@@ -419,8 +418,6 @@ export const GoodsModal = ({
         ...rest,
         video: video && video.length ? video[0].url : "",
         cover: cover[0].url,
-        activityCover:
-          activityCover && activityCover.length ? activityCover[0].url : "",
         imageList: imageList.map((item: { url: string }) => item.url),
         detailImageList: detailImageList.map(
           (item: { url: string }) => item.url
@@ -586,7 +583,7 @@ export const GoodsModal = ({
             </Col>
             <Col span={12}>
               <Form.Item
-                name="refundStatus"
+                name="refundSupport"
                 label="7天无理由退换货"
                 rules={[{ required: true, message: "请选择是否支持7天无理由" }]}
               >
@@ -674,7 +671,7 @@ export const GoodsModal = ({
                       ) || {};
                     return (
                       <Form.Item
-                        name="commissionRate"
+                        name="promotionCommissionRate"
                         label="推广佣金比例"
                         tooltip={`佣金范围${minPromotionCommissionRate}%~${maxPromotionCommissionRate}%`}
                         rules={[
