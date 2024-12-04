@@ -8,7 +8,7 @@ import { useGiftGoodsListSearchParams } from "./util";
 
 const typeOptions = [
   { text: "爱心助农", value: 1 },
-  { text: "文旅周边", value: 2 },
+  { text: "文创周边", value: 2 },
 ];
 
 export const GiftGoodsList = () => {
