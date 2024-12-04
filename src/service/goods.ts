@@ -13,6 +13,7 @@ import type {
   GoodsListResult,
   GoodsListSearchParams,
   GoodsDetail,
+  GoodsOption,
 } from "types/goods";
 
 export const useGoodsList = (params: Partial<GoodsListSearchParams>) => {
@@ -90,5 +91,12 @@ export const useDeleteGoods = (queryKey: QueryKey) => {
         method: "POST",
       }),
     useDeleteConfig(queryKey)
+  );
+};
+
+export const useSelfGoodsOptions = () => {
+  const client = useHttp();
+  return useQuery<GoodsOption[]>(["self_goods_options"], () =>
+    client("goods/self_options")
   );
 };

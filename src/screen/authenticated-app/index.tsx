@@ -40,6 +40,7 @@ import { ExpressList } from "./shopping/express-list";
 import { GoodsCategoryList } from "./shopping/goods/category-list";
 import { FreightTemplateList } from "./shopping/goods/freight-template-list";
 import { GoodsList } from "./shopping/goods/goods-list";
+import { GiftGoodsList } from "./team/gift-goods-list";
 
 import {
   LockOutlined,
@@ -58,6 +59,7 @@ import {
   GiftOutlined,
   PictureOutlined,
   CarOutlined,
+  CloudOutlined,
 } from "@ant-design/icons";
 import {
   ExpressIcon,
@@ -182,6 +184,7 @@ export const AuthenticatedApp = () => {
                 element={<FreightTemplateList />}
               />
               <Route path="shopping/goods/list" element={<GoodsList />} />
+              <Route path="team/gift_list" element={<GiftGoodsList />} />
               <Route
                 path={"*"}
                 element={<Navigate to={"user/list"} replace={true} />}
@@ -470,6 +473,18 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
               icon: <UnorderedListOutlined />,
             },
           ],
+        },
+      ],
+    },
+    {
+      label: "家乡推广",
+      key: "team",
+      icon: <CloudOutlined />,
+      children: [
+        {
+          label: <Link to={"team/gift_list"}>礼包商品</Link>,
+          key: "team_gift_list",
+          icon: <ShoppingOutlined />,
         },
       ],
     },
