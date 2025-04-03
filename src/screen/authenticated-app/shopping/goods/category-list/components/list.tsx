@@ -78,6 +78,11 @@ export const List = ({
             ),
           },
           {
+            title: "推广佣金上限",
+            dataIndex: "promotionCommissionUpperLimit",
+            render: (value) => <>¥{value}</>,
+          },
+          {
             title: "创建时间",
             render: (value, role) => (
               <span>

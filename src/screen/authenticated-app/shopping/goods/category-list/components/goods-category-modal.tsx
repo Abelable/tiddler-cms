@@ -158,6 +158,16 @@ export const GoodsCategoryModal = ({
               </Form.Item>
             </Input.Group>
           </Form.Item>
+          <Form.Item
+            label="推广佣金上限"
+            name="promotionCommissionUpperLimit"
+            rules={[{ required: true, message: "请输入推广佣金上限" }]}
+          >
+            <InputNumber
+              style={{ width: "100%" }}
+              placeholder={"请输入推广佣金上限"}
+            />
+          </Form.Item>
         </Form>
       )}
     </Modal>

@@ -4,6 +4,7 @@ export interface GoodsCategoryOption {
   name: string;
   minPromotionCommissionRate: number;
   maxPromotionCommissionRate: number;
+  promotionCommissionUpperLimit: number;
 }
 
 export interface GoodsCategoriesSearchParams {
@@ -20,6 +21,7 @@ export interface GoodsCategory {
   maxSalesCommissionRate: number;
   minPromotionCommissionRate: number;
   maxPromotionCommissionRate: number;
+  promotionCommissionUpperLimit: number;
   createdAt: string;
 }
 
