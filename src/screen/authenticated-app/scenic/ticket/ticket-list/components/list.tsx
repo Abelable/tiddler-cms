@@ -92,13 +92,13 @@ export const List = ({
           {
             title: "销售佣金比例",
             dataIndex: "salesCommissionRate",
-            render: (value) => <>{`${value * 100}%`}</>,
+            render: (value) => <>{`${value}%`}</>,
             width: "16rem",
           },
           {
             title: "推广佣金比例",
             dataIndex: "promotionCommissionRate",
-            render: (value) => <>{`${value * 100}%`}</>,
+            render: (value) => <>{`${value}%`}</>,
             width: "16rem",
           },
           {
