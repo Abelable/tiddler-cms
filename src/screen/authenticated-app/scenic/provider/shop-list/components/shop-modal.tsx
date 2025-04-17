@@ -51,7 +51,7 @@ export const ShopModal = ({
             </Descriptions.Item>
             <Descriptions.Item label="店铺头像">
               <Avatar
-                src={editingShop?.avatar}
+                src={editingShop?.logo}
                 icon={<UserOutlined />}
                 size="small"
               />

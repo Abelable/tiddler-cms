@@ -9,7 +9,7 @@ export interface Shop {
   status: number;
   type: number;
   name: string;
-  avatar: string;
+  logo: string;
   cover: string;
   createdAt: string;
   updatedAt: string;

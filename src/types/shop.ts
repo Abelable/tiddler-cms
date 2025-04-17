@@ -11,7 +11,7 @@ export interface Shop {
   type: number;
   name: string;
   categoryIds: number[];
-  avatar: string;
+  logo: string;
   cover: string;
   createdAt: string;
   updatedAt: string;

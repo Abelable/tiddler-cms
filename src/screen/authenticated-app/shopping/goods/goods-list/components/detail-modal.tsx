@@ -102,7 +102,7 @@ export const DetailModal = ({
             </Descriptions.Item>
             <Descriptions.Item label="店铺头像">
               <Avatar
-                src={editingGoods?.shopInfo?.avatar}
+                src={editingGoods?.shopInfo?.logo}
                 icon={<UserOutlined />}
                 size="small"
               />
