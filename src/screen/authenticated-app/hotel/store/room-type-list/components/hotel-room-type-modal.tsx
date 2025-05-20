@@ -106,7 +106,7 @@ export const HotelRoomTypeModal = ({ hotelId }: { hotelId: number }) => {
                 tooltip="图片大小不能超过10MB"
                 rules={[{ required: true, message: "请上传房间照片" }]}
               >
-                <OssUpload />
+                <OssUpload multiple />
               </Form.Item>
             </Col>
           </Row>

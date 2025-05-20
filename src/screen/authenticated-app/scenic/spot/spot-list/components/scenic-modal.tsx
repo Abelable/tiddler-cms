@@ -239,7 +239,7 @@ export const ScenicModal = ({
                 getValueFromEvent={normFile}
                 rules={[{ required: true, message: "请上传景区照片" }]}
               >
-                <OssUpload />
+                <OssUpload multiple />
               </Form.Item>
             </Col>
           </Row>

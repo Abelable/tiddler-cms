@@ -375,7 +375,7 @@ export const HotelModal = ({
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
               >
-                <OssUpload />
+                <OssUpload multiple />
               </Form.Item>
             </Col>
           </Row>
@@ -387,7 +387,7 @@ export const HotelModal = ({
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
               >
-                <OssUpload />
+                <OssUpload multiple />
               </Form.Item>
             </Col>
           </Row>
@@ -399,7 +399,7 @@ export const HotelModal = ({
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
               >
-                <OssUpload />
+                <OssUpload multiple />
               </Form.Item>
             </Col>
           </Row>
@@ -411,7 +411,7 @@ export const HotelModal = ({
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
               >
-                <OssUpload />
+                <OssUpload multiple />
               </Form.Item>
             </Col>
           </Row>
@@ -423,7 +423,7 @@ export const HotelModal = ({
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
               >
-                <OssUpload />
+                <OssUpload multiple />
               </Form.Item>
             </Col>
           </Row>

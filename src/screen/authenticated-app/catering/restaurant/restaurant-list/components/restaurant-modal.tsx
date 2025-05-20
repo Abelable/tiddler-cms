@@ -250,7 +250,7 @@ export const RestaurantModal = ({
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
               >
-                <OssUpload />
+                <OssUpload multiple />
               </Form.Item>
             </Col>
           </Row>
@@ -263,7 +263,7 @@ export const RestaurantModal = ({
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
               >
-                <OssUpload />
+                <OssUpload multiple />
               </Form.Item>
             </Col>
           </Row>
@@ -276,7 +276,7 @@ export const RestaurantModal = ({
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
               >
-                <OssUpload />
+                <OssUpload multiple />
               </Form.Item>
             </Col>
           </Row>
