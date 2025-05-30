@@ -85,19 +85,27 @@ export const RestaurantModal = ({
             ]
           : [],
         cover: cover ? [{ url: cover }] : [],
-        foodImageList: foodImageList?.map((item) => ({ url: item })),
-        environmentImageList: environmentImageList?.map((item) => ({
-          url: item,
-        })),
-        priceImageList: priceImageList?.map((item) => ({ url: item })),
-        openTimeList: openTimeList.map((item) => ({
-          startWeekDay: +item.startWeekDay,
-          endWeekDay: +item.endWeekDay,
-          timeFrameList: item.timeFrameList.map((_item) => ({
-            openTime: moment(_item.openTime, "HH:mm"),
-            closeTime: moment(_item.closeTime, "HH:mm"),
-          })),
-        })),
+        foodImageList: foodImageList.length
+          ? foodImageList?.map((item) => ({ url: item }))
+          : [],
+        environmentImageList: environmentImageList.length
+          ? environmentImageList?.map((item) => ({
+              url: item,
+            }))
+          : [],
+        priceImageList: priceImageList.length
+          ? priceImageList?.map((item) => ({ url: item }))
+          : [],
+        openTimeList: openTimeList.length
+          ? openTimeList.map((item) => ({
+              startWeekDay: +item.startWeekDay,
+              endWeekDay: +item.endWeekDay,
+              timeFrameList: item.timeFrameList.map((_item) => ({
+                openTime: moment(_item.openTime, "HH:mm"),
+                closeTime: moment(_item.closeTime, "HH:mm"),
+              })),
+            }))
+          : [],
         ...rest,
       });
     }
