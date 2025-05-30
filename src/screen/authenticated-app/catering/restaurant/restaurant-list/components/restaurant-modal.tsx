@@ -137,24 +137,28 @@ export const RestaurantModal = ({
         ...rest,
         video: video && video.length ? video[0].url : "",
         cover: cover && cover.length ? cover[0].url : "",
-        foodImageList: foodImageList.length
-          ? foodImageList.map((item: { url: string }) => item.url)
-          : [],
-        environmentImageList: environmentImageList.length
-          ? environmentImageList.map((item: { url: string }) => item.url)
-          : [],
-        priceImageList: priceImageList.length
-          ? priceImageList.map((item: { url: string }) => item.url)
-          : [],
-        openTimeList: openTimeList.length
-          ? openTimeList.map((item: OpenTime) => ({
-              ...item,
-              timeFrameList: item.timeFrameList.map((_item) => ({
-                openTime: moment(_item.openTime).format("HH:mm"),
-                closeTime: moment(_item.closeTime).format("HH:mm"),
-              })),
-            }))
-          : [],
+        foodImageList:
+          foodImageList && foodImageList.length
+            ? foodImageList.map((item: { url: string }) => item.url)
+            : [],
+        environmentImageList:
+          environmentImageList && environmentImageList.length
+            ? environmentImageList.map((item: { url: string }) => item.url)
+            : [],
+        priceImageList:
+          priceImageList && priceImageList.length
+            ? priceImageList.map((item: { url: string }) => item.url)
+            : [],
+        openTimeList:
+          openTimeList && openTimeList.length
+            ? openTimeList.map((item: OpenTime) => ({
+                ...item,
+                timeFrameList: item.timeFrameList.map((_item) => ({
+                  openTime: moment(_item.openTime).format("HH:mm"),
+                  closeTime: moment(_item.closeTime).format("HH:mm"),
+                })),
+              }))
+            : [],
       });
       closeModal();
     });
