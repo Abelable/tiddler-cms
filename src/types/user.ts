@@ -20,3 +20,9 @@ export interface UsersResult {
   limit: string;
   total: string;
 }
+
+export interface UserOption {
+  id: number;
+  avatar: string;
+  nickname: string;
+}

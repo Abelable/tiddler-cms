@@ -11,7 +11,7 @@ export const UnauthenticatedApp = () => {
 
   return (
     <Container>
-      <Header>小鱼游后台管理系统</Header>
+      <Header>小鱼游系统后台</Header>
       <Background />
       <ShadowCard>
         <Title>请登录</Title>

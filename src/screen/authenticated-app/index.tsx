@@ -12,6 +12,7 @@ import { RoleList } from "./admin/role-list";
 import { AdminList } from "./admin/admin-list";
 import { UserList } from "./user/user-list";
 import { AuthInfoList } from "./user/auth-info-list";
+import { ShortVideoList } from "./media/short-video";
 import { ScenicCategoryList } from "./scenic/spot/category-list";
 import { ScenicList } from "./scenic/spot/spot-list";
 import { ScenicProviderList } from "./scenic/provider/provider-list";
@@ -60,6 +61,8 @@ import {
   PictureOutlined,
   CarOutlined,
   CloudOutlined,
+  SendOutlined,
+  VideoCameraOutlined,
 } from "@ant-design/icons";
 import {
   ExpressIcon,
@@ -99,6 +102,7 @@ export const AuthenticatedApp = () => {
               <Route path="user/list" element={<UserList />} />
               <Route path="user/auth_info_list" element={<AuthInfoList />} />
               <Route path="activity/mall_banner" element={<MallBannerList />} />
+              <Route path="media/short_video" element={<ShortVideoList />} />
               <Route
                 path="scenic/spot/category_list"
                 element={<ScenicCategoryList />}
@@ -243,6 +247,23 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
         {
           label: <Link to={"activity/mall_banner"}>商城Banner</Link>,
           key: "activity_mall_banner",
+          icon: <PictureOutlined />,
+        },
+      ],
+    },
+    {
+      label: "游记管理",
+      key: "media",
+      icon: <SendOutlined />,
+      children: [
+        {
+          label: <Link to={"media/short_video"}>视频游记</Link>,
+          key: "media_short_video",
+          icon: <VideoCameraOutlined />,
+        },
+        {
+          label: <Link to={"media/tourism_note"}>图文游记</Link>,
+          key: "media_tourism_note",
           icon: <PictureOutlined />,
         },
       ],
@@ -500,7 +521,7 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
       <Link to={"/"}>
         <Logo collapsed={collapsed}>
           <LogoImg src={logo} />
-          <div>小鱼游管理后台</div>
+          <div>小鱼游系统后台</div>
         </Logo>
       </Link>
       <Menu

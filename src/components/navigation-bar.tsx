@@ -11,6 +11,8 @@ const breadcrumbNameMap: { [key: string]: string } = {
   "/user/auth_info_list": "实名认证",
   "/activity": "活动管理",
   "/activity/mall_banner": "商城banner",
+  "/media": "游记管理",
+  "/media/short_video": "视频游记",
   "/scenic": "景区模块",
   "/scenic/spot": "景区管理",
   "/scenic/spot/category_list": "景区分类",
