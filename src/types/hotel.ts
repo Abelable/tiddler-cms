@@ -63,8 +63,3 @@ export interface HotelListResult {
   limit: string;
   total: string;
 }
-
-export interface HotelOption {
-  id: number;
-  name: string;
-}

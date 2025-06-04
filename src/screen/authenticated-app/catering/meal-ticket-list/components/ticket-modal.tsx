@@ -4,12 +4,12 @@ import { ErrorBox, ModalLoading } from "components/lib";
 import dayjs from "dayjs";
 import { useTicketModal } from "../util";
 
-import type { DataOption } from "types/common";
+import type { ProductOption } from "types/common";
 
 export const TicketModal = ({
   restaurantOptions,
 }: {
-  restaurantOptions: DataOption[];
+  restaurantOptions: ProductOption[];
 }) => {
   const { close, ticketModalOpen, editingTicket, error, isLoading } =
     useTicketModal();

@@ -6,12 +6,13 @@ import {
   useEditConfig,
 } from "./use-optimistic-options";
 import { cleanObject } from "utils/index";
+
+import type { ProductOption } from "types/common";
 import type {
   Hotel,
   HotelListResult,
   HotelListSearchParams,
   HotelDetail,
-  HotelOption,
 } from "types/hotel";
 
 export const useHotelList = (params: Partial<HotelListSearchParams>) => {
@@ -70,7 +71,7 @@ export const useDeleteHotel = (queryKey: QueryKey) => {
 
 export const useHotelOptions = () => {
   const client = useHttp();
-  return useQuery<HotelOption[]>(["hotel_options"], () =>
+  return useQuery<ProductOption[]>(["hotel_options"], () =>
     client("hotel/options")
   );
 };

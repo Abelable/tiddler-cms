@@ -45,8 +45,3 @@ export interface RestaurantListResult {
   limit: string;
   total: string;
 }
-
-export interface RestaurantOption {
-  id: number;
-  name: string;
-}

@@ -32,6 +32,12 @@ export interface DataOption {
   name: string;
 }
 
+export interface ProductOption {
+  id: number;
+  cover: string;
+  name: string;
+}
+
 export interface DepositInfo {
   orderSn: string;
   payId: number;

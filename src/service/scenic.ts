@@ -7,7 +7,7 @@ import {
 } from "./use-optimistic-options";
 import { cleanObject } from "utils/index";
 
-import type { DataOption } from "types/common";
+import type { ProductOption } from "types/common";
 import type {
   Scenic,
   ScenicListResult,
@@ -71,7 +71,7 @@ export const useDeleteScenic = (queryKey: QueryKey) => {
 
 export const useScenicOptions = () => {
   const client = useHttp();
-  return useQuery<DataOption[]>(["scenic_options"], () =>
+  return useQuery<ProductOption[]>(["scenic_options"], () =>
     client("scenic/options")
   );
 };

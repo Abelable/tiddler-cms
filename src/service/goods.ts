@@ -8,12 +8,13 @@ import {
   useRejectConfig,
 } from "./use-optimistic-options";
 import { cleanObject } from "utils/index";
+
+import type { ProductOption } from "types/common";
 import type {
   Goods,
   GoodsListResult,
   GoodsListSearchParams,
   GoodsDetail,
-  GoodsOption,
 } from "types/goods";
 
 export const useGoodsList = (params: Partial<GoodsListSearchParams>) => {
@@ -96,14 +97,14 @@ export const useDeleteGoods = (queryKey: QueryKey) => {
 
 export const useGoodsOptions = () => {
   const client = useHttp();
-  return useQuery<GoodsOption[]>(["goods_options"], () =>
+  return useQuery<ProductOption[]>(["goods_options"], () =>
     client("goods/options")
   );
 };
 
 export const useSelfGoodsOptions = () => {
   const client = useHttp();
-  return useQuery<GoodsOption[]>(["self_goods_options"], () =>
+  return useQuery<ProductOption[]>(["self_goods_options"], () =>
     client("goods/self_options")
   );
 };

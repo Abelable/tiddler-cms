@@ -6,12 +6,13 @@ import {
   useEditConfig,
 } from "./use-optimistic-options";
 import { cleanObject } from "utils/index";
+
+import type { ProductOption } from "types/common";
 import type {
   Restaurant,
   RestaurantListResult,
   RestaurantListSearchParams,
   RestaurantDetail,
-  RestaurantOption,
 } from "types/restaurant";
 
 export const useRestaurantList = (
@@ -72,7 +73,7 @@ export const useDeleteRestaurant = (queryKey: QueryKey) => {
 
 export const useRestaurantOptions = () => {
   const client = useHttp();
-  return useQuery<RestaurantOption[]>(["restaurant_options"], () =>
+  return useQuery<ProductOption[]>(["restaurant_options"], () =>
     client("catering/restaurant/options")
   );
 };
