@@ -4,11 +4,16 @@ import { OptionCover, Row } from "components/lib";
 import { Button, Input, Select } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 
-import type { ShortVideoListSearchParams } from "types/shortVideo";
+import type { ProductOption } from "types/common";
 import type { UserOption } from "types/user";
+import type { ShortVideoListSearchParams } from "types/shortVideo";
 
 export interface SearchPanelProps {
   userOptions: UserOption[];
+  scenicOptions: ProductOption[];
+  hotelOptions: ProductOption[];
+  restaurantOptions: ProductOption[];
+  goodsOptions: ProductOption[];
   params: Partial<ShortVideoListSearchParams>;
   setParams: (params: Partial<ShortVideoListSearchParams>) => void;
 }

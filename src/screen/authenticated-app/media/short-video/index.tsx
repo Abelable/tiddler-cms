@@ -14,11 +14,14 @@ import { useShortVideoListSearchParams } from "./util";
 
 export const ShortVideoList = () => {
   const { data: userOptions = [], error: userOptionsError } = useUserOptions();
-  const { data: scenicOptions, error: scenicOptionsError } = useScenicOptions();
-  const { data: hotelOptions, error: hotelOptionsError } = useHotelOptions();
-  const { data: restaurantOptions, error: restaurantOptionsError } =
+  const { data: scenicOptions = [], error: scenicOptionsError } =
+    useScenicOptions();
+  const { data: hotelOptions = [], error: hotelOptionsError } =
+    useHotelOptions();
+  const { data: restaurantOptions = [], error: restaurantOptionsError } =
     useRestaurantOptions();
-  const { data: goodsOptions, error: goodsOptionsError } = useGoodsOptions();
+  const { data: goodsOptions = [], error: goodsOptionsError } =
+    useGoodsOptions();
 
   const [params, setParams] = useShortVideoListSearchParams();
   const { isLoading, error, data } = useShortVideoList(params);
@@ -28,11 +31,19 @@ export const ShortVideoList = () => {
       <Main>
         <SearchPanel
           userOptions={userOptions}
+          scenicOptions={scenicOptions}
+          hotelOptions={hotelOptions}
+          restaurantOptions={restaurantOptions}
+          goodsOptions={goodsOptions}
           params={params}
           setParams={setParams}
         />
         <List
           userOptions={userOptions}
+          scenicOptions={scenicOptions}
+          hotelOptions={hotelOptions}
+          restaurantOptions={restaurantOptions}
+          goodsOptions={goodsOptions}
           params={params}
           setParams={setParams}
           error={
@@ -52,7 +63,13 @@ export const ShortVideoList = () => {
           }}
         />
       </Main>
-      <ShortVideoModal userOptions={userOptions} />
+      <ShortVideoModal
+        userOptions={userOptions}
+        scenicOptions={scenicOptions}
+        hotelOptions={hotelOptions}
+        restaurantOptions={restaurantOptions}
+        goodsOptions={goodsOptions}
+      />
     </Container>
   );
 };

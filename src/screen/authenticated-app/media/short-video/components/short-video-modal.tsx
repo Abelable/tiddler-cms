@@ -9,6 +9,7 @@ import { OssUpload } from "components/oss-upload";
 import { ErrorBox, ModalLoading, OptionCover } from "components/lib";
 import { Map } from "components/map";
 
+import type { ProductOption } from "types/common";
 import type { UserOption } from "types/user";
 
 const normFile = (e: any) => {
@@ -18,8 +19,16 @@ const normFile = (e: any) => {
 
 export const ShortVideoModal = ({
   userOptions,
+  scenicOptions,
+  hotelOptions,
+  restaurantOptions,
+  goodsOptions,
 }: {
   userOptions: UserOption[];
+  scenicOptions: ProductOption[];
+  hotelOptions: ProductOption[];
+  restaurantOptions: ProductOption[];
+  goodsOptions: ProductOption[];
 }) => {
   const [form] = useForm();
 
