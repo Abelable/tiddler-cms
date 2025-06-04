@@ -4,10 +4,10 @@ import { Row } from "components/lib";
 import { Button, Input, Select } from "antd";
 
 import type { TicketListSearchParams } from "types/scenicTicket";
-import type { Option, OperatorOption } from "types/common";
+import type { Option, DataOption } from "types/common";
 
 export interface SearchPanelProps {
-  scenicOptions: OperatorOption[];
+  scenicOptions: DataOption[];
   typeOptions: Option[];
   statusOptions: Option[];
   params: Partial<TicketListSearchParams>;

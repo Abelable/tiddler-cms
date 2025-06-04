@@ -27,7 +27,7 @@ export interface Option {
   value: number;
 }
 
-export interface OperatorOption {
+export interface DataOption {
   id: number;
   name: string;
 }

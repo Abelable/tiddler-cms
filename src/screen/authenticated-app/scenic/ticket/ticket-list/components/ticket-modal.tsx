@@ -4,14 +4,14 @@ import { ErrorBox, ModalLoading } from "components/lib";
 import dayjs from "dayjs";
 import { useTicketModal } from "../util";
 
-import type { Option, OperatorOption } from "types/common";
+import type { Option, DataOption } from "types/common";
 
 export const TicketModal = ({
   typeOptions,
   scenicOptions,
 }: {
   typeOptions: Option[];
-  scenicOptions: OperatorOption[];
+  scenicOptions: DataOption[];
 }) => {
   const { close, ticketModalOpen, editingTicket, error, isLoading } =
     useTicketModal();

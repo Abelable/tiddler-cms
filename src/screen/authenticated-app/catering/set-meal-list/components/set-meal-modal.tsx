@@ -4,12 +4,12 @@ import { ErrorBox, ModalLoading } from "components/lib";
 import dayjs from "dayjs";
 import { useSetMealModal } from "../util";
 
-import type { OperatorOption } from "types/common";
+import type { DataOption } from "types/common";
 
 export const SetMealModal = ({
   restaurantOptions,
 }: {
-  restaurantOptions: OperatorOption[];
+  restaurantOptions: DataOption[];
 }) => {
   const { close, setMealModalOpen, editingSetMeal, error, isLoading } =
     useSetMealModal();

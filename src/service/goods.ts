@@ -94,6 +94,13 @@ export const useDeleteGoods = (queryKey: QueryKey) => {
   );
 };
 
+export const useGoodsOptions = () => {
+  const client = useHttp();
+  return useQuery<GoodsOption[]>(["goods_options"], () =>
+    client("goods/options")
+  );
+};
+
 export const useSelfGoodsOptions = () => {
   const client = useHttp();
   return useQuery<GoodsOption[]>(["self_goods_options"], () =>

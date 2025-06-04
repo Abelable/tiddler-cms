@@ -6,7 +6,7 @@ import { useShortVideoModal, useShortVideoListQueryKey } from "../util";
 
 import { Button, Col, Drawer, Form, Input, Row, Select, Space } from "antd";
 import { OssUpload } from "components/oss-upload";
-import { ErrorBox, ModalLoading, OptionAvatar } from "components/lib";
+import { ErrorBox, ModalLoading, OptionCover } from "components/lib";
 import { Map } from "components/map";
 
 import type { UserOption } from "types/user";
@@ -161,7 +161,7 @@ export const ShortVideoModal = ({
                 >
                   {userOptions.map(({ id, avatar, nickname }) => (
                     <Select.Option key={id} value={id}>
-                      <OptionAvatar src={avatar} icon={<UserOutlined />} />
+                      <OptionCover src={avatar} icon={<UserOutlined />} />
                       <span>{nickname}</span>
                     </Select.Option>
                   ))}

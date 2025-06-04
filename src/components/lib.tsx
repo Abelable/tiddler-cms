@@ -109,7 +109,7 @@ export const GoodsCover = styled(Image)`
   border-radius: 0.4rem;
 `;
 
-export const OptionAvatar = styled(Avatar)`
+export const OptionCover = styled(Avatar)`
   margin-right: 0.6rem;
   width: 2.4rem;
   height: 2.4rem;

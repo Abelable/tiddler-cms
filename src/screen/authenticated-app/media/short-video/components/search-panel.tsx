@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
-import { OptionAvatar, Row } from "components/lib";
+import { OptionCover, Row } from "components/lib";
 import { Button, Input, Select } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 
@@ -78,7 +78,7 @@ export const SearchPanel = ({
         >
           {userOptions?.map(({ id, avatar, nickname }) => (
             <Select.Option key={id} value={id}>
-              <OptionAvatar src={avatar} icon={<UserOutlined />} />
+              <OptionCover src={avatar} icon={<UserOutlined />} />
               <span>{nickname}</span>
             </Select.Option>
           ))}

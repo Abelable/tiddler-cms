@@ -4,10 +4,10 @@ import { Row } from "components/lib";
 import { Button, Input, Select } from "antd";
 
 import type { SetMealListSearchParams } from "types/setMeal";
-import type { Option, OperatorOption } from "types/common";
+import type { Option, DataOption } from "types/common";
 
 export interface SearchPanelProps {
-  restaurantOptions: OperatorOption[];
+  restaurantOptions: DataOption[];
   statusOptions: Option[];
   params: Partial<SetMealListSearchParams>;
   setParams: (params: Partial<SetMealListSearchParams>) => void;

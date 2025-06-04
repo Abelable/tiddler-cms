@@ -27,7 +27,7 @@ import { OssUpload } from "components/oss-upload";
 import { ErrorBox, ModalLoading } from "components/lib";
 
 import type { CategoryOption } from "types/category";
-import type { OperatorOption } from "types/common";
+import type { DataOption } from "types/common";
 import type { Sku, Spec } from "types/goods";
 import type { GoodsCategoryOption } from "types/goodsCategory";
 
@@ -52,7 +52,7 @@ export const GoodsModal = ({
 }: {
   shopCategoryOptions: CategoryOption[];
   goodsCategoryOptions: GoodsCategoryOption[];
-  freightTemplateOptions: OperatorOption[];
+  freightTemplateOptions: DataOption[];
 }) => {
   const [form] = useForm();
   const [shopCategoryId, setShopCategoryId] = useState<undefined | number>(

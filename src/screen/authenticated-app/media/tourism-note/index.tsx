@@ -12,7 +12,7 @@ import { SearchPanel } from "./components/search-panel";
 export const ScenicList = () => {
   const [params, setParams] = useScenicListSearchParams();
   const { isLoading, error, data } = useScenicList(params);
-  const { data: scenicCategoryOptions, error: scenicOptionsError } =
+  const { data: scenicCategoryOptions, error: scenicCateoryOptionsError } =
     useScenicCategoryOptions();
 
   return (
@@ -27,7 +27,7 @@ export const ScenicList = () => {
           categoryOptions={scenicCategoryOptions || []}
           params={params}
           setParams={setParams}
-          error={error || scenicOptionsError}
+          error={error || scenicCateoryOptionsError}
           loading={isLoading}
           dataSource={data?.list}
           pagination={{
