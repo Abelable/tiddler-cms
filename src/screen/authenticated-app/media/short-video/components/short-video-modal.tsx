@@ -6,7 +6,12 @@ import { useShortVideoModal, useShortVideoListQueryKey } from "../util";
 
 import { Button, Col, Drawer, Form, Input, Row, Select, Space } from "antd";
 import { OssUpload } from "components/oss-upload";
-import { ErrorBox, ModalLoading, OptionAvatar } from "components/lib";
+import {
+  ErrorBox,
+  ModalLoading,
+  OptionAvatar,
+  OptionCover,
+} from "components/lib";
 import { Map } from "components/map";
 
 import type { ProductOption } from "types/common";
@@ -172,6 +177,43 @@ export const ShortVideoModal = ({
                     <Select.Option key={id} value={id}>
                       <OptionAvatar src={avatar} icon={<UserOutlined />} />
                       <span>{nickname}</span>
+                    </Select.Option>
+                  ))}
+                </Select>
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item
+                name="cover"
+                label="封面"
+                valuePropName="fileList"
+                getValueFromEvent={normFile}
+              >
+                <OssUpload maxCount={1} />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                name="goodsIds"
+                label="关联商品"
+                rules={[{ required: true, message: "请选择关联商品" }]}
+              >
+                <Select
+                  mode="multiple"
+                  showSearch
+                  filterOption={(input, option) =>
+                    (option!.children as any)[1].props.children
+                      .toLowerCase()
+                      .includes(input.toLowerCase())
+                  }
+                  placeholder="请选择关联商品"
+                >
+                  {goodsOptions.map(({ id, cover, name }) => (
+                    <Select.Option key={id} value={id}>
+                      <OptionCover src={cover} />
+                      <span>{name}</span>
                     </Select.Option>
                   ))}
                 </Select>
