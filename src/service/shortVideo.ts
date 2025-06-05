@@ -17,7 +17,7 @@ export const useShortVideoList = (
   params: Partial<ShortVideoListSearchParams>
 ) => {
   const client = useHttp();
-  return useQuery<ShortVideoListResult>(["shortVideo_list", params], () =>
+  return useQuery<ShortVideoListResult>(["short_video_list", params], () =>
     client("media/short_video/list", { data: params, method: "POST" })
   );
 };
@@ -25,7 +25,7 @@ export const useShortVideoList = (
 export const useShortVideo = (id: number) => {
   const client = useHttp();
   return useQuery<Partial<ShortVideo>>(
-    ["shortVideo", { id }],
+    ["short_video", { id }],
     () => client(`media/short_video/detail`, { data: { id } }),
     {
       enabled: !!id,
