@@ -14,6 +14,7 @@ import {
   Button,
   Popover,
   Image,
+  InputNumber,
 } from "antd";
 import {
   ButtonNoPadding,
@@ -22,7 +23,7 @@ import {
   PageTitle,
   OptionAvatar,
 } from "components/lib";
-import { useDeleteShortVideo } from "service/shortVideo";
+import { useDeleteShortVideo, useEditViews } from "service/shortVideo";
 import { PlusOutlined } from "@ant-design/icons";
 import { SearchPanelProps } from "./search-panel";
 
@@ -46,6 +47,8 @@ export const List = ({
       page: pagination.current,
       limit: pagination.pageSize,
     });
+
+  const { mutate: editViews } = useEditViews(useShortVideoListQueryKey());
 
   return (
     <Container>
@@ -93,6 +96,16 @@ export const List = ({
               );
             },
             width: "32rem",
+          },
+          {
+            title: "观看量",
+            dataIndex: "views",
+            render: (value, shortVideo) => (
+              <InputNumber
+                value={value}
+                onChange={(views) => editViews({ id: shortVideo.id, views })}
+              />
+            ),
           },
           {
             title: "创建时间",

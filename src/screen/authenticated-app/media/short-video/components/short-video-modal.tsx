@@ -185,21 +185,72 @@ export const ShortVideoModal = ({
           </Row>
           <Row gutter={16}>
             <Col span={12}>
-              <Form.Item
-                name="cover"
-                label="封面"
-                valuePropName="fileList"
-                getValueFromEvent={normFile}
-              >
-                <OssUpload maxCount={1} />
+              <Form.Item name="scenicIds" label="关联景点">
+                <Select
+                  mode="multiple"
+                  showSearch
+                  filterOption={(input, option) =>
+                    (option!.children as any)[1].props.children
+                      .toLowerCase()
+                      .includes(input.toLowerCase())
+                  }
+                  placeholder="请选择关联景点"
+                >
+                  {scenicOptions.map(({ id, cover, name }) => (
+                    <Select.Option key={id} value={id}>
+                      <OptionCover src={cover} />
+                      <span>{name}</span>
+                    </Select.Option>
+                  ))}
+                </Select>
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item
-                name="goodsIds"
-                label="关联商品"
-                rules={[{ required: true, message: "请选择关联商品" }]}
-              >
+              <Form.Item name="hotelIds" label="关联酒店">
+                <Select
+                  mode="multiple"
+                  showSearch
+                  filterOption={(input, option) =>
+                    (option!.children as any)[1].props.children
+                      .toLowerCase()
+                      .includes(input.toLowerCase())
+                  }
+                  placeholder="请选择关联酒店"
+                >
+                  {hotelOptions.map(({ id, cover, name }) => (
+                    <Select.Option key={id} value={id}>
+                      <OptionCover src={cover} />
+                      <span>{name}</span>
+                    </Select.Option>
+                  ))}
+                </Select>
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item name="restaurantIds" label="关联餐馆">
+                <Select
+                  mode="multiple"
+                  showSearch
+                  filterOption={(input, option) =>
+                    (option!.children as any)[1].props.children
+                      .toLowerCase()
+                      .includes(input.toLowerCase())
+                  }
+                  placeholder="请选择关联餐馆"
+                >
+                  {restaurantOptions.map(({ id, cover, name }) => (
+                    <Select.Option key={id} value={id}>
+                      <OptionCover src={cover} />
+                      <span>{name}</span>
+                    </Select.Option>
+                  ))}
+                </Select>
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item name="goodsIds" label="关联商品">
                 <Select
                   mode="multiple"
                   showSearch
@@ -226,20 +277,12 @@ export const ShortVideoModal = ({
                 <Input.Group>
                   <Row gutter={8}>
                     <Col span={12}>
-                      <Form.Item
-                        style={{ marginBottom: 0 }}
-                        name="longitude"
-                        rules={[{ required: true, message: "请输入经度" }]}
-                      >
+                      <Form.Item style={{ marginBottom: 0 }} name="longitude">
                         <Input placeholder="请输入经度" />
                       </Form.Item>
                     </Col>
                     <Col span={12}>
-                      <Form.Item
-                        style={{ marginBottom: 0 }}
-                        name="latitude"
-                        rules={[{ required: true, message: "请输入纬度" }]}
-                      >
+                      <Form.Item style={{ marginBottom: 0 }} name="latitude">
                         <Input placeholder="请输入纬度" />
                       </Form.Item>
                     </Col>
@@ -248,11 +291,7 @@ export const ShortVideoModal = ({
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item
-                name="address"
-                label="游记地址详情"
-                rules={[{ required: true, message: "请输入游记地址详情" }]}
-              >
+              <Form.Item name="address" label="游记地址详情">
                 <Input placeholder="请输入游记地址详情" />
               </Form.Item>
             </Col>
