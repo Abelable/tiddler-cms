@@ -124,7 +124,7 @@ export const ShortVideoModal = ({
             <Col span={12}>
               <Form.Item
                 name="cover"
-                label="游记封面"
+                label="封面"
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
               >
@@ -134,10 +134,10 @@ export const ShortVideoModal = ({
             <Col span={12}>
               <Form.Item
                 name="video"
-                label="上传游记视频"
+                label="视频"
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
-                rules={[{ required: true, message: "请上传游记视频" }]}
+                rules={[{ required: true, message: "请上传视频" }]}
               >
                 <OssUpload accept=".mp4" maxCount={1} />
               </Form.Item>
@@ -147,20 +147,20 @@ export const ShortVideoModal = ({
             <Col span={12}>
               <Form.Item
                 name="title"
-                label="视频游记标题"
-                rules={[{ required: true, message: "请输入视频游记标题" }]}
+                label="标题"
+                rules={[{ required: true, message: "请输入标题" }]}
               >
-                <Input placeholder="请输入视频游记标题" />
+                <Input placeholder="请输入标题" />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item
                 name="userId"
-                label="视频作者"
-                rules={[{ required: true, message: "请选择视频作者" }]}
+                label="作者"
+                rules={[{ required: true, message: "请选择作者" }]}
               >
                 <Select
-                  placeholder="请选择用户"
+                  placeholder="请选择作者"
                   showSearch
                   filterOption={(input, option) =>
                     (option!.children as any)[1].props.children
@@ -180,7 +180,7 @@ export const ShortVideoModal = ({
           </Row>
           <Row gutter={16}>
             <Col span={12}>
-              <Form.Item label="视频游记所在经纬度" required>
+              <Form.Item label="游记所在经纬度" required>
                 <Input.Group>
                   <Row gutter={8}>
                     <Col span={12}>
@@ -208,10 +208,10 @@ export const ShortVideoModal = ({
             <Col span={12}>
               <Form.Item
                 name="address"
-                label="视频游记地址详情"
-                rules={[{ required: true, message: "请输入视频游记地址详情" }]}
+                label="游记地址详情"
+                rules={[{ required: true, message: "请输入游记地址详情" }]}
               >
-                <Input placeholder="请输入视频游记地址详情" />
+                <Input placeholder="请输入游记地址详情" />
               </Form.Item>
             </Col>
           </Row>

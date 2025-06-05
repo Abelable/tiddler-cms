@@ -206,23 +206,6 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
 
   const items: MenuProps["items"] = [
     {
-      label: "权限管理",
-      key: "auth",
-      icon: <LockOutlined />,
-      children: [
-        {
-          label: <Link to={"auth/role_list"}>角色列表</Link>,
-          key: "auth_role_list",
-          icon: <MehOutlined />,
-        },
-        {
-          label: <Link to={"auth/admin_list"}>管理员列表</Link>,
-          key: "auth_admin_list",
-          icon: <TeamOutlined />,
-        },
-      ],
-    },
-    {
       label: "用户管理",
       key: "user",
       icon: <UserOutlined />,
@@ -506,6 +489,23 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
           label: <Link to={"team/gift_list"}>礼包商品</Link>,
           key: "team_gift_list",
           icon: <ShoppingOutlined />,
+        },
+      ],
+    },
+    {
+      label: "权限管理",
+      key: "auth",
+      icon: <LockOutlined />,
+      children: [
+        {
+          label: <Link to={"auth/role_list"}>角色列表</Link>,
+          key: "auth_role_list",
+          icon: <MehOutlined />,
+        },
+        {
+          label: <Link to={"auth/admin_list"}>管理员列表</Link>,
+          key: "auth_admin_list",
+          icon: <TeamOutlined />,
         },
       ],
     },
