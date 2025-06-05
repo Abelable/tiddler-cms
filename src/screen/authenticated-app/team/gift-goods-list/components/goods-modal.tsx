@@ -1,5 +1,5 @@
 import { Form, Modal, Select } from "antd";
-import { ErrorBox, GoodsCover } from "components/lib";
+import { ErrorBox, OptionCover } from "components/lib";
 
 import { useForm } from "antd/lib/form/Form";
 import { useSelfGoodsOptions } from "service/goods";
@@ -74,7 +74,7 @@ export const GoodsModal = ({ typeOptions }: { typeOptions: Option[] }) => {
           >
             {goodsOptions.map(({ id, cover, name }) => (
               <Select.Option key={id} value={id}>
-                <GoodsCover src={cover} />
+                <OptionCover src={cover} />
                 <span>{name}</span>
               </Select.Option>
             ))}

@@ -20,7 +20,7 @@ import {
   ErrorBox,
   Row,
   PageTitle,
-  OptionCover,
+  OptionAvatar,
 } from "components/lib";
 import { useDeleteShortVideo } from "service/shortVideo";
 import { PlusOutlined } from "@ant-design/icons";
@@ -84,7 +84,7 @@ export const List = ({
               return user ? (
                 <Popover content={`id: ${user.id}`}>
                   <div style={{ cursor: "pointer" }}>
-                    <OptionCover src={user.avatar} icon={<UserOutlined />} />
+                    <OptionAvatar src={user.avatar} icon={<UserOutlined />} />
                     <span>{user.nickname}</span>
                   </div>
                 </Popover>

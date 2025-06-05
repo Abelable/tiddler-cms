@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Button, Spin, Typography, Image, Avatar } from "antd";
+import { Button, Spin, Typography, Avatar } from "antd";
 
 export const ButtonNoPadding = styled(Button)`
   padding: 0;
@@ -102,16 +102,18 @@ export const PageTitle = styled.div`
   }
 `;
 
-export const GoodsCover = styled(Image)`
-  margin-right: 0.6rem;
-  width: 1.8rem;
-  height: 1.8rem;
-  border-radius: 0.4rem;
-`;
-
-export const OptionCover = styled(Avatar)`
+export const OptionAvatar = styled(Avatar)`
   margin-right: 0.6rem;
   width: 2.4rem;
   height: 2.4rem;
   border-radius: 0.6rem;
+`;
+
+export const OptionCover = styled.img<{
+  size?: string;
+}>`
+  margin-right: 0.6rem;
+  width: ${(props) => props.size || "1.8rem"};
+  height: ${(props) => props.size || "1.8rem"};
+  border-radius: 0.4rem;
 `;

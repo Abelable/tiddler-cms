@@ -1,6 +1,10 @@
 export interface ShortVideoListSearchParams {
   title: string;
   userId: number | undefined;
+  scenicId: number | undefined;
+  hotelId: number | undefined;
+  restaurantId: number | undefined;
+  goodsId: number | undefined;
   page: number;
   limit: number;
 }

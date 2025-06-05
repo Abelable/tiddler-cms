@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
-import { OptionCover, Row } from "components/lib";
+import { OptionAvatar, OptionCover, Row } from "components/lib";
 import { Button, Input, Select } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 
@@ -21,10 +21,18 @@ export interface SearchPanelProps {
 const defaultParmas: Partial<ShortVideoListSearchParams> = {
   title: "",
   userId: undefined,
+  scenicId: undefined,
+  hotelId: undefined,
+  restaurantId: undefined,
+  goodsId: undefined,
 };
 
 export const SearchPanel = ({
   userOptions,
+  scenicOptions,
+  hotelOptions,
+  restaurantOptions,
+  goodsOptions,
   params,
   setParams,
 }: SearchPanelProps) => {
@@ -47,6 +55,26 @@ export const SearchPanel = ({
 
   const setUser = (userId: number) => setTempParams({ ...tempParams, userId });
   const clearUser = () => setTempParams({ ...tempParams, userId: undefined });
+
+  const setScenicId = (scenicId: number) =>
+    setTempParams({ ...tempParams, scenicId });
+  const clearScenicId = () =>
+    setTempParams({ ...tempParams, scenicId: undefined });
+
+  const setHotelId = (hotelId: number) =>
+    setTempParams({ ...tempParams, hotelId });
+  const clearHotelId = () =>
+    setTempParams({ ...tempParams, hotelId: undefined });
+
+  const setRestaurantId = (restaurantId: number) =>
+    setTempParams({ ...tempParams, restaurantId });
+  const clearRestaurantId = () =>
+    setTempParams({ ...tempParams, restaurantId: undefined });
+
+  const setGoodsId = (goodsId: number) =>
+    setTempParams({ ...tempParams, goodsId });
+  const clearGoodsId = () =>
+    setTempParams({ ...tempParams, goodsId: undefined });
 
   const clear = () => {
     setParams({ ...params, ...defaultParmas });
@@ -83,8 +111,104 @@ export const SearchPanel = ({
         >
           {userOptions?.map(({ id, avatar, nickname }) => (
             <Select.Option key={id} value={id}>
-              <OptionCover src={avatar} icon={<UserOutlined />} />
+              <OptionAvatar src={avatar} icon={<UserOutlined />} />
               <span>{nickname}</span>
+            </Select.Option>
+          ))}
+        </Select>
+      </Item>
+      <Item>
+        <div>相关景点：</div>
+        <Select
+          style={{ width: "20rem" }}
+          value={tempParams.scenicId}
+          placeholder="请选择相关景点"
+          allowClear
+          onSelect={setScenicId}
+          onClear={clearScenicId}
+          showSearch
+          filterOption={(input, option) =>
+            (option!.children as any)[1].props.children
+              .toLowerCase()
+              .includes(input.toLowerCase())
+          }
+        >
+          {scenicOptions.map(({ id, cover, name }) => (
+            <Select.Option key={id} value={id}>
+              <OptionCover src={cover} />
+              <span>{name}</span>
+            </Select.Option>
+          ))}
+        </Select>
+      </Item>
+      <Item>
+        <div>相关酒店：</div>
+        <Select
+          style={{ width: "20rem" }}
+          value={tempParams.hotelId}
+          placeholder="请选择相关酒店"
+          allowClear
+          onSelect={setHotelId}
+          onClear={clearHotelId}
+          showSearch
+          filterOption={(input, option) =>
+            (option!.children as any)[1].props.children
+              .toLowerCase()
+              .includes(input.toLowerCase())
+          }
+        >
+          {hotelOptions.map(({ id, cover, name }) => (
+            <Select.Option key={id} value={id}>
+              <OptionCover src={cover} />
+              <span>{name}</span>
+            </Select.Option>
+          ))}
+        </Select>
+      </Item>
+      <Item>
+        <div>相关餐馆：</div>
+        <Select
+          style={{ width: "20rem" }}
+          value={tempParams.restaurantId}
+          placeholder="请选择相关餐馆"
+          allowClear
+          onSelect={setRestaurantId}
+          onClear={clearRestaurantId}
+          showSearch
+          filterOption={(input, option) =>
+            (option!.children as any)[1].props.children
+              .toLowerCase()
+              .includes(input.toLowerCase())
+          }
+        >
+          {restaurantOptions.map(({ id, cover, name }) => (
+            <Select.Option key={id} value={id}>
+              <OptionCover src={cover} />
+              <span>{name}</span>
+            </Select.Option>
+          ))}
+        </Select>
+      </Item>
+      <Item>
+        <div>相关商品：</div>
+        <Select
+          style={{ width: "20rem" }}
+          value={tempParams.goodsId}
+          placeholder="请选择相关商品"
+          allowClear
+          onSelect={setGoodsId}
+          onClear={clearGoodsId}
+          showSearch
+          filterOption={(input, option) =>
+            (option!.children as any)[1].props.children
+              .toLowerCase()
+              .includes(input.toLowerCase())
+          }
+        >
+          {goodsOptions.map(({ id, cover, name }) => (
+            <Select.Option key={id} value={id}>
+              <OptionCover src={cover} />
+              <span>{name}</span>
             </Select.Option>
           ))}
         </Select>
