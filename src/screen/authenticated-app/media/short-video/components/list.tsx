@@ -50,7 +50,7 @@ export const List = ({
   return (
     <Container>
       <Header between={true}>
-        <PageTitle>视频列表</PageTitle>
+        <PageTitle>视频游记列表</PageTitle>
         <Button onClick={() => open()} type={"primary"} icon={<PlusOutlined />}>
           新增
         </Button>

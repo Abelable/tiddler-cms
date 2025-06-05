@@ -84,21 +84,21 @@ export const SearchPanel = ({
   return (
     <Container>
       <Item>
-        <div>视频标题：</div>
+        <div>标题：</div>
         <Input
           style={{ width: "20rem" }}
           value={tempParams.title}
           onChange={setTitle}
-          placeholder="请输入视频标题"
+          placeholder="请输入标题"
           allowClear={true}
         />
       </Item>
       <Item>
-        <div>视频作者：</div>
+        <div>作者：</div>
         <Select
           style={{ width: "20rem" }}
           value={tempParams.userId}
-          placeholder="请选择视频作者"
+          placeholder="请选择作者"
           allowClear
           onSelect={setUser}
           onClear={clearUser}
