@@ -144,6 +144,8 @@ export const OptionCover = styled.img<{
 // `;
 
 export const Card = styled.div`
+  display: flex;
+  align-items: center;
   margin-bottom: 12px;
   padding: 6px;
   cursor: pointer;
@@ -151,5 +153,12 @@ export const Card = styled.div`
   border-radius: 8px;
   :last-child {
     margin-bottom: 0;
+  }
+  > span {
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
   }
 `;

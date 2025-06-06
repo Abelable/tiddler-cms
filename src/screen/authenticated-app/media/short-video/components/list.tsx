@@ -107,45 +107,50 @@ export const List = ({
           {
             title: "关联景点",
             dataIndex: "scenicIds",
-            render: (value) => (
-              <>
-                {value.map((id: number, index: number) => {
-                  const scenic = scenicOptions.find(
-                    (scenic) => scenic.id === id
-                  );
-                  return scenic ? (
-                    <Popover content={`id: ${scenic?.id}`}>
-                      <Card key={index}>
-                        <OptionCover src={scenic.cover} size="2.4rem" />
-                        <span>{scenic.name}</span>
-                      </Card>
-                    </Popover>
-                  ) : (
-                    <>暂无关联景点</>
-                  );
-                })}
-              </>
-            ),
-            width: "20rem",
+            render: (value) =>
+              value.length ? (
+                <>
+                  {value.map((id: number, index: number) => {
+                    const scenic = scenicOptions.find(
+                      (scenic) => scenic.id === id
+                    );
+                    return (
+                      <Popover content={`id: ${scenic?.id}`}>
+                        <Card key={index}>
+                          <OptionCover src={scenic?.cover} size="2.4rem" />
+                          <span>{scenic?.name}</span>
+                        </Card>
+                      </Popover>
+                    );
+                  })}
+                </>
+              ) : (
+                <span style={{ color: "#999" }}>暂无关联景点</span>
+              ),
+            width: "24rem",
           },
           {
             title: "关联酒店",
             dataIndex: "hotelIds",
-            render: (value) => (
-              <>
-                {value.map((id: number, index: number) => {
-                  const { cover, name } =
-                    hotelOptions.find((scenic) => scenic.id === id) || {};
-                  return (
-                    <Card key={index}>
-                      <img src={cover} alt="" />
-                      <div>{name}</div>
-                    </Card>
-                  );
-                })}
-              </>
-            ),
-            width: "20rem",
+            render: (value) =>
+              value.length ? (
+                <>
+                  {value.map((id: number, index: number) => {
+                    const hotel = hotelOptions.find((hotel) => hotel.id === id);
+                    return (
+                      <Popover content={`id: ${hotel?.id}`}>
+                        <Card key={index}>
+                          <OptionCover src={hotel?.cover} size="2.4rem" />
+                          <span>{hotel?.name}</span>
+                        </Card>
+                      </Popover>
+                    );
+                  })}
+                </>
+              ) : (
+                <span style={{ color: "#999" }}>暂无关联酒店</span>
+              ),
+            width: "24rem",
           },
           {
             title: "关联餐馆",
@@ -164,7 +169,7 @@ export const List = ({
                 })}
               </>
             ),
-            width: "20rem",
+            width: "24rem",
           },
           {
             title: "关联商品",
@@ -183,7 +188,7 @@ export const List = ({
                 })}
               </>
             ),
-            width: "20rem",
+            width: "24rem",
           },
           {
             title: "观看量",
