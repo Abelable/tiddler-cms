@@ -1,26 +1,36 @@
 import { GoodsModal } from "./components/goods-modal";
 import { List } from "./components/list";
+import { SearchPanel } from "./components/search-panel";
 
 import styled from "@emotion/styled";
+import { useGoodsOptions } from "service/goods";
 import { useGiftTypeOptions } from "service/giftType";
 import { useGiftGoodsList } from "service/giftGoods";
 import { toNumber } from "utils";
-import { useGiftGoodsListSearchParams } from "./util";
+import { useGiftListSearchParams } from "./util";
 
 export const GiftGoodsList = () => {
   const { data: typeOptions = [], error: typeOptionsError } =
     useGiftTypeOptions();
-  const [params, setParams] = useGiftGoodsListSearchParams();
+  const { data: goodsOptions = [], error: goodsOptionsError } =
+    useGoodsOptions();
+  const [params, setParams] = useGiftListSearchParams();
   const { isLoading, error, data } = useGiftGoodsList(params);
 
   return (
     <Container>
       <Main>
+        <SearchPanel
+          typeOptions={typeOptions}
+          goodsOptions={goodsOptions}
+          params={params}
+          setParams={setParams}
+        />
         <List
           typeOptions={typeOptions}
           params={params}
           setParams={setParams}
-          error={error || typeOptionsError}
+          error={error || typeOptionsError || goodsOptionsError}
           loading={isLoading}
           dataSource={data?.list}
           pagination={{

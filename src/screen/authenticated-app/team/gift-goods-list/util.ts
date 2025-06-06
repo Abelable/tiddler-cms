@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from "react";
 import { useSetUrlSearchParams, useUrlQueryParams } from "utils/url";
 
-export const useGiftGoodsListSearchParams = () => {
+export const useGiftListSearchParams = () => {
   const [params, setParams] = useUrlQueryParams(["page", "limit"]);
   return [
     useMemo(
@@ -17,7 +17,7 @@ export const useGiftGoodsListSearchParams = () => {
 };
 
 export const useGiftGoodsListQueryKey = () => {
-  const [params] = useGiftGoodsListSearchParams();
+  const [params] = useGiftListSearchParams();
   return ["gift_list", params];
 };
 

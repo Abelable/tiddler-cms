@@ -1,4 +1,6 @@
-export interface GoodsListSearchParams {
+export interface GiftListSearchParams {
+  typeId: number;
+  goodsId: number;
   page: number;
   limit: number;
 }
@@ -17,10 +19,4 @@ export interface GoodsListResult {
   page: string;
   limit: string;
   total: string;
-}
-
-export interface GiftGoodsListSearchParams {
-  type: number;
-  page: number;
-  limit: number;
 }

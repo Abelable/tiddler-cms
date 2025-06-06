@@ -14,13 +14,13 @@ import dayjs from "dayjs";
 import { useDeleteGiftGoods } from "service/giftGoods";
 import { useGiftGoodsModal, useGiftGoodsListQueryKey } from "../util";
 
-import type { Goods, GoodsListSearchParams } from "types/giftGoods";
+import type { Goods, GiftListSearchParams } from "types/giftGoods";
 import type { DataOption } from "types/common";
 
 interface ListProps extends TableProps<Goods> {
   typeOptions: DataOption[];
-  params: Partial<GoodsListSearchParams>;
-  setParams: (params: Partial<GoodsListSearchParams>) => void;
+  params: Partial<GiftListSearchParams>;
+  setParams: (params: Partial<GiftListSearchParams>) => void;
   error: Error | unknown;
 }
 
