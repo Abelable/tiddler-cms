@@ -225,6 +225,23 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
       ],
     },
     {
+      label: "家乡代言",
+      key: "team",
+      icon: <CloudOutlined />,
+      children: [
+        {
+          label: <Link to={"team/gift_type_list"}>好物类型</Link>,
+          key: "team_gift_type_list",
+          icon: <AppstoreOutlined />,
+        },
+        {
+          label: <Link to={"team/gift_list"}>家乡好物</Link>,
+          key: "team_gift_list",
+          icon: <ShoppingOutlined />,
+        },
+      ],
+    },
+    {
       label: "活动管理",
       key: "activity",
       icon: <GiftOutlined />,
@@ -479,23 +496,6 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
               icon: <UnorderedListOutlined />,
             },
           ],
-        },
-      ],
-    },
-    {
-      label: "家乡代言",
-      key: "team",
-      icon: <CloudOutlined />,
-      children: [
-        {
-          label: <Link to={"team/gift_type_list"}>好物类型</Link>,
-          key: "team_gift_type_list",
-          icon: <AppstoreOutlined />,
-        },
-        {
-          label: <Link to={"team/gift_list"}>家乡好物</Link>,
-          key: "team_gift_list",
-          icon: <ShoppingOutlined />,
         },
       ],
     },
