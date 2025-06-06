@@ -118,11 +118,11 @@ export const SearchPanel = ({
         </Select>
       </Item>
       <Item>
-        <div>相关景点：</div>
+        <div>关联景点：</div>
         <Select
           style={{ width: "20rem" }}
           value={tempParams.scenicId}
-          placeholder="请选择相关景点"
+          placeholder="请选择关联景点"
           allowClear
           onSelect={setScenicId}
           onClear={clearScenicId}
@@ -142,11 +142,11 @@ export const SearchPanel = ({
         </Select>
       </Item>
       <Item>
-        <div>相关酒店：</div>
+        <div>关联酒店：</div>
         <Select
           style={{ width: "20rem" }}
           value={tempParams.hotelId}
-          placeholder="请选择相关酒店"
+          placeholder="请选择关联酒店"
           allowClear
           onSelect={setHotelId}
           onClear={clearHotelId}
@@ -166,11 +166,11 @@ export const SearchPanel = ({
         </Select>
       </Item>
       <Item>
-        <div>相关餐馆：</div>
+        <div>关联餐馆：</div>
         <Select
           style={{ width: "20rem" }}
           value={tempParams.restaurantId}
-          placeholder="请选择相关餐馆"
+          placeholder="请选择关联餐馆"
           allowClear
           onSelect={setRestaurantId}
           onClear={clearRestaurantId}
@@ -190,11 +190,11 @@ export const SearchPanel = ({
         </Select>
       </Item>
       <Item>
-        <div>相关商品：</div>
+        <div>关联商品：</div>
         <Select
           style={{ width: "20rem" }}
           value={tempParams.goodsId}
-          placeholder="请选择相关商品"
+          placeholder="请选择关联商品"
           allowClear
           onSelect={setGoodsId}
           onClear={clearGoodsId}

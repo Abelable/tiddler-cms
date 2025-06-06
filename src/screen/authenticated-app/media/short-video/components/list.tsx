@@ -22,7 +22,8 @@ import {
   Row,
   PageTitle,
   OptionAvatar,
-  ProductCard,
+  Card,
+  OptionCover,
 } from "components/lib";
 import { useDeleteShortVideo, useEditViews } from "service/shortVideo";
 import { PlusOutlined } from "@ant-design/icons";
@@ -66,7 +67,7 @@ export const List = ({
       <ErrorBox error={error} />
       <Table
         rowKey={"id"}
-        scroll={{ x: 1500 }}
+        scroll={{ x: 2000 }}
         columns={[
           {
             title: "id",
@@ -78,11 +79,12 @@ export const List = ({
             title: "封面",
             dataIndex: "cover",
             render: (value) => <Image width={68} src={value} />,
-            width: "14rem",
+            width: "10rem",
           },
           {
             title: "标题",
             dataIndex: "title",
+            width: "30rem",
           },
           {
             title: "作者",
@@ -91,16 +93,16 @@ export const List = ({
               const user = userOptions.find((item) => item.id === value);
               return user ? (
                 <Popover content={`id: ${user.id}`}>
-                  <div style={{ cursor: "pointer" }}>
+                  <Card>
                     <OptionAvatar src={user.avatar} icon={<UserOutlined />} />
                     <span>{user.nickname}</span>
-                  </div>
+                  </Card>
                 </Popover>
               ) : (
                 <>暂无上级</>
               );
             },
-            width: "32rem",
+            width: "18rem",
           },
           {
             title: "关联景点",
@@ -108,20 +110,81 @@ export const List = ({
             render: (value) => (
               <>
                 {value.map((id: number, index: number) => {
-                  const { cover, name } =
-                    scenicOptions.find((scenic) => scenic.id === id) || {};
-                  return (
-                    <ProductCard key={index}>
-                      <img src={cover} alt="" />
-                      <div>{name}</div>
-                    </ProductCard>
+                  const scenic = scenicOptions.find(
+                    (scenic) => scenic.id === id
+                  );
+                  return scenic ? (
+                    <Popover content={`id: ${scenic?.id}`}>
+                      <Card key={index}>
+                        <OptionCover src={scenic.cover} size="2.4rem" />
+                        <span>{scenic.name}</span>
+                      </Card>
+                    </Popover>
+                  ) : (
+                    <>暂无关联景点</>
                   );
                 })}
               </>
             ),
-            width: "30rem",
+            width: "20rem",
           },
-
+          {
+            title: "关联酒店",
+            dataIndex: "hotelIds",
+            render: (value) => (
+              <>
+                {value.map((id: number, index: number) => {
+                  const { cover, name } =
+                    hotelOptions.find((scenic) => scenic.id === id) || {};
+                  return (
+                    <Card key={index}>
+                      <img src={cover} alt="" />
+                      <div>{name}</div>
+                    </Card>
+                  );
+                })}
+              </>
+            ),
+            width: "20rem",
+          },
+          {
+            title: "关联餐馆",
+            dataIndex: "restaurantIds",
+            render: (value) => (
+              <>
+                {value.map((id: number, index: number) => {
+                  const { cover, name } =
+                    restaurantOptions.find((scenic) => scenic.id === id) || {};
+                  return (
+                    <Card key={index}>
+                      <img src={cover} alt="" />
+                      <div>{name}</div>
+                    </Card>
+                  );
+                })}
+              </>
+            ),
+            width: "20rem",
+          },
+          {
+            title: "关联商品",
+            dataIndex: "goodsIds",
+            render: (value) => (
+              <>
+                {value.map((id: number, index: number) => {
+                  const { cover, name } =
+                    goodsOptions.find((scenic) => scenic.id === id) || {};
+                  return (
+                    <Card key={index}>
+                      <img src={cover} alt="" />
+                      <div>{name}</div>
+                    </Card>
+                  );
+                })}
+              </>
+            ),
+            width: "20rem",
+          },
           {
             title: "观看量",
             dataIndex: "views",
@@ -131,6 +194,7 @@ export const List = ({
                 onChange={(views) => editViews({ id: shortVideo.id, views })}
               />
             ),
+            width: "12rem",
           },
           {
             title: "创建时间",

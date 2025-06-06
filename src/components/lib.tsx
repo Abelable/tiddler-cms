@@ -118,29 +118,38 @@ export const OptionCover = styled.img<{
   border-radius: 0.4rem;
 `;
 
-export const ProductCard = styled.div`
-  display: flex;
-  align-items: center;
+// export const Card = styled.div`
+//   display: flex;
+//   align-items: center;
+//   margin-bottom: 12px;
+//   padding: 6px;
+//   border: 1px solid rgba(0, 0, 0, 0.06);
+//   border-radius: 8px;
+//   :last-child {
+//     margin-bottom: 0;
+//   }
+//   > img {
+//     margin-right: 0.6rem;
+//     width: 2.4rem;
+//     height: 2.4rem;
+//     border-radius: 0.6rem;
+//   }
+//   > div {
+//     -webkit-line-clamp: 1;
+//     overflow: hidden;
+//     text-overflow: ellipsis;
+//     display: -webkit-box;
+//     -webkit-box-orient: vertical;
+//   }
+// `;
+
+export const Card = styled.div`
   margin-bottom: 12px;
   padding: 6px;
+  cursor: pointer;
   border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 8px;
   :last-child {
     margin-bottom: 0;
-  }
-  > img {
-    margin-right: 0.6rem;
-    width: 2rem;
-    height: 2rem;
-    border-radius: 0.4rem;
-  }
-  > div {
-    font-size: 12px;
-    line-height: 1.2;
-    -webkit-line-clamp: 1;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
   }
 `;
