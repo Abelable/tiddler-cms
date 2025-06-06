@@ -79,17 +79,24 @@ export const List = ({
             ),
           },
           {
-            title: "商品id",
-            dataIndex: "goodsId",
-          },
-          {
-            title: "商品封面",
-            dataIndex: "goodsCover",
-            render: (value) => <Image width={68} src={value} />,
-          },
-          {
-            title: "商品名称",
-            dataIndex: "goodsName",
+            title: "商品信息",
+            children: [
+              {
+                title: "id",
+                dataIndex: "goodsId",
+                width: "8rem",
+              },
+              {
+                title: "封面",
+                dataIndex: "goodsCover",
+                width: "12rem",
+                render: (value) => <Image width={68} src={value} />,
+              },
+              {
+                title: "名称",
+                dataIndex: "goodsName",
+              },
+            ],
           },
           {
             title: "创建时间",
