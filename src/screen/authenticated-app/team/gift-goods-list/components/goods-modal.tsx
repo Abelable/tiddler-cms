@@ -36,7 +36,7 @@ export const GoodsModal = ({ typeOptions }: { typeOptions: Option[] }) => {
   return (
     <Modal
       forceRender={true}
-      title="新增礼包商品"
+      title="新增家乡好物"
       open={giftGoodsModalOpen}
       confirmLoading={mutateLoading}
       onOk={confirm}
@@ -46,10 +46,10 @@ export const GoodsModal = ({ typeOptions }: { typeOptions: Option[] }) => {
       <Form form={form} layout="vertical">
         <Form.Item
           name="type"
-          label="礼包类型"
-          rules={[{ required: true, message: "请选择礼包类型" }]}
+          label="好物类型"
+          rules={[{ required: true, message: "请选择好物类型" }]}
         >
-          <Select placeholder="请选择礼包类型">
+          <Select placeholder="请选择好物类型">
             {typeOptions.map(({ text, value }) => (
               <Select.Option key={value} value={value}>
                 {text}

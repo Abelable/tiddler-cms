@@ -41,6 +41,7 @@ import { ExpressList } from "./shopping/express-list";
 import { GoodsCategoryList } from "./shopping/goods/category-list";
 import { FreightTemplateList } from "./shopping/goods/freight-template-list";
 import { GoodsList } from "./shopping/goods/goods-list";
+import { GiftTypeList } from "./team/gift-type-list";
 import { GiftGoodsList } from "./team/gift-goods-list";
 
 import {
@@ -188,6 +189,7 @@ export const AuthenticatedApp = () => {
                 element={<FreightTemplateList />}
               />
               <Route path="shopping/goods/list" element={<GoodsList />} />
+              <Route path="team/gift_type_list" element={<GiftTypeList />} />
               <Route path="team/gift_list" element={<GiftGoodsList />} />
               <Route
                 path={"*"}
@@ -481,12 +483,17 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
       ],
     },
     {
-      label: "家乡推广",
+      label: "家乡代言",
       key: "team",
       icon: <CloudOutlined />,
       children: [
         {
-          label: <Link to={"team/gift_list"}>礼包商品</Link>,
+          label: <Link to={"team/gift_type_list"}>好物类型</Link>,
+          key: "team_gift_type_list",
+          icon: <AppstoreOutlined />,
+        },
+        {
+          label: <Link to={"team/gift_list"}>家乡好物</Link>,
           key: "team_gift_list",
           icon: <ShoppingOutlined />,
         },

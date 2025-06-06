@@ -18,7 +18,7 @@ export const useGiftGoodsListSearchParams = () => {
 
 export const useGiftGoodsListQueryKey = () => {
   const [params] = useGiftGoodsListSearchParams();
-  return ["gift_goods_list", params];
+  return ["gift_list", params];
 };
 
 export const useGiftGoodsModal = () => {

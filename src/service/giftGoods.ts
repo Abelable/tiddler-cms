@@ -5,8 +5,8 @@ import type { GoodsListResult, GoodsListSearchParams } from "types/giftGoods";
 
 export const useGiftGoodsList = (params: Partial<GoodsListSearchParams>) => {
   const client = useHttp();
-  return useQuery<GoodsListResult>(["gift_goods_list", params], () =>
-    client("gift_goods/list", { data: params, method: "POST" })
+  return useQuery<GoodsListResult>(["gift_list", params], () =>
+    client("gift/list", { data: params, method: "POST" })
   );
 };
 
@@ -14,7 +14,7 @@ export const useAddGiftGoods = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     ({ type, goodsIds }: { type: number; goodsIds: number[] }) =>
-      client("gift_goods/add", {
+      client("gift/add", {
         data: { type, goodsIds },
         method: "POST",
       }),
@@ -26,7 +26,7 @@ export const useDeleteGiftGoods = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (id: number) =>
-      client("gift_goods/delete", {
+      client("gift/delete", {
         data: { id },
         method: "POST",
       }),

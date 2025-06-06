@@ -53,8 +53,9 @@ const breadcrumbNameMap: { [key: string]: string } = {
   "/shopping/goods/category_list": "商品分类",
   "/shopping/goods/freight_template_list": "运费模板",
   "/shopping/goods/list": "商品列表",
-  "/team": "家乡推广",
-  "/team/gift_list": "礼包商品",
+  "/team": "家乡代言",
+  "/team/gift_type_list": "好物类型",
+  "/team/gift_list": "家乡好物",
 };
 
 export const NavigationBar = () => {

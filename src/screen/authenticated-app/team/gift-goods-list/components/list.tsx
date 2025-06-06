@@ -57,7 +57,7 @@ export const List = ({
   return (
     <Container>
       <Header between={true}>
-        <PageTitle>礼包商品</PageTitle>
+        <PageTitle>家乡好物</PageTitle>
         <Button onClick={() => open()} type={"primary"} icon={<PlusOutlined />}>
           新增
         </Button>
@@ -72,7 +72,7 @@ export const List = ({
             width: "8rem",
           },
           {
-            title: "礼包类型",
+            title: "好物类型",
             dataIndex: "type",
             render: (value) => (
               <>{typeOptions.find((item) => item.value === value)?.text}</>
