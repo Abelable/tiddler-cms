@@ -25,6 +25,10 @@ export interface ShortVideo {
   collectionTimes: number;
   shareTimes: number;
   views: number;
+  scenicIds: number[];
+  hotelIds: number[];
+  restaurantIds: number[];
+  goodsIds: number[];
   createdAt: string;
   updatedAt: string;
 }

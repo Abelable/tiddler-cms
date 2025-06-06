@@ -22,6 +22,7 @@ import {
   Row,
   PageTitle,
   OptionAvatar,
+  ProductCard,
 } from "components/lib";
 import { useDeleteShortVideo, useEditViews } from "service/shortVideo";
 import { PlusOutlined } from "@ant-design/icons";
@@ -35,6 +36,10 @@ interface ListProps extends TableProps<ShortVideo>, SearchPanelProps {
 
 export const List = ({
   userOptions,
+  scenicOptions,
+  hotelOptions,
+  restaurantOptions,
+  goodsOptions,
   error,
   params,
   setParams,
@@ -97,6 +102,26 @@ export const List = ({
             },
             width: "32rem",
           },
+          {
+            title: "关联景点",
+            dataIndex: "scenicIds",
+            render: (value) => (
+              <>
+                {value.map((id: number, index: number) => {
+                  const { cover, name } =
+                    scenicOptions.find((scenic) => scenic.id === id) || {};
+                  return (
+                    <ProductCard key={index}>
+                      <img src={cover} alt="" />
+                      <div>{name}</div>
+                    </ProductCard>
+                  );
+                })}
+              </>
+            ),
+            width: "30rem",
+          },
+
           {
             title: "观看量",
             dataIndex: "views",
