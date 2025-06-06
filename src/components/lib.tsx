@@ -146,7 +146,7 @@ export const OptionCover = styled.img<{
 export const Card = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   padding: 6px;
   cursor: pointer;
   border: 1px solid rgba(0, 0, 0, 0.06);
@@ -154,7 +154,8 @@ export const Card = styled.div`
   :last-child {
     margin-bottom: 0;
   }
-  > span {
+  > div {
+    flex: 1;
     -webkit-line-clamp: 1;
     overflow: hidden;
     text-overflow: ellipsis;

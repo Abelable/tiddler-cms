@@ -95,7 +95,7 @@ export const List = ({
                 <Popover content={`id: ${user.id}`}>
                   <Card>
                     <OptionAvatar src={user.avatar} icon={<UserOutlined />} />
-                    <span>{user.nickname}</span>
+                    <div>{user.nickname}</div>
                   </Card>
                 </Popover>
               ) : (
@@ -118,7 +118,7 @@ export const List = ({
                       <Popover content={`id: ${scenic?.id}`}>
                         <Card key={index}>
                           <OptionCover src={scenic?.cover} size="2.4rem" />
-                          <span>{scenic?.name}</span>
+                          <div>{scenic?.name}</div>
                         </Card>
                       </Popover>
                     );
@@ -141,7 +141,7 @@ export const List = ({
                       <Popover content={`id: ${hotel?.id}`}>
                         <Card key={index}>
                           <OptionCover src={hotel?.cover} size="2.4rem" />
-                          <span>{hotel?.name}</span>
+                          <div>{hotel?.name}</div>
                         </Card>
                       </Popover>
                     );
@@ -155,39 +155,49 @@ export const List = ({
           {
             title: "关联餐馆",
             dataIndex: "restaurantIds",
-            render: (value) => (
-              <>
-                {value.map((id: number, index: number) => {
-                  const { cover, name } =
-                    restaurantOptions.find((scenic) => scenic.id === id) || {};
-                  return (
-                    <Card key={index}>
-                      <img src={cover} alt="" />
-                      <div>{name}</div>
-                    </Card>
-                  );
-                })}
-              </>
-            ),
+            render: (value) =>
+              value.length ? (
+                <>
+                  {value.map((id: number, index: number) => {
+                    const restaurant = restaurantOptions.find(
+                      (restaurant) => restaurant.id === id
+                    );
+                    return (
+                      <Popover content={`id: ${restaurant?.id}`}>
+                        <Card key={index}>
+                          <OptionCover src={restaurant?.cover} size="2.4rem" />
+                          <div>{restaurant?.name}</div>
+                        </Card>
+                      </Popover>
+                    );
+                  })}
+                </>
+              ) : (
+                <span style={{ color: "#999" }}>暂无关联餐馆</span>
+              ),
             width: "24rem",
           },
           {
             title: "关联商品",
             dataIndex: "goodsIds",
-            render: (value) => (
-              <>
-                {value.map((id: number, index: number) => {
-                  const { cover, name } =
-                    goodsOptions.find((scenic) => scenic.id === id) || {};
-                  return (
-                    <Card key={index}>
-                      <img src={cover} alt="" />
-                      <div>{name}</div>
-                    </Card>
-                  );
-                })}
-              </>
-            ),
+            render: (value) =>
+              value.length ? (
+                <>
+                  {value.map((id: number, index: number) => {
+                    const goods = goodsOptions.find((goods) => goods.id === id);
+                    return (
+                      <Popover content={`id: ${goods?.id}`}>
+                        <Card key={index}>
+                          <OptionCover src={goods?.cover} size="2.4rem" />
+                          <div>{goods?.name}</div>
+                        </Card>
+                      </Popover>
+                    );
+                  })}
+                </>
+              ) : (
+                <span style={{ color: "#999" }}>暂无关联商品</span>
+              ),
             width: "24rem",
           },
           {
