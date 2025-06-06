@@ -115,7 +115,7 @@ export const OptionCover = styled.img<{
   margin-right: 0.6rem;
   width: ${(props) => props.size || "1.8rem"};
   height: ${(props) => props.size || "1.8rem"};
-  border-radius: 0.4rem;
+  border-radius: 0.6rem;
 `;
 
 export const Card = styled.div`
