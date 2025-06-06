@@ -2,16 +2,14 @@ import { GoodsModal } from "./components/goods-modal";
 import { List } from "./components/list";
 
 import styled from "@emotion/styled";
+import { useGiftTypeOptions } from "service/giftType";
 import { useGiftGoodsList } from "service/giftGoods";
 import { toNumber } from "utils";
 import { useGiftGoodsListSearchParams } from "./util";
 
-const typeOptions = [
-  { text: "爱心助农", value: 1 },
-  { text: "文创周边", value: 2 },
-];
-
 export const GiftGoodsList = () => {
+  const { data: typeOptions = [], error: typeOptionsError } =
+    useGiftTypeOptions();
   const [params, setParams] = useGiftGoodsListSearchParams();
   const { isLoading, error, data } = useGiftGoodsList(params);
 
@@ -22,7 +20,7 @@ export const GiftGoodsList = () => {
           typeOptions={typeOptions}
           params={params}
           setParams={setParams}
-          error={error}
+          error={error || typeOptionsError}
           loading={isLoading}
           dataSource={data?.list}
           pagination={{

@@ -6,9 +6,9 @@ import { useSelfGoodsOptions } from "service/goods";
 import { useAddGiftGoods } from "service/giftGoods";
 import { useGiftGoodsModal, useGiftGoodsListQueryKey } from "../util";
 
-import type { Option } from "types/common";
+import type { DataOption } from "types/common";
 
-export const GoodsModal = ({ typeOptions }: { typeOptions: Option[] }) => {
+export const GoodsModal = ({ typeOptions }: { typeOptions: DataOption[] }) => {
   const [form] = useForm();
   const { giftGoodsModalOpen, close } = useGiftGoodsModal();
 
@@ -50,9 +50,9 @@ export const GoodsModal = ({ typeOptions }: { typeOptions: Option[] }) => {
           rules={[{ required: true, message: "请选择好物类型" }]}
         >
           <Select placeholder="请选择好物类型">
-            {typeOptions.map(({ text, value }) => (
-              <Select.Option key={value} value={value}>
-                {text}
+            {typeOptions.map(({ id, name }) => (
+              <Select.Option key={id} value={id}>
+                {name}
               </Select.Option>
             ))}
           </Select>

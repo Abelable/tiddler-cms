@@ -15,10 +15,10 @@ import { useDeleteGiftGoods } from "service/giftGoods";
 import { useGiftGoodsModal, useGiftGoodsListQueryKey } from "../util";
 
 import type { Goods, GoodsListSearchParams } from "types/giftGoods";
-import type { Option } from "types/common";
+import type { DataOption } from "types/common";
 
 interface ListProps extends TableProps<Goods> {
-  typeOptions: Option[];
+  typeOptions: DataOption[];
   params: Partial<GoodsListSearchParams>;
   setParams: (params: Partial<GoodsListSearchParams>) => void;
   error: Error | unknown;
@@ -73,9 +73,9 @@ export const List = ({
           },
           {
             title: "好物类型",
-            dataIndex: "type",
+            dataIndex: "typeId",
             render: (value) => (
-              <>{typeOptions.find((item) => item.value === value)?.text}</>
+              <>{typeOptions.find((item) => item.id === value)?.name}</>
             ),
           },
           {
