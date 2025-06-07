@@ -64,6 +64,7 @@ export const UserModal = () => {
             label="头像"
             valuePropName="fileList"
             getValueFromEvent={normFile}
+            rules={[{ required: true, message: "请上传用户头像" }]}
           >
             <OssUpload maxCount={1} />
           </Form.Item>

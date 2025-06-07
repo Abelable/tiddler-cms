@@ -1,4 +1,4 @@
-import { Form, Modal, Select } from "antd";
+import { Form, Modal, Select, Tag } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 
 import { useForm } from "antd/lib/form/Form";
@@ -6,7 +6,12 @@ import { useBindSuperior } from "service/user";
 import { useBindModal, useUsersQueryKey } from "../util";
 
 import type { PromoterOption } from "types/promoter";
-import { ErrorBox, ModalLoading, OptionAvatar } from "components/lib";
+import {
+  ErrorBox,
+  ModalLoading,
+  OptionAvatar,
+  OptionNickname,
+} from "components/lib";
 import { useEffect } from "react";
 
 export const BindModal = ({
@@ -73,10 +78,13 @@ export const BindModal = ({
                   .includes(input.toLowerCase())
               }
             >
-              {superiorOptions.map(({ id, avatar, nickname }) => (
+              {superiorOptions.map(({ id, avatar, nickname, level }) => (
                 <Select.Option key={id} value={id}>
                   <OptionAvatar src={avatar} icon={<UserOutlined />} />
-                  <span>{nickname}</span>
+                  <OptionNickname maxWidth="6.8rem">{nickname}</OptionNickname>
+                  <Tag color={["green", "blue", "gold", "magenta"][level - 1]}>
+                    家乡代言人{["Lv.1", "Lv.2", "Lv.3", "Lv.4"][level - 1]}
+                  </Tag>
                 </Select.Option>
               ))}
             </Select>
