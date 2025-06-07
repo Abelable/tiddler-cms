@@ -113,7 +113,7 @@ const More = ({ id }: { id: number }) => {
 
   const items: MenuProps["items"] = [
     {
-      label: <div onClick={() => open(id)}>详情</div>,
+      label: <div onClick={() => open(id)}>编辑</div>,
       key: "detail",
     },
     {

@@ -23,12 +23,19 @@ export const UserModal = () => {
   } = useEditUser(useUsersQueryKey());
 
   useEffect(() => {
-    form.setFieldsValue(editingUser);
+    if (editingUser) {
+      const { avatar, ...rest } = editingUser;
+      form.setFieldsValue({
+        avatar: [{ url: avatar }],
+        ...rest,
+      });
+    }
   }, [editingUser, form]);
 
   const confirm = () => {
     form.validateFields().then(async () => {
-      await mutateAsync({ ...editingUser, ...form.getFieldsValue() });
+      const { avatar, ...rest } = form.getFieldsValue();
+      await mutateAsync({ ...editingUser, avatar: avatar[0].url, ...rest });
       closeModal();
     });
   };
@@ -62,7 +69,7 @@ export const UserModal = () => {
           </Form.Item>
           <Form.Item
             label={"用户昵称"}
-            name={"name"}
+            name={"nickname"}
             rules={[{ required: true, message: "请输入用户昵称" }]}
           >
             <Input placeholder={"请输入用户昵称"} />
