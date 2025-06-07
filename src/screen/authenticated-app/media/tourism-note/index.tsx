@@ -1,33 +1,59 @@
-import styled from "@emotion/styled";
-
-import { useScenicCategoryOptions } from "service/scenicCategory";
-import { useScenicList } from "service/scenic";
-import { toNumber } from "utils";
-import { useScenicListSearchParams } from "./util";
-
-import { ScenicModal } from "./components/scenic-modal";
+import { TourismNoteModal } from "./components/tourism-note-modal";
 import { List } from "./components/list";
 import { SearchPanel } from "./components/search-panel";
 
-export const ScenicList = () => {
-  const [params, setParams] = useScenicListSearchParams();
-  const { isLoading, error, data } = useScenicList(params);
-  const { data: scenicCategoryOptions, error: scenicCateoryOptionsError } =
-    useScenicCategoryOptions();
+import styled from "@emotion/styled";
+import { useUserOptions } from "service/user";
+import { useScenicOptions } from "service/scenic";
+import { useHotelOptions } from "service/hotel";
+import { useRestaurantOptions } from "service/restaurant";
+import { useGoodsOptions } from "service/goods";
+import { useTourismNoteList } from "service/tourismNote";
+import { toNumber } from "utils";
+import { useTourismNoteListSearchParams } from "./util";
+
+export const TourismNoteList = () => {
+  const { data: userOptions = [], error: userOptionsError } = useUserOptions();
+  const { data: scenicOptions = [], error: scenicOptionsError } =
+    useScenicOptions();
+  const { data: hotelOptions = [], error: hotelOptionsError } =
+    useHotelOptions();
+  const { data: restaurantOptions = [], error: restaurantOptionsError } =
+    useRestaurantOptions();
+  const { data: goodsOptions = [], error: goodsOptionsError } =
+    useGoodsOptions();
+
+  const [params, setParams] = useTourismNoteListSearchParams();
+  const { isLoading, error, data } = useTourismNoteList(params);
 
   return (
     <Container>
       <Main>
         <SearchPanel
-          categoryOptions={scenicCategoryOptions || []}
+          userOptions={userOptions}
+          scenicOptions={scenicOptions}
+          hotelOptions={hotelOptions}
+          restaurantOptions={restaurantOptions}
+          goodsOptions={goodsOptions}
           params={params}
           setParams={setParams}
         />
         <List
-          categoryOptions={scenicCategoryOptions || []}
+          userOptions={userOptions}
+          scenicOptions={scenicOptions}
+          hotelOptions={hotelOptions}
+          restaurantOptions={restaurantOptions}
+          goodsOptions={goodsOptions}
           params={params}
           setParams={setParams}
-          error={error || scenicCateoryOptionsError}
+          error={
+            error ||
+            userOptionsError ||
+            scenicOptionsError ||
+            hotelOptionsError ||
+            restaurantOptionsError ||
+            goodsOptionsError
+          }
           loading={isLoading}
           dataSource={data?.list}
           pagination={{
@@ -37,7 +63,13 @@ export const ScenicList = () => {
           }}
         />
       </Main>
-      <ScenicModal categoryOptions={scenicCategoryOptions || []} />
+      <TourismNoteModal
+        userOptions={userOptions}
+        scenicOptions={scenicOptions}
+        hotelOptions={hotelOptions}
+        restaurantOptions={restaurantOptions}
+        goodsOptions={goodsOptions}
+      />
     </Container>
   );
 };

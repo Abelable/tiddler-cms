@@ -1,11 +1,15 @@
 import { useSetUrlSearchParams, useUrlQueryParams } from "utils/url";
 import { useCallback, useMemo } from "react";
-import { useScenic } from "service/scenic";
+import { useTourismNote } from "service/tourismNote";
 
-export const useScenicListSearchParams = () => {
+export const useTourismNoteListSearchParams = () => {
   const [params, setParams] = useUrlQueryParams([
-    "name",
-    "categoryId",
+    "title",
+    "userId",
+    "scenicId",
+    "hotelId",
+    "restaurantId",
+    "goodsId",
     "page",
     "limit",
   ]);
@@ -22,42 +26,43 @@ export const useScenicListSearchParams = () => {
   ] as const;
 };
 
-export const useScenicListQueryKey = () => {
-  const [params] = useScenicListSearchParams();
-  return ["scenic_list", params];
+export const useTourismNoteListQueryKey = () => {
+  const [params] = useTourismNoteListSearchParams();
+  return ["tourism_note_list", params];
 };
 
-export const useScenicModal = () => {
-  const [{ scenicCreate }, setAdminModalOpen] = useUrlQueryParams([
-    "scenicCreate",
+export const useTourismNoteModal = () => {
+  const [{ tourismNoteCreate }, setAdminModalOpen] = useUrlQueryParams([
+    "tourismNoteCreate",
   ]);
-  const [{ editingScenicId }, setEditingScenicId] = useUrlQueryParams([
-    "editingScenicId",
-  ]);
+  const [{ editingTourismNoteId }, setEditingTourismNoteId] = useUrlQueryParams(
+    ["editingTourismNoteId"]
+  );
   const setUrlParams = useSetUrlSearchParams();
   const {
-    data: editingScenic,
+    data: editingTourismNote,
     isLoading,
     error,
-  } = useScenic(Number(editingScenicId));
+  } = useTourismNote(Number(editingTourismNoteId));
 
   const open = useCallback(
-    () => setAdminModalOpen({ scenicCreate: true }),
+    () => setAdminModalOpen({ tourismNoteCreate: true }),
     [setAdminModalOpen]
   );
   const startEdit = useCallback(
-    (id: number) => setEditingScenicId({ editingScenicId: `${id}` }),
-    [setEditingScenicId]
+    (id: number) => setEditingTourismNoteId({ editingTourismNoteId: `${id}` }),
+    [setEditingTourismNoteId]
   );
   const close = useCallback(
-    () => setUrlParams({ scenicCreate: "", editingScenicId: "" }),
+    () => setUrlParams({ tourismNoteCreate: "", editingTourismNoteId: "" }),
     [setUrlParams]
   );
 
   return {
-    scenicModalOpen: scenicCreate === "true" || !!editingScenicId,
-    editingScenicId,
-    editingScenic,
+    tourismNoteModalOpen:
+      tourismNoteCreate === "true" || !!editingTourismNoteId,
+    editingTourismNoteId,
+    editingTourismNote,
     isLoading,
     error,
     open,

@@ -13,6 +13,7 @@ import { AdminList } from "./admin/admin-list";
 import { UserList } from "./user/user-list";
 import { AuthInfoList } from "./user/auth-info-list";
 import { ShortVideoList } from "./media/short-video";
+import { TourismNoteList } from "./media/tourism-note";
 import { ScenicCategoryList } from "./scenic/spot/category-list";
 import { ScenicList } from "./scenic/spot/spot-list";
 import { ScenicProviderList } from "./scenic/provider/provider-list";
@@ -104,6 +105,7 @@ export const AuthenticatedApp = () => {
               <Route path="user/auth_info_list" element={<AuthInfoList />} />
               <Route path="activity/mall_banner" element={<MallBannerList />} />
               <Route path="media/short_video" element={<ShortVideoList />} />
+              <Route path="media/tourism_note" element={<TourismNoteList />} />
               <Route
                 path="scenic/spot/category_list"
                 element={<ScenicCategoryList />}

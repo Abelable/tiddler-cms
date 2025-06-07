@@ -1,6 +1,7 @@
+import { UserOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
 import styled from "@emotion/styled";
-import { useScenicModal, useScenicListQueryKey } from "../util";
+import { useTourismNoteModal, useTourismNoteListQueryKey } from "../util";
 
 import {
   Dropdown,
@@ -11,28 +12,41 @@ import {
   TablePaginationConfig,
   TableProps,
   Button,
-  Rate,
-  Tag,
+  Popover,
+  Image,
+  InputNumber,
 } from "antd";
-import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
-import { useDeleteScenic } from "service/scenic";
+import {
+  ButtonNoPadding,
+  ErrorBox,
+  Row,
+  PageTitle,
+  OptionAvatar,
+  Card,
+  OptionCover,
+} from "components/lib";
+import { useDeleteTourismNote, useEditViews } from "service/tourismNote";
 import { PlusOutlined } from "@ant-design/icons";
 import { SearchPanelProps } from "./search-panel";
 
-import type { Scenic } from "types/scenic";
+import type { TourismNote } from "types/tourismNote";
 
-interface ListProps extends TableProps<Scenic>, SearchPanelProps {
+interface ListProps extends TableProps<TourismNote>, SearchPanelProps {
   error: Error | unknown;
 }
 
 export const List = ({
-  categoryOptions,
+  userOptions,
+  scenicOptions,
+  hotelOptions,
+  restaurantOptions,
+  goodsOptions,
   error,
   params,
   setParams,
   ...restProps
 }: ListProps) => {
-  const { open } = useScenicModal();
+  const { open } = useTourismNoteModal();
   const setPagination = (pagination: TablePaginationConfig) =>
     setParams({
       ...params,
@@ -40,10 +54,12 @@ export const List = ({
       limit: pagination.pageSize,
     });
 
+  const { mutate: editViews } = useEditViews(useTourismNoteListQueryKey());
+
   return (
     <Container>
       <Header between={true}>
-        <PageTitle>景区列表</PageTitle>
+        <PageTitle>图文游记列表</PageTitle>
         <Button onClick={() => open()} type={"primary"} icon={<PlusOutlined />}>
           新增
         </Button>
@@ -51,7 +67,7 @@ export const List = ({
       <ErrorBox error={error} />
       <Table
         rowKey={"id"}
-        scroll={{ x: 1500 }}
+        scroll={{ x: 2000 }}
         columns={[
           {
             title: "id",
@@ -60,39 +76,147 @@ export const List = ({
             fixed: "left",
           },
           {
-            title: "名称",
-            render: (value, spot) => (
-              <Row gap={1}>
-                <span>{spot.name}</span>
-                {spot.level ? <Tag color="gold">{spot.level}</Tag> : <></>}
-              </Row>
-            ),
+            title: "封面",
+            dataIndex: "imageList",
+            render: (value) => <Image width={68} src={value[0]} />,
+            width: "10rem",
           },
           {
-            title: "分类",
-            dataIndex: "categoryId",
+            title: "标题",
+            dataIndex: "title",
+            width: "30rem",
+          },
+          {
+            title: "作者",
+            dataIndex: "userId",
+            render: (value) => {
+              const user = userOptions.find((item) => item.id === value);
+              return user ? (
+                <Popover content={`id: ${user.id}`}>
+                  <Card>
+                    <OptionAvatar src={user.avatar} icon={<UserOutlined />} />
+                    <div>{user.nickname}</div>
+                  </Card>
+                </Popover>
+              ) : (
+                <>暂无上级</>
+              );
+            },
             width: "18rem",
-            render: (value) => (
-              <>{categoryOptions.find((item) => item.id === value)?.name}</>
-            ),
           },
           {
-            title: "评分",
-            dataIndex: "score",
-            width: "22rem",
-            render: (value) => (
-              <>
-                <Rate allowHalf value={value} />
-                <span style={{ marginLeft: "1rem" }}>{value}</span>
-              </>
+            title: "关联景点",
+            dataIndex: "scenicIds",
+            render: (value) =>
+              value.length ? (
+                <>
+                  {value.map((id: number) => {
+                    const scenic = scenicOptions.find(
+                      (scenic) => scenic.id === id
+                    );
+                    return (
+                      <Popover key={id} content={`id: ${scenic?.id}`}>
+                        <Card>
+                          <OptionCover src={scenic?.cover} size="2.4rem" />
+                          <div>{scenic?.name}</div>
+                        </Card>
+                      </Popover>
+                    );
+                  })}
+                </>
+              ) : (
+                <span style={{ color: "#999" }}>暂无关联景点</span>
+              ),
+            width: "24rem",
+          },
+          {
+            title: "关联酒店",
+            dataIndex: "hotelIds",
+            render: (value) =>
+              value.length ? (
+                <>
+                  {value.map((id: number) => {
+                    const hotel = hotelOptions.find((hotel) => hotel.id === id);
+                    return (
+                      <Popover key={id} content={`id: ${hotel?.id}`}>
+                        <Card>
+                          <OptionCover src={hotel?.cover} size="2.4rem" />
+                          <div>{hotel?.name}</div>
+                        </Card>
+                      </Popover>
+                    );
+                  })}
+                </>
+              ) : (
+                <span style={{ color: "#999" }}>暂无关联酒店</span>
+              ),
+            width: "24rem",
+          },
+          {
+            title: "关联餐馆",
+            dataIndex: "restaurantIds",
+            render: (value) =>
+              value.length ? (
+                <>
+                  {value.map((id: number) => {
+                    const restaurant = restaurantOptions.find(
+                      (restaurant) => restaurant.id === id
+                    );
+                    return (
+                      <Popover key={id} content={`id: ${restaurant?.id}`}>
+                        <Card>
+                          <OptionCover src={restaurant?.cover} size="2.4rem" />
+                          <div>{restaurant?.name}</div>
+                        </Card>
+                      </Popover>
+                    );
+                  })}
+                </>
+              ) : (
+                <span style={{ color: "#999" }}>暂无关联餐馆</span>
+              ),
+            width: "24rem",
+          },
+          {
+            title: "关联商品",
+            dataIndex: "goodsIds",
+            render: (value) =>
+              value.length ? (
+                <>
+                  {value.map((id: number) => {
+                    const goods = goodsOptions.find((goods) => goods.id === id);
+                    return (
+                      <Popover key={id} content={`id: ${goods?.id}`}>
+                        <Card>
+                          <OptionCover src={goods?.cover} size="2.4rem" />
+                          <div>{goods?.name}</div>
+                        </Card>
+                      </Popover>
+                    );
+                  })}
+                </>
+              ) : (
+                <span style={{ color: "#999" }}>暂无关联商品</span>
+              ),
+            width: "24rem",
+          },
+          {
+            title: "观看量",
+            dataIndex: "views",
+            render: (value, tourismNote) => (
+              <InputNumber
+                value={value}
+                onChange={(views) => editViews({ id: tourismNote.id, views })}
+              />
             ),
+            width: "12rem",
           },
           {
             title: "创建时间",
-            render: (value, scenic) => (
+            render: (value, tourismNote) => (
               <span>
-                {scenic.createdAt
-                  ? dayjs(scenic.createdAt).format("YYYY-MM-DD HH:mm:ss")
+                {tourismNote.createdAt
+                  ? dayjs(tourismNote.createdAt).format("YYYY-MM-DD HH:mm:ss")
                   : "无"}
               </span>
             ),
@@ -102,10 +226,10 @@ export const List = ({
           },
           {
             title: "更新时间",
-            render: (value, scenic) => (
+            render: (value, tourismNote) => (
               <span>
-                {scenic.updatedAt
-                  ? dayjs(scenic.updatedAt).format("YYYY-MM-DD HH:mm:ss")
+                {tourismNote.updatedAt
+                  ? dayjs(tourismNote.updatedAt).format("YYYY-MM-DD HH:mm:ss")
                   : "无"}
               </span>
             ),
@@ -115,8 +239,8 @@ export const List = ({
           },
           {
             title: "操作",
-            render(value, scenic) {
-              return <More id={scenic.id} />;
+            render(value, tourismNote) {
+              return <More id={tourismNote.id} />;
             },
             width: "8rem",
             fixed: "right",
@@ -130,8 +254,10 @@ export const List = ({
 };
 
 const More = ({ id }: { id: number }) => {
-  const { startEdit } = useScenicModal();
-  const { mutate: deleteScenic } = useDeleteScenic(useScenicListQueryKey());
+  const { startEdit } = useTourismNoteModal();
+  const { mutate: deleteTourismNote } = useDeleteTourismNote(
+    useTourismNoteListQueryKey()
+  );
 
   const confirmDelete = (id: number) => {
     Modal.confirm({
@@ -139,7 +265,7 @@ const More = ({ id }: { id: number }) => {
       content: "点击确定删除",
       okText: "确定",
       cancelText: "取消",
-      onOk: () => deleteScenic(id),
+      onOk: () => deleteTourismNote(id),
     });
   };
 
