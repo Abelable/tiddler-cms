@@ -12,6 +12,7 @@ export interface User {
   mobile: string;
   gender: number;
   createdAt: string;
+  updatedAt: string;
 }
 
 export interface UsersResult {

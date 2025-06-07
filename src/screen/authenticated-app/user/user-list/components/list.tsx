@@ -83,6 +83,19 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
               dayjs(a.createdAt).valueOf() - dayjs(b.createdAt).valueOf(),
           },
           {
+            title: "更新时间",
+            render: (value, mallBanner) => (
+              <span>
+                {mallBanner.updatedAt
+                  ? dayjs(mallBanner.updatedAt).format("YYYY-MM-DD HH:mm:ss")
+                  : "无"}
+              </span>
+            ),
+            width: "20rem",
+            sorter: (a, b) =>
+              dayjs(a.updatedAt).valueOf() - dayjs(b.updatedAt).valueOf(),
+          },
+          {
             title: "操作",
             render(value, user) {
               return <More id={user.id} />;
