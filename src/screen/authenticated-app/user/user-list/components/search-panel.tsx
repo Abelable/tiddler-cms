@@ -110,7 +110,7 @@ export const SearchPanel = ({
               <OptionAvatar src={avatar} icon={<UserOutlined />} />
               <OptionNickname maxWidth="6.8rem">{nickname}</OptionNickname>
               <Tag color={["green", "blue", "gold", "magenta"][level - 1]}>
-                家乡代言人{["Lv.1", "Lv.2", "Lv.3", "Lv.4"][level - 1]}
+                {["Lv.1", "Lv.2", "Lv.3", "Lv.4"][level - 1]}
               </Tag>
             </Select.Option>
           ))}
