@@ -110,13 +110,13 @@ export const List = ({
             render: (value) =>
               value.length ? (
                 <>
-                  {value.map((id: number, index: number) => {
+                  {value.map((id: number) => {
                     const scenic = scenicOptions.find(
                       (scenic) => scenic.id === id
                     );
                     return (
-                      <Popover content={`id: ${scenic?.id}`}>
-                        <Card key={index}>
+                      <Popover key={id} content={`id: ${scenic?.id}`}>
+                        <Card>
                           <OptionCover src={scenic?.cover} size="2.4rem" />
                           <div>{scenic?.name}</div>
                         </Card>
@@ -135,11 +135,11 @@ export const List = ({
             render: (value) =>
               value.length ? (
                 <>
-                  {value.map((id: number, index: number) => {
+                  {value.map((id: number) => {
                     const hotel = hotelOptions.find((hotel) => hotel.id === id);
                     return (
-                      <Popover content={`id: ${hotel?.id}`}>
-                        <Card key={index}>
+                      <Popover key={id} content={`id: ${hotel?.id}`}>
+                        <Card>
                           <OptionCover src={hotel?.cover} size="2.4rem" />
                           <div>{hotel?.name}</div>
                         </Card>
@@ -158,13 +158,13 @@ export const List = ({
             render: (value) =>
               value.length ? (
                 <>
-                  {value.map((id: number, index: number) => {
+                  {value.map((id: number) => {
                     const restaurant = restaurantOptions.find(
                       (restaurant) => restaurant.id === id
                     );
                     return (
-                      <Popover content={`id: ${restaurant?.id}`}>
-                        <Card key={index}>
+                      <Popover key={id} content={`id: ${restaurant?.id}`}>
+                        <Card>
                           <OptionCover src={restaurant?.cover} size="2.4rem" />
                           <div>{restaurant?.name}</div>
                         </Card>
@@ -183,11 +183,11 @@ export const List = ({
             render: (value) =>
               value.length ? (
                 <>
-                  {value.map((id: number, index: number) => {
+                  {value.map((id: number) => {
                     const goods = goodsOptions.find((goods) => goods.id === id);
                     return (
-                      <Popover content={`id: ${goods?.id}`}>
-                        <Card key={index}>
+                      <Popover key={id} content={`id: ${goods?.id}`}>
+                        <Card>
                           <OptionCover src={goods?.cover} size="2.4rem" />
                           <div>{goods?.name}</div>
                         </Card>
