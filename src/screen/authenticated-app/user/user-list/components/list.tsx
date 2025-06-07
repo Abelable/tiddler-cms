@@ -5,15 +5,24 @@ import {
   Menu,
   MenuProps,
   Modal,
+  Popover,
   Table,
   TablePaginationConfig,
   TableProps,
+  Tag,
 } from "antd";
-import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
+import {
+  ButtonNoPadding,
+  ErrorBox,
+  Row,
+  PageTitle,
+  OptionAvatar,
+  OptionNickname,
+} from "components/lib";
 import dayjs from "dayjs";
-import { useDeleteUser } from "service/user";
+import { useDeleteSuperior, useDeleteUser } from "service/user";
 import { User } from "types/user";
-import { useUserModal, useUsersQueryKey } from "../util";
+import { useBindModal, useUserModal, useUsersQueryKey } from "../util";
 import { UserOutlined } from "@ant-design/icons";
 import { SearchPanelProps } from "./search-panel";
 
@@ -21,7 +30,13 @@ interface ListProps extends TableProps<User>, SearchPanelProps {
   error: Error | unknown;
 }
 
-export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
+export const List = ({
+  superiorOptions,
+  error,
+  params,
+  setParams,
+  ...restProps
+}: ListProps) => {
   const setPagination = (pagination: TablePaginationConfig) =>
     setParams({
       ...params,
@@ -70,6 +85,32 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
             onFilter: (value, user) => user.gender === value,
           },
           {
+            title: "用户上级",
+            dataIndex: "superiorId",
+            render: (value) => {
+              const option = superiorOptions.find((item) => item.id === value);
+              return option ? (
+                <Popover content={`id: ${option.id}`}>
+                  <div style={{ cursor: "pointer", width: "fit-content" }}>
+                    <OptionAvatar src={option.avatar} icon={<UserOutlined />} />
+                    <OptionNickname>{option.nickname}</OptionNickname>
+                    <Tag
+                      color={
+                        ["green", "blue", "gold", "magenta"][option.level - 1]
+                      }
+                    >
+                      家乡代言人
+                      {["Lv.1", "Lv.2", "Lv.3", "Lv.4"][option.level - 1]}
+                    </Tag>
+                  </div>
+                </Popover>
+              ) : (
+                <>暂无上级</>
+              );
+            },
+            width: "32rem",
+          },
+          {
             title: "注册时间",
             render: (value, user) => (
               <span>
@@ -98,7 +139,7 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
           {
             title: "操作",
             render(value, user) {
-              return <More id={user.id} />;
+              return <More user={user} />;
             },
             width: "8rem",
           },
@@ -110,30 +151,66 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
   );
 };
 
-const More = ({ id }: { id: number }) => {
+const More = ({ user }: { user: User }) => {
   const { open } = useUserModal();
+  const { open: openBindModal } = useBindModal();
   const { mutate: deleteUser } = useDeleteUser(useUsersQueryKey());
+  const { mutate: deleteSuperior } = useDeleteSuperior(useUsersQueryKey());
 
-  const confirmDelete = (id: number) => {
+  const confirmDelete = () => {
     Modal.confirm({
       title: "确定删除该用户吗？",
       content: "点击确定删除",
       okText: "确定",
       cancelText: "取消",
-      onOk: () => deleteUser(id),
+      onOk: () => deleteUser(user.id),
     });
   };
 
-  const items: MenuProps["items"] = [
-    {
-      label: <div onClick={() => open(id)}>编辑</div>,
-      key: "detail",
-    },
-    {
-      label: <div onClick={() => confirmDelete(id)}>删除</div>,
-      key: "delete",
-    },
-  ];
+  const confirmDeleteSuperior = () => {
+    Modal.confirm({
+      title: "确定删除用户上级吗？",
+      content: "点击确定删除",
+      okText: "确定",
+      cancelText: "取消",
+      onOk: () =>
+        deleteSuperior({ userId: user.id, superiorId: user.superiorId }),
+    });
+  };
+
+  const items: MenuProps["items"] = user.superiorId
+    ? [
+        {
+          label: <div onClick={() => open(user.id)}>编辑用户</div>,
+          key: "edit",
+        },
+        {
+          label: <div onClick={() => confirmDelete()}>删除用户</div>,
+          key: "delete",
+        },
+        {
+          label: <div onClick={() => openBindModal(user.id)}>更改上级</div>,
+          key: "bind",
+        },
+        {
+          label: <div onClick={() => confirmDeleteSuperior()}>删除上级</div>,
+          key: "delete_superior",
+        },
+      ]
+    : [
+        {
+          label: <div onClick={() => open(user.id)}>编辑用户</div>,
+          key: "edit",
+        },
+        {
+          label: <div onClick={() => confirmDelete()}>删除用户</div>,
+          key: "delete",
+        },
+        {
+          label: <div onClick={() => openBindModal(user.id)}>绑定上级</div>,
+          key: "bind",
+        },
+      ];
 
   return (
     <Dropdown overlay={<Menu items={items} />}>

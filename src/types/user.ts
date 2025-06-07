@@ -1,6 +1,7 @@
 export interface UsersSearchParams {
   nickname: string;
   mobile: string;
+  superiorId: number;
   page: number;
   limit: number;
 }
@@ -11,6 +12,7 @@ export interface User {
   nickname: string;
   mobile: string;
   gender: number;
+  superiorId: number;
   createdAt: string;
   updatedAt: string;
 }

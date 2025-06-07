@@ -109,6 +109,15 @@ export const OptionAvatar = styled(Avatar)`
   border-radius: 0.6rem;
 `;
 
+export const OptionNickname = styled.div<{ maxWidth?: string }>`
+  display: inline-block;
+  margin-right: 0.6rem;
+  max-width: ${(props) => (props.maxWidth ? props.maxWidth : "fit-content")};
+  vertical-align: middle;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
 export const OptionCover = styled.img<{
   size?: string;
 }>`
