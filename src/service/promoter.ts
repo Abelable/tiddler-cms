@@ -14,7 +14,7 @@ import { PageParams } from "types/common";
 export const usePromoterList = (params: Partial<PromoterListSearchParams>) => {
   const client = useHttp();
   return useQuery<PromoterListResult>(["promoter_list", params], () =>
-    client("team/promoter/list", { data: params, method: "POST" })
+    client("promoter/list", { data: params, method: "POST" })
   );
 };
 
@@ -22,7 +22,7 @@ export const usePromoter = (id: number) => {
   const client = useHttp();
   return useQuery<Partial<Promoter>>(
     ["promoter", { id }],
-    () => client(`team/promoter/detail`, { data: { id } }),
+    () => client(`promoter/detail`, { data: { id } }),
     {
       enabled: !!id,
     }
@@ -41,7 +41,7 @@ export const useAddPromoter = (queryKey: QueryKey) => {
       level: number;
       scene: number;
     }) =>
-      client("team/promoter/add", {
+      client("promoter/add", {
         data: { userId, level, scene },
         method: "POST",
       }),
@@ -53,7 +53,7 @@ export const useChangeLevel = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     ({ id, level, scene }: { id: number; level: number; scene: number }) =>
-      client("team/promoter/change_level", {
+      client("promoter/change_level", {
         data: { id, level, scene },
         method: "POST",
       }),
@@ -65,7 +65,7 @@ export const useDeletePromoter = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (id: number) =>
-      client("team/promoter/delete", {
+      client("promoter/delete", {
         data: { id },
         method: "POST",
       }),
@@ -76,13 +76,13 @@ export const useDeletePromoter = (queryKey: QueryKey) => {
 export const usePromoterOptions = () => {
   const client = useHttp();
   return useQuery<PromoterOption[]>(["promoter_options"], () =>
-    client("team/promoter/options")
+    client("promoter/options")
   );
 };
 
 export const useTopPromoterList = (params: Partial<PageParams>) => {
   const client = useHttp();
   return useQuery<TopPromoterListResult>(["top_promoter_list", params], () =>
-    client("team/promoter/top_list", { data: params, method: "POST" })
+    client("promoter/top_list", { data: params, method: "POST" })
   );
 };

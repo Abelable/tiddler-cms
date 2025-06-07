@@ -9,16 +9,14 @@ import { useUserNormalOptions } from "service/user";
 import { PromoterModal } from "./components/promoter-modal";
 
 const levelOptions = [
-  { text: "乡村振兴推荐官", value: 1, scene: 100 },
-  { text: "乡村振兴服务商C1", value: 2, scene: 201 },
-  { text: "乡村振兴服务商C2", value: 3, scene: 202 },
-  { text: "乡村振兴服务商C3", value: 4, scene: 203 },
-  { text: "乡村振兴委员会", value: 5, scene: 300 },
+  { text: "家乡代言人Lv.1", value: 1, scene: 100 },
+  { text: "家乡代言人Lv.2", value: 2, scene: 201 },
+  { text: "家乡代言人Lv.3", value: 3, scene: 202 },
+  { text: "家乡代言人Lv.4", value: 4, scene: 203 },
 ];
 const pathOptions = [
   { text: "管理后台添加", value: 1 },
-  { text: "礼包购买", value: 2 },
-  { text: "限时活动", value: 3 },
+  { text: "选购好物", value: 2 },
 ];
 
 export const PromoterList = () => {

@@ -62,7 +62,7 @@ export const PromoterModal = ({
   return (
     <Modal
       forceRender={true}
-      title="新增推荐官"
+      title="新增家乡代言人"
       open={promoterModalOpen}
       confirmLoading={mutateLoading}
       onOk={confirm}
@@ -102,10 +102,10 @@ export const PromoterModal = ({
 
           <Form.Item
             name="level"
-            label="推荐官身份"
-            rules={[{ required: true, message: "请选择推荐官身份" }]}
+            label="家乡代言人身份"
+            rules={[{ required: true, message: "请选择家乡代言人身份" }]}
           >
-            <Select placeholder="请选择推荐官身份">
+            <Select placeholder="请选择家乡代言人身份">
               {levelOptions.map((item) => (
                 <Select.Option key={item.value} value={item.value}>
                   {item.text}

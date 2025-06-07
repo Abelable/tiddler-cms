@@ -46,7 +46,7 @@ export const List = ({
   return (
     <Container>
       <Header between={true}>
-        <PageTitle>推荐官列表</PageTitle>
+        <PageTitle>家乡代言人列表</PageTitle>
         <Button onClick={() => open()} type={"primary"} icon={<PlusOutlined />}>
           新增
         </Button>
@@ -71,13 +71,15 @@ export const List = ({
           {
             title: "昵称",
             dataIndex: "nickname",
+            width: "16rem",
           },
           {
             title: "手机号",
             dataIndex: "mobile",
+            width: "16rem",
           },
           {
-            title: "推荐官身份",
+            title: "家乡代言人身份",
             dataIndex: "level",
             render: (value, promoter) => {
               const levelItem = levelOptions.find(
@@ -105,6 +107,7 @@ export const List = ({
             render: (value) => (
               <>{pathOptions.find((item) => item.value === value)?.text}</>
             ),
+            width: "12rem",
           },
           {
             title: "推广人数",
@@ -117,9 +120,7 @@ export const List = ({
                 <Progress
                   percent={Math.round(
                     (promoter.settledCommissionSum /
-                      (promoter.commissionSum +
-                        promoter.giftCommissionSum +
-                        promoter.teamCommissionSum)) *
+                      (promoter.commissionSum + promoter.teamCommissionSum)) *
                       100
                   )}
                   size="small"
@@ -130,23 +131,17 @@ export const List = ({
             width: "20rem",
           },
           {
-            title: "商品佣金",
+            title: "商品奖励",
             dataIndex: "commissionSum",
             render: (value) => <>¥{value ? value.toFixed(2) : 0}</>,
           },
           {
-            title: "礼包佣金",
-            dataIndex: "giftCommissionSum",
-            render: (value) => <>¥{value ? value.toFixed(2) : 0}</>,
-          },
-
-          {
-            title: "团队佣金",
+            title: "团队奖励",
             dataIndex: "teamCommissionSum",
             render: (value) => <>¥{value ? value.toFixed(2) : 0}</>,
           },
           {
-            title: "已提现佣金",
+            title: "已提现奖励",
             dataIndex: "settledCommissionSum",
             render: (value) => (
               <span style={{ color: "#f56c6c" }}>

@@ -18,7 +18,6 @@ export interface Promoter {
   path: number;
   promotedUserNumber: number;
   commissionSum: number;
-  giftCommissionSum: number;
   teamCommissionSum: number;
   settledCommissionSum: number;
   createdAt: string;
