@@ -65,16 +65,14 @@ export const NavigationBar = () => {
   const pathSnippets = location.pathname.split("/").filter((i) => i);
   const extraBreadcrumbItems = pathSnippets.map((_, index) => {
     const url = `/${pathSnippets.slice(0, index + 1).join("/")}`;
-    return (
-      <Breadcrumb.Item key={url}>
-        <Link to={url}>{breadcrumbNameMap[url]}</Link>
-      </Breadcrumb.Item>
-    );
+    return {
+      title: <Link to={url}>{breadcrumbNameMap[url]}</Link>,
+    };
   });
   return (
     <Wrap>
       <div>当前位置：</div>
-      <Breadcrumb>{extraBreadcrumbItems}</Breadcrumb>
+      <Breadcrumb items={extraBreadcrumbItems} />
     </Wrap>
   );
 };
