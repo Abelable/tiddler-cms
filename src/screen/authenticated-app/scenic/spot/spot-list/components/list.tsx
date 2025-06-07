@@ -4,7 +4,6 @@ import { useScenicModal, useScenicListQueryKey } from "../util";
 
 import {
   Dropdown,
-  Menu,
   MenuProps,
   Modal,
   Table,

@@ -1,6 +1,5 @@
 import {
   Dropdown,
-  Menu,
   MenuProps,
   Table,
   TablePaginationConfig,

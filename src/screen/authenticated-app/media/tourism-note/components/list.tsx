@@ -5,7 +5,6 @@ import { useTourismNoteModal, useTourismNoteListQueryKey } from "../util";
 
 import {
   Dropdown,
-  Menu,
   MenuProps,
   Modal,
   Table,

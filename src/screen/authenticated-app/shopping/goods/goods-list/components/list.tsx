@@ -2,7 +2,6 @@ import styled from "@emotion/styled";
 import {
   Image,
   Dropdown,
-  Menu,
   MenuProps,
   Modal,
   Table,

@@ -5,7 +5,6 @@ import { useHotelModal, useHotelListQueryKey } from "../util";
 
 import {
   Dropdown,
-  Menu,
   MenuProps,
   Modal,
   Table,
