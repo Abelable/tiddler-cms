@@ -221,7 +221,7 @@ const More = ({ promoter }: { promoter: Promoter }) => {
   ];
 
   return (
-    <Dropdown overlay={<Menu items={items} />}>
+    <Dropdown menu={{ items }}>
       <ButtonNoPadding type={"link"}>...</ButtonNoPadding>
     </Dropdown>
   );

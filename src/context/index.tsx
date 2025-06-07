@@ -2,16 +2,17 @@ import { ReactNode } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { AuthProvider } from "./auth-context";
 import { ConfigProvider } from "antd";
-import zhCN from "antd/lib/locale/zh_CN";
-import moment from "moment";
-import "moment/locale/zh-cn";
-moment.locale("zh-cn");
+import locale from "antd/locale/zh_CN";
+import dayjs from "dayjs";
+import "dayjs/locale/zh-cn";
+
+dayjs.locale("zh-cn");
 
 export const AppProvider = ({ children }: { children: ReactNode }) => {
   return (
     <QueryClientProvider client={new QueryClient()}>
       <AuthProvider>
-        <ConfigProvider locale={zhCN}>{children}</ConfigProvider>
+        <ConfigProvider locale={locale}>{children}</ConfigProvider>
       </AuthProvider>
     </QueryClientProvider>
   );

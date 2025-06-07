@@ -586,7 +586,7 @@ const User = ({
     <Row gap={1} style={{ cursor: "pointer" }}>
       <Avatar src={userInfo?.avatar} />
       <div>{userInfo?.nickname}</div>
-      <Dropdown overlay={<Menu items={items} />}>
+      <Dropdown menu={{ items }}>
         <CaretDownOutlined style={{ fontSize: "1.2rem" }} />
       </Dropdown>
     </Row>

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useForm } from "antd/lib/form/Form";
-import moment from "moment";
+import dayjs from "dayjs";
 import { useAddScenic, useEditScenic } from "service/scenic";
 import { useScenicModal, useScenicListQueryKey } from "../util";
 
@@ -87,8 +87,8 @@ export const ScenicModal = ({
         openTimeList: openTimeList?.length
           ? openTimeList.map((item) => ({
               ...item,
-              openTime: moment(item.openTime, format),
-              closeTime: moment(item.closeTime, format),
+              openTime: dayjs(item.openTime, format),
+              closeTime: dayjs(item.closeTime, format),
             }))
           : openTimeList,
         projectList: projectList?.length
@@ -127,8 +127,8 @@ export const ScenicModal = ({
         imageList: imageList.map((item: { url: string }) => item.url),
         openTimeList: openTimeList.map((item: OpenTime) => ({
           ...item,
-          openTime: moment(item.openTime).format(format),
-          closeTime: moment(item.closeTime).format(format),
+          openTime: dayjs(item.openTime).format(format),
+          closeTime: dayjs(item.closeTime).format(format),
         })),
         projectList: projectList.length
           ? projectList.map(

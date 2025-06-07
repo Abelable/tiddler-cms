@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useForm } from "antd/lib/form/Form";
-import moment from "moment";
+import dayjs from "dayjs";
 import { useAddHotel, useEditHotel } from "service/hotel";
 import { useHotelModal, useHotelListQueryKey } from "../util";
 
@@ -88,10 +88,8 @@ export const HotelModal = ({
         restaurantImageList: restaurantImageList?.length
           ? restaurantImageList?.map((item) => ({ url: item }))
           : restaurantImageList,
-        openingYear: moment(openingYear),
-        lastDecorationYear: lastDecorationYear
-          ? moment(lastDecorationYear)
-          : "",
+        openingYear: dayjs(openingYear),
+        lastDecorationYear: lastDecorationYear ? dayjs(lastDecorationYear) : "",
         ...rest,
       });
     }
@@ -138,9 +136,9 @@ export const HotelModal = ({
         restaurantImageList: restaurantImageList.map(
           (item: { url: string }) => item.url
         ),
-        openingYear: moment(openingYear).format("YYYY"),
+        openingYear: dayjs(openingYear).format("YYYY"),
         lastDecorationYear: lastDecorationYear
-          ? moment(lastDecorationYear).format("YYYY")
+          ? dayjs(lastDecorationYear).format("YYYY")
           : "",
       });
       closeModal();

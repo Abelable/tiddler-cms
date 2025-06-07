@@ -175,7 +175,7 @@ const More = ({ id, name }: { id: number; name: string }) => {
   ];
 
   return (
-    <Dropdown overlay={<Menu items={items} />}>
+    <Dropdown menu={{ items }}>
       <ButtonNoPadding type={"link"}>...</ButtonNoPadding>
     </Dropdown>
   );

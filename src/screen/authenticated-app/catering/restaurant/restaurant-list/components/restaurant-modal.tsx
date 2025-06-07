@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useForm } from "antd/lib/form/Form";
-import moment from "moment";
+import dayjs from "dayjs";
 import styled from "@emotion/styled";
 import { useAddRestaurant, useEditRestaurant } from "service/restaurant";
 import { useRestaurantModal, useRestaurantListQueryKey } from "../util";
@@ -101,8 +101,8 @@ export const RestaurantModal = ({
               startWeekDay: +item.startWeekDay,
               endWeekDay: +item.endWeekDay,
               timeFrameList: item.timeFrameList.map((_item) => ({
-                openTime: moment(_item.openTime, "HH:mm"),
-                closeTime: moment(_item.closeTime, "HH:mm"),
+                openTime: dayjs(_item.openTime, "HH:mm"),
+                closeTime: dayjs(_item.closeTime, "HH:mm"),
               })),
             }))
           : [],
@@ -154,8 +154,8 @@ export const RestaurantModal = ({
             ? openTimeList.map((item: OpenTime) => ({
                 ...item,
                 timeFrameList: item.timeFrameList.map((_item) => ({
-                  openTime: moment(_item.openTime).format("HH:mm"),
-                  closeTime: moment(_item.closeTime).format("HH:mm"),
+                  openTime: dayjs(_item.openTime).format("HH:mm"),
+                  closeTime: dayjs(_item.closeTime).format("HH:mm"),
                 })),
               }))
             : [],
