@@ -4,6 +4,11 @@ export interface Pagination {
   per_page: number;
 }
 
+export interface PageParams {
+  page: number;
+  limit: number;
+}
+
 export interface Region {
   label: string;
   value: string;

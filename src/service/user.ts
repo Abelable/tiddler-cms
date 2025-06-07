@@ -55,3 +55,34 @@ export const useUserOptions = () => {
   const client = useHttp();
   return useQuery<UserOption[]>(["user_options"], () => client("user/options"));
 };
+
+export const useUserNormalOptions = () => {
+  const client = useHttp();
+  return useQuery<UserOption[]>(["normal_user_options"], () =>
+    client("user/normal_options")
+  );
+};
+
+export const useBindSuperior = (queryKey: QueryKey) => {
+  const client = useHttp();
+  return useMutation(
+    (data: { userId: number; superiorId: number }) =>
+      client("user/bind_superior", {
+        data,
+        method: "POST",
+      }),
+    useEditConfig(queryKey)
+  );
+};
+
+export const useDeleteSuperior = (queryKey: QueryKey) => {
+  const client = useHttp();
+  return useMutation(
+    (data: { userId: number; superiorId: number }) =>
+      client("user/delete_superior", {
+        data,
+        method: "POST",
+      }),
+    useEditConfig(queryKey)
+  );
+};

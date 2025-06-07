@@ -57,6 +57,7 @@ const breadcrumbNameMap: { [key: string]: string } = {
   "/team": "家乡代言",
   "/team/gift_type_list": "好物类型",
   "/team/gift_list": "家乡好物",
+  "/team/promoter_list": "家乡代言人",
 };
 
 export const NavigationBar = () => {

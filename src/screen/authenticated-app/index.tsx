@@ -44,6 +44,7 @@ import { FreightTemplateList } from "./shopping/goods/freight-template-list";
 import { GoodsList } from "./shopping/goods/goods-list";
 import { GiftTypeList } from "./team/gift-type-list";
 import { GiftGoodsList } from "./team/gift-goods-list";
+import { PromoterList } from "./team/promoter-list";
 
 import {
   LockOutlined,
@@ -193,6 +194,7 @@ export const AuthenticatedApp = () => {
               <Route path="shopping/goods/list" element={<GoodsList />} />
               <Route path="team/gift_type_list" element={<GiftTypeList />} />
               <Route path="team/gift_list" element={<GiftGoodsList />} />
+              <Route path="team/promoter_list" element={<PromoterList />} />
               <Route
                 path={"*"}
                 element={<Navigate to={"user/list"} replace={true} />}
@@ -240,6 +242,11 @@ const MenuSider = ({ collapsed }: { collapsed: boolean }) => {
           label: <Link to={"team/gift_list"}>家乡好物</Link>,
           key: "team_gift_list",
           icon: <ShoppingOutlined />,
+        },
+        {
+          label: <Link to={"team/promoter_list"}>家乡代言人</Link>,
+          key: "team_promoter_list",
+          icon: <UserOutlined />,
         },
       ],
     },
