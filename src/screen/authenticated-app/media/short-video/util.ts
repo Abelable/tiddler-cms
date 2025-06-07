@@ -4,7 +4,7 @@ import { useShortVideo } from "service/shortVideo";
 
 export const useShortVideoListSearchParams = () => {
   const [params, setParams] = useUrlQueryParams([
-    "name",
+    "title",
     "userId",
     "scenicId",
     "hotelId",
