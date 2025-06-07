@@ -1,12 +1,13 @@
 import { QueryKey, useMutation, useQuery } from "react-query";
 import { useHttp } from "./http";
-import { useDeleteConfig } from "./use-optimistic-options";
+import { useDeleteConfig, useEditConfig } from "./use-optimistic-options";
 import type {
   User,
   UserOption,
   UsersResult,
   UsersSearchParams,
 } from "types/user";
+import { cleanObject } from "utils";
 
 export const useUsers = (params: Partial<UsersSearchParams>) => {
   const client = useHttp();
@@ -23,6 +24,18 @@ export const useUser = (id: number) => {
     {
       enabled: !!id,
     }
+  );
+};
+
+export const useEditUser = (queryKey: QueryKey) => {
+  const client = useHttp();
+  return useMutation(
+    (params: Partial<User>) =>
+      client("user/edit", {
+        data: cleanObject(params),
+        method: "POST",
+      }),
+    useEditConfig(queryKey)
   );
 };
 
