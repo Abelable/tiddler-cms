@@ -165,7 +165,11 @@ export const HotelModal = ({
       }
       forceRender={true}
       size={"large"}
-      bodyStyle={{ paddingBottom: 80 }}
+      styles={{
+        body: {
+          paddingBottom: 80,
+        },
+      }}
     >
       <ErrorBox error={error} />
 

@@ -99,7 +99,11 @@ export const TourismNoteModal = ({
       forceRender={true}
       onClose={closeModal}
       open={tourismNoteModalOpen}
-      bodyStyle={{ paddingBottom: 80 }}
+      styles={{
+        body: {
+          paddingBottom: 80,
+        },
+      }}
       extra={
         <Space>
           <Button onClick={closeModal}>取消</Button>

@@ -32,7 +32,11 @@ export const DetailModal = ({
       size={"large"}
       onClose={close}
       open={goodsModalOpen}
-      bodyStyle={{ paddingBottom: 80 }}
+      styles={{
+        body: {
+          paddingBottom: 80,
+        },
+      }}
     >
       <ErrorBox error={error} />
       {isLoading ? (

@@ -22,7 +22,11 @@ export const ShopModal = ({
       size={"large"}
       onClose={close}
       open={shopModalOpen}
-      bodyStyle={{ paddingBottom: 80 }}
+      styles={{
+        body: {
+          paddingBottom: 80,
+        },
+      }}
     >
       <ErrorBox error={error} />
       {isLoading ? (

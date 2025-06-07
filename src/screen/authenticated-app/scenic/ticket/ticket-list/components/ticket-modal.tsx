@@ -23,7 +23,11 @@ export const TicketModal = ({
       size={"large"}
       onClose={close}
       open={ticketModalOpen}
-      bodyStyle={{ paddingBottom: 80 }}
+      styles={{
+        body: {
+          paddingBottom: 80,
+        },
+      }}
     >
       <ErrorBox error={error} />
       {isLoading ? (

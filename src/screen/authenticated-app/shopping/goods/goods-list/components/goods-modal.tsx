@@ -454,7 +454,11 @@ export const GoodsModal = ({
       forceRender={true}
       onClose={closeModal}
       open={goodsModalOpen}
-      bodyStyle={{ paddingBottom: 80 }}
+      styles={{
+        body: {
+          paddingBottom: 80,
+        },
+      }}
       extra={
         <Space>
           <Button onClick={closeModal}>取消</Button>

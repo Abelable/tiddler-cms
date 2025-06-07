@@ -261,6 +261,7 @@ const Container = styled.div`
   margin-top: 2.4rem;
   padding: 2.4rem;
   background: #fff;
+  border-radius: 0.6rem;
 `;
 
 const Header = styled(Row)`

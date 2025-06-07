@@ -126,6 +126,7 @@ const Container = styled.div`
   margin-bottom: 1.6rem;
   padding: 2.4rem 16.8rem 0 2.4rem;
   background: #fff;
+  border-radius: 0.6rem;
 `;
 
 const Item = styled(Row)`

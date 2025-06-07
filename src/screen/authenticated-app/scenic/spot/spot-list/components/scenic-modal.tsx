@@ -155,7 +155,11 @@ export const ScenicModal = ({
       forceRender={true}
       onClose={closeModal}
       open={scenicModalOpen}
-      bodyStyle={{ paddingBottom: 80 }}
+      styles={{
+        body: {
+          paddingBottom: 80,
+        },
+      }}
       extra={
         <Space>
           <Button onClick={closeModal}>取消</Button>

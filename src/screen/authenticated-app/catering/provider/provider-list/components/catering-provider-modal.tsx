@@ -19,7 +19,11 @@ export const CateringProviderModal = () => {
       size={"large"}
       onClose={close}
       open={cateringProviderModalOpen}
-      bodyStyle={{ paddingBottom: 80 }}
+      styles={{
+        body: {
+          paddingBottom: 80,
+        },
+      }}
     >
       <ErrorBox error={error} />
       {isLoading ? (

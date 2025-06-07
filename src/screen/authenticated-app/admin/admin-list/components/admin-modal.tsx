@@ -56,7 +56,11 @@ export const AdminModal = ({ roleOptions }: { roleOptions: RoleOption[] }) => {
       size={"large"}
       onClose={closeModal}
       open={adminModalOpen}
-      bodyStyle={{ paddingBottom: 80 }}
+      styles={{
+        body: {
+          paddingBottom: 80,
+        },
+      }}
       extra={
         <Space>
           <Button onClick={closeModal}>取消</Button>

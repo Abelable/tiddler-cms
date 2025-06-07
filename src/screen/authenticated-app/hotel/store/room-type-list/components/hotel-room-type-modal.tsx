@@ -89,7 +89,11 @@ export const HotelRoomTypeModal = ({ hotelId }: { hotelId: number }) => {
       }
       forceRender={true}
       size={"large"}
-      bodyStyle={{ paddingBottom: 80 }}
+      styles={{
+        body: {
+          paddingBottom: 80,
+        },
+      }}
     >
       <ErrorBox error={error} />
       {isLoading ? (

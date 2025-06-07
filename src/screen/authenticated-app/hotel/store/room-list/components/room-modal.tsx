@@ -15,7 +15,11 @@ export const RoomModal = () => {
       size={"large"}
       onClose={close}
       open={roomModalOpen}
-      bodyStyle={{ paddingBottom: 80 }}
+      styles={{
+        body: {
+          paddingBottom: 80,
+        },
+      }}
     >
       <ErrorBox error={error} />
       {isLoading ? (

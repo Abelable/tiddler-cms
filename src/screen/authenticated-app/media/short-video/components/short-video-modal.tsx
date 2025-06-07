@@ -112,7 +112,11 @@ export const ShortVideoModal = ({
       forceRender={true}
       onClose={closeModal}
       open={shortVideoModalOpen}
-      bodyStyle={{ paddingBottom: 80 }}
+      styles={{
+        body: {
+          paddingBottom: 80,
+        },
+      }}
       extra={
         <Space>
           <Button onClick={closeModal}>取消</Button>
