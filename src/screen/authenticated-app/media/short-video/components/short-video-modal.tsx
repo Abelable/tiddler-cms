@@ -90,8 +90,11 @@ export const ShortVideoModal = ({
       await mutateAsync({
         ...editingShortVideo,
         ...rest,
-        cover: cover[0].url,
-        videoUrl: video && video.length ? video[0].url : "",
+        cover:
+          cover && cover.length
+            ? cover[0].url
+            : `${video[0].url}?x-oss-process=video/snapshot,t_0`,
+        videoUrl: video[0].url,
       });
       closeModal();
     });
