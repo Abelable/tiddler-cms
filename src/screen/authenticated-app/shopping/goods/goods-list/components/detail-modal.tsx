@@ -13,14 +13,14 @@ import { ErrorBox, ModalLoading } from "components/lib";
 import dayjs from "dayjs";
 import { useGoodsDetailModal } from "../util";
 
-import type { CategoryOption } from "types/category";
+import type { DataOption } from "types/common";
 
 export const DetailModal = ({
   shopCategoryOptions,
   goodsCategoryOptions,
 }: {
-  shopCategoryOptions: CategoryOption[];
-  goodsCategoryOptions: CategoryOption[];
+  shopCategoryOptions: DataOption[];
+  goodsCategoryOptions: DataOption[];
 }) => {
   const { close, goodsModalOpen, editingGoods, error, isLoading } =
     useGoodsDetailModal();

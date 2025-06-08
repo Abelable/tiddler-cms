@@ -1,14 +1,16 @@
 import { Descriptions, Drawer, Image, Avatar, Tag } from "antd";
 import { ErrorBox, ModalLoading } from "components/lib";
 import { UserOutlined } from "@ant-design/icons";
+
 import dayjs from "dayjs";
 import { useShopModal } from "../util";
-import { CategoryOption } from "types/category";
+
+import type { DataOption } from "types/common";
 
 export const ShopModal = ({
   shopCategoryOptions,
 }: {
-  shopCategoryOptions: CategoryOption[];
+  shopCategoryOptions: DataOption[];
 }) => {
   const { close, shopModalOpen, editingShop, error, isLoading } =
     useShopModal();

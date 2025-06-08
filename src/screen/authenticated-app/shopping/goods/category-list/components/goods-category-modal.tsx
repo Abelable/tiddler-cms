@@ -1,18 +1,20 @@
 import { Form, Input, InputNumber, Select, Modal } from "antd";
 import { useForm } from "antd/lib/form/Form";
 import { ErrorBox, ModalLoading } from "components/lib";
+
+import { useEffect } from "react";
 import {
   useAddGoodsCategory,
   useEditGoodsCategory,
 } from "service/goodsCategory";
 import { useGoodsCategoryModal, useGoodsCategoriesQueryKey } from "../util";
-import { useEffect } from "react";
-import { CategoryOption } from "types/category";
+
+import type { DataOption } from "types/common";
 
 export const GoodsCategoryModal = ({
   shopCategoryOptions,
 }: {
-  shopCategoryOptions: CategoryOption[];
+  shopCategoryOptions: DataOption[];
 }) => {
   const [form] = useForm();
   const {

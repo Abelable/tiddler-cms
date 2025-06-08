@@ -106,15 +106,6 @@ export const List = ({
             render: (value) => <>{`¥${value}`}</>,
           },
           {
-            title: "销量",
-            dataIndex: "salesVolume",
-            sorter: (a, b) => Number(a) - Number(b),
-          },
-          {
-            title: "库存",
-            dataIndex: "stock",
-          },
-          {
             title: "一级分类",
             dataIndex: "shopCategoryId",
             render: (value) => (
@@ -143,6 +134,15 @@ export const List = ({
             dataIndex: "promotionCommissionRate",
             render: (value) => <>{`${value}%`}</>,
             width: "12rem",
+          },
+          {
+            title: "销量",
+            dataIndex: "salesVolume",
+            sorter: (a, b) => Number(a) - Number(b),
+          },
+          {
+            title: "库存",
+            dataIndex: "stock",
           },
           {
             title: "创建时间",

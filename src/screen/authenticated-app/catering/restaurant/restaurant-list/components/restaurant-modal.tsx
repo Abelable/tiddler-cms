@@ -22,7 +22,7 @@ import { ErrorBox, ModalLoading, Row as CustomRow } from "components/lib";
 import { Map } from "components/map";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 
-import type { CategoryOption } from "types/category";
+import type { DataOption } from "types/common";
 import type { OpenTime } from "types/restaurant";
 
 const weekDayOptions = [
@@ -43,7 +43,7 @@ const normFile = (e: any) => {
 export const RestaurantModal = ({
   categoryOptions,
 }: {
-  categoryOptions: CategoryOption[];
+  categoryOptions: DataOption[];
 }) => {
   const [form] = useForm();
 

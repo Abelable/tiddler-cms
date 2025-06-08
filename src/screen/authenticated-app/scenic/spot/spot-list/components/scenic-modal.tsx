@@ -21,8 +21,8 @@ import { ErrorBox, Row as CustomRow, ModalLoading } from "components/lib";
 import { Map } from "components/map";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 
-import type { CategoryOption } from "types/category";
 import type { OpenTime } from "types/scenic";
+import type { DataOption } from "types/common";
 
 const facilityOptions = [
   { id: 1, name: "停车场" },
@@ -54,7 +54,7 @@ const normFile = (e: any) => {
 export const ScenicModal = ({
   categoryOptions,
 }: {
-  categoryOptions: CategoryOption[];
+  categoryOptions: DataOption[];
 }) => {
   const [form] = useForm();
 

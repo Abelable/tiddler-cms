@@ -7,7 +7,8 @@ import {
 } from "./use-optimistic-options";
 import { cleanObject } from "utils/index";
 
-import type { CategoriesSearchParams, CategoryOption } from "types/category";
+import type { DataOption } from "types/common";
+import type { CategoriesSearchParams } from "types/category";
 import type { ShopCategoriesResult, ShopCategory } from "types/shopCategory";
 
 export const useShopCategories = (params: Partial<CategoriesSearchParams>) => {
@@ -66,7 +67,7 @@ export const useDeleteShopCategory = (queryKey: QueryKey) => {
 
 export const useShopCategoryOptions = () => {
   const client = useHttp();
-  return useQuery<CategoryOption[]>(["shop_category_options"], () =>
+  return useQuery<DataOption[]>(["shop_category_options"], () =>
     client("shop/category/options")
   );
 };

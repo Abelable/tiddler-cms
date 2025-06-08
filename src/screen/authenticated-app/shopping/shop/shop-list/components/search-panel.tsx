@@ -1,12 +1,14 @@
-import type { ShopsSearchParams } from "types/shop";
+import { Button, Input, Select } from "antd";
+import { Row } from "components/lib";
+
 import { useState } from "react";
 import styled from "@emotion/styled";
-import { Row } from "components/lib";
-import { Button, Input, Select } from "antd";
-import { CategoryOption } from "types/category";
+
+import type { DataOption } from "types/common";
+import type { ShopsSearchParams } from "types/shop";
 
 export interface SearchPanelProps {
-  shopCategoryOptions: CategoryOption[];
+  shopCategoryOptions: DataOption[];
   params: Partial<ShopsSearchParams>;
   setParams: (params: Partial<ShopsSearchParams>) => void;
 }

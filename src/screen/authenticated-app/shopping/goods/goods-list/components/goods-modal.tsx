@@ -26,7 +26,6 @@ import { PlusOutlined, DeleteOutlined, CloseOutlined } from "@ant-design/icons";
 import { OssUpload } from "components/oss-upload";
 import { ErrorBox, ModalLoading } from "components/lib";
 
-import type { CategoryOption } from "types/category";
 import type { DataOption } from "types/common";
 import type { Sku, Spec } from "types/goods";
 import type { GoodsCategoryOption } from "types/goodsCategory";
@@ -50,7 +49,7 @@ export const GoodsModal = ({
   goodsCategoryOptions,
   freightTemplateOptions,
 }: {
-  shopCategoryOptions: CategoryOption[];
+  shopCategoryOptions: DataOption[];
   goodsCategoryOptions: GoodsCategoryOption[];
   freightTemplateOptions: DataOption[];
 }) => {

@@ -1,17 +1,19 @@
 import { QueryKey, useMutation, useQuery } from "react-query";
 import { useHttp } from "./http";
-import type {
-  Category,
-  CategoriesResult,
-  CategoriesSearchParams,
-  CategoryOption,
-} from "types/category";
+
 import {
   useAddConfig,
   useDeleteConfig,
   useEditConfig,
 } from "./use-optimistic-options";
 import { cleanObject } from "utils/index";
+
+import type { DataOption } from "types/common";
+import type {
+  Category,
+  CategoriesResult,
+  CategoriesSearchParams,
+} from "types/category";
 
 export const useRestaurantCategories = (
   params: Partial<CategoriesSearchParams>
@@ -74,7 +76,7 @@ export const useDeleteRestaurantCategory = (queryKey: QueryKey) => {
 
 export const useRestaurantCategoryOptions = () => {
   const client = useHttp();
-  return useQuery<CategoryOption[]>(["restaurant_category_options"], () =>
+  return useQuery<DataOption[]>(["restaurant_category_options"], () =>
     client("catering/restaurant/category/options")
   );
 };

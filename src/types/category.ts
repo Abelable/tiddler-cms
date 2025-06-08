@@ -15,8 +15,3 @@ export interface CategoriesResult {
   limit: string;
   total: string;
 }
-
-export interface CategoryOption {
-  id: number;
-  name: string;
-}

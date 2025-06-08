@@ -1,16 +1,17 @@
-import styled from "@emotion/styled";
-import { useGoodsCategoryOptions } from "service/goodsCategory";
-import { useShopCategoryOptions } from "service/shopCategory";
-import { useGoodsList } from "service/goods";
-import { toNumber } from "utils";
-import { useGoodsListSearchParams } from "./util";
-
 import { List } from "./components/list";
 import { SearchPanel } from "./components/search-panel";
 import { GoodsModal } from "./components/goods-modal";
 import { DetailModal } from "./components/detail-modal";
 import { RejectModal } from "./components/reject-modal";
+
+import styled from "@emotion/styled";
 import { useFreightTemplateOptions } from "service/freightTemplate";
+import { useMerchantOptions } from "service/merchant";
+import { useGoodsCategoryOptions } from "service/goodsCategory";
+import { useShopCategoryOptions } from "service/shopCategory";
+import { useGoodsList } from "service/goods";
+import { toNumber } from "utils";
+import { useGoodsListSearchParams } from "./util";
 
 const statusOptions = [
   { text: "待审核", value: 0 },
@@ -26,6 +27,12 @@ export const GoodsList = () => {
 
   const { data: goodsCategoryOptions, error: goodsCategoryOptionsError } =
     useGoodsCategoryOptions();
+  const { data: originalMerchantOptions = [], error: merchantOptionsError } =
+    useMerchantOptions();
+  const merchantOptions = [
+    { id: 0, name: "官方自营" },
+    ...originalMerchantOptions,
+  ];
 
   const {
     data: originalFreightTemplateOptions = [],
@@ -40,23 +47,26 @@ export const GoodsList = () => {
     <Container>
       <Main>
         <SearchPanel
+          statusOptions={statusOptions}
           shopCategoryOptions={shopCategoryOptions || []}
           goodsCategoryOptions={goodsCategoryOptions || []}
-          statusOptions={statusOptions}
+          merchantOptions={merchantOptions}
           params={params}
           setParams={setParams}
         />
         <List
+          statusOptions={statusOptions}
           shopCategoryOptions={shopCategoryOptions || []}
           goodsCategoryOptions={goodsCategoryOptions || []}
-          statusOptions={statusOptions}
+          merchantOptions={merchantOptions}
           params={params}
           setParams={setParams}
           error={
             error ||
             goodsCategoryOptionsError ||
             shopCategoryOptionsError ||
-            freightTemplateOptionsError
+            freightTemplateOptionsError ||
+            merchantOptionsError
           }
           loading={isLoading}
           dataSource={data?.list}

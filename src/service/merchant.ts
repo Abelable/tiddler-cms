@@ -1,6 +1,8 @@
 import { QueryKey, useMutation, useQuery } from "react-query";
 import { useHttp } from "./http";
 import { useApprovedConfig, useRejectConfig } from "./use-optimistic-options";
+
+import type { DataOption } from "types/common";
 import type {
   MerchantDetail,
   MerchantsResult,
@@ -46,5 +48,12 @@ export const useRejectMerchant = (queryKey: QueryKey) => {
         method: "POST",
       }),
     useRejectConfig(queryKey)
+  );
+};
+
+export const useMerchantOptions = () => {
+  const client = useHttp();
+  return useQuery<DataOption[]>(["merchant_options"], () =>
+    client("merchant/options")
   );
 };

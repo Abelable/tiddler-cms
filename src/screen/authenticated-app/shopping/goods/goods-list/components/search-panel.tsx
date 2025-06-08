@@ -3,14 +3,15 @@ import styled from "@emotion/styled";
 import { Row } from "components/lib";
 import { Button, Input, Select } from "antd";
 
+import type { DataOption } from "types/common";
 import type { GoodsListSearchParams } from "types/goods";
-import type { CategoryOption } from "types/category";
 import type { GoodsCategoryOption } from "types/goodsCategory";
 
 export interface SearchPanelProps {
-  shopCategoryOptions: CategoryOption[];
-  goodsCategoryOptions: GoodsCategoryOption[];
   statusOptions: { text: string; value: number }[];
+  shopCategoryOptions: DataOption[];
+  goodsCategoryOptions: GoodsCategoryOption[];
+  merchantOptions: DataOption[];
   params: Partial<GoodsListSearchParams>;
   setParams: (params: Partial<GoodsListSearchParams>) => void;
 }
@@ -20,12 +21,14 @@ const defaultParmas: Partial<GoodsListSearchParams> = {
   shopCategoryId: undefined,
   categoryId: undefined,
   status: undefined,
+  merchantId: undefined,
 };
 
 export const SearchPanel = ({
   shopCategoryOptions,
   goodsCategoryOptions,
   statusOptions,
+  merchantOptions,
   params,
   setParams,
 }: SearchPanelProps) => {
@@ -46,6 +49,10 @@ export const SearchPanel = ({
     });
   };
 
+  const setStatus = (status: number) =>
+    setTempParams({ ...tempParams, status });
+  const clearStatus = () => setTempParams({ ...tempParams, status: undefined });
+
   const setShopCategory = (shopCategoryId: number) =>
     setTempParams({ ...tempParams, shopCategoryId });
   const clearShopCategory = () =>
@@ -56,9 +63,10 @@ export const SearchPanel = ({
   const clearCategory = () =>
     setTempParams({ ...tempParams, categoryId: undefined });
 
-  const setStatus = (status: number) =>
-    setTempParams({ ...tempParams, status });
-  const clearStatus = () => setTempParams({ ...tempParams, status: undefined });
+  const setMerchant = (merchantId: number) =>
+    setTempParams({ ...tempParams, merchantId });
+  const clearMerchant = () =>
+    setTempParams({ ...tempParams, merchantId: undefined });
 
   const clear = () => {
     setParams({ ...params, ...defaultParmas });
@@ -76,6 +84,23 @@ export const SearchPanel = ({
           placeholder="请输入商品名称"
           allowClear={true}
         />
+      </Item>
+      <Item>
+        <div>商品状态：</div>
+        <Select
+          style={{ width: "20rem" }}
+          value={tempParams.status}
+          placeholder="请选择商品状态"
+          allowClear={true}
+          onSelect={setStatus}
+          onClear={clearStatus}
+        >
+          {statusOptions?.map(({ text, value }) => (
+            <Select.Option key={value} value={value}>
+              {text}
+            </Select.Option>
+          ))}
+        </Select>
       </Item>
       <Item>
         <div>商品一级分类：</div>
@@ -124,18 +149,24 @@ export const SearchPanel = ({
         </Select>
       </Item>
       <Item>
-        <div>商品状态：</div>
+        <div>商家：</div>
         <Select
           style={{ width: "20rem" }}
-          value={tempParams.status}
-          placeholder="请选择商品状态"
-          allowClear={true}
-          onSelect={setStatus}
-          onClear={clearStatus}
+          value={tempParams.merchantId}
+          placeholder="请选择商家"
+          allowClear
+          onSelect={setMerchant}
+          onClear={clearMerchant}
+          showSearch
+          filterOption={(input, option) =>
+            (option!.children as unknown as string)
+              .toLowerCase()
+              .includes(input.toLowerCase())
+          }
         >
-          {statusOptions?.map(({ text, value }) => (
-            <Select.Option key={value} value={value}>
-              {text}
+          {merchantOptions?.map(({ id, name }) => (
+            <Select.Option key={id} value={id}>
+              {name}
             </Select.Option>
           ))}
         </Select>

@@ -4,12 +4,11 @@ import { Row } from "components/lib";
 import { Button, Input, Select } from "antd";
 
 import type { HotelListSearchParams } from "types/hotel";
-import type { CategoryOption } from "types/category";
-import type { Option } from "types/common";
+import type { DataOption, Option } from "types/common";
 
 export interface SearchPanelProps {
   gradeOptions: Option[];
-  categoryOptions: CategoryOption[];
+  categoryOptions: DataOption[];
   params: Partial<HotelListSearchParams>;
   setParams: (params: Partial<HotelListSearchParams>) => void;
 }

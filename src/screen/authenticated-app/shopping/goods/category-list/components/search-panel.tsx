@@ -3,11 +3,11 @@ import styled from "@emotion/styled";
 import { Row } from "components/lib";
 import { Button, Select } from "antd";
 
-import type { CategoryOption } from "types/category";
+import type { DataOption } from "types/common";
 import type { GoodsCategoriesSearchParams } from "types/goodsCategory";
 
 export interface SearchPanelProps {
-  shopCategoryOptions: CategoryOption[];
+  shopCategoryOptions: DataOption[];
   params: Partial<GoodsCategoriesSearchParams>;
   setParams: (params: Partial<GoodsCategoriesSearchParams>) => void;
 }

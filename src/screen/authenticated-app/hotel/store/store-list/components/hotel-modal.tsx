@@ -22,8 +22,7 @@ import { ErrorBox, ModalLoading } from "components/lib";
 import { Map } from "components/map";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 
-import type { CategoryOption } from "types/category";
-import type { Option } from "types/common";
+import type { DataOption, Option } from "types/common";
 
 const normFile = (e: any) => {
   if (Array.isArray(e)) return e;
@@ -35,7 +34,7 @@ export const HotelModal = ({
   categoryOptions,
 }: {
   gradeOptions: Option[];
-  categoryOptions: CategoryOption[];
+  categoryOptions: DataOption[];
 }) => {
   const [form] = useForm();
 

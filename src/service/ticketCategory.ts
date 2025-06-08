@@ -1,17 +1,18 @@
 import { QueryKey, useMutation, useQuery } from "react-query";
 import { useHttp } from "./http";
-import type {
-  Category,
-  CategoriesResult,
-  CategoriesSearchParams,
-  CategoryOption,
-} from "types/category";
 import {
   useAddConfig,
   useDeleteConfig,
   useEditConfig,
 } from "./use-optimistic-options";
 import { cleanObject } from "utils/index";
+
+import type { DataOption } from "types/common";
+import type {
+  Category,
+  CategoriesResult,
+  CategoriesSearchParams,
+} from "types/category";
 
 export const useTicketCategories = (
   params: Partial<CategoriesSearchParams>
@@ -71,7 +72,7 @@ export const useDeleteTicketCategory = (queryKey: QueryKey) => {
 
 export const useTicketCategoryOptions = () => {
   const client = useHttp();
-  return useQuery<CategoryOption[]>(["ticket_category_options"], () =>
+  return useQuery<DataOption[]>(["ticket_category_options"], () =>
     client("ticket/category/options")
   );
 };

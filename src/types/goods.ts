@@ -3,9 +3,10 @@ import type { MerchantDetail } from "./merchant";
 
 export interface GoodsListSearchParams {
   name: string;
+  status: number | undefined;
   shopCategoryId: number | undefined;
   categoryId: number | undefined;
-  status: number | undefined;
+  merchantId: number | undefined;
   page: number;
   limit: number;
 }

@@ -1,17 +1,18 @@
 import { QueryKey, useMutation, useQuery } from "react-query";
 import { useHttp } from "./http";
-import type {
-  Category,
-  CategoriesResult,
-  CategoriesSearchParams,
-  CategoryOption,
-} from "types/category";
 import {
   useAddConfig,
   useDeleteConfig,
   useEditConfig,
 } from "./use-optimistic-options";
 import { cleanObject } from "utils/index";
+
+import { DataOption } from "types/common";
+import type {
+  Category,
+  CategoriesResult,
+  CategoriesSearchParams,
+} from "types/category";
 
 export const useScenicCategories = (
   params: Partial<CategoriesSearchParams>
@@ -71,7 +72,7 @@ export const useDeleteScenicCategory = (queryKey: QueryKey) => {
 
 export const useScenicCategoryOptions = () => {
   const client = useHttp();
-  return useQuery<CategoryOption[]>(["scenic_category_options"], () =>
+  return useQuery<DataOption[]>(["scenic_category_options"], () =>
     client("scenic/category/options")
   );
 };
