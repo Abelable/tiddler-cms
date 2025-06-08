@@ -201,6 +201,7 @@ export const List = ({
 
 const More = ({ goods }: { goods: Goods }) => {
   const { id, status, shopId } = goods;
+  const { startEdit } = useGoodsModal();
   const { open } = useGoodsDetailModal();
   const { mutate: deleteGoods } = useDeleteGoods(useGoodsListQueryKey());
   const { mutate: approvedGoods } = useApprovedGoods(useGoodsListQueryKey());
@@ -233,7 +234,7 @@ const More = ({ goods }: { goods: Goods }) => {
           key: "detail",
         }
       : {
-          label: <div onClick={() => open(id)}>编辑</div>,
+          label: <div onClick={() => startEdit(id)}>编辑</div>,
           key: "edit",
         },
     status === 0
