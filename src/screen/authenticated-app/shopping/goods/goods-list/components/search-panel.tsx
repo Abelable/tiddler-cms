@@ -11,7 +11,7 @@ export interface SearchPanelProps {
   statusOptions: { text: string; value: number }[];
   shopCategoryOptions: DataOption[];
   goodsCategoryOptions: GoodsCategoryOption[];
-  merchantOptions: DataOption[];
+  shopOptions: DataOption[];
   params: Partial<GoodsListSearchParams>;
   setParams: (params: Partial<GoodsListSearchParams>) => void;
 }
@@ -28,7 +28,7 @@ export const SearchPanel = ({
   shopCategoryOptions,
   goodsCategoryOptions,
   statusOptions,
-  merchantOptions,
+  shopOptions,
   params,
   setParams,
 }: SearchPanelProps) => {
@@ -149,11 +149,11 @@ export const SearchPanel = ({
         </Select>
       </Item>
       <Item>
-        <div>商家：</div>
+        <div>所属店铺：</div>
         <Select
           style={{ width: "20rem" }}
           value={tempParams.merchantId}
-          placeholder="请选择商家"
+          placeholder="请选择所属店铺"
           allowClear
           onSelect={setMerchant}
           onClear={clearMerchant}
@@ -164,7 +164,7 @@ export const SearchPanel = ({
               .includes(input.toLowerCase())
           }
         >
-          {merchantOptions?.map(({ id, name }) => (
+          {shopOptions?.map(({ id, name }) => (
             <Select.Option key={id} value={id}>
               {name}
             </Select.Option>

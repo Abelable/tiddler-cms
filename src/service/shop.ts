@@ -1,5 +1,7 @@
 import { useQuery } from "react-query";
 import { useHttp } from "./http";
+
+import type { DataOption } from "types/common";
 import type { Shop, ShopsResult, ShopsSearchParams } from "types/shop";
 
 export const useShops = (params: Partial<ShopsSearchParams>) => {
@@ -18,4 +20,9 @@ export const useShop = (id: number) => {
       enabled: !!id,
     }
   );
+};
+
+export const useShopOptions = () => {
+  const client = useHttp();
+  return useQuery<DataOption[]>(["shop_options"], () => client("shop/options"));
 };

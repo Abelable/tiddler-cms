@@ -6,7 +6,7 @@ import { RejectModal } from "./components/reject-modal";
 
 import styled from "@emotion/styled";
 import { useFreightTemplateOptions } from "service/freightTemplate";
-import { useMerchantOptions } from "service/merchant";
+import { useShopOptions } from "service/shop";
 import { useGoodsCategoryOptions } from "service/goodsCategory";
 import { useShopCategoryOptions } from "service/shopCategory";
 import { useGoodsList } from "service/goods";
@@ -27,12 +27,10 @@ export const GoodsList = () => {
 
   const { data: goodsCategoryOptions, error: goodsCategoryOptionsError } =
     useGoodsCategoryOptions();
-  const { data: originalMerchantOptions = [], error: merchantOptionsError } =
-    useMerchantOptions();
-  const merchantOptions = [
-    { id: 0, name: "官方自营" },
-    ...originalMerchantOptions,
-  ];
+
+  const { data: originalShopOptions = [], error: shopOptionsError } =
+    useShopOptions();
+  const shopOptions = [{ id: 0, name: "官方自营" }, ...originalShopOptions];
 
   const {
     data: originalFreightTemplateOptions = [],
@@ -50,7 +48,7 @@ export const GoodsList = () => {
           statusOptions={statusOptions}
           shopCategoryOptions={shopCategoryOptions || []}
           goodsCategoryOptions={goodsCategoryOptions || []}
-          merchantOptions={merchantOptions}
+          shopOptions={shopOptions}
           params={params}
           setParams={setParams}
         />
@@ -58,7 +56,7 @@ export const GoodsList = () => {
           statusOptions={statusOptions}
           shopCategoryOptions={shopCategoryOptions || []}
           goodsCategoryOptions={goodsCategoryOptions || []}
-          merchantOptions={merchantOptions}
+          shopOptions={shopOptions}
           params={params}
           setParams={setParams}
           error={
@@ -66,7 +64,7 @@ export const GoodsList = () => {
             goodsCategoryOptionsError ||
             shopCategoryOptionsError ||
             freightTemplateOptionsError ||
-            merchantOptionsError
+            shopOptionsError
           }
           loading={isLoading}
           dataSource={data?.list}
