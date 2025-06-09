@@ -39,6 +39,14 @@ const refundStatusOptions = [
   { text: "支持", value: 1 },
 ];
 
+const deliveryMethodOptions = [
+  { text: "快递", value: 1 },
+  { text: "自提", value: 2 },
+  { text: "快递/自提", value: 3 },
+];
+const pickupAddressOptions = [{ id: 1, addressDetail: "千岛湖科技大厦607" }];
+const refundAddressOptions = [{ id: 1, addressDetail: "千岛湖科技大厦607" }];
+
 const normFile = (e: any) => {
   if (Array.isArray(e)) return e;
   return e && e.fileList;
@@ -571,38 +579,6 @@ export const GoodsModal = ({
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item
-                name="freightTemplateId"
-                label="运费模板"
-                rules={[{ required: true, message: "请选择运费模板" }]}
-              >
-                <Select placeholder="请选择运费模板">
-                  {freightTemplateOptions.map(({ id, name }) => (
-                    <Select.Option key={id} value={id}>
-                      {name}
-                    </Select.Option>
-                  ))}
-                </Select>
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item
-                name="refundSupport"
-                label="7天无理由退换货"
-                rules={[{ required: true, message: "请选择是否支持7天无理由" }]}
-              >
-                <Select placeholder="请选择是否支持7天无理由">
-                  {refundStatusOptions.map((item) => (
-                    <Select.Option key={item.value} value={item.value}>
-                      {item.text}
-                    </Select.Option>
-                  ))}
-                </Select>
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item
                 name="shopCategoryId"
                 label="商品一级分类"
                 rules={[{ required: true, message: "请选择商品一级分类" }]}
@@ -695,6 +671,130 @@ export const GoodsModal = ({
               </Form.Item>
             </Col>
           </Row>
+          {/* <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item
+                name="freightTemplateId"
+                label="运费模板"
+                rules={[{ required: true, message: "请选择运费模板" }]}
+              >
+                <Select placeholder="请选择运费模板">
+                  {freightTemplateOptions.map(({ id, name }) => (
+                    <Select.Option key={id} value={id}>
+                      {name}
+                    </Select.Option>
+                  ))}
+                </Select>
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                name="refundSupport"
+                label="7天无理由退换货"
+                rules={[{ required: true, message: "请选择是否支持7天无理由" }]}
+              >
+                <Select placeholder="请选择是否支持7天无理由">
+                  {refundStatusOptions.map((item) => (
+                    <Select.Option key={item.value} value={item.value}>
+                      {item.text}
+                    </Select.Option>
+                  ))}
+                </Select>
+              </Form.Item>
+            </Col>
+          </Row> */}
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item
+                name="deliveryMethod"
+                label="配送方式"
+                rules={[{ required: true, message: "请选择配送方式" }]}
+              >
+                <Select placeholder="请选择配送方式">
+                  {deliveryMethodOptions.map((item) => (
+                    <Select.Option key={item.value} value={item.value}>
+                      {item.text}
+                    </Select.Option>
+                  ))}
+                </Select>
+              </Form.Item>
+            </Col>
+            <Form.Item
+              noStyle
+              shouldUpdate={(prevValues, currentValues) =>
+                prevValues.deliveryMethod !== currentValues.deliveryMethod
+              }
+            >
+              {({ getFieldValue }) =>
+                [2, 3].includes(getFieldValue("deliveryMethod")) && (
+                  <Col span={12}>
+                    <Form.Item
+                      name="pickupAddressIds"
+                      label="提货地址"
+                      rules={[{ required: true, message: "请选择提货地址" }]}
+                    >
+                      <Select mode="multiple" placeholder="请选择提货地址">
+                        {pickupAddressOptions.map((item) => (
+                          <Select.Option key={item.id} value={item.id}>
+                            {item.addressDetail}
+                          </Select.Option>
+                        ))}
+                      </Select>
+                    </Form.Item>
+                  </Col>
+                )
+              }
+            </Form.Item>
+          </Row>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item
+                name="refundStatus"
+                label="7天无理由退换货"
+                rules={[
+                  {
+                    required: true,
+                    message: "请选择是否支持7天无理由",
+                  },
+                ]}
+              >
+                <Select placeholder="请选择是否支持7天无理由">
+                  {refundStatusOptions.map((item) => (
+                    <Select.Option key={item.value} value={item.value}>
+                      {item.text}
+                    </Select.Option>
+                  ))}
+                </Select>
+              </Form.Item>
+            </Col>
+            <Form.Item
+              noStyle
+              shouldUpdate={(prevValues, currentValues) =>
+                prevValues.refundStatus !== currentValues.refundStatus
+              }
+            >
+              {({ getFieldValue }) =>
+                getFieldValue("refundStatus") === 1 && (
+                  <Col span={12}>
+                    <Form.Item
+                      name="refundAddressIds"
+                      label="退货地址"
+                      rules={[{ required: true, message: "请选择退货地址" }]}
+                    >
+                      <Select mode="multiple" placeholder="请选择退货地址">
+                        {refundAddressOptions.map((item) => (
+                          <Select.Option key={item.id} value={item.id}>
+                            {item.addressDetail}
+                          </Select.Option>
+                        ))}
+                      </Select>
+                    </Form.Item>
+                  </Col>
+                )
+              }
+            </Form.Item>
+          </Row>
+
           <Divider orientation="left" plain>
             商品规格
           </Divider>
