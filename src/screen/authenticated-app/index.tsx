@@ -45,6 +45,7 @@ import { GoodsList } from "./shopping/goods/goods-list";
 import { GiftTypeList } from "./team/gift-type-list";
 import { GiftGoodsList } from "./team/gift-goods-list";
 import { PromoterList } from "./team/promoter-list";
+import { PersonalCenter } from "./permission-management/personal-center";
 
 import {
   LockOutlined,
@@ -100,8 +101,6 @@ export const AuthenticatedApp = () => {
           </Header>
           <Content>
             <Routes>
-              <Route path="auth/role_list" element={<RoleList />} />
-              <Route path="auth/admin_list" element={<AdminList />} />
               <Route path="user/list" element={<UserList />} />
               <Route path="user/auth_info_list" element={<AuthInfoList />} />
               <Route path="activity/mall_banner" element={<MallBannerList />} />
@@ -195,6 +194,9 @@ export const AuthenticatedApp = () => {
               <Route path="team/gift_type_list" element={<GiftTypeList />} />
               <Route path="team/gift_list" element={<GiftGoodsList />} />
               <Route path="team/promoter_list" element={<PromoterList />} />
+              <Route path="auth/role_list" element={<RoleList />} />
+              <Route path="auth/admin_list" element={<AdminList />} />
+              <Route path="auth/personal_center" element={<PersonalCenter />} />
               <Route
                 path={"*"}
                 element={<Navigate to={"user/list"} replace={true} />}

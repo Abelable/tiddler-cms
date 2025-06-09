@@ -32,7 +32,7 @@ export const refreshToken = async () => {
 
 export const useAdminInfo = () => {
   const client = useHttp();
-  return useQuery<AdminInfo>(["admin_info"], () => client("auth/me"));
+  return useQuery<AdminInfo>(["admin_info"], () => client("auth/base_info"));
 };
 
 export const resetPassword = async ({
