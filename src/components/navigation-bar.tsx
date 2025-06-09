@@ -3,9 +3,6 @@ import { Breadcrumb } from "antd";
 import { Link, useLocation } from "react-router-dom";
 
 const breadcrumbNameMap: { [key: string]: string } = {
-  "/auth": "权限管理",
-  "/auth/role_list": "角色列表",
-  "/auth/admin_list": "管理员列表",
   "/user": "用户管理",
   "/user/list": "用户列表",
   "/user/auth_info_list": "实名认证",
@@ -58,6 +55,10 @@ const breadcrumbNameMap: { [key: string]: string } = {
   "/team/gift_type_list": "好物类型",
   "/team/gift_list": "家乡好物",
   "/team/promoter_list": "家乡代言人",
+  "/auth": "权限管理",
+  "/auth/role_list": "角色列表",
+  "/auth/admin_list": "管理员列表",
+  "/auth/personal_center": "个人中心",
 };
 
 export const NavigationBar = () => {

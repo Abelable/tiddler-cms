@@ -577,7 +577,7 @@ const Admin = ({
     {
       key: "center",
       icon: <UserOutlined />,
-      label: <Link to="user_center">个人中心</Link>,
+      label: <Link to="auth/personal_center">个人中心</Link>,
     },
     {
       key: "logout",
