@@ -105,10 +105,6 @@ export const List = ({
             dataIndex: "param",
           },
           {
-            title: "描述",
-            dataIndex: "desc",
-          },
-          {
             title: "排序",
             dataIndex: "sort",
             render: (value, category) => (
@@ -119,6 +115,10 @@ export const List = ({
             ),
             sorter: (a, b) => a.sort - b.sort,
             width: "12rem",
+          },
+          {
+            title: "描述",
+            dataIndex: "desc",
           },
           {
             title: "更新时间",
