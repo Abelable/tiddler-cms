@@ -1,32 +1,37 @@
-import styled from "@emotion/styled";
-import { useMallBannerList } from "service/mallBanner";
-import { toNumber } from "utils";
-import { useMallBannerListSearchParams } from "./util";
-import { MallBannerModal } from "./components/banner-modal";
+import { BannerModal } from "./components/banner-modal";
 import { List } from "./components/list";
 import { SearchPanel } from "./components/search-panel";
 
+import styled from "@emotion/styled";
+import { useBannerList } from "service/banner";
+import { toNumber } from "utils";
+import { useBannerListSearchParams } from "./util";
+
+const positionOptions = [
+  { text: "首页弹窗", value: 1, tips: "" },
+  { text: "首页头图", value: 2, tips: "图片尺寸：4 * 1" },
+  { text: "商城头图", value: 3, tips: "图片尺寸：35 * 8" },
+];
 const sceneOptions = [
   { text: "H5活动", value: 1 },
-  { text: "景点详情", value: 2 },
-  { text: "酒店详情", value: 3 },
-  { text: "餐饮门店详情", value: 4 },
-  { text: "商品详情", value: 5 },
+  { text: "商品详情", value: 2 },
 ];
 
-export const MallBannerList = () => {
-  const [params, setParams] = useMallBannerListSearchParams();
-  const { isLoading, error, data } = useMallBannerList(params);
+export const BannerList = () => {
+  const [params, setParams] = useBannerListSearchParams();
+  const { isLoading, error, data } = useBannerList(params);
 
   return (
     <Container>
       <Main>
         <SearchPanel
+          positionOptions={positionOptions}
           sceneOptions={sceneOptions}
           params={params}
           setParams={setParams}
         />
         <List
+          positionOptions={positionOptions}
           sceneOptions={sceneOptions}
           params={params}
           setParams={setParams}
@@ -38,9 +43,13 @@ export const MallBannerList = () => {
             pageSize: toNumber(data?.limit),
             total: toNumber(data?.total),
           }}
+          bordered
         />
       </Main>
-      <MallBannerModal sceneOptions={sceneOptions} />
+      <BannerModal
+        positionOptions={positionOptions}
+        sceneOptions={sceneOptions}
+      />
     </Container>
   );
 };

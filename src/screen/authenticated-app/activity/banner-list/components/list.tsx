@@ -1,4 +1,3 @@
-import styled from "@emotion/styled";
 import {
   Button,
   Dropdown,
@@ -8,31 +7,37 @@ import {
   TablePaginationConfig,
   TableProps,
   Image,
+  InputNumber,
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
+import { PlusOutlined } from "@ant-design/icons";
+
+import styled from "@emotion/styled";
 import dayjs from "dayjs";
 import {
-  useDeleteMallBanner,
-  useDownMallBanner,
-  useUpMallBanner,
-} from "service/mallBanner";
-import { MallBanner } from "types/mallBanner";
-import { useMallBannerModal, useMallBannerListQueryKey } from "../util";
-import { PlusOutlined } from "@ant-design/icons";
-import { SearchPanelProps } from "./search-panel";
+  useDeleteBanner,
+  useDownBanner,
+  useEditSort,
+  useUpBanner,
+} from "service/banner";
+import { useBannerModal, useBannerListQueryKey } from "../util";
 
-interface ListProps extends TableProps<MallBanner>, SearchPanelProps {
+import type { Banner } from "types/banner";
+import type { SearchPanelProps } from "./search-panel";
+
+interface ListProps extends TableProps<Banner>, SearchPanelProps {
   error: Error | unknown;
 }
 
 export const List = ({
+  positionOptions,
   sceneOptions,
   error,
   params,
   setParams,
   ...restProps
 }: ListProps) => {
-  const { open } = useMallBannerModal();
+  const { open } = useBannerModal();
 
   const setPagination = (pagination: TablePaginationConfig) =>
     setParams({
@@ -40,6 +45,8 @@ export const List = ({
       page: pagination.current,
       limit: pagination.pageSize,
     });
+
+  const { mutate: editSort } = useEditSort(useBannerListQueryKey());
 
   return (
     <Container>
@@ -52,11 +59,13 @@ export const List = ({
       <ErrorBox error={error} />
       <Table
         rowKey={"id"}
+        scroll={{ x: 2000 }}
         columns={[
           {
             title: "id",
             dataIndex: "id",
             width: "8rem",
+            fixed: "left",
           },
           {
             title: "封面",
@@ -76,10 +85,18 @@ export const List = ({
             width: "14rem",
           },
           {
+            title: "使用场景",
+            dataIndex: "position",
+            render: (value) => (
+              <>{positionOptions.find((item) => item.value === +value)?.text}</>
+            ),
+            width: "16rem",
+          },
+          {
             title: "活动跳转场景",
             dataIndex: "scene",
             render: (value) => (
-              <>{sceneOptions.find((item) => item.value === value)?.text}</>
+              <>{sceneOptions.find((item) => item.value === +value)?.text}</>
             ),
             width: "14rem",
           },
@@ -89,14 +106,26 @@ export const List = ({
           },
           {
             title: "描述",
-            dataIndex: "nickname",
+            dataIndex: "desc",
+          },
+          {
+            title: "排序",
+            dataIndex: "sort",
+            render: (value, category) => (
+              <InputNumber
+                value={value}
+                onChange={(sort) => editSort({ id: category.id, sort })}
+              />
+            ),
+            sorter: (a, b) => a.sort - b.sort,
+            width: "12rem",
           },
           {
             title: "更新时间",
-            render: (value, mallBanner) => (
+            render: (value, banner) => (
               <span>
-                {mallBanner.updatedAt
-                  ? dayjs(mallBanner.updatedAt).format("YYYY-MM-DD HH:mm:ss")
+                {banner.updatedAt
+                  ? dayjs(banner.updatedAt).format("YYYY-MM-DD HH:mm:ss")
                   : "无"}
               </span>
             ),
@@ -106,10 +135,10 @@ export const List = ({
           },
           {
             title: "创建时间",
-            render: (value, mallBanner) => (
+            render: (value, banner) => (
               <span>
-                {mallBanner.createdAt
-                  ? dayjs(mallBanner.createdAt).format("YYYY-MM-DD HH:mm:ss")
+                {banner.createdAt
+                  ? dayjs(banner.createdAt).format("YYYY-MM-DD HH:mm:ss")
                   : "无"}
               </span>
             ),
@@ -119,10 +148,11 @@ export const List = ({
           },
           {
             title: "操作",
-            render(value, mallBanner) {
-              return <More id={mallBanner.id} status={mallBanner.status} />;
+            render(value, banner) {
+              return <More id={banner.id} status={banner.status} />;
             },
             width: "8rem",
+            fixed: "right",
           },
         ]}
         onChange={setPagination}
@@ -133,14 +163,10 @@ export const List = ({
 };
 
 const More = ({ id, status }: { id: number; status: number }) => {
-  const { startEdit } = useMallBannerModal();
-  const { mutate: upMallBanner } = useUpMallBanner(useMallBannerListQueryKey());
-  const { mutate: downMallBanner } = useDownMallBanner(
-    useMallBannerListQueryKey()
-  );
-  const { mutate: deleteMallBanner } = useDeleteMallBanner(
-    useMallBannerListQueryKey()
-  );
+  const { startEdit } = useBannerModal();
+  const { mutate: upBanner } = useUpBanner(useBannerListQueryKey());
+  const { mutate: downBanner } = useDownBanner(useBannerListQueryKey());
+  const { mutate: deleteBanner } = useDeleteBanner(useBannerListQueryKey());
 
   const confirmDelete = (id: number) => {
     Modal.confirm({
@@ -148,16 +174,14 @@ const More = ({ id, status }: { id: number; status: number }) => {
       content: "点击确定删除",
       okText: "确定",
       cancelText: "取消",
-      onOk: () => deleteMallBanner(id),
+      onOk: () => deleteBanner(id),
     });
   };
 
   const items: MenuProps["items"] = [
     {
       label: (
-        <div
-          onClick={() => (status === 1 ? downMallBanner(id) : upMallBanner(id))}
-        >
+        <div onClick={() => (status === 1 ? downBanner(id) : upBanner(id))}>
           {status === 1 ? "结束活动" : "恢复活动"}
         </div>
       ),

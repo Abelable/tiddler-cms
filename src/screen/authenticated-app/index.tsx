@@ -34,7 +34,7 @@ import { RestaurantCategoryList } from "./catering/restaurant/category-list";
 import { RestaurantList } from "./catering/restaurant/restaurant-list";
 import { MealTicketList } from "./catering/meal-ticket-list";
 import { SetMealList } from "./catering/set-meal-list";
-import { MallBannerList } from "./activity/mall-banner-list";
+import { BannerList } from "./activity/banner-list";
 import { MerchantList } from "./shopping/merchant-list/index";
 import { ShopCategoryList } from "./shopping/shop/category-list/index";
 import { ShopList } from "./shopping/shop/shop-list";
@@ -103,7 +103,7 @@ export const AuthenticatedApp = () => {
             <Routes>
               <Route path="user/list" element={<UserList />} />
               <Route path="user/auth_info_list" element={<AuthInfoList />} />
-              <Route path="activity/banner" element={<MallBannerList />} />
+              <Route path="activity/banner_list" element={<BannerList />} />
               <Route path="media/short_video" element={<ShortVideoList />} />
               <Route path="media/tourism_note" element={<TourismNoteList />} />
               <Route
