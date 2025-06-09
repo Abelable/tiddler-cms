@@ -1,14 +1,273 @@
-import { Form, Input, Modal } from "antd";
-import { useForm } from "antd/lib/form/Form";
+import { Form, Input, Modal, Tree } from "antd";
 import { ErrorBox, ModalLoading } from "components/lib";
+
+import { Key, useEffect, useState } from "react";
+import { useForm } from "antd/lib/form/Form";
 import { useAddRole, useEditRole } from "service/role";
 import { useRoleModal, useRolesQueryKey } from "../util";
-import { useEffect } from "react";
+
+import type { DataNode } from "antd/es/tree";
+
+const treeData: DataNode[] = [
+  {
+    title: "用户管理",
+    key: "user",
+    children: [
+      {
+        title: "用户列表",
+        key: "user_list",
+      },
+      {
+        title: "实名认证",
+        key: "user_auth_info_list",
+      },
+    ],
+  },
+  {
+    title: "家乡代言",
+    key: "team",
+    children: [
+      {
+        title: "好物类型",
+        key: "team_gift_type_list",
+      },
+      {
+        title: "家乡好物",
+        key: "team_gift_list",
+      },
+      {
+        title: "家乡代言人",
+        key: "team_promoter_list",
+      },
+    ],
+  },
+  {
+    title: "活动管理",
+    key: "activity",
+    children: [
+      {
+        title: "头图列表",
+        key: "activity_banner_list",
+      },
+    ],
+  },
+  {
+    title: "游记管理",
+    key: "media",
+    children: [
+      {
+        title: "视频游记",
+        key: "media_short_video",
+      },
+      {
+        title: "图文游记",
+        key: "media_tourism_note",
+      },
+    ],
+  },
+  {
+    title: "景区模块",
+    key: "scenic",
+    children: [
+      {
+        title: "景区管理",
+        key: "scenic_spot",
+        children: [
+          {
+            title: "景区分类",
+            key: "scenic_spot_category_list",
+          },
+          {
+            title: "景区列表",
+            key: "scenic_spot_list",
+          },
+        ],
+      },
+      {
+        title: "服务商管理",
+        key: "scenic_provider",
+        children: [
+          {
+            title: "服务商列表",
+            key: "scenic_provider_list",
+          },
+          {
+            title: "店铺列表",
+            key: "scenic_provider_shop_list",
+          },
+          {
+            title: "景区申请",
+            key: "scenic_provider_spot_apply",
+          },
+        ],
+      },
+      {
+        title: "门票管理",
+        key: "scenic_ticket",
+        children: [
+          {
+            title: "门票分类",
+            key: "scenic_ticket_category_list",
+          },
+          {
+            title: "门票列表",
+            key: "scenic_ticket_list",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    title: "酒店模块",
+    key: "hotel",
+    children: [
+      {
+        title: "酒店管理",
+        key: "hotel_store",
+        children: [
+          {
+            title: "酒店分类",
+            key: "hotel_store_category_list",
+          },
+          {
+            title: "酒店列表",
+            key: "hotel_store_list",
+          },
+          {
+            title: "房间列表",
+            key: "hotel_store_room_list",
+          },
+        ],
+      },
+      {
+        title: "服务商管理",
+        key: "hotel_provider",
+        children: [
+          {
+            title: "服务商列表",
+            key: "hotel_provider_list",
+          },
+          {
+            title: "店铺列表",
+            key: "hotel_provider_shop_list",
+          },
+          {
+            title: "酒店申请",
+            key: "hotel_provider_hotel_apply",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    title: "餐饮模块",
+    key: "catering",
+    children: [
+      {
+        title: "服务商管理",
+        key: "catering_provider",
+        children: [
+          {
+            title: "服务商列表",
+            key: "catering_provider_list",
+          },
+          {
+            title: "门店申请",
+            key: "catering_provider_restaurant_apply",
+          },
+        ],
+      },
+      {
+        title: "门店管理",
+        key: "catering_restaurant",
+        children: [
+          {
+            title: "门店分类",
+            key: "catering_restaurant_category_list",
+          },
+          {
+            title: "门店列表",
+            key: "catering_restaurant_list",
+          },
+        ],
+      },
+      {
+        title: "代金券列表",
+        key: "catering_meal_ticket_list",
+      },
+      {
+        title: "套餐列表",
+        key: "catering_set_meal_list",
+      },
+    ],
+  },
+  {
+    title: "电商模块",
+    key: "shopping",
+    children: [
+      {
+        title: "商家列表",
+        key: "shopping_merchant_list",
+      },
+      {
+        title: "快递列表",
+        key: "shopping_express_list",
+      },
+      {
+        title: "门店管理",
+        key: "shopping_shop",
+        children: [
+          {
+            title: "店铺分类",
+            key: "shopping_shop_category_list",
+          },
+          {
+            title: "店铺列表",
+            key: "shopping_shop_list",
+          },
+        ],
+      },
+      {
+        title: "商品管理",
+        key: "shopping_goods",
+        children: [
+          {
+            title: "商品分类",
+            key: "shopping_goods_category_list",
+          },
+          {
+            title: "运费模板",
+            key: "shopping_goods_freight_template_list",
+          },
+          {
+            title: "商品列表",
+            key: "shopping_goods_list",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    title: "权限管理",
+    key: "auth",
+    children: [
+      {
+        title: "角色列表",
+        key: "auth_role_list",
+      },
+      {
+        title: "管理员列表",
+        key: "auth_admin_list",
+      },
+    ],
+  },
+];
 
 export const RoleModal = () => {
   const [form] = useForm();
   const { roleModalOpen, editingRoleId, editingRole, isLoading, close } =
     useRoleModal();
+  const [defaultCheckedKeys, setDefaultCheckedKeys] = useState<Key[]>([]);
 
   const useMutateRole = editingRoleId ? useEditRole : useAddRole;
   const {
@@ -18,18 +277,28 @@ export const RoleModal = () => {
   } = useMutateRole(useRolesQueryKey());
 
   useEffect(() => {
-    form.setFieldsValue(editingRole);
+    if (editingRole) {
+      const { permission = "", ...rest } = editingRole;
+      setDefaultCheckedKeys(JSON.parse(permission) as Key[]);
+      form.setFieldsValue({ permission: JSON.parse(permission), ...rest });
+    }
   }, [editingRole, form]);
 
   const confirm = () => {
     form.validateFields().then(async () => {
-      await mutateAsync({ ...editingRole, ...form.getFieldsValue() });
+      const { permission, ...rest } = form.getFieldsValue();
+      await mutateAsync({
+        ...editingRole,
+        permission: JSON.stringify(permission),
+        ...rest,
+      });
       closeModal();
     });
   };
 
   const closeModal = () => {
     form.resetFields();
+    setDefaultCheckedKeys([]);
     close();
   };
 
@@ -61,6 +330,25 @@ export const RoleModal = () => {
           >
             <Input placeholder={"请输入角色描述"} />
           </Form.Item>
+
+          {!editingRoleId || (editingRoleId && defaultCheckedKeys.length) ? (
+            <Form.Item
+              label={"角色权限"}
+              name={"permission"}
+              rules={[{ required: true, message: "请选择角色权限" }]}
+            >
+              <Tree
+                checkable
+                defaultCheckedKeys={defaultCheckedKeys}
+                treeData={treeData}
+                onCheck={(checkedKeys) => {
+                  form.setFieldsValue({ permission: checkedKeys });
+                }}
+              />
+            </Form.Item>
+          ) : (
+            <></>
+          )}
         </Form>
       )}
     </Modal>

@@ -7,6 +7,7 @@ export interface Role {
   id: number;
   name: string;
   desc: string;
+  permission: string;
 }
 
 export interface RolesResult {
