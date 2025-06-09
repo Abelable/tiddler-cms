@@ -39,13 +39,13 @@ const refundStatusOptions = [
   { text: "支持", value: 1 },
 ];
 
-const deliveryMethodOptions = [
+const deliveryModeOptions = [
   { text: "快递", value: 1 },
   { text: "自提", value: 2 },
   { text: "快递/自提", value: 3 },
 ];
-const pickupAddressOptions = [{ id: 1, addressDetail: "千岛湖科技大厦607" }];
-const refundAddressOptions = [{ id: 1, addressDetail: "千岛湖科技大厦607" }];
+const pickupAddressOptions = [{ id: 1, addressDetail: "千岛湖科技大厦507" }];
+const refundAddressOptions = [{ id: 1, addressDetail: "千岛湖科技大厦507" }];
 
 const normFile = (e: any) => {
   if (Array.isArray(e)) return e;
@@ -671,47 +671,15 @@ export const GoodsModal = ({
               </Form.Item>
             </Col>
           </Row>
-          {/* <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item
-                name="freightTemplateId"
-                label="运费模板"
-                rules={[{ required: true, message: "请选择运费模板" }]}
-              >
-                <Select placeholder="请选择运费模板">
-                  {freightTemplateOptions.map(({ id, name }) => (
-                    <Select.Option key={id} value={id}>
-                      {name}
-                    </Select.Option>
-                  ))}
-                </Select>
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item
-                name="refundSupport"
-                label="7天无理由退换货"
-                rules={[{ required: true, message: "请选择是否支持7天无理由" }]}
-              >
-                <Select placeholder="请选择是否支持7天无理由">
-                  {refundStatusOptions.map((item) => (
-                    <Select.Option key={item.value} value={item.value}>
-                      {item.text}
-                    </Select.Option>
-                  ))}
-                </Select>
-              </Form.Item>
-            </Col>
-          </Row> */}
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item
-                name="deliveryMethod"
+                name="deliveryMode"
                 label="配送方式"
                 rules={[{ required: true, message: "请选择配送方式" }]}
               >
                 <Select placeholder="请选择配送方式">
-                  {deliveryMethodOptions.map((item) => (
+                  {deliveryModeOptions.map((item) => (
                     <Select.Option key={item.value} value={item.value}>
                       {item.text}
                     </Select.Option>
@@ -722,11 +690,11 @@ export const GoodsModal = ({
             <Form.Item
               noStyle
               shouldUpdate={(prevValues, currentValues) =>
-                prevValues.deliveryMethod !== currentValues.deliveryMethod
+                prevValues.deliveryMode !== currentValues.deliveryMode
               }
             >
               {({ getFieldValue }) =>
-                [2, 3].includes(getFieldValue("deliveryMethod")) && (
+                [2, 3].includes(getFieldValue("deliveryMode")) && (
                   <Col span={12}>
                     <Form.Item
                       name="pickupAddressIds"

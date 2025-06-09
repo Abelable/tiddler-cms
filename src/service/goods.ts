@@ -31,6 +31,8 @@ export const useGoods = (id: number) => {
     () => client(`goods/detail`, { data: { id } }),
     {
       enabled: !!id,
+      cacheTime: 0,
+      refetchOnWindowFocus: false,
     }
   );
 };
