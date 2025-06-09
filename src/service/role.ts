@@ -23,6 +23,8 @@ export const useRole = (id: number) => {
     () => client(`role/detail`, { data: { id } }),
     {
       enabled: !!id,
+      cacheTime: 0,
+      refetchOnWindowFocus: false,
     }
   );
 };
