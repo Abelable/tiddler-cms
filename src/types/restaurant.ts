@@ -31,10 +31,11 @@ export interface RestaurantDetail {
 
 export interface Restaurant {
   id: number;
+  openStatus: number;
   categoryId: number;
   name: string;
   score: number;
-  openStatus: number;
+  views: number;
   createdAt: string;
   updatedAt: string;
 }

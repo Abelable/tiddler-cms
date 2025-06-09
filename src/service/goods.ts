@@ -83,6 +83,18 @@ export const useEditGoods = (queryKey: QueryKey) => {
   );
 };
 
+export const useEditViews = (queryKey: QueryKey) => {
+  const client = useHttp();
+  return useMutation(
+    ({ id, views }: { id: number; views: number }) =>
+      client("goods/edit_views", {
+        data: { id, views },
+        method: "POST",
+      }),
+    useEditConfig(queryKey)
+  );
+};
+
 export const useDeleteGoods = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(

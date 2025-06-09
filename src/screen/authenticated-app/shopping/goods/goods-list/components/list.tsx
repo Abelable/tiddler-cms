@@ -9,12 +9,14 @@ import {
   TableProps,
   Tooltip,
   Button,
+  InputNumber,
+  Rate,
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
 import { PlusOutlined } from "@ant-design/icons";
 
 import dayjs from "dayjs";
-import { useApprovedGoods, useDeleteGoods } from "service/goods";
+import { useApprovedGoods, useDeleteGoods, useEditViews } from "service/goods";
 import {
   useGoodsDetailModal,
   useGoodsListQueryKey,
@@ -40,13 +42,13 @@ export const List = ({
   ...restProps
 }: ListProps) => {
   const { open } = useGoodsModal();
-
   const setPagination = (pagination: TablePaginationConfig) =>
     setParams({
       ...params,
       page: pagination.current,
       limit: pagination.pageSize,
     });
+  const { mutate: editViews } = useEditViews(useGoodsListQueryKey());
 
   return (
     <Container>
@@ -147,14 +149,36 @@ export const List = ({
             width: "12rem",
           },
           {
+            title: "库存",
+            dataIndex: "stock",
+            width: "12rem",
+          },
+          {
             title: "销量",
             dataIndex: "salesVolume",
             sorter: (a, b) => Number(a) - Number(b),
             width: "12rem",
           },
           {
-            title: "库存",
-            dataIndex: "stock",
+            title: "评分",
+            dataIndex: "score",
+            width: "22rem",
+            render: (value) => (
+              <>
+                <Rate allowHalf value={value} />
+                <span style={{ marginLeft: "1rem" }}>{value}</span>
+              </>
+            ),
+          },
+          {
+            title: "点击率",
+            dataIndex: "views",
+            render: (value, shortVideo) => (
+              <InputNumber
+                value={value}
+                onChange={(views) => editViews({ id: shortVideo.id, views })}
+              />
+            ),
             width: "12rem",
           },
           {

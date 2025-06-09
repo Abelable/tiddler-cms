@@ -12,9 +12,10 @@ import {
   Button,
   Rate,
   Tag,
+  InputNumber,
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
-import { useDeleteScenic } from "service/scenic";
+import { useDeleteScenic, useEditViews } from "service/scenic";
 import { PlusOutlined } from "@ant-design/icons";
 import { SearchPanelProps } from "./search-panel";
 
@@ -38,6 +39,7 @@ export const List = ({
       page: pagination.current,
       limit: pagination.pageSize,
     });
+  const { mutate: editViews } = useEditViews(useScenicListQueryKey());
 
   return (
     <Container>
@@ -85,6 +87,17 @@ export const List = ({
                 <span style={{ marginLeft: "1rem" }}>{value}</span>
               </>
             ),
+          },
+          {
+            title: "点击率",
+            dataIndex: "views",
+            render: (value, shortVideo) => (
+              <InputNumber
+                value={value}
+                onChange={(views) => editViews({ id: shortVideo.id, views })}
+              />
+            ),
+            width: "12rem",
           },
           {
             title: "创建时间",

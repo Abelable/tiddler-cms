@@ -12,9 +12,10 @@ import {
   Button,
   Rate,
   Image,
+  InputNumber,
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
-import { useDeleteRestaurant } from "service/restaurant";
+import { useDeleteRestaurant, useEditViews } from "service/restaurant";
 import { PlusOutlined } from "@ant-design/icons";
 import { SearchPanelProps } from "./search-panel";
 
@@ -38,6 +39,7 @@ export const List = ({
       page: pagination.current,
       limit: pagination.pageSize,
     });
+  const { mutate: editViews } = useEditViews(useRestaurantListQueryKey());
 
   return (
     <Container>
@@ -77,7 +79,7 @@ export const List = ({
             ),
           },
           {
-            title: "综合评分",
+            title: "评分",
             dataIndex: "score",
             width: "22rem",
             render: (value) => (
@@ -86,6 +88,17 @@ export const List = ({
                 <span style={{ marginLeft: "1rem" }}>{value}</span>
               </>
             ),
+          },
+          {
+            title: "点击率",
+            dataIndex: "views",
+            render: (value, shortVideo) => (
+              <InputNumber
+                value={value}
+                onChange={(views) => editViews({ id: shortVideo.id, views })}
+              />
+            ),
+            width: "12rem",
           },
           {
             title: "创建时间",

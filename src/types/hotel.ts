@@ -53,6 +53,7 @@ export interface Hotel {
   grade: number;
   categoryId: number;
   score: number;
+  views: number;
   createdAt: string;
   updatedAt: string;
 }

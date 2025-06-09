@@ -12,9 +12,10 @@ import {
   TableProps,
   Button,
   Image,
+  InputNumber,
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
-import { useDeleteHotel } from "service/hotel";
+import { useDeleteHotel, useEditViews } from "service/hotel";
 import { PlusOutlined } from "@ant-design/icons";
 import { SearchPanelProps } from "./search-panel";
 
@@ -39,6 +40,7 @@ export const List = ({
       page: pagination.current,
       limit: pagination.pageSize,
     });
+  const { mutate: editViews } = useEditViews(useHotelListQueryKey());
 
   return (
     <Container>
@@ -94,6 +96,17 @@ export const List = ({
           {
             title: "评分",
             dataIndex: "score",
+            width: "12rem",
+          },
+          {
+            title: "点击率",
+            dataIndex: "views",
+            render: (value, shortVideo) => (
+              <InputNumber
+                value={value}
+                onChange={(views) => editViews({ id: shortVideo.id, views })}
+              />
+            ),
             width: "12rem",
           },
           {

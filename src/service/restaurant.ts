@@ -59,6 +59,18 @@ export const useEditRestaurant = (queryKey: QueryKey) => {
   );
 };
 
+export const useEditViews = (queryKey: QueryKey) => {
+  const client = useHttp();
+  return useMutation(
+    ({ id, views }: { id: number; views: number }) =>
+      client("catering/restaurant/edit_views", {
+        data: { id, views },
+        method: "POST",
+      }),
+    useEditConfig(queryKey)
+  );
+};
+
 export const useDeleteRestaurant = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(

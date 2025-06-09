@@ -57,6 +57,7 @@ export interface Scenic {
   level: string;
   categoryId: number;
   score: number;
+  views: number;
   createdAt: string;
   updatedAt: string;
 }

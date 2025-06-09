@@ -41,10 +41,12 @@ export interface Goods {
   stock: number;
   salesCommissionRate: number;
   promotionCommissionRate: number;
-  salesVolume: number;
   refundSupport: number;
   specList: Spec[];
   skuList: Sku[];
+  score: number;
+  salesVolume: number;
+  views: number;
   createdAt: string;
   updatedAt: string;
 }
