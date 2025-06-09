@@ -28,7 +28,7 @@ export const login = async (form: AuthForm) => {
   });
   window.localStorage.setItem(localStorageKey, token);
   window.localStorage.setItem(localStoragePermissionKey, permission);
-  return token;
+  return { token, permission: JSON.parse(permission) };
 };
 
 export const logout = async () => {

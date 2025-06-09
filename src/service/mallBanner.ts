@@ -16,16 +16,16 @@ export const useMallBannerList = (
   params: Partial<MallBannerListSearchParams>
 ) => {
   const client = useHttp();
-  return useQuery<MallBannerListResult>(["mall_banner_list", params], () =>
-    client("mall_banner/list", { data: params, method: "POST" })
+  return useQuery<MallBannerListResult>(["banner_list", params], () =>
+    client("banner/list", { data: params, method: "POST" })
   );
 };
 
 export const useMallBanner = (id: number) => {
   const client = useHttp();
   return useQuery<Partial<MallBanner>>(
-    ["mall_banner", { id }],
-    () => client("mall_banner/detail", { data: { id } }),
+    ["banner", { id }],
+    () => client("banner/detail", { data: { id } }),
     {
       enabled: !!id,
     }
@@ -36,7 +36,7 @@ export const useAddMallBanner = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (params: Partial<MallBanner>) =>
-      client("mall_banner/add", {
+      client("banner/add", {
         data: cleanObject(params),
         method: "POST",
       }),
@@ -48,7 +48,7 @@ export const useEditMallBanner = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (params: Partial<MallBanner>) =>
-      client("mall_banner/edit", {
+      client("banner/edit", {
         data: cleanObject(params),
         method: "POST",
       }),
@@ -60,7 +60,7 @@ export const useUpMallBanner = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (id: number) =>
-      client("mall_banner/up", {
+      client("banner/up", {
         data: { id },
         method: "POST",
       }),
@@ -72,7 +72,7 @@ export const useDownMallBanner = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (id: number) =>
-      client("mall_banner/down", {
+      client("banner/down", {
         data: { id },
         method: "POST",
       }),
@@ -84,7 +84,7 @@ export const useDeleteMallBanner = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (id: number) =>
-      client("mall_banner/delete", {
+      client("banner/delete", {
         data: { id },
         method: "POST",
       }),

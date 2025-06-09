@@ -103,7 +103,7 @@ export const AuthenticatedApp = () => {
             <Routes>
               <Route path="user/list" element={<UserList />} />
               <Route path="user/auth_info_list" element={<AuthInfoList />} />
-              <Route path="activity/mall_banner" element={<MallBannerList />} />
+              <Route path="activity/banner" element={<MallBannerList />} />
               <Route path="media/short_video" element={<ShortVideoList />} />
               <Route path="media/tourism_note" element={<TourismNoteList />} />
               <Route
@@ -264,8 +264,8 @@ const MenuSider = ({
       icon: <GiftOutlined />,
       children: [
         {
-          label: <Link to={"activity/mall_banner"}>商城Banner</Link>,
-          key: "activity_mall_banner",
+          label: <Link to={"activity/banner_list"}>头图列表</Link>,
+          key: "activity_banner_list",
           icon: <PictureOutlined />,
         },
       ],

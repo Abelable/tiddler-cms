@@ -44,7 +44,7 @@ export const List = ({
   return (
     <Container>
       <Header between={true}>
-        <PageTitle>商城Banner列表</PageTitle>
+        <PageTitle>头图列表</PageTitle>
         <Button onClick={() => open()} type={"primary"} icon={<PlusOutlined />}>
           新增
         </Button>

@@ -24,7 +24,7 @@ export const useMallBannerListSearchParams = () => {
 
 export const useMallBannerListQueryKey = () => {
   const [params] = useMallBannerListSearchParams();
-  return ["mall_banner_list", params];
+  return ["banner_list", params];
 };
 
 export const useMallBannerModal = () => {

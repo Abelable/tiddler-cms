@@ -330,7 +330,6 @@ export const RoleModal = () => {
           >
             <Input placeholder={"请输入角色描述"} />
           </Form.Item>
-
           {!editingRoleId || (editingRoleId && defaultCheckedKeys.length) ? (
             <Form.Item
               label={"角色权限"}
