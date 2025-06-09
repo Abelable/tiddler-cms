@@ -9,12 +9,15 @@ import { useBannerListSearchParams } from "./util";
 
 const positionOptions = [
   { text: "首页弹窗", value: 1, tips: "" },
-  { text: "首页头图", value: 2, tips: "图片尺寸：4 * 1" },
-  { text: "商城头图", value: 3, tips: "图片尺寸：35 * 8" },
+  { text: "首页头图", value: 2, tips: "图片尺寸：355 * 200" },
+  { text: "商城头图", value: 3, tips: "图片尺寸：355 * 180" },
 ];
 const sceneOptions = [
-  { text: "H5活动", value: 1 },
-  { text: "商品详情", value: 2 },
+  { text: "景点详情", value: 1 },
+  { text: "酒店详情", value: 2 },
+  { text: "餐馆详情", value: 3 },
+  { text: "商品详情", value: 4 },
+  { text: "H5活动", value: 5 },
 ];
 
 export const BannerList = () => {

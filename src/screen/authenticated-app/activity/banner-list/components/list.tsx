@@ -180,16 +180,16 @@ const More = ({ id, status }: { id: number; status: number }) => {
 
   const items: MenuProps["items"] = [
     {
+      label: <div onClick={() => startEdit(id)}>编辑</div>,
+      key: "edit",
+    },
+    {
       label: (
         <div onClick={() => (status === 1 ? downBanner(id) : upBanner(id))}>
-          {status === 1 ? "结束活动" : "恢复活动"}
+          {status === 1 ? "结束" : "恢复"}
         </div>
       ),
       key: "status",
-    },
-    {
-      label: <div onClick={() => startEdit(id)}>编辑</div>,
-      key: "edit",
     },
     {
       label: <div onClick={() => confirmDelete(id)}>删除</div>,

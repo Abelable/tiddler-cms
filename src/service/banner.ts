@@ -14,16 +14,16 @@ import type {
 
 export const useBannerList = (params: Partial<BannerListSearchParams>) => {
   const client = useHttp();
-  return useQuery<BannerListResult>(["mall_banner_list", params], () =>
-    client("mall/banner/list", { data: params, method: "POST" })
+  return useQuery<BannerListResult>(["banner_list", params], () =>
+    client("banner/list", { data: params, method: "POST" })
   );
 };
 
 export const useBanner = (id: number) => {
   const client = useHttp();
   return useQuery<Partial<Banner>>(
-    ["mall_banner", { id }],
-    () => client("mall/banner/detail", { data: { id } }),
+    ["banner", { id }],
+    () => client("banner/detail", { data: { id } }),
     {
       enabled: !!id,
     }
@@ -34,7 +34,7 @@ export const useAddBanner = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (params: Partial<Banner>) =>
-      client("mall/banner/add", {
+      client("banner/add", {
         data: cleanObject(params),
         method: "POST",
       }),
@@ -46,7 +46,7 @@ export const useEditBanner = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (params: Partial<Banner>) =>
-      client("mall/banner/edit", {
+      client("banner/edit", {
         data: cleanObject(params),
         method: "POST",
       }),
@@ -58,7 +58,7 @@ export const useEditSort = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     ({ id, sort }: { id: number; sort: number }) =>
-      client("mall/banner/edit_sort", {
+      client("banner/edit_sort", {
         data: { id, sort },
         method: "POST",
       }),
@@ -70,7 +70,7 @@ export const useUpBanner = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (id: number) =>
-      client("mall/banner/up", {
+      client("banner/up", {
         data: { id },
         method: "POST",
       }),
@@ -82,7 +82,7 @@ export const useDownBanner = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (id: number) =>
-      client("mall/banner/down", {
+      client("banner/down", {
         data: { id },
         method: "POST",
       }),
@@ -94,7 +94,7 @@ export const useDeleteBanner = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (id: number) =>
-      client("mall/banner/delete", {
+      client("banner/delete", {
         data: { id },
         method: "POST",
       }),
