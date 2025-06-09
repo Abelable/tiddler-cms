@@ -2,14 +2,14 @@ import { useState } from "react";
 import { useRouteType } from "utils/url";
 import { useAuth } from "context/auth-context";
 import styled from "@emotion/styled";
-import { useUserInfo } from "service/auth";
+import { useAdminInfo } from "service/auth";
 import { HashRouter as Router, Link } from "react-router-dom";
 import { Routes, Route, Navigate } from "react-router";
 import { Avatar, Dropdown, Layout, Menu, MenuProps } from "antd";
 import { NavigationBar } from "components/navigation-bar";
 
-import { RoleList } from "./admin/role-list";
-import { AdminList } from "./admin/admin-list";
+import { RoleList } from "./permission-management/role-list";
+import { AdminList } from "./permission-management/admin-list";
 import { UserList } from "./user/user-list";
 import { AuthInfoList } from "./user/auth-info-list";
 import { ShortVideoList } from "./media/short-video";
@@ -78,12 +78,12 @@ import {
   SetMealIcon,
 } from "assets/icon";
 import logo from "assets/images/logo.png";
-import { UserInfo } from "types/auth";
+import { AdminInfo } from "types/auth";
 import { Row } from "components/lib";
 
 export const AuthenticatedApp = () => {
   const [collapsed, setCollapsed] = useState(false);
-  const { data: userInfo } = useUserInfo();
+  const { data: adminInfo } = useAdminInfo();
   const { logout } = useAuth();
 
   return (
@@ -96,7 +96,7 @@ export const AuthenticatedApp = () => {
               <Trigger collapsed={collapsed} setCollapsed={setCollapsed} />
               <NavigationBar />
             </Row>
-            <User userInfo={userInfo} logout={logout} />
+            <Admin adminInfo={adminInfo} logout={logout} />
           </Header>
           <Content>
             <Routes>
@@ -564,11 +564,11 @@ const Trigger = ({ collapsed, setCollapsed }: Collapsed) => {
   );
 };
 
-const User = ({
-  userInfo,
+const Admin = ({
+  adminInfo,
   logout,
 }: {
-  userInfo: UserInfo | undefined;
+  adminInfo: AdminInfo | undefined;
   logout: () => void;
 }) => {
   const items: MenuProps["items"] = [
@@ -593,13 +593,13 @@ const User = ({
 
   return (
     <Dropdown menu={{ items, onClick }}>
-      <UserInfoWrap>
+      <AdminInfoWrap>
         <Avatar
           style={{ marginRight: "0.8rem", width: "3rem", height: "3rem" }}
-          src={userInfo?.avatar}
+          src={adminInfo?.avatar}
         />
-        <div>{userInfo?.nickname}</div>
-      </UserInfoWrap>
+        <div>{adminInfo?.nickname}</div>
+      </AdminInfoWrap>
     </Dropdown>
   );
 };
@@ -641,7 +641,7 @@ const Header = styled(Layout.Header)`
   z-index: 10;
 `;
 
-const UserInfoWrap = styled.div`
+const AdminInfoWrap = styled.div`
   display: flex;
   align-items: center;
   padding-left: 1.2rem;

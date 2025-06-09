@@ -1,6 +1,9 @@
-import { useQuery } from "react-query";
-import { AuthForm, UserInfo } from "types/auth";
+import { useMutation, useQuery } from "react-query";
 import { http, useHttp } from "./http";
+import { cleanObject } from "utils";
+import { useEditAdminBaseInfoConfig } from "./use-optimistic-options";
+
+import type { AuthForm, AdminInfo } from "types/auth";
 
 const localStorageKey = "__auth_provider_token__";
 
@@ -27,7 +30,33 @@ export const refreshToken = async () => {
   window.localStorage.setItem(localStorageKey, token);
 };
 
-export const useUserInfo = () => {
+export const useAdminInfo = () => {
   const client = useHttp();
-  return useQuery<UserInfo>(["useInfo"], () => client("auth/me"));
+  return useQuery<AdminInfo>(["admin_info"], () => client("auth/me"));
+};
+
+export const resetPassword = async ({
+  password,
+  newPassword,
+}: {
+  password: string;
+  newPassword: string;
+}) => {
+  await http("auth/reset_password", {
+    token: getToken() as string,
+    data: { password, newPassword },
+    method: "POST",
+  });
+};
+
+export const useUpdateAdminInfo = () => {
+  const client = useHttp();
+  return useMutation(
+    (params: Partial<AdminInfo>) =>
+      client("auth/update_base_info", {
+        data: cleanObject(params),
+        method: "POST",
+      }),
+    useEditAdminBaseInfoConfig(["admin_info"])
+  );
 };

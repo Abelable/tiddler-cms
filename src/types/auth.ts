@@ -3,7 +3,7 @@ export interface AuthForm {
   password: string;
 }
 
-export interface UserInfo {
-  nickname: string;
+export interface AdminInfo {
   avatar: string | null;
+  nickname: string;
 }
