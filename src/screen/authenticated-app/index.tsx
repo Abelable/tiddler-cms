@@ -5,7 +5,7 @@ import styled from "@emotion/styled";
 import { useUserInfo } from "service/auth";
 import { HashRouter as Router, Link } from "react-router-dom";
 import { Routes, Route, Navigate } from "react-router";
-import { Avatar, Button, Dropdown, Layout, Menu, MenuProps } from "antd";
+import { Avatar, Dropdown, Layout, Menu, MenuProps } from "antd";
 import { NavigationBar } from "components/navigation-bar";
 
 import { RoleList } from "./admin/role-list";
@@ -50,7 +50,6 @@ import {
   LockOutlined,
   MenuUnfoldOutlined,
   MenuFoldOutlined,
-  CaretDownOutlined,
   MehOutlined,
   TeamOutlined,
   ShopOutlined,
@@ -66,6 +65,7 @@ import {
   CloudOutlined,
   SendOutlined,
   VideoCameraOutlined,
+  LogoutOutlined,
 } from "@ant-design/icons";
 import {
   ExpressIcon,
@@ -573,23 +573,34 @@ const User = ({
 }) => {
   const items: MenuProps["items"] = [
     {
-      label: (
-        <Button type={"link"} onClick={logout}>
-          登出
-        </Button>
-      ),
+      key: "center",
+      icon: <UserOutlined />,
+      label: <Link to="user_center">个人中心</Link>,
+    },
+    {
       key: "logout",
+      icon: <LogoutOutlined />,
+      label: "退出登录",
     },
   ];
 
+  const onClick = (event: any) => {
+    const { key } = event;
+    if (key === "logout") {
+      logout();
+    }
+  };
+
   return (
-    <Row gap={1} style={{ cursor: "pointer" }}>
-      <Avatar src={userInfo?.avatar} />
-      <div>{userInfo?.nickname}</div>
-      <Dropdown menu={{ items }}>
-        <CaretDownOutlined style={{ fontSize: "1.2rem" }} />
-      </Dropdown>
-    </Row>
+    <Dropdown menu={{ items, onClick }}>
+      <UserInfoWrap>
+        <Avatar
+          style={{ marginRight: "0.8rem", width: "3rem", height: "3rem" }}
+          src={userInfo?.avatar}
+        />
+        <div>{userInfo?.nickname}</div>
+      </UserInfoWrap>
+    </Dropdown>
   );
 };
 
@@ -604,8 +615,8 @@ const Logo = styled.div<{ collapsed: boolean }>`
   > div {
     margin-left: 1rem;
     flex: 1;
-    height: 2.2rem;
     color: #fff;
+    white-space: nowrap;
     overflow: hidden;
     opacity: ${(props) => (props.collapsed ? 0 : 1)};
     transition: opacity 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
@@ -628,6 +639,20 @@ const Header = styled(Layout.Header)`
   background: #fff;
   box-shadow: 0 2px 4px rgb(0 21 41 / 8%);
   z-index: 10;
+`;
+
+const UserInfoWrap = styled.div`
+  display: flex;
+  align-items: center;
+  padding-left: 1.2rem;
+  padding-right: 1.6rem;
+  height: 4.4rem;
+  color: rgba(0, 0, 0, 0.45);
+  border-radius: 0.6rem;
+  cursor: pointer;
+  &:hover {
+    background: rgba(0, 0, 0, 0.03);
+  }
 `;
 
 const Unfold = styled(MenuUnfoldOutlined)`
