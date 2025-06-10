@@ -673,6 +673,8 @@ export const GoodsModal = ({
                 }}
               </Form.Item>
             </Col>
+          </Row>
+          <Row gutter={16}>
             <Col span={12}>
               <Form.Item
                 name="deliveryMode"
