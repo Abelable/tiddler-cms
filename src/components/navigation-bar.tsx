@@ -49,6 +49,8 @@ const breadcrumbNameMap: { [key: string]: string } = {
   "/shopping/express_list": "快递列表",
   "/shopping/self_support": "自营管理",
   "/shopping/self_support/freight_template_list": "运费模板",
+  "/shopping/self_support/pickup_address_list": "提货地址",
+  "/shopping/self_support/refund_address_list": "退货地址",
   "/shopping/goods": "商品管理",
   "/shopping/goods/category_list": "商品分类",
   "/shopping/goods/list": "商品列表",

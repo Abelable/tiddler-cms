@@ -41,6 +41,8 @@ import { ShopList } from "./shopping/shop/shop-list";
 import { ExpressList } from "./shopping/express-list";
 import { GoodsCategoryList } from "./shopping/goods/category-list";
 import { FreightTemplateList } from "./shopping/self-support/freight-template-list";
+import { PickupAddressList } from "./shopping/self-support/pickup-address";
+import { RefundAddressList } from "./shopping/self-support/refund-address";
 import { GoodsList } from "./shopping/goods/goods-list";
 import { GiftTypeList } from "./team/gift-type-list";
 import { GiftGoodsList } from "./team/gift-goods-list";
@@ -68,6 +70,7 @@ import {
   VideoCameraOutlined,
   LogoutOutlined,
   TagOutlined,
+  EnvironmentOutlined,
 } from "@ant-design/icons";
 import {
   ExpressIcon,
@@ -186,6 +189,14 @@ export const AuthenticatedApp = () => {
               <Route
                 path="shopping/self_support/freight_template_list"
                 element={<FreightTemplateList />}
+              />
+              <Route
+                path="shopping/self_support/pickup_address_list"
+                element={<PickupAddressList />}
+              />
+              <Route
+                path="shopping/self_support/refund_address_list"
+                element={<RefundAddressList />}
               />
               <Route
                 path="shopping/goods/category_list"
@@ -502,6 +513,24 @@ const MenuSider = ({
               ),
               key: "shopping_self_support_freight_template_list",
               icon: <CarOutlined />,
+            },
+            {
+              label: (
+                <Link to={"shopping/self_support/pickup_address_list"}>
+                  提货地址
+                </Link>
+              ),
+              key: "shopping_self_support_pickup_address_list",
+              icon: <EnvironmentOutlined />,
+            },
+            {
+              label: (
+                <Link to={"shopping/self_support/refund_address_list"}>
+                  退货地址
+                </Link>
+              ),
+              key: "shopping_self_support_refund_address_list",
+              icon: <EnvironmentOutlined />,
             },
           ],
         },
