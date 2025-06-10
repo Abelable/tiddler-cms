@@ -29,6 +29,7 @@ import { ErrorBox, ModalLoading } from "components/lib";
 import type { DataOption } from "types/common";
 import type { Sku, Spec } from "types/goods";
 import type { GoodsCategoryOption } from "types/goodsCategory";
+import type { RefundAddress } from "types/refundAddress";
 
 interface TableSku extends Sku {
   [x: string]: string | number | object;
@@ -44,8 +45,6 @@ const deliveryModeOptions = [
   { text: "自提", value: 2 },
   { text: "快递/自提", value: 3 },
 ];
-const pickupAddressOptions = [{ id: 1, addressDetail: "千岛湖科技大厦507" }];
-const refundAddressOptions = [{ id: 1, addressDetail: "千岛湖科技大厦507" }];
 
 const normFile = (e: any) => {
   if (Array.isArray(e)) return e;
@@ -56,10 +55,14 @@ export const GoodsModal = ({
   shopCategoryOptions,
   goodsCategoryOptions,
   freightTemplateOptions,
+  pickupAddressOptions,
+  refundAddressOptions,
 }: {
   shopCategoryOptions: DataOption[];
   goodsCategoryOptions: GoodsCategoryOption[];
   freightTemplateOptions: DataOption[];
+  pickupAddressOptions: DataOption[];
+  refundAddressOptions: Partial<RefundAddress>[];
 }) => {
   const [form] = useForm();
   const [shopCategoryId, setShopCategoryId] = useState<undefined | number>(
@@ -730,7 +733,7 @@ export const GoodsModal = ({
                       <Select mode="multiple" placeholder="请选择提货地址">
                         {pickupAddressOptions.map((item) => (
                           <Select.Option key={item.id} value={item.id}>
-                            {item.addressDetail}
+                            {item.name}
                           </Select.Option>
                         ))}
                       </Select>

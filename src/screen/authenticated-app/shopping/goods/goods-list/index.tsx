@@ -12,6 +12,8 @@ import { useShopCategoryOptions } from "service/shopCategory";
 import { useGoodsList } from "service/goods";
 import { toNumber } from "utils";
 import { useGoodsListSearchParams } from "./util";
+import { useRefundAddressOptions } from "service/refundAddress";
+import { usePickupAddressOptions } from "service/pickupAddress";
 
 const statusOptions = [
   { text: "待审核", value: 0 },
@@ -40,6 +42,10 @@ export const GoodsList = () => {
     { id: 0, name: "全国包邮" },
     ...originalFreightTemplateOptions,
   ];
+  const { data: pickupAddressOptions = [], error: pickupAddressOptionsError } =
+    usePickupAddressOptions();
+  const { data: refundAddressOptions = [], error: refundAddressOptionsError } =
+    useRefundAddressOptions();
 
   return (
     <Container>
@@ -64,6 +70,8 @@ export const GoodsList = () => {
             goodsCategoryOptionsError ||
             shopCategoryOptionsError ||
             freightTemplateOptionsError ||
+            pickupAddressOptionsError ||
+            refundAddressOptionsError ||
             shopOptionsError
           }
           loading={isLoading}
@@ -79,6 +87,8 @@ export const GoodsList = () => {
         shopCategoryOptions={shopCategoryOptions || []}
         goodsCategoryOptions={goodsCategoryOptions || []}
         freightTemplateOptions={freightTemplateOptions}
+        pickupAddressOptions={pickupAddressOptions}
+        refundAddressOptions={refundAddressOptions}
       />
       <DetailModal
         shopCategoryOptions={shopCategoryOptions || []}
