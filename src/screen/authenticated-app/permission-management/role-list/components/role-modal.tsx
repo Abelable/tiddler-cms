@@ -228,16 +228,22 @@ const treeData: DataNode[] = [
         ],
       },
       {
+        title: "自营管理",
+        key: "self_support",
+        children: [
+          {
+            title: "运费模板",
+            key: "shopping_self_support_freight_template_list",
+          },
+        ],
+      },
+      {
         title: "商品管理",
         key: "shopping_goods",
         children: [
           {
             title: "商品分类",
             key: "shopping_goods_category_list",
-          },
-          {
-            title: "运费模板",
-            key: "shopping_goods_freight_template_list",
           },
           {
             title: "商品列表",

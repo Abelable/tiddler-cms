@@ -40,7 +40,7 @@ import { ShopCategoryList } from "./shopping/shop/category-list/index";
 import { ShopList } from "./shopping/shop/shop-list";
 import { ExpressList } from "./shopping/express-list";
 import { GoodsCategoryList } from "./shopping/goods/category-list";
-import { FreightTemplateList } from "./shopping/goods/freight-template-list";
+import { FreightTemplateList } from "./shopping/self-support/freight-template-list";
 import { GoodsList } from "./shopping/goods/goods-list";
 import { GiftTypeList } from "./team/gift-type-list";
 import { GiftGoodsList } from "./team/gift-goods-list";
@@ -67,6 +67,7 @@ import {
   SendOutlined,
   VideoCameraOutlined,
   LogoutOutlined,
+  TagOutlined,
 } from "@ant-design/icons";
 import {
   ExpressIcon,
@@ -183,12 +184,12 @@ export const AuthenticatedApp = () => {
               <Route path="shopping/shop/list" element={<ShopList />} />
               <Route path="shopping/express_list" element={<ExpressList />} />
               <Route
-                path="shopping/goods/category_list"
-                element={<GoodsCategoryList />}
+                path="shopping/self_support/freight_template_list"
+                element={<FreightTemplateList />}
               />
               <Route
-                path="shopping/goods/freight_template_list"
-                element={<FreightTemplateList />}
+                path="shopping/goods/category_list"
+                element={<GoodsCategoryList />}
               />
               <Route path="shopping/goods/list" element={<GoodsList />} />
               <Route path="team/gift_type_list" element={<GiftTypeList />} />
@@ -489,6 +490,22 @@ const MenuSider = ({
           ],
         },
         {
+          label: "自营管理",
+          key: "self_support",
+          icon: <TagOutlined />,
+          children: [
+            {
+              label: (
+                <Link to={"shopping/self_support/freight_template_list"}>
+                  运费模板
+                </Link>
+              ),
+              key: "shopping_self_support_freight_template_list",
+              icon: <CarOutlined />,
+            },
+          ],
+        },
+        {
           label: "商品管理",
           key: "shopping_goods",
           icon: <ShoppingOutlined />,
@@ -498,15 +515,7 @@ const MenuSider = ({
               key: "shopping_goods_category_list",
               icon: <AppstoreOutlined />,
             },
-            {
-              label: (
-                <Link to={"shopping/goods/freight_template_list"}>
-                  运费模板
-                </Link>
-              ),
-              key: "shopping_goods_freight_template_list",
-              icon: <CarOutlined />,
-            },
+
             {
               label: <Link to={"shopping/goods/list"}>商品列表</Link>,
               key: "shopping_goods_list",
