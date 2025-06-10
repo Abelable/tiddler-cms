@@ -670,8 +670,6 @@ export const GoodsModal = ({
                 }}
               </Form.Item>
             </Col>
-          </Row>
-          <Row gutter={16}>
             <Col span={12}>
               <Form.Item
                 name="deliveryMode"
@@ -687,6 +685,34 @@ export const GoodsModal = ({
                 </Select>
               </Form.Item>
             </Col>
+          </Row>
+          <Row gutter={16}>
+            <Form.Item
+              noStyle
+              shouldUpdate={(prevValues, currentValues) =>
+                prevValues.deliveryMode !== currentValues.deliveryMode
+              }
+            >
+              {({ getFieldValue }) =>
+                [1, 3].includes(getFieldValue("deliveryMode")) && (
+                  <Col span={12}>
+                    <Form.Item
+                      name="freightTemplateId"
+                      label="运费模板"
+                      rules={[{ required: true, message: "请选择运费模板" }]}
+                    >
+                      <Select placeholder="请选择运费模板">
+                        {freightTemplateOptions.map(({ id, name }) => (
+                          <Select.Option key={id} value={id}>
+                            {name}
+                          </Select.Option>
+                        ))}
+                      </Select>
+                    </Form.Item>
+                  </Col>
+                )
+              }
+            </Form.Item>
             <Form.Item
               noStyle
               shouldUpdate={(prevValues, currentValues) =>
