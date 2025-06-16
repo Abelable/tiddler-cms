@@ -11,7 +11,7 @@ import { useTopMediaListSearchParams } from "./util";
 export const TopMediaList = () => {
   const { data: shortVideoOptions = [], error: shortVideoOptionsError } =
     useShortVideoOptions();
-  const { data: tourismOptions = [], error: tourismOptionsError } =
+  const { data: tourismNoteOptions = [], error: tourismNoteOptionsError } =
     useTourismNoteOptions();
 
   const [params, setParams] = useTopMediaListSearchParams();
@@ -23,7 +23,7 @@ export const TopMediaList = () => {
         <List
           params={params}
           setParams={setParams}
-          error={error || shortVideoOptionsError || tourismOptionsError}
+          error={error || shortVideoOptionsError || tourismNoteOptionsError}
           loading={isLoading}
           dataSource={data?.list}
           pagination={{
@@ -36,7 +36,7 @@ export const TopMediaList = () => {
       </Main>
       <TopMediaModal
         shortVideoOptions={shortVideoOptions}
-        tourismOptions={tourismOptions}
+        tourismNoteOptions={tourismNoteOptions}
       />
     </Container>
   );
