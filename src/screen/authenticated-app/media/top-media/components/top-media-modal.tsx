@@ -1,4 +1,4 @@
-import { Form, Modal, Select } from "antd";
+import { Form, Input, Modal, Select } from "antd";
 import { OssUpload } from "components/oss-upload";
 import { ErrorBox, ModalLoading, OptionCover } from "components/lib";
 
@@ -173,13 +173,22 @@ export const TopMediaModal = ({
               )
             }
           </Form.Item>
+
           <Form.Item
             name="cover"
             label="封面"
             valuePropName="fileList"
             getValueFromEvent={normFile}
+            rules={[{ required: true, message: "请上传封面" }]}
           >
             <OssUpload maxCount={1} />
+          </Form.Item>
+          <Form.Item
+            name="desc"
+            label="标题"
+            rules={[{ required: true, message: "请输入标题" }]}
+          >
+            <Input placeholder="请输入标题" />
           </Form.Item>
         </Form>
       )}
