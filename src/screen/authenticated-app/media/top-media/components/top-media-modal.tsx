@@ -42,11 +42,11 @@ export const TopMediaModal = ({
     >
       <Form form={form} layout="vertical">
         <Form.Item
-          name="categoryId"
-          label="门店类型"
-          rules={[{ required: true, message: "请选择门店类型" }]}
+          name="shortVideoId"
+          label="视频游记"
+          rules={[{ required: true, message: "请选择视频游记" }]}
         >
-          <Select placeholder="请选择门店类型">
+          <Select placeholder="请选择视频游记">
             {shortVideoOptions.map(({ id, cover, title }) => (
               <Select.Option key={id} value={id}>
                 <OptionCover src={cover} />
