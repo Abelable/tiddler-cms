@@ -1,9 +1,17 @@
 import { Form, Modal, Select } from "antd";
+import { OssUpload } from "components/oss-upload";
+import { OptionCover } from "components/lib";
+
 import { useForm } from "antd/lib/form/Form";
 import { useAddTopMedia } from "service/topMedia";
 import { useTopMediaModal, useTopMediaListQueryKey } from "../util";
-import { MediaOption } from "types/common";
-import { OptionCover } from "components/lib";
+
+import type { MediaOption } from "types/common";
+
+const normFile = (e: any) => {
+  if (Array.isArray(e)) return e;
+  return e && e.fileList;
+};
 
 const typeOptions = [
   { text: "视频游记", value: 2 },
@@ -93,8 +101,8 @@ export const TopMediaModal = ({
               ) : (
                 <Form.Item
                   name="tourismNoteId"
-                  label="视频游记"
-                  rules={[{ required: true, message: "请选择视频游记" }]}
+                  label="图文游记"
+                  rules={[{ required: true, message: "请选择图文游记" }]}
                 >
                   <Select
                     showSearch
@@ -103,7 +111,7 @@ export const TopMediaModal = ({
                         .toLowerCase()
                         .includes(input.toLowerCase())
                     }
-                    placeholder="请选择视频游记"
+                    placeholder="请选择图文游记"
                   >
                     {tourismNoteOptions.map(({ id, cover, title }) => (
                       <Select.Option key={id} value={id}>
@@ -118,6 +126,15 @@ export const TopMediaModal = ({
               <></>
             )
           }
+        </Form.Item>
+        <Form.Item
+          name="cover"
+          label="封面"
+          valuePropName="fileList"
+          getValueFromEvent={normFile}
+          rules={[{ required: true, message: "请上传封面" }]}
+        >
+          <OssUpload maxCount={1} />
         </Form.Item>
       </Form>
     </Modal>
