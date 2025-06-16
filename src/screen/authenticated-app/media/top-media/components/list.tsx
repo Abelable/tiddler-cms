@@ -108,6 +108,7 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
 };
 
 const More = ({ id }: { id: number }) => {
+  const { startEdit } = useTopMediaModal();
   const { mutate: deleteTopMedia } = useDeleteTopMedia(
     useTopMediaListQueryKey()
   );
@@ -123,6 +124,10 @@ const More = ({ id }: { id: number }) => {
   };
 
   const items: MenuProps["items"] = [
+    {
+      label: <div onClick={() => startEdit(id)}>编辑</div>,
+      key: "edit",
+    },
     {
       label: <div onClick={() => confirmDelete(id)}>删除</div>,
       key: "delete",
