@@ -62,7 +62,6 @@ export const TopMediaModal = ({
         <Form.Item
           noStyle
           shouldUpdate={(prevValues, currentValues) => {
-            // 监听formItem值变化
             return prevValues.mediaType !== currentValues.mediaType;
           }}
         >
