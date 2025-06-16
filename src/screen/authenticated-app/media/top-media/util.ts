@@ -1,4 +1,5 @@
 import { useCallback, useMemo } from "react";
+import { useTopMedia } from "service/topMedia";
 import { useSetUrlSearchParams, useUrlQueryParams } from "utils/url";
 
 export const useTopMediaListSearchParams = () => {
@@ -25,11 +26,21 @@ export const useTopMediaModal = () => {
   const [{ topMediaCreate }, setTopMediaModalOpen] = useUrlQueryParams([
     "topMediaCreate",
   ]);
+  const [{ editingTopMediaId }, setEditingTopMediaId] = useUrlQueryParams([
+    "editingTopMediaId",
+  ]);
   const setUrlParams = useSetUrlSearchParams();
+  const { data: editingTopMedia, isLoading } = useTopMedia(
+    Number(editingTopMediaId)
+  );
 
   const open = useCallback(
     () => setTopMediaModalOpen({ topMediaCreate: true }),
     [setTopMediaModalOpen]
+  );
+  const startEdit = useCallback(
+    (id: number) => setEditingTopMediaId({ editingTopMediaId: `${id}` }),
+    [setEditingTopMediaId]
   );
   const close = useCallback(
     () => setUrlParams({ topMediaCreate: "", editingTopMediaId: "" }),
@@ -37,8 +48,12 @@ export const useTopMediaModal = () => {
   );
 
   return {
-    topMediaModalOpen: topMediaCreate === "true",
+    topMediaModalOpen: topMediaCreate === "true" || !!editingTopMediaId,
+    editingTopMediaId,
+    editingTopMedia,
+    isLoading,
     open,
+    startEdit,
     close,
   };
 };

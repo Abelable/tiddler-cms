@@ -1,12 +1,13 @@
 import { Form, Modal, Select } from "antd";
 import { OssUpload } from "components/oss-upload";
-import { OptionCover } from "components/lib";
+import { ErrorBox, ModalLoading, OptionCover } from "components/lib";
 
 import { useForm } from "antd/lib/form/Form";
-import { useAddTopMedia } from "service/topMedia";
+import { useAddTopMedia, useEditTopMedia } from "service/topMedia";
 import { useTopMediaModal, useTopMediaListQueryKey } from "../util";
 
 import type { MediaOption } from "types/common";
+import { useEffect } from "react";
 
 const normFile = (e: any) => {
   if (Array.isArray(e)) return e;
@@ -26,15 +27,38 @@ export const TopMediaModal = ({
   tourismNoteOptions: MediaOption[];
 }) => {
   const [form] = useForm();
-  const { topMediaModalOpen, close } = useTopMediaModal();
+  const {
+    topMediaModalOpen,
+    editingTopMediaId,
+    editingTopMedia,
+    isLoading,
+    close,
+  } = useTopMediaModal();
 
-  const { mutateAsync, isLoading: mutateLoading } = useAddTopMedia(
-    useTopMediaListQueryKey()
-  );
+  const useMutateTopMedia = editingTopMediaId
+    ? useEditTopMedia
+    : useAddTopMedia;
+  const {
+    mutateAsync,
+    isLoading: mutateLoading,
+    error,
+  } = useMutateTopMedia(useTopMediaListQueryKey());
+
+  useEffect(() => {
+    if (editingTopMedia) {
+      const { cover, ...rest } = editingTopMedia;
+      form.setFieldsValue({ cover: cover ? [{ url: cover }] : [], ...rest });
+    }
+  }, [editingTopMedia, form]);
 
   const confirm = () => {
     form.validateFields().then(async () => {
-      await mutateAsync(form.getFieldsValue());
+      const { cover, ...rest } = form.getFieldsValue();
+      await mutateAsync({
+        ...editingTopMedia,
+        ...rest,
+        cover: cover && cover.length ? cover[0].url : "",
+      });
       closeModal();
     });
   };
@@ -47,96 +71,100 @@ export const TopMediaModal = ({
   return (
     <Modal
       forceRender={true}
-      title={"新增最佳游记"}
+      title={editingTopMediaId ? "修改封面" : "新增最佳游记"}
       open={topMediaModalOpen}
       confirmLoading={mutateLoading}
       onOk={confirm}
       onCancel={closeModal}
     >
-      <Form form={form} layout="vertical">
-        <Form.Item
-          name="mediaType"
-          label="游记类型"
-          rules={[{ required: true, message: "请选择游记类型" }]}
-        >
-          <Select placeholder="请选择游记类型">
-            {typeOptions.map(({ text, value }) => (
-              <Select.Option key={value} value={value}>
-                {text}
-              </Select.Option>
-            ))}
-          </Select>
-        </Form.Item>
-        <Form.Item
-          noStyle
-          shouldUpdate={(prevValues, currentValues) => {
-            return prevValues.mediaType !== currentValues.mediaType;
-          }}
-        >
-          {({ getFieldValue }) =>
-            getFieldValue("mediaType") ? (
-              getFieldValue("position") === 2 ? (
-                <Form.Item
-                  name="shortVideoId"
-                  label="视频游记"
-                  rules={[{ required: true, message: "请选择视频游记" }]}
-                >
-                  <Select
-                    showSearch
-                    filterOption={(input, option) =>
-                      (option!.children as any)[1].props.children
-                        .toLowerCase()
-                        .includes(input.toLowerCase())
-                    }
-                    placeholder="请选择视频游记"
+      <ErrorBox error={error} />
+      {isLoading ? (
+        <ModalLoading />
+      ) : (
+        <Form form={form} layout="vertical">
+          <Form.Item
+            name="mediaType"
+            label="游记类型"
+            rules={[{ required: true, message: "请选择游记类型" }]}
+          >
+            <Select placeholder="请选择游记类型">
+              {typeOptions.map(({ text, value }) => (
+                <Select.Option key={value} value={value}>
+                  {text}
+                </Select.Option>
+              ))}
+            </Select>
+          </Form.Item>
+          <Form.Item
+            noStyle
+            shouldUpdate={(prevValues, currentValues) => {
+              return prevValues.mediaType !== currentValues.mediaType;
+            }}
+          >
+            {({ getFieldValue }) =>
+              getFieldValue("mediaType") ? (
+                getFieldValue("mediaType") === 2 ? (
+                  <Form.Item
+                    name="mediaId"
+                    label="视频游记"
+                    rules={[{ required: true, message: "请选择视频游记" }]}
                   >
-                    {shortVideoOptions.map(({ id, cover, title }) => (
-                      <Select.Option key={id} value={id}>
-                        <OptionCover src={cover} />
-                        <span>{title}</span>
-                      </Select.Option>
-                    ))}
-                  </Select>
-                </Form.Item>
+                    <Select
+                      showSearch
+                      filterOption={(input, option) =>
+                        (option!.children as any)[1].props.children
+                          .toLowerCase()
+                          .includes(input.toLowerCase())
+                      }
+                      placeholder="请选择视频游记"
+                    >
+                      {shortVideoOptions.map(({ id, cover, title }) => (
+                        <Select.Option key={id} value={id}>
+                          <OptionCover src={cover} />
+                          <span>{title}</span>
+                        </Select.Option>
+                      ))}
+                    </Select>
+                  </Form.Item>
+                ) : (
+                  <Form.Item
+                    name="mediaId"
+                    label="图文游记"
+                    rules={[{ required: true, message: "请选择图文游记" }]}
+                  >
+                    <Select
+                      showSearch
+                      filterOption={(input, option) =>
+                        (option!.children as any)[1].props.children
+                          .toLowerCase()
+                          .includes(input.toLowerCase())
+                      }
+                      placeholder="请选择图文游记"
+                    >
+                      {tourismNoteOptions.map(({ id, cover, title }) => (
+                        <Select.Option key={id} value={id}>
+                          <OptionCover src={cover} />
+                          <span>{title}</span>
+                        </Select.Option>
+                      ))}
+                    </Select>
+                  </Form.Item>
+                )
               ) : (
-                <Form.Item
-                  name="tourismNoteId"
-                  label="图文游记"
-                  rules={[{ required: true, message: "请选择图文游记" }]}
-                >
-                  <Select
-                    showSearch
-                    filterOption={(input, option) =>
-                      (option!.children as any)[1].props.children
-                        .toLowerCase()
-                        .includes(input.toLowerCase())
-                    }
-                    placeholder="请选择图文游记"
-                  >
-                    {tourismNoteOptions.map(({ id, cover, title }) => (
-                      <Select.Option key={id} value={id}>
-                        <OptionCover src={cover} />
-                        <span>{title}</span>
-                      </Select.Option>
-                    ))}
-                  </Select>
-                </Form.Item>
+                <></>
               )
-            ) : (
-              <></>
-            )
-          }
-        </Form.Item>
-        <Form.Item
-          name="cover"
-          label="封面"
-          valuePropName="fileList"
-          getValueFromEvent={normFile}
-          rules={[{ required: true, message: "请上传封面" }]}
-        >
-          <OssUpload maxCount={1} />
-        </Form.Item>
-      </Form>
+            }
+          </Form.Item>
+          <Form.Item
+            name="cover"
+            label="封面"
+            valuePropName="fileList"
+            getValueFromEvent={normFile}
+          >
+            <OssUpload maxCount={1} />
+          </Form.Item>
+        </Form>
+      )}
     </Modal>
   );
 };
