@@ -117,6 +117,13 @@ export const TopMediaModal = ({
                           .includes(input.toLowerCase())
                       }
                       placeholder="请选择视频游记"
+                      onChange={(value) => {
+                        form.setFieldsValue({
+                          title: shortVideoOptions.find(
+                            (item) => item.id === value
+                          )?.title,
+                        });
+                      }}
                     >
                       {shortVideoOptions.map(({ id, cover, title }) => (
                         <Select.Option key={id} value={id}>
