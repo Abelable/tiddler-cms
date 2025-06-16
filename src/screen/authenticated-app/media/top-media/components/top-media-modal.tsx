@@ -111,12 +111,12 @@ export const TopMediaModal = ({
                   >
                     <Select
                       showSearch
+                      placeholder="请选择视频游记"
                       filterOption={(input, option) =>
                         (option!.children as any)[1].props.children
                           .toLowerCase()
                           .includes(input.toLowerCase())
                       }
-                      placeholder="请选择视频游记"
                       onChange={(value) => {
                         form.setFieldsValue({
                           title: shortVideoOptions.find(
@@ -141,12 +141,19 @@ export const TopMediaModal = ({
                   >
                     <Select
                       showSearch
+                      placeholder="请选择图文游记"
                       filterOption={(input, option) =>
                         (option!.children as any)[1].props.children
                           .toLowerCase()
                           .includes(input.toLowerCase())
                       }
-                      placeholder="请选择图文游记"
+                      onChange={(value) => {
+                        form.setFieldsValue({
+                          title: shortVideoOptions.find(
+                            (item) => item.id === value
+                          )?.title,
+                        });
+                      }}
                     >
                       {tourismNoteOptions.map(({ id, cover, title }) => (
                         <Select.Option key={id} value={id}>
