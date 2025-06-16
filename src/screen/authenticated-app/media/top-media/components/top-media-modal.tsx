@@ -60,27 +60,41 @@ export const TopMediaModal = ({
           </Select>
         </Form.Item>
         <Form.Item
-          name="shortVideoId"
-          label="视频游记"
-          rules={[{ required: true, message: "请选择视频游记" }]}
+          noStyle
+          shouldUpdate={(prevValues, currentValues) => {
+            // 监听formItem值变化
+            return prevValues.mediaType !== currentValues.mediaType;
+          }}
         >
-          <Select
-            showSearch
-            filterOption={(input, option) =>
-              (option!.children as any)[1].props.children
-                .toLowerCase()
-                .includes(input.toLowerCase())
-            }
-            placeholder="请选择视频游记"
-          >
-            {shortVideoOptions.map(({ id, cover, title }) => (
-              <Select.Option key={id} value={id}>
-                <OptionCover src={cover} />
-                <span>{title}</span>
-              </Select.Option>
-            ))}
-          </Select>
+          {({ getFieldValue }) =>
+            getFieldValue("mediaType") &&
+            getFieldValue("position") === 2 && (
+              <Form.Item
+                name="shortVideoId"
+                label="视频游记"
+                rules={[{ required: true, message: "请选择视频游记" }]}
+              >
+                <Select
+                  showSearch
+                  filterOption={(input, option) =>
+                    (option!.children as any)[1].props.children
+                      .toLowerCase()
+                      .includes(input.toLowerCase())
+                  }
+                  placeholder="请选择视频游记"
+                >
+                  {shortVideoOptions.map(({ id, cover, title }) => (
+                    <Select.Option key={id} value={id}>
+                      <OptionCover src={cover} />
+                      <span>{title}</span>
+                    </Select.Option>
+                  ))}
+                </Select>
+              </Form.Item>
+            )
+          }
         </Form.Item>
+
         <Form.Item
           name="tourismNoteId"
           label="视频游记"
