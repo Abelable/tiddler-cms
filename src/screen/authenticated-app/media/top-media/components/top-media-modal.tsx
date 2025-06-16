@@ -184,7 +184,7 @@ export const TopMediaModal = ({
             <OssUpload maxCount={1} />
           </Form.Item>
           <Form.Item
-            name="desc"
+            name="title"
             label="标题"
             rules={[{ required: true, message: "请输入标题" }]}
           >
