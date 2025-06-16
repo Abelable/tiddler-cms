@@ -118,10 +118,12 @@ export const TopMediaModal = ({
                           .includes(input.toLowerCase())
                       }
                       onChange={(value) => {
+                        const shortVideo = shortVideoOptions.find(
+                          (item) => item.id === value
+                        );
                         form.setFieldsValue({
-                          title: shortVideoOptions.find(
-                            (item) => item.id === value
-                          )?.title,
+                          title: shortVideo?.title,
+                          cover: [{ url: shortVideo?.cover }],
                         });
                       }}
                     >
@@ -148,10 +150,12 @@ export const TopMediaModal = ({
                           .includes(input.toLowerCase())
                       }
                       onChange={(value) => {
+                        const tourismNote = tourismNoteOptions.find(
+                          (item) => item.id === value
+                        );
                         form.setFieldsValue({
-                          title: shortVideoOptions.find(
-                            (item) => item.id === value
-                          )?.title,
+                          title: tourismNote?.title,
+                          cover: [{ url: tourismNote?.cover }],
                         });
                       }}
                     >
