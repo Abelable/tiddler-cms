@@ -44,6 +44,12 @@ export interface ProductOption {
   name: string;
 }
 
+export interface MediaOption {
+  id: number;
+  cover: string;
+  title: string;
+}
+
 export interface DepositInfo {
   orderSn: string;
   payId: number;

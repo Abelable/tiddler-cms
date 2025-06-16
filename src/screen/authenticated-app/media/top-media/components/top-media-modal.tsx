@@ -1,9 +1,17 @@
-import { Form, Input, Modal } from "antd";
+import { Form, Input, Modal, Select } from "antd";
 import { useForm } from "antd/lib/form/Form";
 import { useAddTopMedia } from "service/topMedia";
 import { useTopMediaModal, useTopMediaListQueryKey } from "../util";
+import { MediaOption } from "types/common";
+import { OptionCover } from "components/lib";
 
-export const TopMediaModal = () => {
+export const TopMediaModal = ({
+  shortVideoOptions,
+  tourismOptions,
+}: {
+  shortVideoOptions: MediaOption[];
+  tourismOptions: MediaOption[];
+}) => {
   const [form] = useForm();
   const { topMediaModalOpen, close } = useTopMediaModal();
 
@@ -26,7 +34,7 @@ export const TopMediaModal = () => {
   return (
     <Modal
       forceRender={true}
-      title={"代金券驳回重审"}
+      title={"新增最佳游记"}
       open={topMediaModalOpen}
       confirmLoading={mutateLoading}
       onOk={confirm}
@@ -34,11 +42,18 @@ export const TopMediaModal = () => {
     >
       <Form form={form} layout="vertical">
         <Form.Item
-          label={"驳回原因"}
-          name={"failureReason"}
-          rules={[{ required: true, message: "请输入驳回原因" }]}
+          name="categoryId"
+          label="门店类型"
+          rules={[{ required: true, message: "请选择门店类型" }]}
         >
-          <Input placeholder={"请输入驳回原因"} />
+          <Select placeholder="请选择门店类型">
+            {shortVideoOptions.map(({ id, cover, title }) => (
+              <Select.Option key={id} value={id}>
+                <OptionCover src={cover} />
+                <span>{title}</span>
+              </Select.Option>
+            ))}
+          </Select>
         </Form.Item>
       </Form>
     </Modal>

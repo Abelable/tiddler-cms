@@ -7,6 +7,7 @@ import {
 } from "./use-optimistic-options";
 import { cleanObject } from "utils/index";
 
+import type { MediaOption } from "types/common";
 import type {
   ShortVideo,
   ShortVideoListResult,
@@ -78,5 +79,12 @@ export const useDeleteShortVideo = (queryKey: QueryKey) => {
         method: "POST",
       }),
     useDeleteConfig(queryKey)
+  );
+};
+
+export const useShortVideoOptions = () => {
+  const client = useHttp();
+  return useQuery<MediaOption[]>(["short_video_options"], () =>
+    client("media/short_video/options")
   );
 };

@@ -2,11 +2,18 @@ import { TopMediaModal } from "./components/top-media-modal";
 import { List } from "./components/list";
 
 import styled from "@emotion/styled";
+import { useShortVideoOptions } from "service/shortVideo";
+import { useTourismNoteOptions } from "service/tourismNote";
 import { useTopMediaList } from "service/topMedia";
 import { toNumber } from "utils";
 import { useTopMediaListSearchParams } from "./util";
 
 export const TopMediaList = () => {
+  const { data: shortVideoOptions = [], error: shortVideoOptionsError } =
+    useShortVideoOptions();
+  const { data: tourismOptions = [], error: tourismOptionsError } =
+    useTourismNoteOptions();
+
   const [params, setParams] = useTopMediaListSearchParams();
   const { isLoading, error, data } = useTopMediaList(params);
 
@@ -16,7 +23,7 @@ export const TopMediaList = () => {
         <List
           params={params}
           setParams={setParams}
-          error={error}
+          error={error || shortVideoOptionsError || tourismOptionsError}
           loading={isLoading}
           dataSource={data?.list}
           pagination={{
@@ -27,7 +34,10 @@ export const TopMediaList = () => {
           bordered
         />
       </Main>
-      <TopMediaModal />
+      <TopMediaModal
+        shortVideoOptions={shortVideoOptions}
+        tourismOptions={tourismOptions}
+      />
     </Container>
   );
 };

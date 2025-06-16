@@ -7,6 +7,7 @@ import {
 } from "./use-optimistic-options";
 import { cleanObject } from "utils/index";
 
+import type { MediaOption } from "types/common";
 import type {
   TourismNote,
   TourismNoteListResult,
@@ -78,5 +79,12 @@ export const useDeleteTourismNote = (queryKey: QueryKey) => {
         method: "POST",
       }),
     useDeleteConfig(queryKey)
+  );
+};
+
+export const useTourismNoteOptions = () => {
+  const client = useHttp();
+  return useQuery<MediaOption[]>(["tourism_note_options"], () =>
+    client("media/tourism_note/options")
   );
 };
