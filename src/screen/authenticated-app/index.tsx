@@ -12,6 +12,7 @@ import { RoleList } from "./permission-management/role-list";
 import { AdminList } from "./permission-management/admin-list";
 import { UserList } from "./user/user-list";
 import { AuthInfoList } from "./user/auth-info-list";
+import { TopMediaList } from "./media/top-media";
 import { ShortVideoList } from "./media/short-video";
 import { TourismNoteList } from "./media/tourism-note";
 import { ScenicCategoryList } from "./scenic/spot/category-list";
@@ -71,6 +72,7 @@ import {
   LogoutOutlined,
   TagOutlined,
   EnvironmentOutlined,
+  LikeOutlined,
 } from "@ant-design/icons";
 import {
   ExpressIcon,
@@ -108,6 +110,7 @@ export const AuthenticatedApp = () => {
               <Route path="user/list" element={<UserList />} />
               <Route path="user/auth_info_list" element={<AuthInfoList />} />
               <Route path="activity/banner_list" element={<BannerList />} />
+              <Route path="media/top" element={<TopMediaList />} />
               <Route path="media/short_video" element={<ShortVideoList />} />
               <Route path="media/tourism_note" element={<TourismNoteList />} />
               <Route
@@ -287,6 +290,11 @@ const MenuSider = ({
       key: "media",
       icon: <SendOutlined />,
       children: [
+        {
+          label: <Link to={"media/top"}>最佳游记</Link>,
+          key: "media_top",
+          icon: <LikeOutlined />,
+        },
         {
           label: <Link to={"media/short_video"}>视频游记</Link>,
           key: "media_short_video",

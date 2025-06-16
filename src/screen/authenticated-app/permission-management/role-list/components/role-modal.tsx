@@ -56,6 +56,10 @@ const treeData: DataNode[] = [
     key: "media",
     children: [
       {
+        title: "最佳游记",
+        key: "media_top",
+      },
+      {
         title: "视频游记",
         key: "media_short_video",
       },
