@@ -281,7 +281,7 @@ export const ShortVideoModal = ({
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item label="游记所在经纬度" required>
-                <Input.Group>
+                <Space.Compact>
                   <Row gutter={8}>
                     <Col span={12}>
                       <Form.Item style={{ marginBottom: 0 }} name="longitude">
@@ -294,7 +294,7 @@ export const ShortVideoModal = ({
                       </Form.Item>
                     </Col>
                   </Row>
-                </Input.Group>
+                </Space.Compact>
               </Form.Item>
             </Col>
             <Col span={12}>

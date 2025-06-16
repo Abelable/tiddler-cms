@@ -65,6 +65,7 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
             title: "类型",
             dataIndex: "mediaType",
             render: (value) => <>{value === 2 ? "视频游记" : "图文游记"}</>,
+            width: "12rem",
           },
           {
             title: "更新时间",

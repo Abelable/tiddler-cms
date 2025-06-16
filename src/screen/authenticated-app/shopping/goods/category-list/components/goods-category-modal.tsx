@@ -1,4 +1,4 @@
-import { Form, Input, InputNumber, Select, Modal } from "antd";
+import { Form, Input, InputNumber, Select, Modal, Space } from "antd";
 import { useForm } from "antd/lib/form/Form";
 import { ErrorBox, ModalLoading } from "components/lib";
 
@@ -85,7 +85,7 @@ export const GoodsCategoryModal = ({
             </Select>
           </Form.Item>
           <Form.Item label="销售佣金比例范围%" required>
-            <Input.Group compact>
+            <Space.Compact>
               <Form.Item
                 style={{ marginBottom: 0, width: "46%" }}
                 name="minSalesCommissionRate"
@@ -120,10 +120,10 @@ export const GoodsCategoryModal = ({
                   placeholder="请输入最大销售佣金比例"
                 />
               </Form.Item>
-            </Input.Group>
+            </Space.Compact>
           </Form.Item>
           <Form.Item label="推广佣金比例范围%" required>
-            <Input.Group compact>
+            <Space.Compact>
               <Form.Item
                 style={{ marginBottom: 0, width: "46%" }}
                 name="minPromotionCommissionRate"
@@ -158,7 +158,7 @@ export const GoodsCategoryModal = ({
                   placeholder="请输入最大推广佣金比例"
                 />
               </Form.Item>
-            </Input.Group>
+            </Space.Compact>
           </Form.Item>
           <Form.Item
             label="推广佣金上限"

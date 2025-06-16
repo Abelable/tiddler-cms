@@ -250,7 +250,7 @@ export const ScenicModal = ({
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item label="景区所在经纬度" required>
-                <Input.Group>
+                <Space.Compact>
                   <Row gutter={8}>
                     <Col span={12}>
                       <Form.Item
@@ -271,7 +271,7 @@ export const ScenicModal = ({
                       </Form.Item>
                     </Col>
                   </Row>
-                </Input.Group>
+                </Space.Compact>
               </Form.Item>
             </Col>
             <Col span={12}>

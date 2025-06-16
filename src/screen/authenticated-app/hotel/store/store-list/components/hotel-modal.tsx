@@ -432,7 +432,7 @@ export const HotelModal = ({
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item label="酒店所在经纬度" required>
-                <Input.Group>
+                <Space.Compact>
                   <Row gutter={8}>
                     <Col span={12}>
                       <Form.Item
@@ -453,7 +453,7 @@ export const HotelModal = ({
                       </Form.Item>
                     </Col>
                   </Row>
-                </Input.Group>
+                </Space.Compact>
               </Form.Item>
             </Col>
             <Col span={12}>
