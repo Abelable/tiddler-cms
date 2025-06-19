@@ -90,7 +90,7 @@ export const List = ({
             ),
           },
           {
-            title: "点击率",
+            title: "访问量",
             dataIndex: "views",
             render: (value, shortVideo) => (
               <InputNumber

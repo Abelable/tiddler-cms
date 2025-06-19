@@ -82,7 +82,7 @@ export const List = ({
             dataIndex: "status",
             render: (value, goods) =>
               value === 0 ? (
-                <span style={{ color: "#87d068" }}>待审核</span>
+                <span style={{ color: "#faad14" }}>待审核</span>
               ) : value === 1 ? (
                 <span style={{ color: "#296BEF" }}>售卖中</span>
               ) : (
@@ -107,7 +107,7 @@ export const List = ({
               const shop = shopOptions.find((item) => item.id === value);
               return shop?.id === 0 ? (
                 <img
-                  style={{ width: "8rem" }}
+                  style={{ width: "6.8rem" }}
                   src="https://static.tiddler.cn/mp/self_support.png"
                   alt=""
                 />
@@ -133,13 +133,6 @@ export const List = ({
             dataIndex: "name",
             width: "32rem",
           },
-
-          {
-            title: "价格",
-            dataIndex: "price",
-            render: (value) => <>{`¥${value}`}</>,
-            width: "12rem",
-          },
           {
             title: "一级分类",
             dataIndex: "shopCategoryId",
@@ -156,6 +149,12 @@ export const List = ({
                 {goodsCategoryOptions.find((item) => item.id === value)?.name}
               </>
             ),
+            width: "12rem",
+          },
+          {
+            title: "价格",
+            dataIndex: "price",
+            render: (value) => <>{`¥${value}`}</>,
             width: "12rem",
           },
           {
@@ -211,7 +210,7 @@ export const List = ({
             ),
           },
           {
-            title: "点击率",
+            title: "访问量",
             dataIndex: "views",
             render: (value, shortVideo) => (
               <InputNumber
