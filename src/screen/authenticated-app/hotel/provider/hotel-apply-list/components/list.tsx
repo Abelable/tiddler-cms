@@ -14,7 +14,7 @@ import { ProviderHotel } from "types/providerHotel";
 import { useProviderHotelListQueryKey, useRejectModal } from "../util";
 import { SearchPanelProps } from "./search-panel";
 import {
-  useApprovedProviderHotel,
+  useApproveProviderHotel,
   useDeleteProviderHotel,
 } from "service/providerHotel";
 
@@ -129,7 +129,7 @@ export const List = ({
 };
 
 const More = ({ id, status }: { id: number; status: number }) => {
-  const { mutate: approvedProviderHotel } = useApprovedProviderHotel(
+  const { mutate: approveProviderHotel } = useApproveProviderHotel(
     useProviderHotelListQueryKey()
   );
   const { mutate: deleteProviderHotel } = useDeleteProviderHotel(
@@ -137,13 +137,13 @@ const More = ({ id, status }: { id: number; status: number }) => {
   );
   const { open: openRejectModal } = useRejectModal();
 
-  const confirmApproved = (id: number) => {
+  const confirmApprove = (id: number) => {
     Modal.confirm({
       title: "酒店申请通过确认",
       content: "请确保在服务商有景区相关资质的情况下进行该操作",
       okText: "确定",
       cancelText: "取消",
-      onOk: () => approvedProviderHotel(id),
+      onOk: () => approveProviderHotel(id),
     });
   };
 
@@ -161,8 +161,8 @@ const More = ({ id, status }: { id: number; status: number }) => {
     status === 0
       ? [
           {
-            label: <div onClick={() => confirmApproved(id)}>通过</div>,
-            key: "approved",
+            label: <div onClick={() => confirmApprove(id)}>通过</div>,
+            key: "approve",
           },
           {
             label: <div onClick={() => openRejectModal(id)}>驳回</div>,

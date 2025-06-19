@@ -1,6 +1,6 @@
 import { QueryKey, useMutation, useQuery } from "react-query";
 import { useHttp } from "./http";
-import { useApprovedConfig, useRejectConfig } from "./use-optimistic-options";
+import { useApproveConfig, useRejectConfig } from "./use-optimistic-options";
 import type {
   ProviderRestaurantListSearchParams,
   ProviderRestaurantListResult,
@@ -20,15 +20,15 @@ export const useProviderRestaurantList = (
   );
 };
 
-export const useApprovedProviderRestaurant = (queryKey: QueryKey) => {
+export const useApproveProviderRestaurant = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (id: number) =>
-      client("catering/provider/restaurant/approved", {
+      client("catering/provider/restaurant/approve", {
         data: { id },
         method: "POST",
       }),
-    useApprovedConfig(queryKey)
+    useApproveConfig(queryKey)
   );
 };
 

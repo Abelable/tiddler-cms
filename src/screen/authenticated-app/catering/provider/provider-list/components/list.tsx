@@ -19,7 +19,7 @@ import {
   useRejectModal,
 } from "../util";
 import { SearchPanelProps } from "./search-panel";
-import { useApprovedCateringProvider } from "service/cateringProvider";
+import { useApproveCateringProvider } from "service/cateringProvider";
 
 interface ListProps extends TableProps<CateringProvider>, SearchPanelProps {
   error: Error | unknown;
@@ -159,18 +159,18 @@ export const List = ({
 
 const More = ({ id, status }: { id: number; status: number }) => {
   const { open } = useCateringProviderModal();
-  const { mutate: approvedCateringProvider } = useApprovedCateringProvider(
+  const { mutate: approveCateringProvider } = useApproveCateringProvider(
     useCateringProvidersQueryKey()
   );
   const { open: openRejectModal } = useRejectModal();
 
-  const confirmApproved = (id: number) => {
+  const confirmApprove = (id: number) => {
     Modal.confirm({
       title: "商家审核通过确认",
       content: "请确保在商家信息无误的情况下进行该操作",
       okText: "确定",
       cancelText: "取消",
-      onOk: () => approvedCateringProvider(id),
+      onOk: () => approveCateringProvider(id),
     });
   };
 
@@ -182,8 +182,8 @@ const More = ({ id, status }: { id: number; status: number }) => {
             key: "detail",
           },
           {
-            label: <div onClick={() => confirmApproved(id)}>通过</div>,
-            key: "approved",
+            label: <div onClick={() => confirmApprove(id)}>通过</div>,
+            key: "approve",
           },
           {
             label: <div onClick={() => openRejectModal(id)}>驳回</div>,

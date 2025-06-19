@@ -10,7 +10,7 @@ import {
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
 import dayjs from "dayjs";
-import { useApprovedRoom, useDeleteRoom } from "service/hotelRoom";
+import { useApproveRoom, useDeleteRoom } from "service/hotelRoom";
 import { useRoomModal, useRoomListQueryKey, useRejectModal } from "../util";
 import { SearchPanelProps } from "./search-panel";
 
@@ -170,7 +170,7 @@ export const List = ({
 const More = ({ id, status }: { id: number; status: number }) => {
   const { open } = useRoomModal();
   const { mutate: deleteRoom } = useDeleteRoom(useRoomListQueryKey());
-  const { mutate: approvedRoom } = useApprovedRoom(useRoomListQueryKey());
+  const { mutate: approveRoom } = useApproveRoom(useRoomListQueryKey());
   const { open: openRejectModal } = useRejectModal();
 
   const confirmDelete = (id: number) => {
@@ -183,13 +183,13 @@ const More = ({ id, status }: { id: number; status: number }) => {
     });
   };
 
-  const confirmApproved = (id: number) => {
+  const confirmApprove = (id: number) => {
     Modal.confirm({
       title: "房间审核通过确认",
       content: "请确保在房间信息无误的情况下进行该操作",
       okText: "确定",
       cancelText: "取消",
-      onOk: () => approvedRoom(id),
+      onOk: () => approveRoom(id),
     });
   };
 
@@ -202,8 +202,8 @@ const More = ({ id, status }: { id: number; status: number }) => {
           key: "detail",
         },
         {
-          label: <div onClick={() => confirmApproved(id)}>通过</div>,
-          key: "approved",
+          label: <div onClick={() => confirmApprove(id)}>通过</div>,
+          key: "approve",
         },
         {
           label: <div onClick={() => openRejectModal(id)}>驳回</div>,

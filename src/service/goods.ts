@@ -2,7 +2,7 @@ import { QueryKey, useMutation, useQuery } from "react-query";
 import { useHttp } from "./http";
 import {
   useAddConfig,
-  useApprovedConfig,
+  useApproveConfig,
   useDeleteConfig,
   useEditConfig,
   useRejectConfig,
@@ -37,7 +37,7 @@ export const useGoods = (id: number) => {
   );
 };
 
-export const useApprovedGoods = (queryKey: QueryKey) => {
+export const useApproveGoods = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (id: number) =>
@@ -45,7 +45,7 @@ export const useApprovedGoods = (queryKey: QueryKey) => {
         data: { id },
         method: "POST",
       }),
-    useApprovedConfig(queryKey)
+    useApproveConfig(queryKey)
   );
 };
 

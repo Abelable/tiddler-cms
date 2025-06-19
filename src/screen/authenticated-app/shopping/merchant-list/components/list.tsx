@@ -19,7 +19,7 @@ import {
   useRejectModal,
 } from "../util";
 import { SearchPanelProps } from "./search-panel";
-import { useApprovedMerchant } from "service/merchant";
+import { useApproveMerchant } from "service/merchant";
 
 interface ListProps extends TableProps<Merchant>, SearchPanelProps {
   error: Error | unknown;
@@ -158,18 +158,18 @@ export const List = ({
 
 const More = ({ id, status }: { id: number; status: number }) => {
   const { open } = useMerchantModal();
-  const { mutate: approvedMerchant } = useApprovedMerchant(
+  const { mutate: approveMerchant } = useApproveMerchant(
     useMerchantsQueryKey()
   );
   const { open: openRejectModal } = useRejectModal();
 
-  const confirmApproved = (id: number) => {
+  const confirmApprove = (id: number) => {
     Modal.confirm({
       title: "商家审核通过确认",
       content: "请确保在商家信息无误的情况下进行该操作",
       okText: "确定",
       cancelText: "取消",
-      onOk: () => approvedMerchant(id),
+      onOk: () => approveMerchant(id),
     });
   };
 
@@ -181,8 +181,8 @@ const More = ({ id, status }: { id: number; status: number }) => {
             key: "detail",
           },
           {
-            label: <div onClick={() => confirmApproved(id)}>通过</div>,
-            key: "approved",
+            label: <div onClick={() => confirmApprove(id)}>通过</div>,
+            key: "approve",
           },
           {
             label: <div onClick={() => openRejectModal(id)}>驳回</div>,

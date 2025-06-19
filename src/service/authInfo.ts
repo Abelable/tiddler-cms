@@ -1,6 +1,6 @@
 import { QueryKey, useMutation, useQuery } from "react-query";
 import { useHttp } from "./http";
-import { useApprovedConfig, useRejectConfig } from "./use-optimistic-options";
+import { useApproveConfig, useRejectConfig } from "./use-optimistic-options";
 import type {
   AuthInfoDetail,
   AuthInfoListResult,
@@ -25,15 +25,15 @@ export const useAuthInfo = (id: number) => {
   );
 };
 
-export const useApprovedAuthInfo = (queryKey: QueryKey) => {
+export const useApproveAuthInfo = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (id: number) =>
-      client("auth_info/approved", {
+      client("auth_info/approve", {
         data: { id },
         method: "POST",
       }),
-    useApprovedConfig(queryKey)
+    useApproveConfig(queryKey)
   );
 };
 

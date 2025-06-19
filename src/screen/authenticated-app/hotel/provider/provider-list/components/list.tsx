@@ -19,7 +19,7 @@ import {
   useRejectModal,
 } from "../util";
 import { SearchPanelProps } from "./search-panel";
-import { useApprovedProvider } from "service/hotelProvider";
+import { useApproveProvider } from "service/hotelProvider";
 
 import type { Provider } from "types/hotelProvider";
 
@@ -157,18 +157,18 @@ export const List = ({
 
 const More = ({ id, status }: { id: number; status: number }) => {
   const { open } = useProviderModal();
-  const { mutate: approvedProvider } = useApprovedProvider(
+  const { mutate: approveProvider } = useApproveProvider(
     useProvidersQueryKey()
   );
   const { open: openRejectModal } = useRejectModal();
 
-  const confirmApproved = (id: number) => {
+  const confirmApprove = (id: number) => {
     Modal.confirm({
       title: "服务商审核通过确认",
       content: "请确保在服务商信息无误的情况下进行该操作",
       okText: "确定",
       cancelText: "取消",
-      onOk: () => approvedProvider(id),
+      onOk: () => approveProvider(id),
     });
   };
 
@@ -180,8 +180,8 @@ const More = ({ id, status }: { id: number; status: number }) => {
             key: "detail",
           },
           {
-            label: <div onClick={() => confirmApproved(id)}>通过</div>,
-            key: "approved",
+            label: <div onClick={() => confirmApprove(id)}>通过</div>,
+            key: "approve",
           },
           {
             label: <div onClick={() => openRejectModal(id)}>驳回</div>,

@@ -14,7 +14,7 @@ import { ProviderRestaurant } from "types/providerRestaurant";
 import { useProviderRestaurantListQueryKey, useRejectModal } from "../util";
 import { SearchPanelProps } from "./search-panel";
 import {
-  useApprovedProviderRestaurant,
+  useApproveProviderRestaurant,
   useDeleteProviderRestaurant,
 } from "service/providerRestaurant";
 
@@ -130,7 +130,7 @@ export const List = ({
 };
 
 const More = ({ id, status }: { id: number; status: number }) => {
-  const { mutate: approvedProviderRestaurant } = useApprovedProviderRestaurant(
+  const { mutate: approveProviderRestaurant } = useApproveProviderRestaurant(
     useProviderRestaurantListQueryKey()
   );
   const { mutate: deleteProviderRestaurant } = useDeleteProviderRestaurant(
@@ -138,13 +138,13 @@ const More = ({ id, status }: { id: number; status: number }) => {
   );
   const { open: openRejectModal } = useRejectModal();
 
-  const confirmApproved = (id: number) => {
+  const confirmApprove = (id: number) => {
     Modal.confirm({
       title: "门店申请通过确认",
       content: "请确保在服务商有门店相关资质的情况下进行该操作",
       okText: "确定",
       cancelText: "取消",
-      onOk: () => approvedProviderRestaurant(id),
+      onOk: () => approveProviderRestaurant(id),
     });
   };
 
@@ -162,8 +162,8 @@ const More = ({ id, status }: { id: number; status: number }) => {
     status === 0
       ? [
           {
-            label: <div onClick={() => confirmApproved(id)}>通过</div>,
-            key: "approved",
+            label: <div onClick={() => confirmApprove(id)}>通过</div>,
+            key: "approve",
           },
           {
             label: <div onClick={() => openRejectModal(id)}>驳回</div>,

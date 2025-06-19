@@ -17,7 +17,7 @@ import {
   useRejectModal,
 } from "../util";
 import { SearchPanelProps } from "./search-panel";
-import { useApprovedAuthInfo } from "service/authInfo";
+import { useApproveAuthInfo } from "service/authInfo";
 
 interface ListProps extends TableProps<AuthInfo>, SearchPanelProps {
   error: Error | unknown;
@@ -125,18 +125,18 @@ export const List = ({
 
 const More = ({ id, status }: { id: number; status: number }) => {
   const { open } = useAuthInfoModal();
-  const { mutate: approvedAuthInfo } = useApprovedAuthInfo(
+  const { mutate: approveAuthInfo } = useApproveAuthInfo(
     useAuthInfoListQueryKey()
   );
   const { open: openRejectModal } = useRejectModal();
 
-  const confirmApproved = (id: number) => {
+  const confirmApprove = (id: number) => {
     Modal.confirm({
       title: "实名认证审核通过确认",
       content: "请确保在实名认证信息无误的情况下进行该操作",
       okText: "确定",
       cancelText: "取消",
-      onOk: () => approvedAuthInfo(id),
+      onOk: () => approveAuthInfo(id),
     });
   };
 
@@ -148,8 +148,8 @@ const More = ({ id, status }: { id: number; status: number }) => {
             key: "detail",
           },
           {
-            label: <div onClick={() => confirmApproved(id)}>通过</div>,
-            key: "approved",
+            label: <div onClick={() => confirmApprove(id)}>通过</div>,
+            key: "approve",
           },
           {
             label: <div onClick={() => openRejectModal(id)}>驳回</div>,

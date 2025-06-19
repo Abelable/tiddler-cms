@@ -115,3 +115,34 @@ export const useRejectModal = () => {
     close,
   };
 };
+
+export const useApproveModal = () => {
+  const [{ approveGoodsId }, setApproveGoodsId] = useUrlQueryParams([
+    "approveGoodsId",
+  ]);
+  const setUrlParams = useSetUrlSearchParams();
+  const {
+    data: editingGoods,
+    isLoading,
+    error,
+  } = useGoods(Number(approveGoodsId));
+
+  const open = useCallback(
+    (id: number) => setApproveGoodsId({ approveGoodsId: `${id}` }),
+    [setApproveGoodsId]
+  );
+  const close = useCallback(
+    () => setUrlParams({ approveGoodsId: "" }),
+    [setUrlParams]
+  );
+
+  return {
+    approveModalOpen: !!approveGoodsId,
+    approveGoodsId,
+    editingGoods,
+    isLoading,
+    error,
+    open,
+    close,
+  };
+};

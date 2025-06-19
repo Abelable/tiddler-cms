@@ -1,7 +1,7 @@
 import { QueryKey, useMutation, useQuery } from "react-query";
 import { useHttp } from "./http";
 import {
-  useApprovedConfig,
+  useApproveConfig,
   useDeleteConfig,
   useRejectConfig,
 } from "./use-optimistic-options";
@@ -29,7 +29,7 @@ export const useRoom = (id: number) => {
   );
 };
 
-export const useApprovedRoom = (queryKey: QueryKey) => {
+export const useApproveRoom = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (id: number) =>
@@ -37,7 +37,7 @@ export const useApprovedRoom = (queryKey: QueryKey) => {
         data: { id },
         method: "POST",
       }),
-    useApprovedConfig(queryKey)
+    useApproveConfig(queryKey)
   );
 };
 

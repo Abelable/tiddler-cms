@@ -12,7 +12,7 @@ import {
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
 import dayjs from "dayjs";
-import { useApprovedSetMeal, useDeleteSetMeal } from "service/setMeal";
+import { useApproveSetMeal, useDeleteSetMeal } from "service/setMeal";
 import {
   useSetMealModal,
   useSetMealListQueryKey,
@@ -170,7 +170,7 @@ export const List = ({
 const More = ({ id, status }: { id: number; status: number }) => {
   const { open } = useSetMealModal();
   const { mutate: deleteSetMeal } = useDeleteSetMeal(useSetMealListQueryKey());
-  const { mutate: approvedSetMeal } = useApprovedSetMeal(
+  const { mutate: approveSetMeal } = useApproveSetMeal(
     useSetMealListQueryKey()
   );
   const { open: openRejectModal } = useRejectModal();
@@ -185,13 +185,13 @@ const More = ({ id, status }: { id: number; status: number }) => {
     });
   };
 
-  const confirmApproved = (id: number) => {
+  const confirmApprove = (id: number) => {
     Modal.confirm({
       title: "套餐审核通过确认",
       content: "请确保在套餐信息无误的情况下进行该操作",
       okText: "确定",
       cancelText: "取消",
-      onOk: () => approvedSetMeal(id),
+      onOk: () => approveSetMeal(id),
     });
   };
 
@@ -204,8 +204,8 @@ const More = ({ id, status }: { id: number; status: number }) => {
           key: "detail",
         },
         {
-          label: <div onClick={() => confirmApproved(id)}>通过</div>,
-          key: "approved",
+          label: <div onClick={() => confirmApprove(id)}>通过</div>,
+          key: "approve",
         },
         {
           label: <div onClick={() => openRejectModal(id)}>驳回</div>,

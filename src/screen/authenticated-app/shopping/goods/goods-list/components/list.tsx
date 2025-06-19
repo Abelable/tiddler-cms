@@ -24,7 +24,7 @@ import {
 import { PlusOutlined } from "@ant-design/icons";
 
 import dayjs from "dayjs";
-import { useApprovedGoods, useDeleteGoods, useEditViews } from "service/goods";
+import { useApproveGoods, useDeleteGoods, useEditViews } from "service/goods";
 import {
   useGoodsDetailModal,
   useGoodsListQueryKey,
@@ -267,7 +267,7 @@ const More = ({ goods }: { goods: Goods }) => {
   const { startEdit } = useGoodsModal();
   const { open } = useGoodsDetailModal();
   const { mutate: deleteGoods } = useDeleteGoods(useGoodsListQueryKey());
-  const { mutate: approvedGoods } = useApprovedGoods(useGoodsListQueryKey());
+  const { mutate: approveGoods } = useApproveGoods(useGoodsListQueryKey());
   const { open: openRejectModal } = useRejectModal();
 
   const confirmDelete = (id: number) => {
@@ -280,13 +280,13 @@ const More = ({ goods }: { goods: Goods }) => {
     });
   };
 
-  const confirmApproved = (id: number) => {
+  const confirmApprove = (id: number) => {
     Modal.confirm({
       title: "商品审核通过确认",
       content: "请确保在商品信息无误的情况下进行该操作",
       okText: "确定",
       cancelText: "取消",
-      onOk: () => approvedGoods(id),
+      onOk: () => approveGoods(id),
     });
   };
 
@@ -302,8 +302,8 @@ const More = ({ goods }: { goods: Goods }) => {
         },
     status === 0
       ? {
-          label: <div onClick={() => confirmApproved(id)}>通过</div>,
-          key: "approved",
+          label: <div onClick={() => confirmApprove(id)}>通过</div>,
+          key: "approve",
         }
       : undefined,
     status === 0

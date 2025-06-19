@@ -52,7 +52,7 @@ export const useDeleteConfig = (queryKey: QueryKey) =>
     list: old.list.filter((item: any) => item.id !== target) || [],
   }));
 
-export const useApprovedConfig = (queryKey: QueryKey) =>
+export const useApproveConfig = (queryKey: QueryKey) =>
   useConfig(queryKey, (id, old) =>
     old
       ? {

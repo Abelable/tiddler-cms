@@ -14,7 +14,7 @@ import { ProviderScenic } from "types/providerScenic";
 import { useProviderScenicListQueryKey, useRejectModal } from "../util";
 import { SearchPanelProps } from "./search-panel";
 import {
-  useApprovedProviderScenic,
+  useApproveProviderScenic,
   useDeleteProviderScenic,
 } from "service/providerScenic";
 
@@ -129,7 +129,7 @@ export const List = ({
 };
 
 const More = ({ id, status }: { id: number; status: number }) => {
-  const { mutate: approvedProviderScenic } = useApprovedProviderScenic(
+  const { mutate: approveProviderScenic } = useApproveProviderScenic(
     useProviderScenicListQueryKey()
   );
   const { mutate: deleteProviderScenic } = useDeleteProviderScenic(
@@ -137,13 +137,13 @@ const More = ({ id, status }: { id: number; status: number }) => {
   );
   const { open: openRejectModal } = useRejectModal();
 
-  const confirmApproved = (id: number) => {
+  const confirmApprove = (id: number) => {
     Modal.confirm({
       title: "景区申请通过确认",
       content: "请确保在服务商有景区相关资质的情况下进行该操作",
       okText: "确定",
       cancelText: "取消",
-      onOk: () => approvedProviderScenic(id),
+      onOk: () => approveProviderScenic(id),
     });
   };
 
@@ -161,8 +161,8 @@ const More = ({ id, status }: { id: number; status: number }) => {
     status === 0
       ? [
           {
-            label: <div onClick={() => confirmApproved(id)}>通过</div>,
-            key: "approved",
+            label: <div onClick={() => confirmApprove(id)}>通过</div>,
+            key: "approve",
           },
           {
             label: <div onClick={() => openRejectModal(id)}>驳回</div>,

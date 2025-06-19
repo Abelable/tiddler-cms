@@ -11,7 +11,7 @@ import {
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
 import dayjs from "dayjs";
-import { useApprovedTicket, useDeleteTicket } from "service/mealTicket";
+import { useApproveTicket, useDeleteTicket } from "service/mealTicket";
 import { useTicketModal, useTicketListQueryKey, useRejectModal } from "../util";
 import { SearchPanelProps } from "./search-panel";
 
@@ -155,7 +155,7 @@ export const List = ({
 const More = ({ id, status }: { id: number; status: number }) => {
   const { open } = useTicketModal();
   const { mutate: deleteTicket } = useDeleteTicket(useTicketListQueryKey());
-  const { mutate: approvedTicket } = useApprovedTicket(useTicketListQueryKey());
+  const { mutate: approveTicket } = useApproveTicket(useTicketListQueryKey());
   const { open: openRejectModal } = useRejectModal();
 
   const confirmDelete = (id: number) => {
@@ -168,13 +168,13 @@ const More = ({ id, status }: { id: number; status: number }) => {
     });
   };
 
-  const confirmApproved = (id: number) => {
+  const confirmApprove = (id: number) => {
     Modal.confirm({
       title: "代金券审核通过确认",
       content: "请确保在代金券信息无误的情况下进行该操作",
       okText: "确定",
       cancelText: "取消",
-      onOk: () => approvedTicket(id),
+      onOk: () => approveTicket(id),
     });
   };
 
@@ -187,8 +187,8 @@ const More = ({ id, status }: { id: number; status: number }) => {
           key: "detail",
         },
         {
-          label: <div onClick={() => confirmApproved(id)}>通过</div>,
-          key: "approved",
+          label: <div onClick={() => confirmApprove(id)}>通过</div>,
+          key: "approve",
         },
         {
           label: <div onClick={() => openRejectModal(id)}>驳回</div>,
