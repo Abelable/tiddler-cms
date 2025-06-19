@@ -319,10 +319,10 @@ export const List = ({
             dataIndex: "score",
             width: "22rem",
             render: (value) => (
-              <>
+              <Row>
                 <Rate value={value} allowHalf disabled />
                 <span style={{ marginLeft: "1rem" }}>{value}</span>
-              </>
+              </Row>
             ),
           },
           {
