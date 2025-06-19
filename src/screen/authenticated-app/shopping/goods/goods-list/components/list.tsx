@@ -25,7 +25,11 @@ import { SearchPanelProps } from "./search-panel";
 
 import styled from "@emotion/styled";
 import dayjs from "dayjs";
-import { useDeleteGoods, useEditViews } from "service/goods";
+import {
+  useDeleteGoods,
+  useEditGoodsCommission,
+  useEditViews,
+} from "service/goods";
 import {
   useApproveModal,
   useGoodsDetailModal,
@@ -58,6 +62,9 @@ export const List = ({
       limit: pagination.pageSize,
     });
   const { mutate: editViews } = useEditViews(useGoodsListQueryKey());
+  const { mutate: editCommission } = useEditGoodsCommission(
+    useGoodsListQueryKey()
+  );
 
   return (
     <Container>
@@ -161,7 +168,18 @@ export const List = ({
           {
             title: "销售佣金比例",
             dataIndex: "salesCommissionRate",
-            render: (value) => <>{`${value}%`}</>,
+            render: (value, goods) =>
+              goods.shopId ? (
+                <>{`${value}%`}</>
+              ) : (
+                <InputNumber
+                  value={value}
+                  onChange={(salesCommissionRate) =>
+                    editCommission({ id: goods.id, salesCommissionRate })
+                  }
+                  suffix="%"
+                />
+              ),
             width: "12rem",
           },
           {
@@ -213,10 +231,10 @@ export const List = ({
           {
             title: "访问量",
             dataIndex: "views",
-            render: (value, shortVideo) => (
+            render: (value, goods) => (
               <InputNumber
                 value={value}
-                onChange={(views) => editViews({ id: shortVideo.id, views })}
+                onChange={(views) => editViews({ id: goods.id, views })}
               />
             ),
             width: "12rem",
