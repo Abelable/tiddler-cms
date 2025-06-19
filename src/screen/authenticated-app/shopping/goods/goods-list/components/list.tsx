@@ -114,14 +114,8 @@ export const List = ({
             dataIndex: "shopId",
             render: (value) => {
               const shop = shopOptions.find((item) => item.id === value);
-              return shop?.id === 0 ? (
-                <img
-                  style={{ width: "6.8rem" }}
-                  src="https://static.tiddler.cn/mp/self_support.png"
-                  alt=""
-                />
-              ) : (
-                <Popover content={`id: ${shop?.id}`}>
+              return (
+                <Popover content={shop?.id ? `id: ${shop?.id}` : ""}>
                   <Card>
                     <OptionCover src={shop?.logo} />
                     <div>{shop?.name}</div>
