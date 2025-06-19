@@ -6,30 +6,73 @@ import {
   Avatar,
   Tooltip,
   Tag,
+  Row,
+  Col,
+  Form,
+  InputNumber,
+  Space,
+  Button,
 } from "antd";
 import { UserOutlined } from "@ant-design/icons";
-
 import { ErrorBox, ModalLoading } from "components/lib";
+
+import { useEffect, useState } from "react";
+import { useForm } from "antd/es/form/Form";
 import dayjs from "dayjs";
-import { useGoodsDetailModal } from "../util";
+import { useGoodsDetailModal, useGoodsListQueryKey } from "../util";
 
 import type { DataOption } from "types/common";
+import type { GoodsCategoryOption } from "types/goodsCategory";
+import { useEditGoodsCommission } from "service/goods";
 
 export const DetailModal = ({
   shopCategoryOptions,
   goodsCategoryOptions,
 }: {
   shopCategoryOptions: DataOption[];
-  goodsCategoryOptions: DataOption[];
+  goodsCategoryOptions: GoodsCategoryOption[];
 }) => {
+  const [form] = useForm();
+  const [goodsCategory, setGoodsCategory] = useState<
+    GoodsCategoryOption | undefined
+  >();
   const { close, goodsModalOpen, editingGoods, error, isLoading } =
     useGoodsDetailModal();
+  const {
+    mutateAsync,
+    error: submitError,
+    isLoading: mutateLoading,
+  } = useEditGoodsCommission(useGoodsListQueryKey());
+
+  useEffect(() => {
+    if (editingGoods) {
+      setGoodsCategory(
+        goodsCategoryOptions.find(
+          (item) => item.id === editingGoods?.categoryId
+        )
+      );
+      form.setFieldsValue(editingGoods);
+    }
+  }, [editingGoods, editingGoods?.categoryId, form, goodsCategoryOptions]);
+
+  const submit = () => {
+    form.validateFields().then(async () => {
+      await mutateAsync(form.getFieldsValue());
+      closeModal();
+    });
+  };
+
+  const closeModal = () => {
+    form.resetFields();
+    setGoodsCategory(undefined);
+    close();
+  };
 
   return (
     <Drawer
       forceRender={true}
       title="商品详情"
-      size={"large"}
+      width={"100rem"}
       onClose={close}
       open={goodsModalOpen}
       styles={{
@@ -37,12 +80,87 @@ export const DetailModal = ({
           paddingBottom: 80,
         },
       }}
+      extra={
+        <Space>
+          <Button onClick={closeModal}>取消</Button>
+          <Button onClick={submit} loading={mutateLoading} type="primary">
+            提交
+          </Button>
+        </Space>
+      }
     >
-      <ErrorBox error={error} />
+      <ErrorBox error={error || submitError} />
       {isLoading ? (
         <ModalLoading />
       ) : (
         <>
+          <Divider orientation="left">代言奖励</Divider>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item
+                name="promotionCommissionRate"
+                label="代言奖励比例"
+                tooltip={`佣金范围${goodsCategory?.minPromotionCommissionRate}%~${goodsCategory?.maxPromotionCommissionRate}%`}
+                rules={[{ required: true, message: "请填写代言奖励比例" }]}
+              >
+                <InputNumber
+                  min={goodsCategory?.minPromotionCommissionRate}
+                  max={goodsCategory?.maxPromotionCommissionRate}
+                  style={{ width: "100%" }}
+                  placeholder="请填写代言奖励比例"
+                  suffix="%"
+                />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                name="promotionCommissionUpperLimit"
+                label="代言奖励上限"
+                tooltip={`最高可设¥${goodsCategory?.promotionCommissionUpperLimit}`}
+                rules={[{ required: true, message: "请填写代言奖励上限" }]}
+              >
+                <InputNumber
+                  max={goodsCategory?.promotionCommissionUpperLimit}
+                  style={{ width: "100%" }}
+                  placeholder="请填写代言奖励上限"
+                  prefix="￥"
+                />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item
+                name="superiorPromotionCommissionRate"
+                label="上级代言奖励比例"
+                tooltip={`佣金范围${goodsCategory?.minSuperiorPromotionCommissionRate}%~${goodsCategory?.maxSuperiorPromotionCommissionRate}%`}
+                rules={[{ required: true, message: "请填写上级代言奖励比例" }]}
+              >
+                <InputNumber
+                  min={goodsCategory?.minSuperiorPromotionCommissionRate}
+                  max={goodsCategory?.maxSuperiorPromotionCommissionRate}
+                  style={{ width: "100%" }}
+                  placeholder="请填写上级代言奖励比例"
+                  suffix="%"
+                />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                name="superiorPromotionCommissionUpperLimit"
+                label="上级代言奖励上限"
+                tooltip={`最高可设¥${goodsCategory?.superiorPromotionCommissionUpperLimit}`}
+                rules={[{ required: true, message: "请填写上级代言奖励上限" }]}
+              >
+                <InputNumber
+                  max={goodsCategory?.superiorPromotionCommissionUpperLimit}
+                  style={{ width: "100%" }}
+                  placeholder="请填写上级代言奖励上限"
+                  prefix="￥"
+                />
+              </Form.Item>
+            </Col>
+          </Row>
           <Divider orientation="left">商品信息</Divider>
           <Descriptions size={"small"} column={2} bordered>
             <Descriptions.Item label="商品ID">

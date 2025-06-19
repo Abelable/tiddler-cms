@@ -16,7 +16,6 @@ import type {
   GoodsListSearchParams,
   GoodsDetail,
 } from "types/goods";
-import { GoodsCategoryOption } from "types/goodsCategory";
 
 export const useGoodsList = (params: Partial<GoodsListSearchParams>) => {
   const client = useHttp();
@@ -41,7 +40,7 @@ export const useGoods = (id: number) => {
 export const useApproveGoods = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
-    (params: Partial<GoodsCategoryOption>) =>
+    (params: Partial<Goods>) =>
       client("goods/approve", {
         data: cleanObject(params),
         method: "POST",
@@ -79,6 +78,18 @@ export const useEditGoods = (queryKey: QueryKey) => {
   return useMutation(
     (params: Partial<Goods>) =>
       client("goods/edit", {
+        data: cleanObject(params),
+        method: "POST",
+      }),
+    useEditConfig(queryKey)
+  );
+};
+
+export const useEditGoodsCommission = (queryKey: QueryKey) => {
+  const client = useHttp();
+  return useMutation(
+    (params: Partial<Goods>) =>
+      client("goods/edit_commission", {
         data: cleanObject(params),
         method: "POST",
       }),
