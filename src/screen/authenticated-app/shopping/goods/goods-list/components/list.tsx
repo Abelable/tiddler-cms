@@ -171,18 +171,27 @@ export const List = ({
           {
             title: "销售佣金比例",
             dataIndex: "salesCommissionRate",
-            render: (value, goods) =>
-              goods.shopId ? (
-                <>{`${value}%`}</>
-              ) : (
-                <InputNumber
-                  value={value}
-                  onChange={(salesCommissionRate) =>
-                    editCommission({ id: goods.id, salesCommissionRate })
-                  }
-                  suffix="%"
-                />
-              ),
+            render: (value, goods) => {
+              if (goods.shopId) {
+                return <>{`${value}%`}</>;
+              } else {
+                const { minSalesCommissionRate, maxSalesCommissionRate } =
+                  goodsCategoryOptions.find(
+                    (item) => item.id === goods.categoryId
+                  ) || {};
+                return (
+                  <InputNumber
+                    min={minSalesCommissionRate}
+                    max={maxSalesCommissionRate}
+                    value={value}
+                    onChange={(salesCommissionRate) =>
+                      editCommission({ id: goods.id, salesCommissionRate })
+                    }
+                    suffix="%"
+                  />
+                );
+              }
+            },
             width: "12rem",
           },
           {
