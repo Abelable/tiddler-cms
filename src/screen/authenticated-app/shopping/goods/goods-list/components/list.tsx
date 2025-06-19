@@ -185,7 +185,15 @@ export const List = ({
           {
             title: "代言奖励比例",
             dataIndex: "promotionCommissionRate",
-            render: (value) => <>{`${value}%`}</>,
+            render: (value, goods) => (
+              <InputNumber
+                value={value}
+                onChange={(promotionCommissionRate) =>
+                  editCommission({ id: goods.id, promotionCommissionRate })
+                }
+                suffix="%"
+              />
+            ),
             width: "12rem",
           },
           {
