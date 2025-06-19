@@ -46,7 +46,7 @@ export const ApproveModal = ({
       title={
         <Row gap={1}>
           <ExclamationCircleFilled
-            style={{ color: "#faad14", fontSize: "2.4rem" }}
+            style={{ color: "#faad14", fontSize: "2.2rem" }}
           />
           <span>商品审核通过确认</span>
         </Row>
@@ -56,7 +56,7 @@ export const ApproveModal = ({
       onOk={confirm}
       onCancel={closeModal}
     >
-      <div style={{ marginBottom: "2.4rem" }}>
+      <div style={{ marginBottom: "2.4rem", paddingLeft: "3.2rem" }}>
         请确保在商品信息无误的情况下进行该操作
       </div>
       <Form form={form} layout="vertical">

@@ -16,6 +16,7 @@ import type {
   GoodsListSearchParams,
   GoodsDetail,
 } from "types/goods";
+import { GoodsCategoryOption } from "types/goodsCategory";
 
 export const useGoodsList = (params: Partial<GoodsListSearchParams>) => {
   const client = useHttp();
@@ -40,9 +41,9 @@ export const useGoods = (id: number) => {
 export const useApproveGoods = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
-    (id: number) =>
-      client("goods/up", {
-        data: { id },
+    (params: Partial<GoodsCategoryOption>) =>
+      client("goods/approve", {
+        data: cleanObject(params),
         method: "POST",
       }),
     useApproveConfig(queryKey)
