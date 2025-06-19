@@ -43,6 +43,7 @@ export const HotelList = () => {
             pageSize: toNumber(data?.limit),
             total: toNumber(data?.total),
           }}
+          bordered
         />
       </Main>
       <HotelModal

@@ -35,6 +35,7 @@ export const RestaurantList = () => {
             pageSize: toNumber(data?.limit),
             total: toNumber(data?.total),
           }}
+          bordered
         />
       </Main>
       <RestaurantModal categoryOptions={restaurantCategoryOptions || []} />

@@ -33,6 +33,7 @@ export const ShopList = () => {
             pageSize: toNumber(data?.limit),
             total: toNumber(data?.total),
           }}
+          bordered
         />
       </Main>
       <ShopModal shopCategoryOptions={shopCategoryOptions || []} />

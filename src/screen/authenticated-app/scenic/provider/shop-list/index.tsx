@@ -32,6 +32,7 @@ export const ScenicShopList = () => {
             pageSize: toNumber(data?.limit),
             total: toNumber(data?.total),
           }}
+          bordered
         />
       </Main>
       <ShopModal shopTypeOptions={shopTypeOptions} />

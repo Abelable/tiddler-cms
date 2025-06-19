@@ -186,35 +186,40 @@ export const List = ({
             width: "12rem",
           },
           {
-            title: "代言奖励比例",
-            dataIndex: "superiorPromotionCommissionUpperLimit",
-            render: (value, goods) => (
-              <InputNumber
-                value={value}
-                onChange={(promotionCommissionRate) =>
-                  editCommission({ id: goods.id, promotionCommissionRate })
-                }
-                suffix="%"
-              />
-            ),
-            width: "12rem",
-          },
-          {
-            title: "代言奖励上限",
-            dataIndex: "promotionCommissionUpperLimit",
-            render: (value, goods) => (
-              <InputNumber
-                value={value}
-                onChange={(promotionCommissionUpperLimit) =>
-                  editCommission({
-                    id: goods.id,
-                    promotionCommissionUpperLimit,
-                  })
-                }
-                prefix="￥"
-              />
-            ),
-            width: "12rem",
+            title: "代言奖励",
+            children: [
+              {
+                title: "比例",
+                dataIndex: "superiorPromotionCommissionUpperLimit",
+                render: (value, goods) => (
+                  <InputNumber
+                    value={value}
+                    onChange={(promotionCommissionRate) =>
+                      editCommission({ id: goods.id, promotionCommissionRate })
+                    }
+                    suffix="%"
+                  />
+                ),
+                width: "12rem",
+              },
+              {
+                title: "上限",
+                dataIndex: "promotionCommissionUpperLimit",
+                render: (value, goods) => (
+                  <InputNumber
+                    value={value}
+                    onChange={(promotionCommissionUpperLimit) =>
+                      editCommission({
+                        id: goods.id,
+                        promotionCommissionUpperLimit,
+                      })
+                    }
+                    prefix="￥"
+                  />
+                ),
+                width: "12rem",
+              },
+            ],
           },
           {
             title: "上级代言奖励比例",

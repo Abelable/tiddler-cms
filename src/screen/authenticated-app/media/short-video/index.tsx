@@ -61,6 +61,7 @@ export const ShortVideoList = () => {
             pageSize: toNumber(data?.limit),
             total: toNumber(data?.total),
           }}
+          bordered
         />
       </Main>
       <ShortVideoModal

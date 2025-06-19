@@ -24,6 +24,7 @@ export const RefundAddressList = () => {
             pageSize: toNumber(data?.limit),
             total: toNumber(data?.total),
           }}
+          bordered
         />
       </Main>
       <RefundAddressModal />

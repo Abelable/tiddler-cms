@@ -23,6 +23,7 @@ export const HotelCategoryList = () => {
             pageSize: toNumber(data?.limit),
             total: toNumber(data?.total),
           }}
+          bordered
         />
       </Main>
       <HotelCategoryModal />

@@ -38,6 +38,7 @@ export const AuthInfoList = () => {
             pageSize: toNumber(data?.limit),
             total: toNumber(data?.total),
           }}
+          bordered
         />
       </Main>
       <AuthInfoModal />

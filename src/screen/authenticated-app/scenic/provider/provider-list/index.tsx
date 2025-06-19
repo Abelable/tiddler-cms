@@ -39,6 +39,7 @@ export const ScenicProviderList = () => {
             pageSize: toNumber(data?.limit),
             total: toNumber(data?.total),
           }}
+          bordered
         />
       </Main>
       <ProviderModal />

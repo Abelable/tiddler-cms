@@ -29,6 +29,7 @@ export const ShopCategoryList = () => {
             pageSize: toNumber(data?.limit),
             total: toNumber(data?.total),
           }}
+          bordered
         />
       </Main>
       <ShopCategoryModal merchantTypeOptions={merchantTypeOptions} />

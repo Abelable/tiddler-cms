@@ -43,6 +43,7 @@ export const SetMealList = () => {
             pageSize: toNumber(data?.limit),
             total: toNumber(data?.total),
           }}
+          bordered
         />
       </Main>
       <SetMealModal restaurantOptions={restaurantOptions || []} />

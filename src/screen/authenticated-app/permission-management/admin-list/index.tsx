@@ -32,6 +32,7 @@ export const AdminList = () => {
             pageSize: toNumber(data?.limit),
             total: toNumber(data?.total),
           }}
+          bordered
         />
       </Main>
       <AdminModal roleOptions={roleOptions || []} />

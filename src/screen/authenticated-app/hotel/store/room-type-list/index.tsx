@@ -23,6 +23,7 @@ export const HotelRoomTypeList = () => {
             pageSize: toNumber(data?.limit),
             total: toNumber(data?.total),
           }}
+          bordered
         />
       </Main>
       <HotelRoomTypeModal hotelId={+(params.hotelId || 0)} />

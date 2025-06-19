@@ -37,6 +37,7 @@ export const ProviderHotelList = () => {
             pageSize: toNumber(data?.limit),
             total: toNumber(data?.total),
           }}
+          bordered
         />
       </Main>
       <RejectModal />

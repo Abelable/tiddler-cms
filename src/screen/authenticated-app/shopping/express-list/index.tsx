@@ -23,6 +23,7 @@ export const ExpressList = () => {
             pageSize: toNumber(data?.limit),
             total: toNumber(data?.total),
           }}
+          bordered
         />
       </Main>
       <ExpressModal />
