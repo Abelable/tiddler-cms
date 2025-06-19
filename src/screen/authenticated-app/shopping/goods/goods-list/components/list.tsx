@@ -222,39 +222,45 @@ export const List = ({
             ],
           },
           {
-            title: "上级代言奖励比例",
-            dataIndex: "superiorPromotionCommissionRate",
-            render: (value, goods) => (
-              <InputNumber
-                value={value}
-                onChange={(superiorPromotionCommissionRate) =>
-                  editCommission({
-                    id: goods.id,
-                    superiorPromotionCommissionRate,
-                  })
-                }
-                suffix="%"
-              />
-            ),
-            width: "16rem",
+            title: "上级代言奖励",
+            children: [
+              {
+                title: "比例",
+                dataIndex: "superiorPromotionCommissionRate",
+                render: (value, goods) => (
+                  <InputNumber
+                    value={value}
+                    onChange={(superiorPromotionCommissionRate) =>
+                      editCommission({
+                        id: goods.id,
+                        superiorPromotionCommissionRate,
+                      })
+                    }
+                    suffix="%"
+                  />
+                ),
+                width: "12rem",
+              },
+              {
+                title: "上限",
+                dataIndex: "superiorPromotionCommissionUpperLimit",
+                render: (value, goods) => (
+                  <InputNumber
+                    value={value}
+                    onChange={(superiorPromotionCommissionUpperLimit) =>
+                      editCommission({
+                        id: goods.id,
+                        superiorPromotionCommissionUpperLimit,
+                      })
+                    }
+                    prefix="￥"
+                  />
+                ),
+                width: "12rem",
+              },
+            ],
           },
-          {
-            title: "上级代言奖励上限",
-            dataIndex: "superiorPromotionCommissionUpperLimit",
-            render: (value, goods) => (
-              <InputNumber
-                value={value}
-                onChange={(superiorPromotionCommissionUpperLimit) =>
-                  editCommission({
-                    id: goods.id,
-                    superiorPromotionCommissionUpperLimit,
-                  })
-                }
-                prefix="￥"
-              />
-            ),
-            width: "16rem",
-          },
+
           {
             title: "库存",
             dataIndex: "stock",
