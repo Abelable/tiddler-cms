@@ -82,11 +82,35 @@ export const List = ({
             render: (value) => <>¥{value}</>,
           },
           {
-            title: "创建时间",
-            render: (value, role) => (
+            title: "上级代言奖励比例范围",
+            render: (value, category) => (
+              <>{`${category.minSuperiorPromotionCommissionRate}% ~ ${category.maxSuperiorPromotionCommissionRate}%`}</>
+            ),
+          },
+          {
+            title: "上级代言奖励上限",
+            dataIndex: "superiorPromotionCommissionUpperLimit",
+            render: (value) => <>¥{value}</>,
+          },
+          {
+            title: "更新时间",
+            render: (value, category) => (
               <span>
-                {role.createdAt
-                  ? dayjs(role.createdAt).format("YYYY-MM-DD HH:mm:ss")
+                {category.updatedAt
+                  ? dayjs(category.updatedAt).format("YYYY-MM-DD HH:mm:ss")
+                  : "无"}
+              </span>
+            ),
+            width: "20rem",
+            sorter: (a, b) =>
+              dayjs(a.updatedAt).valueOf() - dayjs(b.updatedAt).valueOf(),
+          },
+          {
+            title: "创建时间",
+            render: (value, category) => (
+              <span>
+                {category.createdAt
+                  ? dayjs(category.createdAt).format("YYYY-MM-DD HH:mm:ss")
                   : "无"}
               </span>
             ),
@@ -96,8 +120,8 @@ export const List = ({
           },
           {
             title: "操作",
-            render(value, role) {
-              return <More id={role.id} />;
+            render(value, category) {
+              return <More id={category.id} />;
             },
             width: "8rem",
           },

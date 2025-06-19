@@ -1,12 +1,3 @@
-export interface GoodsCategoryOption {
-  id: number;
-  shopCategoryId: number;
-  name: string;
-  minPromotionCommissionRate: number;
-  maxPromotionCommissionRate: number;
-  promotionCommissionUpperLimit: number;
-}
-
 export interface GoodsCategoriesSearchParams {
   shopCategoryId: number | undefined;
   page: number;
@@ -22,7 +13,11 @@ export interface GoodsCategory {
   minPromotionCommissionRate: number;
   maxPromotionCommissionRate: number;
   promotionCommissionUpperLimit: number;
+  minSuperiorPromotionCommissionRate: number;
+  maxSuperiorPromotionCommissionRate: number;
+  superiorPromotionCommissionUpperLimit: number;
   createdAt: string;
+  updatedAt: string;
 }
 
 export interface GoodsCategoriesResult {
@@ -30,4 +25,18 @@ export interface GoodsCategoriesResult {
   page: string;
   limit: string;
   total: string;
+}
+
+export interface GoodsCategoryOption {
+  id: number;
+  shopCategoryId: number;
+  name: string;
+  minSalesCommissionRate: number;
+  maxSalesCommissionRate: number;
+  minPromotionCommissionRate: number;
+  maxPromotionCommissionRate: number;
+  promotionCommissionUpperLimit: number;
+  minSuperiorPromotionCommissionRate: number;
+  maxSuperiorPromotionCommissionRate: number;
+  superiorPromotionCommissionUpperLimit: number;
 }

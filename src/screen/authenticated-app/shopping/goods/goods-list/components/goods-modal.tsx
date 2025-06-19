@@ -654,6 +654,45 @@ export const GoodsModal = ({
                     return (
                       <Form.Item
                         name="promotionCommissionRate"
+                        label="销售佣金比例"
+                        tooltip={`佣金范围${minPromotionCommissionRate}%~${maxPromotionCommissionRate}%`}
+                        rules={[
+                          { required: true, message: "请填写销售佣金比例" },
+                        ]}
+                      >
+                        <InputNumber
+                          min={minPromotionCommissionRate}
+                          max={maxPromotionCommissionRate}
+                          formatter={(value) => `${value}%`}
+                          style={{ width: "100%" }}
+                          placeholder="请填写销售佣金比例"
+                        />
+                      </Form.Item>
+                    );
+                  }
+                }}
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                noStyle
+                shouldUpdate={(prevValues, currentValues) =>
+                  prevValues.categoryId !== currentValues.categoryId
+                }
+              >
+                {({ getFieldValue }) => {
+                  const categoryId = getFieldValue("categoryId");
+                  if (categoryId) {
+                    const {
+                      minPromotionCommissionRate,
+                      maxPromotionCommissionRate,
+                    } =
+                      goodsCategoryOptions.find(
+                        (item) => item.id === getFieldValue("categoryId")
+                      ) || {};
+                    return (
+                      <Form.Item
+                        name="promotionCommissionRate"
                         label="代言奖励比例"
                         tooltip={`佣金范围${minPromotionCommissionRate}%~${maxPromotionCommissionRate}%`}
                         rules={[
