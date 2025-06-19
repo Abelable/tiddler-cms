@@ -55,7 +55,7 @@ export const List = ({
             width: "8rem",
           },
           {
-            title: "商品分类名称",
+            title: "商品分类",
             dataIndex: "name",
           },
           {
