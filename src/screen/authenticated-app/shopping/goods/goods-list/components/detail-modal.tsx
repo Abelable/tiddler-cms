@@ -36,7 +36,7 @@ export const DetailModal = ({
   const [goodsCategory, setGoodsCategory] = useState<
     GoodsCategoryOption | undefined
   >();
-  const { close, goodsModalOpen, editingGoods, error, isLoading } =
+  const { close, goodsModalOpen, curGoodsId, editingGoods, error, isLoading } =
     useGoodsDetailModal();
   const {
     mutateAsync,
@@ -57,7 +57,7 @@ export const DetailModal = ({
 
   const submit = () => {
     form.validateFields().then(async () => {
-      await mutateAsync(form.getFieldsValue());
+      await mutateAsync({ id: +curGoodsId, ...form.getFieldsValue() });
       closeModal();
     });
   };
@@ -95,72 +95,78 @@ export const DetailModal = ({
       ) : (
         <>
           <Divider orientation="left">代言奖励</Divider>
-          <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item
-                name="promotionCommissionRate"
-                label="代言奖励比例"
-                tooltip={`佣金范围${goodsCategory?.minPromotionCommissionRate}%~${goodsCategory?.maxPromotionCommissionRate}%`}
-                rules={[{ required: true, message: "请填写代言奖励比例" }]}
-              >
-                <InputNumber
-                  min={goodsCategory?.minPromotionCommissionRate}
-                  max={goodsCategory?.maxPromotionCommissionRate}
-                  style={{ width: "100%" }}
-                  placeholder="请填写代言奖励比例"
-                  suffix="%"
-                />
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item
-                name="promotionCommissionUpperLimit"
-                label="代言奖励上限"
-                tooltip={`最高可设¥${goodsCategory?.promotionCommissionUpperLimit}`}
-                rules={[{ required: true, message: "请填写代言奖励上限" }]}
-              >
-                <InputNumber
-                  max={goodsCategory?.promotionCommissionUpperLimit}
-                  style={{ width: "100%" }}
-                  placeholder="请填写代言奖励上限"
-                  prefix="￥"
-                />
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item
-                name="superiorPromotionCommissionRate"
-                label="上级代言奖励比例"
-                tooltip={`佣金范围${goodsCategory?.minSuperiorPromotionCommissionRate}%~${goodsCategory?.maxSuperiorPromotionCommissionRate}%`}
-                rules={[{ required: true, message: "请填写上级代言奖励比例" }]}
-              >
-                <InputNumber
-                  min={goodsCategory?.minSuperiorPromotionCommissionRate}
-                  max={goodsCategory?.maxSuperiorPromotionCommissionRate}
-                  style={{ width: "100%" }}
-                  placeholder="请填写上级代言奖励比例"
-                  suffix="%"
-                />
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item
-                name="superiorPromotionCommissionUpperLimit"
-                label="上级代言奖励上限"
-                tooltip={`最高可设¥${goodsCategory?.superiorPromotionCommissionUpperLimit}`}
-                rules={[{ required: true, message: "请填写上级代言奖励上限" }]}
-              >
-                <InputNumber
-                  max={goodsCategory?.superiorPromotionCommissionUpperLimit}
-                  style={{ width: "100%" }}
-                  placeholder="请填写上级代言奖励上限"
-                  prefix="￥"
-                />
-              </Form.Item>
-            </Col>
-          </Row>
+          <Form form={form} layout="vertical">
+            <Row gutter={16}>
+              <Col span={12}>
+                <Form.Item
+                  name="promotionCommissionRate"
+                  label="代言奖励比例"
+                  tooltip={`佣金范围${goodsCategory?.minPromotionCommissionRate}%~${goodsCategory?.maxPromotionCommissionRate}%`}
+                  rules={[{ required: true, message: "请填写代言奖励比例" }]}
+                >
+                  <InputNumber
+                    min={goodsCategory?.minPromotionCommissionRate}
+                    max={goodsCategory?.maxPromotionCommissionRate}
+                    style={{ width: "100%" }}
+                    placeholder="请填写代言奖励比例"
+                    suffix="%"
+                  />
+                </Form.Item>
+              </Col>
+              <Col span={12}>
+                <Form.Item
+                  name="promotionCommissionUpperLimit"
+                  label="代言奖励上限"
+                  tooltip={`最高可设¥${goodsCategory?.promotionCommissionUpperLimit}`}
+                  rules={[{ required: true, message: "请填写代言奖励上限" }]}
+                >
+                  <InputNumber
+                    max={goodsCategory?.promotionCommissionUpperLimit}
+                    style={{ width: "100%" }}
+                    placeholder="请填写代言奖励上限"
+                    prefix="￥"
+                  />
+                </Form.Item>
+              </Col>
+            </Row>
+            <Row gutter={16}>
+              <Col span={12}>
+                <Form.Item
+                  name="superiorPromotionCommissionRate"
+                  label="上级代言奖励比例"
+                  tooltip={`佣金范围${goodsCategory?.minSuperiorPromotionCommissionRate}%~${goodsCategory?.maxSuperiorPromotionCommissionRate}%`}
+                  rules={[
+                    { required: true, message: "请填写上级代言奖励比例" },
+                  ]}
+                >
+                  <InputNumber
+                    min={goodsCategory?.minSuperiorPromotionCommissionRate}
+                    max={goodsCategory?.maxSuperiorPromotionCommissionRate}
+                    style={{ width: "100%" }}
+                    placeholder="请填写上级代言奖励比例"
+                    suffix="%"
+                  />
+                </Form.Item>
+              </Col>
+              <Col span={12}>
+                <Form.Item
+                  name="superiorPromotionCommissionUpperLimit"
+                  label="上级代言奖励上限"
+                  tooltip={`最高可设¥${goodsCategory?.superiorPromotionCommissionUpperLimit}`}
+                  rules={[
+                    { required: true, message: "请填写上级代言奖励上限" },
+                  ]}
+                >
+                  <InputNumber
+                    max={goodsCategory?.superiorPromotionCommissionUpperLimit}
+                    style={{ width: "100%" }}
+                    placeholder="请填写上级代言奖励上限"
+                    prefix="￥"
+                  />
+                </Form.Item>
+              </Col>
+            </Row>
+          </Form>
           <Divider orientation="left">商品信息</Divider>
           <Descriptions size={"small"} column={2} bordered>
             <Descriptions.Item label="商品ID">
@@ -188,11 +194,13 @@ export const DetailModal = ({
               {editingGoods?.name}
             </Descriptions.Item>
             <Descriptions.Item label="分类">
-              {
-                goodsCategoryOptions.find(
-                  (item) => item.id === editingGoods?.categoryId
-                )?.name
-              }
+              <Tag>
+                {
+                  goodsCategoryOptions.find(
+                    (item) => item.id === editingGoods?.categoryId
+                  )?.name
+                }
+              </Tag>
             </Descriptions.Item>
             <Descriptions.Item label="价格">
               {`¥${editingGoods?.price}`}
@@ -200,14 +208,14 @@ export const DetailModal = ({
             <Descriptions.Item label="销售佣金比例">
               {`${editingGoods?.salesCommissionRate}%`}
             </Descriptions.Item>
-            <Descriptions.Item label="代言奖励比例">
-              {`${editingGoods?.promotionCommissionRate}%`}
-            </Descriptions.Item>
             <Descriptions.Item label="库存">
               {editingGoods?.stock}
             </Descriptions.Item>
             <Descriptions.Item label="销量">
-              {editingGoods?.salesVolume}
+              {editingGoods?.salesVolume || "暂无销量"}
+            </Descriptions.Item>
+            <Descriptions.Item label="评分">
+              {editingGoods?.score || "暂无评"}分
             </Descriptions.Item>
             <Descriptions.Item label="创建时间">
               {dayjs(editingGoods?.createdAt).format("YYYY-MM-DD HH:mm:ss")}
@@ -258,7 +266,7 @@ export const DetailModal = ({
             column={2}
             bordered
           >
-            <Descriptions.Item label="ID">
+            <Descriptions.Item label="商家ID">
               {editingGoods?.merchantInfo?.id}
             </Descriptions.Item>
             <Descriptions.Item label="商家类型">
