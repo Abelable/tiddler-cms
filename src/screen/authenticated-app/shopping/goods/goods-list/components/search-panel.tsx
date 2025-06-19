@@ -1,17 +1,18 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
-import { Row } from "components/lib";
+import { OptionCover, Row } from "components/lib";
 import { Button, Input, Select } from "antd";
 
 import type { DataOption } from "types/common";
 import type { GoodsListSearchParams } from "types/goods";
 import type { GoodsCategoryOption } from "types/goodsCategory";
+import type { ShopOption } from "types/shop";
 
 export interface SearchPanelProps {
   statusOptions: { text: string; value: number }[];
   shopCategoryOptions: DataOption[];
   goodsCategoryOptions: GoodsCategoryOption[];
-  shopOptions: DataOption[];
+  shopOptions: ShopOption[];
   params: Partial<GoodsListSearchParams>;
   setParams: (params: Partial<GoodsListSearchParams>) => void;
 }
@@ -159,14 +160,15 @@ export const SearchPanel = ({
           onClear={clearMerchant}
           showSearch
           filterOption={(input, option) =>
-            (option!.children as unknown as string)
+            (option!.children as any)[1].props.children
               .toLowerCase()
               .includes(input.toLowerCase())
           }
         >
-          {shopOptions?.map(({ id, name }) => (
+          {shopOptions?.map(({ id, logo, name }) => (
             <Select.Option key={id} value={id}>
-              {name}
+              <OptionCover src={logo} />
+              <span>{name}</span>
             </Select.Option>
           ))}
         </Select>

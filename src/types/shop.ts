@@ -23,3 +23,9 @@ export interface ShopsResult {
   limit: string;
   total: string;
 }
+
+export interface ShopOption {
+  id: number;
+  logo: string;
+  name: string;
+}

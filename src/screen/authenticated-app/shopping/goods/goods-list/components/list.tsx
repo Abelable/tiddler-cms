@@ -11,8 +11,16 @@ import {
   Button,
   InputNumber,
   Rate,
+  Popover,
 } from "antd";
-import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
+import {
+  ButtonNoPadding,
+  ErrorBox,
+  Row,
+  PageTitle,
+  Card,
+  OptionCover,
+} from "components/lib";
 import { PlusOutlined } from "@ant-design/icons";
 
 import dayjs from "dayjs";
@@ -93,6 +101,28 @@ export const List = ({
             width: "12rem",
           },
           {
+            title: "店铺",
+            dataIndex: "shopId",
+            render: (value) => {
+              const shop = shopOptions.find((item) => item.id === value);
+              return shop?.id === 0 ? (
+                <img
+                  style={{ width: "8rem" }}
+                  src="https://static.tiddler.cn/mp/self_support.png"
+                  alt=""
+                />
+              ) : (
+                <Popover content={`id: ${shop?.id}`}>
+                  <Card>
+                    <OptionCover src={shop?.logo} />
+                    <div>{shop?.name}</div>
+                  </Card>
+                </Popover>
+              );
+            },
+            width: "18rem",
+          },
+          {
             title: "图片",
             dataIndex: "cover",
             render: (value) => <Image width={68} src={value} />,
@@ -129,14 +159,6 @@ export const List = ({
             width: "12rem",
           },
           {
-            title: "店铺",
-            dataIndex: "shopId",
-            render: (value) => (
-              <>{shopOptions.find((item) => item.id === value)?.name}</>
-            ),
-            width: "24rem",
-          },
-          {
             title: "销售佣金比例",
             dataIndex: "salesCommissionRate",
             render: (value) => <>{`${value}%`}</>,
@@ -147,6 +169,24 @@ export const List = ({
             dataIndex: "promotionCommissionRate",
             render: (value) => <>{`${value}%`}</>,
             width: "12rem",
+          },
+          {
+            title: "代言奖励上限",
+            dataIndex: "promotionCommissionUpperLimit",
+            render: (value) => <>{`¥${value}`}</>,
+            width: "12rem",
+          },
+          {
+            title: "上级代言奖励比例",
+            dataIndex: "superiorPromotionCommissionRate",
+            render: (value) => <>{`${value}%`}</>,
+            width: "16rem",
+          },
+          {
+            title: "上级代言奖励上限",
+            dataIndex: "superiorPromotionCommissionUpperLimit",
+            render: (value) => <>{`¥${value}`}</>,
+            width: "16rem",
           },
           {
             title: "库存",

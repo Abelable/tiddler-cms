@@ -1,8 +1,12 @@
 import { useQuery } from "react-query";
 import { useHttp } from "./http";
 
-import type { DataOption } from "types/common";
-import type { Shop, ShopsResult, ShopsSearchParams } from "types/shop";
+import type {
+  Shop,
+  ShopOption,
+  ShopsResult,
+  ShopsSearchParams,
+} from "types/shop";
 
 export const useShops = (params: Partial<ShopsSearchParams>) => {
   const client = useHttp();
@@ -24,5 +28,5 @@ export const useShop = (id: number) => {
 
 export const useShopOptions = () => {
   const client = useHttp();
-  return useQuery<DataOption[]>(["shop_options"], () => client("shop/options"));
+  return useQuery<ShopOption[]>(["shop_options"], () => client("shop/options"));
 };

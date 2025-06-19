@@ -122,9 +122,10 @@ export const OptionCover = styled.img<{
   size?: string;
 }>`
   margin-right: 0.6rem;
-  width: ${(props) => props.size || "1.8rem"};
-  height: ${(props) => props.size || "1.8rem"};
-  border-radius: 0.6rem;
+  width: ${(props) => props.size || "2.4rem"};
+  height: ${(props) => props.size || "2.4rem"};
+  border-radius: 50%;
+  border: 1px solid #eee;
 `;
 
 export const Card = styled.div`

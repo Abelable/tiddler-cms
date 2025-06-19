@@ -41,6 +41,9 @@ export interface Goods {
   stock: number;
   salesCommissionRate: number;
   promotionCommissionRate: number;
+  promotionCommissionUpperLimit: number;
+  superiorPromotionCommissionRate: number;
+  superiorPromotionCommissionUpperLimit: number;
   refundSupport: number;
   specList: Spec[];
   skuList: Sku[];

@@ -32,7 +32,10 @@ export const GoodsList = () => {
 
   const { data: originalShopOptions = [], error: shopOptionsError } =
     useShopOptions();
-  const shopOptions = [{ id: 0, name: "官方自营" }, ...originalShopOptions];
+  const shopOptions = [
+    { id: 0, logo: "https://static.tiddler.cn/mp/logo.png", name: "官方自营" },
+    ...originalShopOptions,
+  ];
 
   const {
     data: originalFreightTemplateOptions = [],
