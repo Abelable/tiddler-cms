@@ -21,7 +21,7 @@ export interface Sku {
   name: string;
   price: number;
   originalPrice: number;
-  commissionRate: number;
+  salesCommissionRate: number;
   stock: number;
 }
 

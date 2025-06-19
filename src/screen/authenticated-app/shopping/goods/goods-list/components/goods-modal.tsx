@@ -157,7 +157,7 @@ export const GoodsModal = ({
       },
     },
     {
-      title: "代言奖励比例",
+      title: "销售佣金比例",
       render: (item: TableSku, _: TableSku, index: number) => {
         return (
           <InputNumber
@@ -165,9 +165,9 @@ export const GoodsModal = ({
             max={100}
             formatter={(value) => `${value}%`}
             style={{ width: "100%" }}
-            defaultValue={tableSkuList[index].commissionRate}
+            defaultValue={tableSkuList[index].salesCommissionRate}
             onChange={(e) => {
-              tableSkuList[index].commissionRate = e || 0;
+              tableSkuList[index].salesCommissionRate = e || 0;
               setTableSkuList(tableSkuList);
             }}
           />
@@ -263,7 +263,7 @@ export const GoodsModal = ({
                 [item.name]: str,
                 price: 0,
                 originalPrice: 0,
-                commissionRate: 0,
+                salesCommissionRate: 0,
                 stock: 0,
                 name: str,
               };
@@ -294,7 +294,7 @@ export const GoodsModal = ({
                   [item.name]: t,
                   price: 0,
                   originalPrice: 0,
-                  commissionRate: 0,
+                  salesCommissionRate: 0,
                   stock: 0,
                 };
               }
@@ -335,7 +335,7 @@ export const GoodsModal = ({
             image = "",
             price = 0,
             originalPrice = 0,
-            commissionRate = 0,
+            salesCommissionRate = 0,
             stock = 0,
           }) => {
             const restData = Object.fromEntries(
@@ -348,7 +348,7 @@ export const GoodsModal = ({
               image,
               price,
               originalPrice,
-              commissionRate,
+              salesCommissionRate,
               stock,
               ...restData,
             };
@@ -436,12 +436,19 @@ export const GoodsModal = ({
         stock,
         specList: specContent,
         skuList: tableSkuList.map(
-          ({ name, image, price, originalPrice, commissionRate, stock }) => ({
+          ({
             name,
             image,
             price,
             originalPrice,
-            commissionRate,
+            salesCommissionRate,
+            stock,
+          }) => ({
+            name,
+            image,
+            price,
+            originalPrice,
+            salesCommissionRate,
             stock,
           })
         ),
@@ -644,28 +651,25 @@ export const GoodsModal = ({
                 {({ getFieldValue }) => {
                   const categoryId = getFieldValue("categoryId");
                   if (categoryId) {
-                    const {
-                      minPromotionCommissionRate,
-                      maxPromotionCommissionRate,
-                    } =
+                    const { minSalesCommissionRate, maxSalesCommissionRate } =
                       goodsCategoryOptions.find(
                         (item) => item.id === getFieldValue("categoryId")
                       ) || {};
                     return (
                       <Form.Item
-                        name="promotionCommissionRate"
+                        name="salesCommissionRate"
                         label="销售佣金比例"
-                        tooltip={`佣金范围${minPromotionCommissionRate}%~${maxPromotionCommissionRate}%`}
+                        tooltip={`佣金范围${minSalesCommissionRate}%~${maxSalesCommissionRate}%`}
                         rules={[
                           { required: true, message: "请填写销售佣金比例" },
                         ]}
                       >
                         <InputNumber
-                          min={minPromotionCommissionRate}
-                          max={maxPromotionCommissionRate}
-                          formatter={(value) => `${value}%`}
+                          min={minSalesCommissionRate}
+                          max={maxSalesCommissionRate}
                           style={{ width: "100%" }}
                           placeholder="请填写销售佣金比例"
+                          suffix="%"
                         />
                       </Form.Item>
                     );
@@ -673,6 +677,8 @@ export const GoodsModal = ({
                 }}
               </Form.Item>
             </Col>
+          </Row>
+          <Row gutter={16}>
             <Col span={12}>
               <Form.Item
                 noStyle
@@ -702,9 +708,120 @@ export const GoodsModal = ({
                         <InputNumber
                           min={minPromotionCommissionRate}
                           max={maxPromotionCommissionRate}
-                          formatter={(value) => `${value}%`}
                           style={{ width: "100%" }}
                           placeholder="请填写代言奖励比例"
+                          suffix="%"
+                        />
+                      </Form.Item>
+                    );
+                  }
+                }}
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                noStyle
+                shouldUpdate={(prevValues, currentValues) =>
+                  prevValues.categoryId !== currentValues.categoryId
+                }
+              >
+                {({ getFieldValue }) => {
+                  const categoryId = getFieldValue("categoryId");
+                  if (categoryId) {
+                    const { promotionCommissionUpperLimit } =
+                      goodsCategoryOptions.find(
+                        (item) => item.id === getFieldValue("categoryId")
+                      ) || {};
+                    return (
+                      <Form.Item
+                        name="promotionCommissionUpperLimit"
+                        label="代言奖励上限"
+                        tooltip={`最高可设¥${promotionCommissionUpperLimit}`}
+                        rules={[
+                          { required: true, message: "请填写代言奖励上限" },
+                        ]}
+                      >
+                        <InputNumber
+                          max={promotionCommissionUpperLimit}
+                          style={{ width: "100%" }}
+                          placeholder="请填写代言奖励上限"
+                          prefix="￥"
+                        />
+                      </Form.Item>
+                    );
+                  }
+                }}
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item
+                noStyle
+                shouldUpdate={(prevValues, currentValues) =>
+                  prevValues.categoryId !== currentValues.categoryId
+                }
+              >
+                {({ getFieldValue }) => {
+                  const categoryId = getFieldValue("categoryId");
+                  if (categoryId) {
+                    const {
+                      minSuperiorPromotionCommissionRate,
+                      maxSuperiorPromotionCommissionRate,
+                    } =
+                      goodsCategoryOptions.find(
+                        (item) => item.id === getFieldValue("categoryId")
+                      ) || {};
+                    return (
+                      <Form.Item
+                        name="superiorPromotionCommissionRate"
+                        label="上级代言奖励比例"
+                        tooltip={`佣金范围${minSuperiorPromotionCommissionRate}%~${maxSuperiorPromotionCommissionRate}%`}
+                        rules={[
+                          { required: true, message: "请填写上级代言奖励比例" },
+                        ]}
+                      >
+                        <InputNumber
+                          min={minSuperiorPromotionCommissionRate}
+                          max={maxSuperiorPromotionCommissionRate}
+                          style={{ width: "100%" }}
+                          placeholder="请填写上级代言奖励比例"
+                          suffix="%"
+                        />
+                      </Form.Item>
+                    );
+                  }
+                }}
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                noStyle
+                shouldUpdate={(prevValues, currentValues) =>
+                  prevValues.categoryId !== currentValues.categoryId
+                }
+              >
+                {({ getFieldValue }) => {
+                  const categoryId = getFieldValue("categoryId");
+                  if (categoryId) {
+                    const { superiorPromotionCommissionUpperLimit } =
+                      goodsCategoryOptions.find(
+                        (item) => item.id === getFieldValue("categoryId")
+                      ) || {};
+                    return (
+                      <Form.Item
+                        name="superiorPromotionCommissionUpperLimit"
+                        label="上级代言奖励上限"
+                        tooltip={`最高可设¥${superiorPromotionCommissionUpperLimit}`}
+                        rules={[
+                          { required: true, message: "请填写上级代言奖励上限" },
+                        ]}
+                      >
+                        <InputNumber
+                          max={superiorPromotionCommissionUpperLimit}
+                          style={{ width: "100%" }}
+                          placeholder="请填写上级代言奖励上限"
+                          prefix="￥"
                         />
                       </Form.Item>
                     );
