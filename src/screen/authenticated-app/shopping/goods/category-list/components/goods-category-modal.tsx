@@ -122,16 +122,16 @@ export const GoodsCategoryModal = ({
               </Form.Item>
             </Space.Compact>
           </Form.Item>
-          <Form.Item label="推广佣金比例范围%" required>
+          <Form.Item label="代言奖励比例范围%" required>
             <Space.Compact>
               <Form.Item
                 style={{ marginBottom: 0, width: "46%" }}
                 name="minPromotionCommissionRate"
-                rules={[{ required: true, message: "请输入最小推广佣金比例" }]}
+                rules={[{ required: true, message: "请输入最小代言奖励比例" }]}
               >
                 <InputNumber
                   style={{ width: "100%", textAlign: "center" }}
-                  placeholder="请输入最小推广佣金比例"
+                  placeholder="请输入最小代言奖励比例"
                 />
               </Form.Item>
               <Input
@@ -148,26 +148,26 @@ export const GoodsCategoryModal = ({
               <Form.Item
                 style={{ marginBottom: 0, width: "46%" }}
                 name="maxPromotionCommissionRate"
-                rules={[{ required: true, message: "请输入最大推广佣金比例" }]}
+                rules={[{ required: true, message: "请输入最大代言奖励比例" }]}
               >
                 <InputNumber
                   style={{
                     width: "100%",
                     textAlign: "center",
                   }}
-                  placeholder="请输入最大推广佣金比例"
+                  placeholder="请输入最大代言奖励比例"
                 />
               </Form.Item>
             </Space.Compact>
           </Form.Item>
           <Form.Item
-            label="推广佣金上限"
+            label="代言奖励上限"
             name="promotionCommissionUpperLimit"
-            rules={[{ required: true, message: "请输入推广佣金上限" }]}
+            rules={[{ required: true, message: "请输入代言奖励上限" }]}
           >
             <InputNumber
               style={{ width: "100%" }}
-              placeholder={"请输入推广佣金上限"}
+              placeholder={"请输入代言奖励上限"}
             />
           </Form.Item>
         </Form>

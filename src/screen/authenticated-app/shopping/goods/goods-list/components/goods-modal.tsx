@@ -157,7 +157,7 @@ export const GoodsModal = ({
       },
     },
     {
-      title: "推广佣金比例",
+      title: "代言奖励比例",
       render: (item: TableSku, _: TableSku, index: number) => {
         return (
           <InputNumber
@@ -654,10 +654,10 @@ export const GoodsModal = ({
                     return (
                       <Form.Item
                         name="promotionCommissionRate"
-                        label="推广佣金比例"
+                        label="代言奖励比例"
                         tooltip={`佣金范围${minPromotionCommissionRate}%~${maxPromotionCommissionRate}%`}
                         rules={[
-                          { required: true, message: "请填写推广佣金比例" },
+                          { required: true, message: "请填写代言奖励比例" },
                         ]}
                       >
                         <InputNumber
@@ -665,7 +665,7 @@ export const GoodsModal = ({
                           max={maxPromotionCommissionRate}
                           formatter={(value) => `${value}%`}
                           style={{ width: "100%" }}
-                          placeholder="请填写推广佣金比例"
+                          placeholder="请填写代言奖励比例"
                         />
                       </Form.Item>
                     );

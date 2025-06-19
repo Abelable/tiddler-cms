@@ -70,7 +70,7 @@ export const RoomModal = () => {
             <Descriptions.Item label="销售佣金比例">
               {`${(editingRoom?.salesCommissionRate as number) * 100}%`}
             </Descriptions.Item>
-            <Descriptions.Item label="推广佣金比例">
+            <Descriptions.Item label="代言奖励比例">
               {`${(editingRoom?.promotionCommissionRate as number) * 100}%`}
             </Descriptions.Item>
             <Descriptions.Item label="销量">

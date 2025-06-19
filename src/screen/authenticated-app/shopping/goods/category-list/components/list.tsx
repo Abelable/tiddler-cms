@@ -71,13 +71,13 @@ export const List = ({
             ),
           },
           {
-            title: "推广佣金比例范围",
+            title: "代言奖励比例范围",
             render: (value, category) => (
               <>{`${category.minPromotionCommissionRate}% ~ ${category.maxPromotionCommissionRate}%`}</>
             ),
           },
           {
-            title: "推广佣金上限",
+            title: "代言奖励上限",
             dataIndex: "promotionCommissionUpperLimit",
             render: (value) => <>¥{value}</>,
           },

@@ -75,7 +75,7 @@ export const TicketModal = ({
             <Descriptions.Item label="销售佣金比例">
               {`${(editingTicket?.salesCommissionRate as number) * 100}%`}
             </Descriptions.Item>
-            <Descriptions.Item label="推广佣金比例">
+            <Descriptions.Item label="代言奖励比例">
               {`${(editingTicket?.promotionCommissionRate as number) * 100}%`}
             </Descriptions.Item>
             <Descriptions.Item label="销量">

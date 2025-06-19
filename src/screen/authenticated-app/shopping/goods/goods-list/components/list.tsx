@@ -143,7 +143,7 @@ export const List = ({
             width: "12rem",
           },
           {
-            title: "推广佣金比例",
+            title: "代言奖励比例",
             dataIndex: "promotionCommissionRate",
             render: (value) => <>{`${value}%`}</>,
             width: "12rem",

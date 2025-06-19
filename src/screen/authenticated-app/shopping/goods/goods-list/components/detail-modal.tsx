@@ -82,7 +82,7 @@ export const DetailModal = ({
             <Descriptions.Item label="销售佣金比例">
               {`${editingGoods?.salesCommissionRate}%`}
             </Descriptions.Item>
-            <Descriptions.Item label="推广佣金比例">
+            <Descriptions.Item label="代言奖励比例">
               {`${editingGoods?.promotionCommissionRate}%`}
             </Descriptions.Item>
             <Descriptions.Item label="库存">
