@@ -219,18 +219,25 @@ export const List = ({
               {
                 title: "上限",
                 dataIndex: "promotionCommissionUpperLimit",
-                render: (value, goods) => (
-                  <InputNumber
-                    value={value}
-                    onChange={(promotionCommissionUpperLimit) =>
-                      editCommission({
-                        id: goods.id,
-                        promotionCommissionUpperLimit,
-                      })
-                    }
-                    prefix="￥"
-                  />
-                ),
+                render: (value, goods) => {
+                  const { promotionCommissionUpperLimit } =
+                    goodsCategoryOptions.find(
+                      (item) => item.id === goods.categoryId
+                    ) || {};
+                  return (
+                    <InputNumber
+                      max={promotionCommissionUpperLimit}
+                      value={value}
+                      onChange={(promotionCommissionUpperLimit) =>
+                        editCommission({
+                          id: goods.id,
+                          promotionCommissionUpperLimit,
+                        })
+                      }
+                      prefix="￥"
+                    />
+                  );
+                },
                 width: "12rem",
               },
             ],
@@ -241,18 +248,29 @@ export const List = ({
               {
                 title: "比例",
                 dataIndex: "superiorPromotionCommissionRate",
-                render: (value, goods) => (
-                  <InputNumber
-                    value={value}
-                    onChange={(superiorPromotionCommissionRate) =>
-                      editCommission({
-                        id: goods.id,
-                        superiorPromotionCommissionRate,
-                      })
-                    }
-                    suffix="%"
-                  />
-                ),
+                render: (value, goods) => {
+                  const {
+                    minSuperiorPromotionCommissionRate,
+                    maxSuperiorPromotionCommissionRate,
+                  } =
+                    goodsCategoryOptions.find(
+                      (item) => item.id === goods.categoryId
+                    ) || {};
+                  return (
+                    <InputNumber
+                      min={minSuperiorPromotionCommissionRate}
+                      max={maxSuperiorPromotionCommissionRate}
+                      value={value}
+                      onChange={(superiorPromotionCommissionRate) =>
+                        editCommission({
+                          id: goods.id,
+                          superiorPromotionCommissionRate,
+                        })
+                      }
+                      suffix="%"
+                    />
+                  );
+                },
                 width: "12rem",
               },
               {
