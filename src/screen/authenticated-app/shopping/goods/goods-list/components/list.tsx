@@ -276,18 +276,25 @@ export const List = ({
               {
                 title: "上限",
                 dataIndex: "superiorPromotionCommissionUpperLimit",
-                render: (value, goods) => (
-                  <InputNumber
-                    value={value}
-                    onChange={(superiorPromotionCommissionUpperLimit) =>
-                      editCommission({
-                        id: goods.id,
-                        superiorPromotionCommissionUpperLimit,
-                      })
-                    }
-                    prefix="￥"
-                  />
-                ),
+                render: (value, goods) => {
+                  const { superiorPromotionCommissionUpperLimit } =
+                    goodsCategoryOptions.find(
+                      (item) => item.id === goods.categoryId
+                    ) || {};
+                  return (
+                    <InputNumber
+                      max={superiorPromotionCommissionUpperLimit}
+                      value={value}
+                      onChange={(superiorPromotionCommissionUpperLimit) =>
+                        editCommission({
+                          id: goods.id,
+                          superiorPromotionCommissionUpperLimit,
+                        })
+                      }
+                      prefix="￥"
+                    />
+                  );
+                },
                 width: "12rem",
               },
             ],
