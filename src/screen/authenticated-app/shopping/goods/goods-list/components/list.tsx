@@ -191,15 +191,27 @@ export const List = ({
               {
                 title: "比例",
                 dataIndex: "promotionCommissionRate",
-                render: (value, goods) => (
-                  <InputNumber
-                    value={value}
-                    onChange={(promotionCommissionRate) =>
-                      editCommission({ id: goods.id, promotionCommissionRate })
-                    }
-                    suffix="%"
-                  />
-                ),
+                render: (value, goods) => {
+                  const { minSalesCommissionRate, maxSalesCommissionRate } =
+                    goodsCategoryOptions.find(
+                      (item) => item.id === goods.categoryId
+                    ) || {};
+
+                  return (
+                    <InputNumber
+                      min={minSalesCommissionRate}
+                      max={maxSalesCommissionRate}
+                      value={value}
+                      onChange={(promotionCommissionRate) =>
+                        editCommission({
+                          id: goods.id,
+                          promotionCommissionRate,
+                        })
+                      }
+                      suffix="%"
+                    />
+                  );
+                },
                 width: "12rem",
               },
               {
