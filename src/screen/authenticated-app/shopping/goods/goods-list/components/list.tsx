@@ -11,6 +11,7 @@ import {
   InputNumber,
   Rate,
   Popover,
+  Tag,
 } from "antd";
 import {
   ButtonNoPadding,
@@ -145,7 +146,9 @@ export const List = ({
             title: "一级分类",
             dataIndex: "shopCategoryId",
             render: (value) => (
-              <>{shopCategoryOptions.find((item) => item.id === value)?.name}</>
+              <Tag>
+                {shopCategoryOptions.find((item) => item.id === value)?.name}
+              </Tag>
             ),
             width: "12rem",
           },
@@ -153,9 +156,9 @@ export const List = ({
             title: "二级分类",
             dataIndex: "categoryId",
             render: (value) => (
-              <>
+              <Tag>
                 {goodsCategoryOptions.find((item) => item.id === value)?.name}
-              </>
+              </Tag>
             ),
             width: "12rem",
           },
@@ -184,7 +187,7 @@ export const List = ({
           },
           {
             title: "代言奖励比例",
-            dataIndex: "promotionCommissionRate",
+            dataIndex: "superiorPromotionCommissionUpperLimit",
             render: (value, goods) => (
               <InputNumber
                 value={value}
@@ -199,19 +202,52 @@ export const List = ({
           {
             title: "代言奖励上限",
             dataIndex: "promotionCommissionUpperLimit",
-            render: (value) => <>{`¥${value}`}</>,
+            render: (value, goods) => (
+              <InputNumber
+                value={value}
+                onChange={(promotionCommissionUpperLimit) =>
+                  editCommission({
+                    id: goods.id,
+                    promotionCommissionUpperLimit,
+                  })
+                }
+                prefix="￥"
+              />
+            ),
             width: "12rem",
           },
           {
             title: "上级代言奖励比例",
             dataIndex: "superiorPromotionCommissionRate",
-            render: (value) => <>{`${value}%`}</>,
+            render: (value, goods) => (
+              <InputNumber
+                value={value}
+                onChange={(superiorPromotionCommissionRate) =>
+                  editCommission({
+                    id: goods.id,
+                    superiorPromotionCommissionRate,
+                  })
+                }
+                suffix="%"
+              />
+            ),
             width: "16rem",
           },
           {
             title: "上级代言奖励上限",
             dataIndex: "superiorPromotionCommissionUpperLimit",
-            render: (value) => <>{`¥${value}`}</>,
+            render: (value, goods) => (
+              <InputNumber
+                value={value}
+                onChange={(superiorPromotionCommissionUpperLimit) =>
+                  editCommission({
+                    id: goods.id,
+                    superiorPromotionCommissionUpperLimit,
+                  })
+                }
+                prefix="￥"
+              />
+            ),
             width: "16rem",
           },
           {
