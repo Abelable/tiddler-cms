@@ -83,7 +83,7 @@ export const List = ({
             width: "22rem",
             render: (value) => (
               <>
-                <Rate allowHalf value={value} />
+                <Rate value={value} allowHalf disabled />
                 <span style={{ marginLeft: "1rem" }}>{value}</span>
               </>
             ),
