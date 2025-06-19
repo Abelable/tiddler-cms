@@ -2,6 +2,7 @@ import { List } from "./components/list";
 import { SearchPanel } from "./components/search-panel";
 import { GoodsModal } from "./components/goods-modal";
 import { DetailModal } from "./components/detail-modal";
+import { ApproveModal } from "./components/approve-modal";
 import { RejectModal } from "./components/reject-modal";
 
 import styled from "@emotion/styled";
@@ -10,10 +11,10 @@ import { useShopOptions } from "service/shop";
 import { useGoodsCategoryOptions } from "service/goodsCategory";
 import { useShopCategoryOptions } from "service/shopCategory";
 import { useGoodsList } from "service/goods";
-import { toNumber } from "utils";
-import { useGoodsListSearchParams } from "./util";
 import { useRefundAddressOptions } from "service/refundAddress";
 import { usePickupAddressOptions } from "service/pickupAddress";
+import { toNumber } from "utils";
+import { useGoodsListSearchParams } from "./util";
 
 const statusOptions = [
   { text: "待审核", value: 0 },
@@ -97,6 +98,7 @@ export const GoodsList = () => {
         shopCategoryOptions={shopCategoryOptions || []}
         goodsCategoryOptions={goodsCategoryOptions || []}
       />
+      <ApproveModal goodsCategoryOptions={goodsCategoryOptions || []} />
       <RejectModal />
     </Container>
   );

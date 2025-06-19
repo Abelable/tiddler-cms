@@ -1,8 +1,3 @@
-import { useState, useRef, useEffect } from "react";
-import { useForm } from "antd/lib/form/Form";
-import { useAddGoods, useEditGoods } from "service/goods";
-import { useGoodsModal, useGoodsListQueryKey } from "../util";
-
 import {
   Button,
   Col,
@@ -25,6 +20,11 @@ import {
 import { PlusOutlined, DeleteOutlined, CloseOutlined } from "@ant-design/icons";
 import { OssUpload } from "components/oss-upload";
 import { ErrorBox, ModalLoading } from "components/lib";
+
+import { useState, useRef, useEffect } from "react";
+import { useForm } from "antd/lib/form/Form";
+import { useAddGoods, useEditGoods } from "service/goods";
+import { useGoodsModal, useGoodsListQueryKey } from "../util";
 
 import type { DataOption } from "types/common";
 import type { Sku, Spec } from "types/goods";

@@ -1,4 +1,3 @@
-import styled from "@emotion/styled";
 import {
   Image,
   Dropdown,
@@ -22,16 +21,18 @@ import {
   OptionCover,
 } from "components/lib";
 import { PlusOutlined } from "@ant-design/icons";
+import { SearchPanelProps } from "./search-panel";
 
+import styled from "@emotion/styled";
 import dayjs from "dayjs";
-import { useApproveGoods, useDeleteGoods, useEditViews } from "service/goods";
+import { useDeleteGoods, useEditViews } from "service/goods";
 import {
+  useApproveModal,
   useGoodsDetailModal,
   useGoodsListQueryKey,
   useGoodsModal,
   useRejectModal,
 } from "../util";
-import { SearchPanelProps } from "./search-panel";
 
 import type { Goods } from "types/goods";
 
@@ -267,7 +268,7 @@ const More = ({ goods }: { goods: Goods }) => {
   const { startEdit } = useGoodsModal();
   const { open } = useGoodsDetailModal();
   const { mutate: deleteGoods } = useDeleteGoods(useGoodsListQueryKey());
-  const { mutate: approveGoods } = useApproveGoods(useGoodsListQueryKey());
+  const { open: openApproveModal } = useApproveModal();
   const { open: openRejectModal } = useRejectModal();
 
   const confirmDelete = (id: number) => {
@@ -280,29 +281,10 @@ const More = ({ goods }: { goods: Goods }) => {
     });
   };
 
-  const confirmApprove = (id: number) => {
-    Modal.confirm({
-      title: "商品审核通过确认",
-      content: "请确保在商品信息无误的情况下进行该操作",
-      okText: "确定",
-      cancelText: "取消",
-      onOk: () => approveGoods(id),
-    });
-  };
-
   const items = [
-    shopId
-      ? {
-          label: <div onClick={() => open(id)}>详情</div>,
-          key: "detail",
-        }
-      : {
-          label: <div onClick={() => startEdit(id)}>编辑</div>,
-          key: "edit",
-        },
     status === 0
       ? {
-          label: <div onClick={() => confirmApprove(id)}>通过</div>,
+          label: <div onClick={() => openApproveModal(id)}>通过</div>,
           key: "approve",
         }
       : undefined,
@@ -312,6 +294,15 @@ const More = ({ goods }: { goods: Goods }) => {
           key: "reject",
         }
       : undefined,
+    shopId
+      ? {
+          label: <div onClick={() => open(id)}>详情</div>,
+          key: "detail",
+        }
+      : {
+          label: <div onClick={() => startEdit(id)}>编辑</div>,
+          key: "edit",
+        },
     {
       label: <div onClick={() => confirmDelete(id)}>删除</div>,
       key: "delete",
