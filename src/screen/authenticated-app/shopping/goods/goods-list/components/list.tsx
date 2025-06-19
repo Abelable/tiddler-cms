@@ -190,7 +190,7 @@ export const List = ({
             children: [
               {
                 title: "比例",
-                dataIndex: "superiorPromotionCommissionUpperLimit",
+                dataIndex: "promotionCommissionRate",
                 render: (value, goods) => (
                   <InputNumber
                     value={value}
