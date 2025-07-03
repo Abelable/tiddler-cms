@@ -101,6 +101,17 @@ export const List = ({
             width: "15rem",
           },
           {
+            title: "身份有效期限",
+            render: (value, promoter) => (
+              <span>
+                {promoter.expirationTime
+                  ? dayjs(promoter.expirationTime).format("YYYY-MM-DD HH:mm:ss")
+                  : "无"}
+              </span>
+            ),
+            width: "20rem",
+          },
+          {
             title: "生成场景",
             dataIndex: "path",
             render: (value) => (
@@ -109,8 +120,37 @@ export const List = ({
             width: "12rem",
           },
           {
-            title: "邀请代言人人数",
+            title: "邀请人数",
             dataIndex: "promotedUserNumber",
+            width: "12rem",
+          },
+          {
+            title: "自购返现",
+            dataIndex: "selfCommissionSum",
+            render: (value) => <>¥{value ? value.toFixed(2) : "0.00"}</>,
+            width: "18rem",
+          },
+          {
+            title: "分享奖励",
+            dataIndex: "shareCommissionSum",
+            render: (value) => <>¥{value ? value.toFixed(2) : "0.00"}</>,
+            width: "18rem",
+          },
+          {
+            title: "团队奖励",
+            dataIndex: "teamCommissionSum",
+            render: (value) => <>¥{value ? value.toFixed(2) : "0.00"}</>,
+            width: "18rem",
+          },
+          {
+            title: "已提现奖励",
+            dataIndex: "settledCommissionSum",
+            render: (value) => (
+              <span style={{ color: "#f56c6c" }}>
+                -¥{value ? value.toFixed(2) : "0.00"}
+              </span>
+            ),
+            width: "18rem",
           },
           {
             title: "提现进度",
@@ -131,31 +171,6 @@ export const List = ({
             ),
             width: "20rem",
           },
-          {
-            title: "自购返现",
-            dataIndex: "selfCommissionSum",
-            render: (value) => <>¥{value ? value.toFixed(2) : 0}</>,
-          },
-          {
-            title: "分享奖励",
-            dataIndex: "shareCommissionSum",
-            render: (value) => <>¥{value ? value.toFixed(2) : 0}</>,
-          },
-          {
-            title: "团队奖励",
-            dataIndex: "teamCommissionSum",
-            render: (value) => <>¥{value ? value.toFixed(2) : 0}</>,
-          },
-          {
-            title: "已提现奖励",
-            dataIndex: "settledCommissionSum",
-            render: (value) => (
-              <span style={{ color: "#f56c6c" }}>
-                -¥{value ? value.toFixed(2) : 0}
-              </span>
-            ),
-          },
-
           {
             title: "创建时间",
             render: (value, promoter) => (

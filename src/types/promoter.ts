@@ -16,6 +16,7 @@ export interface Promoter {
   level: number;
   scene: number;
   path: number;
+  expirationTime: string;
   promotedUserNumber: number;
   selfCommissionSum: number;
   shareCommissionSum: number;
