@@ -101,17 +101,6 @@ export const List = ({
             width: "15rem",
           },
           {
-            title: "身份有效期限",
-            render: (value, promoter) => (
-              <span>
-                {promoter.expirationTime
-                  ? dayjs(promoter.expirationTime).format("YYYY-MM-DD HH:mm:ss")
-                  : "无"}
-              </span>
-            ),
-            width: "20rem",
-          },
-          {
             title: "生成场景",
             dataIndex: "path",
             render: (value) => (
@@ -168,6 +157,17 @@ export const List = ({
                   status="active"
                 />
               </>
+            ),
+            width: "20rem",
+          },
+          {
+            title: "到期时间",
+            render: (value, promoter) => (
+              <span>
+                {promoter.expirationTime
+                  ? dayjs(promoter.expirationTime).format("YYYY-MM-DD HH:mm:ss")
+                  : "无"}
+              </span>
             ),
             width: "20rem",
           },

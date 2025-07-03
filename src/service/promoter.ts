@@ -36,13 +36,15 @@ export const useAddPromoter = (queryKey: QueryKey) => {
       userId,
       level,
       scene,
+      duration,
     }: {
       userId: number;
       level: number;
       scene: number;
+      duration: number;
     }) =>
       client("promoter/add", {
-        data: { userId, level, scene },
+        data: { userId, level, scene, duration },
         method: "POST",
       }),
     useAddConfig(queryKey)

@@ -1,4 +1,4 @@
-import { Form, Modal, Select } from "antd";
+import { Form, InputNumber, Modal, Select } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { ErrorBox, ModalLoading, OptionAvatar } from "components/lib";
 
@@ -112,6 +112,16 @@ export const PromoterModal = ({
                 </Select.Option>
               ))}
             </Select>
+          </Form.Item>
+          <Form.Item
+            name="duration"
+            label="代言时长（天）"
+            rules={[{ required: true, message: "请填写代言时长" }]}
+          >
+            <InputNumber
+              style={{ width: "100%" }}
+              placeholder="请填写代言时长"
+            />
           </Form.Item>
         </Form>
       )}
