@@ -9,6 +9,7 @@ export interface PromoterListSearchParams {
 
 export interface Promoter {
   id: number;
+  status: number;
   user_id: number;
   avatar: string;
   nickname: string;

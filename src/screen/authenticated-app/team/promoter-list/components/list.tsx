@@ -1,5 +1,6 @@
 import {
   Avatar,
+  Badge,
   Button,
   Dropdown,
   MenuProps,
@@ -99,6 +100,19 @@ export const List = ({
               );
             },
             width: "15rem",
+          },
+          {
+            title: "状态",
+            dataIndex: "status",
+            render: (value) => (
+              <Badge
+                status={
+                  (["processing", "warning", "error"] as const)[value - 1]
+                }
+                text={["正常", "即将过期", "已过期"][value - 1]}
+              />
+            ),
+            width: "12rem",
           },
           {
             title: "生成场景",
