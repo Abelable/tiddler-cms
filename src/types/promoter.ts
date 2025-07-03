@@ -17,7 +17,8 @@ export interface Promoter {
   scene: number;
   path: number;
   promotedUserNumber: number;
-  commissionSum: number;
+  selfCommissionSum: number;
+  shareCommissionSum: number;
   teamCommissionSum: number;
   settledCommissionSum: number;
   createdAt: string;

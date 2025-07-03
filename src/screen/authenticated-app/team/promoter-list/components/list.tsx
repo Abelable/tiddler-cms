@@ -78,7 +78,7 @@ export const List = ({
             width: "16rem",
           },
           {
-            title: "家乡代言人身份",
+            title: "身份",
             dataIndex: "level",
             render: (value, promoter) => {
               const levelItem = levelOptions.find(
@@ -109,7 +109,7 @@ export const List = ({
             width: "12rem",
           },
           {
-            title: "推广人数",
+            title: "邀请代言人人数",
             dataIndex: "promotedUserNumber",
           },
           {
@@ -119,7 +119,9 @@ export const List = ({
                 <Progress
                   percent={Math.round(
                     (promoter.settledCommissionSum /
-                      (promoter.commissionSum + promoter.teamCommissionSum)) *
+                      (promoter.selfCommissionSum +
+                        promoter.shareCommissionSum +
+                        promoter.teamCommissionSum)) *
                       100
                   )}
                   size="small"
@@ -130,8 +132,13 @@ export const List = ({
             width: "20rem",
           },
           {
-            title: "商品奖励",
-            dataIndex: "commissionSum",
+            title: "自购返现",
+            dataIndex: "selfCommissionSum",
+            render: (value) => <>¥{value ? value.toFixed(2) : 0}</>,
+          },
+          {
+            title: "分享奖励",
+            dataIndex: "shareCommissionSum",
             render: (value) => <>¥{value ? value.toFixed(2) : 0}</>,
           },
           {
