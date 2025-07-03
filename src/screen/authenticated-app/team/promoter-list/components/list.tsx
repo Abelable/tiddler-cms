@@ -232,8 +232,8 @@ const More = ({ promoter }: { promoter: Promoter }) => {
 
   const items: MenuProps["items"] = [
     {
-      label: <div onClick={() => startEdit(promoter.id)}>更改等级</div>,
-      key: "change",
+      label: <div onClick={() => startEdit(promoter.id)}>编辑</div>,
+      key: "edit",
     },
     {
       label: <div onClick={() => confirmDelete(promoter.id)}>删除</div>,

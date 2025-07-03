@@ -4,7 +4,7 @@ import { ErrorBox, ModalLoading, OptionAvatar } from "components/lib";
 
 import { useEffect } from "react";
 import { useForm } from "antd/lib/form/Form";
-import { useAddPromoter, useChangeLevel } from "service/promoter";
+import { useAddPromoter, useEditPromoter } from "service/promoter";
 import { usePromoterModal, usePromoterListQueryKey } from "../util";
 
 export const PromoterModal = ({
@@ -24,7 +24,7 @@ export const PromoterModal = ({
   } = usePromoterModal();
 
   const useMutationPromoter = editingPromoterId
-    ? useChangeLevel
+    ? useEditPromoter
     : useAddPromoter;
   const {
     mutateAsync,
@@ -62,7 +62,7 @@ export const PromoterModal = ({
   return (
     <Modal
       forceRender={true}
-      title="新增家乡代言人"
+      title={editingPromoterId ? "编辑家乡代言人" : "新增家乡代言人"}
       open={promoterModalOpen}
       confirmLoading={mutateLoading}
       onOk={confirm}
@@ -115,12 +115,16 @@ export const PromoterModal = ({
           </Form.Item>
           <Form.Item
             name="duration"
-            label="代言时长（天）"
-            rules={[{ required: true, message: "请填写代言时长" }]}
+            label={
+              editingPromoterId ? "增加身份有效期（天）" : "身份有效期（天）"
+            }
+            rules={[
+              { required: !editingPromoterId, message: "请输入身份有效期" },
+            ]}
           >
             <InputNumber
               style={{ width: "100%" }}
-              placeholder="请填写代言时长"
+              placeholder="请输入身份有效期"
             />
           </Form.Item>
         </Form>

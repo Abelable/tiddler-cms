@@ -1,6 +1,11 @@
 import { QueryKey, useMutation, useQuery } from "react-query";
 import { useHttp } from "./http";
-import { useAddConfig, useDeleteConfig } from "./use-optimistic-options";
+import {
+  useAddConfig,
+  useDeleteConfig,
+  useEditConfig,
+} from "./use-optimistic-options";
+import { cleanObject } from "utils";
 
 import type {
   PromoterOption,
@@ -9,7 +14,7 @@ import type {
   Promoter,
   TopPromoterListResult,
 } from "types/promoter";
-import { PageParams } from "types/common";
+import type { PageParams } from "types/common";
 
 export const usePromoterList = (params: Partial<PromoterListSearchParams>) => {
   const client = useHttp();
@@ -51,15 +56,25 @@ export const useAddPromoter = (queryKey: QueryKey) => {
   );
 };
 
-export const useChangeLevel = (queryKey: QueryKey) => {
+export const useEditPromoter = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
-    ({ id, level, scene }: { id: number; level: number; scene: number }) =>
+    ({
+      id,
+      level,
+      scene,
+      duration,
+    }: {
+      id: number;
+      level: number;
+      scene: number;
+      duration: number;
+    }) =>
       client("promoter/change_level", {
-        data: { id, level, scene },
+        data: cleanObject({ id, level, scene, duration }),
         method: "POST",
       }),
-    useAddConfig(queryKey)
+    useEditConfig(queryKey)
   );
 };
 
