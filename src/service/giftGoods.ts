@@ -1,6 +1,10 @@
 import { QueryKey, useMutation, useQuery } from "react-query";
 import { useHttp } from "./http";
-import { useAddConfig, useDeleteConfig } from "./use-optimistic-options";
+import {
+  useAddConfig,
+  useDeleteConfig,
+  useEditConfig,
+} from "./use-optimistic-options";
 import type {
   GiftGoodsListResult,
   GiftGoodsListSearchParams,
@@ -24,6 +28,18 @@ export const useAddGiftGoods = (queryKey: QueryKey) => {
         method: "POST",
       }),
     useAddConfig(queryKey)
+  );
+};
+
+export const useEditDuration = (queryKey: QueryKey) => {
+  const client = useHttp();
+  return useMutation(
+    ({ id, duration }: { id: number; duration: number }) =>
+      client("gift/edit_duration", {
+        data: { id, duration },
+        method: "POST",
+      }),
+    useEditConfig(queryKey)
   );
 };
 

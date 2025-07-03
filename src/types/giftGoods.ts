@@ -11,7 +11,7 @@ export interface GiftGoods {
   goodsId: number;
   goodsName: string;
   goodsCover: string;
-  effectiveDuration: number;
+  duration: number;
   createdAt: string;
 }
 

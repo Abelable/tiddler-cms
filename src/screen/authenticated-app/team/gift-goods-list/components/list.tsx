@@ -5,13 +5,14 @@ import {
   TablePaginationConfig,
   TableProps,
   Image,
+  InputNumber,
 } from "antd";
 import { ErrorBox, Row, PageTitle } from "components/lib";
 import { PlusOutlined } from "@ant-design/icons";
 
 import styled from "@emotion/styled";
 import dayjs from "dayjs";
-import { useDeleteGiftGoods } from "service/giftGoods";
+import { useDeleteGiftGoods, useEditDuration } from "service/giftGoods";
 import { useGiftGoodsModal, useGiftGoodsListQueryKey } from "../util";
 
 import type { GiftGoods, GiftGoodsListSearchParams } from "types/giftGoods";
@@ -40,6 +41,7 @@ export const List = ({
       limit: pagination.pageSize,
     });
 
+  const { mutate: editDuration } = useEditDuration(useGiftGoodsListQueryKey());
   const { mutate: deleteIntegrityGoods } = useDeleteGiftGoods(
     useGiftGoodsListQueryKey()
   );
@@ -100,7 +102,15 @@ export const List = ({
           },
           {
             title: "代言时长（天）",
-            dataIndex: "effectiveDuration",
+            dataIndex: "duration",
+            render: (value, giftGoods) => (
+              <InputNumber
+                value={value}
+                onChange={(duration) =>
+                  editDuration({ id: giftGoods.id, duration })
+                }
+              />
+            ),
           },
           {
             title: "创建时间",

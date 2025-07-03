@@ -81,7 +81,7 @@ export const GoodsModal = ({ typeOptions }: { typeOptions: DataOption[] }) => {
           </Select>
         </Form.Item>
         <Form.Item
-          name="effectiveDuration"
+          name="duration"
           label="代言时长（天）"
           rules={[{ required: true, message: "请填写代言时长" }]}
         >
