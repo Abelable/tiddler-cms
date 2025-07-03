@@ -22,9 +22,17 @@ export const useGiftGoodsList = (
 export const useAddGiftGoods = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
-    ({ type, goodsIds }: { type: number; goodsIds: number[] }) =>
+    ({
+      type,
+      goodsIds,
+      duration,
+    }: {
+      type: number;
+      goodsIds: number[];
+      duration: number;
+    }) =>
       client("gift/add", {
-        data: { type, goodsIds },
+        data: { type, goodsIds, duration },
         method: "POST",
       }),
     useAddConfig(queryKey)

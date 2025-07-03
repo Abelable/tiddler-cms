@@ -23,7 +23,7 @@ export const GoodsModal = ({ typeOptions }: { typeOptions: DataOption[] }) => {
 
   const confirm = () => {
     form.validateFields().then(async () => {
-      await mutateAsync({ type: 2, ...form.getFieldsValue() });
+      await mutateAsync(form.getFieldsValue());
       closeModal();
     });
   };
@@ -45,7 +45,7 @@ export const GoodsModal = ({ typeOptions }: { typeOptions: DataOption[] }) => {
       <ErrorBox error={error || goodsOptionsError} />
       <Form form={form} layout="vertical">
         <Form.Item
-          name="type"
+          name="typeId"
           label="好物类型"
           rules={[{ required: true, message: "请选择好物类型" }]}
         >
