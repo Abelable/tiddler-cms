@@ -14,13 +14,13 @@ import dayjs from "dayjs";
 import { useDeleteGiftGoods } from "service/giftGoods";
 import { useGiftGoodsModal, useGiftGoodsListQueryKey } from "../util";
 
-import type { Goods, GiftListSearchParams } from "types/giftGoods";
+import type { GiftGoods, GiftGoodsListSearchParams } from "types/giftGoods";
 import type { DataOption } from "types/common";
 
-interface ListProps extends TableProps<Goods> {
+interface ListProps extends TableProps<GiftGoods> {
   typeOptions: DataOption[];
-  params: Partial<GiftListSearchParams>;
-  setParams: (params: Partial<GiftListSearchParams>) => void;
+  params: Partial<GiftGoodsListSearchParams>;
+  setParams: (params: Partial<GiftGoodsListSearchParams>) => void;
   error: Error | unknown;
 }
 
@@ -97,6 +97,10 @@ export const List = ({
                 dataIndex: "goodsName",
               },
             ],
+          },
+          {
+            title: "代言时长（天）",
+            dataIndex: "effectiveDuration",
           },
           {
             title: "创建时间",

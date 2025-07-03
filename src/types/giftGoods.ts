@@ -1,21 +1,22 @@
-export interface GiftListSearchParams {
+export interface GiftGoodsListSearchParams {
   typeId: number;
   goodsId: number;
   page: number;
   limit: number;
 }
 
-export interface Goods {
+export interface GiftGoods {
   id: number;
+  typeId: number;
   goodsId: number;
   goodsName: string;
   goodsCover: string;
-  typeId: number;
+  effectiveDuration: number;
   createdAt: string;
 }
 
-export interface GoodsListResult {
-  list: Goods[];
+export interface GiftGoodsListResult {
+  list: GiftGoods[];
   page: string;
   limit: string;
   total: string;

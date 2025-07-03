@@ -134,3 +134,10 @@ export const useSelfGoodsOptions = () => {
     client("goods/self_options")
   );
 };
+
+export const useNormalGoodsOptions = () => {
+  const client = useHttp();
+  return useQuery<ProductOption[]>(["normal_goods_options"], () =>
+    client("goods/normal_options")
+  );
+};

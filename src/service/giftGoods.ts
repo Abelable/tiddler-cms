@@ -1,11 +1,16 @@
 import { QueryKey, useMutation, useQuery } from "react-query";
 import { useHttp } from "./http";
 import { useAddConfig, useDeleteConfig } from "./use-optimistic-options";
-import type { GoodsListResult, GiftListSearchParams } from "types/giftGoods";
+import type {
+  GiftGoodsListResult,
+  GiftGoodsListSearchParams,
+} from "types/giftGoods";
 
-export const useGiftGoodsList = (params: Partial<GiftListSearchParams>) => {
+export const useGiftGoodsList = (
+  params: Partial<GiftGoodsListSearchParams>
+) => {
   const client = useHttp();
-  return useQuery<GoodsListResult>(["gift_list", params], () =>
+  return useQuery<GiftGoodsListResult>(["gift_goods_list", params], () =>
     client("gift/list", { data: params, method: "POST" })
   );
 };

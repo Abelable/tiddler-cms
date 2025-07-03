@@ -1,8 +1,8 @@
-import { Form, Modal, Select } from "antd";
+import { Form, InputNumber, Modal, Select } from "antd";
 import { ErrorBox, OptionCover } from "components/lib";
 
 import { useForm } from "antd/lib/form/Form";
-import { useSelfGoodsOptions } from "service/goods";
+import { useNormalGoodsOptions } from "service/goods";
 import { useAddGiftGoods } from "service/giftGoods";
 import { useGiftGoodsModal, useGiftGoodsListQueryKey } from "../util";
 
@@ -13,7 +13,7 @@ export const GoodsModal = ({ typeOptions }: { typeOptions: DataOption[] }) => {
   const { giftGoodsModalOpen, close } = useGiftGoodsModal();
 
   const { data: goodsOptions = [], error: goodsOptionsError } =
-    useSelfGoodsOptions();
+    useNormalGoodsOptions();
 
   const {
     mutateAsync,
@@ -79,6 +79,13 @@ export const GoodsModal = ({ typeOptions }: { typeOptions: DataOption[] }) => {
               </Select.Option>
             ))}
           </Select>
+        </Form.Item>
+        <Form.Item
+          name="effectiveDuration"
+          label="代言时长（天）"
+          rules={[{ required: true, message: "请填写代言时长" }]}
+        >
+          <InputNumber style={{ width: "100%" }} placeholder="请填写代言时长" />
         </Form.Item>
       </Form>
     </Modal>

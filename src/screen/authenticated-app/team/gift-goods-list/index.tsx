@@ -7,14 +7,14 @@ import { useGoodsOptions } from "service/goods";
 import { useGiftTypeOptions } from "service/giftType";
 import { useGiftGoodsList } from "service/giftGoods";
 import { toNumber } from "utils";
-import { useGiftListSearchParams } from "./util";
+import { useGiftGoodsListSearchParams } from "./util";
 
 export const GiftGoodsList = () => {
   const { data: typeOptions = [], error: typeOptionsError } =
     useGiftTypeOptions();
   const { data: goodsOptions = [], error: goodsOptionsError } =
     useGoodsOptions();
-  const [params, setParams] = useGiftListSearchParams();
+  const [params, setParams] = useGiftGoodsListSearchParams();
   const { isLoading, error, data } = useGiftGoodsList(params);
 
   return (

@@ -4,17 +4,17 @@ import { OptionCover, Row } from "components/lib";
 import { useState } from "react";
 import styled from "@emotion/styled";
 
-import type { GiftListSearchParams } from "types/giftGoods";
+import type { GiftGoodsListSearchParams } from "types/giftGoods";
 import type { DataOption, ProductOption } from "types/common";
 
 export interface SearchPanelProps {
   typeOptions: DataOption[];
   goodsOptions: ProductOption[];
-  params: Partial<GiftListSearchParams>;
-  setParams: (params: Partial<GiftListSearchParams>) => void;
+  params: Partial<GiftGoodsListSearchParams>;
+  setParams: (params: Partial<GiftGoodsListSearchParams>) => void;
 }
 
-const defaultParmas: Partial<GiftListSearchParams> = {
+const defaultParmas: Partial<GiftGoodsListSearchParams> = {
   typeId: undefined,
   goodsId: undefined,
 };
