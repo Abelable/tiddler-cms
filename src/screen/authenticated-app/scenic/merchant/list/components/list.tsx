@@ -88,7 +88,6 @@ export const List = ({
                         )}
                       </p>
                       <p>支付Id：{provider.depositInfo.payId}</p>
-                      <p>支付编号：{provider.depositInfo.orderSn}</p>
                       <p>
                         支付时间：
                         {dayjs(provider.depositInfo.updatedAt).format(

@@ -55,6 +55,21 @@ export const List = ({
             width: "8rem",
           },
           {
+            title: "商家类型",
+            dataIndex: "type",
+            render: (value) => <>{value === 1 ? "个人" : "企业"}</>,
+            filters: typeOptions,
+            onFilter: (value, merchant) => merchant.type === value,
+          },
+          {
+            title: "联系人姓名",
+            dataIndex: "name",
+          },
+          {
+            title: "联系人手机号",
+            dataIndex: "mobile",
+          },
+          {
             title: "状态",
             dataIndex: "status",
             render: (value, merchant) =>
@@ -99,21 +114,6 @@ export const List = ({
               ),
             filters: statusOptions,
             onFilter: (value, merchant) => merchant.status === value,
-          },
-          {
-            title: "商家类型",
-            dataIndex: "type",
-            render: (value) => <>{value === 1 ? "个人" : "企业"}</>,
-            filters: typeOptions,
-            onFilter: (value, merchant) => merchant.type === value,
-          },
-          {
-            title: "联系人姓名",
-            dataIndex: "name",
-          },
-          {
-            title: "联系人手机号",
-            dataIndex: "mobile",
           },
           {
             title: "入驻时间",
