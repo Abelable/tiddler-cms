@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
-import { useProviders } from "service/scenicProvider";
+import { useMerchants } from "service/scenicMerchant";
 import { toNumber } from "utils";
-import { useProvidersSearchParams } from "./util";
+import { useMerchantsSearchParams } from "./util";
 
-import { ProviderModal } from "./components/provider-modal";
+import { MerchantModal } from "./components/merchant-modal";
 import { List } from "./components/list";
 import { SearchPanel } from "./components/search-panel";
 import { RejectModal } from "./components/reject-modal";
@@ -15,9 +15,9 @@ const statusOptions = [
   { text: "已驳回", value: 3 },
 ];
 
-export const ScenicProviderList = () => {
-  const [params, setParams] = useProvidersSearchParams();
-  const { isLoading, error, data } = useProviders(params);
+export const ScenicMerchantList = () => {
+  const [params, setParams] = useMerchantsSearchParams();
+  const { isLoading, error, data } = useMerchants(params);
 
   return (
     <Container>
@@ -42,7 +42,7 @@ export const ScenicProviderList = () => {
           bordered
         />
       </Main>
-      <ProviderModal />
+      <MerchantModal />
       <RejectModal />
     </Container>
   );

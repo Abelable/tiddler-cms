@@ -1,11 +1,11 @@
 import { Descriptions, Drawer, Image } from "antd";
 import { ErrorBox, ModalLoading } from "components/lib";
 import dayjs from "dayjs";
-import { useProviderModal } from "../util";
+import { useMerchantModal } from "../util";
 
-export const ProviderModal = () => {
-  const { close, merchantModalOpen, editingProvider, error, isLoading } =
-    useProviderModal();
+export const MerchantModal = () => {
+  const { close, merchantModalOpen, editingMerchant, error, isLoading } =
+    useMerchantModal();
 
   return (
     <Drawer
@@ -33,13 +33,13 @@ export const ProviderModal = () => {
             bordered
           >
             <Descriptions.Item label="ID">
-              {editingProvider?.id}
+              {editingMerchant?.id}
             </Descriptions.Item>
             <Descriptions.Item label="入驻时间">
-              {dayjs(editingProvider?.createdAt).format("YYYY-MM-DD HH:mm:ss")}
+              {dayjs(editingMerchant?.createdAt).format("YYYY-MM-DD HH:mm:ss")}
             </Descriptions.Item>
             <Descriptions.Item label="更新时间">
-              {dayjs(editingProvider?.updatedAt).format("YYYY-MM-DD HH:mm:ss")}
+              {dayjs(editingMerchant?.updatedAt).format("YYYY-MM-DD HH:mm:ss")}
             </Descriptions.Item>
           </Descriptions>
           <Descriptions
@@ -50,19 +50,19 @@ export const ProviderModal = () => {
             bordered
           >
             <Descriptions.Item label="公司名称">
-              {editingProvider?.companyName}
+              {editingMerchant?.companyName}
             </Descriptions.Item>
             <Descriptions.Item label="公司经营地址">
-              {editingProvider?.regionDesc}
+              {editingMerchant?.regionDesc}
             </Descriptions.Item>
             <Descriptions.Item label="公司地址详情">
-              {editingProvider?.addressDetail}
+              {editingMerchant?.addressDetail}
             </Descriptions.Item>
             <Descriptions.Item label="营业执照照片">
               <Image
                 width={132}
                 height={84}
-                src={editingProvider?.businessLicensePhoto}
+                src={editingMerchant?.businessLicensePhoto}
               />
             </Descriptions.Item>
           </Descriptions>
@@ -74,36 +74,36 @@ export const ProviderModal = () => {
             bordered
           >
             <Descriptions.Item label="姓名">
-              {editingProvider?.name}
+              {editingMerchant?.name}
             </Descriptions.Item>
             <Descriptions.Item label="手机号">
-              {editingProvider?.mobile}
+              {editingMerchant?.mobile}
             </Descriptions.Item>
             <Descriptions.Item label="邮箱">
-              {editingProvider?.email}
+              {editingMerchant?.email}
             </Descriptions.Item>
             <Descriptions.Item label="身份证号">
-              {editingProvider?.idCardNumber}
+              {editingMerchant?.idCardNumber}
             </Descriptions.Item>
             <Descriptions.Item label="身份证正面照片">
               <Image
                 width={132}
                 height={84}
-                src={editingProvider?.idCardFrontPhoto}
+                src={editingMerchant?.idCardFrontPhoto}
               />
             </Descriptions.Item>
             <Descriptions.Item label="身份证反面照片">
               <Image
                 width={132}
                 height={84}
-                src={editingProvider?.idCardFrontPhoto}
+                src={editingMerchant?.idCardFrontPhoto}
               />
             </Descriptions.Item>
             <Descriptions.Item label="手持身份证照片">
               <Image
                 width={132}
                 height={84}
-                src={editingProvider?.holdIdCardPhoto}
+                src={editingMerchant?.holdIdCardPhoto}
               />
             </Descriptions.Item>
           </Descriptions>
@@ -115,13 +115,13 @@ export const ProviderModal = () => {
             bordered
           >
             <Descriptions.Item label="持卡人姓名">
-              {editingProvider?.bankCardOwnerName}
+              {editingMerchant?.bankCardOwnerName}
             </Descriptions.Item>
             <Descriptions.Item label="银行账号">
-              {editingProvider?.bankCardNumber}
+              {editingMerchant?.bankCardNumber}
             </Descriptions.Item>
             <Descriptions.Item label="开户银行及支行名称">
-              {editingProvider?.bankName}
+              {editingMerchant?.bankName}
             </Descriptions.Item>
           </Descriptions>
         </>

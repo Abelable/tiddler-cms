@@ -12,8 +12,7 @@ export const useProviderScenicList = (
   const client = useHttp();
   return useQuery<ProviderScenicListResult>(
     ["provider_scenic_list", params],
-    () =>
-      client("scenic/provider/scenic/list", { data: params, method: "POST" })
+    () => client("scenic/shop/scenic/list", { data: params, method: "POST" })
   );
 };
 
@@ -21,7 +20,7 @@ export const useApproveProviderScenic = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (id: number) =>
-      client("scenic/provider/scenic/approve", {
+      client("scenic/shop/scenic/approve", {
         data: { id },
         method: "POST",
       }),
@@ -33,7 +32,7 @@ export const useRejectProviderScenic = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (data: { id: number; failureReason: string }) =>
-      client("scenic/provider/scenic/reject", {
+      client("scenic/shop/scenic/reject", {
         data,
         method: "POST",
       }),
@@ -45,7 +44,7 @@ export const useDeleteProviderScenic = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (id: number) =>
-      client("scenic/provider/scenic/delete", {
+      client("scenic/shop/scenic/delete", {
         data: { id },
         method: "POST",
       }),

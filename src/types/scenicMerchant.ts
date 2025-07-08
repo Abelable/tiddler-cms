@@ -1,6 +1,6 @@
 import type { DepositInfo } from "./common";
 
-export interface ProvidersSearchParams {
+export interface MerchantsSearchParams {
   status: number;
   name: string;
   mobile: string;
@@ -8,7 +8,7 @@ export interface ProvidersSearchParams {
   limit: number;
 }
 
-export interface Provider {
+export interface Merchant {
   id: number;
   companyName: string;
   name: string;
@@ -20,7 +20,7 @@ export interface Provider {
   updatedAt: string;
 }
 
-export interface ProviderDetail extends Provider {
+export interface MerchantDetail extends Merchant {
   regionDesc: string;
   regionCodeList: string[];
   addressDetail: string;
@@ -35,8 +35,8 @@ export interface ProviderDetail extends Provider {
   bankName: string;
 }
 
-export interface ProvidersResult {
-  list: Provider[];
+export interface MerchantsResult {
+  list: Merchant[];
   page: string;
   limit: string;
   total: string;

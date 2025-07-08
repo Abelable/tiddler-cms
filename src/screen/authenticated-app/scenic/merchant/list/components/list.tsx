@@ -12,16 +12,16 @@ import {
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
 import dayjs from "dayjs";
-import { Provider } from "types/scenicProvider";
+import { Merchant } from "types/scenicMerchant";
 import {
-  useProviderModal,
-  useProvidersQueryKey,
+  useMerchantModal,
+  useMerchantsQueryKey,
   useRejectModal,
 } from "../util";
 import { SearchPanelProps } from "./search-panel";
-import { useApproveProvider } from "service/scenicProvider";
+import { useApproveMerchant } from "service/scenicMerchant";
 
-interface ListProps extends TableProps<Provider>, SearchPanelProps {
+interface ListProps extends TableProps<Merchant>, SearchPanelProps {
   error: Error | unknown;
 }
 
@@ -154,9 +154,9 @@ export const List = ({
 };
 
 const More = ({ id, status }: { id: number; status: number }) => {
-  const { open } = useProviderModal();
-  const { mutate: approveProvider } = useApproveProvider(
-    useProvidersQueryKey()
+  const { open } = useMerchantModal();
+  const { mutate: approveMerchant } = useApproveMerchant(
+    useMerchantsQueryKey()
   );
   const { open: openRejectModal } = useRejectModal();
 
@@ -166,7 +166,7 @@ const More = ({ id, status }: { id: number; status: number }) => {
       content: "请确保在服务商信息无误的情况下进行该操作",
       okText: "确定",
       cancelText: "取消",
-      onOk: () => approveProvider(id),
+      onOk: () => approveMerchant(id),
     });
   };
 

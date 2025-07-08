@@ -5,15 +5,15 @@ import { Row } from "components/lib";
 import { Button, Input, Select } from "antd";
 
 import type { Option } from "types/common";
-import type { ProvidersSearchParams } from "types/scenicProvider";
+import type { MerchantsSearchParams } from "types/scenicMerchant";
 
 export interface SearchPanelProps {
   statusOptions: Option[];
-  params: Partial<ProvidersSearchParams>;
-  setParams: (params: Partial<ProvidersSearchParams>) => void;
+  params: Partial<MerchantsSearchParams>;
+  setParams: (params: Partial<MerchantsSearchParams>) => void;
 }
 
-const defaultParmas: Partial<ProvidersSearchParams> = {
+const defaultParmas: Partial<MerchantsSearchParams> = {
   status: undefined,
   name: "",
   mobile: "",

@@ -67,19 +67,19 @@ export const List = ({
                   title="保证金支付信息"
                   content={
                     <div>
-                      <p>支付金额：{merchant.depositInfo.paymentAmount}元</p>
+                      <p>支付金额：{merchant.depositInfo?.paymentAmount}元</p>
                       <p>
                         支付状态：
-                        {merchant.depositInfo.status === 1 ? (
+                        {merchant.depositInfo?.status === 1 ? (
                           <Tag color="success">已支付</Tag>
                         ) : (
                           <Tag color="error">未支付</Tag>
                         )}
                       </p>
-                      <p>支付Id：{merchant.depositInfo.payId}</p>
+                      <p>支付Id：{merchant.depositInfo?.payId}</p>
                       <p>
                         支付时间：
-                        {dayjs(merchant.depositInfo.updatedAt).format(
+                        {dayjs(merchant.depositInfo?.updatedAt).format(
                           "YYYY-MM-DD HH:mm:ss"
                         )}
                       </p>

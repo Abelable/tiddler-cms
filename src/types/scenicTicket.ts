@@ -1,4 +1,4 @@
-import type { ProviderDetail } from "./scenicProvider";
+import type { MerchantDetail } from "./scenicMerchant";
 
 export interface TicketListSearchParams {
   name: string;
@@ -32,5 +32,5 @@ export interface TicketListResult {
 }
 
 export interface TicketDetail extends Ticket {
-  providerInfo: Partial<ProviderDetail>;
+  providerInfo: Partial<MerchantDetail>;
 }
