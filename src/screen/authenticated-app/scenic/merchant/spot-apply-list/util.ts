@@ -1,7 +1,7 @@
 import { useSetUrlSearchParams, useUrlQueryParams } from "utils/url";
 import { useCallback, useMemo } from "react";
 
-export const useProviderScenicListSearchParams = () => {
+export const useShopScenicListSearchParams = () => {
   const [params, setParams] = useUrlQueryParams(["status", "page", "limit"]);
   return [
     useMemo(
@@ -16,29 +16,29 @@ export const useProviderScenicListSearchParams = () => {
   ] as const;
 };
 
-export const useProviderScenicListQueryKey = () => {
-  const [params] = useProviderScenicListSearchParams();
+export const useShopScenicListQueryKey = () => {
+  const [params] = useShopScenicListSearchParams();
   return ["provider_scenic_list", params];
 };
 
 export const useRejectModal = () => {
-  const [{ rejectProviderScenicId }, setRejectProviderId] = useUrlQueryParams([
-    "rejectProviderScenicId",
+  const [{ rejectShopScenicId }, setRejectProviderId] = useUrlQueryParams([
+    "rejectShopScenicId",
   ]);
   const setUrlParams = useSetUrlSearchParams();
 
   const open = useCallback(
-    (id: number) => setRejectProviderId({ rejectProviderScenicId: `${id}` }),
+    (id: number) => setRejectProviderId({ rejectShopScenicId: `${id}` }),
     [setRejectProviderId]
   );
   const close = useCallback(
-    () => setUrlParams({ rejectProviderScenicId: "" }),
+    () => setUrlParams({ rejectShopScenicId: "" }),
     [setUrlParams]
   );
 
   return {
-    rejectModalOpen: !!rejectProviderScenicId,
-    rejectProviderScenicId,
+    rejectModalOpen: !!rejectShopScenicId,
+    rejectShopScenicId,
     open,
     close,
   };

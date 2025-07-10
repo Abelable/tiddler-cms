@@ -1,24 +1,26 @@
-export interface ProviderScenicListSearchParams {
+export interface ShopScenicListSearchParams {
   status: number;
   page: number;
   limit: number;
 }
 
-export interface ProviderScenic {
+export interface ShopScenic {
   id: number;
   status: number;
   failureReason: string;
   scenicId: number;
   scenicName: string;
   scenicImage: string;
-  providerCompanyName: string;
-  providerBusinessLicensePhoto: string;
+  shopLogo: string;
+  shopName: string;
+  merchantName: string;
+  businessLicense: string;
   createdAt: string;
   updatedAt: string;
 }
 
-export interface ProviderScenicListResult {
-  list: ProviderScenic[];
+export interface ShopScenicListResult {
+  list: ShopScenic[];
   page: string;
   limit: string;
   total: string;

@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
-import { useProviderScenicList } from "service/providerScenic";
+import { useShopScenicList } from "service/providerScenic";
 import { toNumber } from "utils";
-import { useProviderScenicListSearchParams } from "./util";
+import { useShopScenicListSearchParams } from "./util";
 
 import { List } from "./components/list";
 import { SearchPanel } from "./components/search-panel";
@@ -13,9 +13,9 @@ const statusOptions = [
   { text: "已驳回", value: 2, color: "#FF4D4F" },
 ];
 
-export const ProviderScenicList = () => {
-  const [params, setParams] = useProviderScenicListSearchParams();
-  const { isLoading, error, data } = useProviderScenicList(params);
+export const ShopScenicList = () => {
+  const [params, setParams] = useShopScenicListSearchParams();
+  const { isLoading, error, data } = useShopScenicList(params);
 
   return (
     <Container>

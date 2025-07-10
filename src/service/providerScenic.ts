@@ -2,21 +2,20 @@ import { QueryKey, useMutation, useQuery } from "react-query";
 import { useHttp } from "./http";
 import { useApproveConfig, useRejectConfig } from "./use-optimistic-options";
 import type {
-  ProviderScenicListSearchParams,
-  ProviderScenicListResult,
+  ShopScenicListSearchParams,
+  ShopScenicListResult,
 } from "types/providerScenic";
 
-export const useProviderScenicList = (
-  params: Partial<ProviderScenicListSearchParams>
+export const useShopScenicList = (
+  params: Partial<ShopScenicListSearchParams>
 ) => {
   const client = useHttp();
-  return useQuery<ProviderScenicListResult>(
-    ["provider_scenic_list", params],
-    () => client("scenic/shop/scenic/list", { data: params, method: "POST" })
+  return useQuery<ShopScenicListResult>(["provider_scenic_list", params], () =>
+    client("scenic/shop/scenic/list", { data: params, method: "POST" })
   );
 };
 
-export const useApproveProviderScenic = (queryKey: QueryKey) => {
+export const useApproveShopScenic = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (id: number) =>
@@ -28,7 +27,7 @@ export const useApproveProviderScenic = (queryKey: QueryKey) => {
   );
 };
 
-export const useRejectProviderScenic = (queryKey: QueryKey) => {
+export const useRejectShopScenic = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (data: { id: number; failureReason: string }) =>
@@ -40,7 +39,7 @@ export const useRejectProviderScenic = (queryKey: QueryKey) => {
   );
 };
 
-export const useDeleteProviderScenic = (queryKey: QueryKey) => {
+export const useDeleteShopScenic = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (id: number) =>

@@ -7,18 +7,22 @@ import {
   TablePaginationConfig,
   TableProps,
   Image,
+  Avatar,
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
+import { ShopOutlined } from "@ant-design/icons";
+
 import dayjs from "dayjs";
-import { ProviderScenic } from "types/providerScenic";
-import { useProviderScenicListQueryKey, useRejectModal } from "../util";
-import { SearchPanelProps } from "./search-panel";
+import { useShopScenicListQueryKey, useRejectModal } from "../util";
 import {
-  useApproveProviderScenic,
-  useDeleteProviderScenic,
+  useApproveShopScenic,
+  useDeleteShopScenic,
 } from "service/providerScenic";
 
-interface ListProps extends TableProps<ProviderScenic>, SearchPanelProps {
+import type { ShopScenic } from "types/providerScenic";
+import type { SearchPanelProps } from "./search-panel";
+
+interface ListProps extends TableProps<ShopScenic>, SearchPanelProps {
   error: Error | unknown;
 }
 
@@ -39,7 +43,7 @@ export const List = ({
   return (
     <Container>
       <Header between={true}>
-        <PageTitle>景区申请列表</PageTitle>
+        <PageTitle>景区申请</PageTitle>
       </Header>
       <ErrorBox error={error} />
       <Table
@@ -56,7 +60,7 @@ export const List = ({
             title: "景区图片",
             dataIndex: "scenicImage",
             render: (value) => <Image width={68} src={value} />,
-            width: "14rem",
+            width: "10rem",
           },
           {
             title: "景区名称",
@@ -64,15 +68,26 @@ export const List = ({
             width: "32rem",
           },
           {
-            title: "申请服务商",
-            dataIndex: "providerCompanyName",
+            title: "店铺logo",
+            dataIndex: "shopLogo",
+            render: (value) => <Avatar src={value} icon={<ShopOutlined />} />,
+            width: "10rem",
+          },
+          {
+            title: "店铺名称",
+            dataIndex: "shopName",
+            width: "24rem",
+          },
+          {
+            title: "服务商名称",
+            dataIndex: "merchantName",
             width: "32rem",
           },
           {
             title: "服务商资质",
-            dataIndex: "providerBusinessLicensePhoto",
+            dataIndex: "businessLicense",
             render: (value) => <Image width={68} src={value} />,
-            width: "14rem",
+            width: "12rem",
           },
           {
             title: "状态",
@@ -129,11 +144,11 @@ export const List = ({
 };
 
 const More = ({ id, status }: { id: number; status: number }) => {
-  const { mutate: approveProviderScenic } = useApproveProviderScenic(
-    useProviderScenicListQueryKey()
+  const { mutate: approveShopScenic } = useApproveShopScenic(
+    useShopScenicListQueryKey()
   );
-  const { mutate: deleteProviderScenic } = useDeleteProviderScenic(
-    useProviderScenicListQueryKey()
+  const { mutate: deleteShopScenic } = useDeleteShopScenic(
+    useShopScenicListQueryKey()
   );
   const { open: openRejectModal } = useRejectModal();
 
@@ -143,7 +158,7 @@ const More = ({ id, status }: { id: number; status: number }) => {
       content: "请确保在服务商有景区相关资质的情况下进行该操作",
       okText: "确定",
       cancelText: "取消",
-      onOk: () => approveProviderScenic(id),
+      onOk: () => approveShopScenic(id),
     });
   };
 
@@ -153,7 +168,7 @@ const More = ({ id, status }: { id: number; status: number }) => {
       content: "点击确定删除",
       okText: "确定",
       cancelText: "取消",
-      onOk: () => deleteProviderScenic(id),
+      onOk: () => deleteShopScenic(id),
     });
   };
 

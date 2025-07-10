@@ -1,4 +1,4 @@
-import type { ProviderScenicListSearchParams } from "types/providerScenic";
+import type { ShopScenicListSearchParams } from "types/providerScenic";
 import { useState } from "react";
 import styled from "@emotion/styled";
 import { Row } from "components/lib";
@@ -6,11 +6,11 @@ import { Button, Select } from "antd";
 
 export interface SearchPanelProps {
   statusOptions: { text: string; value: number; color: string }[];
-  params: Partial<ProviderScenicListSearchParams>;
-  setParams: (params: Partial<ProviderScenicListSearchParams>) => void;
+  params: Partial<ShopScenicListSearchParams>;
+  setParams: (params: Partial<ShopScenicListSearchParams>) => void;
 }
 
-const defaultParmas: Partial<ProviderScenicListSearchParams> = {
+const defaultParmas: Partial<ShopScenicListSearchParams> = {
   status: undefined,
 };
 

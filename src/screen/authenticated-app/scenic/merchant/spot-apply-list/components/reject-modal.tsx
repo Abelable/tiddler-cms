@@ -1,20 +1,20 @@
 import { Form, Input, Modal } from "antd";
 import { useForm } from "antd/lib/form/Form";
-import { useRejectProviderScenic } from "service/providerScenic";
-import { useRejectModal, useProviderScenicListQueryKey } from "../util";
+import { useRejectShopScenic } from "service/providerScenic";
+import { useRejectModal, useShopScenicListQueryKey } from "../util";
 
 export const RejectModal = () => {
   const [form] = useForm();
-  const { rejectModalOpen, rejectProviderScenicId, close } = useRejectModal();
+  const { rejectModalOpen, rejectShopScenicId, close } = useRejectModal();
 
-  const { mutateAsync, isLoading: mutateLoading } = useRejectProviderScenic(
-    useProviderScenicListQueryKey()
+  const { mutateAsync, isLoading: mutateLoading } = useRejectShopScenic(
+    useShopScenicListQueryKey()
   );
 
   const confirm = () => {
     form.validateFields().then(async () => {
       await mutateAsync({
-        id: +rejectProviderScenicId,
+        id: +rejectShopScenicId,
         ...form.getFieldsValue(),
       });
       closeModal();

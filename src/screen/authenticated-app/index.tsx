@@ -19,7 +19,7 @@ import { ScenicCategoryList } from "./scenic/spot/category-list";
 import { ScenicList } from "./scenic/spot/spot-list";
 import { ScenicMerchantList } from "./scenic/merchant/list";
 import { ScenicShopList } from "./scenic/merchant/shop-list";
-import { ProviderScenicList } from "./scenic/merchant/spot-apply-list";
+import { ShopScenicList } from "./scenic/merchant/spot-apply-list";
 import { ScenicTicketCategoryList } from "./scenic/ticket/category-list";
 import { ScenicTicketList } from "./scenic/ticket/ticket-list";
 import { HotelCategoryList } from "./hotel/store/category-list";
@@ -128,7 +128,7 @@ export const AuthenticatedApp = () => {
               />
               <Route
                 path="scenic/merchant/spot_apply"
-                element={<ProviderScenicList />}
+                element={<ShopScenicList />}
               />
               <Route
                 path="scenic/ticket/category_list"

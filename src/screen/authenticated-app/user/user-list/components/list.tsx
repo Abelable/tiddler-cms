@@ -18,12 +18,14 @@ import {
   OptionAvatar,
   OptionNickname,
 } from "components/lib";
+import { UserOutlined } from "@ant-design/icons";
+
 import dayjs from "dayjs";
 import { useDeleteSuperior, useDeleteUser } from "service/user";
-import { User } from "types/user";
 import { useBindModal, useUserModal, useUsersQueryKey } from "../util";
-import { UserOutlined } from "@ant-design/icons";
-import { SearchPanelProps } from "./search-panel";
+
+import type { User } from "types/user";
+import type { SearchPanelProps } from "./search-panel";
 
 interface ListProps extends TableProps<User>, SearchPanelProps {
   error: Error | unknown;
