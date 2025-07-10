@@ -12,12 +12,15 @@ import {
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
 import dayjs from "dayjs";
-import { useApproveTicket, useDeleteTicket } from "service/scenicTicket";
+import {
+  useApproveTicket,
+  useDeleteTicket,
+  useEditTicketCommission,
+} from "service/scenicTicket";
 import { useTicketModal, useTicketListQueryKey, useRejectModal } from "../util";
 import { SearchPanelProps } from "./search-panel";
 
 import type { Ticket } from "types/scenicTicket";
-import { useEditGoodsCommission } from "service/goods";
 
 interface ListProps extends TableProps<Ticket>, SearchPanelProps {
   error: Error | unknown;
@@ -39,7 +42,7 @@ export const List = ({
       limit: pagination.pageSize,
     });
 
-  const { mutate: editCommission } = useEditGoodsCommission(
+  const { mutate: editCommission } = useEditTicketCommission(
     useTicketListQueryKey()
   );
 

@@ -1,8 +1,23 @@
-import { Descriptions, Divider, Drawer, Tooltip, Tag, Image } from "antd";
+import {
+  Descriptions,
+  Divider,
+  Drawer,
+  Tooltip,
+  Tag,
+  Image,
+  Form,
+  Row,
+  Col,
+  InputNumber,
+  Space,
+  Button,
+} from "antd";
 
 import { ErrorBox, ModalLoading } from "components/lib";
 import dayjs from "dayjs";
-import { useTicketModal } from "../util";
+import { useForm } from "antd/es/form/Form";
+import { useEditTicketCommission } from "service/scenicTicket";
+import { useTicketListQueryKey, useTicketModal } from "../util";
 
 import type { Option, DataOption } from "types/common";
 
@@ -13,27 +28,134 @@ export const TicketModal = ({
   typeOptions: Option[];
   scenicOptions: DataOption[];
 }) => {
-  const { close, ticketModalOpen, editingTicket, error, isLoading } =
-    useTicketModal();
+  const [form] = useForm();
+  const {
+    close,
+    ticketModalOpen,
+    editingTicketId,
+    editingTicket,
+    error,
+    isLoading,
+  } = useTicketModal();
+
+  const {
+    mutateAsync,
+    error: submitError,
+    isLoading: mutateLoading,
+  } = useEditTicketCommission(useTicketListQueryKey());
+
+  const submit = () => {
+    form.validateFields().then(async () => {
+      await mutateAsync({ id: +editingTicketId, ...form.getFieldsValue() });
+      closeModal();
+    });
+  };
+
+  const closeModal = () => {
+    form.resetFields();
+    close();
+  };
 
   return (
     <Drawer
-      forceRender={true}
       title="门票详情"
+      width={"100rem"}
+      forceRender={true}
       size={"large"}
-      onClose={close}
+      onClose={closeModal}
       open={ticketModalOpen}
       styles={{
         body: {
           paddingBottom: 80,
         },
       }}
+      extra={
+        <Space>
+          <Button onClick={closeModal}>取消</Button>
+          <Button onClick={submit} loading={mutateLoading} type="primary">
+            提交
+          </Button>
+        </Space>
+      }
     >
-      <ErrorBox error={error} />
+      <ErrorBox error={error || submitError} />
       {isLoading ? (
         <ModalLoading />
       ) : (
         <>
+          <Divider orientation="left">代言奖励</Divider>
+          <Form form={form} layout="vertical">
+            <Row gutter={16}>
+              <Col span={12}>
+                <Form.Item
+                  name="promotionCommissionRate"
+                  label="代言奖励比例"
+                  tooltip="佣金范围5%~20%"
+                  rules={[{ required: true, message: "请填写代言奖励比例" }]}
+                >
+                  <InputNumber
+                    min={5}
+                    max={20}
+                    style={{ width: "100%" }}
+                    placeholder="请填写代言奖励比例"
+                    suffix="%"
+                  />
+                </Form.Item>
+              </Col>
+              <Col span={12}>
+                <Form.Item
+                  name="promotionCommissionUpperLimit"
+                  label="代言奖励上限"
+                  tooltip="最高可设¥20"
+                  rules={[{ required: true, message: "请填写代言奖励上限" }]}
+                >
+                  <InputNumber
+                    max={20}
+                    style={{ width: "100%" }}
+                    placeholder="请填写代言奖励上限"
+                    prefix="￥"
+                  />
+                </Form.Item>
+              </Col>
+            </Row>
+            <Row gutter={16}>
+              <Col span={12}>
+                <Form.Item
+                  name="superiorPromotionCommissionRate"
+                  label="上级代言奖励比例"
+                  tooltip="佣金范围5%~10%"
+                  rules={[
+                    { required: true, message: "请填写上级代言奖励比例" },
+                  ]}
+                >
+                  <InputNumber
+                    min={5}
+                    max={10}
+                    style={{ width: "100%" }}
+                    placeholder="请填写上级代言奖励比例"
+                    suffix="%"
+                  />
+                </Form.Item>
+              </Col>
+              <Col span={12}>
+                <Form.Item
+                  name="superiorPromotionCommissionUpperLimit"
+                  label="上级代言奖励上限"
+                  tooltip="最高可设¥10"
+                  rules={[
+                    { required: true, message: "请填写上级代言奖励上限" },
+                  ]}
+                >
+                  <InputNumber
+                    max={10}
+                    style={{ width: "100%" }}
+                    placeholder="请填写上级代言奖励上限"
+                    prefix="￥"
+                  />
+                </Form.Item>
+              </Col>
+            </Row>
+          </Form>
           <Divider orientation="left">门票信息</Divider>
           <Descriptions size={"small"} column={2}>
             <Descriptions.Item label="门票id">

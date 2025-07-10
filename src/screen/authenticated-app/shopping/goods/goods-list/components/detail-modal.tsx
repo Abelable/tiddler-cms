@@ -73,7 +73,7 @@ export const DetailModal = ({
       forceRender={true}
       title="商品详情"
       width={"100rem"}
-      onClose={close}
+      onClose={closeModal}
       open={goodsModalOpen}
       styles={{
         body: {
