@@ -9,7 +9,7 @@ import { SearchPanel } from "./components/search-panel";
 
 export const ScenicShopList = () => {
   const shopTypeOptions = [
-    { text: "景区官方", value: 1 },
+    { text: "景点官方", value: 1 },
     { text: "旅行社", value: 2 },
     { text: "平台自营", value: 3 },
   ];

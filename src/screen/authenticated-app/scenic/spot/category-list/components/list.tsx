@@ -34,7 +34,7 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
   return (
     <Container>
       <Header between={true}>
-        <PageTitle>景区分类</PageTitle>
+        <PageTitle>景点分类</PageTitle>
         <Button onClick={() => open()} type={"primary"} icon={<PlusOutlined />}>
           新增
         </Button>
@@ -49,7 +49,7 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
             width: "8rem",
           },
           {
-            title: "景区分类名称",
+            title: "景点分类名称",
             dataIndex: "name",
           },
           {
@@ -88,7 +88,7 @@ const More = ({ id }: { id: number }) => {
 
   const confirmDelete = (id: number) => {
     Modal.confirm({
-      title: "确定删除该景区分类吗？",
+      title: "确定删除该景点分类吗？",
       content: "点击确定删除",
       okText: "确定",
       cancelText: "取消",

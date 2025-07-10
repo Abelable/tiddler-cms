@@ -43,7 +43,7 @@ export const List = ({
   return (
     <Container>
       <Header between={true}>
-        <PageTitle>景区申请</PageTitle>
+        <PageTitle>景点申请</PageTitle>
       </Header>
       <ErrorBox error={error} />
       <Table
@@ -57,13 +57,13 @@ export const List = ({
             fixed: "left",
           },
           {
-            title: "景区图片",
+            title: "景点图片",
             dataIndex: "scenicImage",
             render: (value) => <Image width={68} src={value} />,
             width: "10rem",
           },
           {
-            title: "景区名称",
+            title: "景点名称",
             dataIndex: "scenicName",
             width: "32rem",
           },
@@ -154,8 +154,8 @@ const More = ({ id, status }: { id: number; status: number }) => {
 
   const confirmApprove = (id: number) => {
     Modal.confirm({
-      title: "景区申请通过确认",
-      content: "请确保在服务商有景区相关资质的情况下进行该操作",
+      title: "景点申请通过确认",
+      content: "请确保在服务商有景点相关资质的情况下进行该操作",
       okText: "确定",
       cancelText: "取消",
       onOk: () => approveShopScenic(id),
@@ -164,7 +164,7 @@ const More = ({ id, status }: { id: number; status: number }) => {
 
   const confirmDelete = (id: number) => {
     Modal.confirm({
-      title: "确定删除该景区申请吗？",
+      title: "确定删除该景点申请吗？",
       content: "点击确定删除",
       okText: "确定",
       cancelText: "取消",

@@ -140,7 +140,7 @@ const More = ({ id, status }: { id: number; status: number }) => {
   const confirmApprove = (id: number) => {
     Modal.confirm({
       title: "酒店申请通过确认",
-      content: "请确保在服务商有景区相关资质的情况下进行该操作",
+      content: "请确保在服务商有景点相关资质的情况下进行该操作",
       okText: "确定",
       cancelText: "取消",
       onOk: () => approveProviderHotel(id),

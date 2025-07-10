@@ -29,7 +29,7 @@ export const RejectModal = () => {
   return (
     <Modal
       forceRender={true}
-      title={"驳回服务商景区申请"}
+      title={"驳回服务商景点申请"}
       open={rejectModalOpen}
       confirmLoading={mutateLoading}
       onOk={confirm}

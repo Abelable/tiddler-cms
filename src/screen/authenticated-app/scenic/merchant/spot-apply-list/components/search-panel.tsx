@@ -33,11 +33,11 @@ export const SearchPanel = ({
   return (
     <Container>
       <Item>
-        <div>景区申请状态：</div>
+        <div>景点申请状态：</div>
         <Select
           style={{ width: "20rem" }}
           value={tempParams.status}
-          placeholder="请选择景区申请状态"
+          placeholder="请选择景点申请状态"
           allowClear={true}
           onSelect={setStatus}
           onClear={clearStatus}

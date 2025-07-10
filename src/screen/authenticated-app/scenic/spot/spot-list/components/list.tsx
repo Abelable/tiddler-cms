@@ -44,7 +44,7 @@ export const List = ({
   return (
     <Container>
       <Header between={true}>
-        <PageTitle>景区列表</PageTitle>
+        <PageTitle>景点列表</PageTitle>
         <Button onClick={() => open()} type={"primary"} icon={<PlusOutlined />}>
           新增
         </Button>
@@ -147,7 +147,7 @@ const More = ({ id }: { id: number }) => {
 
   const confirmDelete = (id: number) => {
     Modal.confirm({
-      title: "确定删除该景区吗？",
+      title: "确定删除该景点吗？",
       content: "点击确定删除",
       okText: "确定",
       cancelText: "取消",

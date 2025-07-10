@@ -70,19 +70,19 @@ const treeData: DataNode[] = [
     ],
   },
   {
-    title: "景区模块",
+    title: "景点模块",
     key: "scenic",
     children: [
       {
-        title: "景区管理",
+        title: "景点管理",
         key: "scenic_spot",
         children: [
           {
-            title: "景区分类",
+            title: "景点分类",
             key: "scenic_spot_category_list",
           },
           {
-            title: "景区列表",
+            title: "景点列表",
             key: "scenic_spot_list",
           },
         ],
@@ -100,7 +100,7 @@ const treeData: DataNode[] = [
             key: "scenic_provider_shop_list",
           },
           {
-            title: "景区申请",
+            title: "景点申请",
             key: "scenic_provider_spot_apply",
           },
         ],

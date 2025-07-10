@@ -61,7 +61,7 @@ export const TicketModal = ({
                   ?.text
               }
             </Descriptions.Item>
-            <Descriptions.Item label="关联景区">
+            <Descriptions.Item label="关联景点">
               {editingTicket?.scenicIds?.length &&
                 editingTicket?.scenicIds.map((id: number) => (
                   <Tag color="success" key={id}>

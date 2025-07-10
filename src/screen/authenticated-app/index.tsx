@@ -308,22 +308,22 @@ const MenuSider = ({
       ],
     },
     {
-      label: "景区模块",
+      label: "景点模块",
       key: "scenic",
       icon: <ScenicSpotIcon />,
       children: [
         {
-          label: "景区管理",
+          label: "景点管理",
           key: "scenic_spot",
           icon: <ScenicSpotIcon />,
           children: [
             {
-              label: <Link to={"scenic/spot/category_list"}>景区分类</Link>,
+              label: <Link to={"scenic/spot/category_list"}>景点分类</Link>,
               key: "scenic_spot_category_list",
               icon: <AppstoreOutlined />,
             },
             {
-              label: <Link to={"scenic/spot/list"}>景区列表</Link>,
+              label: <Link to={"scenic/spot/list"}>景点列表</Link>,
               key: "scenic_spot_list",
               icon: <UnorderedListOutlined />,
             },
@@ -345,7 +345,7 @@ const MenuSider = ({
               icon: <ShopOutlined />,
             },
             {
-              label: <Link to={"scenic/merchant/spot_apply"}>景区申请</Link>,
+              label: <Link to={"scenic/merchant/spot_apply"}>景点申请</Link>,
               key: "scenic_provider_spot_apply",
               icon: <FileAddOutlined />,
             },

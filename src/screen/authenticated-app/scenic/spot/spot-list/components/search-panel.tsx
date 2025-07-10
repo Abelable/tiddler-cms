@@ -52,21 +52,21 @@ export const SearchPanel = ({
   return (
     <Container>
       <Item>
-        <div>景区名称：</div>
+        <div>景点名称：</div>
         <Input
           style={{ width: "20rem" }}
           value={tempParams.name}
           onChange={setName}
-          placeholder="请输入景区名称"
+          placeholder="请输入景点名称"
           allowClear={true}
         />
       </Item>
       <Item>
-        <div>景区分类：</div>
+        <div>景点分类：</div>
         <Select
           style={{ width: "20rem" }}
           value={tempParams.categoryId}
-          placeholder="请选择景区分类"
+          placeholder="请选择景点分类"
           allowClear={true}
           onSelect={setCategory}
           onClear={clearCategory}

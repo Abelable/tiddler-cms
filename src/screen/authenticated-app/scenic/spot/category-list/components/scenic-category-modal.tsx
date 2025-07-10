@@ -46,7 +46,7 @@ export const ScenicCategoryModal = () => {
   return (
     <Modal
       forceRender={true}
-      title={editingScenicCategoryId ? "编辑景区分类" : "新增景区分类"}
+      title={editingScenicCategoryId ? "编辑景点分类" : "新增景点分类"}
       open={scenicCategoryModalOpen}
       confirmLoading={mutateLoading}
       onOk={confirm}
@@ -58,11 +58,11 @@ export const ScenicCategoryModal = () => {
       ) : (
         <Form form={form} layout="vertical">
           <Form.Item
-            label={"景区分类名称"}
+            label={"景点分类名称"}
             name={"name"}
-            rules={[{ required: true, message: "请输入景区分类名称" }]}
+            rules={[{ required: true, message: "请输入景点分类名称" }]}
           >
-            <Input placeholder={"请输入景区分类名称"} />
+            <Input placeholder={"请输入景点分类名称"} />
           </Form.Item>
         </Form>
       )}

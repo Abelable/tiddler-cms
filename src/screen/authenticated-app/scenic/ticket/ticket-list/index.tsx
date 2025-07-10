@@ -15,8 +15,8 @@ export const ScenicTicketList = () => {
   const { isLoading, error, data } = useTicketList(params);
   const { data: scenicOptions, error: scenicOptionsError } = useScenicOptions();
   const typeOptions = [
-    { text: "单景区门票", value: 1 },
-    { text: "多景区联票", value: 2 },
+    { text: "单景点门票", value: 1 },
+    { text: "多景点联票", value: 2 },
   ];
   const statusOptions = [
     { text: "待审核", value: 0 },
