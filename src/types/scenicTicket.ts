@@ -17,6 +17,9 @@ export interface Ticket {
   price: number;
   salesCommissionRate: number;
   promotionCommissionRate: number;
+  promotionCommissionUpperLimit: number;
+  superiorPromotionCommissionRate: number;
+  superiorPromotionCommissionUpperLimit: number;
   salesVolume: number;
   status: number;
   failureReason: string;

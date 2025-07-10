@@ -129,7 +129,7 @@ export const List = ({
             title: "图片",
             dataIndex: "cover",
             render: (value) => <Image width={68} src={value} />,
-            width: "14rem",
+            width: "10rem",
           },
           {
             title: "名称",
@@ -302,7 +302,6 @@ export const List = ({
               },
             ],
           },
-
           {
             title: "库存",
             dataIndex: "stock",
