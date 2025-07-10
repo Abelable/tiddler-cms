@@ -22,6 +22,7 @@ import { useEditTicketCommission } from "service/scenicTicket";
 import { useTicketListQueryKey, useTicketModal } from "../util";
 
 import type { Option, DataOption } from "types/common";
+import { useEffect } from "react";
 
 export const TicketModal = ({
   typeOptions,
@@ -45,6 +46,12 @@ export const TicketModal = ({
     error: submitError,
     isLoading: mutateLoading,
   } = useEditTicketCommission(useTicketListQueryKey());
+
+  useEffect(() => {
+    if (editingTicket) {
+      form.setFieldsValue(editingTicket);
+    }
+  }, [editingTicket, form]);
 
   const submit = () => {
     form.validateFields().then(async () => {
