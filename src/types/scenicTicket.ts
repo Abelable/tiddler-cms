@@ -34,6 +34,18 @@ export interface TicketListResult {
   total: string;
 }
 
+export interface Shop {
+  id: number;
+  status: number;
+  type: number;
+  name: string;
+  logo: string;
+  cover: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface TicketDetail extends Ticket {
-  providerInfo: Partial<MerchantDetail>;
+  shopInfo: Partial<Shop>;
+  merchantInfo: Partial<MerchantDetail>;
 }
