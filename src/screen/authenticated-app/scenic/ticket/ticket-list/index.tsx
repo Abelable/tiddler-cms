@@ -9,6 +9,7 @@ import { TicketModal } from "./components/ticket-modal";
 import { List } from "./components/list";
 import { SearchPanel } from "./components/search-panel";
 import { RejectModal } from "./components/reject-modal";
+import { ApproveModal } from "./components/approve-modal";
 
 export const ScenicTicketList = () => {
   const [params, setParams] = useTicketListSearchParams();
@@ -55,6 +56,7 @@ export const ScenicTicketList = () => {
         typeOptions={typeOptions}
         scenicOptions={scenicOptions || []}
       />
+      <ApproveModal />
       <RejectModal />
     </Container>
   );

@@ -17,7 +17,12 @@ import {
   useDeleteTicket,
   useEditTicketCommission,
 } from "service/scenicTicket";
-import { useTicketModal, useTicketListQueryKey, useRejectModal } from "../util";
+import {
+  useTicketModal,
+  useTicketListQueryKey,
+  useRejectModal,
+  useApproveModal,
+} from "../util";
 import { SearchPanelProps } from "./search-panel";
 
 import type { Ticket } from "types/scenicTicket";
@@ -253,7 +258,7 @@ export const List = ({
           {
             title: "操作",
             render(value, ticket) {
-              return <More id={ticket.id} status={ticket.status} />;
+              return <More ticket={ticket} />;
             },
             width: "8rem",
             fixed: "right",
@@ -266,10 +271,11 @@ export const List = ({
   );
 };
 
-const More = ({ id, status }: { id: number; status: number }) => {
+const More = ({ ticket }: { ticket: Ticket }) => {
+  const { id, status } = ticket;
   const { open } = useTicketModal();
   const { mutate: deleteTicket } = useDeleteTicket(useTicketListQueryKey());
-  const { mutate: approveTicket } = useApproveTicket(useTicketListQueryKey());
+  const { open: openApproveModal } = useApproveModal();
   const { open: openRejectModal } = useRejectModal();
 
   const confirmDelete = (id: number) => {
@@ -282,70 +288,28 @@ const More = ({ id, status }: { id: number; status: number }) => {
     });
   };
 
-  const confirmApprove = (id: number) => {
-    Modal.confirm({
-      title: "门票审核通过确认",
-      content: "请确保在门票信息无误的情况下进行该操作",
-      okText: "确定",
-      cancelText: "取消",
-      onOk: () => approveTicket(id),
-    });
-  };
-
-  let items: MenuProps["items"];
-  switch (status) {
-    case 0:
-      items = [
-        {
-          label: <div onClick={() => open(id)}>详情</div>,
-          key: "detail",
-        },
-        {
-          label: <div onClick={() => confirmApprove(id)}>通过</div>,
+  const items = [
+    status === 0
+      ? {
+          label: <div onClick={() => openApproveModal(id)}>通过</div>,
           key: "approve",
-        },
-        {
+        }
+      : undefined,
+    status === 0
+      ? {
           label: <div onClick={() => openRejectModal(id)}>驳回</div>,
           key: "reject",
-        },
-
-        {
-          label: <div onClick={() => confirmDelete(id)}>删除</div>,
-          key: "delete",
-        },
-      ];
-      break;
-
-    case 1:
-      items = [
-        {
-          label: <div onClick={() => open(id)}>详情</div>,
-          key: "detail",
-        },
-        {
-          label: <div onClick={() => openRejectModal(id)}>驳回重审</div>,
-          key: "reject",
-        },
-        {
-          label: <div onClick={() => confirmDelete(id)}>删除</div>,
-          key: "delete",
-        },
-      ];
-      break;
-
-    case 2:
-      items = [
-        {
-          label: <div onClick={() => open(id)}>详情</div>,
-          key: "detail",
-        },
-        {
-          label: <div onClick={() => confirmDelete(id)}>删除</div>,
-          key: "delete",
-        },
-      ];
-      break;
-  }
+        }
+      : undefined,
+    {
+      label: <div onClick={() => open(id)}>详情</div>,
+      key: "detail",
+    },
+    {
+      label: <div onClick={() => confirmDelete(id)}>删除</div>,
+      key: "delete",
+    },
+  ].filter((item) => item !== undefined) as MenuProps["items"];
 
   return (
     <Dropdown menu={{ items }}>

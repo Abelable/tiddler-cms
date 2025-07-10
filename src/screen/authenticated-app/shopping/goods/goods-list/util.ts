@@ -93,29 +93,6 @@ export const useGoodsDetailModal = () => {
   };
 };
 
-export const useRejectModal = () => {
-  const [{ rejectGoodsId }, setRejectGoodsId] = useUrlQueryParams([
-    "rejectGoodsId",
-  ]);
-  const setUrlParams = useSetUrlSearchParams();
-
-  const open = useCallback(
-    (id: number) => setRejectGoodsId({ rejectGoodsId: `${id}` }),
-    [setRejectGoodsId]
-  );
-  const close = useCallback(
-    () => setUrlParams({ rejectGoodsId: "" }),
-    [setUrlParams]
-  );
-
-  return {
-    rejectModalOpen: !!rejectGoodsId,
-    rejectGoodsId,
-    open,
-    close,
-  };
-};
-
 export const useApproveModal = () => {
   const [{ approveGoodsId }, setApproveGoodsId] = useUrlQueryParams([
     "approveGoodsId",
@@ -142,6 +119,29 @@ export const useApproveModal = () => {
     editingGoods,
     isLoading,
     error,
+    open,
+    close,
+  };
+};
+
+export const useRejectModal = () => {
+  const [{ rejectGoodsId }, setRejectGoodsId] = useUrlQueryParams([
+    "rejectGoodsId",
+  ]);
+  const setUrlParams = useSetUrlSearchParams();
+
+  const open = useCallback(
+    (id: number) => setRejectGoodsId({ rejectGoodsId: `${id}` }),
+    [setRejectGoodsId]
+  );
+  const close = useCallback(
+    () => setUrlParams({ rejectGoodsId: "" }),
+    [setUrlParams]
+  );
+
+  return {
+    rejectModalOpen: !!rejectGoodsId,
+    rejectGoodsId,
     open,
     close,
   };

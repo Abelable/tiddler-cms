@@ -11,6 +11,9 @@ export interface TicketListSearchParams {
 
 export interface Ticket {
   id: number;
+  status: number;
+  failureReason: string;
+  shopId: number;
   name: string;
   type: number;
   scenicIds: number[];
@@ -21,8 +24,6 @@ export interface Ticket {
   superiorPromotionCommissionRate: number;
   superiorPromotionCommissionUpperLimit: number;
   salesVolume: number;
-  status: number;
-  failureReason: string;
   createdAt: string;
   updatedAt: string;
 }
