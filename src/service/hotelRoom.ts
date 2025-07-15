@@ -47,9 +47,9 @@ export const useEditRoomCommission = (queryKey: QueryKey) => {
 export const useApproveRoom = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
-    (id: number) =>
+    (params: Partial<Room>) =>
       client("hotel/room/approve", {
-        data: { id },
+        data: cleanObject(params),
         method: "POST",
       }),
     useApproveConfig(queryKey)

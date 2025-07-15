@@ -17,7 +17,12 @@ import {
   useDeleteRoom,
   useEditRoomCommission,
 } from "service/hotelRoom";
-import { useRoomModal, useRoomListQueryKey, useRejectModal } from "../util";
+import {
+  useRoomModal,
+  useRoomListQueryKey,
+  useRejectModal,
+  useApproveModal,
+} from "../util";
 import { SearchPanelProps } from "./search-panel";
 
 import type { Room } from "types/hotelRoom";
@@ -271,7 +276,7 @@ export const List = ({
 const More = ({ id, status }: { id: number; status: number }) => {
   const { open } = useRoomModal();
   const { mutate: deleteRoom } = useDeleteRoom(useRoomListQueryKey());
-  const { mutate: approveRoom } = useApproveRoom(useRoomListQueryKey());
+  const { open: openApproveModal } = useApproveModal();
   const { open: openRejectModal } = useRejectModal();
 
   const confirmDelete = (id: number) => {
@@ -284,70 +289,28 @@ const More = ({ id, status }: { id: number; status: number }) => {
     });
   };
 
-  const confirmApprove = (id: number) => {
-    Modal.confirm({
-      title: "房间审核通过确认",
-      content: "请确保在房间信息无误的情况下进行该操作",
-      okText: "确定",
-      cancelText: "取消",
-      onOk: () => approveRoom(id),
-    });
-  };
-
-  let items: MenuProps["items"];
-  switch (status) {
-    case 0:
-      items = [
-        {
-          label: <div onClick={() => open(id)}>详情</div>,
-          key: "detail",
-        },
-        {
-          label: <div onClick={() => confirmApprove(id)}>通过</div>,
+  const items = [
+    status === 0
+      ? {
+          label: <div onClick={() => openApproveModal(id)}>通过</div>,
           key: "approve",
-        },
-        {
+        }
+      : undefined,
+    status === 0
+      ? {
           label: <div onClick={() => openRejectModal(id)}>驳回</div>,
           key: "reject",
-        },
-
-        {
-          label: <div onClick={() => confirmDelete(id)}>删除</div>,
-          key: "delete",
-        },
-      ];
-      break;
-
-    case 1:
-      items = [
-        {
-          label: <div onClick={() => open(id)}>详情</div>,
-          key: "detail",
-        },
-        {
-          label: <div onClick={() => openRejectModal(id)}>驳回重审</div>,
-          key: "reject",
-        },
-        {
-          label: <div onClick={() => confirmDelete(id)}>删除</div>,
-          key: "delete",
-        },
-      ];
-      break;
-
-    case 2:
-      items = [
-        {
-          label: <div onClick={() => open(id)}>详情</div>,
-          key: "detail",
-        },
-        {
-          label: <div onClick={() => confirmDelete(id)}>删除</div>,
-          key: "delete",
-        },
-      ];
-      break;
-  }
+        }
+      : undefined,
+    {
+      label: <div onClick={() => open(id)}>详情</div>,
+      key: "detail",
+    },
+    {
+      label: <div onClick={() => confirmDelete(id)}>删除</div>,
+      key: "delete",
+    },
+  ].filter((item) => item !== undefined) as MenuProps["items"];
 
   return (
     <Dropdown menu={{ items }}>

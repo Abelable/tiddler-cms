@@ -4,9 +4,10 @@ import { useRoomList } from "service/hotelRoom";
 import { toNumber } from "utils";
 import { useRoomListSearchParams } from "./util";
 
-import { RoomModal } from "./components/room-modal";
-import { List } from "./components/list";
 import { SearchPanel } from "./components/search-panel";
+import { List } from "./components/list";
+import { RoomModal } from "./components/room-modal";
+import { ApproveModal } from "./components/approve-modal";
 import { RejectModal } from "./components/reject-modal";
 
 export const HotelRoomList = () => {
@@ -42,6 +43,7 @@ export const HotelRoomList = () => {
         />
       </Main>
       <RoomModal />
+      <ApproveModal />
       <RejectModal />
     </Container>
   );

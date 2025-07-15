@@ -5,11 +5,11 @@ import { useTicketList } from "service/scenicTicket";
 import { toNumber } from "utils";
 import { useTicketListSearchParams } from "./util";
 
-import { TicketModal } from "./components/ticket-modal";
-import { List } from "./components/list";
 import { SearchPanel } from "./components/search-panel";
-import { RejectModal } from "./components/reject-modal";
+import { List } from "./components/list";
+import { TicketModal } from "./components/ticket-modal";
 import { ApproveModal } from "./components/approve-modal";
+import { RejectModal } from "./components/reject-modal";
 
 export const ScenicTicketList = () => {
   const [params, setParams] = useTicketListSearchParams();

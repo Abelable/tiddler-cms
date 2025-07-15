@@ -59,6 +59,37 @@ export const useRoomModal = () => {
   };
 };
 
+export const useApproveModal = () => {
+  const [{ approveRoomId }, setApproveRoomId] = useUrlQueryParams([
+    "approveRoomId",
+  ]);
+  const setUrlParams = useSetUrlSearchParams();
+  const {
+    data: editingRoom,
+    isLoading,
+    error,
+  } = useRoom(Number(approveRoomId));
+
+  const open = useCallback(
+    (id: number) => setApproveRoomId({ approveRoomId: `${id}` }),
+    [setApproveRoomId]
+  );
+  const close = useCallback(
+    () => setUrlParams({ approveRoomId: "" }),
+    [setUrlParams]
+  );
+
+  return {
+    approveModalOpen: !!approveRoomId,
+    approveRoomId,
+    editingRoom,
+    isLoading,
+    error,
+    open,
+    close,
+  };
+};
+
 export const useRejectModal = () => {
   const [{ rejectRoomId }, setRejectRoomId] = useUrlQueryParams([
     "rejectRoomId",
