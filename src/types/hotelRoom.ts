@@ -1,4 +1,4 @@
-import type { ProviderDetail } from "./hotelProvider";
+import type { MerchantDetail } from "./hotelMerchant";
 
 export interface RoomListSearchParams {
   name: string;
@@ -34,5 +34,5 @@ export interface RoomListResult {
 }
 
 export interface RoomDetail extends Room {
-  providerInfo: Partial<ProviderDetail>;
+  providerInfo: Partial<MerchantDetail>;
 }

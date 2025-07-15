@@ -6,22 +6,20 @@ import {
   Table,
   TablePaginationConfig,
   TableProps,
-  Tooltip,
-  Popover,
-  Tag,
+  Image,
+  Avatar,
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
-import dayjs from "dayjs";
-import { Merchant } from "types/scenicMerchant";
-import {
-  useMerchantModal,
-  useMerchantsQueryKey,
-  useRejectModal,
-} from "../util";
-import { SearchPanelProps } from "./search-panel";
-import { useApproveMerchant } from "service/scenicMerchant";
+import { ShopOutlined } from "@ant-design/icons";
 
-interface ListProps extends TableProps<Merchant>, SearchPanelProps {
+import dayjs from "dayjs";
+import { useShopScenicListQueryKey, useRejectModal } from "../util";
+import { useApproveShopScenic, useDeleteShopScenic } from "service/shopScenic";
+
+import type { ShopScenic } from "types/shopScenic";
+import type { SearchPanelProps } from "./search-panel";
+
+interface ListProps extends TableProps<ShopScenic>, SearchPanelProps {
   error: Error | unknown;
 }
 
@@ -42,77 +40,66 @@ export const List = ({
   return (
     <Container>
       <Header between={true}>
-        <PageTitle>商家列表</PageTitle>
+        <PageTitle>景点申请</PageTitle>
       </Header>
       <ErrorBox error={error} />
       <Table
         rowKey={"id"}
+        scroll={{ x: 1600 }}
         columns={[
           {
             title: "id",
             dataIndex: "id",
             width: "8rem",
+            fixed: "left",
           },
           {
-            title: "公司名称",
-            dataIndex: "companyName",
+            title: "景点图片",
+            dataIndex: "scenicImage",
+            render: (value) => <Image width={68} src={value} />,
+            width: "10rem",
           },
           {
-            title: "法人姓名",
-            dataIndex: "name",
+            title: "景点名称",
+            dataIndex: "scenicName",
+            width: "32rem",
           },
           {
-            title: "法人手机号",
-            dataIndex: "mobile",
+            title: "店铺logo",
+            dataIndex: "shopLogo",
+            render: (value) => <Avatar src={value} icon={<ShopOutlined />} />,
+            width: "10rem",
+          },
+          {
+            title: "店铺名称",
+            dataIndex: "shopName",
+            width: "24rem",
+          },
+          {
+            title: "商家名称",
+            dataIndex: "merchantName",
+            width: "32rem",
+          },
+          {
+            title: "商家资质",
+            dataIndex: "businessLicense",
+            render: (value) => <Image width={68} src={value} />,
+            width: "12rem",
           },
           {
             title: "状态",
             dataIndex: "status",
-            render: (value, provider) =>
-              value === 0 ? (
-                <span style={{ color: "#faad14" }}>待审核</span>
-              ) : value === 1 ? (
-                <span style={{ color: "#1890ff" }}>待支付保证金</span>
-              ) : value === 2 ? (
-                <Popover
-                  title="保证金支付信息"
-                  content={
-                    <div>
-                      <p>支付金额：{provider.depositInfo.paymentAmount}元</p>
-                      <p>
-                        支付状态：
-                        {provider.depositInfo.status === 1 ? (
-                          <Tag color="success">已支付</Tag>
-                        ) : (
-                          <Tag color="error">未支付</Tag>
-                        )}
-                      </p>
-                      <p>支付Id：{provider.depositInfo.payId}</p>
-                      <p>
-                        支付时间：
-                        {dayjs(provider.depositInfo.updatedAt).format(
-                          "YYYY-MM-DD HH:mm:ss"
-                        )}
-                      </p>
-                    </div>
-                  }
-                >
-                  <span style={{ color: "#52c41a", cursor: "pointer" }}>
-                    入驻成功
-                  </span>
-                </Popover>
-              ) : (
-                <Tooltip title={provider.failureReason}>
-                  <span style={{ color: "#ff4d4f", cursor: "pointer" }}>
-                    已驳回
-                  </span>
-                </Tooltip>
-              ),
+            render: (value) => (
+              <span style={{ color: statusOptions[value].color }}>
+                {statusOptions[value].text}
+              </span>
+            ),
             filters: statusOptions,
-            onFilter: (value, provider) => provider.status === value,
+            onFilter: (value, scenic) => scenic.status === value,
+            width: "12rem",
           },
           {
-            title: "入驻时间",
+            title: "申请时间",
             render: (value, provider) => (
               <span>
                 {provider.createdAt
@@ -143,6 +130,7 @@ export const List = ({
               return <More id={provider.id} status={provider.status} />;
             },
             width: "8rem",
+            fixed: "right",
           },
         ]}
         onChange={setPagination}
@@ -153,29 +141,37 @@ export const List = ({
 };
 
 const More = ({ id, status }: { id: number; status: number }) => {
-  const { open } = useMerchantModal();
-  const { mutate: approveMerchant } = useApproveMerchant(
-    useMerchantsQueryKey()
+  const { mutate: approveShopScenic } = useApproveShopScenic(
+    useShopScenicListQueryKey()
+  );
+  const { mutate: deleteShopScenic } = useDeleteShopScenic(
+    useShopScenicListQueryKey()
   );
   const { open: openRejectModal } = useRejectModal();
 
   const confirmApprove = (id: number) => {
     Modal.confirm({
-      title: "商家审核通过确认",
-      content: "请确保在商家信息无误的情况下进行该操作",
+      title: "景点申请通过确认",
+      content: "请确保在商家有景点相关资质的情况下进行该操作",
       okText: "确定",
       cancelText: "取消",
-      onOk: () => approveMerchant(id),
+      onOk: () => approveShopScenic(id),
+    });
+  };
+
+  const confirmDelete = (id: number) => {
+    Modal.confirm({
+      title: "确定删除该景点申请吗？",
+      content: "点击确定删除",
+      okText: "确定",
+      cancelText: "取消",
+      onOk: () => deleteShopScenic(id),
     });
   };
 
   const items: MenuProps["items"] =
     status === 0
       ? [
-          {
-            label: <div onClick={() => open(id)}>详情</div>,
-            key: "detail",
-          },
           {
             label: <div onClick={() => confirmApprove(id)}>通过</div>,
             key: "approve",
@@ -184,11 +180,15 @@ const More = ({ id, status }: { id: number; status: number }) => {
             label: <div onClick={() => openRejectModal(id)}>驳回</div>,
             key: "reject",
           },
+          {
+            label: <div onClick={() => confirmDelete(id)}>删除</div>,
+            key: "delete",
+          },
         ]
       : [
           {
-            label: <div onClick={() => open(id)}>详情</div>,
-            key: "detail",
+            label: <div onClick={() => confirmDelete(id)}>删除</div>,
+            key: "delete",
           },
         ];
 

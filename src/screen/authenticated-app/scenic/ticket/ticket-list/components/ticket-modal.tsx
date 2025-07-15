@@ -260,14 +260,14 @@ export const TicketModal = ({
             </Descriptions.Item>
           </Descriptions>
 
-          <Divider orientation="left">服务商信息</Divider>
+          <Divider orientation="left">商家信息</Divider>
           <Descriptions
             style={{ marginBottom: "3.2rem" }}
             size={"small"}
             column={2}
             bordered
           >
-            <Descriptions.Item label="服务商ID">
+            <Descriptions.Item label="商家ID">
               {editingTicket?.merchantInfo?.id}
             </Descriptions.Item>
             <Descriptions.Item label="公司名称">

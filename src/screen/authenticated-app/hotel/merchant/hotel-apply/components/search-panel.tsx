@@ -1,22 +1,17 @@
+import type { ShopHotelListSearchParams } from "types/shopHotel";
 import { useState } from "react";
 import styled from "@emotion/styled";
-
 import { Row } from "components/lib";
-import { Button, Input, Select } from "antd";
-
-import type { Option } from "types/common";
-import type { MerchantsSearchParams } from "types/scenicMerchant";
+import { Button, Select } from "antd";
 
 export interface SearchPanelProps {
-  statusOptions: Option[];
-  params: Partial<MerchantsSearchParams>;
-  setParams: (params: Partial<MerchantsSearchParams>) => void;
+  statusOptions: { text: string; value: number; color: string }[];
+  params: Partial<ShopHotelListSearchParams>;
+  setParams: (params: Partial<ShopHotelListSearchParams>) => void;
 }
 
-const defaultParmas: Partial<MerchantsSearchParams> = {
+const defaultParmas: Partial<ShopHotelListSearchParams> = {
   status: undefined,
-  name: "",
-  mobile: "",
 };
 
 export const SearchPanel = ({
@@ -30,36 +25,6 @@ export const SearchPanel = ({
     setTempParams({ ...tempParams, status });
   const clearStatus = () => setTempParams({ ...tempParams, status: undefined });
 
-  const setNickname = (evt: any) => {
-    if (!evt.target.value && evt.type !== "change") {
-      setTempParams({
-        ...tempParams,
-        name: "",
-      });
-      return;
-    }
-
-    setTempParams({
-      ...tempParams,
-      name: evt.target.value,
-    });
-  };
-
-  const setMobile = (evt: any) => {
-    if (!evt.target.value && evt.type !== "change") {
-      setTempParams({
-        ...tempParams,
-        mobile: "",
-      });
-      return;
-    }
-
-    setTempParams({
-      ...tempParams,
-      mobile: evt.target.value,
-    });
-  };
-
   const clear = () => {
     setParams({ ...params, ...defaultParmas, page: 1 });
     setTempParams({ ...tempParams, ...defaultParmas });
@@ -68,11 +33,11 @@ export const SearchPanel = ({
   return (
     <Container>
       <Item>
-        <div>商家状态：</div>
+        <div>酒店申请状态：</div>
         <Select
           style={{ width: "20rem" }}
           value={tempParams.status}
-          placeholder="请选择商家状态"
+          placeholder="请选择酒店申请状态"
           allowClear={true}
           onSelect={setStatus}
           onClear={clearStatus}
@@ -83,26 +48,6 @@ export const SearchPanel = ({
             </Select.Option>
           ))}
         </Select>
-      </Item>
-      <Item>
-        <div>联系人姓名：</div>
-        <Input
-          style={{ width: "20rem" }}
-          value={tempParams.name}
-          onChange={setNickname}
-          placeholder="请输入姓名"
-          allowClear={true}
-        />
-      </Item>
-      <Item>
-        <div>联系人手机号：</div>
-        <Input
-          style={{ width: "20rem" }}
-          value={tempParams.mobile}
-          onChange={setMobile}
-          placeholder="请输入手机号"
-          allowClear={true}
-        />
       </Item>
 
       <ButtonWrap gap={true}>

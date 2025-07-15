@@ -11,15 +11,17 @@ import {
   Tag,
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
+
 import dayjs from "dayjs";
-import { Merchant } from "types/scenicMerchant";
 import {
   useMerchantModal,
   useMerchantsQueryKey,
   useRejectModal,
 } from "../util";
 import { SearchPanelProps } from "./search-panel";
-import { useApproveMerchant } from "service/scenicMerchant";
+import { useApproveMerchant } from "service/hotelMerchant";
+
+import type { Merchant } from "types/hotelMerchant";
 
 interface ListProps extends TableProps<Merchant>, SearchPanelProps {
   error: Error | unknown;
@@ -88,6 +90,7 @@ export const List = ({
                         )}
                       </p>
                       <p>支付Id：{provider.depositInfo.payId}</p>
+                      <p>支付编号：{provider.depositInfo.orderSn}</p>
                       <p>
                         支付时间：
                         {dayjs(provider.depositInfo.updatedAt).format(

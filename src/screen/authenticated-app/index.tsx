@@ -15,20 +15,20 @@ import { AuthInfoList } from "./user/auth-info-list";
 import { TopMediaList } from "./media/top-media";
 import { ShortVideoList } from "./media/short-video";
 import { TourismNoteList } from "./media/tourism-note";
-import { ScenicCategoryList } from "./scenic/spot/category-list";
-import { ScenicList } from "./scenic/spot/spot-list";
+import { ScenicCategoryList } from "./scenic/category-list";
+import { ScenicList } from "./scenic/list";
 import { ScenicMerchantList } from "./scenic/merchant/list";
 import { ScenicShopList } from "./scenic/merchant/shop-list";
-import { ShopScenicList } from "./scenic/merchant/spot-apply-list";
+import { ShopScenicList } from "./scenic/merchant/scenic-apply";
 import { ScenicTicketCategoryList } from "./scenic/ticket/category-list";
 import { ScenicTicketList } from "./scenic/ticket/ticket-list";
-import { HotelCategoryList } from "./hotel/store/category-list";
-import { HotelList } from "./hotel/store/store-list";
-import { HotelRoomList } from "./hotel/store/room-list";
-import { HotelRoomTypeList } from "./hotel/store/room-type-list";
-import { HotelProviderList } from "./hotel/provider/provider-list";
-import { HotelShopList } from "./hotel/provider/shop-list";
-import { ProviderHotelList } from "./hotel/provider/hotel-apply-list";
+import { HotelCategoryList } from "./hotel/category-list";
+import { HotelList } from "./hotel/list";
+import { HotelRoomList } from "./hotel/room/list";
+import { HotelRoomTypeList } from "./hotel/room/type-list";
+import { HotelMarchantList } from "./hotel/merchant/list";
+import { HotelShopList } from "./hotel/merchant/shop-list";
+import { ShopHotelList } from "./hotel/merchant/hotel-apply";
 import { CateringProviderList } from "./catering/provider/provider-list";
 import { ProviderRestaurantList } from "./catering/provider/restaurant-apply-list";
 import { RestaurantCategoryList } from "./catering/restaurant/category-list";
@@ -146,8 +146,8 @@ export const AuthenticatedApp = () => {
               />
               <Route path="hotel/store/room_list" element={<HotelRoomList />} />
               <Route
-                path="hotel/provider/list"
-                element={<HotelProviderList />}
+                path="hotel/merchant/list"
+                element={<HotelMarchantList />}
               />
               <Route
                 path="hotel/provider/shop_list"
@@ -155,7 +155,7 @@ export const AuthenticatedApp = () => {
               />
               <Route
                 path="hotel/provider/hotel_apply"
-                element={<ProviderHotelList />}
+                element={<ShopHotelList />}
               />
               <Route
                 path="catering/provider_list"
@@ -330,23 +330,23 @@ const MenuSider = ({
           ],
         },
         {
-          label: "服务商管理",
-          key: "scenic_provider",
+          label: "商家管理",
+          key: "scenic_merchant",
           icon: <TeamOutlined />,
           children: [
             {
-              label: <Link to={"scenic/merchant/list"}>服务商列表</Link>,
-              key: "scenic_provider_list",
+              label: <Link to={"scenic/merchant/list"}>商家列表</Link>,
+              key: "scenic_merchant_list",
               icon: <TeamOutlined />,
             },
             {
               label: <Link to={"scenic/merchant/shop_list"}>店铺列表</Link>,
-              key: "scenic_provider_shop_list",
+              key: "scenic_merchant_shop_list",
               icon: <ShopOutlined />,
             },
             {
               label: <Link to={"scenic/merchant/spot_apply"}>景点申请</Link>,
-              key: "scenic_provider_spot_apply",
+              key: "scenic_merchant_spot_apply",
               icon: <FileAddOutlined />,
             },
           ],
@@ -398,23 +398,23 @@ const MenuSider = ({
           ],
         },
         {
-          label: "服务商管理",
-          key: "hotel_provider",
+          label: "商家管理",
+          key: "hotel_merchant",
           icon: <TeamOutlined />,
           children: [
             {
-              label: <Link to={"hotel/provider/list"}>服务商列表</Link>,
-              key: "hotel_provider_list",
+              label: <Link to={"hotel/merchant/list"}>商家列表</Link>,
+              key: "hotel_merchant_list",
               icon: <TeamOutlined />,
             },
             {
               label: <Link to={"hotel/provider/shop_list"}>店铺列表</Link>,
-              key: "hotel_provider_shop_list",
+              key: "hotel_merchant_shop_list",
               icon: <ShopOutlined />,
             },
             {
               label: <Link to={"hotel/provider/hotel_apply"}>酒店申请</Link>,
-              key: "hotel_provider_hotel_apply",
+              key: "hotel_merchant_hotel_apply",
               icon: <FileAddOutlined />,
             },
           ],
@@ -427,12 +427,12 @@ const MenuSider = ({
       icon: <CateringIcon />,
       children: [
         {
-          label: "服务商管理",
+          label: "商家管理",
           key: "catering_provider",
           icon: <TeamOutlined />,
           children: [
             {
-              label: <Link to={"catering/provider/list"}>服务商列表</Link>,
+              label: <Link to={"catering/provider/list"}>商家列表</Link>,
               key: "catering_provider_list",
               icon: <TeamOutlined />,
             },

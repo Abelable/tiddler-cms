@@ -1,4 +1,4 @@
-import type { ShopScenicListSearchParams } from "types/providerScenic";
+import type { ShopScenicListSearchParams } from "types/shopScenic";
 import { useState } from "react";
 import styled from "@emotion/styled";
 import { Row } from "components/lib";

@@ -1,0 +1,131 @@
+import { Descriptions, Drawer, Image } from "antd";
+import { ErrorBox, ModalLoading } from "components/lib";
+import dayjs from "dayjs";
+import { useMerchantModal } from "../util";
+
+export const MerchantModal = () => {
+  const { close, merchantModalOpen, editingMerchant, error, isLoading } =
+    useMerchantModal();
+
+  return (
+    <Drawer
+      forceRender={true}
+      title="商家详情"
+      size={"large"}
+      onClose={close}
+      open={merchantModalOpen}
+      styles={{
+        body: {
+          paddingBottom: 80,
+        },
+      }}
+    >
+      <ErrorBox error={error} />
+      {isLoading ? (
+        <ModalLoading />
+      ) : (
+        <>
+          <Descriptions
+            style={{ marginBottom: "3.2rem" }}
+            title="基础信息"
+            size={"small"}
+            column={1}
+            bordered
+          >
+            <Descriptions.Item label="ID">
+              {editingMerchant?.id}
+            </Descriptions.Item>
+            <Descriptions.Item label="入驻时间">
+              {dayjs(editingMerchant?.createdAt).format("YYYY-MM-DD HH:mm:ss")}
+            </Descriptions.Item>
+            <Descriptions.Item label="更新时间">
+              {dayjs(editingMerchant?.updatedAt).format("YYYY-MM-DD HH:mm:ss")}
+            </Descriptions.Item>
+          </Descriptions>
+          <Descriptions
+            style={{ marginBottom: "3.2rem" }}
+            title="公司信息"
+            size={"small"}
+            column={1}
+            bordered
+          >
+            <Descriptions.Item label="公司名称">
+              {editingMerchant?.companyName}
+            </Descriptions.Item>
+            <Descriptions.Item label="公司经营地址">
+              {editingMerchant?.regionDesc}
+            </Descriptions.Item>
+            <Descriptions.Item label="公司地址详情">
+              {editingMerchant?.addressDetail}
+            </Descriptions.Item>
+            <Descriptions.Item label="营业执照照片">
+              <Image
+                width={132}
+                height={84}
+                src={editingMerchant?.businessLicensePhoto}
+              />
+            </Descriptions.Item>
+          </Descriptions>
+          <Descriptions
+            style={{ marginBottom: "3.2rem" }}
+            title="法人信息"
+            size={"small"}
+            column={1}
+            bordered
+          >
+            <Descriptions.Item label="姓名">
+              {editingMerchant?.name}
+            </Descriptions.Item>
+            <Descriptions.Item label="手机号">
+              {editingMerchant?.mobile}
+            </Descriptions.Item>
+            <Descriptions.Item label="邮箱">
+              {editingMerchant?.email}
+            </Descriptions.Item>
+            <Descriptions.Item label="身份证号">
+              {editingMerchant?.idCardNumber}
+            </Descriptions.Item>
+            <Descriptions.Item label="身份证正面照片">
+              <Image
+                width={132}
+                height={84}
+                src={editingMerchant?.idCardFrontPhoto}
+              />
+            </Descriptions.Item>
+            <Descriptions.Item label="身份证反面照片">
+              <Image
+                width={132}
+                height={84}
+                src={editingMerchant?.idCardFrontPhoto}
+              />
+            </Descriptions.Item>
+            <Descriptions.Item label="手持身份证照片">
+              <Image
+                width={132}
+                height={84}
+                src={editingMerchant?.holdIdCardPhoto}
+              />
+            </Descriptions.Item>
+          </Descriptions>
+          <Descriptions
+            style={{ marginBottom: "3.2rem" }}
+            title="银行信息"
+            size={"small"}
+            column={1}
+            bordered
+          >
+            <Descriptions.Item label="持卡人姓名">
+              {editingMerchant?.bankCardOwnerName}
+            </Descriptions.Item>
+            <Descriptions.Item label="银行账号">
+              {editingMerchant?.bankCardNumber}
+            </Descriptions.Item>
+            <Descriptions.Item label="开户银行及支行名称">
+              {editingMerchant?.bankName}
+            </Descriptions.Item>
+          </Descriptions>
+        </>
+      )}
+    </Drawer>
+  );
+};

@@ -88,20 +88,20 @@ const treeData: DataNode[] = [
         ],
       },
       {
-        title: "服务商管理",
-        key: "scenic_provider",
+        title: "商家管理",
+        key: "scenic_merchant",
         children: [
           {
-            title: "服务商列表",
-            key: "scenic_provider_list",
+            title: "商家列表",
+            key: "scenic_merchant_list",
           },
           {
             title: "店铺列表",
-            key: "scenic_provider_shop_list",
+            key: "scenic_merchant_shop_list",
           },
           {
             title: "景点申请",
-            key: "scenic_provider_spot_apply",
+            key: "scenic_merchant_spot_apply",
           },
         ],
       },
@@ -144,20 +144,20 @@ const treeData: DataNode[] = [
         ],
       },
       {
-        title: "服务商管理",
-        key: "hotel_provider",
+        title: "商家管理",
+        key: "hotel_merchant",
         children: [
           {
-            title: "服务商列表",
-            key: "hotel_provider_list",
+            title: "商家列表",
+            key: "hotel_merchant_list",
           },
           {
             title: "店铺列表",
-            key: "hotel_provider_shop_list",
+            key: "hotel_merchant_shop_list",
           },
           {
             title: "酒店申请",
-            key: "hotel_provider_hotel_apply",
+            key: "hotel_merchant_hotel_apply",
           },
         ],
       },
@@ -168,11 +168,11 @@ const treeData: DataNode[] = [
     key: "catering",
     children: [
       {
-        title: "服务商管理",
+        title: "商家管理",
         key: "catering_provider",
         children: [
           {
-            title: "服务商列表",
+            title: "商家列表",
             key: "catering_provider_list",
           },
           {

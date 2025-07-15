@@ -64,13 +64,13 @@ export const List = ({
             width: "32rem",
           },
           {
-            title: "申请服务商",
+            title: "申请商家",
             dataIndex: "providerCompanyName",
             width: "32rem",
             render: (value) => <>{value || "个体商户"}</>,
           },
           {
-            title: "服务商资质",
+            title: "商家资质",
             dataIndex: "providerBusinessLicensePhoto",
             render: (value) => <Image width={68} src={value} />,
             width: "14rem",
@@ -141,7 +141,7 @@ const More = ({ id, status }: { id: number; status: number }) => {
   const confirmApprove = (id: number) => {
     Modal.confirm({
       title: "门店申请通过确认",
-      content: "请确保在服务商有门店相关资质的情况下进行该操作",
+      content: "请确保在商家有门店相关资质的情况下进行该操作",
       okText: "确定",
       cancelText: "取消",
       onOk: () => approveProviderRestaurant(id),

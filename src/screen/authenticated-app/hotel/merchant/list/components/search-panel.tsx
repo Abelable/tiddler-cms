@@ -4,8 +4,8 @@ import styled from "@emotion/styled";
 import { Row } from "components/lib";
 import { Button, Input, Select } from "antd";
 
+import type { MerchantsSearchParams } from "types/hotelMerchant";
 import type { Option } from "types/common";
-import type { MerchantsSearchParams } from "types/scenicMerchant";
 
 export interface SearchPanelProps {
   statusOptions: Option[];
@@ -30,7 +30,7 @@ export const SearchPanel = ({
     setTempParams({ ...tempParams, status });
   const clearStatus = () => setTempParams({ ...tempParams, status: undefined });
 
-  const setNickname = (evt: any) => {
+  const setName = (evt: any) => {
     if (!evt.target.value && evt.type !== "change") {
       setTempParams({
         ...tempParams,
@@ -89,7 +89,7 @@ export const SearchPanel = ({
         <Input
           style={{ width: "20rem" }}
           value={tempParams.name}
-          onChange={setNickname}
+          onChange={setName}
           placeholder="请输入姓名"
           allowClear={true}
         />

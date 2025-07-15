@@ -79,13 +79,13 @@ export const SetMealModal = ({
             </Descriptions.Item>
           </Descriptions>
 
-          <Divider orientation="left">服务商信息</Divider>
+          <Divider orientation="left">商家信息</Divider>
           <Descriptions
             style={{ marginBottom: "3.2rem" }}
             size={"small"}
             column={2}
           >
-            <Descriptions.Item label="服务商id">
+            <Descriptions.Item label="商家id">
               {editingSetMeal?.providerInfo?.id}
             </Descriptions.Item>
             <Descriptions.Item label="公司名称">
