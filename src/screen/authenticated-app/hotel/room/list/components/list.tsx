@@ -12,11 +12,7 @@ import {
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
 import dayjs from "dayjs";
-import {
-  useApproveRoom,
-  useDeleteRoom,
-  useEditRoomCommission,
-} from "service/hotelRoom";
+import { useDeleteRoom, useEditRoomCommission } from "service/hotelRoom";
 import {
   useRoomModal,
   useRoomListQueryKey,
