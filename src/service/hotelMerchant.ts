@@ -18,7 +18,7 @@ export const useMerchant = (id: number) => {
   const client = useHttp();
   return useQuery<MerchantDetail>(
     ["hotel_merchant", { id }],
-    () => client(`hotel/provider/detail`, { data: { id } }),
+    () => client(`hotel/merchant/detail`, { data: { id } }),
     {
       enabled: !!id,
     }
@@ -29,7 +29,7 @@ export const useApproveMerchant = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (id: number) =>
-      client("hotel/provider/approve", {
+      client("hotel/merchant/approve", {
         data: { id },
         method: "POST",
       }),
@@ -41,7 +41,7 @@ export const useRejectMerchant = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (data: { id: number; failureReason: string }) =>
-      client("hotel/provider/reject", {
+      client("hotel/merchant/reject", {
         data,
         method: "POST",
       }),

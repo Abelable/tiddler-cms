@@ -150,11 +150,11 @@ export const AuthenticatedApp = () => {
                 element={<HotelMarchantList />}
               />
               <Route
-                path="hotel/provider/shop_list"
+                path="hotel/merchant/shop_list"
                 element={<HotelShopList />}
               />
               <Route
-                path="hotel/provider/hotel_apply"
+                path="hotel/merchant/hotel_apply"
                 element={<ShopHotelList />}
               />
               <Route
@@ -408,12 +408,12 @@ const MenuSider = ({
               icon: <TeamOutlined />,
             },
             {
-              label: <Link to={"hotel/provider/shop_list"}>店铺列表</Link>,
+              label: <Link to={"hotel/merchant/shop_list"}>店铺列表</Link>,
               key: "hotel_merchant_shop_list",
               icon: <ShopOutlined />,
             },
             {
-              label: <Link to={"hotel/provider/hotel_apply"}>酒店申请</Link>,
+              label: <Link to={"hotel/merchant/hotel_apply"}>酒店申请</Link>,
               key: "hotel_merchant_hotel_apply",
               icon: <FileAddOutlined />,
             },
