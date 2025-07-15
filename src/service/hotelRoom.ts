@@ -3,13 +3,16 @@ import { useHttp } from "./http";
 import {
   useApproveConfig,
   useDeleteConfig,
+  useEditConfig,
   useRejectConfig,
 } from "./use-optimistic-options";
 import type {
   RoomListResult,
   RoomListSearchParams,
   RoomDetail,
+  Room,
 } from "types/hotelRoom";
+import { cleanObject } from "utils";
 
 export const useRoomList = (params: Partial<RoomListSearchParams>) => {
   const client = useHttp();
@@ -26,6 +29,18 @@ export const useRoom = (id: number) => {
     {
       enabled: !!id,
     }
+  );
+};
+
+export const useEditRoomCommission = (queryKey: QueryKey) => {
+  const client = useHttp();
+  return useMutation(
+    (params: Partial<Room>) =>
+      client("hotel/room/edit_commission", {
+        data: cleanObject(params),
+        method: "POST",
+      }),
+    useEditConfig(queryKey)
   );
 };
 

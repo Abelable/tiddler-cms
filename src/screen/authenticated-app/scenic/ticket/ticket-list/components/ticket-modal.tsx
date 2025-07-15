@@ -70,7 +70,6 @@ export const TicketModal = ({
       title="门票详情"
       width={"100rem"}
       forceRender={true}
-      size={"large"}
       onClose={closeModal}
       open={ticketModalOpen}
       styles={{
@@ -165,6 +164,7 @@ export const TicketModal = ({
               </Col>
             </Row>
           </Form>
+
           <Divider orientation="left">门票信息</Divider>
           <Descriptions size={"small"} column={2} bordered>
             <Descriptions.Item label="门票ID">

@@ -11,17 +11,21 @@ export interface RoomListSearchParams {
 
 export interface Room {
   id: number;
+  status: number;
+  failureReason: string;
+  shopId: number;
   typeName: number;
   hotelName: number;
   price: number;
   salesCommissionRate: number;
   promotionCommissionRate: number;
+  promotionCommissionUpperLimit: number;
+  superiorPromotionCommissionRate: number;
+  superiorPromotionCommissionUpperLimit: number;
   salesVolume: number;
   breakfastNum: number;
   guestNum: number;
   cancellable: number;
-  status: number;
-  failureReason: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -33,6 +37,18 @@ export interface RoomListResult {
   total: string;
 }
 
+export interface Shop {
+  id: number;
+  status: number;
+  type: number;
+  name: string;
+  logo: string;
+  cover: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface RoomDetail extends Room {
-  providerInfo: Partial<MerchantDetail>;
+  shopInfo: Partial<Shop>;
+  merchantInfo: Partial<MerchantDetail>;
 }

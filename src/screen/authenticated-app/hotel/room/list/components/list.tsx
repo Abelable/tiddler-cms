@@ -1,16 +1,22 @@
 import styled from "@emotion/styled";
 import {
   Dropdown,
+  InputNumber,
   MenuProps,
   Modal,
   Table,
   TablePaginationConfig,
   TableProps,
+  Tag,
   Tooltip,
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
 import dayjs from "dayjs";
-import { useApproveRoom, useDeleteRoom } from "service/hotelRoom";
+import {
+  useApproveRoom,
+  useDeleteRoom,
+  useEditRoomCommission,
+} from "service/hotelRoom";
 import { useRoomModal, useRoomListQueryKey, useRejectModal } from "../util";
 import { SearchPanelProps } from "./search-panel";
 
@@ -34,6 +40,10 @@ export const List = ({
       limit: pagination.pageSize,
     });
 
+  const { mutate: editCommission } = useEditRoomCommission(
+    useRoomListQueryKey()
+  );
+
   return (
     <Container>
       <Header between={true}>
@@ -53,19 +63,20 @@ export const List = ({
           {
             title: "房型名称",
             dataIndex: "typeName",
-            width: "24rem",
+            width: "18rem",
           },
           {
             title: "关联酒店",
             dataIndex: "hotelName",
-            width: "24rem",
+            width: "20rem",
+            render: (value) => <Tag color="success">{value}</Tag>,
           },
           {
             title: "状态",
             dataIndex: "status",
             render: (value, ticket) =>
               value === 0 ? (
-                <span style={{ color: "#87d068" }}>待审核</span>
+                <span style={{ color: "#faad14" }}>待审核</span>
               ) : value === 1 ? (
                 <span style={{ color: "#296BEF" }}>售卖中</span>
               ) : (
@@ -75,27 +86,117 @@ export const List = ({
                   </span>
                 </Tooltip>
               ),
-            filters: statusOptions,
+            filters: [
+              { text: "待审核", value: 0 },
+              { text: "售卖中", value: 1 },
+              { text: "未过审", value: 2 },
+            ],
             onFilter: (value, ticket) => ticket.status === value,
-            width: "16rem",
+            width: "12rem",
           },
           {
             title: "价格",
             dataIndex: "price",
             render: (value) => <>{`¥${value}起`}</>,
-            width: "16rem",
+            width: "12rem",
           },
           {
             title: "销售佣金比例",
             dataIndex: "salesCommissionRate",
             render: (value) => <>{`${value}%`}</>,
-            width: "16rem",
+            width: "12rem",
           },
           {
-            title: "代言奖励比例",
-            dataIndex: "promotionCommissionRate",
-            render: (value) => <>{`${value}%`}</>,
-            width: "16rem",
+            title: "代言奖励",
+            children: [
+              {
+                title: "比例",
+                dataIndex: "promotionCommissionRate",
+                render: (value, ticket) => {
+                  return (
+                    <InputNumber
+                      min={5}
+                      max={20}
+                      value={value}
+                      onChange={(promotionCommissionRate) =>
+                        editCommission({
+                          id: ticket.id,
+                          promotionCommissionRate,
+                        })
+                      }
+                      suffix="%"
+                    />
+                  );
+                },
+                width: "12rem",
+              },
+              {
+                title: "上限",
+                dataIndex: "promotionCommissionUpperLimit",
+                render: (value, ticket) => {
+                  return (
+                    <InputNumber
+                      max={20}
+                      value={value}
+                      onChange={(promotionCommissionUpperLimit) =>
+                        editCommission({
+                          id: ticket.id,
+                          promotionCommissionUpperLimit,
+                        })
+                      }
+                      prefix="￥"
+                    />
+                  );
+                },
+                width: "12rem",
+              },
+            ],
+          },
+          {
+            title: "上级代言奖励",
+            children: [
+              {
+                title: "比例",
+                dataIndex: "superiorPromotionCommissionRate",
+                render: (value, ticket) => {
+                  return (
+                    <InputNumber
+                      min={5}
+                      max={20}
+                      value={value}
+                      onChange={(superiorPromotionCommissionRate) =>
+                        editCommission({
+                          id: ticket.id,
+                          superiorPromotionCommissionRate,
+                        })
+                      }
+                      suffix="%"
+                    />
+                  );
+                },
+                width: "12rem",
+              },
+              {
+                title: "上限",
+                dataIndex: "superiorPromotionCommissionUpperLimit",
+                render: (value, ticket) => {
+                  return (
+                    <InputNumber
+                      max={10}
+                      value={value}
+                      onChange={(superiorPromotionCommissionUpperLimit) =>
+                        editCommission({
+                          id: ticket.id,
+                          superiorPromotionCommissionUpperLimit,
+                        })
+                      }
+                      prefix="￥"
+                    />
+                  );
+                },
+                width: "12rem",
+              },
+            ],
           },
           {
             title: "销量",

@@ -12,11 +12,7 @@ import {
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
 import dayjs from "dayjs";
-import {
-  useApproveTicket,
-  useDeleteTicket,
-  useEditTicketCommission,
-} from "service/scenicTicket";
+import { useDeleteTicket, useEditTicketCommission } from "service/scenicTicket";
 import {
   useTicketModal,
   useTicketListQueryKey,
