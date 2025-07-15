@@ -51,7 +51,7 @@ export const List = ({
           },
           {
             title: "酒店图片",
-            dataIndex: "hotelImage",
+            dataIndex: "hotelCover",
             render: (value) => <Image width={68} src={value} />,
             width: "14rem",
           },
@@ -62,12 +62,12 @@ export const List = ({
           },
           {
             title: "申请商家",
-            dataIndex: "providerCompanyName",
+            dataIndex: "merchantName",
             width: "32rem",
           },
           {
             title: "商家资质",
-            dataIndex: "providerBusinessLicensePhoto",
+            dataIndex: "businessLicense",
             render: (value) => <Image width={68} src={value} />,
             width: "14rem",
           },

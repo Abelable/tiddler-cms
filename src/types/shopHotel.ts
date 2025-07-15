@@ -10,7 +10,7 @@ export interface ShopHotel {
   failureReason: string;
   hotelId: number;
   hotelName: string;
-  hotelImage: string;
+  hotelCover: string;
   merchantName: string;
   businessLicense: string;
   createdAt: string;
