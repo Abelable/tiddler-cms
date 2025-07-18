@@ -1,6 +1,6 @@
 import type { DepositInfo } from "./common";
 
-export interface CateringProvidersSearchParams {
+export interface CateringMerchantsSearchParams {
   status: number;
   type: number;
   name: string;
@@ -9,20 +9,20 @@ export interface CateringProvidersSearchParams {
   limit: number;
 }
 
-export interface CateringProvider {
+export interface CateringMerchant {
   id: number;
+  status: number;
+  failureReason: string;
   type: number;
+  companyName?: string;
   name: string;
   mobile: string;
-  status: number;
   depositInfo: DepositInfo;
-  failureReason: string;
   createdAt: string;
   updatedAt: string;
 }
 
-export interface CateringProviderDetail extends CateringProvider {
-  companyName: string;
+export interface CateringMerchantDetail extends CateringMerchant {
   regionDesc: string;
   regionCodeList: string[];
   addressDetail: string;
@@ -32,10 +32,14 @@ export interface CateringProviderDetail extends CateringProvider {
   idCardNumber: string;
   idCardFrontPhoto: string;
   idCardBackPhoto: string;
+  holdIdCardPhoto: string;
+  bankCardNumber: string;
+  bankCardOwnerName: string;
+  bankName: string;
 }
 
-export interface CateringProvidersResult {
-  list: CateringProvider[];
+export interface CateringMerchantsResult {
+  list: CateringMerchant[];
   page: string;
   limit: string;
   total: string;

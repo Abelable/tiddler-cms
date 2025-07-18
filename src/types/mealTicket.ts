@@ -1,4 +1,4 @@
-import type { CateringProviderDetail } from "./cateringProvider";
+import type { CateringMerchantDetail } from "./cateringMerchant";
 
 export interface TicketListSearchParams {
   name: string;
@@ -30,5 +30,5 @@ export interface TicketListResult {
 }
 
 export interface TicketDetail extends Ticket {
-  providerInfo: Partial<CateringProviderDetail>;
+  providerInfo: Partial<CateringMerchantDetail>;
 }

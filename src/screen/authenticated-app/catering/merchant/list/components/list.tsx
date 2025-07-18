@@ -12,16 +12,16 @@ import {
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
 import dayjs from "dayjs";
-import { CateringProvider } from "types/cateringProvider";
+import { CateringMerchant } from "types/cateringMerchant";
 import {
-  useCateringProviderModal,
-  useCateringProvidersQueryKey,
+  useCateringMerchantModal,
+  useCateringMerchantsQueryKey,
   useRejectModal,
 } from "../util";
 import { SearchPanelProps } from "./search-panel";
-import { useApproveCateringProvider } from "service/cateringProvider";
+import { useApproveCateringMerchant } from "service/cateringMerchant";
 
-interface ListProps extends TableProps<CateringProvider>, SearchPanelProps {
+interface ListProps extends TableProps<CateringMerchant>, SearchPanelProps {
   error: Error | unknown;
 }
 
@@ -57,9 +57,9 @@ export const List = ({
           {
             title: "商家类型",
             dataIndex: "type",
-            render: (value) => <>{value === 1 ? "个体" : "企业"}</>,
+            render: (value) => <Tag>{value === 1 ? "个体" : "企业"}</Tag>,
             filters: typeOptions,
-            onFilter: (value, provider) => provider.type === value,
+            onFilter: (value, merchant) => merchant.type === value,
           },
           {
             title: "联系人姓名",
@@ -72,7 +72,7 @@ export const List = ({
           {
             title: "状态",
             dataIndex: "status",
-            render: (value, provider) =>
+            render: (value, merchant) =>
               value === 0 ? (
                 <span style={{ color: "#faad14" }}>待审核</span>
               ) : value === 1 ? (
@@ -82,20 +82,19 @@ export const List = ({
                   title="保证金支付信息"
                   content={
                     <div>
-                      <p>支付金额：{provider.depositInfo.paymentAmount}元</p>
+                      <p>支付金额：{merchant.depositInfo.paymentAmount}元</p>
                       <p>
                         支付状态：
-                        {provider.depositInfo.status === 1 ? (
+                        {merchant.depositInfo.status === 1 ? (
                           <Tag color="success">已支付</Tag>
                         ) : (
                           <Tag color="error">未支付</Tag>
                         )}
                       </p>
-                      <p>支付Id：{provider.depositInfo.payId}</p>
-                      <p>支付编号：{provider.depositInfo.orderSn}</p>
+                      <p>支付Id：{merchant.depositInfo.payId}</p>
                       <p>
                         支付时间：
-                        {dayjs(provider.depositInfo.updatedAt).format(
+                        {dayjs(merchant.depositInfo.updatedAt).format(
                           "YYYY-MM-DD HH:mm:ss"
                         )}
                       </p>
@@ -107,21 +106,21 @@ export const List = ({
                   </span>
                 </Popover>
               ) : (
-                <Tooltip title={provider.failureReason}>
+                <Tooltip title={merchant.failureReason}>
                   <span style={{ color: "#ff4d4f", cursor: "pointer" }}>
                     已驳回
                   </span>
                 </Tooltip>
               ),
             filters: statusOptions,
-            onFilter: (value, provider) => provider.status === value,
+            onFilter: (value, merchant) => merchant.status === value,
           },
           {
             title: "入驻时间",
-            render: (value, provider) => (
+            render: (value, merchant) => (
               <span>
-                {provider.createdAt
-                  ? dayjs(provider.createdAt).format("YYYY-MM-DD HH:mm:ss")
+                {merchant.createdAt
+                  ? dayjs(merchant.createdAt).format("YYYY-MM-DD HH:mm:ss")
                   : "无"}
               </span>
             ),
@@ -131,10 +130,10 @@ export const List = ({
           },
           {
             title: "更新时间",
-            render: (value, provider) => (
+            render: (value, merchant) => (
               <span>
-                {provider.updatedAt
-                  ? dayjs(provider.updatedAt).format("YYYY-MM-DD HH:mm:ss")
+                {merchant.updatedAt
+                  ? dayjs(merchant.updatedAt).format("YYYY-MM-DD HH:mm:ss")
                   : "无"}
               </span>
             ),
@@ -144,8 +143,8 @@ export const List = ({
           },
           {
             title: "操作",
-            render(value, provider) {
-              return <More id={provider.id} status={provider.status} />;
+            render(value, merchant) {
+              return <More id={merchant.id} status={merchant.status} />;
             },
             width: "8rem",
           },
@@ -158,9 +157,9 @@ export const List = ({
 };
 
 const More = ({ id, status }: { id: number; status: number }) => {
-  const { open } = useCateringProviderModal();
-  const { mutate: approveCateringProvider } = useApproveCateringProvider(
-    useCateringProvidersQueryKey()
+  const { open } = useCateringMerchantModal();
+  const { mutate: approveCateringMerchant } = useApproveCateringMerchant(
+    useCateringMerchantsQueryKey()
   );
   const { open: openRejectModal } = useRejectModal();
 
@@ -170,7 +169,7 @@ const More = ({ id, status }: { id: number; status: number }) => {
       content: "请确保在商家信息无误的情况下进行该操作",
       okText: "确定",
       cancelText: "取消",
-      onOk: () => approveCateringProvider(id),
+      onOk: () => approveCateringMerchant(id),
     });
   };
 

@@ -29,8 +29,8 @@ import { HotelRoomTypeList } from "./hotel/room/type-list";
 import { HotelMarchantList } from "./hotel/merchant/list";
 import { HotelShopList } from "./hotel/merchant/shop-list";
 import { ShopHotelList } from "./hotel/merchant/hotel-apply";
-import { CateringProviderList } from "./catering/provider/provider-list";
-import { ProviderRestaurantList } from "./catering/provider/restaurant-apply-list";
+import { CateringMerchantList } from "./catering/merchant/list";
+import { ProviderRestaurantList } from "./catering/merchant/restaurant-apply";
 import { RestaurantCategoryList } from "./catering/restaurant/category-list";
 import { RestaurantList } from "./catering/restaurant/restaurant-list";
 import { MealTicketList } from "./catering/meal-ticket-list";
@@ -159,11 +159,11 @@ export const AuthenticatedApp = () => {
               />
               <Route
                 path="catering/provider_list"
-                element={<CateringProviderList />}
+                element={<CateringMerchantList />}
               />
               <Route
                 path="catering/provider/list"
-                element={<CateringProviderList />}
+                element={<CateringMerchantList />}
               />
               <Route
                 path="catering/provider/restaurant_apply"
@@ -428,19 +428,19 @@ const MenuSider = ({
       children: [
         {
           label: "商家管理",
-          key: "catering_provider",
+          key: "catering_merchant",
           icon: <TeamOutlined />,
           children: [
             {
               label: <Link to={"catering/provider/list"}>商家列表</Link>,
-              key: "catering_provider_list",
+              key: "catering_merchant_list",
               icon: <TeamOutlined />,
             },
             {
               label: (
                 <Link to={"catering/provider/restaurant_apply"}>门店申请</Link>
               ),
-              key: "catering_provider_restaurant_apply",
+              key: "catering_merchant_restaurant_apply",
               icon: <FileAddOutlined />,
             },
           ],
@@ -465,7 +465,7 @@ const MenuSider = ({
           ],
         },
         {
-          label: <Link to={"catering/meal_ticket_list"}>代金券列表</Link>,
+          label: <Link to={"catering/meal_ticket_list"}>餐券列表</Link>,
           key: "catering_meal_ticket_list",
           icon: <CouponIcon />,
         },

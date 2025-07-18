@@ -40,7 +40,7 @@ const breadcrumbNameMap: { [key: string]: string } = {
   "/catering/restaurant": "门店管理",
   "/catering/restaurant/category_list": "门店分类",
   "/catering/restaurant/list": "门店列表",
-  "/catering/meal_ticket_list": "代金券列表",
+  "/catering/meal_ticket_list": "餐券列表",
   "/catering/set_meal_list": "套餐列表",
   "/shopping": "电商模块",
   "/shopping/merchant_list": "商家列表",

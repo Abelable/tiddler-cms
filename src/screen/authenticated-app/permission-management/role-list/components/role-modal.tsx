@@ -169,15 +169,15 @@ const treeData: DataNode[] = [
     children: [
       {
         title: "商家管理",
-        key: "catering_provider",
+        key: "catering_merchant",
         children: [
           {
             title: "商家列表",
-            key: "catering_provider_list",
+            key: "catering_merchant_list",
           },
           {
             title: "门店申请",
-            key: "catering_provider_restaurant_apply",
+            key: "catering_merchant_restaurant_apply",
           },
         ],
       },
@@ -196,7 +196,7 @@ const treeData: DataNode[] = [
         ],
       },
       {
-        title: "代金券列表",
+        title: "餐券列表",
         key: "catering_meal_ticket_list",
       },
       {

@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
-import { useCateringProviders } from "service/cateringProvider";
+import { useCateringMerchants } from "service/cateringMerchant";
 import { toNumber } from "utils";
-import { useCateringProvidersSearchParams } from "./util";
+import { useCateringMerchantsSearchParams } from "./util";
 
-import { CateringProviderModal } from "./components/catering-provider-modal";
+import { CateringMerchantModal } from "./components/merchant-modal";
 import { List } from "./components/list";
 import { SearchPanel } from "./components/search-panel";
 import { RejectModal } from "./components/reject-modal";
@@ -19,9 +19,9 @@ const statusOptions = [
   { text: "已驳回", value: 3 },
 ];
 
-export const CateringProviderList = () => {
-  const [params, setParams] = useCateringProvidersSearchParams();
-  const { isLoading, error, data } = useCateringProviders(params);
+export const CateringMerchantList = () => {
+  const [params, setParams] = useCateringMerchantsSearchParams();
+  const { isLoading, error, data } = useCateringMerchants(params);
 
   return (
     <Container>
@@ -48,7 +48,7 @@ export const CateringProviderList = () => {
           bordered
         />
       </Main>
-      <CateringProviderModal />
+      <CateringMerchantModal />
       <RejectModal />
     </Container>
   );

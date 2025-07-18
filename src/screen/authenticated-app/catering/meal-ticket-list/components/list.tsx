@@ -39,7 +39,7 @@ export const List = ({
   return (
     <Container>
       <Header between={true}>
-        <PageTitle>代金券列表</PageTitle>
+        <PageTitle>餐券列表</PageTitle>
       </Header>
       <ErrorBox error={error} />
       <Table
@@ -56,7 +56,7 @@ export const List = ({
             title: "名称",
             width: "28rem",
             render: (value, ticket) => (
-              <>{`${ticket.price}代${ticket.originalPrice}元代金券`}</>
+              <>{`${ticket.price}代${ticket.originalPrice}元餐券`}</>
             ),
           },
           {
@@ -160,7 +160,7 @@ const More = ({ id, status }: { id: number; status: number }) => {
 
   const confirmDelete = (id: number) => {
     Modal.confirm({
-      title: "确定删除该代金券吗？",
+      title: "确定删除该餐券吗？",
       content: "点击确定删除",
       okText: "确定",
       cancelText: "取消",
@@ -170,8 +170,8 @@ const More = ({ id, status }: { id: number; status: number }) => {
 
   const confirmApprove = (id: number) => {
     Modal.confirm({
-      title: "代金券审核通过确认",
-      content: "请确保在代金券信息无误的情况下进行该操作",
+      title: "餐券审核通过确认",
+      content: "请确保在餐券信息无误的情况下进行该操作",
       okText: "确定",
       cancelText: "取消",
       onOk: () => approveTicket(id),

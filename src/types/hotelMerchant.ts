@@ -10,11 +10,11 @@ export interface MerchantsSearchParams {
 
 export interface Merchant {
   id: number;
+  status: number;
+  failureReason: string;
   companyName: string;
   name: string;
   mobile: string;
-  status: number;
-  failureReason: string;
   depositInfo: DepositInfo;
   createdAt: string;
   updatedAt: string;

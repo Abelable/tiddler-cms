@@ -1,4 +1,4 @@
-import type { CateringProviderDetail } from "./cateringProvider";
+import type { CateringMerchantDetail } from "./cateringMerchant";
 
 export interface SetMealListSearchParams {
   name: string;
@@ -32,5 +32,5 @@ export interface SetMealListResult {
 }
 
 export interface SetMealDetail extends SetMeal {
-  providerInfo: Partial<CateringProviderDetail>;
+  providerInfo: Partial<CateringMerchantDetail>;
 }

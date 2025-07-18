@@ -17,7 +17,7 @@ export const TicketModal = ({
   return (
     <Drawer
       forceRender={true}
-      title="代金券详情"
+      title="餐券详情"
       size={"large"}
       onClose={close}
       open={ticketModalOpen}
@@ -32,7 +32,7 @@ export const TicketModal = ({
         <ModalLoading />
       ) : (
         <>
-          <Divider orientation="left">代金券信息</Divider>
+          <Divider orientation="left">餐券信息</Divider>
           <Descriptions size={"small"} column={2}>
             <Descriptions.Item label="ID">
               {editingTicket?.id}
@@ -51,7 +51,7 @@ export const TicketModal = ({
               )}
             </Descriptions.Item>
             <Descriptions.Item label="名称">
-              {`${editingTicket?.price}代${editingTicket?.originalPrice}代金券`}
+              {`${editingTicket?.price}代${editingTicket?.originalPrice}餐券`}
             </Descriptions.Item>
             <Descriptions.Item label="关联门店">
               {editingTicket?.restaurantIds?.length &&

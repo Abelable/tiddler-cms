@@ -59,12 +59,12 @@ export const SearchPanel = ({
   return (
     <Container>
       <Item>
-        <div>代金券名称：</div>
+        <div>餐券名称：</div>
         <Input
           style={{ width: "20rem" }}
           value={tempParams.name}
           onChange={setName}
-          placeholder="请输入代金券名称"
+          placeholder="请输入餐券名称"
           allowClear={true}
         />
       </Item>
@@ -86,11 +86,11 @@ export const SearchPanel = ({
         </Select>
       </Item>
       <Item>
-        <div>代金券状态：</div>
+        <div>餐券状态：</div>
         <Select
           style={{ width: "20rem" }}
           value={tempParams.status}
-          placeholder="请选择代金券状态"
+          placeholder="请选择餐券状态"
           allowClear={true}
           onSelect={setStatus}
           onClear={clearStatus}
