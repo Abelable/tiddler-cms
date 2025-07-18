@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { useShops } from "service/scenicShop";
+import { useShops } from "service/cateringShop";
 import { toNumber } from "utils";
 import { useShopsSearchParams } from "./util";
 
