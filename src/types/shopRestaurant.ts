@@ -1,24 +1,24 @@
-export interface ProviderRestaurantListSearchParams {
+export interface ShopRestaurantListSearchParams {
   status: number;
   page: number;
   limit: number;
 }
 
-export interface ProviderRestaurant {
+export interface ShopRestaurant {
   id: number;
   status: number;
   failureReason: string;
   restaurantId: number;
   restaurantName: string;
   restaurantImage: string;
-  providerCompanyName: string;
-  providerBusinessLicensePhoto: string;
+  merchantName: string;
+  businessLicense: string;
   createdAt: string;
   updatedAt: string;
 }
 
-export interface ProviderRestaurantListResult {
-  list: ProviderRestaurant[];
+export interface ShopRestaurantListResult {
+  list: ShopRestaurant[];
   page: string;
   limit: string;
   total: string;

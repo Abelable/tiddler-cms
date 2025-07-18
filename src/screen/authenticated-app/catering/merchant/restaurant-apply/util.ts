@@ -1,7 +1,7 @@
 import { useSetUrlSearchParams, useUrlQueryParams } from "utils/url";
 import { useCallback, useMemo } from "react";
 
-export const useProviderRestaurantListSearchParams = () => {
+export const useShopRestaurantListSearchParams = () => {
   const [params, setParams] = useUrlQueryParams(["status", "page", "limit"]);
   return [
     useMemo(
@@ -16,29 +16,29 @@ export const useProviderRestaurantListSearchParams = () => {
   ] as const;
 };
 
-export const useProviderRestaurantListQueryKey = () => {
-  const [params] = useProviderRestaurantListSearchParams();
-  return ["provider_restaurant_list", params];
+export const useShopRestaurantListQueryKey = () => {
+  const [params] = useShopRestaurantListSearchParams();
+  return ["shop_restaurant_list", params];
 };
 
 export const useRejectModal = () => {
-  const [{ rejectProviderRestaurantId }, setRejectProviderId] =
-    useUrlQueryParams(["rejectProviderRestaurantId"]);
+  const [{ rejectShopRestaurantId }, setRejectProviderId] = useUrlQueryParams([
+    "rejectShopRestaurantId",
+  ]);
   const setUrlParams = useSetUrlSearchParams();
 
   const open = useCallback(
-    (id: number) =>
-      setRejectProviderId({ rejectProviderRestaurantId: `${id}` }),
+    (id: number) => setRejectProviderId({ rejectShopRestaurantId: `${id}` }),
     [setRejectProviderId]
   );
   const close = useCallback(
-    () => setUrlParams({ rejectProviderRestaurantId: "" }),
+    () => setUrlParams({ rejectShopRestaurantId: "" }),
     [setUrlParams]
   );
 
   return {
-    rejectModalOpen: !!rejectProviderRestaurantId,
-    rejectProviderRestaurantId,
+    rejectModalOpen: !!rejectShopRestaurantId,
+    rejectShopRestaurantId,
     open,
     close,
   };

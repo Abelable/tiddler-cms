@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
-import { useProviderRestaurantList } from "service/providerRestaurant";
+import { useShopRestaurantList } from "service/shopRestaurant";
 import { toNumber } from "utils";
-import { useProviderRestaurantListSearchParams } from "./util";
+import { useShopRestaurantListSearchParams } from "./util";
 
 import { List } from "./components/list";
 import { SearchPanel } from "./components/search-panel";
@@ -13,9 +13,9 @@ const statusOptions = [
   { text: "已驳回", value: 2, color: "#f50" },
 ];
 
-export const ProviderRestaurantList = () => {
-  const [params, setParams] = useProviderRestaurantListSearchParams();
-  const { isLoading, error, data } = useProviderRestaurantList(params);
+export const ShopRestaurantList = () => {
+  const [params, setParams] = useShopRestaurantListSearchParams();
+  const { isLoading, error, data } = useShopRestaurantList(params);
 
   return (
     <Container>

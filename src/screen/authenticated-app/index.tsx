@@ -31,7 +31,7 @@ import { HotelShopList } from "./hotel/merchant/shop-list";
 import { ShopHotelList } from "./hotel/merchant/hotel-apply";
 import { CateringMerchantList } from "./catering/merchant/list";
 import { CateringShopList } from "./catering/merchant/shop-list";
-import { ProviderRestaurantList } from "./catering/merchant/restaurant-apply";
+import { ShopRestaurantList } from "./catering/merchant/restaurant-apply";
 import { RestaurantCategoryList } from "./catering/restaurant/category-list";
 import { RestaurantList } from "./catering/restaurant/restaurant-list";
 import { MealTicketList } from "./catering/meal-ticket-list";
@@ -168,7 +168,7 @@ export const AuthenticatedApp = () => {
               />
               <Route
                 path="catering/merchant/restaurant_apply"
-                element={<ProviderRestaurantList />}
+                element={<ShopRestaurantList />}
               />
               <Route
                 path="catering/restaurant/category_list"

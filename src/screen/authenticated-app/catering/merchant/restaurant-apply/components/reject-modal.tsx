@@ -1,21 +1,20 @@
 import { Form, Input, Modal } from "antd";
 import { useForm } from "antd/lib/form/Form";
-import { useRejectProviderRestaurant } from "service/providerRestaurant";
-import { useRejectModal, useProviderRestaurantListQueryKey } from "../util";
+import { useRejectShopRestaurant } from "service/shopRestaurant";
+import { useRejectModal, useShopRestaurantListQueryKey } from "../util";
 
 export const RejectModal = () => {
   const [form] = useForm();
-  const { rejectModalOpen, rejectProviderRestaurantId, close } =
-    useRejectModal();
+  const { rejectModalOpen, rejectShopRestaurantId, close } = useRejectModal();
 
-  const { mutateAsync, isLoading: mutateLoading } = useRejectProviderRestaurant(
-    useProviderRestaurantListQueryKey()
+  const { mutateAsync, isLoading: mutateLoading } = useRejectShopRestaurant(
+    useShopRestaurantListQueryKey()
   );
 
   const confirm = () => {
     form.validateFields().then(async () => {
       await mutateAsync({
-        id: +rejectProviderRestaurantId,
+        id: +rejectShopRestaurantId,
         ...form.getFieldsValue(),
       });
       closeModal();

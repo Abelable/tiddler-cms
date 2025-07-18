@@ -10,15 +10,15 @@ import {
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
 import dayjs from "dayjs";
-import { ProviderRestaurant } from "types/providerRestaurant";
-import { useProviderRestaurantListQueryKey, useRejectModal } from "../util";
+import { ShopRestaurant } from "types/shopRestaurant";
+import { useShopRestaurantListQueryKey, useRejectModal } from "../util";
 import { SearchPanelProps } from "./search-panel";
 import {
-  useApproveProviderRestaurant,
-  useDeleteProviderRestaurant,
-} from "service/providerRestaurant";
+  useApproveShopRestaurant,
+  useDeleteShopRestaurant,
+} from "service/shopRestaurant";
 
-interface ListProps extends TableProps<ProviderRestaurant>, SearchPanelProps {
+interface ListProps extends TableProps<ShopRestaurant>, SearchPanelProps {
   error: Error | unknown;
 }
 
@@ -65,13 +65,13 @@ export const List = ({
           },
           {
             title: "申请商家",
-            dataIndex: "providerCompanyName",
+            dataIndex: "merchantName",
             width: "32rem",
             render: (value) => <>{value || "个体商户"}</>,
           },
           {
             title: "商家资质",
-            dataIndex: "providerBusinessLicensePhoto",
+            dataIndex: "businessLicense",
             render: (value) => <Image width={68} src={value} />,
             width: "14rem",
           },
@@ -130,11 +130,11 @@ export const List = ({
 };
 
 const More = ({ id, status }: { id: number; status: number }) => {
-  const { mutate: approveProviderRestaurant } = useApproveProviderRestaurant(
-    useProviderRestaurantListQueryKey()
+  const { mutate: approveShopRestaurant } = useApproveShopRestaurant(
+    useShopRestaurantListQueryKey()
   );
-  const { mutate: deleteProviderRestaurant } = useDeleteProviderRestaurant(
-    useProviderRestaurantListQueryKey()
+  const { mutate: deleteShopRestaurant } = useDeleteShopRestaurant(
+    useShopRestaurantListQueryKey()
   );
   const { open: openRejectModal } = useRejectModal();
 
@@ -144,7 +144,7 @@ const More = ({ id, status }: { id: number; status: number }) => {
       content: "请确保在商家有门店相关资质的情况下进行该操作",
       okText: "确定",
       cancelText: "取消",
-      onOk: () => approveProviderRestaurant(id),
+      onOk: () => approveShopRestaurant(id),
     });
   };
 
@@ -154,7 +154,7 @@ const More = ({ id, status }: { id: number; status: number }) => {
       content: "点击确定删除",
       okText: "确定",
       cancelText: "取消",
-      onOk: () => deleteProviderRestaurant(id),
+      onOk: () => deleteShopRestaurant(id),
     });
   };
 

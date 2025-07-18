@@ -2,29 +2,29 @@ import { QueryKey, useMutation, useQuery } from "react-query";
 import { useHttp } from "./http";
 import { useApproveConfig, useRejectConfig } from "./use-optimistic-options";
 import type {
-  ProviderRestaurantListSearchParams,
-  ProviderRestaurantListResult,
-} from "types/providerRestaurant";
+  ShopRestaurantListSearchParams,
+  ShopRestaurantListResult,
+} from "types/shopRestaurant";
 
-export const useProviderRestaurantList = (
-  params: Partial<ProviderRestaurantListSearchParams>
+export const useShopRestaurantList = (
+  params: Partial<ShopRestaurantListSearchParams>
 ) => {
   const client = useHttp();
-  return useQuery<ProviderRestaurantListResult>(
-    ["provider_restaurant_list", params],
+  return useQuery<ShopRestaurantListResult>(
+    ["shop_restaurant_list", params],
     () =>
-      client("catering/merchant/restaurant/list", {
+      client("catering/shop/restaurant/list", {
         data: params,
         method: "POST",
       })
   );
 };
 
-export const useApproveProviderRestaurant = (queryKey: QueryKey) => {
+export const useApproveShopRestaurant = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (id: number) =>
-      client("catering/merchant/restaurant/approve", {
+      client("catering/shop/restaurant/approve", {
         data: { id },
         method: "POST",
       }),
@@ -32,11 +32,11 @@ export const useApproveProviderRestaurant = (queryKey: QueryKey) => {
   );
 };
 
-export const useRejectProviderRestaurant = (queryKey: QueryKey) => {
+export const useRejectShopRestaurant = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (data: { id: number; failureReason: string }) =>
-      client("catering/merchant/restaurant/reject", {
+      client("catering/shop/restaurant/reject", {
         data,
         method: "POST",
       }),
@@ -44,11 +44,11 @@ export const useRejectProviderRestaurant = (queryKey: QueryKey) => {
   );
 };
 
-export const useDeleteProviderRestaurant = (queryKey: QueryKey) => {
+export const useDeleteShopRestaurant = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (id: number) =>
-      client("catering/merchant/restaurant/delete", {
+      client("catering/shop/restaurant/delete", {
         data: { id },
         method: "POST",
       }),

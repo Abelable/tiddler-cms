@@ -100,10 +100,10 @@ export const List = ({
           },
           {
             title: "申请时间",
-            render: (value, provider) => (
+            render: (value, apply) => (
               <span>
-                {provider.createdAt
-                  ? dayjs(provider.createdAt).format("YYYY-MM-DD HH:mm:ss")
+                {apply.createdAt
+                  ? dayjs(apply.createdAt).format("YYYY-MM-DD HH:mm:ss")
                   : "无"}
               </span>
             ),
@@ -113,10 +113,10 @@ export const List = ({
           },
           {
             title: "更新时间",
-            render: (value, provider) => (
+            render: (value, apply) => (
               <span>
-                {provider.updatedAt
-                  ? dayjs(provider.updatedAt).format("YYYY-MM-DD HH:mm:ss")
+                {apply.updatedAt
+                  ? dayjs(apply.updatedAt).format("YYYY-MM-DD HH:mm:ss")
                   : "无"}
               </span>
             ),
@@ -126,8 +126,8 @@ export const List = ({
           },
           {
             title: "操作",
-            render(value, provider) {
-              return <More id={provider.id} status={provider.status} />;
+            render(value, apply) {
+              return <More id={apply.id} status={apply.status} />;
             },
             width: "8rem",
             fixed: "right",
