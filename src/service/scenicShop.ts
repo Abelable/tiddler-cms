@@ -12,7 +12,7 @@ export const useShops = (params: Partial<ShopsSearchParams>) => {
 export const useShop = (id: number) => {
   const client = useHttp();
   return useQuery<Shop>(
-    ["shop", { id }],
+    ["scenic_shop", { id }],
     () => client(`scenic/shop/detail`, { data: { id } }),
     {
       enabled: !!id,

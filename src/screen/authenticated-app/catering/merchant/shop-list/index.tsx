@@ -7,9 +7,9 @@ import { ShopModal } from "./components/shop-modal";
 import { List } from "./components/list";
 import { SearchPanel } from "./components/search-panel";
 
-export const HotelShopList = () => {
+export const CateringShopList = () => {
   const shopTypeOptions = [
-    { text: "酒店官方", value: 1 },
+    { text: "门店官方", value: 1 },
     { text: "专营店", value: 2 },
     { text: "平台自营", value: 3 },
   ];

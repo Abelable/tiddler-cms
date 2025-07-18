@@ -4,16 +4,16 @@ import type { Shop, ShopsResult, ShopsSearchParams } from "types/shop";
 
 export const useShops = (params: Partial<ShopsSearchParams>) => {
   const client = useHttp();
-  return useQuery<ShopsResult>(["hotel_shops", params], () =>
-    client("hotel/shop/list", { data: params, method: "POST" })
+  return useQuery<ShopsResult>(["catering_shops", params], () =>
+    client("catering/shop/list", { data: params, method: "POST" })
   );
 };
 
 export const useShop = (id: number) => {
   const client = useHttp();
   return useQuery<Shop>(
-    ["hotel_shop", { id }],
-    () => client(`hotel/shop/detail`, { data: { id } }),
+    ["catering_shop", { id }],
+    () => client(`catering/shop/detail`, { data: { id } }),
     {
       enabled: !!id,
     }

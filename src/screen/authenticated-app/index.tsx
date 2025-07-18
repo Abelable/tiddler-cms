@@ -30,6 +30,7 @@ import { HotelMarchantList } from "./hotel/merchant/list";
 import { HotelShopList } from "./hotel/merchant/shop-list";
 import { ShopHotelList } from "./hotel/merchant/hotel-apply";
 import { CateringMerchantList } from "./catering/merchant/list";
+import { CateringShopList } from "./catering/merchant/shop-list";
 import { ProviderRestaurantList } from "./catering/merchant/restaurant-apply";
 import { RestaurantCategoryList } from "./catering/restaurant/category-list";
 import { RestaurantList } from "./catering/restaurant/restaurant-list";
@@ -158,15 +159,15 @@ export const AuthenticatedApp = () => {
                 element={<ShopHotelList />}
               />
               <Route
-                path="catering/provider_list"
+                path="catering/merchant/list"
                 element={<CateringMerchantList />}
               />
               <Route
-                path="catering/provider/list"
-                element={<CateringMerchantList />}
+                path="catering/merchant/shop_list"
+                element={<CateringShopList />}
               />
               <Route
-                path="catering/provider/restaurant_apply"
+                path="catering/merchant/restaurant_apply"
                 element={<ProviderRestaurantList />}
               />
               <Route
@@ -432,13 +433,18 @@ const MenuSider = ({
           icon: <TeamOutlined />,
           children: [
             {
-              label: <Link to={"catering/provider/list"}>商家列表</Link>,
+              label: <Link to={"catering/merchant/list"}>商家列表</Link>,
               key: "catering_merchant_list",
               icon: <TeamOutlined />,
             },
             {
+              label: <Link to={"catering/merchant/shop_list"}>店铺列表</Link>,
+              key: "catering_merchant_shop_list",
+              icon: <ShopOutlined />,
+            },
+            {
               label: (
-                <Link to={"catering/provider/restaurant_apply"}>门店申请</Link>
+                <Link to={"catering/merchant/restaurant_apply"}>门店申请</Link>
               ),
               key: "catering_merchant_restaurant_apply",
               icon: <FileAddOutlined />,
