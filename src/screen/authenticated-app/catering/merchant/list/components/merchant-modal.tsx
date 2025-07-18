@@ -200,25 +200,25 @@ export const CateringMerchantModal = () => {
                   />
                 </Descriptions.Item>
               </Descriptions>
-              <Descriptions
-                style={{ marginBottom: "3.2rem" }}
-                title="银行信息"
-                size={"small"}
-                column={1}
-                bordered
-              >
-                <Descriptions.Item label="持卡人姓名">
-                  {editingCateringMerchant?.bankCardOwnerName}
-                </Descriptions.Item>
-                <Descriptions.Item label="银行账号">
-                  {editingCateringMerchant?.bankCardNumber}
-                </Descriptions.Item>
-                <Descriptions.Item label="开户银行及支行名称">
-                  {editingCateringMerchant?.bankName}
-                </Descriptions.Item>
-              </Descriptions>
             </>
           )}
+          <Descriptions
+            style={{ marginBottom: "3.2rem" }}
+            title="银行信息"
+            size={"small"}
+            column={1}
+            bordered
+          >
+            <Descriptions.Item label="持卡人姓名">
+              {editingCateringMerchant?.bankCardOwnerName}
+            </Descriptions.Item>
+            <Descriptions.Item label="银行账号">
+              {editingCateringMerchant?.bankCardNumber}
+            </Descriptions.Item>
+            <Descriptions.Item label="开户银行及支行名称">
+              {editingCateringMerchant?.bankName}
+            </Descriptions.Item>
+          </Descriptions>
         </>
       )}
     </Drawer>
