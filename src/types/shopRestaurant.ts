@@ -10,7 +10,7 @@ export interface ShopRestaurant {
   failureReason: string;
   restaurantId: number;
   restaurantName: string;
-  restaurantImage: string;
+  restaurantCover: string;
   merchantName: string;
   businessLicense: string;
   createdAt: string;
