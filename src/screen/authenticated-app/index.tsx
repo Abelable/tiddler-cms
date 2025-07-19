@@ -77,7 +77,7 @@ import {
 } from "@ant-design/icons";
 import {
   ExpressIcon,
-  ScenicSpotIcon,
+  ScenicIcon,
   TicketIcon,
   HotelIcon,
   BedIcon,
@@ -115,10 +115,10 @@ export const AuthenticatedApp = () => {
               <Route path="media/short_video" element={<ShortVideoList />} />
               <Route path="media/tourism_note" element={<TourismNoteList />} />
               <Route
-                path="scenic/spot/category_list"
+                path="scenic/category_list"
                 element={<ScenicCategoryList />}
               />
-              <Route path="scenic/spot/list" element={<ScenicList />} />
+              <Route path="scenic/list" element={<ScenicList />} />
               <Route
                 path="scenic/merchant/list"
                 element={<ScenicMerchantList />}
@@ -128,7 +128,7 @@ export const AuthenticatedApp = () => {
                 element={<ScenicShopList />}
               />
               <Route
-                path="scenic/merchant/spot_apply"
+                path="scenic/merchant/scenic_apply"
                 element={<ShopScenicList />}
               />
               <Route
@@ -311,24 +311,17 @@ const MenuSider = ({
     {
       label: "景点模块",
       key: "scenic",
-      icon: <ScenicSpotIcon />,
+      icon: <ScenicIcon />,
       children: [
         {
-          label: "景点管理",
-          key: "scenic_spot",
-          icon: <ScenicSpotIcon />,
-          children: [
-            {
-              label: <Link to={"scenic/spot/category_list"}>景点分类</Link>,
-              key: "scenic_spot_category_list",
-              icon: <AppstoreOutlined />,
-            },
-            {
-              label: <Link to={"scenic/spot/list"}>景点列表</Link>,
-              key: "scenic_spot_list",
-              icon: <UnorderedListOutlined />,
-            },
-          ],
+          label: <Link to={"scenic/category_list"}>景点分类</Link>,
+          key: "scenic_category_list",
+          icon: <AppstoreOutlined />,
+        },
+        {
+          label: <Link to={"scenic/list"}>景点列表</Link>,
+          key: "scenic_list",
+          icon: <UnorderedListOutlined />,
         },
         {
           label: "商家管理",
@@ -346,8 +339,8 @@ const MenuSider = ({
               icon: <ShopOutlined />,
             },
             {
-              label: <Link to={"scenic/merchant/spot_apply"}>景点申请</Link>,
-              key: "scenic_merchant_spot_apply",
+              label: <Link to={"scenic/merchant/scenic_apply"}>景点申请</Link>,
+              key: "scenic_merchant_scenic_apply",
               icon: <FileAddOutlined />,
             },
           ],

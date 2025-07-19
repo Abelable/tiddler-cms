@@ -62,10 +62,10 @@ export const List = ({
           },
           {
             title: "名称",
-            render: (value, spot) => (
+            render: (value, scenic) => (
               <Row gap={1}>
-                <span>{spot.name}</span>
-                {spot.level ? <Tag color="gold">{spot.level}</Tag> : <></>}
+                <span>{scenic.name}</span>
+                {scenic.level ? <Tag color="gold">{scenic.level}</Tag> : <></>}
               </Row>
             ),
           },
