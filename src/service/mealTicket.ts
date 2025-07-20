@@ -1,4 +1,5 @@
 import { QueryKey, useMutation, useQuery } from "react-query";
+import { cleanObject } from "utils";
 import { useHttp } from "./http";
 import {
   useApproveConfig,
@@ -6,13 +7,13 @@ import {
   useEditConfig,
   useRejectConfig,
 } from "./use-optimistic-options";
+
 import type {
   TicketListResult,
   TicketListSearchParams,
   TicketDetail,
   Ticket,
 } from "types/mealTicket";
-import { cleanObject } from "utils";
 
 export const useTicketList = (params: Partial<TicketListSearchParams>) => {
   const client = useHttp();

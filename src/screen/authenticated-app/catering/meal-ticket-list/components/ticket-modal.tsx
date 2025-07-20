@@ -16,13 +16,13 @@ import {
 import { UserOutlined } from "@ant-design/icons";
 import { ErrorBox, ModalLoading } from "components/lib";
 
-import dayjs from "dayjs";
+import { useEffect } from "react";
 import { useForm } from "antd/es/form/Form";
+import dayjs from "dayjs";
+import { useEditTicketCommission } from "service/mealTicket";
 import { useTicketListQueryKey, useTicketModal } from "../util";
 
 import type { ProductOption } from "types/common";
-import { useEditTicketCommission } from "service/mealTicket";
-import { useEffect } from "react";
 
 export const TicketModal = ({
   restaurantOptions,

@@ -9,6 +9,7 @@ import { SetMealModal } from "./components/set-meal-modal";
 import { List } from "./components/list";
 import { SearchPanel } from "./components/search-panel";
 import { RejectModal } from "./components/reject-modal";
+import { ApproveModal } from "./components/approve-modal";
 
 export const SetMealList = () => {
   const [params, setParams] = useSetMealListSearchParams();
@@ -47,6 +48,7 @@ export const SetMealList = () => {
         />
       </Main>
       <SetMealModal restaurantOptions={restaurantOptions || []} />
+      <ApproveModal />
       <RejectModal />
     </Container>
   );

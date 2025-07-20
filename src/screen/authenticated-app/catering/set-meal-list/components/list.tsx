@@ -9,14 +9,16 @@ import {
   Tooltip,
   Tag,
   Image,
+  InputNumber,
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
 import dayjs from "dayjs";
-import { useApproveSetMeal, useDeleteSetMeal } from "service/setMeal";
+import { useDeleteSetMeal, useEditSetMealCommission } from "service/setMeal";
 import {
   useSetMealModal,
   useSetMealListQueryKey,
   useRejectModal,
+  useApproveModal,
 } from "../util";
 import { SearchPanelProps } from "./search-panel";
 
@@ -40,6 +42,10 @@ export const List = ({
       page: pagination.current,
       limit: pagination.pageSize,
     });
+
+  const { mutate: editCommission } = useEditSetMealCommission(
+    useSetMealListQueryKey()
+  );
 
   return (
     <Container>
@@ -83,35 +89,11 @@ export const List = ({
             width: "36rem",
           },
           {
-            title: "价格",
-            dataIndex: "price",
-            render: (value) => <>{`¥${value}`}</>,
-            width: "16rem",
-          },
-          {
-            title: "销售佣金比例",
-            dataIndex: "salesCommissionRate",
-            render: (value) => <>{`${value}%`}</>,
-            width: "16rem",
-          },
-          {
-            title: "代言奖励比例",
-            dataIndex: "promotionCommissionRate",
-            render: (value) => <>{`${value}%`}</>,
-            width: "16rem",
-          },
-          {
-            title: "销量",
-            dataIndex: "salesVolume",
-            sorter: (a, b) => Number(a) - Number(b),
-            width: "16rem",
-          },
-          {
             title: "状态",
             dataIndex: "status",
             render: (value, setMeal) =>
               value === 0 ? (
-                <span style={{ color: "#87d068" }}>待审核</span>
+                <span style={{ color: "#faad14" }}>待审核</span>
               ) : value === 1 ? (
                 <span style={{ color: "#296BEF" }}>售卖中</span>
               ) : (
@@ -121,8 +103,122 @@ export const List = ({
                   </span>
                 </Tooltip>
               ),
-            filters: statusOptions,
+            filters: [
+              { text: "待审核", value: 0 },
+              { text: "售卖中", value: 1 },
+              { text: "未过审", value: 2 },
+            ],
             onFilter: (value, setMeal) => setMeal.status === value,
+            width: "12rem",
+          },
+          {
+            title: "价格",
+            dataIndex: "price",
+            render: (value) => <>{`¥${value}`}</>,
+            width: "16rem",
+          },
+          {
+            title: "销售佣金比例",
+            dataIndex: "salesCommissionRate",
+            render: (value) => <>{`${value}%`}</>,
+            width: "12rem",
+          },
+          {
+            title: "代言奖励",
+            children: [
+              {
+                title: "比例",
+                dataIndex: "promotionCommissionRate",
+                render: (value, setMeal) => {
+                  return (
+                    <InputNumber
+                      min={5}
+                      max={30}
+                      value={value}
+                      onChange={(promotionCommissionRate) =>
+                        editCommission({
+                          id: setMeal.id,
+                          promotionCommissionRate,
+                        })
+                      }
+                      suffix="%"
+                    />
+                  );
+                },
+                width: "12rem",
+              },
+              {
+                title: "上限",
+                dataIndex: "promotionCommissionUpperLimit",
+                render: (value, setMeal) => {
+                  return (
+                    <InputNumber
+                      max={30}
+                      value={value}
+                      onChange={(promotionCommissionUpperLimit) =>
+                        editCommission({
+                          id: setMeal.id,
+                          promotionCommissionUpperLimit,
+                        })
+                      }
+                      prefix="￥"
+                    />
+                  );
+                },
+                width: "12rem",
+              },
+            ],
+          },
+          {
+            title: "上级代言奖励",
+            children: [
+              {
+                title: "比例",
+                dataIndex: "superiorPromotionCommissionRate",
+                render: (value, setMeal) => {
+                  return (
+                    <InputNumber
+                      min={5}
+                      max={10}
+                      value={value}
+                      onChange={(superiorPromotionCommissionRate) =>
+                        editCommission({
+                          id: setMeal.id,
+                          superiorPromotionCommissionRate,
+                        })
+                      }
+                      suffix="%"
+                    />
+                  );
+                },
+                width: "12rem",
+              },
+              {
+                title: "上限",
+                dataIndex: "superiorPromotionCommissionUpperLimit",
+                render: (value, setMeal) => {
+                  return (
+                    <InputNumber
+                      max={10}
+                      value={value}
+                      onChange={(superiorPromotionCommissionUpperLimit) =>
+                        editCommission({
+                          id: setMeal.id,
+                          superiorPromotionCommissionUpperLimit,
+                        })
+                      }
+                      prefix="￥"
+                    />
+                  );
+                },
+                width: "12rem",
+              },
+            ],
+          },
+          {
+            title: "销量",
+            dataIndex: "salesVolume",
+            sorter: (a, b) => Number(a) - Number(b),
             width: "16rem",
           },
           {
@@ -170,9 +266,7 @@ export const List = ({
 const More = ({ id, status }: { id: number; status: number }) => {
   const { open } = useSetMealModal();
   const { mutate: deleteSetMeal } = useDeleteSetMeal(useSetMealListQueryKey());
-  const { mutate: approveSetMeal } = useApproveSetMeal(
-    useSetMealListQueryKey()
-  );
+  const { open: openApproveModal } = useApproveModal();
   const { open: openRejectModal } = useRejectModal();
 
   const confirmDelete = (id: number) => {
@@ -185,70 +279,28 @@ const More = ({ id, status }: { id: number; status: number }) => {
     });
   };
 
-  const confirmApprove = (id: number) => {
-    Modal.confirm({
-      title: "套餐审核通过确认",
-      content: "请确保在套餐信息无误的情况下进行该操作",
-      okText: "确定",
-      cancelText: "取消",
-      onOk: () => approveSetMeal(id),
-    });
-  };
-
-  let items: MenuProps["items"];
-  switch (status) {
-    case 0:
-      items = [
-        {
-          label: <div onClick={() => open(id)}>详情</div>,
-          key: "detail",
-        },
-        {
-          label: <div onClick={() => confirmApprove(id)}>通过</div>,
+  const items = [
+    status === 0
+      ? {
+          label: <div onClick={() => openApproveModal(id)}>通过</div>,
           key: "approve",
-        },
-        {
+        }
+      : undefined,
+    status === 0
+      ? {
           label: <div onClick={() => openRejectModal(id)}>驳回</div>,
           key: "reject",
-        },
-
-        {
-          label: <div onClick={() => confirmDelete(id)}>删除</div>,
-          key: "delete",
-        },
-      ];
-      break;
-
-    case 1:
-      items = [
-        {
-          label: <div onClick={() => open(id)}>详情</div>,
-          key: "detail",
-        },
-        {
-          label: <div onClick={() => openRejectModal(id)}>驳回重审</div>,
-          key: "reject",
-        },
-        {
-          label: <div onClick={() => confirmDelete(id)}>删除</div>,
-          key: "delete",
-        },
-      ];
-      break;
-
-    case 2:
-      items = [
-        {
-          label: <div onClick={() => open(id)}>详情</div>,
-          key: "detail",
-        },
-        {
-          label: <div onClick={() => confirmDelete(id)}>删除</div>,
-          key: "delete",
-        },
-      ];
-      break;
-  }
+        }
+      : undefined,
+    {
+      label: <div onClick={() => open(id)}>详情</div>,
+      key: "detail",
+    },
+    {
+      label: <div onClick={() => confirmDelete(id)}>删除</div>,
+      key: "delete",
+    },
+  ].filter((item) => item !== undefined) as MenuProps["items"];
 
   return (
     <Dropdown menu={{ items }}>

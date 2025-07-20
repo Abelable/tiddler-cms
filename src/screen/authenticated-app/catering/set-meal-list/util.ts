@@ -59,6 +59,37 @@ export const useSetMealModal = () => {
   };
 };
 
+export const useApproveModal = () => {
+  const [{ approveTicketId }, setApproveTicketId] = useUrlQueryParams([
+    "approveTicketId",
+  ]);
+  const setUrlParams = useSetUrlSearchParams();
+  const {
+    data: editingTicket,
+    isLoading,
+    error,
+  } = useSetMeal(Number(approveTicketId));
+
+  const open = useCallback(
+    (id: number) => setApproveTicketId({ approveTicketId: `${id}` }),
+    [setApproveTicketId]
+  );
+  const close = useCallback(
+    () => setUrlParams({ approveTicketId: "" }),
+    [setUrlParams]
+  );
+
+  return {
+    approveModalOpen: !!approveTicketId,
+    approveTicketId,
+    editingTicket,
+    isLoading,
+    error,
+    open,
+    close,
+  };
+};
+
 export const useRejectModal = () => {
   const [{ rejectSetMealId }, setRejectSetMealId] = useUrlQueryParams([
     "rejectSetMealId",

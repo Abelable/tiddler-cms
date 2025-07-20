@@ -10,6 +10,8 @@ export interface SetMealListSearchParams {
 
 export interface SetMeal {
   id: number;
+  status: number;
+  failureReason: string;
   cover: string;
   name: string;
   restaurantIds: number[];
@@ -17,9 +19,10 @@ export interface SetMeal {
   originalPrice: number;
   salesCommissionRate: number;
   promotionCommissionRate: number;
+  promotionCommissionUpperLimit: number;
+  superiorPromotionCommissionRate: number;
+  superiorPromotionCommissionUpperLimit: number;
   salesVolume: number;
-  status: number;
-  failureReason: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -31,6 +34,18 @@ export interface SetMealListResult {
   total: string;
 }
 
+export interface Shop {
+  id: number;
+  status: number;
+  type: number;
+  name: string;
+  logo: string;
+  cover: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface SetMealDetail extends SetMeal {
-  providerInfo: Partial<CateringMerchantDetail>;
+  shopInfo: Partial<Shop>;
+  merchantInfo: Partial<CateringMerchantDetail>;
 }
