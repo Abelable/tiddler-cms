@@ -9,6 +9,7 @@ import { TicketModal } from "./components/ticket-modal";
 import { List } from "./components/list";
 import { SearchPanel } from "./components/search-panel";
 import { RejectModal } from "./components/reject-modal";
+import { ApproveModal } from "./components/approve-modal";
 
 export const MealTicketList = () => {
   const [params, setParams] = useTicketListSearchParams();
@@ -47,6 +48,7 @@ export const MealTicketList = () => {
         />
       </Main>
       <TicketModal restaurantOptions={restaurantOptions || []} />
+      <ApproveModal />
       <RejectModal />
     </Container>
   );
