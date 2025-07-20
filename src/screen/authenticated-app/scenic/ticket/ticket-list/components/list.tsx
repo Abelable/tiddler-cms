@@ -137,7 +137,7 @@ export const List = ({
                   return (
                     <InputNumber
                       min={5}
-                      max={20}
+                      max={30}
                       value={value}
                       onChange={(promotionCommissionRate) =>
                         editCommission({
@@ -157,7 +157,7 @@ export const List = ({
                 render: (value, ticket) => {
                   return (
                     <InputNumber
-                      max={20}
+                      max={30}
                       value={value}
                       onChange={(promotionCommissionUpperLimit) =>
                         editCommission({
@@ -183,7 +183,7 @@ export const List = ({
                   return (
                     <InputNumber
                       min={5}
-                      max={20}
+                      max={10}
                       value={value}
                       onChange={(superiorPromotionCommissionRate) =>
                         editCommission({

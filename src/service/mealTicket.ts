@@ -47,9 +47,9 @@ export const useEditTicketCommission = (queryKey: QueryKey) => {
 export const useApproveTicket = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
-    (id: number) =>
+    (params: Partial<Ticket>) =>
       client("catering/meal_ticket/approve", {
-        data: { id },
+        data: cleanObject(params),
         method: "POST",
       }),
     useApproveConfig(queryKey)

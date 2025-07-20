@@ -90,7 +90,7 @@ export const RoomModal = () => {
                 >
                   <InputNumber
                     min={5}
-                    max={20}
+                    max={30}
                     style={{ width: "100%" }}
                     placeholder="请填写代言奖励比例"
                     suffix="%"
@@ -105,7 +105,7 @@ export const RoomModal = () => {
                   rules={[{ required: true, message: "请填写代言奖励上限" }]}
                 >
                   <InputNumber
-                    max={20}
+                    max={30}
                     style={{ width: "100%" }}
                     placeholder="请填写代言奖励上限"
                     prefix="￥"
