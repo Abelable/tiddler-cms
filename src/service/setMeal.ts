@@ -36,7 +36,7 @@ export const useEditSetMealCommission = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (params: Partial<SetMeal>) =>
-      client("catering/meal_ticket/edit_commission", {
+      client("catering/set_meal/edit_commission", {
         data: cleanObject(params),
         method: "POST",
       }),
@@ -47,9 +47,9 @@ export const useEditSetMealCommission = (queryKey: QueryKey) => {
 export const useApproveSetMeal = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
-    (id: number) =>
+    (params: Partial<SetMeal>) =>
       client("catering/set_meal/approve", {
-        data: { id },
+        data: cleanObject(params),
         method: "POST",
       }),
     useApproveConfig(queryKey)

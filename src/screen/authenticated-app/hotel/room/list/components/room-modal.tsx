@@ -85,7 +85,7 @@ export const RoomModal = () => {
                 <Form.Item
                   name="promotionCommissionRate"
                   label="代言奖励比例"
-                  tooltip="佣金范围5%~20%"
+                  tooltip="佣金范围5%~30%"
                   rules={[{ required: true, message: "请填写代言奖励比例" }]}
                 >
                   <InputNumber

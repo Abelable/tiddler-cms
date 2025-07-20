@@ -107,7 +107,7 @@ export const List = ({
           {
             title: "价格",
             dataIndex: "price",
-            render: (value) => <>{`¥${value}起`}</>,
+            render: (value) => <>{`¥${value}`}</>,
             width: "12rem",
           },
           {
