@@ -182,7 +182,7 @@ export const TicketModal = ({
               )}
             </Descriptions.Item>
             <Descriptions.Item label="名称">
-              {`${editingTicket?.price}代${editingTicket?.originalPrice}餐券`}
+              {`${editingTicket?.originalPrice}代金券`}
             </Descriptions.Item>
             <Descriptions.Item label="关联门店">
               {editingTicket?.restaurantIds?.length &&
@@ -192,16 +192,16 @@ export const TicketModal = ({
                   </Tag>
                 ))}
             </Descriptions.Item>
-            <Descriptions.Item label="销售佣金比例">
-              {`${(editingTicket?.salesCommissionRate as number) * 100}%`}
+            <Descriptions.Item label="价格">
+              {`¥${editingTicket?.price}起`}
             </Descriptions.Item>
-            <Descriptions.Item label="代言奖励比例">
-              {`${(editingTicket?.promotionCommissionRate as number) * 100}%`}
+            <Descriptions.Item label="销售佣金比例">
+              {`${editingTicket?.salesCommissionRate}%`}
             </Descriptions.Item>
             <Descriptions.Item label="销量">
               {editingTicket?.salesVolume}
             </Descriptions.Item>
-            <Descriptions.Item label=""> </Descriptions.Item>
+            <Descriptions.Item> </Descriptions.Item>
             <Descriptions.Item label="创建时间">
               {dayjs(editingTicket?.createdAt).format("YYYY-MM-DD HH:mm:ss")}
             </Descriptions.Item>
@@ -256,16 +256,36 @@ export const TicketModal = ({
             column={2}
             bordered
           >
-            <Descriptions.Item label="商家id">
+            <Descriptions.Item label="商家ID">
               {editingTicket?.merchantInfo?.id}
             </Descriptions.Item>
-            <Descriptions.Item label="公司名称">
-              {editingTicket?.merchantInfo?.companyName}
+            <Descriptions.Item label="商家类型">
+              <Tag>
+                {editingTicket?.merchantInfo?.type === 1 ? "个体" : "企业"}
+              </Tag>
             </Descriptions.Item>
+            {editingTicket?.merchantInfo?.type === 2 ? (
+              <>
+                <Descriptions.Item label="公司名称">
+                  {editingTicket?.merchantInfo?.companyName}
+                </Descriptions.Item>
+                <Descriptions.Item label="公司地址">
+                  {editingTicket?.merchantInfo?.addressDetail}
+                </Descriptions.Item>
+              </>
+            ) : (
+              <></>
+            )}
             <Descriptions.Item label="营业执照照片">
               <Image
                 width={68}
                 src={editingTicket?.merchantInfo?.businessLicensePhoto}
+              />
+            </Descriptions.Item>
+            <Descriptions.Item label="卫生许可证照片">
+              <Image
+                width={68}
+                src={editingTicket?.merchantInfo?.hygienicLicensePhoto}
               />
             </Descriptions.Item>
             <Descriptions.Item label="联系人姓名">
@@ -274,7 +294,6 @@ export const TicketModal = ({
             <Descriptions.Item label="联系人手机号">
               {editingTicket?.merchantInfo?.mobile}
             </Descriptions.Item>
-            <Descriptions.Item label=""> </Descriptions.Item>
             <Descriptions.Item label="入驻时间">
               {dayjs(editingTicket?.createdAt).format("YYYY-MM-DD HH:mm:ss")}
             </Descriptions.Item>

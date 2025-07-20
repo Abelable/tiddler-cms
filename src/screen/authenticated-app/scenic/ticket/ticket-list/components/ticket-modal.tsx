@@ -174,9 +174,7 @@ export const TicketModal = ({
               {editingTicket?.status === 0 ? (
                 <span style={{ color: "#87d068" }}>待审核</span>
               ) : editingTicket?.status === 1 ? (
-                <span style={{ color: "#296BEF", cursor: "pointer" }}>
-                  售卖中
-                </span>
+                <span style={{ color: "#296BEF" }}>售卖中</span>
               ) : (
                 <Tooltip title={editingTicket?.failureReason}>
                   <span style={{ color: "#f50", cursor: "pointer" }}>
