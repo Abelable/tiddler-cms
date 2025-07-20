@@ -10,14 +10,18 @@ export interface TicketListSearchParams {
 
 export interface Ticket {
   id: number;
+  status: number;
+  failureReason: string;
+  shopId: number;
   restaurantIds: number[];
   price: number;
   originalPrice: number;
   salesCommissionRate: number;
   promotionCommissionRate: number;
+  promotionCommissionUpperLimit: number;
+  superiorPromotionCommissionRate: number;
+  superiorPromotionCommissionUpperLimit: number;
   salesVolume: number;
-  status: number;
-  failureReason: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -29,6 +33,18 @@ export interface TicketListResult {
   total: string;
 }
 
+export interface Shop {
+  id: number;
+  status: number;
+  type: number;
+  name: string;
+  logo: string;
+  cover: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface TicketDetail extends Ticket {
-  providerInfo: Partial<CateringMerchantDetail>;
+  shopInfo: Partial<Shop>;
+  merchantInfo: Partial<CateringMerchantDetail>;
 }

@@ -3,13 +3,16 @@ import { useHttp } from "./http";
 import {
   useApproveConfig,
   useDeleteConfig,
+  useEditConfig,
   useRejectConfig,
 } from "./use-optimistic-options";
 import type {
   TicketListResult,
   TicketListSearchParams,
   TicketDetail,
+  Ticket,
 } from "types/mealTicket";
+import { cleanObject } from "utils";
 
 export const useTicketList = (params: Partial<TicketListSearchParams>) => {
   const client = useHttp();
@@ -26,6 +29,18 @@ export const useTicket = (id: number) => {
     {
       enabled: !!id,
     }
+  );
+};
+
+export const useEditTicketCommission = (queryKey: QueryKey) => {
+  const client = useHttp();
+  return useMutation(
+    (params: Partial<Ticket>) =>
+      client("catering/meal_ticket/edit_commission", {
+        data: cleanObject(params),
+        method: "POST",
+      }),
+    useEditConfig(queryKey)
   );
 };
 

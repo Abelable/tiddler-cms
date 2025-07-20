@@ -59,6 +59,37 @@ export const useTicketModal = () => {
   };
 };
 
+export const useApproveModal = () => {
+  const [{ approveTicketId }, setApproveTicketId] = useUrlQueryParams([
+    "approveTicketId",
+  ]);
+  const setUrlParams = useSetUrlSearchParams();
+  const {
+    data: editingTicket,
+    isLoading,
+    error,
+  } = useTicket(Number(approveTicketId));
+
+  const open = useCallback(
+    (id: number) => setApproveTicketId({ approveTicketId: `${id}` }),
+    [setApproveTicketId]
+  );
+  const close = useCallback(
+    () => setUrlParams({ approveTicketId: "" }),
+    [setUrlParams]
+  );
+
+  return {
+    approveModalOpen: !!approveTicketId,
+    approveTicketId,
+    editingTicket,
+    isLoading,
+    error,
+    open,
+    close,
+  };
+};
+
 export const useRejectModal = () => {
   const [{ rejectTicketId }, setRejectTicketId] = useUrlQueryParams([
     "rejectTicketId",

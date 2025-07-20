@@ -86,22 +86,22 @@ export const TicketModal = ({
             column={2}
           >
             <Descriptions.Item label="商家id">
-              {editingTicket?.providerInfo?.id}
+              {editingTicket?.merchantInfo?.id}
             </Descriptions.Item>
             <Descriptions.Item label="公司名称">
-              {editingTicket?.providerInfo?.companyName}
+              {editingTicket?.merchantInfo?.companyName}
             </Descriptions.Item>
             <Descriptions.Item label="营业执照照片">
               <Image
                 width={68}
-                src={editingTicket?.providerInfo?.businessLicensePhoto}
+                src={editingTicket?.merchantInfo?.businessLicensePhoto}
               />
             </Descriptions.Item>
             <Descriptions.Item label="联系人姓名">
-              {editingTicket?.providerInfo?.name}
+              {editingTicket?.merchantInfo?.name}
             </Descriptions.Item>
             <Descriptions.Item label="联系人手机号">
-              {editingTicket?.providerInfo?.mobile}
+              {editingTicket?.merchantInfo?.mobile}
             </Descriptions.Item>
             <Descriptions.Item label=""> </Descriptions.Item>
             <Descriptions.Item label="入驻时间">

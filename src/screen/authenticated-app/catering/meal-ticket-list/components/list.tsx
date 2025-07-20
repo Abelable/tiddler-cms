@@ -8,11 +8,17 @@ import {
   TableProps,
   Tooltip,
   Tag,
+  InputNumber,
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
 import dayjs from "dayjs";
-import { useApproveTicket, useDeleteTicket } from "service/mealTicket";
-import { useTicketModal, useTicketListQueryKey, useRejectModal } from "../util";
+import { useDeleteTicket, useEditTicketCommission } from "service/mealTicket";
+import {
+  useTicketModal,
+  useTicketListQueryKey,
+  useRejectModal,
+  useApproveModal,
+} from "../util";
 import { SearchPanelProps } from "./search-panel";
 
 import type { Ticket } from "types/mealTicket";
@@ -36,6 +42,10 @@ export const List = ({
       limit: pagination.pageSize,
     });
 
+  const { mutate: editCommission } = useEditTicketCommission(
+    useTicketListQueryKey()
+  );
+
   return (
     <Container>
       <Header between={true}>
@@ -55,9 +65,7 @@ export const List = ({
           {
             title: "名称",
             width: "28rem",
-            render: (value, ticket) => (
-              <>{`${ticket.price}代${ticket.originalPrice}元餐券`}</>
-            ),
+            render: (value, ticket) => <>{`${ticket.originalPrice}元代金券`}</>,
           },
           {
             title: "关联门店",
@@ -74,29 +82,11 @@ export const List = ({
             width: "36rem",
           },
           {
-            title: "销售佣金比例",
-            dataIndex: "salesCommissionRate",
-            render: (value) => <>{`${value}%`}</>,
-            width: "16rem",
-          },
-          {
-            title: "代言奖励比例",
-            dataIndex: "promotionCommissionRate",
-            render: (value) => <>{`${value}%`}</>,
-            width: "16rem",
-          },
-          {
-            title: "销量",
-            dataIndex: "salesVolume",
-            sorter: (a, b) => Number(a) - Number(b),
-            width: "16rem",
-          },
-          {
             title: "状态",
             dataIndex: "status",
             render: (value, ticket) =>
               value === 0 ? (
-                <span style={{ color: "#87d068" }}>待审核</span>
+                <span style={{ color: "#faad14" }}>待审核</span>
               ) : value === 1 ? (
                 <span style={{ color: "#296BEF" }}>售卖中</span>
               ) : (
@@ -106,8 +96,122 @@ export const List = ({
                   </span>
                 </Tooltip>
               ),
-            filters: statusOptions,
+            filters: [
+              { text: "待审核", value: 0 },
+              { text: "售卖中", value: 1 },
+              { text: "未过审", value: 2 },
+            ],
             onFilter: (value, ticket) => ticket.status === value,
+            width: "12rem",
+          },
+          {
+            title: "价格",
+            dataIndex: "price",
+            render: (value) => <>{`¥${value}起`}</>,
+            width: "12rem",
+          },
+          {
+            title: "销售佣金比例",
+            dataIndex: "salesCommissionRate",
+            render: (value) => <>{`${value}%`}</>,
+            width: "12rem",
+          },
+          {
+            title: "代言奖励",
+            children: [
+              {
+                title: "比例",
+                dataIndex: "promotionCommissionRate",
+                render: (value, ticket) => {
+                  return (
+                    <InputNumber
+                      min={5}
+                      max={20}
+                      value={value}
+                      onChange={(promotionCommissionRate) =>
+                        editCommission({
+                          id: ticket.id,
+                          promotionCommissionRate,
+                        })
+                      }
+                      suffix="%"
+                    />
+                  );
+                },
+                width: "12rem",
+              },
+              {
+                title: "上限",
+                dataIndex: "promotionCommissionUpperLimit",
+                render: (value, ticket) => {
+                  return (
+                    <InputNumber
+                      max={20}
+                      value={value}
+                      onChange={(promotionCommissionUpperLimit) =>
+                        editCommission({
+                          id: ticket.id,
+                          promotionCommissionUpperLimit,
+                        })
+                      }
+                      prefix="￥"
+                    />
+                  );
+                },
+                width: "12rem",
+              },
+            ],
+          },
+          {
+            title: "上级代言奖励",
+            children: [
+              {
+                title: "比例",
+                dataIndex: "superiorPromotionCommissionRate",
+                render: (value, ticket) => {
+                  return (
+                    <InputNumber
+                      min={5}
+                      max={20}
+                      value={value}
+                      onChange={(superiorPromotionCommissionRate) =>
+                        editCommission({
+                          id: ticket.id,
+                          superiorPromotionCommissionRate,
+                        })
+                      }
+                      suffix="%"
+                    />
+                  );
+                },
+                width: "12rem",
+              },
+              {
+                title: "上限",
+                dataIndex: "superiorPromotionCommissionUpperLimit",
+                render: (value, ticket) => {
+                  return (
+                    <InputNumber
+                      max={10}
+                      value={value}
+                      onChange={(superiorPromotionCommissionUpperLimit) =>
+                        editCommission({
+                          id: ticket.id,
+                          superiorPromotionCommissionUpperLimit,
+                        })
+                      }
+                      prefix="￥"
+                    />
+                  );
+                },
+                width: "12rem",
+              },
+            ],
+          },
+          {
+            title: "销量",
+            dataIndex: "salesVolume",
+            sorter: (a, b) => Number(a) - Number(b),
             width: "16rem",
           },
           {
@@ -155,7 +259,7 @@ export const List = ({
 const More = ({ id, status }: { id: number; status: number }) => {
   const { open } = useTicketModal();
   const { mutate: deleteTicket } = useDeleteTicket(useTicketListQueryKey());
-  const { mutate: approveTicket } = useApproveTicket(useTicketListQueryKey());
+  const { open: openApproveModal } = useApproveModal();
   const { open: openRejectModal } = useRejectModal();
 
   const confirmDelete = (id: number) => {
@@ -168,70 +272,28 @@ const More = ({ id, status }: { id: number; status: number }) => {
     });
   };
 
-  const confirmApprove = (id: number) => {
-    Modal.confirm({
-      title: "餐券审核通过确认",
-      content: "请确保在餐券信息无误的情况下进行该操作",
-      okText: "确定",
-      cancelText: "取消",
-      onOk: () => approveTicket(id),
-    });
-  };
-
-  let items: MenuProps["items"];
-  switch (status) {
-    case 0:
-      items = [
-        {
-          label: <div onClick={() => open(id)}>详情</div>,
-          key: "detail",
-        },
-        {
-          label: <div onClick={() => confirmApprove(id)}>通过</div>,
+  const items = [
+    status === 0
+      ? {
+          label: <div onClick={() => openApproveModal(id)}>通过</div>,
           key: "approve",
-        },
-        {
+        }
+      : undefined,
+    status === 0
+      ? {
           label: <div onClick={() => openRejectModal(id)}>驳回</div>,
           key: "reject",
-        },
-
-        {
-          label: <div onClick={() => confirmDelete(id)}>删除</div>,
-          key: "delete",
-        },
-      ];
-      break;
-
-    case 1:
-      items = [
-        {
-          label: <div onClick={() => open(id)}>详情</div>,
-          key: "detail",
-        },
-        {
-          label: <div onClick={() => openRejectModal(id)}>驳回重审</div>,
-          key: "reject",
-        },
-        {
-          label: <div onClick={() => confirmDelete(id)}>删除</div>,
-          key: "delete",
-        },
-      ];
-      break;
-
-    case 2:
-      items = [
-        {
-          label: <div onClick={() => open(id)}>详情</div>,
-          key: "detail",
-        },
-        {
-          label: <div onClick={() => confirmDelete(id)}>删除</div>,
-          key: "delete",
-        },
-      ];
-      break;
-  }
+        }
+      : undefined,
+    {
+      label: <div onClick={() => open(id)}>详情</div>,
+      key: "detail",
+    },
+    {
+      label: <div onClick={() => confirmDelete(id)}>删除</div>,
+      key: "delete",
+    },
+  ].filter((item) => item !== undefined) as MenuProps["items"];
 
   return (
     <Dropdown menu={{ items }}>
