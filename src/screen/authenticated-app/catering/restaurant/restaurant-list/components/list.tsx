@@ -4,7 +4,6 @@ import { useRestaurantModal, useRestaurantListQueryKey } from "../util";
 
 import {
   Dropdown,
-  Menu,
   Modal,
   Table,
   TablePaginationConfig,
@@ -13,6 +12,7 @@ import {
   Rate,
   Image,
   InputNumber,
+  MenuProps,
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
 import { useDeleteRestaurant, useEditViews } from "service/restaurant";
@@ -158,23 +158,19 @@ const More = ({ id }: { id: number }) => {
     });
   };
 
+  const items: MenuProps["items"] = [
+    {
+      label: <div onClick={() => startEdit(id)}>编辑</div>,
+      key: "detail",
+    },
+    {
+      label: <div onClick={() => confirmDelete(id)}>删除</div>,
+      key: "delete",
+    },
+  ];
+
   return (
-    <Dropdown
-      overlay={
-        <Menu
-          items={[
-            {
-              label: <div onClick={() => startEdit(id)}>编辑</div>,
-              key: "detail",
-            },
-            {
-              label: <div onClick={() => confirmDelete(id)}>删除</div>,
-              key: "delete",
-            },
-          ]}
-        />
-      }
-    >
+    <Dropdown menu={{ items }}>
       <ButtonNoPadding type={"link"}>...</ButtonNoPadding>
     </Dropdown>
   );

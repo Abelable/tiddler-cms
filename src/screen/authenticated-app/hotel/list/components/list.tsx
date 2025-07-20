@@ -171,7 +171,7 @@ const More = ({ id, name }: { id: number; name: string }) => {
     });
   };
 
-  let items: MenuProps["items"] = [
+  const items: MenuProps["items"] = [
     {
       label: <div onClick={() => startEdit(id)}>编辑</div>,
       key: "detail",
