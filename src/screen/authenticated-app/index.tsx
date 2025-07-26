@@ -12,6 +12,8 @@ import { RoleList } from "./permission-management/role-list";
 import { AdminList } from "./permission-management/admin-list";
 import { UserList } from "./user/user-list";
 import { AuthInfoList } from "./user/auth-info-list";
+import { BannerList } from "./activity/banner-list";
+import { HotScenicList } from "./activity/hot-scenic";
 import { TopMediaList } from "./media/top-media";
 import { ShortVideoList } from "./media/short-video";
 import { TourismNoteList } from "./media/tourism-note";
@@ -36,7 +38,6 @@ import { RestaurantCategoryList } from "./catering/restaurant/category-list";
 import { RestaurantList } from "./catering/restaurant/restaurant-list";
 import { MealTicketList } from "./catering/meal-ticket-list";
 import { SetMealList } from "./catering/set-meal-list";
-import { BannerList } from "./activity/banner-list";
 import { MerchantList } from "./shopping/merchant-list/index";
 import { ShopCategoryList } from "./shopping/shop/category-list/index";
 import { ShopList } from "./shopping/shop/shop-list";
@@ -111,6 +112,7 @@ export const AuthenticatedApp = () => {
               <Route path="user/list" element={<UserList />} />
               <Route path="user/auth_info_list" element={<AuthInfoList />} />
               <Route path="activity/banner_list" element={<BannerList />} />
+              <Route path="activity/hot_scenic" element={<HotScenicList />} />
               <Route path="media/top" element={<TopMediaList />} />
               <Route path="media/short_video" element={<ShortVideoList />} />
               <Route path="media/tourism_note" element={<TourismNoteList />} />
@@ -283,6 +285,11 @@ const MenuSider = ({
           label: <Link to={"activity/banner_list"}>头图列表</Link>,
           key: "activity_banner_list",
           icon: <PictureOutlined />,
+        },
+        {
+          label: <Link to={"activity/hot_scenic"}>网红打开地</Link>,
+          key: "activity_hot_scenic",
+          icon: <EnvironmentOutlined />,
         },
       ],
     },

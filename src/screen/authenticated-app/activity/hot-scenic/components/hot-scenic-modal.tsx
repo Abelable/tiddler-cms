@@ -1,0 +1,117 @@
+import { Form, Input, Select, Modal, InputNumber } from "antd";
+import { useForm } from "antd/lib/form/Form";
+import { ErrorBox, ModalLoading, OptionCover } from "components/lib";
+
+import { useEffect } from "react";
+import { useAddHotScenic, useEditHotScenic } from "service/hotScenic";
+import { useHotScenicModal, useHotScenicListQueryKey } from "../util";
+
+import type { ProductOption } from "types/common";
+
+export const HotScenicModal = ({
+  scenicOptions,
+}: {
+  scenicOptions: ProductOption[];
+}) => {
+  const [form] = useForm();
+  const {
+    hotScenicModalOpen,
+    editingHotScenicId,
+    editingHotScenic,
+    isLoading,
+    close,
+  } = useHotScenicModal();
+
+  const useMutateHotScenic = editingHotScenicId
+    ? useEditHotScenic
+    : useAddHotScenic;
+  const {
+    mutateAsync,
+    isLoading: mutateLoading,
+    error,
+  } = useMutateHotScenic(useHotScenicListQueryKey());
+
+  useEffect(() => {
+    if (editingHotScenic) {
+      form.setFieldsValue(editingHotScenic);
+    }
+  }, [editingHotScenic, form]);
+
+  const submit = () => {
+    form.validateFields().then(async () => {
+      const { scenicId, ...rest } = form.getFieldsValue();
+      const selectedScenic = scenicOptions.find((item) => item.id === scenicId);
+      await mutateAsync({
+        ...editingHotScenic,
+        scenicId,
+        scenicCover: selectedScenic?.cover,
+        scenicName: selectedScenic?.name,
+        ...rest,
+      });
+      closeModal();
+    });
+  };
+
+  const closeModal = () => {
+    form.resetFields();
+    close();
+  };
+
+  return (
+    <Modal
+      forceRender={true}
+      title={editingHotScenicId ? "编辑网红打卡地" : "新增网红打卡地"}
+      open={hotScenicModalOpen}
+      confirmLoading={mutateLoading}
+      onOk={submit}
+      onCancel={closeModal}
+    >
+      <ErrorBox error={error} />
+      {isLoading ? (
+        <ModalLoading />
+      ) : (
+        <Form form={form} layout="vertical">
+          <Form.Item
+            name="scenicId"
+            label="景点"
+            rules={[{ required: true, message: "请选择景点" }]}
+          >
+            <Select
+              placeholder="请选择景点"
+              showSearch
+              filterOption={(input, option) =>
+                (option!.children as any)[1].props.children
+                  .toLowerCase()
+                  .includes(input.toLowerCase())
+              }
+            >
+              {scenicOptions.map(({ id, cover, name }) => (
+                <Select.Option key={id} value={id}>
+                  <OptionCover src={cover} />
+                  <span>{name}</span>
+                </Select.Option>
+              ))}
+            </Select>
+          </Form.Item>
+          <Form.Item
+            name="recommendReason"
+            label="推荐理由"
+            rules={[{ required: true, message: "请输入推荐理由" }]}
+          >
+            <Input placeholder="请输入推荐理由" />
+          </Form.Item>
+          <Form.Item
+            name="interestedUserNumber"
+            label="感兴趣人数"
+            rules={[{ required: true, message: "请输入感兴趣人数" }]}
+          >
+            <InputNumber
+              placeholder="请输入感兴趣人数"
+              style={{ width: "100%" }}
+            />
+          </Form.Item>
+        </Form>
+      )}
+    </Modal>
+  );
+};
