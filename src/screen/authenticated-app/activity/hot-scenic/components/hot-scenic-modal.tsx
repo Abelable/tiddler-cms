@@ -90,6 +90,26 @@ export const HotScenicModal = ({
                   .toLowerCase()
                   .includes(input.toLowerCase())
               }
+              onChange={(value) => {
+                const selectedScenic = scenicOptions.find(
+                  (item) => item.id === value
+                );
+                if (selectedScenic) {
+                  form.setFieldsValue({
+                    scenicCover: [
+                      {
+                        url: selectedScenic.cover,
+                      },
+                    ],
+                    scenicName: selectedScenic.name,
+                  });
+                } else {
+                  form.setFieldsValue({
+                    scenicCover: [],
+                    scenicName: "",
+                  });
+                }
+              }}
             >
               {scenicOptions.map(({ id, cover, name }) => (
                 <Select.Option key={id} value={id}>
