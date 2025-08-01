@@ -82,7 +82,7 @@ export const LakeTripModal = ({
       ) : (
         <Form form={form} layout="vertical">
           <Form.Item
-            name="scenicId"
+            name="lakeId"
             label="湖区"
             rules={[{ required: true, message: "请选择湖区" }]}
           >

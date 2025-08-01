@@ -73,20 +73,35 @@ export const List = ({
             width: "10rem",
           },
           {
-            title: "封面",
+            title: "岛屿封面",
             dataIndex: "scenicCover",
             render: (value) => <Image width={88} src={value} />,
             width: "10rem",
           },
           {
-            title: "名称",
+            title: "岛屿名称",
             dataIndex: "scenicName",
             width: "24rem",
           },
           {
-            title: "推荐理由",
-            dataIndex: "recommendReason",
+            title: "岛屿描述",
+            dataIndex: "desc",
             width: "24rem",
+          },
+          {
+            title: "行程里数（km）",
+            dataIndex: "distance",
+            width: "12rem",
+          },
+          {
+            title: "行程时长（h）",
+            dataIndex: "duration",
+            width: "12rem",
+          },
+          {
+            title: "最佳时间（月）",
+            dataIndex: "time",
+            width: "12rem",
           },
           {
             title: "排序",
