@@ -14,6 +14,7 @@ import { UserList } from "./user/user-list";
 import { AuthInfoList } from "./user/auth-info-list";
 import { BannerList } from "./activity/banner-list";
 import { HotScenicList } from "./activity/hot-scenic";
+import { LakeTripList } from "./activity/lake-trip";
 import { TopMediaList } from "./media/top-media";
 import { ShortVideoList } from "./media/short-video";
 import { TourismNoteList } from "./media/tourism-note";
@@ -113,6 +114,7 @@ export const AuthenticatedApp = () => {
               <Route path="user/auth_info_list" element={<AuthInfoList />} />
               <Route path="activity/banner_list" element={<BannerList />} />
               <Route path="activity/hot_scenic" element={<HotScenicList />} />
+              <Route path="activity/lake_trip" element={<LakeTripList />} />
               <Route path="media/top" element={<TopMediaList />} />
               <Route path="media/short_video" element={<ShortVideoList />} />
               <Route path="media/tourism_note" element={<TourismNoteList />} />
@@ -289,6 +291,11 @@ const MenuSider = ({
         {
           label: <Link to={"activity/hot_scenic"}>网红打卡地</Link>,
           key: "activity_hot_scenic",
+          icon: <EnvironmentOutlined />,
+        },
+        {
+          label: <Link to={"activity/lake_trip"}>游湖登岛</Link>,
+          key: "activity_lake_trip",
           icon: <EnvironmentOutlined />,
         },
       ],
