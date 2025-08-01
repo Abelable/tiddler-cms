@@ -39,19 +39,21 @@ export const HotScenicModal = ({
 
   useEffect(() => {
     if (editingHotScenic) {
-      form.setFieldsValue(editingHotScenic);
+      const { scenicCover, ...rest } = editingHotScenic;
+      form.setFieldsValue({
+        scenicCover: scenicCover ? [{ url: scenicCover }] : [],
+        ...rest,
+      });
     }
   }, [editingHotScenic, form]);
 
   const submit = () => {
     form.validateFields().then(async () => {
-      const { scenicId, ...rest } = form.getFieldsValue();
-      const selectedScenic = scenicOptions.find((item) => item.id === scenicId);
+      const { scenicCover, ...rest } = form.getFieldsValue();
       await mutateAsync({
         ...editingHotScenic,
-        scenicId,
-        scenicCover: selectedScenic?.cover,
-        scenicName: selectedScenic?.name,
+        scenicCover:
+          scenicCover && scenicCover.length ? scenicCover[0].url : "",
         ...rest,
       });
       closeModal();
