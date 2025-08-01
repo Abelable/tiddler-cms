@@ -87,8 +87,10 @@ export const LakeTripModal = ({
             rules={[{ required: true, message: "请选择湖区" }]}
           >
             <Select placeholder="请选择湖区">
-              {lakeOptions.map(({ id, name }) => (
-                <>{name}</>
+              {lakeOptions.map((item) => (
+                <Select.Option key={item.id} value={item.id}>
+                  {item.name}
+                </Select.Option>
               ))}
             </Select>
           </Form.Item>
