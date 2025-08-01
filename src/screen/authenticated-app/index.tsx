@@ -86,6 +86,7 @@ import {
   CateringIcon,
   CouponIcon,
   SetMealIcon,
+  ShipIcon,
 } from "assets/icon";
 import logo from "assets/images/logo.png";
 import { AdminInfo } from "types/auth";
@@ -296,7 +297,7 @@ const MenuSider = ({
         {
           label: <Link to={"activity/lake_trip"}>游湖登岛</Link>,
           key: "activity_lake_trip",
-          icon: <EnvironmentOutlined />,
+          icon: <ShipIcon />,
         },
       ],
     },
