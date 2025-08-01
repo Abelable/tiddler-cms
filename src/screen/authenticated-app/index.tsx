@@ -287,7 +287,7 @@ const MenuSider = ({
           icon: <PictureOutlined />,
         },
         {
-          label: <Link to={"activity/hot_scenic"}>网红打开地</Link>,
+          label: <Link to={"activity/hot_scenic"}>网红打卡地</Link>,
           key: "activity_hot_scenic",
           icon: <EnvironmentOutlined />,
         },
