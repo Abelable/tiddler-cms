@@ -17,7 +17,7 @@ export const useHotScenicList = (
 ) => {
   const client = useHttp();
   return useQuery<HotScenicListResult>(["hot_scenic_list", params], () =>
-    client("hot_scenic/list", { data: params, method: "POST" })
+    client("trip_type/hot_scenic/list", { data: params, method: "POST" })
   );
 };
 
@@ -25,7 +25,7 @@ export const useHotScenic = (id: number) => {
   const client = useHttp();
   return useQuery<Partial<HotScenic>>(
     ["hot_scenic", { id }],
-    () => client("hot_scenic/detail", { data: { id } }),
+    () => client("trip_type/hot_scenic/detail", { data: { id } }),
     {
       enabled: !!id,
     }
@@ -36,7 +36,7 @@ export const useAddHotScenic = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (params: Partial<HotScenic>) =>
-      client("hot_scenic/add", {
+      client("trip_type/hot_scenic/add", {
         data: cleanObject(params),
         method: "POST",
       }),
@@ -48,7 +48,7 @@ export const useEditHotScenic = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (params: Partial<HotScenic>) =>
-      client("hot_scenic/edit", {
+      client("trip_type/hot_scenic/edit", {
         data: cleanObject(params),
         method: "POST",
       }),
@@ -60,7 +60,7 @@ export const useEditInterestedNumber = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     ({ id, number }: { id: number; number: number }) =>
-      client("hot_scenic/edit_interested_number", {
+      client("trip_type/hot_scenic/edit_interested_number", {
         data: { id, number },
         method: "POST",
       }),
@@ -72,7 +72,7 @@ export const useEditSort = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     ({ id, sort }: { id: number; sort: number }) =>
-      client("hot_scenic/edit_sort", {
+      client("trip_type/hot_scenic/edit_sort", {
         data: { id, sort },
         method: "POST",
       }),
@@ -84,7 +84,7 @@ export const useDeleteHotScenic = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (id: number) =>
-      client("hot_scenic/delete", {
+      client("trip_type/hot_scenic/delete", {
         data: { id },
         method: "POST",
       }),

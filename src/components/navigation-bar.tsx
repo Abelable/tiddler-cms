@@ -8,6 +8,7 @@ const breadcrumbNameMap: { [key: string]: string } = {
   "/user/auth_info_list": "实名认证",
   "/activity": "活动管理",
   "/activity/banner": "商城banner",
+  "/activity/hot_scenic": "网红打卡地",
   "/media": "游记管理",
   "/media/top": "最佳游记",
   "/media/short_video": "视频游记",
