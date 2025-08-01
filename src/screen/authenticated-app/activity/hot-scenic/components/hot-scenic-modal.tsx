@@ -1,12 +1,18 @@
 import { Form, Input, Select, Modal, InputNumber } from "antd";
 import { useForm } from "antd/lib/form/Form";
 import { ErrorBox, ModalLoading, OptionCover } from "components/lib";
+import { OssUpload } from "components/oss-upload";
 
 import { useEffect } from "react";
 import { useAddHotScenic, useEditHotScenic } from "service/hotScenic";
 import { useHotScenicModal, useHotScenicListQueryKey } from "../util";
 
 import type { ProductOption } from "types/common";
+
+const normFile = (e: any) => {
+  if (Array.isArray(e)) return e;
+  return e && e.fileList;
+};
 
 export const HotScenicModal = ({
   scenicOptions,
@@ -92,6 +98,37 @@ export const HotScenicModal = ({
                 </Select.Option>
               ))}
             </Select>
+          </Form.Item>
+          <Form.Item
+            noStyle
+            shouldUpdate={(prevValues, currentValues) => {
+              return prevValues.scenicId !== currentValues.scenicId;
+            }}
+          >
+            {({ getFieldValue }) =>
+              getFieldValue("scenicId") ? (
+                <>
+                  <Form.Item
+                    name="scenicCover"
+                    label="景点封面"
+                    valuePropName="fileList"
+                    getValueFromEvent={normFile}
+                    rules={[{ required: true, message: "请上传活动封面" }]}
+                  >
+                    <OssUpload maxCount={1} />
+                  </Form.Item>
+                  <Form.Item
+                    name="scenicName"
+                    label="景点名称"
+                    rules={[{ required: true, message: "请输入景点名称" }]}
+                  >
+                    <Input placeholder="请输入景点名称" />
+                  </Form.Item>
+                </>
+              ) : (
+                <></>
+              )
+            }
           </Form.Item>
           <Form.Item
             name="recommendReason"
