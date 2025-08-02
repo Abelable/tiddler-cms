@@ -53,24 +53,29 @@ export const List = ({
       <ErrorBox error={error} />
       <Table
         rowKey={"id"}
+        scroll={{ x: 1200 }}
         columns={[
           {
             title: "id",
             dataIndex: "id",
             width: "8rem",
+            fixed: "left",
           },
           {
             title: "头像",
             dataIndex: "avatar",
             render: (value) => <Avatar src={value} icon={<UserOutlined />} />,
+            width: "6.8rem",
           },
           {
             title: "昵称",
             dataIndex: "nickname",
+            width: "32rem",
           },
           {
             title: "手机号",
             dataIndex: "mobile",
+            width: "14rem",
           },
           {
             title: "性别",
@@ -84,6 +89,7 @@ export const List = ({
               { text: "女", value: 2 },
             ],
             onFilter: (value, user) => user.gender === value,
+            width: "6.8rem",
           },
           {
             title: "用户上级",
@@ -143,6 +149,7 @@ export const List = ({
               return <More user={user} />;
             },
             width: "8rem",
+            fixed: "right",
           },
         ]}
         onChange={setPagination}
