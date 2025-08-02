@@ -89,7 +89,7 @@ export const List = ({
               { text: "女", value: 2 },
             ],
             onFilter: (value, user) => user.gender === value,
-            width: "6.8rem",
+            width: "8rem",
           },
           {
             title: "用户上级",
