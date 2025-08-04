@@ -70,7 +70,7 @@ export const List = ({
             render: (value) => (
               <>{lakeOptions.find((item) => item.id === value)?.name}</>
             ),
-            width: "10rem",
+            width: "12rem",
           },
           {
             title: "景点封面",

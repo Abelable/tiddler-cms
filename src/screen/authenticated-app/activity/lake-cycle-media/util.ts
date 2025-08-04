@@ -18,7 +18,7 @@ export const useLakeCycleMediaListSearchParams = () => {
 
 export const useLakeCycleMediaListQueryKey = () => {
   const [params] = useLakeCycleMediaListSearchParams();
-  return ["top_media_list", params];
+  return ["lake_cycle_media_list", params];
 };
 
 export const useLakeCycleMediaModal = () => {

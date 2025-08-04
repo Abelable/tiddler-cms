@@ -111,7 +111,7 @@ export const MediaModal = ({
                 </Form.Item>
               ) : (
                 <Form.Item
-                  name="mediaId"
+                  name="mediaIds"
                   label="图文攻略"
                   rules={[{ required: true, message: "请选择图文攻略" }]}
                 >
