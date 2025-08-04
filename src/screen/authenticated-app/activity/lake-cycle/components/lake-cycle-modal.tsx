@@ -96,11 +96,11 @@ export const LakeCycleModal = ({
           </Form.Item>
           <Form.Item
             name="scenicId"
-            label="岛屿"
-            rules={[{ required: true, message: "请选择岛屿" }]}
+            label="景点"
+            rules={[{ required: true, message: "请选择景点" }]}
           >
             <Select
-              placeholder="请选择岛屿"
+              placeholder="请选择景点"
               showSearch
               filterOption={(input, option) =>
                 (option!.children as any)[1].props.children
@@ -147,7 +147,7 @@ export const LakeCycleModal = ({
                 <>
                   <Form.Item
                     name="scenicCover"
-                    label="岛屿封面"
+                    label="景点封面"
                     valuePropName="fileList"
                     getValueFromEvent={normFile}
                     rules={[{ required: true, message: "请上传活动封面" }]}
@@ -156,10 +156,10 @@ export const LakeCycleModal = ({
                   </Form.Item>
                   <Form.Item
                     name="scenicName"
-                    label="岛屿名称"
-                    rules={[{ required: true, message: "请输入岛屿名称" }]}
+                    label="景点名称"
+                    rules={[{ required: true, message: "请输入景点名称" }]}
                   >
-                    <Input placeholder="请输入岛屿名称" />
+                    <Input placeholder="请输入景点名称" />
                   </Form.Item>
                 </>
               ) : (
@@ -169,10 +169,10 @@ export const LakeCycleModal = ({
           </Form.Item>
           <Form.Item
             name="desc"
-            label="岛屿描述"
-            rules={[{ required: true, message: "请输入岛屿描述" }]}
+            label="景点描述"
+            rules={[{ required: true, message: "请输入景点描述" }]}
           >
-            <Input placeholder="请输入岛屿描述" />
+            <Input placeholder="请输入景点描述" />
           </Form.Item>
           <Form.Item
             name="distance"
