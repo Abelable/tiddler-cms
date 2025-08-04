@@ -1,11 +1,11 @@
-export interface LakeTripListSearchParams {
+export interface LakeCycleListSearchParams {
   page: number;
   limit: number;
 }
 
-export interface LakeTrip {
+export interface LakeCycle {
   id: number;
-  lakeId: number;
+  routeId: number;
   scenicId: number;
   scenicCover: number;
   scenicName: string;
@@ -18,8 +18,8 @@ export interface LakeTrip {
   updatedAt: string;
 }
 
-export interface LakeTripListResult {
-  list: LakeTrip[];
+export interface LakeCycleListResult {
+  list: LakeCycle[];
   page: string;
   limit: string;
   total: string;

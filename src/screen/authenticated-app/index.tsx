@@ -299,6 +299,27 @@ const MenuSider = ({
           key: "activity_lake_trip",
           icon: <ShipIcon />,
         },
+        {
+          label: "环湖骑行",
+          key: "activity_lake_cycle",
+          icon: <TeamOutlined />,
+          children: [
+            {
+              label: (
+                <Link to={"activity/lake_cycle/scenic_list"}>沿途风景</Link>
+              ),
+              key: "activity_lake_cycle_scenic_list",
+              icon: <TeamOutlined />,
+            },
+            {
+              label: (
+                <Link to={"activity/lake_cycle/media_list"}>骑行攻略</Link>
+              ),
+              key: "activity_lake_cycle_media_list",
+              icon: <ShopOutlined />,
+            },
+          ],
+        },
       ],
     },
     {
