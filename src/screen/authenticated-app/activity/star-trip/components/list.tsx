@@ -41,7 +41,7 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
   return (
     <Container>
       <Header between={true}>
-        <PageTitle>网红打卡地</PageTitle>
+        <PageTitle>明星同游</PageTitle>
         <Button onClick={() => open()} type={"primary"} icon={<PlusOutlined />}>
           新增
         </Button>
@@ -61,23 +61,23 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
             title: "类型",
             dataIndex: "productType",
             render: (value) => <Tag>{value === 1 ? "景点" : "酒店"}</Tag>,
-            width: "10rem",
+            width: "6rem",
           },
           {
             title: "封面",
             dataIndex: "cover",
             render: (value) => <Image width={88} src={value} />,
-            width: "10rem",
+            width: "8rem",
           },
           {
             title: "名称",
             dataIndex: "name",
-            width: "24rem",
+            width: "18rem",
           },
           {
             title: "描述",
             dataIndex: "desc",
-            width: "24rem",
+            width: "18rem",
           },
           {
             title: "排序",
