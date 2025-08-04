@@ -15,6 +15,8 @@ import { AuthInfoList } from "./user/auth-info-list";
 import { BannerList } from "./activity/banner-list";
 import { HotScenicList } from "./activity/hot-scenic";
 import { LakeTripList } from "./activity/lake-trip";
+import { LakeCycleList } from "./activity/lake-cycle";
+import { LakeCycleMediaList } from "./activity/lake-cycle-media";
 import { TopMediaList } from "./media/top-media";
 import { ShortVideoList } from "./media/short-video";
 import { TourismNoteList } from "./media/tourism-note";
@@ -70,12 +72,12 @@ import {
   PictureOutlined,
   CarOutlined,
   CloudOutlined,
-  SendOutlined,
   VideoCameraOutlined,
   LogoutOutlined,
   TagOutlined,
   EnvironmentOutlined,
   LikeOutlined,
+  BookOutlined,
 } from "@ant-design/icons";
 import {
   ExpressIcon,
@@ -87,6 +89,7 @@ import {
   CouponIcon,
   SetMealIcon,
   ShipIcon,
+  CycleIcon,
 } from "assets/icon";
 import logo from "assets/images/logo.png";
 import { AdminInfo } from "types/auth";
@@ -116,6 +119,14 @@ export const AuthenticatedApp = () => {
               <Route path="activity/banner_list" element={<BannerList />} />
               <Route path="activity/hot_scenic" element={<HotScenicList />} />
               <Route path="activity/lake_trip" element={<LakeTripList />} />
+              <Route
+                path="activity/lake_cycle/scenic_list"
+                element={<LakeCycleList />}
+              />
+              <Route
+                path="activity/lake_cycle/media_list"
+                element={<LakeCycleMediaList />}
+              />
               <Route path="media/top" element={<TopMediaList />} />
               <Route path="media/short_video" element={<ShortVideoList />} />
               <Route path="media/tourism_note" element={<TourismNoteList />} />
@@ -302,21 +313,21 @@ const MenuSider = ({
         {
           label: "环湖骑行",
           key: "activity_lake_cycle",
-          icon: <TeamOutlined />,
+          icon: <CycleIcon />,
           children: [
             {
               label: (
-                <Link to={"activity/lake_cycle/scenic_list"}>沿途风景</Link>
+                <Link to={"activity/lake_cycle/scenic_list"}>沿途景点</Link>
               ),
               key: "activity_lake_cycle_scenic_list",
-              icon: <TeamOutlined />,
+              icon: <ScenicIcon />,
             },
             {
               label: (
                 <Link to={"activity/lake_cycle/media_list"}>骑行攻略</Link>
               ),
               key: "activity_lake_cycle_media_list",
-              icon: <ShopOutlined />,
+              icon: <BookOutlined />,
             },
           ],
         },
@@ -325,7 +336,7 @@ const MenuSider = ({
     {
       label: "游记管理",
       key: "media",
-      icon: <SendOutlined />,
+      icon: <BookOutlined />,
       children: [
         {
           label: <Link to={"media/top"}>最佳游记</Link>,

@@ -71,7 +71,7 @@ export const TopMediaModal = ({
   return (
     <Modal
       forceRender={true}
-      title={editingTopMediaId ? "修改封面" : "新增最佳游记"}
+      title={editingTopMediaId ? "编辑最佳游记" : "新增最佳游记"}
       open={topMediaModalOpen}
       confirmLoading={mutateLoading}
       onOk={confirm}

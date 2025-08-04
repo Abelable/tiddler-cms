@@ -70,7 +70,7 @@ export const LakeCycleModal = ({
   return (
     <Modal
       forceRender={true}
-      title={editingLakeCycleId ? "编辑沿途风景" : "新增沿途风景"}
+      title={editingLakeCycleId ? "编辑沿途景点" : "新增沿途景点"}
       open={lakeCycleModalOpen}
       confirmLoading={mutateLoading}
       onOk={submit}
