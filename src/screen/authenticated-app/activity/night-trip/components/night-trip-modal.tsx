@@ -68,7 +68,7 @@ export const NightTripModal = ({
   return (
     <Modal
       forceRender={true}
-      title={editingNightTripId ? "编辑夜游打卡地" : "新增夜游打卡地"}
+      title={editingNightTripId ? "编辑夜游景点" : "新增夜游景点"}
       open={nightTripModalOpen}
       confirmLoading={mutateLoading}
       onOk={submit}
@@ -152,26 +152,14 @@ export const NightTripModal = ({
               )
             }
           </Form.Item>
-          <Form.Item
-            name="featureTips"
-            label="特色"
-            rules={[{ required: true, message: "请输入特色" }]}
-          >
+          <Form.Item name="featureTips" label="特色">
             <Input placeholder="请输入特色" />
           </Form.Item>
-          <Form.Item
-            name="recommendTips"
-            label="推荐"
-            rules={[{ required: true, message: "请输入推荐" }]}
-          >
-            <Input placeholder="请输入推荐" />
-          </Form.Item>
-          <Form.Item
-            name="guideTips"
-            label="攻略"
-            rules={[{ required: true, message: "请输入攻略" }]}
-          >
+          <Form.Item name="guideTips" label="攻略">
             <Input placeholder="请输入攻略" />
+          </Form.Item>
+          <Form.Item name="recommendTips" label="推荐">
+            <Input placeholder="请输入推荐" />
           </Form.Item>
         </Form>
       )}
