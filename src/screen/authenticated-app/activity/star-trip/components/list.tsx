@@ -8,33 +8,26 @@ import {
   TableProps,
   Image,
   InputNumber,
+  Tag,
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
 import { PlusOutlined } from "@ant-design/icons";
 
 import styled from "@emotion/styled";
 import dayjs from "dayjs";
-import { useDeleteLakeTrip, useEditSort } from "service/lakeTrip";
-import { useLakeTripModal, useLakeTripListQueryKey } from "../util";
+import { useDeleteStarTrip, useEditSort } from "service/starTrip";
+import { useStarTripModal, useStarTripListQueryKey } from "../util";
 
-import type { DataOption } from "types/common";
-import type { LakeTrip, LakeTripListSearchParams } from "types/lakeTrip";
+import type { StarTrip, StarTripListSearchParams } from "types/starTrip";
 
-interface ListProps extends TableProps<LakeTrip> {
-  lakeOptions: DataOption[];
+interface ListProps extends TableProps<StarTrip> {
   error: Error | unknown;
-  params: Partial<LakeTripListSearchParams>;
-  setParams: (params: Partial<LakeTripListSearchParams>) => void;
+  params: Partial<StarTripListSearchParams>;
+  setParams: (params: Partial<StarTripListSearchParams>) => void;
 }
 
-export const List = ({
-  lakeOptions,
-  error,
-  params,
-  setParams,
-  ...restProps
-}: ListProps) => {
-  const { open } = useLakeTripModal();
+export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
+  const { open } = useStarTripModal();
 
   const setPagination = (pagination: TablePaginationConfig) =>
     setParams({
@@ -43,12 +36,12 @@ export const List = ({
       limit: pagination.pageSize,
     });
 
-  const { mutate: editSort } = useEditSort(useLakeTripListQueryKey());
+  const { mutate: editSort } = useEditSort(useStarTripListQueryKey());
 
   return (
     <Container>
       <Header between={true}>
-        <PageTitle>游湖登岛</PageTitle>
+        <PageTitle>网红打卡地</PageTitle>
         <Button onClick={() => open()} type={"primary"} icon={<PlusOutlined />}>
           新增
         </Button>
@@ -65,51 +58,34 @@ export const List = ({
             fixed: "left",
           },
           {
-            title: "湖区",
-            dataIndex: "lakeId",
-            render: (value) => (
-              <>{lakeOptions.find((item) => item.id === value)?.name}</>
-            ),
+            title: "类型",
+            dataIndex: "productType",
+            render: (value) => <Tag>{value === 1 ? "景点" : "酒店"}</Tag>,
             width: "10rem",
           },
           {
-            title: "岛屿封面",
-            dataIndex: "scenicCover",
+            title: "封面",
+            dataIndex: "cover",
             render: (value) => <Image width={88} src={value} />,
             width: "10rem",
           },
           {
-            title: "岛屿名称",
-            dataIndex: "scenicName",
+            title: "名称",
+            dataIndex: "name",
             width: "24rem",
           },
           {
-            title: "岛屿描述",
+            title: "描述",
             dataIndex: "desc",
             width: "24rem",
           },
           {
-            title: "行程里数（km）",
-            dataIndex: "distance",
-            width: "12rem",
-          },
-          {
-            title: "行程时长（h）",
-            dataIndex: "duration",
-            width: "12rem",
-          },
-          {
-            title: "最佳时间（月）",
-            dataIndex: "time",
-            width: "12rem",
-          },
-          {
             title: "排序",
             dataIndex: "sort",
-            render: (value, lakeTrip) => (
+            render: (value, starTrip) => (
               <InputNumber
                 value={value}
-                onChange={(sort) => editSort({ id: lakeTrip.id, sort })}
+                onChange={(sort) => editSort({ id: starTrip.id, sort })}
               />
             ),
             sorter: (a, b) => a.sort - b.sort,
@@ -158,18 +134,18 @@ export const List = ({
 };
 
 const More = ({ id }: { id: number }) => {
-  const { startEdit } = useLakeTripModal();
-  const { mutate: deleteLakeTrip } = useDeleteLakeTrip(
-    useLakeTripListQueryKey()
+  const { startEdit } = useStarTripModal();
+  const { mutate: deleteStarTrip } = useDeleteStarTrip(
+    useStarTripListQueryKey()
   );
 
   const confirmDelete = (id: number) => {
     Modal.confirm({
-      title: "确定删除该景点吗？",
+      title: "确定删除该明星同游地吗？",
       content: "点击确定删除",
       okText: "确定",
       cancelText: "取消",
-      onOk: () => deleteLakeTrip(id),
+      onOk: () => deleteStarTrip(id),
     });
   };
 

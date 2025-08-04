@@ -14,6 +14,7 @@ const breadcrumbNameMap: { [key: string]: string } = {
   "/activity/lake_cycle/scenic_list": "沿途景点",
   "/activity/lake_cycle/media_list": "骑行攻略",
   "/activity/night_trip": "夜游千岛湖",
+  "/activity/star_trip": "明星同游",
   "/media": "游记管理",
   "/media/top": "最佳游记",
   "/media/short_video": "视频游记",

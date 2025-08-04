@@ -18,6 +18,7 @@ import { LakeTripList } from "./activity/lake-trip";
 import { LakeCycleList } from "./activity/lake-cycle";
 import { LakeCycleMediaList } from "./activity/lake-cycle-media";
 import { NightTripList } from "./activity/night-trip";
+import { StarTripList } from "./activity/star-trip";
 import { TopMediaList } from "./media/top-media";
 import { ShortVideoList } from "./media/short-video";
 import { TourismNoteList } from "./media/tourism-note";
@@ -80,6 +81,7 @@ import {
   LikeOutlined,
   BookOutlined,
   MoonOutlined,
+  StarOutlined,
 } from "@ant-design/icons";
 import {
   ExpressIcon,
@@ -130,6 +132,7 @@ export const AuthenticatedApp = () => {
                 element={<LakeCycleMediaList />}
               />
               <Route path="activity/night_trip" element={<NightTripList />} />
+              <Route path="activity/star_trip" element={<StarTripList />} />
               <Route path="media/top" element={<TopMediaList />} />
               <Route path="media/short_video" element={<ShortVideoList />} />
               <Route path="media/tourism_note" element={<TourismNoteList />} />
@@ -338,6 +341,11 @@ const MenuSider = ({
           label: <Link to={"activity/night_trip"}>夜游千岛湖</Link>,
           key: "activity_night_trip",
           icon: <MoonOutlined />,
+        },
+        {
+          label: <Link to={"activity/star_trip"}>明星同游</Link>,
+          key: "activity_star_trip",
+          icon: <StarOutlined />,
         },
       ],
     },

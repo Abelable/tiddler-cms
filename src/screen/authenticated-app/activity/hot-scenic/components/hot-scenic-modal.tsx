@@ -135,7 +135,7 @@ export const HotScenicModal = ({
                     label="景点封面"
                     valuePropName="fileList"
                     getValueFromEvent={normFile}
-                    rules={[{ required: true, message: "请上传活动封面" }]}
+                    rules={[{ required: true, message: "请上传景点封面" }]}
                   >
                     <OssUpload maxCount={1} />
                   </Form.Item>
