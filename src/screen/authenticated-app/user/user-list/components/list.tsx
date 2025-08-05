@@ -70,7 +70,7 @@ export const List = ({
           {
             title: "昵称",
             dataIndex: "nickname",
-            width: "32rem",
+            width: "24rem",
           },
           {
             title: "手机号",
@@ -106,7 +106,6 @@ export const List = ({
                         ["green", "blue", "gold", "magenta"][option.level - 1]
                       }
                     >
-                      家乡代言人
                       {["Lv.1", "Lv.2", "Lv.3", "Lv.4"][option.level - 1]}
                     </Tag>
                   </div>
@@ -115,7 +114,7 @@ export const List = ({
                 <>暂无上级</>
               );
             },
-            width: "32rem",
+            width: "24rem",
           },
           {
             title: "注册时间",
