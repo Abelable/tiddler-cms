@@ -5,13 +5,13 @@ import styled from "@emotion/styled";
 import { useLakeHomestayList } from "service/lakeHomestay";
 import { toNumber } from "utils";
 import { useLakeHomestayListSearchParams } from "./util";
-import { useScenicOptions } from "service/scenic";
+import { useHomestayOptions } from "service/hotel";
 
 export const LakeHomestayList = () => {
   const [params, setParams] = useLakeHomestayListSearchParams();
   const { isLoading, error, data } = useLakeHomestayList(params);
-  const { data: scenicOptions = [], error: scenicOptionsError } =
-    useScenicOptions();
+  const { data: homestayOptions = [], error: homestayOptionsError } =
+    useHomestayOptions();
 
   return (
     <Container>
@@ -19,7 +19,7 @@ export const LakeHomestayList = () => {
         <List
           params={params}
           setParams={setParams}
-          error={error || scenicOptionsError}
+          error={error || homestayOptionsError}
           loading={isLoading}
           dataSource={data?.list}
           pagination={{
@@ -30,7 +30,7 @@ export const LakeHomestayList = () => {
           bordered
         />
       </Main>
-      <LakeHomestayModal scenicOptions={scenicOptions} />
+      <LakeHomestayModal homestayOptions={homestayOptions} />
     </Container>
   );
 };

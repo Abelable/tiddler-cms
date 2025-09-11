@@ -87,3 +87,10 @@ export const useHotelOptions = () => {
     client("hotel/options")
   );
 };
+
+export const useHomestayOptions = () => {
+  const client = useHttp();
+  return useQuery<ProductOption[]>(["homestay_options"], () =>
+    client("hotel/homestay_options")
+  );
+};

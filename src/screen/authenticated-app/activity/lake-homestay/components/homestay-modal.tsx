@@ -15,9 +15,9 @@ const normFile = (e: any) => {
 };
 
 export const LakeHomestayModal = ({
-  scenicOptions,
+  homestayOptions,
 }: {
-  scenicOptions: ProductOption[];
+  homestayOptions: ProductOption[];
 }) => {
   const [form] = useForm();
   const {
@@ -92,7 +92,7 @@ export const LakeHomestayModal = ({
                   .includes(input.toLowerCase())
               }
               onChange={(value) => {
-                const selectedScenic = scenicOptions.find(
+                const selectedScenic = homestayOptions.find(
                   (item) => item.id === value
                 );
                 if (selectedScenic) {
@@ -112,7 +112,7 @@ export const LakeHomestayModal = ({
                 }
               }}
             >
-              {scenicOptions.map(({ id, cover, name }) => (
+              {homestayOptions.map(({ id, cover, name }) => (
                 <Select.Option key={id} value={id}>
                   <OptionCover src={cover} />
                   <span>{name}</span>
