@@ -13,6 +13,7 @@ import {
   Rate,
   Tag,
   InputNumber,
+  Image,
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
 import { useDeleteScenic, useEditViews } from "service/scenic";
@@ -59,6 +60,12 @@ export const List = ({
             dataIndex: "id",
             width: "8rem",
             fixed: "left",
+          },
+          {
+            title: "图片",
+            dataIndex: "imageList",
+            render: (value) => <Image width={68} src={value[0]} />,
+            width: "14rem",
           },
           {
             title: "名称",

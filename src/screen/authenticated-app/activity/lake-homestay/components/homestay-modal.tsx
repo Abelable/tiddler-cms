@@ -4,8 +4,8 @@ import { ErrorBox, ModalLoading, OptionCover } from "components/lib";
 import { OssUpload } from "components/oss-upload";
 
 import { useEffect } from "react";
-import { useAddNightTrip, useEditNightTrip } from "service/nightTrip";
-import { useNightTripModal, useNightTripListQueryKey } from "../util";
+import { useAddLakeHomestay, useEditLakeHomestay } from "service/lakeHomestay";
+import { useLakeHomestayModal, useLakeHomestayListQueryKey } from "../util";
 
 import type { ProductOption } from "types/common";
 
@@ -14,46 +14,45 @@ const normFile = (e: any) => {
   return e && e.fileList;
 };
 
-export const NightTripModal = ({
+export const LakeHomestayModal = ({
   scenicOptions,
 }: {
   scenicOptions: ProductOption[];
 }) => {
   const [form] = useForm();
   const {
-    nightTripModalOpen,
-    editingNightTripId,
-    editingNightTrip,
+    lakeHomestayModalOpen,
+    editingLakeHomestayId,
+    editingLakeHomestay,
     isLoading,
     close,
-  } = useNightTripModal();
+  } = useLakeHomestayModal();
 
-  const useMutateNightTrip = editingNightTripId
-    ? useEditNightTrip
-    : useAddNightTrip;
+  const useMutateLakeHomestay = editingLakeHomestayId
+    ? useEditLakeHomestay
+    : useAddLakeHomestay;
   const {
     mutateAsync,
     isLoading: mutateLoading,
     error,
-  } = useMutateNightTrip(useNightTripListQueryKey());
+  } = useMutateLakeHomestay(useLakeHomestayListQueryKey());
 
   useEffect(() => {
-    if (editingNightTrip) {
-      const { scenicCover, ...rest } = editingNightTrip;
+    if (editingLakeHomestay) {
+      const { cover, ...rest } = editingLakeHomestay;
       form.setFieldsValue({
-        scenicCover: scenicCover ? [{ url: scenicCover }] : [],
+        cover: cover ? [{ url: cover }] : [],
         ...rest,
       });
     }
-  }, [editingNightTrip, form]);
+  }, [editingLakeHomestay, form]);
 
   const submit = () => {
     form.validateFields().then(async () => {
-      const { scenicCover, ...rest } = form.getFieldsValue();
+      const { cover, ...rest } = form.getFieldsValue();
       await mutateAsync({
-        ...editingNightTrip,
-        scenicCover:
-          scenicCover && scenicCover.length ? scenicCover[0].url : "",
+        ...editingLakeHomestay,
+        cover: cover && cover.length ? cover[0].url : "",
         ...rest,
       });
       closeModal();
@@ -68,8 +67,8 @@ export const NightTripModal = ({
   return (
     <Modal
       forceRender={true}
-      title={editingNightTripId ? "编辑夜游景点" : "新增夜游景点"}
-      open={nightTripModalOpen}
+      title={editingLakeHomestayId ? "编辑湖畔民宿" : "新增湖畔民宿"}
+      open={lakeHomestayModalOpen}
       confirmLoading={mutateLoading}
       onOk={submit}
       onCancel={closeModal}
@@ -80,12 +79,12 @@ export const NightTripModal = ({
       ) : (
         <Form form={form} layout="vertical">
           <Form.Item
-            name="scenicId"
-            label="景点"
-            rules={[{ required: true, message: "请选择景点" }]}
+            name="hotelId"
+            label="民宿"
+            rules={[{ required: true, message: "请选择民宿" }]}
           >
             <Select
-              placeholder="请选择景点"
+              placeholder="请选择民宿"
               showSearch
               filterOption={(input, option) =>
                 (option!.children as any)[1].props.children
@@ -98,17 +97,17 @@ export const NightTripModal = ({
                 );
                 if (selectedScenic) {
                   form.setFieldsValue({
-                    scenicCover: [
+                    cover: [
                       {
                         url: selectedScenic.cover,
                       },
                     ],
-                    scenicName: selectedScenic.name,
+                    name: selectedScenic.name,
                   });
                 } else {
                   form.setFieldsValue({
-                    scenicCover: [],
-                    scenicName: "",
+                    cover: [],
+                    name: "",
                   });
                 }
               }}
@@ -124,42 +123,33 @@ export const NightTripModal = ({
           <Form.Item
             noStyle
             shouldUpdate={(prevValues, currentValues) => {
-              return prevValues.scenicId !== currentValues.scenicId;
+              return prevValues.hotelId !== currentValues.hotelId;
             }}
           >
             {({ getFieldValue }) =>
-              getFieldValue("scenicId") ? (
+              getFieldValue("hotelId") ? (
                 <>
                   <Form.Item
-                    name="scenicCover"
-                    label="景点封面"
+                    name="cover"
+                    label="民宿封面"
                     valuePropName="fileList"
                     getValueFromEvent={normFile}
-                    rules={[{ required: true, message: "请上传景点封面" }]}
+                    rules={[{ required: true, message: "请上传民宿封面" }]}
                   >
                     <OssUpload maxCount={1} />
                   </Form.Item>
                   <Form.Item
-                    name="scenicName"
-                    label="景点名称"
-                    rules={[{ required: true, message: "请输入景点名称" }]}
+                    name="name"
+                    label="民宿名称"
+                    rules={[{ required: true, message: "请输入民宿名称" }]}
                   >
-                    <Input placeholder="请输入景点名称" />
+                    <Input placeholder="请输入民宿名称" />
                   </Form.Item>
                 </>
               ) : (
                 <></>
               )
             }
-          </Form.Item>
-          <Form.Item name="featureTips" label="特色">
-            <Input placeholder="请输入特色" />
-          </Form.Item>
-          <Form.Item name="guideTips" label="攻略">
-            <Input placeholder="请输入攻略" />
-          </Form.Item>
-          <Form.Item name="recommendTips" label="推荐">
-            <Input placeholder="请输入推荐" />
           </Form.Item>
         </Form>
       )}

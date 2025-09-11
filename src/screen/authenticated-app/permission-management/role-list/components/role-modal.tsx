@@ -49,6 +49,40 @@ const treeData: DataNode[] = [
         title: "头图列表",
         key: "activity_banner_list",
       },
+      {
+        title: "网红打卡地",
+        key: "activity_hot_scenic",
+      },
+      {
+        title: "游湖登岛",
+        key: "activity_lake_trip",
+      },
+      {
+        title: "环湖骑行",
+        key: "activity_lake_cycle",
+        children: [
+          {
+            title: "沿途景点",
+            key: "activity_lake_cycle_scenic_list",
+          },
+          {
+            title: "骑行攻略",
+            key: "activity_lake_cycle_media_list",
+          },
+        ],
+      },
+      {
+        title: "夜游千岛湖",
+        key: "activity_night_trip",
+      },
+      {
+        title: "明星同游",
+        key: "activity_star_trip",
+      },
+      {
+        title: "湖畔民宿",
+        key: "activity_lake_homestay",
+      },
     ],
   },
   {

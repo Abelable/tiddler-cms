@@ -18,6 +18,7 @@ const sceneOptions = [
   { text: "餐馆详情", value: 3 },
   { text: "商品详情", value: 4 },
   { text: "H5活动", value: 5 },
+  { text: "原生页面", value: 6 },
 ];
 
 export const BannerList = () => {

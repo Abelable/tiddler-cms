@@ -150,7 +150,7 @@ export const LakeTripModal = ({
                     label="岛屿封面"
                     valuePropName="fileList"
                     getValueFromEvent={normFile}
-                    rules={[{ required: true, message: "请上传活动封面" }]}
+                    rules={[{ required: true, message: "请上传岛屿封面" }]}
                   >
                     <OssUpload maxCount={1} />
                   </Form.Item>
