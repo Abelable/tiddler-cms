@@ -13,13 +13,13 @@ import { AdminList } from "./permission-management/admin-list";
 import { UserList } from "./user/user-list";
 import { AuthInfoList } from "./user/auth-info-list";
 import { BannerList } from "./activity/banner-list";
-import { HotScenicList } from "./activity/hot-scenic";
-import { LakeTripList } from "./activity/lake-trip";
-import { LakeCycleList } from "./activity/lake-cycle";
-import { LakeCycleMediaList } from "./activity/lake-cycle-media";
-import { NightTripList } from "./activity/night-trip";
-import { StarTripList } from "./activity/star-trip";
-import { LakeHomestayList } from "./activity/lake-homestay";
+import { HotScenicList } from "./theme/hot-scenic";
+import { LakeTripList } from "./theme/lake-trip";
+import { LakeCycleList } from "./theme/lake-cycle";
+import { LakeCycleMediaList } from "./theme/lake-cycle-media";
+import { NightTripList } from "./theme/night-trip";
+import { StarTripList } from "./theme/star-trip";
+import { LakeHomestayList } from "./theme/lake-homestay";
 import { TopMediaList } from "./media/top-media";
 import { ShortVideoList } from "./media/short-video";
 import { TourismNoteList } from "./media/tourism-note";
@@ -83,6 +83,7 @@ import {
   BookOutlined,
   MoonOutlined,
   StarOutlined,
+  GoldOutlined,
 } from "@ant-design/icons";
 import {
   ExpressIcon,
@@ -122,20 +123,20 @@ export const AuthenticatedApp = () => {
               <Route path="user/list" element={<UserList />} />
               <Route path="user/auth_info_list" element={<AuthInfoList />} />
               <Route path="activity/banner_list" element={<BannerList />} />
-              <Route path="activity/hot_scenic" element={<HotScenicList />} />
-              <Route path="activity/lake_trip" element={<LakeTripList />} />
+              <Route path="theme/hot_scenic" element={<HotScenicList />} />
+              <Route path="theme/lake_trip" element={<LakeTripList />} />
               <Route
-                path="activity/lake_cycle/scenic_list"
+                path="theme/lake_cycle/scenic_list"
                 element={<LakeCycleList />}
               />
               <Route
-                path="activity/lake_cycle/media_list"
+                path="theme/lake_cycle/media_list"
                 element={<LakeCycleMediaList />}
               />
-              <Route path="activity/night_trip" element={<NightTripList />} />
-              <Route path="activity/star_trip" element={<StarTripList />} />
+              <Route path="theme/night_trip" element={<NightTripList />} />
+              <Route path="theme/star_trip" element={<StarTripList />} />
               <Route
-                path="activity/lake_homestay"
+                path="theme/lake_homestay"
                 element={<LakeHomestayList />}
               />
               <Route path="media/top" element={<TopMediaList />} />
@@ -311,50 +312,53 @@ const MenuSider = ({
           key: "activity_banner_list",
           icon: <PictureOutlined />,
         },
+      ],
+    },
+    {
+      label: "主题模块",
+      key: "theme",
+      icon: <GoldOutlined />,
+      children: [
         {
-          label: <Link to={"activity/hot_scenic"}>网红打卡地</Link>,
-          key: "activity_hot_scenic",
+          label: <Link to={"theme/hot_scenic"}>网红打卡地</Link>,
+          key: "theme_hot_scenic",
           icon: <EnvironmentOutlined />,
         },
         {
-          label: <Link to={"activity/lake_trip"}>游湖登岛</Link>,
-          key: "activity_lake_trip",
+          label: <Link to={"theme/lake_trip"}>游湖登岛</Link>,
+          key: "theme_lake_trip",
           icon: <ShipIcon />,
         },
         {
           label: "环湖骑行",
-          key: "activity_lake_cycle",
+          key: "theme_lake_cycle",
           icon: <CycleIcon />,
           children: [
             {
-              label: (
-                <Link to={"activity/lake_cycle/scenic_list"}>沿途景点</Link>
-              ),
-              key: "activity_lake_cycle_scenic_list",
+              label: <Link to={"theme/lake_cycle/scenic_list"}>沿途景点</Link>,
+              key: "theme_lake_cycle_scenic_list",
               icon: <ScenicIcon />,
             },
             {
-              label: (
-                <Link to={"activity/lake_cycle/media_list"}>骑行攻略</Link>
-              ),
-              key: "activity_lake_cycle_media_list",
+              label: <Link to={"theme/lake_cycle/media_list"}>骑行攻略</Link>,
+              key: "theme_lake_cycle_media_list",
               icon: <BookOutlined />,
             },
           ],
         },
         {
-          label: <Link to={"activity/night_trip"}>夜游千岛湖</Link>,
-          key: "activity_night_trip",
+          label: <Link to={"theme/night_trip"}>夜游千岛湖</Link>,
+          key: "theme_night_trip",
           icon: <MoonOutlined />,
         },
         {
-          label: <Link to={"activity/star_trip"}>明星同游</Link>,
-          key: "activity_star_trip",
+          label: <Link to={"theme/star_trip"}>明星同游</Link>,
+          key: "theme_star_trip",
           icon: <StarOutlined />,
         },
         {
-          label: <Link to={"activity/lake_homestay"}>湖畔民宿</Link>,
-          key: "activity_lake_homestay",
+          label: <Link to={"theme/lake_homestay"}>湖畔民宿</Link>,
+          key: "theme_lake_homestay",
           icon: <HotelIcon />,
         },
       ],
