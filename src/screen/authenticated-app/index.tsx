@@ -8,11 +8,13 @@ import { Routes, Route, Navigate } from "react-router";
 import { Avatar, Dropdown, Layout, Menu, MenuProps } from "antd";
 import { NavigationBar } from "components/navigation-bar";
 
-import { RoleList } from "./permission-management/role-list";
-import { AdminList } from "./permission-management/admin-list";
+import { RoleList } from "./admin/role-list";
+import { AdminList } from "./admin/admin-list";
+import { PersonalCenter } from "./admin/personal-center";
 import { UserList } from "./user/user-list";
 import { AuthInfoList } from "./user/auth-info-list";
 import { BannerList } from "./activity/banner-list";
+import { TaskList } from "./activity/task-list";
 import { HotScenicList } from "./theme/hot-scenic";
 import { LakeTripList } from "./theme/lake-trip";
 import { LakeCycleList } from "./theme/lake-cycle";
@@ -56,7 +58,6 @@ import { GoodsList } from "./shopping/goods/goods-list";
 import { GiftTypeList } from "./team/gift-type-list";
 import { GiftGoodsList } from "./team/gift-goods-list";
 import { PromoterList } from "./team/promoter-list";
-import { PersonalCenter } from "./permission-management/personal-center";
 
 import {
   LockOutlined,
@@ -84,6 +85,7 @@ import {
   MoonOutlined,
   StarOutlined,
   GoldOutlined,
+  BarsOutlined,
 } from "@ant-design/icons";
 import {
   ExpressIcon,
@@ -123,6 +125,7 @@ export const AuthenticatedApp = () => {
               <Route path="user/list" element={<UserList />} />
               <Route path="user/auth_info_list" element={<AuthInfoList />} />
               <Route path="activity/banner_list" element={<BannerList />} />
+              <Route path="activity/task_list" element={<TaskList />} />
               <Route path="theme/hot_scenic" element={<HotScenicList />} />
               <Route path="theme/lake_trip" element={<LakeTripList />} />
               <Route
@@ -311,6 +314,11 @@ const MenuSider = ({
           label: <Link to={"activity/banner_list"}>头图列表</Link>,
           key: "activity_banner_list",
           icon: <PictureOutlined />,
+        },
+        {
+          label: <Link to={"activity/task_list"}>奖励任务</Link>,
+          key: "activity_task_list",
+          icon: <BarsOutlined />,
         },
       ],
     },

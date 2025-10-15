@@ -49,6 +49,10 @@ const treeData: DataNode[] = [
         title: "头图列表",
         key: "activity_banner_list",
       },
+      {
+        title: "奖励任务",
+        key: "activity_task_list",
+      },
     ],
   },
   {
