@@ -1,4 +1,14 @@
-import { Button, Col, Drawer, Form, Input, Row, Space, Select } from "antd";
+import {
+  Button,
+  Col,
+  Drawer,
+  Form,
+  Input,
+  Row,
+  Space,
+  Select,
+  InputNumber,
+} from "antd";
 import { useForm } from "antd/lib/form/Form";
 import { ErrorBox, ModalLoading, OptionCover } from "components/lib";
 import { Map } from "components/map";
@@ -90,6 +100,61 @@ export const TaskModal = ({
         <ModalLoading />
       ) : (
         <Form form={form} layout="vertical">
+          <Row>
+            <Col span={24}>
+              <Form.Item label="任务奖励" required>
+                <Space.Compact>
+                  <Row gutter={8}>
+                    <Col span={8}>
+                      <Form.Item
+                        style={{ marginBottom: 0 }}
+                        name="rewardOne"
+                        rules={[
+                          { required: true, message: "请输入阶段一奖励" },
+                        ]}
+                      >
+                        <InputNumber
+                          style={{ width: "100%" }}
+                          placeholder="请输入阶段一奖励"
+                          prefix="￥"
+                        />
+                      </Form.Item>
+                    </Col>
+                    <Col span={8}>
+                      <Form.Item
+                        style={{ marginBottom: 0 }}
+                        name="rewardTwo"
+                        rules={[
+                          { required: true, message: "请输入阶段二奖励" },
+                        ]}
+                      >
+                        <Input
+                          style={{ width: "100%" }}
+                          placeholder="请输入阶段二奖励"
+                          prefix="￥"
+                        />
+                      </Form.Item>
+                    </Col>
+                    <Col span={8}>
+                      <Form.Item
+                        style={{ marginBottom: 0 }}
+                        name="rewardThree"
+                        rules={[
+                          { required: true, message: "请输入阶段三奖励" },
+                        ]}
+                      >
+                        <Input
+                          style={{ width: "100%" }}
+                          placeholder="请输入阶段三奖励"
+                          prefix="￥"
+                        />
+                      </Form.Item>
+                    </Col>
+                  </Row>
+                </Space.Compact>
+              </Form.Item>
+            </Col>
+          </Row>
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item
