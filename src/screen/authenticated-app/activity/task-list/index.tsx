@@ -64,7 +64,6 @@ export const TaskList = () => {
         />
       </Main>
       <TaskModal
-        statusOptions={statusOptions}
         productTypeOptions={productTypeOptions}
         scenicOptions={scenicOptions}
         hotelOptions={hotelOptions}

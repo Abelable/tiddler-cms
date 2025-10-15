@@ -1,7 +1,7 @@
 import { Button, Col, Drawer, Form, Input, Row, Space, Select } from "antd";
 import { useForm } from "antd/lib/form/Form";
 import { ErrorBox, ModalLoading, OptionCover } from "components/lib";
-import { OssUpload } from "components/oss-upload";
+import { Map } from "components/map";
 
 import { useEffect } from "react";
 import { useAddTask, useEditTask } from "service/task";
@@ -9,19 +9,12 @@ import { useTaskModal, useTaskListQueryKey } from "../util";
 
 import type { Option, ProductOption } from "types/common";
 
-const normFile = (e: any) => {
-  if (Array.isArray(e)) return e;
-  return e && e.fileList;
-};
-
 export const TaskModal = ({
-  statusOptions,
   productTypeOptions,
   scenicOptions,
   hotelOptions,
   restaurantOptions,
 }: {
-  statusOptions: Option[];
   productTypeOptions: Option[];
   scenicOptions: ProductOption[];
   hotelOptions: ProductOption[];
@@ -44,6 +37,15 @@ export const TaskModal = ({
       form.setFieldsValue({ ...rest });
     }
   }, [editingTask, form]);
+
+  const setLng = (longitude: number | undefined) =>
+    form.setFieldsValue({
+      longitude,
+    });
+  const setLat = (latitude: number | undefined) =>
+    form.setFieldsValue({
+      latitude,
+    });
 
   const submit = () => {
     form.validateFields().then(async () => {
@@ -195,7 +197,7 @@ export const TaskModal = ({
                           }
                         }}
                       >
-                        {scenicOptions.map(({ id, cover, name }) => (
+                        {hotelOptions.map(({ id, cover, name }) => (
                           <Select.Option key={id} value={id}>
                             <OptionCover src={cover} />
                             <span>{name}</span>
@@ -240,7 +242,7 @@ export const TaskModal = ({
                           }
                         }}
                       >
-                        {scenicOptions.map(({ id, cover, name }) => (
+                        {restaurantOptions.map(({ id, cover, name }) => (
                           <Select.Option key={id} value={id}>
                             <OptionCover src={cover} />
                             <span>{name}</span>
@@ -258,68 +260,59 @@ export const TaskModal = ({
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item
-                name="productType"
-                label="关联产品类型"
-                rules={[{ required: true, message: "请选择产品类型" }]}
+                name="productName"
+                label="关联产品名称"
+                rules={[{ required: true, message: "请输入产品名称" }]}
               >
-                <Select placeholder="请选择产品类型">
-                  {productTypeOptions.map((item) => (
-                    <Select.Option key={item.value} value={item.value}>
-                      {item.text}
-                    </Select.Option>
-                  ))}
-                </Select>
+                <Input placeholder="请输入产品名称" />
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item name="desc" label="活动描述">
-                <Input placeholder="请输入活动描述" />
+              <Form.Item name="tel" label="商家联系电话">
+                <Input placeholder="请输入联系电话" />
               </Form.Item>
             </Col>
           </Row>
           <Row gutter={16}>
             <Col span={12}>
-              <Form.Item name="scene" label="活动跳转场景">
-                <Select placeholder="请选择活动跳转场景">
-                  {productTypeOptions.map((item) => (
-                    <Select.Option key={item.value} value={item.value}>
-                      {item.text}
-                    </Select.Option>
-                  ))}
-                </Select>
+              <Form.Item label="经纬度" required>
+                <Space.Compact>
+                  <Row gutter={8}>
+                    <Col span={12}>
+                      <Form.Item
+                        style={{ marginBottom: 0 }}
+                        name="longitude"
+                        rules={[{ required: true, message: "请输入经度" }]}
+                      >
+                        <Input placeholder="请输入经度" />
+                      </Form.Item>
+                    </Col>
+                    <Col span={12}>
+                      <Form.Item
+                        style={{ marginBottom: 0 }}
+                        name="latitude"
+                        rules={[{ required: true, message: "请输入纬度" }]}
+                      >
+                        <Input placeholder="请输入纬度" />
+                      </Form.Item>
+                    </Col>
+                  </Row>
+                </Space.Compact>
               </Form.Item>
             </Col>
-            <Col span={12}>
-              <Form.Item name="param" label="活动链接/id">
-                <Input placeholder="请输入活动链接/id" />
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row gutter={16}>
             <Col span={12}>
               <Form.Item
-                noStyle
-                shouldUpdate={(prevValues, currentValues) => {
-                  // 监听formItem值变化
-                  return prevValues.position !== currentValues.position;
-                }}
+                name="address"
+                label="地址详情"
+                rules={[{ required: true, message: "请输入景点地址详情" }]}
               >
-                {({ getFieldValue }) => (
-                  <Form.Item
-                    name="cover"
-                    label="活动封面"
-                    tooltip={
-                      getFieldValue("position") &&
-                      statusOptions[getFieldValue("position") - 1].tips
-                    }
-                    valuePropName="fileList"
-                    getValueFromEvent={normFile}
-                    rules={[{ required: true, message: "请上传活动封面" }]}
-                  >
-                    <OssUpload maxCount={1} />
-                  </Form.Item>
-                )}
+                <Input placeholder="请输入景点地址详情" />
               </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={24}>
+              <Map setLng={setLng} setLat={setLat} />
             </Col>
           </Row>
         </Form>
