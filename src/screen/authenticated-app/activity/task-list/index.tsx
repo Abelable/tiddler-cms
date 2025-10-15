@@ -6,6 +6,9 @@ import styled from "@emotion/styled";
 import { useTaskList } from "service/task";
 import { toNumber } from "utils";
 import { useTaskListSearchParams } from "./util";
+import { useScenicOptions } from "service/scenic";
+import { useHotelOptions } from "service/hotel";
+import { useRestaurantOptions } from "service/restaurant";
 
 const statusOptions = [
   { text: "进行中", value: 1 },
@@ -21,6 +24,12 @@ const productTypeOptions = [
 ];
 
 export const TaskList = () => {
+  const { data: scenicOptions = [], error: scenicOptionsError } =
+    useScenicOptions();
+  const { data: hotelOptions = [], error: hotelOptionsError } =
+    useHotelOptions();
+  const { data: restaurantOptions = [], error: restaurantOptionsError } =
+    useRestaurantOptions();
   const [params, setParams] = useTaskListSearchParams();
   const { isLoading, error, data } = useTaskList(params);
 
@@ -38,7 +47,12 @@ export const TaskList = () => {
           productTypeOptions={productTypeOptions}
           params={params}
           setParams={setParams}
-          error={error}
+          error={
+            scenicOptionsError ||
+            hotelOptionsError ||
+            restaurantOptionsError ||
+            error
+          }
           loading={isLoading}
           dataSource={data?.list}
           pagination={{
@@ -52,6 +66,9 @@ export const TaskList = () => {
       <TaskModal
         statusOptions={statusOptions}
         productTypeOptions={productTypeOptions}
+        scenicOptions={scenicOptions}
+        hotelOptions={hotelOptions}
+        restaurantOptions={restaurantOptions}
       />
     </Container>
   );

@@ -42,6 +42,10 @@ export interface ProductOption {
   id: number;
   cover: string;
   name: string;
+  tel?: string;
+  address?: string;
+  longitude?: string;
+  latitude?: string;
 }
 
 export interface MediaOption {
