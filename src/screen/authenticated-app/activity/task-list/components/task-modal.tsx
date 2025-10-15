@@ -43,8 +43,13 @@ export const TaskModal = ({
 
   useEffect(() => {
     if (editingTask) {
-      const { ...rest } = editingTask;
-      form.setFieldsValue({ ...rest });
+      const { rewardList = [], ...rest } = editingTask;
+      form.setFieldsValue({
+        rewardOne: rewardList[0],
+        rewardTwo: rewardList[1],
+        rewardThree: rewardList[2],
+        ...rest,
+      });
     }
   }, [editingTask, form]);
 
@@ -59,11 +64,13 @@ export const TaskModal = ({
 
   const submit = () => {
     form.validateFields().then(async () => {
-      const { cover, ...rest } = form.getFieldsValue();
+      const { rewardOne, rewardTwo, rewardThree, ...rest } =
+        form.getFieldsValue();
       await mutateAsync({
         ...editingTask,
         ...rest,
-        cover: cover && cover.length ? cover[0].url : "",
+        rewardTotal: rewardOne + rewardTwo + rewardThree,
+        rewardList: [rewardOne, rewardTwo, rewardThree],
       });
       closeModal();
     });
@@ -128,7 +135,7 @@ export const TaskModal = ({
                           { required: true, message: "请输入阶段二奖励" },
                         ]}
                       >
-                        <Input
+                        <InputNumber
                           style={{ width: "100%" }}
                           placeholder="请输入阶段二奖励"
                           prefix="￥"
@@ -143,7 +150,7 @@ export const TaskModal = ({
                           { required: true, message: "请输入阶段三奖励" },
                         ]}
                       >
-                        <Input
+                        <InputNumber
                           style={{ width: "100%" }}
                           placeholder="请输入阶段三奖励"
                           prefix="￥"

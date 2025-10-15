@@ -6,6 +6,7 @@ import {
   Table,
   TablePaginationConfig,
   TableProps,
+  Tag,
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
 import { PlusOutlined } from "@ant-design/icons";
@@ -71,24 +72,24 @@ export const List = ({
             width: "14rem",
           },
           {
-            title: "相关产品类型",
+            title: "任务奖励",
+            dataIndex: "rewardTotal",
+            render: (value) => <>{`¥${value}`}</>,
+            width: "16rem",
+          },
+          {
+            title: "关联产品类型",
             dataIndex: "productType",
             render: (value) => (
-              <>
+              <Tag>
                 {productTypeOptions.find((item) => item.value === +value)?.text}
-              </>
+              </Tag>
             ),
             width: "16rem",
           },
           {
-            title: "相关产品名称",
+            title: "关联产品名称",
             dataIndex: "productName",
-          },
-          {
-            title: "任务奖励",
-            dataIndex: "rewardTotal",
-            render: (value) => <>{`¥${value}`}</>,
-            width: "12rem",
           },
           {
             title: "更新时间",
