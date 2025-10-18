@@ -20,12 +20,12 @@ import { useTaskModal, useTaskListQueryKey } from "../util";
 import type { Option, ProductOption } from "types/common";
 
 export const TaskModal = ({
-  productTypeOptions,
+  merchantTypeOptions,
   scenicOptions,
   hotelOptions,
   restaurantOptions,
 }: {
-  productTypeOptions: Option[];
+  merchantTypeOptions: Option[];
   scenicOptions: ProductOption[];
   hotelOptions: ProductOption[];
   restaurantOptions: ProductOption[];
@@ -165,12 +165,12 @@ export const TaskModal = ({
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item
-                name="productType"
-                label="关联产品类型"
-                rules={[{ required: true, message: "请选择产品类型" }]}
+                name="merchantType"
+                label="商家类型"
+                rules={[{ required: true, message: "请选择商家类型" }]}
               >
-                <Select placeholder="请选择产品类型">
-                  {productTypeOptions.map((item) => (
+                <Select placeholder="请选择商家类型">
+                  {merchantTypeOptions.map((item) => (
                     <Select.Option key={item.value} value={item.value}>
                       {item.text}
                     </Select.Option>
@@ -183,11 +183,11 @@ export const TaskModal = ({
                 noStyle
                 shouldUpdate={(prevValues, currentValues) => {
                   // 监听formItem值变化
-                  return prevValues.productType !== currentValues.productType;
+                  return prevValues.merchantType !== currentValues.merchantType;
                 }}
               >
                 {({ getFieldValue }) =>
-                  getFieldValue("productType") === 1 ? (
+                  getFieldValue("merchantType") === 1 ? (
                     <Form.Item
                       name="productId"
                       label="关联景点"
@@ -207,7 +207,7 @@ export const TaskModal = ({
                           );
                           if (selectedScenic) {
                             form.setFieldsValue({
-                              productName: selectedScenic.name,
+                              merchantName: selectedScenic.name,
                               tel: selectedScenic.tel,
                               address: selectedScenic.address,
                               latitude: selectedScenic.latitude,
@@ -215,7 +215,7 @@ export const TaskModal = ({
                             });
                           } else {
                             form.setFieldsValue({
-                              productName: "",
+                              merchantName: "",
                               tel: "",
                               address: "",
                               latitude: "",
@@ -232,7 +232,7 @@ export const TaskModal = ({
                         ))}
                       </Select>
                     </Form.Item>
-                  ) : getFieldValue("productType") === 2 ? (
+                  ) : getFieldValue("merchantType") === 2 ? (
                     <Form.Item
                       name="productId"
                       label="关联酒店"
@@ -252,7 +252,7 @@ export const TaskModal = ({
                           );
                           if (selectedHotel) {
                             form.setFieldsValue({
-                              productName: selectedHotel.name,
+                              merchantName: selectedHotel.name,
                               tel: selectedHotel.tel,
                               address: selectedHotel.address,
                               latitude: selectedHotel.latitude,
@@ -260,7 +260,7 @@ export const TaskModal = ({
                             });
                           } else {
                             form.setFieldsValue({
-                              productName: "",
+                              merchantName: "",
                               tel: "",
                               address: "",
                               latitude: "",
@@ -277,7 +277,7 @@ export const TaskModal = ({
                         ))}
                       </Select>
                     </Form.Item>
-                  ) : getFieldValue("productType") === 3 ? (
+                  ) : getFieldValue("merchantType") === 3 ? (
                     <Form.Item
                       name="productId"
                       label="关联餐厅"
@@ -297,7 +297,7 @@ export const TaskModal = ({
                           );
                           if (selectedRestaurant) {
                             form.setFieldsValue({
-                              productName: selectedRestaurant.name,
+                              merchantName: selectedRestaurant.name,
                               tel: selectedRestaurant.tel,
                               address: selectedRestaurant.address,
                               latitude: selectedRestaurant.latitude,
@@ -305,7 +305,7 @@ export const TaskModal = ({
                             });
                           } else {
                             form.setFieldsValue({
-                              productName: "",
+                              merchantName: "",
                               tel: "",
                               address: "",
                               latitude: "",
@@ -332,11 +332,11 @@ export const TaskModal = ({
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item
-                name="productName"
-                label="关联产品名称"
-                rules={[{ required: true, message: "请输入产品名称" }]}
+                name="merchantName"
+                label="商家名称"
+                rules={[{ required: true, message: "请输入商家名称" }]}
               >
-                <Input placeholder="请输入产品名称" />
+                <Input placeholder="请输入商家名称" />
               </Form.Item>
             </Col>
             <Col span={12}>

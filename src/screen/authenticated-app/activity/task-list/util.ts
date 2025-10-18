@@ -5,8 +5,8 @@ import { useTask } from "service/task";
 export const useTaskListSearchParams = () => {
   const [params, setParams] = useUrlQueryParams([
     "status",
-    "productType",
-    "productName",
+    "merchantType",
+    "merchantName",
     "page",
     "limit",
   ]);

@@ -16,10 +16,10 @@ const statusOptions = [
   { text: "已完成", value: 3 },
   { text: "已下架", value: 4 },
 ];
-const productTypeOptions = [
+const merchantTypeOptions = [
   { text: "景点", value: 1 },
   { text: "酒店", value: 2 },
-  { text: "餐馆", value: 3 },
+  { text: "餐饮", value: 3 },
   { text: "商品", value: 4 },
 ];
 
@@ -38,13 +38,13 @@ export const TaskList = () => {
       <Main>
         <SearchPanel
           statusOptions={statusOptions}
-          productTypeOptions={productTypeOptions}
+          merchantTypeOptions={merchantTypeOptions}
           params={params}
           setParams={setParams}
         />
         <List
           statusOptions={statusOptions}
-          productTypeOptions={productTypeOptions}
+          merchantTypeOptions={merchantTypeOptions}
           params={params}
           setParams={setParams}
           error={
@@ -64,7 +64,7 @@ export const TaskList = () => {
         />
       </Main>
       <TaskModal
-        productTypeOptions={productTypeOptions}
+        merchantTypeOptions={merchantTypeOptions}
         scenicOptions={scenicOptions}
         hotelOptions={hotelOptions}
         restaurantOptions={restaurantOptions}

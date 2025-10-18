@@ -1,7 +1,7 @@
 export interface TaskListSearchParams {
   status: number | undefined;
-  productType: number | undefined;
-  productName: string;
+  merchantType: number | undefined;
+  merchantName: string;
   page: number;
   limit: number;
 }
@@ -9,9 +9,9 @@ export interface TaskListSearchParams {
 export interface Task {
   id: number;
   status: number;
-  productType: number;
+  merchantType: number;
   productId: number;
-  productName: string;
+  merchantName: string;
   tel: string;
   address: string;
   longitude: number;

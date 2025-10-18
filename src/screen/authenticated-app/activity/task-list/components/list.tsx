@@ -25,7 +25,7 @@ interface ListProps extends TableProps<Task>, SearchPanelProps {
 
 export const List = ({
   statusOptions,
-  productTypeOptions,
+  merchantTypeOptions,
   error,
   params,
   setParams,
@@ -78,18 +78,21 @@ export const List = ({
             width: "16rem",
           },
           {
-            title: "关联产品类型",
-            dataIndex: "productType",
+            title: "商家类型",
+            dataIndex: "merchantType",
             render: (value) => (
               <Tag>
-                {productTypeOptions.find((item) => item.value === +value)?.text}
+                {
+                  merchantTypeOptions.find((item) => item.value === +value)
+                    ?.text
+                }
               </Tag>
             ),
             width: "16rem",
           },
           {
-            title: "关联产品名称",
-            dataIndex: "productName",
+            title: "商家名称",
+            dataIndex: "merchantName",
           },
           {
             title: "更新时间",

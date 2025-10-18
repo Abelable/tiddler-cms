@@ -9,20 +9,20 @@ import type { TaskListSearchParams } from "types/task";
 
 export interface SearchPanelProps {
   statusOptions: Option[];
-  productTypeOptions: Option[];
+  merchantTypeOptions: Option[];
   params: Partial<TaskListSearchParams>;
   setParams: (params: Partial<TaskListSearchParams>) => void;
 }
 
 const defaultParmas: Partial<TaskListSearchParams> = {
   status: undefined,
-  productType: undefined,
-  productName: "",
+  merchantType: undefined,
+  merchantName: "",
 };
 
 export const SearchPanel = ({
   statusOptions,
-  productTypeOptions,
+  merchantTypeOptions,
   params,
   setParams,
 }: SearchPanelProps) => {
@@ -32,23 +32,23 @@ export const SearchPanel = ({
     setTempParams({ ...tempParams, status });
   const clearStatus = () => setTempParams({ ...tempParams, status: undefined });
 
-  const setProductType = (productType: number) =>
-    setTempParams({ ...tempParams, productType });
+  const setProductType = (merchantType: number) =>
+    setTempParams({ ...tempParams, merchantType });
   const clearPosition = () =>
-    setTempParams({ ...tempParams, productType: undefined });
+    setTempParams({ ...tempParams, merchantType: undefined });
 
-  const setProductName = (evt: any) => {
+  const setMerchantName = (evt: any) => {
     if (!evt.target.value && evt.type !== "change") {
       setTempParams({
         ...tempParams,
-        productName: "",
+        merchantName: "",
       });
       return;
     }
 
     setTempParams({
       ...tempParams,
-      productName: evt.target.value,
+      merchantName: evt.target.value,
     });
   };
 
@@ -77,16 +77,16 @@ export const SearchPanel = ({
         </Select>
       </Item>
       <Item>
-        <div>产品类型：</div>
+        <div>商家类型：</div>
         <Select
           style={{ width: "20rem" }}
-          value={tempParams.productType}
-          placeholder="请选择产品类型"
+          value={tempParams.merchantType}
+          placeholder="请选择商家类型"
           allowClear
           onSelect={setProductType}
           onClear={clearPosition}
         >
-          {productTypeOptions?.map(({ text, value }) => (
+          {merchantTypeOptions?.map(({ text, value }) => (
             <Select.Option key={value} value={value}>
               {text}
             </Select.Option>
@@ -94,12 +94,12 @@ export const SearchPanel = ({
         </Select>
       </Item>
       <Item>
-        <div>产品名称：</div>
+        <div>商家名称：</div>
         <Input
           style={{ width: "20rem" }}
-          value={tempParams.productName}
-          onChange={setProductName}
-          placeholder="请输入产品名称"
+          value={tempParams.merchantName}
+          onChange={setMerchantName}
+          placeholder="请输入商家名称"
           allowClear={true}
         />
       </Item>
