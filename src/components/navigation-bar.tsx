@@ -9,7 +9,7 @@ const breadcrumbNameMap: { [key: string]: string } = {
   "/activity": "活动管理",
   "/activity/banner_list": "头图列表",
   "/activity/task_list": "奖励任务",
-  "/theme": "主题模块",
+  "/theme": "主题专区",
   "/theme/hot_scenic": "网红打卡地",
   "/theme/lake_trip": "游湖登岛",
   "/theme/lake_cycle": "环湖骑行",

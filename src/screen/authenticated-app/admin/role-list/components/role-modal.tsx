@@ -56,7 +56,7 @@ const treeData: DataNode[] = [
     ],
   },
   {
-    title: "主题模块",
+    title: "主题专区",
     key: "theme",
     children: [
       {

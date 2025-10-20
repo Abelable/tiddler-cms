@@ -323,7 +323,7 @@ const MenuSider = ({
       ],
     },
     {
-      label: "主题模块",
+      label: "主题专区",
       key: "theme",
       icon: <GoldOutlined />,
       children: [
