@@ -263,10 +263,10 @@ export const SetMealModal = ({
             </Descriptions.Item>
             <Descriptions.Item label="商家类型">
               <Tag>
-                {editingSetMeal?.merchantInfo?.type === 1 ? "个体" : "企业"}
+                {editingSetMeal?.merchantInfo?.type === 1 ? "企业" : "个体"}
               </Tag>
             </Descriptions.Item>
-            {editingSetMeal?.merchantInfo?.type === 2 ? (
+            {editingSetMeal?.merchantInfo?.type === 1 ? (
               <>
                 <Descriptions.Item label="公司名称">
                   {editingSetMeal?.merchantInfo?.companyName}

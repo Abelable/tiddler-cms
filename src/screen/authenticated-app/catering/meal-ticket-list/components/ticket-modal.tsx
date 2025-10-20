@@ -261,10 +261,10 @@ export const TicketModal = ({
             </Descriptions.Item>
             <Descriptions.Item label="商家类型">
               <Tag>
-                {editingTicket?.merchantInfo?.type === 1 ? "个体" : "企业"}
+                {editingTicket?.merchantInfo?.type === 1 ? "企业" : "个体"}
               </Tag>
             </Descriptions.Item>
-            {editingTicket?.merchantInfo?.type === 2 ? (
+            {editingTicket?.merchantInfo?.type === 1 ? (
               <>
                 <Descriptions.Item label="公司名称">
                   {editingTicket?.merchantInfo?.companyName}

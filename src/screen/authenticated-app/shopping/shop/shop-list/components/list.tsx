@@ -58,10 +58,10 @@ export const List = ({
           {
             title: "商家类型",
             dataIndex: "type",
-            render: (value) => <>{value === 1 ? "个人" : "企业"}</>,
+            render: (value) => <>{value === 1 ? "企业" : "个人"}</>,
             filters: [
-              { text: "个人", value: 1 },
-              { text: "企业", value: 2 },
+              { text: "企业", value: 1 },
+              { text: "个人", value: 2 },
             ],
             onFilter: (value, shop) => shop.type === value,
           },

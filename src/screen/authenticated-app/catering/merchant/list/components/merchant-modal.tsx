@@ -41,7 +41,7 @@ export const CateringMerchantModal = () => {
               {editingCateringMerchant?.id}
             </Descriptions.Item>
             <Descriptions.Item label="商家类型">
-              {editingCateringMerchant?.type === 1 ? "个体" : "企业"}
+              {editingCateringMerchant?.type === 1 ? "企业" : "个体"}
             </Descriptions.Item>
             <Descriptions.Item label="入驻时间">
               {dayjs(editingCateringMerchant?.createdAt).format(
@@ -54,7 +54,7 @@ export const CateringMerchantModal = () => {
               )}
             </Descriptions.Item>
           </Descriptions>
-          {editingCateringMerchant?.type === 1 ? (
+          {editingCateringMerchant?.type === 2 ? (
             <>
               <Descriptions
                 style={{ marginBottom: "3.2rem" }}

@@ -6,8 +6,8 @@ import { ShopCategoryModal } from "./components/shop-category-modal";
 import { useShopCategoriesSearchParams } from "./util";
 
 const merchantTypeOptions = [
-  { label: "个人", value: 1 },
-  { label: "企业", value: 2 },
+  { label: "企业", value: 1 },
+  { label: "个人", value: 2 },
 ];
 
 export const ShopCategoryList = () => {

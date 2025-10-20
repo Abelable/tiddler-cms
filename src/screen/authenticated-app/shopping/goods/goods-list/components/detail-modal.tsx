@@ -270,7 +270,7 @@ export const DetailModal = ({
               {editingGoods?.merchantInfo?.id}
             </Descriptions.Item>
             <Descriptions.Item label="商家类型">
-              {editingGoods?.merchantInfo?.type === 1 ? "个人" : "企业"}
+              {editingGoods?.merchantInfo?.type === 1 ? "企业" : "个人"}
             </Descriptions.Item>
             <Descriptions.Item label="联系人姓名">
               {editingGoods?.merchantInfo?.name}

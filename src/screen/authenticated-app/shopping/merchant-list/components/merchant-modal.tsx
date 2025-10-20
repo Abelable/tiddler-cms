@@ -36,7 +36,7 @@ export const MerchantModal = () => {
               {editingMerchant?.id}
             </Descriptions.Item>
             <Descriptions.Item label="商家类型">
-              {editingMerchant?.type === 1 ? "个人" : "企业"}
+              {editingMerchant?.type === 1 ? "企业" : "个人"}
             </Descriptions.Item>
             <Descriptions.Item label="入驻时间">
               {dayjs(editingMerchant?.createdAt).format("YYYY-MM-DD HH:mm:ss")}
@@ -45,7 +45,7 @@ export const MerchantModal = () => {
               {dayjs(editingMerchant?.updatedAt).format("YYYY-MM-DD HH:mm:ss")}
             </Descriptions.Item>
           </Descriptions>
-          {editingMerchant?.type === 1 ? (
+          {editingMerchant?.type === 2 ? (
             <>
               <Descriptions
                 style={{ marginBottom: "3.2rem" }}

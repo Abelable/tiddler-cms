@@ -36,7 +36,7 @@ export const ShopModal = ({
           <Descriptions size={"small"} column={1} bordered>
             <Descriptions.Item label="ID">{editingShop?.id}</Descriptions.Item>
             <Descriptions.Item label="商家类型">
-              {editingShop?.type === 1 ? "个人" : "企业"}
+              {editingShop?.type === 1 ? "企业" : "个人"}
             </Descriptions.Item>
             <Descriptions.Item label="店铺头像">
               <Avatar
