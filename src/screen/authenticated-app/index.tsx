@@ -284,7 +284,7 @@ const MenuSider = ({
       ],
     },
     {
-      label: "家乡代言",
+      label: "家乡代言人",
       key: "team",
       icon: <CloudOutlined />,
       children: [
@@ -299,7 +299,7 @@ const MenuSider = ({
           icon: <ShoppingOutlined />,
         },
         {
-          label: <Link to={"team/promoter_list"}>家乡代言人</Link>,
+          label: <Link to={"team/promoter_list"}>代言人列表</Link>,
           key: "team_promoter_list",
           icon: <UserOutlined />,
         },
