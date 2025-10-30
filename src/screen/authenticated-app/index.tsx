@@ -98,6 +98,7 @@ import {
   SetMealIcon,
   ShipIcon,
   CycleIcon,
+  MedalIcon,
 } from "assets/icon";
 import logo from "assets/images/logo.png";
 import { AdminInfo } from "types/auth";
@@ -286,7 +287,7 @@ const MenuSider = ({
     {
       label: "家乡代言人",
       key: "team",
-      icon: <CloudOutlined />,
+      icon: <MedalIcon />,
       children: [
         {
           label: <Link to={"team/gift_type_list"}>好物类型</Link>,
