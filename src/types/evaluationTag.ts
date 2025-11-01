@@ -11,6 +11,7 @@ export interface EvaluationTag {
   type: number;
   content: string;
   createdAt: string;
+  updatedAt: string;
 }
 
 export interface EvaluationTagListResult {

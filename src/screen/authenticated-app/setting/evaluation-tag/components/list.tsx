@@ -19,14 +19,22 @@ import type {
   EvaluationTag,
   EvaluationTagListSearchParams,
 } from "types/evaluationTag";
+import type { SearchPanelProps } from "./search-panel";
 
-interface ListProps extends TableProps<EvaluationTag> {
+interface ListProps extends SearchPanelProps, TableProps<EvaluationTag> {
   params: Partial<EvaluationTagListSearchParams>;
   setParams: (params: Partial<EvaluationTagListSearchParams>) => void;
   error: Error | unknown;
 }
 
-export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
+export const List = ({
+  typeOptions,
+  sceneOptions,
+  error,
+  params,
+  setParams,
+  ...restProps
+}: ListProps) => {
   const { open } = useEvaluationTagModal();
 
   const setPagination = (pagination: TablePaginationConfig) =>
@@ -54,8 +62,35 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
             width: "8rem",
           },
           {
-            title: "评价标签名称",
-            dataIndex: "name",
+            title: "类型",
+            dataIndex: "type",
+            render: (value) => (
+              <>{typeOptions.find((item) => item.value === value)?.text}</>
+            ),
+          },
+          {
+            title: "标签内容",
+            dataIndex: "content",
+          },
+          {
+            title: "使用场景",
+            dataIndex: "scene",
+            render: (value) => (
+              <>{sceneOptions.find((item) => item.value === value)?.text}</>
+            ),
+          },
+          {
+            title: "更新时间",
+            render: (value, banner) => (
+              <span>
+                {banner.updatedAt
+                  ? dayjs(banner.updatedAt).format("YYYY-MM-DD HH:mm:ss")
+                  : "无"}
+              </span>
+            ),
+            width: "20rem",
+            sorter: (a, b) =>
+              dayjs(a.updatedAt).valueOf() - dayjs(b.updatedAt).valueOf(),
           },
           {
             title: "创建时间",
