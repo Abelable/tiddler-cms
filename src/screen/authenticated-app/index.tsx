@@ -58,6 +58,7 @@ import { GoodsList } from "./shopping/goods/goods-list";
 import { GiftTypeList } from "./team/gift-type-list";
 import { GiftGoodsList } from "./team/gift-goods-list";
 import { PromoterList } from "./team/promoter-list";
+import { EvaluationTagList } from "./setting/evaluation-tag";
 
 import {
   LockOutlined,
@@ -75,10 +76,10 @@ import {
   GiftOutlined,
   PictureOutlined,
   CarOutlined,
-  CloudOutlined,
   VideoCameraOutlined,
   LogoutOutlined,
   TagOutlined,
+  TagsOutlined,
   EnvironmentOutlined,
   LikeOutlined,
   BookOutlined,
@@ -86,6 +87,7 @@ import {
   StarOutlined,
   GoldOutlined,
   BarsOutlined,
+  SettingOutlined,
 } from "@ant-design/icons";
 import {
   ExpressIcon,
@@ -245,6 +247,10 @@ export const AuthenticatedApp = () => {
               <Route path="auth/role_list" element={<RoleList />} />
               <Route path="auth/admin_list" element={<AdminList />} />
               <Route path="auth/personal_center" element={<PersonalCenter />} />
+              <Route
+                path="setting/evaluation_tag"
+                element={<EvaluationTagList />}
+              />
               <Route
                 path={"*"}
                 element={<Navigate to={"user/list"} replace={true} />}
@@ -661,6 +667,18 @@ const MenuSider = ({
           label: <Link to={"auth/admin_list"}>管理员列表</Link>,
           key: "auth_admin_list",
           icon: <TeamOutlined />,
+        },
+      ],
+    },
+    {
+      label: "系统设置",
+      key: "setting",
+      icon: <SettingOutlined />,
+      children: [
+        {
+          label: <Link to={"setting/evaluation_tag"}>评价标签</Link>,
+          key: "setting_evaluation_tag",
+          icon: <TagsOutlined />,
         },
       ],
     },

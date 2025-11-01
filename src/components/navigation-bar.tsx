@@ -73,6 +73,8 @@ const breadcrumbNameMap: { [key: string]: string } = {
   "/auth/role_list": "角色列表",
   "/auth/admin_list": "管理员列表",
   "/auth/personal_center": "个人中心",
+  "/setting": "系统设置",
+  "/setting/evaluation_tag": "评价标签",
 };
 
 export const NavigationBar = () => {

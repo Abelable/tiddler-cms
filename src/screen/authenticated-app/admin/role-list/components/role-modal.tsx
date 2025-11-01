@@ -317,6 +317,16 @@ const treeData: DataNode[] = [
       },
     ],
   },
+  {
+    title: "系统设置",
+    key: "setting",
+    children: [
+      {
+        title: "评价标签",
+        key: "evaluation_tag",
+      },
+    ],
+  },
 ];
 
 export const RoleModal = () => {
