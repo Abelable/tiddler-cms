@@ -35,7 +35,7 @@ export const SearchPanel = ({
   return (
     <Container>
       <Item>
-        <div>评价类型：</div>
+        <div>投诉类型：</div>
         <Select
           style={{ width: "20rem" }}
           value={tempParams.type}

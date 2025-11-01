@@ -653,7 +653,7 @@ const MenuSider = ({
             {
               label: <Link to={"shopping/goods/list"}>商品列表</Link>,
               key: "shopping_goods_list",
-              icon: <ProfileOutlined />,
+              icon: <UnorderedListOutlined />,
             },
           ],
         },
@@ -689,7 +689,7 @@ const MenuSider = ({
         {
           label: <Link to={"setting/complaint_option"}>投诉选项</Link>,
           key: "setting_complaint_option",
-          icon: <TagsOutlined />,
+          icon: <ProfileOutlined />,
         },
       ],
     },

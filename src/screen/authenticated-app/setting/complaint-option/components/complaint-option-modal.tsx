@@ -90,11 +90,7 @@ export const ComplaintOptionModal = ({
           >
             <Input placeholder={"请输入选项标题"} />
           </Form.Item>
-          <Form.Item
-            label={"选项内容"}
-            name="content"
-            rules={[{ required: true, message: "请输入选项内容" }]}
-          >
+          <Form.Item label={"选项内容"} name="content">
             <Input placeholder={"请输入选项内容"} />
           </Form.Item>
         </Form>
