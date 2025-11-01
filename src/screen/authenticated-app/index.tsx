@@ -59,6 +59,7 @@ import { GiftTypeList } from "./team/gift-type-list";
 import { GiftGoodsList } from "./team/gift-goods-list";
 import { PromoterList } from "./team/promoter-list";
 import { EvaluationTagList } from "./setting/evaluation-tag";
+import { ComplaintOptionList } from "./setting/complaint-option";
 
 import {
   LockOutlined,
@@ -88,6 +89,7 @@ import {
   GoldOutlined,
   BarsOutlined,
   SettingOutlined,
+  ProfileOutlined,
 } from "@ant-design/icons";
 import {
   ExpressIcon,
@@ -250,6 +252,10 @@ export const AuthenticatedApp = () => {
               <Route
                 path="setting/evaluation_tag"
                 element={<EvaluationTagList />}
+              />
+              <Route
+                path="setting/complaint_option"
+                element={<ComplaintOptionList />}
               />
               <Route
                 path={"*"}
@@ -647,7 +653,7 @@ const MenuSider = ({
             {
               label: <Link to={"shopping/goods/list"}>商品列表</Link>,
               key: "shopping_goods_list",
-              icon: <UnorderedListOutlined />,
+              icon: <ProfileOutlined />,
             },
           ],
         },
@@ -678,6 +684,11 @@ const MenuSider = ({
         {
           label: <Link to={"setting/evaluation_tag"}>评价标签</Link>,
           key: "setting_evaluation_tag",
+          icon: <TagsOutlined />,
+        },
+        {
+          label: <Link to={"setting/complaint_option"}>投诉选项</Link>,
+          key: "setting_complaint_option",
           icon: <TagsOutlined />,
         },
       ],

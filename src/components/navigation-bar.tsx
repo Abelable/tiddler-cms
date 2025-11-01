@@ -75,6 +75,7 @@ const breadcrumbNameMap: { [key: string]: string } = {
   "/auth/personal_center": "个人中心",
   "/setting": "系统设置",
   "/setting/evaluation_tag": "评价标签",
+  "/setting/complaint_option": "投诉选项",
 };
 
 export const NavigationBar = () => {
