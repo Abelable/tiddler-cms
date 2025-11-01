@@ -14,6 +14,7 @@ export const useEvaluationTagListSearchParams = () => {
       () => ({
         page: Number(params.page) || 1,
         limit: Number(params.limit) || 10,
+        ...params,
       }),
       [params]
     ),
@@ -23,7 +24,7 @@ export const useEvaluationTagListSearchParams = () => {
 
 export const useEvaluationTagListQueryKey = () => {
   const [params] = useEvaluationTagListSearchParams();
-  return ["scenic_categories", params];
+  return ["evaluation_tag_list", params];
 };
 
 export const useEvaluationTagModal = () => {

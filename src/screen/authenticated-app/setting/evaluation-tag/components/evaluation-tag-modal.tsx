@@ -94,7 +94,7 @@ export const EvaluationTagModal = ({
           </Form.Item>
           <Form.Item
             label={"标签内容"}
-            name={"name"}
+            name="content"
             rules={[{ required: true, message: "请输入标签内容" }]}
           >
             <Input placeholder={"请输入标签内容"} />
