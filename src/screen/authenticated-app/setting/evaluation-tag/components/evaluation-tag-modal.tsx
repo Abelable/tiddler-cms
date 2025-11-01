@@ -67,6 +67,19 @@ export const EvaluationTagModal = ({
       ) : (
         <Form form={form} layout="vertical">
           <Form.Item
+            name="scene"
+            label="使用场景"
+            rules={[{ required: true, message: "请选择使用场景" }]}
+          >
+            <Select placeholder="请选择使用场景">
+              {sceneOptions.map((item) => (
+                <Select.Option key={item.value} value={item.value}>
+                  {item.text}
+                </Select.Option>
+              ))}
+            </Select>
+          </Form.Item>
+          <Form.Item
             name="type"
             label="评价类型"
             rules={[{ required: true, message: "请选择评价类型" }]}
@@ -85,19 +98,6 @@ export const EvaluationTagModal = ({
             rules={[{ required: true, message: "请输入标签内容" }]}
           >
             <Input placeholder={"请输入标签内容"} />
-          </Form.Item>
-          <Form.Item
-            name="scene"
-            label="使用场景"
-            rules={[{ required: true, message: "请选择使用场景" }]}
-          >
-            <Select placeholder="请选择使用场景">
-              {sceneOptions.map((item) => (
-                <Select.Option key={item.value} value={item.value}>
-                  {item.text}
-                </Select.Option>
-              ))}
-            </Select>
           </Form.Item>
         </Form>
       )}
