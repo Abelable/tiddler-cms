@@ -70,7 +70,7 @@ export const useEditPromoter = (queryKey: QueryKey) => {
       scene: number;
       duration: number;
     }) =>
-      client("promoter/change_level", {
+      client("promoter/edit", {
         data: cleanObject({ id, level, scene, duration }),
         method: "POST",
       }),
