@@ -63,7 +63,7 @@ export const ApproveModal = () => {
         <Form.Item
           name="promotionCommissionUpperLimit"
           label="代言奖励上限"
-          tooltip={`最高可设¥20`}
+          tooltip={`最高可设¥30`}
           rules={[{ required: true, message: "请填写代言奖励上限" }]}
         >
           <InputNumber
