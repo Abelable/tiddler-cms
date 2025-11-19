@@ -622,7 +622,7 @@ const MenuSider = ({
             {
               label: (
                 <Link to={"shopping/self_support/pickup_address_list"}>
-                  提货地址
+                  提货地点
                 </Link>
               ),
               key: "shopping_self_support_pickup_address_list",

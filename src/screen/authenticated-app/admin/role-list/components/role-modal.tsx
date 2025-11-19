@@ -278,7 +278,7 @@ const treeData: DataNode[] = [
             key: "shopping_self_support_freight_template_list",
           },
           {
-            title: "提货地址",
+            title: "提货地点",
             key: "shopping_self_support_pickup_address_list",
           },
           {

@@ -20,6 +20,7 @@ const statusOptions = [
   { text: "待审核", value: 0 },
   { text: "售卖中", value: 1 },
   { text: "未过审", value: 2 },
+  { text: "已下架", value: 3 },
 ];
 
 export const GoodsList = () => {
