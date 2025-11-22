@@ -32,7 +32,7 @@ export const login = async (form: AuthForm) => {
 };
 
 export const logout = async () => {
-  await http("auth/logout", { token: getToken() as string });
+  await http("auth/logout", { method: "POST", token: getToken() as string });
   removeToken();
   removePermission();
 };
