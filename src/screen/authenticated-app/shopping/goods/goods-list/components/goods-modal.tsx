@@ -932,11 +932,11 @@ export const GoodsModal = ({
                 getFieldValue("refundStatus") === 1 && (
                   <Col span={12}>
                     <Form.Item
-                      name="refundAddressIds"
+                      name="refundAddressId"
                       label="退货地址"
                       rules={[{ required: true, message: "请选择退货地址" }]}
                     >
-                      <Select mode="multiple" placeholder="请选择退货地址">
+                      <Select placeholder="请选择退货地址">
                         {refundAddressOptions.map((item) => (
                           <Select.Option key={item.id} value={item.id}>
                             {item.addressDetail}
