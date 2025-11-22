@@ -38,7 +38,7 @@ export const logout = async () => {
 };
 
 export const refreshToken = async () => {
-  const token = await http("auth/token_refresh");
+  const token = await http("auth/token_refresh", { method: "POST" });
   window.localStorage.setItem(localStorageKey, token);
 };
 
