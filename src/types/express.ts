@@ -1,4 +1,6 @@
 export interface ExpressesSearchParams {
+  name: string;
+  code: string;
   page: number;
   limit: number;
 }

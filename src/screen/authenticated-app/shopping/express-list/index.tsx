@@ -1,8 +1,10 @@
+import { List } from "./components/list";
+import { ExpressModal } from "./components/express-modal";
+import { SearchPanel } from "./components/search-panel";
+
 import styled from "@emotion/styled";
 import { useExpresses } from "service/express";
 import { toNumber } from "utils";
-import { List } from "./components/list";
-import { ExpressModal } from "./components/express-modal";
 import { useExpressesSearchParams } from "./util";
 
 export const ExpressList = () => {
@@ -12,6 +14,7 @@ export const ExpressList = () => {
   return (
     <Container>
       <Main>
+        <SearchPanel params={params} setParams={setParams} />
         <List
           params={params}
           setParams={setParams}

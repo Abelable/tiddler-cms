@@ -3,7 +3,12 @@ import { useCallback, useMemo } from "react";
 import { useExpress } from "service/express";
 
 export const useExpressesSearchParams = () => {
-  const [params, setParams] = useUrlQueryParams(["page", "limit"]);
+  const [params, setParams] = useUrlQueryParams([
+    "name",
+    "code",
+    "page",
+    "limit",
+  ]);
   return [
     useMemo(
       () => ({
