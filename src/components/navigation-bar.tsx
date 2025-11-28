@@ -65,6 +65,7 @@ const breadcrumbNameMap: { [key: string]: string } = {
   "/shopping/goods": "商品管理",
   "/shopping/goods/category_list": "商品分类",
   "/shopping/goods/list": "商品列表",
+  "/shopping/order_list": "订单列表",
   "/team": "家乡代言人",
   "/team/gift_type_list": "好物类型",
   "/team/gift_list": "家乡好物",
