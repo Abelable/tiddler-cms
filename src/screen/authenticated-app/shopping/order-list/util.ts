@@ -7,6 +7,7 @@ export const useOrderListSearchParams = () => {
     "orderSn",
     "status",
     "goodsId",
+    "shopId",
     "userId",
     "deliveryMode",
     "consignee",

@@ -58,14 +58,14 @@ interface ListProps
       | "goodsOptions"
       | "shopOptions"
     > {
-  statusOptions: Option[];
+  statusDescOptions: Option[];
   error: Error | unknown;
   selectedRowKeys: React.Key[];
   setSelectedRowKeys: (selectedRowKeys: []) => void;
 }
 
 export const List = ({
-  statusOptions,
+  statusDescOptions,
   selectedRowKeys,
   setSelectedRowKeys,
   error,
@@ -157,12 +157,15 @@ export const List = ({
                         : "#333",
                     }}
                   >
-                    {statusOptions.find((item) => item.value === value)?.text}
+                    {
+                      statusDescOptions.find((item) => item.value === value)
+                        ?.text
+                    }
                   </span>
                 </Row>
               );
             },
-            filters: statusOptions,
+            filters: statusDescOptions,
             onFilter: (value, order) => order.status === value,
             width: "18rem",
           },

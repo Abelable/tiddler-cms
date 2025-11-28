@@ -26,6 +26,13 @@ const deliveryModeOptions = [
   { text: "到店自提", value: 2 },
 ];
 const statusOptions = [
+  { text: "待发货", value: 1 },
+  { text: "待收货", value: 2 },
+  { text: "待自提", value: 3 },
+  { text: "已完成", value: 4 },
+  { text: "售后/退款", value: 5 },
+];
+const statusDescOptions = [
   { text: "待付款", value: 101 },
   { text: "用户取消", value: 102 },
   { text: "系统取消", value: 103 },
@@ -71,7 +78,7 @@ export const GoodsOrderList = () => {
           setParams={setParams}
         />
         <List
-          statusOptions={statusOptions}
+          statusDescOptions={statusDescOptions}
           selectedRowKeys={selectedRowKeys}
           setSelectedRowKeys={setSelectedRowKeys}
           params={params}
@@ -108,7 +115,7 @@ export const GoodsOrderList = () => {
           </Button>
         </Row>
       </Drawer>
-      <OrderModal statusOptions={statusOptions} />
+      <OrderModal statusDescOptions={statusDescOptions} />
       <DeliveryModal expressOptions={expressOptions} />
       <ShippingModal />
       <AddressModal />
