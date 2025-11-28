@@ -6,7 +6,7 @@ export interface GoodsListSearchParams {
   status: number | undefined;
   shopCategoryId: number | undefined;
   categoryId: number | undefined;
-  merchantId: number | undefined;
+  shopId: number | undefined;
   page: number;
   limit: number;
 }

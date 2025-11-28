@@ -2,6 +2,7 @@ export interface OrderListSearchParams {
   status: number | undefined;
   orderSn: string;
   goodsId: number | undefined;
+  shopId: number | undefined;
   userId: number | undefined;
   deliveryMode: number | undefined;
   consignee: string;
@@ -17,7 +18,9 @@ export interface Order {
   deliveryMode: number;
   goodsList: OrderGoods[];
   refundAmount: number;
-  merchantId: number;
+  shopId: number;
+  shopLogo: string;
+  shopName: string;
   userInfo: { id: number; avatar: string; nickname: string };
   consignee: string;
   mobile: string;
@@ -100,9 +103,4 @@ export interface OrderDetail extends Omit<Order, "goodsList"> {
   shipTime: string;
   confirmTime: string;
   finishTime: string;
-}
-
-export interface ExpressOption {
-  name: string;
-  code: string;
 }

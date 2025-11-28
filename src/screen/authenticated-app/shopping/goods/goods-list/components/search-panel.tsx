@@ -22,7 +22,7 @@ const defaultParmas: Partial<GoodsListSearchParams> = {
   shopCategoryId: undefined,
   categoryId: undefined,
   status: undefined,
-  merchantId: undefined,
+  shopId: undefined,
 };
 
 export const SearchPanel = ({
@@ -64,10 +64,8 @@ export const SearchPanel = ({
   const clearCategory = () =>
     setTempParams({ ...tempParams, categoryId: undefined });
 
-  const setMerchant = (merchantId: number) =>
-    setTempParams({ ...tempParams, merchantId });
-  const clearMerchant = () =>
-    setTempParams({ ...tempParams, merchantId: undefined });
+  const setShop = (shopId: number) => setTempParams({ ...tempParams, shopId });
+  const clearShop = () => setTempParams({ ...tempParams, shopId: undefined });
 
   const clear = () => {
     setParams({ ...params, ...defaultParmas, page: 1 });
@@ -153,11 +151,11 @@ export const SearchPanel = ({
         <div>所属店铺：</div>
         <Select
           style={{ width: "20rem" }}
-          value={tempParams.merchantId}
+          value={tempParams.shopId}
           placeholder="请选择所属店铺"
           allowClear
-          onSelect={setMerchant}
-          onClear={clearMerchant}
+          onSelect={setShop}
+          onClear={clearShop}
           showSearch
           filterOption={(input, option) =>
             (option!.children as any)[1].props.children

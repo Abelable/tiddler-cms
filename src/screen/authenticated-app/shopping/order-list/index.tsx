@@ -12,11 +12,12 @@ import styled from "@emotion/styled";
 
 import {
   useExportOrder,
-  useExpressOptions,
   useOrderedGoodsOptions,
   useOrderedUserOptions,
   useOrderList,
 } from "service/goodsOrder";
+import { useExpressOptions } from "service/express";
+import { useShopOptions } from "service/shop";
 import { toNumber } from "utils";
 import { useOrderListQueryKey, useOrderListSearchParams } from "./util";
 
@@ -48,6 +49,11 @@ export const GoodsOrderList = () => {
   const { data: expressOptions = [] } = useExpressOptions();
   const { data: userOptions = [] } = useOrderedUserOptions();
   const { data: goodsOptions = [] } = useOrderedGoodsOptions();
+  const { data: originalShopOptions = [] } = useShopOptions();
+  const shopOptions = [
+    { id: 0, logo: "https://static.tiddler.cn/mp/logo.png", name: "官方自营" },
+    ...originalShopOptions,
+  ];
 
   const { isLoading, error, data } = useOrderList(params);
   const { mutate: exportOrder } = useExportOrder(useOrderListQueryKey());
@@ -59,6 +65,7 @@ export const GoodsOrderList = () => {
           statusOptions={statusOptions}
           userOptions={userOptions}
           goodsOptions={goodsOptions}
+          shopOptions={shopOptions}
           deliveryModeOptions={deliveryModeOptions}
           params={params}
           setParams={setParams}

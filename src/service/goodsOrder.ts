@@ -8,7 +8,6 @@ import {
 } from "./use-optimistic-options";
 
 import type {
-  ExpressOption,
   OrderDetail,
   OrderListResult,
   OrderListSearchParams,
@@ -148,12 +147,5 @@ export const useTrackingInfo = (id: number) => {
     {
       enabled: !!id,
     }
-  );
-};
-
-export const useExpressOptions = () => {
-  const client = useHttp();
-  return useQuery<ExpressOption[]>(["express_options"], () =>
-    client("goods/express_options")
   );
 };

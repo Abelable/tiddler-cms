@@ -1,5 +1,6 @@
 import { Button, Form, Input, InputNumber, Modal, Select, Space } from "antd";
 import { PlusOutlined, MinusCircleOutlined } from "@ant-design/icons";
+import { ErrorBox } from "components/lib";
 
 import { useEffect, useState } from "react";
 import { useForm } from "antd/lib/form/Form";
@@ -7,8 +8,8 @@ import styled from "@emotion/styled";
 import { useShipOrder, useModifyShipment } from "service/goodsOrder";
 import { useDeliveryModal, useOrderListQueryKey } from "../util";
 
-import type { ExpressOption, OrderGoods } from "types/goodsOrder";
-import { ErrorBox } from "components/lib";
+import type { OrderGoods } from "types/goodsOrder";
+import type { ExpressOption } from "types/express";
 
 interface Package {
   shipCode: string;

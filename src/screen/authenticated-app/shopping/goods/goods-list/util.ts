@@ -7,6 +7,7 @@ export const useGoodsListSearchParams = () => {
     "name",
     "shopCategoryId",
     "categoryId",
+    "shopId",
     "status",
     "page",
     "limit",

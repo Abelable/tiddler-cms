@@ -10,6 +10,7 @@ import {
   Statistic,
   Tooltip,
   Tag,
+  Popover,
 } from "antd";
 import {
   ButtonNoPadding,
@@ -21,6 +22,8 @@ import {
   GoodsName,
   GoodsSku,
   GoodsPriceWrap,
+  OptionCover,
+  Card,
 } from "components/lib";
 import { FileUpload } from "components/file-upload";
 import {
@@ -49,7 +52,11 @@ interface ListProps
   extends TableProps<Order>,
     Omit<
       SearchPanelProps,
-      "statusOptions" | "deliveryModeOptions" | "userOptions" | "goodsOptions"
+      | "statusOptions"
+      | "deliveryModeOptions"
+      | "userOptions"
+      | "goodsOptions"
+      | "shopOptions"
     > {
   statusOptions: Option[];
   error: Error | unknown;
@@ -193,6 +200,26 @@ export const List = ({
               </>
             ),
             width: "30rem",
+          },
+          {
+            title: "店铺",
+            dataIndex: "shopId",
+            render: (value, order) => {
+              return (
+                <Popover content={`id: ${order.shopId}`}>
+                  <Card>
+                    <OptionCover
+                      src={
+                        order.shopLogo ||
+                        "https://static.tiddler.cn/mp/logo.png"
+                      }
+                    />
+                    <div>{order.shopName || "官方自营"}</div>
+                  </Card>
+                </Popover>
+              );
+            },
+            width: "18rem",
           },
           {
             title: "实付金额",

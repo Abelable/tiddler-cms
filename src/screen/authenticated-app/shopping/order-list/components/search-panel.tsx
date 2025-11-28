@@ -1,4 +1,4 @@
-import { GoodsCover, OptionAvatar, Row } from "components/lib";
+import { GoodsCover, OptionAvatar, OptionCover, Row } from "components/lib";
 import { Button, Input, Select } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 
@@ -7,11 +7,13 @@ import styled from "@emotion/styled";
 
 import type { Option } from "types/common";
 import type { OrderListSearchParams } from "types/goodsOrder";
+import type { ShopOption } from "types/shop";
 
 export interface SearchPanelProps {
   statusOptions: Option[];
   userOptions: { id: number; avatar: string; nickname: string }[];
   goodsOptions: { id: number; cover: string; name: string }[];
+  shopOptions: ShopOption[];
   deliveryModeOptions: Option[];
   params: Partial<OrderListSearchParams>;
   setParams: (params: Partial<OrderListSearchParams>) => void;
@@ -21,6 +23,7 @@ const defaultParmas: Partial<OrderListSearchParams> = {
   status: undefined,
   orderSn: "",
   goodsId: undefined,
+  shopId: undefined,
   userId: undefined,
   deliveryMode: undefined,
   consignee: "",
@@ -31,6 +34,7 @@ export const SearchPanel = ({
   statusOptions,
   userOptions,
   goodsOptions,
+  shopOptions,
   deliveryModeOptions,
   params,
   setParams,
@@ -63,6 +67,9 @@ export const SearchPanel = ({
     setTempParams({ ...tempParams, goodsId });
   const clearGoodsId = () =>
     setTempParams({ ...tempParams, goodsId: undefined });
+
+  const setShop = (shopId: number) => setTempParams({ ...tempParams, shopId });
+  const clearShop = () => setTempParams({ ...tempParams, shopId: undefined });
 
   const setDeliveryMode = (deliveryMode: number) =>
     setTempParams({ ...tempParams, deliveryMode });
@@ -152,6 +159,30 @@ export const SearchPanel = ({
           {goodsOptions.map(({ id, cover, name }) => (
             <Select.Option key={id} value={id}>
               <GoodsCover src={cover} />
+              <span>{name}</span>
+            </Select.Option>
+          ))}
+        </Select>
+      </Item>
+      <Item>
+        <div>所属店铺：</div>
+        <Select
+          style={{ width: "20rem" }}
+          value={tempParams.shopId}
+          placeholder="请选择所属店铺"
+          allowClear
+          onSelect={setShop}
+          onClear={clearShop}
+          showSearch
+          filterOption={(input, option) =>
+            (option!.children as any)[1].props.children
+              .toLowerCase()
+              .includes(input.toLowerCase())
+          }
+        >
+          {shopOptions?.map(({ id, logo, name }) => (
+            <Select.Option key={id} value={id}>
+              <OptionCover src={logo} />
               <span>{name}</span>
             </Select.Option>
           ))}

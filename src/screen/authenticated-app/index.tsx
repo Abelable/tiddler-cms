@@ -245,7 +245,7 @@ export const AuthenticatedApp = () => {
                 element={<GoodsCategoryList />}
               />
               <Route path="shopping/goods/list" element={<GoodsList />} />
-              <Route path="shopping/goods/list" element={<GoodsOrderList />} />
+              <Route path="shopping/order_list" element={<GoodsOrderList />} />
               <Route path="team/gift_type_list" element={<GiftTypeList />} />
               <Route path="team/gift_list" element={<GiftGoodsList />} />
               <Route path="team/promoter_list" element={<PromoterList />} />
