@@ -73,3 +73,9 @@ export interface GoodsDetail extends Goods {
   shopInfo: Partial<Shop>;
   merchantInfo: Partial<MerchantDetail>;
 }
+
+export interface GoodsOption {
+  id: number;
+  cover: string;
+  name: string;
+}

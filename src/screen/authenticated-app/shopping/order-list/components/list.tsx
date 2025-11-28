@@ -1,0 +1,407 @@
+import styled from "@emotion/styled";
+import {
+  Avatar,
+  Dropdown,
+  MenuProps,
+  Modal,
+  Table,
+  TablePaginationConfig,
+  TableProps,
+  Statistic,
+  Tooltip,
+  Tag,
+} from "antd";
+import {
+  ButtonNoPadding,
+  ErrorBox,
+  Row,
+  PageTitle,
+  GoodsCard,
+  GoodsInfo,
+  GoodsName,
+  GoodsSku,
+  GoodsPriceWrap,
+} from "components/lib";
+import { FileUpload } from "components/file-upload";
+import {
+  UserOutlined,
+  ClockCircleFilled,
+  ExclamationCircleFilled,
+} from "@ant-design/icons";
+
+import dayjs from "dayjs";
+import { useQueryClient } from "react-query";
+import { useConfirmOrder, useRefundOrder } from "service/goodsOrder";
+import {
+  useOrderModal,
+  useOrderListQueryKey,
+  useDeliveryModal,
+  useAddressModal,
+} from "../util";
+import { SearchPanelProps } from "./search-panel";
+
+import type { Option } from "types/common";
+import type { Order, OrderGoods } from "types/goodsOrder";
+
+const { Countdown } = Statistic;
+
+interface ListProps
+  extends TableProps<Order>,
+    Omit<
+      SearchPanelProps,
+      "statusOptions" | "deliveryModeOptions" | "userOptions" | "goodsOptions"
+    > {
+  statusOptions: Option[];
+  error: Error | unknown;
+  selectedRowKeys: React.Key[];
+  setSelectedRowKeys: (selectedRowKeys: []) => void;
+}
+
+export const List = ({
+  statusOptions,
+  selectedRowKeys,
+  setSelectedRowKeys,
+  error,
+  params,
+  setParams,
+  ...restProps
+}: ListProps) => {
+  const setPagination = (pagination: TablePaginationConfig) =>
+    setParams({
+      ...params,
+      page: pagination.current,
+      limit: pagination.pageSize,
+    });
+
+  const queryClient = useQueryClient();
+  const queryKey = useOrderListQueryKey();
+  const handleSuccess = () => queryClient.invalidateQueries(queryKey);
+
+  return (
+    <Container>
+      <Header between={true}>
+        <PageTitle>订单列表</PageTitle>
+        <FileUpload name="导入订单数据" onSuccess={handleSuccess} />
+      </Header>
+      <ErrorBox error={error} />
+      <Table
+        rowKey={"id"}
+        scroll={{ x: 2000 }}
+        rowSelection={{
+          type: "checkbox",
+          selectedRowKeys,
+          onChange: (selectedRowKeys) =>
+            setSelectedRowKeys(selectedRowKeys as []),
+        }}
+        columns={[
+          {
+            title: "id",
+            dataIndex: "id",
+            width: "8rem",
+            fixed: "left",
+          },
+          {
+            title: "订单状态",
+            dataIndex: "status",
+            render: (value, order) => {
+              const deadline =
+                dayjs(order.createdAt).valueOf() + 1000 * 60 * 60 * 24 * 2;
+              return (
+                <Row>
+                  {[201, 202].includes(value) ? (
+                    deadline <= Date.now() ? (
+                      <Tooltip title="超时未发货" color="#ff4d4f">
+                        <ExclamationCircleFilled
+                          style={{
+                            marginRight: "4px",
+                            color: "#ff4d4f",
+                            cursor: "pointer",
+                          }}
+                        />
+                      </Tooltip>
+                    ) : (
+                      <Tooltip
+                        title={
+                          <CustomCountdown
+                            value={deadline}
+                            format="D 天 H 时 m 分 s 秒"
+                          />
+                        }
+                        color="#faad14"
+                      >
+                        <ClockCircleFilled
+                          style={{
+                            marginRight: "4px",
+                            color: "#faad14",
+                            cursor: "pointer",
+                          }}
+                        />
+                      </Tooltip>
+                    )
+                  ) : (
+                    <></>
+                  )}
+                  <span
+                    style={{
+                      color: [201, 202].includes(value)
+                        ? deadline <= Date.now()
+                          ? "#ff4d4f"
+                          : "#faad14"
+                        : "#333",
+                    }}
+                  >
+                    {statusOptions.find((item) => item.value === value)?.text}
+                  </span>
+                </Row>
+              );
+            },
+            filters: statusOptions,
+            onFilter: (value, order) => order.status === value,
+            width: "18rem",
+          },
+          {
+            title: "订单编号",
+            dataIndex: "orderSn",
+            width: "21rem",
+          },
+          {
+            title: "商品信息",
+            dataIndex: "goodsList",
+            render: (value) => (
+              <>
+                {value.map(
+                  (
+                    { cover, name, selectedSkuName, price, number }: OrderGoods,
+                    index: number
+                  ) => (
+                    <GoodsCard key={index}>
+                      <img src={cover} alt="" />
+                      <GoodsInfo>
+                        <GoodsName>{name}</GoodsName>
+                        <GoodsSku>{selectedSkuName}</GoodsSku>
+                        <GoodsPriceWrap>
+                          <div style={{ color: "#ff4d4f" }}>
+                            <span style={{ fontSize: "6px" }}>¥</span>
+                            <span style={{ fontSize: "12px" }}>{price}</span>
+                          </div>
+                          <div style={{ fontSize: "10px" }}>x{number}</div>
+                        </GoodsPriceWrap>
+                      </GoodsInfo>
+                    </GoodsCard>
+                  )
+                )}
+              </>
+            ),
+            width: "30rem",
+          },
+          {
+            title: "实付金额",
+            dataIndex: "paymentAmount",
+            render: (value) => <>¥{value}</>,
+            width: "12rem",
+          },
+          {
+            title: "下单用户",
+            dataIndex: "userInfo",
+            render: (value) => (
+              <>
+                <Avatar
+                  size="small"
+                  src={value?.avatar}
+                  icon={<UserOutlined />}
+                />
+                <span style={{ marginLeft: "0.6rem" }}>
+                  {value?.nickname.length > 8
+                    ? `${value?.nickname.slice(0, 8)}...`
+                    : value?.nickname}
+                </span>
+              </>
+            ),
+            width: "20rem",
+          },
+          {
+            title: "配送方式",
+            dataIndex: "deliveryMode",
+            render: (value) => (
+              <Tag>{value === 1 ? "物流配送" : "到店自提"}</Tag>
+            ),
+            width: "12rem",
+          },
+          {
+            title: "收件人",
+            dataIndex: "consignee",
+            width: "12rem",
+          },
+          {
+            title: "收件人手机号",
+            dataIndex: "mobile",
+            width: "18rem",
+          },
+          {
+            title: "提交时间",
+            render: (value, order) => (
+              <span>
+                {order.createdAt
+                  ? dayjs(order.createdAt).format("YYYY-MM-DD HH:mm:ss")
+                  : "无"}
+              </span>
+            ),
+            sorter: (a, b) =>
+              dayjs(a.createdAt).valueOf() - dayjs(b.createdAt).valueOf(),
+            width: "20rem",
+          },
+          {
+            title: "处理时间",
+            render: (value, refund) => (
+              <span>
+                {refund.updatedAt
+                  ? dayjs(refund.updatedAt).format("YYYY-MM-DD HH:mm:ss")
+                  : "无"}
+              </span>
+            ),
+            sorter: (a, b) =>
+              dayjs(a.updatedAt).valueOf() - dayjs(b.updatedAt).valueOf(),
+            width: "20rem",
+          },
+          {
+            title: "操作",
+            render(value, order) {
+              return <More id={order.id} status={order.status} />;
+            },
+            fixed: "right",
+            width: "8rem",
+          },
+        ]}
+        onChange={setPagination}
+        {...restProps}
+      />
+    </Container>
+  );
+};
+
+const More = ({ id, status }: { id: number; status: number }) => {
+  const { open: openOrderModal } = useOrderModal();
+  const { open: openDeliveryModal, modify: modifyDelivery } =
+    useDeliveryModal();
+  const { open: openAddressModal } = useAddressModal();
+  const { mutate: refundOrder } = useRefundOrder(useOrderListQueryKey());
+  const { mutate: confirmOrder } = useConfirmOrder(useOrderListQueryKey());
+
+  const confirmRefund = (id: number) => {
+    Modal.confirm({
+      title: "确定退款该订单吗？",
+      content: "点击确定退款",
+      okText: "确定",
+      cancelText: "取消",
+      onOk: () => refundOrder(id),
+    });
+  };
+
+  const confirmReceived = (id: number) => {
+    Modal.confirm({
+      title: "确认收货之前，请核实物流信息",
+      content: "点击确定确认已收货",
+      okText: "确定",
+      cancelText: "取消",
+      onOk: () => confirmOrder([id]),
+    });
+  };
+
+  let items: MenuProps["items"];
+  switch (status) {
+    case 201:
+    case 202:
+      items = [
+        {
+          label: <div onClick={() => openOrderModal(id)}>详情</div>,
+          key: "detail",
+        },
+        {
+          label: <div onClick={() => confirmRefund(id)}>退款</div>,
+          key: "refund",
+        },
+        {
+          label: <div onClick={() => openAddressModal(id)}>修改地址</div>,
+          key: "modify_address",
+        },
+        {
+          label: <div onClick={() => openDeliveryModal(id)}>发货</div>,
+          key: "delivery",
+        },
+      ];
+      break;
+
+    case 301:
+      items = [
+        {
+          label: <div onClick={() => openOrderModal(id)}>详情</div>,
+          key: "detail",
+        },
+        {
+          label: <div onClick={() => modifyDelivery(id)}>修改物流</div>,
+          key: "modify_delivery",
+        },
+        {
+          label: <div onClick={() => confirmReceived(id)}>确认收货</div>,
+          key: "confirm",
+        },
+      ];
+      break;
+
+    case 302:
+      items = [
+        {
+          label: <div onClick={() => openOrderModal(id)}>详情</div>,
+          key: "detail",
+        },
+        {
+          label: <div onClick={() => confirmRefund(id)}>退款</div>,
+          key: "refund",
+        },
+        {
+          label: <div onClick={() => confirmReceived(id)}>确认提货</div>,
+          key: "confirm",
+        },
+      ];
+      break;
+
+    case 203:
+    case 204:
+    case 401:
+    case 402:
+    case 403:
+    case 501:
+    case 502:
+      items = [
+        {
+          label: <div onClick={() => openOrderModal(id)}>详情</div>,
+          key: "detail",
+        },
+      ];
+      break;
+  }
+
+  return (
+    <Dropdown menu={{ items }}>
+      <ButtonNoPadding type={"link"}>...</ButtonNoPadding>
+    </Dropdown>
+  );
+};
+
+const Container = styled.div`
+  margin-top: 2.4rem;
+  padding: 2.4rem;
+  background: #fff;
+  border-radius: 0.6rem;
+`;
+
+const Header = styled(Row)`
+  margin-bottom: 2.4rem;
+`;
+
+const CustomCountdown = styled(Countdown)`
+  > * {
+    color: #fff !important;
+    font-size: 14px !important;
+  }
+`;

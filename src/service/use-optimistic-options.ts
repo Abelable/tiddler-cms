@@ -85,3 +85,63 @@ export const useEditAdminBaseInfoConfig = (queryKey: QueryKey) =>
         }
       : null
   );
+
+export const useCancelOrderConfig = (queryKey: QueryKey) =>
+  useConfig(queryKey, (ids, old) =>
+    old
+      ? {
+          ...old,
+          list: old.list.map((item: any) =>
+            ids.includes(item.id) ? { ...item, status: 104 } : item
+          ),
+        }
+      : null
+  );
+
+export const useRefundOrderConfig = (queryKey: QueryKey) =>
+  useConfig(queryKey, (id, old) =>
+    old
+      ? {
+          ...old,
+          list: old.list.map((item: any) =>
+            item.id === id ? { ...item, status: 203 } : item
+          ),
+        }
+      : null
+  );
+
+export const useShipOrderConfig = (queryKey: QueryKey) =>
+  useConfig(queryKey, (target, old) =>
+    old
+      ? {
+          ...old,
+          list: old.list.map((item: any) =>
+            item.id === target.id ? { ...item, ...target, status: 301 } : item
+          ),
+        }
+      : null
+  );
+
+export const useConfirmOrderConfig = (queryKey: QueryKey) =>
+  useConfig(queryKey, (ids, old) =>
+    old
+      ? {
+          ...old,
+          list: old.list.map((item: any) =>
+            ids.includes(item.id) ? { ...item, status: 403 } : item
+          ),
+        }
+      : null
+  );
+
+export const useExportOrderConfig = (queryKey: QueryKey) =>
+  useConfig(queryKey, (ids, old) =>
+    old
+      ? {
+          ...old,
+          list: old.list.map((item: any) =>
+            ids.includes(item.id) ? { ...item, status: 202 } : item
+          ),
+        }
+      : null
+  );

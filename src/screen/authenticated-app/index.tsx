@@ -55,6 +55,7 @@ import { FreightTemplateList } from "./shopping/self-support/freight-template-li
 import { PickupAddressList } from "./shopping/self-support/pickup-address";
 import { RefundAddressList } from "./shopping/self-support/refund-address";
 import { GoodsList } from "./shopping/goods/goods-list";
+import { GoodsOrderList } from "./shopping/order-list";
 import { GiftTypeList } from "./team/gift-type-list";
 import { GiftGoodsList } from "./team/gift-goods-list";
 import { PromoterList } from "./team/promoter-list";
@@ -90,6 +91,7 @@ import {
   BarsOutlined,
   SettingOutlined,
   ProfileOutlined,
+  SnippetsOutlined,
 } from "@ant-design/icons";
 import {
   ExpressIcon,
@@ -243,6 +245,7 @@ export const AuthenticatedApp = () => {
                 element={<GoodsCategoryList />}
               />
               <Route path="shopping/goods/list" element={<GoodsList />} />
+              <Route path="shopping/goods/list" element={<GoodsOrderList />} />
               <Route path="team/gift_type_list" element={<GiftTypeList />} />
               <Route path="team/gift_list" element={<GiftGoodsList />} />
               <Route path="team/promoter_list" element={<PromoterList />} />
@@ -656,6 +659,11 @@ const MenuSider = ({
               icon: <UnorderedListOutlined />,
             },
           ],
+        },
+        {
+          label: <Link to={"shopping/order_list"}>订单列表</Link>,
+          key: "shopping_order_list",
+          icon: <SnippetsOutlined />,
         },
       ],
     },
