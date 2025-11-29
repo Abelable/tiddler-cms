@@ -145,3 +145,53 @@ export const useExportOrderConfig = (queryKey: QueryKey) =>
         }
       : null
   );
+
+export const useAddCouponConfig = (queryKey: QueryKey) =>
+  useConfig(queryKey, (target, old) =>
+    old
+      ? {
+          ...old,
+          list: [
+            ...target.goodsIds.map((id: number, index: number) => ({
+              id: `${
+                (old.list[0]
+                  ? Number(
+                      old.list.sort(
+                        (a: { id: number }, b: { id: number }) => b.id - a.id
+                      )[0].id
+                    )
+                  : 1) +
+                target.goodsIds.length -
+                index
+              }`,
+              type: target.type,
+            })),
+            ...old.list,
+          ],
+        }
+      : null
+  );
+
+export const useDownCouponConfig = (queryKey: QueryKey) =>
+  useConfig(queryKey, (id, old) =>
+    old
+      ? {
+          ...old,
+          list: old.list.map((item: any) =>
+            item.id === id ? { ...item, status: 3 } : item
+          ),
+        }
+      : null
+  );
+
+export const useUpConfig = (queryKey: QueryKey) =>
+  useConfig(queryKey, (id, old) =>
+    old
+      ? {
+          ...old,
+          list: old.list.map((item: any) =>
+            item.id === id ? { ...item, status: 1 } : item
+          ),
+        }
+      : null
+  );

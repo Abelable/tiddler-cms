@@ -55,6 +55,7 @@ import { FreightTemplateList } from "./shopping/self-support/freight-template-li
 import { PickupAddressList } from "./shopping/self-support/pickup-address";
 import { RefundAddressList } from "./shopping/self-support/refund-address";
 import { GoodsList } from "./shopping/goods/goods-list";
+import { GoodsCouponList } from "./shopping/coupon-list";
 import { GoodsOrderList } from "./shopping/order-list";
 import { GiftTypeList } from "./team/gift-type-list";
 import { GiftGoodsList } from "./team/gift-goods-list";
@@ -245,6 +246,10 @@ export const AuthenticatedApp = () => {
                 element={<GoodsCategoryList />}
               />
               <Route path="shopping/goods/list" element={<GoodsList />} />
+              <Route
+                path="shopping/coupon_list"
+                element={<GoodsCouponList />}
+              />
               <Route path="shopping/order_list" element={<GoodsOrderList />} />
               <Route path="team/gift_type_list" element={<GiftTypeList />} />
               <Route path="team/gift_list" element={<GiftGoodsList />} />
@@ -587,11 +592,6 @@ const MenuSider = ({
           icon: <TeamOutlined />,
         },
         {
-          label: <Link to={"shopping/express_list"}>快递列表</Link>,
-          key: "shopping_express_list",
-          icon: <ExpressIcon />,
-        },
-        {
           label: "店铺管理",
           key: "shopping_shop",
           icon: <ShopOutlined />,
@@ -607,6 +607,11 @@ const MenuSider = ({
               icon: <UnorderedListOutlined />,
             },
           ],
+        },
+        {
+          label: <Link to={"shopping/express_list"}>快递列表</Link>,
+          key: "shopping_express_list",
+          icon: <ExpressIcon />,
         },
         {
           label: "自营管理",
@@ -659,6 +664,11 @@ const MenuSider = ({
               icon: <UnorderedListOutlined />,
             },
           ],
+        },
+        {
+          label: <Link to={"shopping/coupon_list"}>优惠券</Link>,
+          key: "shopping_coupon_list",
+          icon: <CouponIcon />,
         },
         {
           label: <Link to={"shopping/order_list"}>订单列表</Link>,
