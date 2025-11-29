@@ -14,7 +14,7 @@ import type { ShopCategoriesResult, ShopCategory } from "types/shopCategory";
 export const useShopCategories = (params: Partial<CategoriesSearchParams>) => {
   const client = useHttp();
   return useQuery<ShopCategoriesResult>(["shop_categories", params], () =>
-    client("shop/category/list", { data: params, method: "POST" })
+    client("goods/shop/category/list", { data: params, method: "POST" })
   );
 };
 
@@ -33,7 +33,7 @@ export const useAddShopCategory = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (params: Partial<ShopCategory>) =>
-      client("shop/category/add", {
+      client("goods/shop/category/add", {
         data: cleanObject(params),
         method: "POST",
       }),
@@ -45,7 +45,7 @@ export const useEditShopCategory = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (params: Partial<ShopCategory>) =>
-      client("shop/category/edit", {
+      client("goods/shop/category/edit", {
         data: cleanObject(params),
         method: "POST",
       }),
@@ -57,7 +57,7 @@ export const useDeleteShopCategory = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (id: number) =>
-      client("shop/category/delete", {
+      client("goods/shop/category/delete", {
         data: { id },
         method: "POST",
       }),
@@ -68,7 +68,7 @@ export const useDeleteShopCategory = (queryKey: QueryKey) => {
 export const useShopCategoryOptions = () => {
   const client = useHttp();
   return useQuery<DataOption[]>(["shop_category_options"], () =>
-    client("shop/category/options")
+    client("goods/shop/category/options")
   );
 };
 
@@ -76,7 +76,7 @@ export const useEditShopCategorySort = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     ({ id, sort }: { id: number; sort: number }) =>
-      client("shop/category/edit_sort", {
+      client("goods/shop/category/edit_sort", {
         data: { id, sort },
         method: "POST",
       }),
@@ -88,7 +88,7 @@ export const useEditShopCategoryVisible = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     ({ id, visible }: { id: number; visible: number }) =>
-      client("shop/category/edit_visible", {
+      client("goods/shop/category/edit_visible", {
         data: { id, visible },
         method: "POST",
       }),

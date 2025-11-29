@@ -15,7 +15,7 @@ export const useGiftGoodsList = (
 ) => {
   const client = useHttp();
   return useQuery<GiftGoodsListResult>(["gift_goods_list", params], () =>
-    client("gift/list", { data: params, method: "POST" })
+    client("goods/gift/list", { data: params, method: "POST" })
   );
 };
 
@@ -31,7 +31,7 @@ export const useAddGiftGoods = (queryKey: QueryKey) => {
       goodsIds: number[];
       duration: number;
     }) =>
-      client("gift/add", {
+      client("goods/gift/add", {
         data: { typeId, goodsIds, duration },
         method: "POST",
       }),
@@ -43,7 +43,7 @@ export const useEditDuration = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     ({ id, duration }: { id: number; duration: number }) =>
-      client("gift/edit_duration", {
+      client("goods/gift/edit_duration", {
         data: { id, duration },
         method: "POST",
       }),
@@ -55,7 +55,7 @@ export const useDeleteGiftGoods = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (id: number) =>
-      client("gift/delete", {
+      client("goods/gift/delete", {
         data: { id },
         method: "POST",
       }),

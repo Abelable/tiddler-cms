@@ -21,7 +21,7 @@ export const usePickupAddressList = (
   const client = useHttp();
   return useQuery<PickupAddressListResult>(
     ["pickup_address_list", params],
-    () => client("pickup_address/list", { data: params, method: "POST" })
+    () => client("goods/pickup_address/list", { data: params, method: "POST" })
   );
 };
 
@@ -40,7 +40,7 @@ export const useAddPickupAddress = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (params: Partial<PickupAddress>) =>
-      client("pickup_address/add", {
+      client("goods/pickup_address/add", {
         data: cleanObject(params),
         method: "POST",
       }),
@@ -52,7 +52,7 @@ export const useEditPickupAddress = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (params: Partial<PickupAddress>) =>
-      client("pickup_address/edit", {
+      client("goods/pickup_address/edit", {
         data: cleanObject(params),
         method: "POST",
       }),
@@ -64,7 +64,7 @@ export const useDeletePickupAddress = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (id: number) =>
-      client("pickup_address/delete", {
+      client("goods/pickup_address/delete", {
         data: { id },
         method: "POST",
       }),
@@ -75,6 +75,6 @@ export const useDeletePickupAddress = (queryKey: QueryKey) => {
 export const usePickupAddressOptions = () => {
   const client = useHttp();
   return useQuery<DataOption[]>(["pickup_address_options"], () =>
-    client("pickup_address/options")
+    client("goods/pickup_address/options")
   );
 };

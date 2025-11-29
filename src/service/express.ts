@@ -16,7 +16,7 @@ import { ExpressOption } from "../types/express";
 export const useExpresses = (params: Partial<ExpressesSearchParams>) => {
   const client = useHttp();
   return useQuery<ExpressesResult>(["expresses", params], () =>
-    client("express/list", { data: params, method: "POST" })
+    client("goods/express/list", { data: params, method: "POST" })
   );
 };
 
@@ -35,7 +35,7 @@ export const useAddExpress = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (params: Partial<Express>) =>
-      client("express/add", {
+      client("goods/express/add", {
         data: cleanObject(params),
         method: "POST",
       }),
@@ -47,7 +47,7 @@ export const useEditExpress = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (params: Partial<Express>) =>
-      client("express/edit", {
+      client("goods/express/edit", {
         data: cleanObject(params),
         method: "POST",
       }),
@@ -59,7 +59,7 @@ export const useDeleteExpress = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (id: number) =>
-      client("express/delete", {
+      client("goods/express/delete", {
         data: { id },
         method: "POST",
       }),
@@ -70,6 +70,6 @@ export const useDeleteExpress = (queryKey: QueryKey) => {
 export const useExpressOptions = () => {
   const client = useHttp();
   return useQuery<ExpressOption[]>(["express_options"], () =>
-    client("express/options")
+    client("goods/express/options")
   );
 };

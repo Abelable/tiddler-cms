@@ -11,7 +11,7 @@ import type {
 export const useShops = (params: Partial<ShopsSearchParams>) => {
   const client = useHttp();
   return useQuery<ShopsResult>(["shops", params], () =>
-    client("shop/list", { data: params, method: "POST" })
+    client("goods/shop/list", { data: params, method: "POST" })
   );
 };
 
@@ -28,5 +28,7 @@ export const useShop = (id: number) => {
 
 export const useShopOptions = () => {
   const client = useHttp();
-  return useQuery<ShopOption[]>(["shop_options"], () => client("shop/options"));
+  return useQuery<ShopOption[]>(["shop_options"], () =>
+    client("goods/shop/options")
+  );
 };

@@ -12,7 +12,7 @@ import type {
 export const useMerchants = (params: Partial<MerchantsSearchParams>) => {
   const client = useHttp();
   return useQuery<MerchantsResult>(["merchants", params], () =>
-    client("merchant/list", { data: params, method: "POST" })
+    client("goods/merchant/list", { data: params, method: "POST" })
   );
 };
 
@@ -31,7 +31,7 @@ export const useApproveMerchant = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (id: number) =>
-      client("merchant/approve", {
+      client("goods/merchant/approve", {
         data: { id },
         method: "POST",
       }),
@@ -43,7 +43,7 @@ export const useRejectMerchant = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (data: { id: number; failureReason: string }) =>
-      client("merchant/reject", {
+      client("goods/merchant/reject", {
         data,
         method: "POST",
       }),
@@ -54,6 +54,6 @@ export const useRejectMerchant = (queryKey: QueryKey) => {
 export const useMerchantOptions = () => {
   const client = useHttp();
   return useQuery<DataOption[]>(["merchant_options"], () =>
-    client("merchant/options")
+    client("goods/merchant/options")
   );
 };

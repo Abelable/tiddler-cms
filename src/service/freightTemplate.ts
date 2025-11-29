@@ -20,7 +20,8 @@ export const useFreightTemplateList = (
   const client = useHttp();
   return useQuery<FreightTemplateListResult>(
     ["freight_template_list", params],
-    () => client("freight_template/list", { data: params, method: "POST" })
+    () =>
+      client("goods/freight_template/list", { data: params, method: "POST" })
   );
 };
 
@@ -39,7 +40,7 @@ export const useAddFreightTemplate = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (params: Partial<FreightTemplate>) =>
-      client("freight_template/add", {
+      client("goods/freight_template/add", {
         data: cleanObject(params),
         method: "POST",
       }),
@@ -51,7 +52,7 @@ export const useEditFreightTemplate = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (params: Partial<FreightTemplate>) =>
-      client("freight_template/edit", {
+      client("goods/freight_template/edit", {
         data: cleanObject(params),
         method: "POST",
       }),
@@ -63,7 +64,7 @@ export const useDeleteFreightTemplate = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (id: number) =>
-      client("freight_template/delete", {
+      client("goods/freight_template/delete", {
         data: { id },
         method: "POST",
       }),
@@ -74,6 +75,6 @@ export const useDeleteFreightTemplate = (queryKey: QueryKey) => {
 export const useFreightTemplateOptions = () => {
   const client = useHttp();
   return useQuery<FreightTemplateOption[]>(["freight_template_options"], () =>
-    client("freight_template/options")
+    client("goods/freight_template/options")
   );
 };

@@ -17,7 +17,7 @@ export const useNightTripList = (
 ) => {
   const client = useHttp();
   return useQuery<NightTripListResult>(["night_trip_list", params], () =>
-    client("trip_type/night_trip/list", { data: params, method: "POST" })
+    client("theme/night_trip/list", { data: params, method: "POST" })
   );
 };
 
@@ -25,7 +25,7 @@ export const useNightTrip = (id: number) => {
   const client = useHttp();
   return useQuery<Partial<NightTrip>>(
     ["night_trip", { id }],
-    () => client("trip_type/night_trip/detail", { data: { id } }),
+    () => client("theme/night_trip/detail", { data: { id } }),
     {
       enabled: !!id,
     }
@@ -36,7 +36,7 @@ export const useAddNightTrip = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (params: Partial<NightTrip>) =>
-      client("trip_type/night_trip/add", {
+      client("theme/night_trip/add", {
         data: cleanObject(params),
         method: "POST",
       }),
@@ -48,7 +48,7 @@ export const useEditNightTrip = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (params: Partial<NightTrip>) =>
-      client("trip_type/night_trip/edit", {
+      client("theme/night_trip/edit", {
         data: cleanObject(params),
         method: "POST",
       }),
@@ -60,7 +60,7 @@ export const useEditSort = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     ({ id, sort }: { id: number; sort: number }) =>
-      client("trip_type/night_trip/edit_sort", {
+      client("theme/night_trip/edit_sort", {
         data: { id, sort },
         method: "POST",
       }),
@@ -72,7 +72,7 @@ export const useDeleteNightTrip = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (id: number) =>
-      client("trip_type/night_trip/delete", {
+      client("theme/night_trip/delete", {
         data: { id },
         method: "POST",
       }),

@@ -17,7 +17,7 @@ export const useLakeHomestayList = (
 ) => {
   const client = useHttp();
   return useQuery<LakeHomestayListResult>(["lake_homestay_list", params], () =>
-    client("trip_type/lake_homestay/list", { data: params, method: "POST" })
+    client("theme/lake_homestay/list", { data: params, method: "POST" })
   );
 };
 
@@ -25,7 +25,7 @@ export const useLakeHomestay = (id: number) => {
   const client = useHttp();
   return useQuery<Partial<LakeHomestay>>(
     ["lake_homestay", { id }],
-    () => client("trip_type/lake_homestay/detail", { data: { id } }),
+    () => client("theme/lake_homestay/detail", { data: { id } }),
     {
       enabled: !!id,
     }
@@ -36,7 +36,7 @@ export const useAddLakeHomestay = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (params: Partial<LakeHomestay>) =>
-      client("trip_type/lake_homestay/add", {
+      client("theme/lake_homestay/add", {
         data: cleanObject(params),
         method: "POST",
       }),
@@ -48,7 +48,7 @@ export const useEditLakeHomestay = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (params: Partial<LakeHomestay>) =>
-      client("trip_type/lake_homestay/edit", {
+      client("theme/lake_homestay/edit", {
         data: cleanObject(params),
         method: "POST",
       }),
@@ -60,7 +60,7 @@ export const useEditSort = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     ({ id, sort }: { id: number; sort: number }) =>
-      client("trip_type/lake_homestay/edit_sort", {
+      client("theme/lake_homestay/edit_sort", {
         data: { id, sort },
         method: "POST",
       }),
@@ -72,7 +72,7 @@ export const useDeleteLakeHomestay = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (id: number) =>
-      client("trip_type/lake_homestay/delete", {
+      client("theme/lake_homestay/delete", {
         data: { id },
         method: "POST",
       }),

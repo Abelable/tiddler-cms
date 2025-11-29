@@ -15,7 +15,7 @@ import type {
 export const useLakeTripList = (params: Partial<LakeTripListSearchParams>) => {
   const client = useHttp();
   return useQuery<LakeTripListResult>(["lake_trip_list", params], () =>
-    client("trip_type/lake_trip/list", { data: params, method: "POST" })
+    client("theme/lake_trip/list", { data: params, method: "POST" })
   );
 };
 
@@ -23,7 +23,7 @@ export const useLakeTrip = (id: number) => {
   const client = useHttp();
   return useQuery<Partial<LakeTrip>>(
     ["lake_trip", { id }],
-    () => client("trip_type/lake_trip/detail", { data: { id } }),
+    () => client("theme/lake_trip/detail", { data: { id } }),
     {
       enabled: !!id,
     }
@@ -34,7 +34,7 @@ export const useAddLakeTrip = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (params: Partial<LakeTrip>) =>
-      client("trip_type/lake_trip/add", {
+      client("theme/lake_trip/add", {
         data: cleanObject(params),
         method: "POST",
       }),
@@ -46,7 +46,7 @@ export const useEditLakeTrip = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (params: Partial<LakeTrip>) =>
-      client("trip_type/lake_trip/edit", {
+      client("theme/lake_trip/edit", {
         data: cleanObject(params),
         method: "POST",
       }),
@@ -58,7 +58,7 @@ export const useEditSort = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     ({ id, sort }: { id: number; sort: number }) =>
-      client("trip_type/lake_trip/edit_sort", {
+      client("theme/lake_trip/edit_sort", {
         data: { id, sort },
         method: "POST",
       }),
@@ -70,7 +70,7 @@ export const useDeleteLakeTrip = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (id: number) =>
-      client("trip_type/lake_trip/delete", {
+      client("theme/lake_trip/delete", {
         data: { id },
         method: "POST",
       }),

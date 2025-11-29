@@ -21,7 +21,7 @@ export const useRefundAddressList = (
   const client = useHttp();
   return useQuery<RefundAddressListResult>(
     ["refund_address_list", params],
-    () => client("refund_address/list", { data: params, method: "POST" })
+    () => client("goods/refund_address/list", { data: params, method: "POST" })
   );
 };
 
@@ -29,7 +29,7 @@ export const useRefundAddress = (id: number) => {
   const client = useHttp();
   return useQuery<RefundAddress>(
     ["refund_address", { id }],
-    () => client(`refund_address/detail`, { data: { id } }),
+    () => client(`goods/refund_address/detail`, { data: { id } }),
     {
       enabled: !!id,
     }
@@ -40,7 +40,7 @@ export const useAddRefundAddress = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (params: Partial<RefundAddress>) =>
-      client("refund_address/add", {
+      client("goods/refund_address/add", {
         data: cleanObject(params),
         method: "POST",
       }),
@@ -52,7 +52,7 @@ export const useEditRefundAddress = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (params: Partial<RefundAddress>) =>
-      client("refund_address/edit", {
+      client("goods/refund_address/edit", {
         data: cleanObject(params),
         method: "POST",
       }),
@@ -64,7 +64,7 @@ export const useDeleteRefundAddress = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
     (id: number) =>
-      client("refund_address/delete", {
+      client("goods/refund_address/delete", {
         data: { id },
         method: "POST",
       }),
@@ -75,6 +75,6 @@ export const useDeleteRefundAddress = (queryKey: QueryKey) => {
 export const useRefundAddressOptions = () => {
   const client = useHttp();
   return useQuery<DataOption[]>(["refund_address_options"], () =>
-    client("refund_address/options")
+    client("goods/refund_address/options")
   );
 };
