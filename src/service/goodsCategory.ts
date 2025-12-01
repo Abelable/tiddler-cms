@@ -70,9 +70,12 @@ export const useDeleteGoodsCategory = (queryKey: QueryKey) => {
   );
 };
 
-export const useGoodsCategoryOptions = () => {
+export const useGoodsCategoryOptions = (shopCategoryIds: number[]) => {
   const client = useHttp();
   return useQuery<GoodsCategoryOption[]>(["goods_category_options"], () =>
-    client("goods/category/options")
+    client("goods/category/options", {
+      data: { shopCategoryIds },
+      method: "POST",
+    })
   );
 };

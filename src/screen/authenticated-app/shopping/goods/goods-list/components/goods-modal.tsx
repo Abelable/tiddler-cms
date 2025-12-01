@@ -53,12 +53,14 @@ const normFile = (e: any) => {
 
 export const GoodsModal = ({
   shopCategoryOptions,
+  setShopCategoryIds,
   goodsCategoryOptions,
   freightTemplateOptions,
   pickupAddressOptions,
   refundAddressOptions,
 }: {
   shopCategoryOptions: DataOption[];
+  setShopCategoryIds: (shopCategoryIds: number[]) => void;
   goodsCategoryOptions: GoodsCategoryOption[];
   freightTemplateOptions: DataOption[];
   pickupAddressOptions: DataOption[];
@@ -589,11 +591,12 @@ export const GoodsModal = ({
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item
-                name="shopCategoryId"
+                name="shopCategoryIds"
                 label="商品一级分类"
                 rules={[{ required: true, message: "请选择商品一级分类" }]}
               >
                 <Select
+                  mode="multiple"
                   placeholder="请选择商品一级分类"
                   onChange={(value) => setShopCategoryId(value || undefined)}
                 >
@@ -609,34 +612,41 @@ export const GoodsModal = ({
               <Form.Item
                 noStyle
                 shouldUpdate={(prevValues, currentValues) =>
-                  prevValues.shopCategoryId !== currentValues.shopCategoryId
+                  prevValues.shopCategoryIds !== currentValues.shopCategoryIds
                 }
               >
-                {({ getFieldValue }) =>
-                  getFieldValue("shopCategoryId") && (
-                    <Form.Item
-                      name="categoryId"
-                      label="商品二级分类"
-                      rules={[
-                        { required: true, message: "请选择商品二级分类" },
-                      ]}
-                    >
-                      <Select placeholder="请选择商品二级分类">
-                        {goodsCategoryOptions
-                          .filter((item) =>
-                            shopCategoryId
-                              ? item.shopCategoryId === shopCategoryId
-                              : true
-                          )
-                          .map(({ id, name }) => (
-                            <Select.Option key={id} value={id}>
-                              {name}
-                            </Select.Option>
-                          ))}
-                      </Select>
-                    </Form.Item>
-                  )
-                }
+                {({ getFieldValue }) => {
+                  const shopCategoryIds = getFieldValue("shopCategoryIds");
+                  setShopCategoryIds(shopCategoryIds);
+                  if (shopCategoryIds && shopCategoryIds.length > 0) {
+                    return (
+                      <Form.Item
+                        name="categoryIds"
+                        label="商品二级分类"
+                        rules={[
+                          { required: true, message: "请选择商品二级分类" },
+                        ]}
+                      >
+                        <Select
+                          mode="multiple"
+                          placeholder="请选择商品二级分类"
+                        >
+                          {goodsCategoryOptions
+                            .filter((item) =>
+                              shopCategoryId
+                                ? item.shopCategoryId === shopCategoryId
+                                : true
+                            )
+                            .map(({ id, name }) => (
+                              <Select.Option key={id} value={id}>
+                                {name}
+                              </Select.Option>
+                            ))}
+                        </Select>
+                      </Form.Item>
+                    );
+                  }
+                }}
               </Form.Item>
             </Col>
           </Row>
@@ -645,16 +655,25 @@ export const GoodsModal = ({
               <Form.Item
                 noStyle
                 shouldUpdate={(prevValues, currentValues) =>
-                  prevValues.categoryId !== currentValues.categoryId
+                  prevValues.categoryIds !== currentValues.categoryIds
                 }
               >
                 {({ getFieldValue }) => {
-                  const categoryId = getFieldValue("categoryId");
-                  if (categoryId) {
-                    const { minSalesCommissionRate, maxSalesCommissionRate } =
-                      goodsCategoryOptions.find(
-                        (item) => item.id === getFieldValue("categoryId")
-                      ) || {};
+                  const categoryIds = getFieldValue("categoryIds");
+                  if (categoryIds && categoryIds.length > 0) {
+                    const selectedCategories = goodsCategoryOptions.filter(
+                      (item) => categoryIds.includes(item.id)
+                    );
+                    const minSalesCommissionRate = Math.max(
+                      ...selectedCategories.map(
+                        (item) => item.minSalesCommissionRate || 0
+                      )
+                    );
+                    const maxSalesCommissionRate = Math.min(
+                      ...selectedCategories.map(
+                        (item) => item.maxSalesCommissionRate || Infinity
+                      )
+                    );
                     return (
                       <Form.Item
                         name="salesCommissionRate"
@@ -683,19 +702,25 @@ export const GoodsModal = ({
               <Form.Item
                 noStyle
                 shouldUpdate={(prevValues, currentValues) =>
-                  prevValues.categoryId !== currentValues.categoryId
+                  prevValues.categoryIds !== currentValues.categoryIds
                 }
               >
                 {({ getFieldValue }) => {
-                  const categoryId = getFieldValue("categoryId");
-                  if (categoryId) {
-                    const {
-                      minPromotionCommissionRate,
-                      maxPromotionCommissionRate,
-                    } =
-                      goodsCategoryOptions.find(
-                        (item) => item.id === getFieldValue("categoryId")
-                      ) || {};
+                  const categoryIds = getFieldValue("categoryIds");
+                  if (categoryIds && categoryIds.length > 0) {
+                    const selectedCategories = goodsCategoryOptions.filter(
+                      (item) => categoryIds.includes(item.id)
+                    );
+                    const minPromotionCommissionRate = Math.max(
+                      ...selectedCategories.map(
+                        (item) => item.minPromotionCommissionRate || 0
+                      )
+                    );
+                    const maxPromotionCommissionRate = Math.min(
+                      ...selectedCategories.map(
+                        (item) => item.maxPromotionCommissionRate || Infinity
+                      )
+                    );
                     return (
                       <Form.Item
                         name="promotionCommissionRate"
@@ -722,16 +747,20 @@ export const GoodsModal = ({
               <Form.Item
                 noStyle
                 shouldUpdate={(prevValues, currentValues) =>
-                  prevValues.categoryId !== currentValues.categoryId
+                  prevValues.categoryIds !== currentValues.categoryIds
                 }
               >
                 {({ getFieldValue }) => {
-                  const categoryId = getFieldValue("categoryId");
-                  if (categoryId) {
-                    const { promotionCommissionUpperLimit } =
-                      goodsCategoryOptions.find(
-                        (item) => item.id === getFieldValue("categoryId")
-                      ) || {};
+                  const categoryIds = getFieldValue("categoryIds");
+                  if (categoryIds && categoryIds.length > 0) {
+                    const selectedCategories = goodsCategoryOptions.filter(
+                      (item) => categoryIds.includes(item.id)
+                    );
+                    const promotionCommissionUpperLimit = Math.min(
+                      ...selectedCategories.map(
+                        (item) => item.promotionCommissionUpperLimit || Infinity
+                      )
+                    );
                     return (
                       <Form.Item
                         name="promotionCommissionUpperLimit"
@@ -759,19 +788,26 @@ export const GoodsModal = ({
               <Form.Item
                 noStyle
                 shouldUpdate={(prevValues, currentValues) =>
-                  prevValues.categoryId !== currentValues.categoryId
+                  prevValues.categoryIds !== currentValues.categoryIds
                 }
               >
                 {({ getFieldValue }) => {
-                  const categoryId = getFieldValue("categoryId");
-                  if (categoryId) {
-                    const {
-                      minSuperiorPromotionCommissionRate,
-                      maxSuperiorPromotionCommissionRate,
-                    } =
-                      goodsCategoryOptions.find(
-                        (item) => item.id === getFieldValue("categoryId")
-                      ) || {};
+                  const categoryIds = getFieldValue("categoryIds");
+                  if (categoryIds && categoryIds.length > 0) {
+                    const selectedCategories = goodsCategoryOptions.filter(
+                      (item) => categoryIds.includes(item.id)
+                    );
+                    const minSuperiorPromotionCommissionRate = Math.max(
+                      ...selectedCategories.map(
+                        (item) => item.minSuperiorPromotionCommissionRate || 0
+                      )
+                    );
+                    const maxSuperiorPromotionCommissionRate = Math.min(
+                      ...selectedCategories.map(
+                        (item) =>
+                          item.maxSuperiorPromotionCommissionRate || Infinity
+                      )
+                    );
                     return (
                       <Form.Item
                         name="superiorPromotionCommissionRate"
@@ -798,16 +834,21 @@ export const GoodsModal = ({
               <Form.Item
                 noStyle
                 shouldUpdate={(prevValues, currentValues) =>
-                  prevValues.categoryId !== currentValues.categoryId
+                  prevValues.categoryIds !== currentValues.categoryIds
                 }
               >
                 {({ getFieldValue }) => {
-                  const categoryId = getFieldValue("categoryId");
-                  if (categoryId) {
-                    const { superiorPromotionCommissionUpperLimit } =
-                      goodsCategoryOptions.find(
-                        (item) => item.id === getFieldValue("categoryId")
-                      ) || {};
+                  const categoryIds = getFieldValue("categoryIds");
+                  if (categoryIds && categoryIds.length > 0) {
+                    const selectedCategories = goodsCategoryOptions.filter(
+                      (item) => categoryIds.includes(item.id)
+                    );
+                    const superiorPromotionCommissionUpperLimit = Math.min(
+                      ...selectedCategories.map(
+                        (item) =>
+                          item.superiorPromotionCommissionUpperLimit || Infinity
+                      )
+                    );
                     return (
                       <Form.Item
                         name="superiorPromotionCommissionUpperLimit"

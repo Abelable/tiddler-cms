@@ -15,6 +15,7 @@ import { useRefundAddressOptions } from "service/refundAddress";
 import { usePickupAddressOptions } from "service/pickupAddress";
 import { toNumber } from "utils";
 import { useGoodsListSearchParams } from "./util";
+import { useState } from "react";
 
 const statusOptions = [
   { text: "待审核", value: 0 },
@@ -29,8 +30,9 @@ export const GoodsList = () => {
   const { data: shopCategoryOptions, error: shopCategoryOptionsError } =
     useShopCategoryOptions();
 
+  const [shopCategoryIds, setShopCategoryIds] = useState<number[]>([]);
   const { data: goodsCategoryOptions, error: goodsCategoryOptionsError } =
-    useGoodsCategoryOptions();
+    useGoodsCategoryOptions(shopCategoryIds);
 
   const { data: originalShopOptions = [], error: shopOptionsError } =
     useShopOptions();
@@ -91,6 +93,7 @@ export const GoodsList = () => {
       </Main>
       <GoodsModal
         shopCategoryOptions={shopCategoryOptions || []}
+        setShopCategoryIds={setShopCategoryIds}
         goodsCategoryOptions={goodsCategoryOptions || []}
         freightTemplateOptions={freightTemplateOptions}
         pickupAddressOptions={pickupAddressOptions}
