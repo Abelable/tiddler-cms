@@ -67,9 +67,6 @@ export const GoodsModal = ({
   refundAddressOptions: Partial<RefundAddress>[];
 }) => {
   const [form] = useForm();
-  const [shopCategoryId, setShopCategoryId] = useState<undefined | number>(
-    undefined
-  );
   const { goodsModalOpen, editingGoodsId, editingGoods, isLoading, close } =
     useGoodsModal();
 
@@ -598,7 +595,7 @@ export const GoodsModal = ({
                 <Select
                   mode="multiple"
                   placeholder="请选择商品一级分类"
-                  onChange={(value) => setShopCategoryId(value || undefined)}
+                  onChange={(value) => setShopCategoryIds(value || [])}
                 >
                   {shopCategoryOptions.map(({ id, name }) => (
                     <Select.Option key={id} value={id}>
@@ -617,7 +614,6 @@ export const GoodsModal = ({
               >
                 {({ getFieldValue }) => {
                   const shopCategoryIds = getFieldValue("shopCategoryIds");
-                  setShopCategoryIds(shopCategoryIds);
                   if (shopCategoryIds && shopCategoryIds.length > 0) {
                     return (
                       <Form.Item
@@ -631,17 +627,11 @@ export const GoodsModal = ({
                           mode="multiple"
                           placeholder="请选择商品二级分类"
                         >
-                          {goodsCategoryOptions
-                            .filter((item) =>
-                              shopCategoryId
-                                ? item.shopCategoryId === shopCategoryId
-                                : true
-                            )
-                            .map(({ id, name }) => (
-                              <Select.Option key={id} value={id}>
-                                {name}
-                              </Select.Option>
-                            ))}
+                          {goodsCategoryOptions.map(({ id, name }) => (
+                            <Select.Option key={id} value={id}>
+                              {name}
+                            </Select.Option>
+                          ))}
                         </Select>
                       </Form.Item>
                     );
