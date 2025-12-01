@@ -1,6 +1,7 @@
 import { Form, Input, InputNumber, Select, Modal, Space } from "antd";
 import { useForm } from "antd/lib/form/Form";
 import { ErrorBox, ModalLoading } from "components/lib";
+import { OssUpload } from "components/oss-upload";
 
 import { useEffect } from "react";
 import {
@@ -10,6 +11,11 @@ import {
 import { useGoodsCategoryModal, useGoodsCategoriesQueryKey } from "../util";
 
 import type { DataOption } from "types/common";
+
+const normFile = (e: any) => {
+  if (Array.isArray(e)) return e;
+  return e && e.fileList;
+};
 
 export const GoodsCategoryModal = ({
   shopCategoryOptions,
@@ -35,12 +41,20 @@ export const GoodsCategoryModal = ({
   } = useMutateRole(useGoodsCategoriesQueryKey());
 
   useEffect(() => {
-    form.setFieldsValue(editingGoodsCategory);
+    if (editingGoodsCategory) {
+      const { logo, ...rest } = editingGoodsCategory;
+      form.setFieldsValue({ logo: logo ? [{ url: logo }] : [], ...rest });
+    }
   }, [editingGoodsCategory, form]);
 
   const confirm = () => {
     form.validateFields().then(async () => {
-      await mutateAsync({ ...editingGoodsCategory, ...form.getFieldsValue() });
+      const { logo, ...rest } = form.getFieldsValue();
+      await mutateAsync({
+        ...editingGoodsCategory,
+        ...rest,
+        logo: logo && logo.length ? logo[0].url : "",
+      });
       closeModal();
     });
   };
@@ -65,18 +79,30 @@ export const GoodsCategoryModal = ({
       ) : (
         <Form form={form} layout="vertical">
           <Form.Item
+            name="logo"
+            label="商品分类标签"
+            tooltip="图片大小不能超过10MB"
+            valuePropName="fileList"
+            getValueFromEvent={normFile}
+          >
+            <OssUpload maxCount={1} />
+          </Form.Item>
+          <Form.Item
             label="商品分类名称"
             name="name"
             rules={[{ required: true, message: "请输入商品分类名称" }]}
           >
             <Input placeholder={"请输入商品分类名称"} />
           </Form.Item>
+          <Form.Item label="商品分类描述" name="description">
+            <Input placeholder={"请输入商品分类描述"} />
+          </Form.Item>
           <Form.Item
-            name="shopCategoryId"
+            name="shopCategoryIds"
             label="所属店铺分类"
             rules={[{ required: true, message: "请选择所属店铺分类" }]}
           >
-            <Select placeholder="请选择所属店铺分类">
+            <Select mode="multiple" placeholder="请选择所属店铺分类">
               {shopCategoryOptions.map((item) => (
                 <Select.Option key={item.id} value={item.id}>
                   {item.name}

@@ -22,7 +22,7 @@ export const useShopCategory = (id: number) => {
   const client = useHttp();
   return useQuery<Partial<ShopCategory>>(
     ["shop_category", { id }],
-    () => client(`shop/category/detail`, { data: { id } }),
+    () => client("goods/shop/category/detail", { data: { id } }),
     {
       enabled: !!id,
     }

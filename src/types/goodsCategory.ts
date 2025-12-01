@@ -6,8 +6,10 @@ export interface GoodsCategoriesSearchParams {
 
 export interface GoodsCategory {
   id: number;
-  shopCategoryId: number;
+  shopCategoryIds: number[];
+  logo: string;
   name: string;
+  description: string;
   minSalesCommissionRate: number;
   maxSalesCommissionRate: number;
   minPromotionCommissionRate: number;

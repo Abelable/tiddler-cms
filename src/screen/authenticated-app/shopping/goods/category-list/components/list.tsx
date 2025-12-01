@@ -1,5 +1,5 @@
-import styled from "@emotion/styled";
 import {
+  Avatar,
   Button,
   Dropdown,
   MenuProps,
@@ -7,12 +7,15 @@ import {
   Table,
   TablePaginationConfig,
   TableProps,
+  Tag,
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
+import { PlusOutlined, AppstoreOutlined } from "@ant-design/icons";
+
+import styled from "@emotion/styled";
 import dayjs from "dayjs";
 import { useDeleteGoodsCategory } from "service/goodsCategory";
 import { useGoodsCategoryModal, useGoodsCategoriesQueryKey } from "../util";
-import { PlusOutlined } from "@ant-design/icons";
 
 import type { GoodsCategory } from "types/goodsCategory";
 import type { SearchPanelProps } from "./search-panel";
@@ -48,49 +51,75 @@ export const List = ({
       <ErrorBox error={error} />
       <Table
         rowKey={"id"}
+        scroll={{ x: 2000 }}
         columns={[
           {
             title: "id",
             dataIndex: "id",
             width: "8rem",
+            fixed: "left",
           },
           {
-            title: "商品分类",
+            title: "图标",
+            dataIndex: "logo",
+            render: (value) => (
+              <Avatar src={value} icon={<AppstoreOutlined />} />
+            ),
+            width: "6.8rem",
+          },
+          {
+            title: "名称",
             dataIndex: "name",
+            width: "10rem",
+          },
+          {
+            title: "描述",
+            dataIndex: "description",
+            width: "24rem",
           },
           {
             title: "所属店铺分类",
-            dataIndex: "shopCategoryId",
+            dataIndex: "shopCategoryIds",
             render: (value) =>
-              shopCategoryOptions.find((item) => item.id === value)?.name,
+              value.map((id: number) => (
+                <Tag key={id}>
+                  {shopCategoryOptions.find((type) => type.id === id)?.name}
+                </Tag>
+              )),
+            width: "18rem",
           },
           {
             title: "销售佣金比例范围",
             render: (value, category) => (
               <>{`${category.minSalesCommissionRate}% ~ ${category.maxSalesCommissionRate}%`}</>
             ),
+            width: "18rem",
           },
           {
             title: "代言奖励比例范围",
             render: (value, category) => (
               <>{`${category.minPromotionCommissionRate}% ~ ${category.maxPromotionCommissionRate}%`}</>
             ),
+            width: "18rem",
           },
           {
             title: "代言奖励上限",
             dataIndex: "promotionCommissionUpperLimit",
             render: (value) => <>¥{value}</>,
+            width: "18rem",
           },
           {
             title: "上级代言奖励比例范围",
             render: (value, category) => (
               <>{`${category.minSuperiorPromotionCommissionRate}% ~ ${category.maxSuperiorPromotionCommissionRate}%`}</>
             ),
+            width: "18rem",
           },
           {
             title: "上级代言奖励上限",
             dataIndex: "superiorPromotionCommissionUpperLimit",
             render: (value) => <>¥{value}</>,
+            width: "18rem",
           },
           {
             title: "更新时间",
@@ -124,6 +153,7 @@ export const List = ({
               return <More id={category.id} />;
             },
             width: "8rem",
+            fixed: "right",
           },
         ]}
         onChange={setPagination}
