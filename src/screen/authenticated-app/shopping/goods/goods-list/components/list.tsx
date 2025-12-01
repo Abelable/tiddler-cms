@@ -141,23 +141,25 @@ export const List = ({
           },
           {
             title: "一级分类",
-            dataIndex: "shopCategoryId",
-            render: (value) => (
-              <Tag>
-                {shopCategoryOptions.find((item) => item.id === value)?.name}
-              </Tag>
-            ),
+            dataIndex: "shopCategoryIds",
+            render: (value) =>
+              value.map((id: number) => (
+                <Tag key={id}>
+                  {shopCategoryOptions.find((item) => item.id === id)?.name}
+                </Tag>
+              )),
             width: "12rem",
           },
           {
             title: "二级分类",
-            dataIndex: "categoryId",
-            render: (value) => (
-              <Tag>
-                {goodsCategoryOptions.find((item) => item.id === value)?.name}
-              </Tag>
-            ),
-            width: "12rem",
+            dataIndex: "categoryIds",
+            render: (value) =>
+              value.map((id: number) => (
+                <Tag key={id}>
+                  {goodsCategoryOptions.find((item) => item.id === id)?.name}
+                </Tag>
+              )),
+            width: "18rem",
           },
           {
             title: "价格",
@@ -172,10 +174,19 @@ export const List = ({
               if (goods.shopId) {
                 return <>{`${value}%`}</>;
               } else {
-                const { minSalesCommissionRate, maxSalesCommissionRate } =
-                  goodsCategoryOptions.find(
-                    (item) => item.id === goods.categoryId
-                  ) || {};
+                const selectedCategories = goodsCategoryOptions.filter((item) =>
+                  goods.categoryIds.includes(item.id)
+                );
+                const minSalesCommissionRate = Math.max(
+                  ...selectedCategories.map(
+                    (item) => item.minSalesCommissionRate || 0
+                  )
+                );
+                const maxSalesCommissionRate = Math.min(
+                  ...selectedCategories.map(
+                    (item) => item.maxSalesCommissionRate || Infinity
+                  )
+                );
                 return (
                   <InputNumber
                     min={minSalesCommissionRate}
@@ -198,13 +209,19 @@ export const List = ({
                 title: "比例",
                 dataIndex: "promotionCommissionRate",
                 render: (value, goods) => {
-                  const {
-                    minPromotionCommissionRate,
-                    maxPromotionCommissionRate,
-                  } =
-                    goodsCategoryOptions.find(
-                      (item) => item.id === goods.categoryId
-                    ) || {};
+                  const selectedCategories = goodsCategoryOptions.filter(
+                    (item) => goods.categoryIds.includes(item.id)
+                  );
+                  const minPromotionCommissionRate = Math.max(
+                    ...selectedCategories.map(
+                      (item) => item.minPromotionCommissionRate || 0
+                    )
+                  );
+                  const maxPromotionCommissionRate = Math.min(
+                    ...selectedCategories.map(
+                      (item) => item.maxPromotionCommissionRate || Infinity
+                    )
+                  );
                   return (
                     <InputNumber
                       min={minPromotionCommissionRate}
@@ -226,10 +243,14 @@ export const List = ({
                 title: "上限",
                 dataIndex: "promotionCommissionUpperLimit",
                 render: (value, goods) => {
-                  const { promotionCommissionUpperLimit } =
-                    goodsCategoryOptions.find(
-                      (item) => item.id === goods.categoryId
-                    ) || {};
+                  const selectedCategories = goodsCategoryOptions.filter(
+                    (item) => goods.categoryIds.includes(item.id)
+                  );
+                  const promotionCommissionUpperLimit = Math.min(
+                    ...selectedCategories.map(
+                      (item) => item.promotionCommissionUpperLimit || Infinity
+                    )
+                  );
                   return (
                     <InputNumber
                       max={promotionCommissionUpperLimit}
@@ -255,13 +276,20 @@ export const List = ({
                 title: "比例",
                 dataIndex: "superiorPromotionCommissionRate",
                 render: (value, goods) => {
-                  const {
-                    minSuperiorPromotionCommissionRate,
-                    maxSuperiorPromotionCommissionRate,
-                  } =
-                    goodsCategoryOptions.find(
-                      (item) => item.id === goods.categoryId
-                    ) || {};
+                  const selectedCategories = goodsCategoryOptions.filter(
+                    (item) => goods.categoryIds.includes(item.id)
+                  );
+                  const minSuperiorPromotionCommissionRate = Math.max(
+                    ...selectedCategories.map(
+                      (item) => item.minSuperiorPromotionCommissionRate || 0
+                    )
+                  );
+                  const maxSuperiorPromotionCommissionRate = Math.min(
+                    ...selectedCategories.map(
+                      (item) =>
+                        item.maxSuperiorPromotionCommissionRate || Infinity
+                    )
+                  );
                   return (
                     <InputNumber
                       min={minSuperiorPromotionCommissionRate}
@@ -283,10 +311,15 @@ export const List = ({
                 title: "上限",
                 dataIndex: "superiorPromotionCommissionUpperLimit",
                 render: (value, goods) => {
-                  const { superiorPromotionCommissionUpperLimit } =
-                    goodsCategoryOptions.find(
-                      (item) => item.id === goods.categoryId
-                    ) || {};
+                  const selectedCategories = goodsCategoryOptions.filter(
+                    (item) => goods.categoryIds.includes(item.id)
+                  );
+                  const superiorPromotionCommissionUpperLimit = Math.min(
+                    ...selectedCategories.map(
+                      (item) =>
+                        item.superiorPromotionCommissionUpperLimit || Infinity
+                    )
+                  );
                   return (
                     <InputNumber
                       max={superiorPromotionCommissionUpperLimit}

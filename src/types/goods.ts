@@ -30,6 +30,8 @@ export interface Goods {
   status: number;
   failureReason: string;
   shopId: number;
+  shopCategoryIds: number[];
+  categoryIds: number[];
   cover: string;
   video: string;
   imageList: string[];
