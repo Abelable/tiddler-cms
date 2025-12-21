@@ -51,6 +51,18 @@ export const useEditDuration = (queryKey: QueryKey) => {
   );
 };
 
+export const useEditSort = (queryKey: QueryKey) => {
+  const client = useHttp();
+  return useMutation(
+    ({ id, sort }: { id: number; sort: number }) =>
+      client("goods/gift/edit_sort", {
+        data: { id, sort },
+        method: "POST",
+      }),
+    useEditConfig(queryKey)
+  );
+};
+
 export const useDeleteGiftGoods = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(

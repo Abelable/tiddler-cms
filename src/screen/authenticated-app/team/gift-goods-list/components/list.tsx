@@ -12,7 +12,11 @@ import { PlusOutlined } from "@ant-design/icons";
 
 import styled from "@emotion/styled";
 import dayjs from "dayjs";
-import { useDeleteGiftGoods, useEditDuration } from "service/giftGoods";
+import {
+  useDeleteGiftGoods,
+  useEditDuration,
+  useEditSort,
+} from "service/giftGoods";
 import { useGiftGoodsModal, useGiftGoodsListQueryKey } from "../util";
 
 import type { GiftGoods, GiftGoodsListSearchParams } from "types/giftGoods";
@@ -42,6 +46,8 @@ export const List = ({
     });
 
   const { mutate: editDuration } = useEditDuration(useGiftGoodsListQueryKey());
+  const { mutate: editSort } = useEditSort(useGiftGoodsListQueryKey());
+
   const { mutate: deleteIntegrityGoods } = useDeleteGiftGoods(
     useGiftGoodsListQueryKey()
   );
@@ -111,6 +117,18 @@ export const List = ({
                 }
               />
             ),
+          },
+          {
+            title: "排序",
+            dataIndex: "sort",
+            render: (value, giftGoods) => (
+              <InputNumber
+                value={value}
+                onChange={(sort) => editSort({ id: giftGoods.id, sort })}
+              />
+            ),
+            sorter: (a, b) => a.sort - b.sort,
+            width: "12rem",
           },
           {
             title: "创建时间",

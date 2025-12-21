@@ -12,6 +12,7 @@ export interface GiftGoods {
   goodsName: string;
   goodsCover: string;
   duration: number;
+  sort: number;
   createdAt: string;
 }
 
