@@ -5,6 +5,7 @@ import {
   useShipOrderConfig,
   useExportOrderConfig,
   useRefundOrderConfig,
+  useCancelOrderConfig,
 } from "./use-optimistic-options";
 
 import type {
@@ -34,6 +35,18 @@ export const useOrder = (id: number) => {
     {
       enabled: !!id,
     }
+  );
+};
+
+export const useCancelOrder = (queryKey: QueryKey) => {
+  const client = useHttp();
+  return useMutation(
+    (ids: number[]) =>
+      client("goods/order/cancel", {
+        data: { ids },
+        method: "POST",
+      }),
+    useCancelOrderConfig(queryKey)
   );
 };
 

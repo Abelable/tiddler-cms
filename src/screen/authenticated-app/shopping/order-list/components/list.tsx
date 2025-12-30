@@ -34,7 +34,11 @@ import {
 
 import dayjs from "dayjs";
 import { useQueryClient } from "react-query";
-import { useConfirmOrder, useRefundOrder } from "service/goodsOrder";
+import {
+  useCancelOrder,
+  useConfirmOrder,
+  useRefundOrder,
+} from "service/goodsOrder";
 import {
   useOrderModal,
   useOrderListQueryKey,
@@ -314,8 +318,19 @@ const More = ({ id, status }: { id: number; status: number }) => {
   const { open: openDeliveryModal, modify: modifyDelivery } =
     useDeliveryModal();
   const { open: openAddressModal } = useAddressModal();
+  const { mutate: cancelOrder } = useCancelOrder(useOrderListQueryKey());
   const { mutate: refundOrder } = useRefundOrder(useOrderListQueryKey());
   const { mutate: confirmOrder } = useConfirmOrder(useOrderListQueryKey());
+
+  const confirmCancel = (id: number) => {
+    Modal.confirm({
+      title: "确定取消该订单吗？",
+      content: "点击确定取消",
+      okText: "确定",
+      cancelText: "取消",
+      onOk: () => cancelOrder([id]),
+    });
+  };
 
   const confirmRefund = (id: number) => {
     Modal.confirm({
@@ -339,6 +354,19 @@ const More = ({ id, status }: { id: number; status: number }) => {
 
   let items: MenuProps["items"];
   switch (status) {
+    case 101:
+      items = [
+        {
+          label: <div onClick={() => openOrderModal(id)}>详情</div>,
+          key: "detail",
+        },
+        {
+          label: <div onClick={() => confirmCancel(id)}>取消</div>,
+          key: "cancel",
+        },
+      ];
+      break;
+
     case 201:
     case 202:
       items = [
