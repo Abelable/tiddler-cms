@@ -9,6 +9,8 @@ const breadcrumbNameMap: { [key: string]: string } = {
   "/activity": "活动管理",
   "/activity/banner_list": "头图列表",
   "/activity/task_list": "奖励任务",
+  "/activity/new_year": "团圆家乡年",
+  "/activity/new_year/task_list": "任务列表",
   "/theme": "主题专区",
   "/theme/hot_scenic": "网红打卡地",
   "/theme/lake_trip": "游湖登岛",

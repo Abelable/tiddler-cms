@@ -15,6 +15,7 @@ import { UserList } from "./user/user-list";
 import { AuthInfoList } from "./user/auth-info-list";
 import { BannerList } from "./activity/banner-list";
 import { TaskList } from "./activity/task-list";
+import { NewYearTaskList } from "./activity/new-year/task-list";
 import { HotScenicList } from "./theme/hot-scenic";
 import { LakeTripList } from "./theme/lake-trip";
 import { LakeCycleList } from "./theme/lake-cycle";
@@ -93,6 +94,7 @@ import {
   SettingOutlined,
   ProfileOutlined,
   SnippetsOutlined,
+  SlackOutlined,
 } from "@ant-design/icons";
 import {
   ExpressIcon,
@@ -134,6 +136,10 @@ export const AuthenticatedApp = () => {
               <Route path="user/auth_info_list" element={<AuthInfoList />} />
               <Route path="activity/banner_list" element={<BannerList />} />
               <Route path="activity/task_list" element={<TaskList />} />
+              <Route
+                path="activity/new_year/task_list"
+                element={<NewYearTaskList />}
+              />
               <Route path="theme/hot_scenic" element={<HotScenicList />} />
               <Route path="theme/lake_trip" element={<LakeTripList />} />
               <Route
@@ -340,6 +346,18 @@ const MenuSider = ({
           label: <Link to={"activity/task_list"}>奖励任务</Link>,
           key: "activity_task_list",
           icon: <BarsOutlined />,
+        },
+        {
+          label: "团圆家乡年",
+          key: "activity_new_year",
+          icon: <SlackOutlined />,
+          children: [
+            {
+              label: <Link to={"activity/new_year/task_list"}>任务列表</Link>,
+              key: "activity_new_year_task_lis",
+              icon: <BarsOutlined />,
+            },
+          ],
         },
       ],
     },
