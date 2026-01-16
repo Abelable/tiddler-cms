@@ -22,17 +22,9 @@ export const useNewYearGoodsList = (
 export const useAddNewYearGoods = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
-    ({
-      typeId,
-      goodsIds,
-      duration,
-    }: {
-      typeId: number;
-      goodsIds: number[];
-      duration: number;
-    }) =>
+    ({ goodsIds, luckScore }: { goodsIds: number[]; luckScore: number }) =>
       client("new_year/goods/add", {
-        data: { typeId, goodsIds, duration },
+        data: { goodsIds, luckScore },
         method: "POST",
       }),
     useAddConfig(queryKey)

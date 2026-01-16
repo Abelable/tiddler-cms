@@ -363,7 +363,7 @@ const MenuSider = ({
               icon: <BarsOutlined />,
             },
             {
-              label: <Link to={"activity/new_year/goods_list"}>商品列表</Link>,
+              label: <Link to={"activity/new_year/goods_list"}>兑换商品</Link>,
               key: "activity_new_year_goods_lis",
               icon: <UnorderedListOutlined />,
             },
