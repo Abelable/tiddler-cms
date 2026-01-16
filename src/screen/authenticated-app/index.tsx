@@ -16,6 +16,7 @@ import { AuthInfoList } from "./user/auth-info-list";
 import { BannerList } from "./activity/banner-list";
 import { TaskList } from "./activity/task-list";
 import { NewYearTaskList } from "./activity/new-year/task-list";
+import { NewYearPrizeList } from "./activity/new-year/prize-list";
 import { NewYearGoodsList } from "./activity/new-year/goods-list";
 import { HotScenicList } from "./theme/hot-scenic";
 import { LakeTripList } from "./theme/lake-trip";
@@ -140,6 +141,10 @@ export const AuthenticatedApp = () => {
               <Route
                 path="activity/new_year/task_list"
                 element={<NewYearTaskList />}
+              />
+              <Route
+                path="activity/new_year/prize_list"
+                element={<NewYearPrizeList />}
               />
               <Route
                 path="activity/new_year/goods_list"
@@ -361,6 +366,11 @@ const MenuSider = ({
               label: <Link to={"activity/new_year/task_list"}>任务列表</Link>,
               key: "activity_new_year_task_lis",
               icon: <BarsOutlined />,
+            },
+            {
+              label: <Link to={"activity/new_year/prize_list"}>奖品列表</Link>,
+              key: "activity_new_year_prize_lis",
+              icon: <UnorderedListOutlined />,
             },
             {
               label: <Link to={"activity/new_year/goods_list"}>兑换商品</Link>,

@@ -71,11 +71,11 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
             dataIndex: "status",
             render: (value) =>
               value === 1 ? (
-                <span style={{ color: "#87d068" }}>进行中</span>
+                <span style={{ color: "#87d068" }}>上架中</span>
               ) : (
                 <span style={{ color: "#999" }}>已下架</span>
               ),
-            width: "14rem",
+            width: "10rem",
           },
           {
             title: "商品信息",
@@ -177,7 +177,7 @@ const More = ({ id, status }: { id: number; status: number }) => {
             status === 1 ? downNewYearGoods(id) : upNewYearGoods(id)
           }
         >
-          {status === 1 ? "结束" : "恢复"}
+          {status === 1 ? "下架" : "上架"}
         </div>
       ),
       key: "status",
