@@ -89,6 +89,8 @@ export const PrizeModal = ({ typeOptions }: { typeOptions: Option[] }) => {
                 <OssUpload maxCount={1} />
               </Form.Item>
             </Col>
+          </Row>
+          <Row gutter={16}>
             <Col span={12}>
               <Form.Item
                 name="name"
@@ -98,8 +100,6 @@ export const PrizeModal = ({ typeOptions }: { typeOptions: Option[] }) => {
                 <Input placeholder="请输入名称" />
               </Form.Item>
             </Col>
-          </Row>
-          <Row gutter={16}>
             <Col span={12}>
               <Form.Item
                 name="type"
@@ -115,12 +115,28 @@ export const PrizeModal = ({ typeOptions }: { typeOptions: Option[] }) => {
                 </Select>
               </Form.Item>
             </Col>
+          </Row>
+          <Row gutter={16}>
             <Col span={12}>
               <Form.Item
-                name="couponId"
-                label="优惠券Id"
-                rules={[{ required: true, message: "请输入优惠券Id" }]}
+                name="isBig"
+                label="是否是大奖"
+                rules={[{ required: true, message: "请选择是否是大奖" }]}
               >
+                <Select placeholder="请选择是否是大奖">
+                  {[
+                    { name: "是", value: 1 },
+                    { name: "否", value: 0 },
+                  ].map((item) => (
+                    <Select.Option key={item.value} value={item.value}>
+                      {item.name}
+                    </Select.Option>
+                  ))}
+                </Select>
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item name="couponId" label="优惠券Id">
                 <InputNumber
                   style={{ width: "100%" }}
                   placeholder="请输入优惠券Id"
@@ -130,33 +146,11 @@ export const PrizeModal = ({ typeOptions }: { typeOptions: Option[] }) => {
           </Row>
           <Row gutter={16}>
             <Col span={12}>
-              <Form.Item
-                name="goodsId"
-                label="商品Id"
-                rules={[{ required: true, message: "请输入商品Id" }]}
-              >
+              <Form.Item name="goodsId" label="商品Id">
                 <InputNumber
                   style={{ width: "100%" }}
                   placeholder="请输入商品Id"
                 />
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item
-                name="isBig"
-                label="是否是大奖"
-                rules={[{ required: true, message: "请选择是否是大奖" }]}
-              >
-                <Select placeholder="请选择是否是大奖">
-                  {[
-                    { name: "否", value: 0 },
-                    { name: "是", value: 1 },
-                  ].map((item) => (
-                    <Select.Option key={item.value} value={item.value}>
-                      {item.name}
-                    </Select.Option>
-                  ))}
-                </Select>
               </Form.Item>
             </Col>
           </Row>
