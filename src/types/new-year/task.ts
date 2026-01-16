@@ -5,6 +5,7 @@ export interface TaskListSearchParams {
 
 export interface Task {
   id: number;
+  status: number;
   icon: string;
   name: string;
   desc: string;

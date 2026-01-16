@@ -14,7 +14,12 @@ import { PlusOutlined } from "@ant-design/icons";
 
 import styled from "@emotion/styled";
 import dayjs from "dayjs";
-import { useDeleteTask, useEditSort } from "service/new-year/task";
+import {
+  useDeleteTask,
+  useEditSort,
+  useUpTask,
+  useDownTask,
+} from "service/new-year/task";
 import { useTaskModal, useTaskListQueryKey } from "../util";
 
 import type { Task, TaskListSearchParams } from "types/new-year/task";
@@ -65,10 +70,21 @@ export const List = ({
             fixed: "left",
           },
           {
+            title: "活动状态",
+            dataIndex: "status",
+            render: (value) =>
+              value === 1 ? (
+                <span style={{ color: "#87d068" }}>进行中</span>
+              ) : (
+                <span style={{ color: "#999" }}>已结束</span>
+              ),
+            width: "14rem",
+          },
+          {
             title: "图标",
             dataIndex: "icon",
             render: (value) => <Image width={58} src={value} />,
-            width: "10rem",
+            width: "9rem",
           },
           {
             title: "名称",
@@ -81,6 +97,7 @@ export const List = ({
           {
             title: "按钮文案",
             dataIndex: "btnContent",
+            width: "12rem",
           },
           {
             title: "福气值",
@@ -140,7 +157,7 @@ export const List = ({
           {
             title: "操作",
             render(value, task) {
-              return <More id={task.id} />;
+              return <More id={task.id} status={task.status} />;
             },
             width: "8rem",
             fixed: "right",
@@ -153,8 +170,10 @@ export const List = ({
   );
 };
 
-const More = ({ id }: { id: number }) => {
+const More = ({ id, status }: { id: number; status: number }) => {
   const { startEdit } = useTaskModal();
+  const { mutate: upTask } = useUpTask(useTaskListQueryKey());
+  const { mutate: downTask } = useDownTask(useTaskListQueryKey());
   const { mutate: deleteTask } = useDeleteTask(useTaskListQueryKey());
 
   const confirmDelete = (id: number) => {
@@ -171,6 +190,14 @@ const More = ({ id }: { id: number }) => {
     {
       label: <div onClick={() => startEdit(id)}>编辑</div>,
       key: "edit",
+    },
+    {
+      label: (
+        <div onClick={() => (status === 1 ? downTask(id) : upTask(id))}>
+          {status === 1 ? "结束" : "恢复"}
+        </div>
+      ),
+      key: "status",
     },
     {
       label: <div onClick={() => confirmDelete(id)}>删除</div>,

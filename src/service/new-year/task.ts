@@ -66,6 +66,30 @@ export const useEditSort = (queryKey: QueryKey) => {
   );
 };
 
+export const useUpTask = (queryKey: QueryKey) => {
+  const client = useHttp();
+  return useMutation(
+    (id: number) =>
+      client("new_year/task/up", {
+        data: { id },
+        method: "POST",
+      }),
+    useEditConfig(queryKey)
+  );
+};
+
+export const useDownTask = (queryKey: QueryKey) => {
+  const client = useHttp();
+  return useMutation(
+    (id: number) =>
+      client("new_year/task/down", {
+        data: { id },
+        method: "POST",
+      }),
+    useEditConfig(queryKey)
+  );
+};
+
 export const useDeleteTask = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
