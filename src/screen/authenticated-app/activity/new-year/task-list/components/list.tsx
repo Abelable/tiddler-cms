@@ -70,7 +70,7 @@ export const List = ({
             fixed: "left",
           },
           {
-            title: "活动状态",
+            title: "状态",
             dataIndex: "status",
             render: (value) =>
               value === 1 ? (

@@ -2,24 +2,22 @@ import { Form, InputNumber, Modal, Select } from "antd";
 import { ErrorBox, OptionCover } from "components/lib";
 
 import { useForm } from "antd/lib/form/Form";
-import { useGiftFilterGoodsOptions } from "service/goods";
-import { useAddGiftGoods } from "service/giftGoods";
-import { useGiftGoodsModal, useGiftGoodsListQueryKey } from "../util";
+import { useNewYearFilterGoodsOptions } from "service/goods";
+import { useAddNewYearGoods } from "service/new-year/goods";
+import { useNewYearGoodsModal, useNewYearGoodsListQueryKey } from "../util";
 
-import type { DataOption } from "types/common";
-
-export const GoodsModal = ({ typeOptions }: { typeOptions: DataOption[] }) => {
+export const GoodsModal = () => {
   const [form] = useForm();
-  const { giftGoodsModalOpen, close } = useGiftGoodsModal();
+  const { newYearGoodsModalOpen, close } = useNewYearGoodsModal();
 
   const { data: goodsOptions = [], error: goodsOptionsError } =
-    useGiftFilterGoodsOptions();
+    useNewYearFilterGoodsOptions();
 
   const {
     mutateAsync,
     isLoading: mutateLoading,
     error,
-  } = useAddGiftGoods(useGiftGoodsListQueryKey());
+  } = useAddNewYearGoods(useNewYearGoodsListQueryKey());
 
   const confirm = () => {
     form.validateFields().then(async () => {
@@ -36,27 +34,14 @@ export const GoodsModal = ({ typeOptions }: { typeOptions: DataOption[] }) => {
   return (
     <Modal
       forceRender={true}
-      title="新增家乡好物"
-      open={giftGoodsModalOpen}
+      title="新增兑换商品"
+      open={newYearGoodsModalOpen}
       confirmLoading={mutateLoading}
       onOk={confirm}
       onCancel={closeModal}
     >
       <ErrorBox error={error || goodsOptionsError} />
       <Form form={form} layout="vertical">
-        <Form.Item
-          name="typeId"
-          label="好物类型"
-          rules={[{ required: true, message: "请选择好物类型" }]}
-        >
-          <Select placeholder="请选择好物类型">
-            {typeOptions.map(({ id, name }) => (
-              <Select.Option key={id} value={id}>
-                {name}
-              </Select.Option>
-            ))}
-          </Select>
-        </Form.Item>
         <Form.Item
           name="goodsIds"
           label="商品"
@@ -81,11 +66,14 @@ export const GoodsModal = ({ typeOptions }: { typeOptions: DataOption[] }) => {
           </Select>
         </Form.Item>
         <Form.Item
-          name="duration"
-          label="代言时长（天）"
-          rules={[{ required: true, message: "请填写代言时长" }]}
+          name="luckScore"
+          label="所需福气值"
+          rules={[{ required: true, message: "请填写所需福气值" }]}
         >
-          <InputNumber style={{ width: "100%" }} placeholder="请填写代言时长" />
+          <InputNumber
+            style={{ width: "100%" }}
+            placeholder="请填写所需福气值"
+          />
         </Form.Item>
       </Form>
     </Modal>

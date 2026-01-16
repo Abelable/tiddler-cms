@@ -135,9 +135,16 @@ export const useSelfGoodsOptions = () => {
   );
 };
 
-export const useNormalGoodsOptions = () => {
+export const useGiftFilterGoodsOptions = () => {
   const client = useHttp();
-  return useQuery<ProductOption[]>(["normal_goods_options"], () =>
-    client("goods/normal_options")
+  return useQuery<ProductOption[]>(["gift_filter_goods_options"], () =>
+    client("goods/gift_filter_options")
+  );
+};
+
+export const useNewYearFilterGoodsOptions = () => {
+  const client = useHttp();
+  return useQuery<ProductOption[]>(["new_year_filter_goods_options"], () =>
+    client("goods/new_year_filter_options")
   );
 };

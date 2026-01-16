@@ -48,7 +48,7 @@ export const List = ({
   const { mutate: editDuration } = useEditDuration(useGiftGoodsListQueryKey());
   const { mutate: editSort } = useEditSort(useGiftGoodsListQueryKey());
 
-  const { mutate: deleteIntegrityGoods } = useDeleteGiftGoods(
+  const { mutate: deleteGiftGoods } = useDeleteGiftGoods(
     useGiftGoodsListQueryKey()
   );
 
@@ -58,7 +58,7 @@ export const List = ({
       content: "点击确定删除",
       okText: "确定",
       cancelText: "取消",
-      onOk: () => deleteIntegrityGoods(id),
+      onOk: () => deleteGiftGoods(id),
     });
   };
 
