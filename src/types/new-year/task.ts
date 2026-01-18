@@ -6,12 +6,13 @@ export interface TaskListSearchParams {
 export interface Task {
   id: number;
   status: number;
+  type: number;
   icon: string;
   name: string;
   desc: string;
   btnContent: string;
   luckScore: number;
-  type: number;
+  scene: number;
   param: string;
   sort: number;
   createdAt: string;

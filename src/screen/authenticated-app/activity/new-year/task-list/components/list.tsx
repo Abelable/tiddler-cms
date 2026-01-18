@@ -27,6 +27,7 @@ import type { Option } from "types/common";
 
 interface ListProps extends TableProps<Task> {
   typeOptions: Option[];
+  sceneOptions: Option[];
   params: Partial<TaskListSearchParams>;
   setParams: (params: Partial<TaskListSearchParams>) => void;
   error: Error | unknown;
@@ -34,6 +35,7 @@ interface ListProps extends TableProps<Task> {
 
 export const List = ({
   typeOptions,
+  sceneOptions,
   error,
   params,
   setParams,
@@ -81,6 +83,14 @@ export const List = ({
             width: "14rem",
           },
           {
+            title: "类型",
+            dataIndex: "type",
+            render: (value) => (
+              <>{typeOptions.find((item) => item.value === +value)?.text}</>
+            ),
+            width: "12rem",
+          },
+          {
             title: "图标",
             dataIndex: "icon",
             render: (value) => <Image width={58} src={value} />,
@@ -105,10 +115,10 @@ export const List = ({
             width: "12rem",
           },
           {
-            title: "类型",
-            dataIndex: "type",
+            title: "场景",
+            dataIndex: "scene",
             render: (value) => (
-              <>{typeOptions.find((item) => item.value === +value)?.text}</>
+              <>{sceneOptions.find((item) => item.value === +value)?.text}</>
             ),
             width: "12rem",
           },

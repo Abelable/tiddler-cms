@@ -7,6 +7,11 @@ import { toNumber } from "utils";
 import { useTaskListSearchParams } from "./util";
 
 const typeOptions = [
+  { text: "单次任务", value: 1 },
+  { text: "每日任务", value: 2 },
+  { text: "重复任务", value: 3 },
+];
+const sceneOptions = [
   { text: "页面跳转", value: 1 },
   { text: "加微信群", value: 2 },
 ];
@@ -20,6 +25,7 @@ export const NewYearTaskList = () => {
       <Main>
         <List
           typeOptions={typeOptions}
+          sceneOptions={sceneOptions}
           params={params}
           setParams={setParams}
           error={error}
@@ -33,7 +39,7 @@ export const NewYearTaskList = () => {
           bordered
         />
       </Main>
-      <TaskModal typeOptions={typeOptions} />
+      <TaskModal typeOptions={typeOptions} sceneOptions={sceneOptions} />
     </Container>
   );
 };

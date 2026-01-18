@@ -15,7 +15,13 @@ const normFile = (e: any) => {
   return e && e.fileList;
 };
 
-export const TaskModal = ({ typeOptions }: { typeOptions: Option[] }) => {
+export const TaskModal = ({
+  typeOptions,
+  sceneOptions,
+}: {
+  typeOptions: Option[];
+  sceneOptions: Option[];
+}) => {
   const [form] = useForm();
   const { taskModalOpen, editingTaskId, editingTask, isLoading, close } =
     useTaskModal();
@@ -149,6 +155,23 @@ export const TaskModal = ({ typeOptions }: { typeOptions: Option[] }) => {
                 </Select>
               </Form.Item>
             </Col>
+            <Col span={12}>
+              <Form.Item
+                name="scene"
+                label="场景"
+                rules={[{ required: true, message: "请选择场景" }]}
+              >
+                <Select placeholder="请选择场景">
+                  {sceneOptions.map((item) => (
+                    <Select.Option key={item.value} value={item.value}>
+                      {item.text}
+                    </Select.Option>
+                  ))}
+                </Select>
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
             <Col span={12}>
               <Form.Item name="param" label="参数">
                 <Input placeholder="请输入参数" />
