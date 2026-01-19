@@ -83,14 +83,6 @@ export const List = ({
             width: "14rem",
           },
           {
-            title: "类型",
-            dataIndex: "type",
-            render: (value) => (
-              <>{typeOptions.find((item) => item.value === +value)?.text}</>
-            ),
-            width: "12rem",
-          },
-          {
             title: "图标",
             dataIndex: "icon",
             render: (value) => <Image width={58} src={value} />,
@@ -112,6 +104,19 @@ export const List = ({
           {
             title: "福气值",
             dataIndex: "luckScore",
+            width: "12rem",
+          },
+          {
+            title: "类型",
+            dataIndex: "type",
+            render: (value) => (
+              <>{typeOptions.find((item) => item.value === +value)?.text}</>
+            ),
+            width: "12rem",
+          },
+          {
+            title: "次数限制",
+            dataIndex: "timeLimit",
             width: "12rem",
           },
           {

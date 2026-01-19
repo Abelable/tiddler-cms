@@ -7,6 +7,7 @@ export interface Task {
   id: number;
   status: number;
   type: number;
+  timeLimit: number;
   icon: string;
   name: string;
   desc: string;

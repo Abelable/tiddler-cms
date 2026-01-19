@@ -156,6 +156,16 @@ export const TaskModal = ({
               </Form.Item>
             </Col>
             <Col span={12}>
+              <Form.Item name="timeLimit" label="次数限制">
+                <InputNumber
+                  style={{ width: "100%" }}
+                  placeholder="请输入次数限制"
+                />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={12}>
               <Form.Item
                 name="scene"
                 label="场景"
@@ -170,8 +180,6 @@ export const TaskModal = ({
                 </Select>
               </Form.Item>
             </Col>
-          </Row>
-          <Row gutter={16}>
             <Col span={12}>
               <Form.Item name="param" label="参数">
                 <Input placeholder="请输入参数" />
