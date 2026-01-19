@@ -5,6 +5,7 @@ import styled from "@emotion/styled";
 import { useTaskList } from "service/new-year/task";
 import { toNumber } from "utils";
 import { useTaskListSearchParams } from "./util";
+import { SearchPanel } from "./components/search-panel";
 
 const typeOptions = [
   { text: "单次任务", value: 1 },
@@ -23,6 +24,11 @@ export const NewYearTaskList = () => {
   return (
     <Container>
       <Main>
+        <SearchPanel
+          typeOptions={typeOptions}
+          params={params}
+          setParams={setParams}
+        />
         <List
           typeOptions={typeOptions}
           sceneOptions={sceneOptions}

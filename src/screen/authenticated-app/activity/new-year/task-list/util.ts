@@ -3,7 +3,7 @@ import { useSetUrlSearchParams, useUrlQueryParams } from "utils/url";
 import { useTask } from "service/new-year/task";
 
 export const useTaskListSearchParams = () => {
-  const [params, setParams] = useUrlQueryParams(["page", "limit"]);
+  const [params, setParams] = useUrlQueryParams(["type", "page", "limit"]);
   return [
     useMemo(
       () => ({

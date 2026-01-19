@@ -22,14 +22,12 @@ import {
 } from "service/new-year/task";
 import { useTaskModal, useTaskListQueryKey } from "../util";
 
-import type { Task, TaskListSearchParams } from "types/new-year/task";
+import type { Task } from "types/new-year/task";
 import type { Option } from "types/common";
+import type { SearchPanelProps } from "./search-panel";
 
-interface ListProps extends TableProps<Task> {
-  typeOptions: Option[];
+interface ListProps extends TableProps<Task>, SearchPanelProps {
   sceneOptions: Option[];
-  params: Partial<TaskListSearchParams>;
-  setParams: (params: Partial<TaskListSearchParams>) => void;
   error: Error | unknown;
 }
 

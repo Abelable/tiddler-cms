@@ -1,4 +1,5 @@
 export interface TaskListSearchParams {
+  type: number | undefined;
   page: number;
   limit: number;
 }
