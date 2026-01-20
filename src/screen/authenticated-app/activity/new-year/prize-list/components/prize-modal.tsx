@@ -202,7 +202,7 @@ export const PrizeModal = ({ typeOptions }: { typeOptions: Option[] }) => {
 
           <Row gutter={16}>
             <Col span={12}>
-              <Form.Item name="luckValue" label="福气值">
+              <Form.Item name="luckScore" label="福气值">
                 <InputNumber
                   style={{ width: "100%" }}
                   min={0}

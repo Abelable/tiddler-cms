@@ -16,7 +16,7 @@ export interface Prize {
   sort: number; // 排序
   rate: number; // 抽奖概率 0~1
   stock: number; // 库存 -1不限，0售罄
-  luckValue: number; // 福气值，仅 type=1 有效
+  luckScore: number; // 福气值，仅 type=1 有效
   cost: number; // 单次真实成本
   limitPerUser: number; // 单用户最多中奖次数 0不限
   fallbackPrizeId: number; // 库存不足降级奖品ID
