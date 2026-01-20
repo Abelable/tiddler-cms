@@ -3,7 +3,7 @@ import { useSetUrlSearchParams, useUrlQueryParams } from "utils/url";
 import { usePrize } from "service/new-year/prize";
 
 export const usePrizeListSearchParams = () => {
-  const [params, setParams] = useUrlQueryParams(["page", "limit"]);
+  const [params, setParams] = useUrlQueryParams(["type", "page", "limit"]);
   return [
     useMemo(
       () => ({

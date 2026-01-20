@@ -1,11 +1,11 @@
 import { TaskModal } from "./components/task-modal";
 import { List } from "./components/list";
+import { SearchPanel } from "./components/search-panel";
 
 import styled from "@emotion/styled";
 import { useTaskList } from "service/new-year/task";
 import { toNumber } from "utils";
 import { useTaskListSearchParams } from "./util";
-import { SearchPanel } from "./components/search-panel";
 
 const typeOptions = [
   { text: "单次任务", value: 1 },

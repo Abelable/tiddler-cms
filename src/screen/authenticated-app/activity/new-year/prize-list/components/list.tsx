@@ -9,6 +9,7 @@ import {
   Image,
   InputNumber,
   Switch,
+  Tag,
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
 import { PlusOutlined } from "@ant-design/icons";
@@ -24,13 +25,10 @@ import {
 } from "service/new-year/prize";
 import { usePrizeModal, usePrizeListQueryKey } from "../util";
 
-import type { Prize, PrizeListSearchParams } from "types/new-year/prize";
-import type { Option } from "types/common";
+import type { Prize } from "types/new-year/prize";
+import type { SearchPanelProps } from "./search-panel";
 
-interface ListProps extends TableProps<Prize> {
-  typeOptions: Option[];
-  params: Partial<PrizeListSearchParams>;
-  setParams: (params: Partial<PrizeListSearchParams>) => void;
+interface ListProps extends TableProps<Prize>, SearchPanelProps {
   error: Error | unknown;
 }
 
@@ -64,43 +62,23 @@ export const List = ({
       <ErrorBox error={error} />
       <Table
         rowKey={"id"}
-        scroll={{ x: 2000 }}
+        scroll={{ x: 2500 }}
         columns={[
-          {
-            title: "id",
-            dataIndex: "id",
-            width: "8rem",
-            fixed: "left",
-          },
+          { title: "ID", dataIndex: "id", width: "6rem", fixed: "left" },
           {
             title: "状态",
             dataIndex: "status",
             render: (value) =>
-              value === 1 ? (
-                <span style={{ color: "#87d068" }}>上架中</span>
-              ) : (
-                <span style={{ color: "#999" }}>已下架</span>
-              ),
+              value === 1 ? <Tag color="green">上架中</Tag> : <Tag>已下架</Tag>,
             width: "10rem",
           },
           {
             title: "图片",
             dataIndex: "cover",
             render: (value) => <Image width={58} src={value} />,
-            width: "9rem",
+            width: "8rem",
           },
-          {
-            title: "名称",
-            dataIndex: "name",
-          },
-          {
-            title: "类型",
-            dataIndex: "type",
-            render: (value) => (
-              <>{typeOptions.find((item) => item.value === +value)?.text}</>
-            ),
-            width: "12rem",
-          },
+          { title: "名称", dataIndex: "name", width: "16rem" },
           {
             title: "大奖",
             dataIndex: "isBig",
@@ -112,41 +90,89 @@ export const List = ({
                 }
               />
             ),
+            width: "8rem",
+          },
+          {
+            title: "类型",
+            dataIndex: "type",
+            render: (value) => (
+              <>{typeOptions.find((item) => item.value === +value)?.text}</>
+            ),
+            width: "10rem",
+          },
+          {
+            title: "福气值",
+            dataIndex: "luckValue",
+            width: "8rem",
+          },
+          {
+            title: "单次成本",
+            dataIndex: "cost",
+            width: "8rem",
+          },
+          {
+            title: "抽奖概率",
+            dataIndex: "rate",
+            render: (value) => (+value).toFixed(3),
+            width: "10rem",
+          },
+          {
+            title: "库存",
+            dataIndex: "stock",
+            render: (value) => (value === -1 ? "不限" : value),
+            width: "8rem",
+          },
+          {
+            title: "单用户限制",
+            dataIndex: "limitPerUser",
+            render: (value) => (value === 0 ? "不限" : value),
+            width: "10rem",
+          },
+          {
+            title: "降级奖品ID",
+            dataIndex: "fallbackPrizeId",
+            width: "10rem",
+          },
+          {
+            title: "生效时间",
+            dataIndex: "startAt",
+            render: (value) =>
+              value ? dayjs(value).format("YYYY-MM-DD HH:mm") : "-",
+            width: "15rem",
+          },
+          {
+            title: "结束时间",
+            dataIndex: "endAt",
+            render: (value) =>
+              value ? dayjs(value).format("YYYY-MM-DD HH:mm") : "-",
+            width: "15rem",
           },
           {
             title: "排序",
             dataIndex: "sort",
-            render: (value, category) => (
+            render: (value, prize) => (
               <InputNumber
                 value={value}
-                onChange={(sort) => editSort({ id: category.id, sort })}
+                onChange={(sort) => editSort({ id: prize.id, sort })}
               />
             ),
             sorter: (a, b) => a.sort - b.sort,
-            width: "12rem",
+            width: "10rem",
           },
           {
             title: "更新时间",
-            render: (value, prize) => (
-              <span>
-                {prize.updatedAt
-                  ? dayjs(prize.updatedAt).format("YYYY-MM-DD HH:mm:ss")
-                  : "无"}
-              </span>
-            ),
+            dataIndex: "updatedAt",
+            render: (value) =>
+              value ? dayjs(value).format("YYYY-MM-DD HH:mm:ss") : "无",
             width: "20rem",
             sorter: (a, b) =>
               dayjs(a.updatedAt).valueOf() - dayjs(b.updatedAt).valueOf(),
           },
           {
             title: "创建时间",
-            render: (value, prize) => (
-              <span>
-                {prize.createdAt
-                  ? dayjs(prize.createdAt).format("YYYY-MM-DD HH:mm:ss")
-                  : "无"}
-              </span>
-            ),
+            dataIndex: "createdAt",
+            render: (value) =>
+              value ? dayjs(value).format("YYYY-MM-DD HH:mm:ss") : "无",
             width: "20rem",
             sorter: (a, b) =>
               dayjs(a.createdAt).valueOf() - dayjs(b.createdAt).valueOf(),
@@ -175,7 +201,7 @@ const More = ({ id, status }: { id: number; status: number }) => {
 
   const confirmDelete = (id: number) => {
     Modal.confirm({
-      title: "确定删除该prize吗？",
+      title: "确定删除该奖品吗？",
       content: "点击确定删除",
       okText: "确定",
       cancelText: "取消",
@@ -184,10 +210,7 @@ const More = ({ id, status }: { id: number; status: number }) => {
   };
 
   const items: MenuProps["items"] = [
-    {
-      label: <div onClick={() => startEdit(id)}>编辑</div>,
-      key: "edit",
-    },
+    { label: <div onClick={() => startEdit(id)}>编辑</div>, key: "edit" },
     {
       label: (
         <div onClick={() => (status === 1 ? downPrize(id) : upPrize(id))}>
@@ -196,10 +219,7 @@ const More = ({ id, status }: { id: number; status: number }) => {
       ),
       key: "status",
     },
-    {
-      label: <div onClick={() => confirmDelete(id)}>删除</div>,
-      key: "delete",
-    },
+    { label: <div onClick={() => confirmDelete(id)}>删除</div>, key: "delete" },
   ];
 
   return (

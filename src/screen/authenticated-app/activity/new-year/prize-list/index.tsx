@@ -1,5 +1,6 @@
 import { PrizeModal } from "./components/prize-modal";
 import { List } from "./components/list";
+import { SearchPanel } from "./components/search-panel";
 
 import styled from "@emotion/styled";
 import { usePrizeList } from "service/new-year/prize";
@@ -19,6 +20,11 @@ export const NewYearPrizeList = () => {
   return (
     <Container>
       <Main>
+        <SearchPanel
+          typeOptions={typeOptions}
+          params={params}
+          setParams={setParams}
+        />
         <List
           typeOptions={typeOptions}
           params={params}
