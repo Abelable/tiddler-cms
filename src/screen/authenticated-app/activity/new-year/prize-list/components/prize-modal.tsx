@@ -76,7 +76,11 @@ export const PrizeModal = ({ typeOptions }: { typeOptions: Option[] }) => {
       size="large"
       onClose={closeModal}
       open={prizeModalOpen}
-      bodyStyle={{ paddingBottom: 80 }}
+      styles={{
+        body: {
+          paddingBottom: 80,
+        },
+      }}
       extra={
         <Space>
           <Button onClick={closeModal}>取消</Button>

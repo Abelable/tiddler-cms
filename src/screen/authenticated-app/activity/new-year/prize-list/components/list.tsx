@@ -101,11 +101,6 @@ export const List = ({
             width: "10rem",
           },
           {
-            title: "福气值",
-            dataIndex: "luckValue",
-            width: "8rem",
-          },
-          {
             title: "单次成本",
             dataIndex: "cost",
             width: "8rem",
@@ -113,7 +108,7 @@ export const List = ({
           {
             title: "抽奖概率",
             dataIndex: "rate",
-            render: (value) => (+value).toFixed(3),
+            render: (value) => (+value).toFixed(4),
             width: "10rem",
           },
           {
