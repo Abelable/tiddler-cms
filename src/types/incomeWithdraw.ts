@@ -1,3 +1,4 @@
+import type { Merchant } from "./merchant";
 import type { Shop } from "./shop";
 import type { User } from "./user";
 
@@ -16,14 +17,15 @@ export interface IncomeWithdraw {
   failureReason: string;
   userInfo: User;
   shopInfo: Shop;
-  merchantInfo: { code: string; name: string; bankName: string };
-  scene: number;
+  merchantInfo: Merchant;
   path: number;
   withdrawAmount: number;
   taxFee: number;
   handlingFee: number;
   actualAmount: number;
   remark: string;
+  reviewerId?: number;
+  reviewedTime: string;
   createdAt: string;
   updatedAt: string;
 }

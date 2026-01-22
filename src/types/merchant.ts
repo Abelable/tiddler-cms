@@ -17,6 +17,9 @@ export interface Merchant {
   status: number;
   depositInfo: DepositInfo;
   failureReason: string;
+  bankCardNumber: string;
+  bankCardOwnerName: string;
+  bankName: string;
   createdAt: string;
   updatedAt: string;
 }

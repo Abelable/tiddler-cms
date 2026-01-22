@@ -63,6 +63,7 @@ import { GoodsOrderList } from "./shopping/order-list";
 import { GiftTypeList } from "./team/gift-type-list";
 import { GiftGoodsList } from "./team/gift-goods-list";
 import { PromoterList } from "./team/promoter-list";
+import { IncomeWithdrawList } from "./finance/income-withdraw";
 import { CommissionWithdrawList } from "./finance/commission-withdraw";
 import { EvaluationTagList } from "./setting/evaluation-tag";
 import { ComplaintOptionList } from "./setting/complaint-option";
@@ -273,6 +274,10 @@ export const AuthenticatedApp = () => {
               <Route path="team/gift_type_list" element={<GiftTypeList />} />
               <Route path="team/gift_list" element={<GiftGoodsList />} />
               <Route path="team/promoter_list" element={<PromoterList />} />
+              <Route
+                path="finance/income_withdraw"
+                element={<IncomeWithdrawList />}
+              />
               <Route
                 path="finance/commission_withdraw"
                 element={<CommissionWithdrawList />}

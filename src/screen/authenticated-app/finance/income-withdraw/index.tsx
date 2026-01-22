@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 
-import { useCommissionWithdrawList } from "service/commissionWithdraw";
+import { useIncomeWithdrawList } from "service/incomeWithdraw";
 import { toNumber } from "utils";
-import { useCommissionWithdrawListSearchParams } from "./util";
+import { useIncomeWithdrawListSearchParams } from "./util";
 
 import { List } from "./components/list";
 import { SearchPanel } from "./components/search-panel";
@@ -14,28 +14,22 @@ const statusOptions = [
   { text: "已提现", value: 1 },
   { text: "已驳回", value: 2 },
 ];
-const sceneOptions = [
-  { text: "自购奖励", value: 1 },
-  { text: "分享奖励", value: 2 },
-  { text: "团队奖励", value: 3 },
-];
 const pathOptions = [
   { text: "微信", value: 1 },
   { text: "银行卡", value: 2 },
-  { text: "积分兑换", value: 3 },
+  { text: "余额", value: 3 },
 ];
 
-export const CommissionWithdrawList = () => {
+export const IncomeWithdrawList = () => {
   const { data: userOptions = [], error: promoterError } = usePromoterOptions();
-  const [params, setParams] = useCommissionWithdrawListSearchParams();
-  const { isLoading, error, data } = useCommissionWithdrawList(params);
+  const [params, setParams] = useIncomeWithdrawListSearchParams();
+  const { isLoading, error, data } = useIncomeWithdrawList(params);
 
   return (
     <Container>
       <Main>
         <SearchPanel
           statusOptions={statusOptions}
-          sceneOptions={sceneOptions}
           pathOptions={pathOptions}
           userOptions={userOptions}
           params={params}
@@ -43,7 +37,6 @@ export const CommissionWithdrawList = () => {
         />
         <List
           statusOptions={statusOptions}
-          sceneOptions={sceneOptions}
           pathOptions={pathOptions}
           params={params}
           setParams={setParams}

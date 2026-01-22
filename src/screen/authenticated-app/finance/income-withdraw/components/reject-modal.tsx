@@ -1,14 +1,14 @@
 import { Form, Input, Modal } from "antd";
 import { useForm } from "antd/lib/form/Form";
-import { useRejectCommissionWithdraw } from "service/commissionWithdraw";
-import { useRejectModal, useCommissionWithdrawListQueryKey } from "../util";
+import { useRejectIncomeWithdraw } from "service/incomeWithdraw";
+import { useRejectModal, useIncomeWithdrawListQueryKey } from "../util";
 
 export const RejectModal = () => {
   const [form] = useForm();
   const { rejectModalOpen, rejectWithdrawId, close } = useRejectModal();
 
-  const { mutateAsync, isLoading: mutateLoading } = useRejectCommissionWithdraw(
-    useCommissionWithdrawListQueryKey()
+  const { mutateAsync, isLoading: mutateLoading } = useRejectIncomeWithdraw(
+    useIncomeWithdrawListQueryKey()
   );
 
   const confirm = () => {

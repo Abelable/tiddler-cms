@@ -22,7 +22,7 @@ const sceneOptions = [
 const pathOptions = [
   { text: "微信", value: 1 },
   { text: "银行卡", value: 2 },
-  { text: "积分兑换", value: 3 },
+  { text: "余额", value: 3 },
 ];
 
 export const CommissionWithdrawList = () => {

@@ -1,13 +1,14 @@
 import { useSetUrlSearchParams, useUrlQueryParams } from "utils/url";
 import { useCallback, useMemo } from "react";
-import { useCommissionWithdraw } from "service/commissionWithdraw";
+import { useIncomeWithdraw } from "service/incomeWithdraw";
 
-export const useCommissionWithdrawListSearchParams = () => {
+export const useIncomeWithdrawListSearchParams = () => {
   const [params, setParams] = useUrlQueryParams([
     "status",
-    "scene",
     "path",
     "userId",
+    "shopType",
+    "shopId",
     "page",
     "limit",
   ]);
@@ -24,34 +25,34 @@ export const useCommissionWithdrawListSearchParams = () => {
   ] as const;
 };
 
-export const useCommissionWithdrawListQueryKey = () => {
-  const [params] = useCommissionWithdrawListSearchParams();
-  return ["commission_withdraw_list", params];
+export const useIncomeWithdrawListQueryKey = () => {
+  const [params] = useIncomeWithdrawListSearchParams();
+  return ["goods_shop_income_withdraw_list", params];
 };
 
-export const useCommissionWithdrawModal = () => {
-  const [{ editingCommissionWithdrawId }, setEditingCommissionWithdrawId] =
-    useUrlQueryParams(["editingCommissionWithdrawId"]);
+export const useIncomeWithdrawModal = () => {
+  const [{ editingIncomeWithdrawId }, setEditingIncomeWithdrawId] =
+    useUrlQueryParams(["editingIncomeWithdrawId"]);
   const setUrlParams = useSetUrlSearchParams();
   const {
     data: withdrawInfo,
     isLoading,
     error,
-  } = useCommissionWithdraw(Number(editingCommissionWithdrawId));
+  } = useIncomeWithdraw(Number(editingIncomeWithdrawId));
 
   const open = useCallback(
     (id: number) =>
-      setEditingCommissionWithdrawId({ editingCommissionWithdrawId: `${id}` }),
-    [setEditingCommissionWithdrawId]
+      setEditingIncomeWithdrawId({ editingIncomeWithdrawId: `${id}` }),
+    [setEditingIncomeWithdrawId]
   );
   const close = useCallback(
-    () => setUrlParams({ editingCommissionWithdrawId: "" }),
+    () => setUrlParams({ editingIncomeWithdrawId: "" }),
     [setUrlParams]
   );
 
   return {
-    withdrawModalOpen: !!editingCommissionWithdrawId,
-    editingCommissionWithdrawId,
+    withdrawModalOpen: !!editingIncomeWithdrawId,
+    editingIncomeWithdrawId,
     withdrawInfo,
     isLoading,
     error,

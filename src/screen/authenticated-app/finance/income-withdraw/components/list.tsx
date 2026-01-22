@@ -8,7 +8,6 @@ import {
   Table,
   TablePaginationConfig,
   TableProps,
-  Tag,
   Tooltip,
 } from "antd";
 import { ButtonNoPadding, ErrorBox, Row, PageTitle } from "components/lib";
@@ -16,23 +15,22 @@ import { UserOutlined } from "@ant-design/icons";
 
 import dayjs from "dayjs";
 import {
-  useApprovedCommissionWithdraw,
-  useDeleteCommissionWithdraw,
-} from "service/commissionWithdraw";
-import { useCommissionWithdrawListQueryKey, useRejectModal } from "../util";
+  useApprovedIncomeWithdraw,
+  useDeleteIncomeWithdraw,
+} from "service/incomeWithdraw";
+import { useIncomeWithdrawListQueryKey, useRejectModal } from "../util";
 import { SearchPanelProps } from "./search-panel";
 
-import type { CommissionWithdraw } from "types/commissionWithdraw";
+import type { IncomeWithdraw } from "types/incomeWithdraw";
 
 interface ListProps
-  extends TableProps<CommissionWithdraw>,
+  extends TableProps<IncomeWithdraw>,
     Omit<SearchPanelProps, "userOptions"> {
   error: Error | unknown;
 }
 
 export const List = ({
   statusOptions,
-  sceneOptions,
   pathOptions,
   error,
   params,
@@ -82,16 +80,6 @@ export const List = ({
             width: "10rem",
           },
           {
-            title: "奖励场景",
-            dataIndex: "scene",
-            render: (value) => (
-              <Tag color={["gold", "blue", "green", "purple"][value]}>
-                {sceneOptions.find((item) => item.value === value)?.text}
-              </Tag>
-            ),
-            width: "10rem",
-          },
-          {
             title: "提现用户",
             dataIndex: "userInfo",
             render: (value) => (
@@ -106,6 +94,17 @@ export const List = ({
                     ? `${value.nickname.slice(0, 8)}...`
                     : value.nickname}
                 </span>
+              </>
+            ),
+            width: "20rem",
+          },
+          {
+            title: "所属店铺",
+            dataIndex: "shopInfo",
+            render: (value) => (
+              <>
+                <Avatar size="small" src={value.logo} icon={<UserOutlined />} />
+                <span style={{ marginLeft: "0.6rem" }}>{value.name}</span>
               </>
             ),
             width: "20rem",
@@ -189,13 +188,13 @@ export const List = ({
   );
 };
 
-const More = ({ withdraw }: { withdraw: CommissionWithdraw }) => {
+const More = ({ withdraw }: { withdraw: IncomeWithdraw }) => {
   const { open: openRejectModal } = useRejectModal();
-  const { mutate: approvedCommissionWithdraw } = useApprovedCommissionWithdraw(
-    useCommissionWithdrawListQueryKey()
+  const { mutate: approvedIncomeWithdraw } = useApprovedIncomeWithdraw(
+    useIncomeWithdrawListQueryKey()
   );
-  const { mutate: deleteCommissionWithdraw } = useDeleteCommissionWithdraw(
-    useCommissionWithdrawListQueryKey()
+  const { mutate: deleteIncomeWithdraw } = useDeleteIncomeWithdraw(
+    useIncomeWithdrawListQueryKey()
   );
 
   const confirmApproved = () => {
@@ -210,13 +209,13 @@ const More = ({ withdraw }: { withdraw: CommissionWithdraw }) => {
         ) : (
           <Descriptions size={"small"} column={1} bordered>
             <Descriptions.Item label="卡号">
-              {withdraw.bankCardInfo?.code}
+              {withdraw.merchantInfo?.bankCardNumber}
             </Descriptions.Item>
             <Descriptions.Item label="姓名">
-              {withdraw.bankCardInfo?.name}
+              {withdraw.merchantInfo?.bankCardOwnerName}
             </Descriptions.Item>
             <Descriptions.Item label="开户行">
-              {withdraw.bankCardInfo?.bankName}
+              {withdraw.merchantInfo?.bankName}
             </Descriptions.Item>
             <Descriptions.Item label="打款金额">
               <span style={{ color: "red" }}>¥{withdraw.actualAmount}</span>
@@ -225,7 +224,7 @@ const More = ({ withdraw }: { withdraw: CommissionWithdraw }) => {
         ),
       okText: "确定",
       cancelText: "取消",
-      onOk: () => approvedCommissionWithdraw(withdraw.id),
+      onOk: () => approvedIncomeWithdraw(withdraw.id),
     });
   };
 
@@ -235,7 +234,7 @@ const More = ({ withdraw }: { withdraw: CommissionWithdraw }) => {
       content: "点击确定删除",
       okText: "确定",
       cancelText: "取消",
-      onOk: () => deleteCommissionWithdraw(withdraw.id),
+      onOk: () => deleteIncomeWithdraw(withdraw.id),
     });
   };
 

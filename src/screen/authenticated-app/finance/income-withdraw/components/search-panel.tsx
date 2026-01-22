@@ -10,7 +10,6 @@ import type { CommissionWithdrawListSearchParams } from "types/commissionWithdra
 
 export interface SearchPanelProps {
   statusOptions: Option[];
-  sceneOptions: Option[];
   pathOptions: Option[];
   userOptions: { id: number; avatar: string; nickname: string }[];
   params: Partial<CommissionWithdrawListSearchParams>;
@@ -26,7 +25,6 @@ const defaultParmas: Partial<CommissionWithdrawListSearchParams> = {
 
 export const SearchPanel = ({
   statusOptions,
-  sceneOptions,
   pathOptions,
   userOptions,
   params,
@@ -37,9 +35,6 @@ export const SearchPanel = ({
   const setStatus = (status: number) =>
     setTempParams({ ...tempParams, status });
   const clearStatus = () => setTempParams({ ...tempParams, status: undefined });
-
-  const setScene = (scene: number) => setTempParams({ ...tempParams, scene });
-  const clearScene = () => setTempParams({ ...tempParams, scene: undefined });
 
   const setPath = (path: number) => setTempParams({ ...tempParams, path });
   const clearPath = () => setTempParams({ ...tempParams, path: undefined });
@@ -65,23 +60,6 @@ export const SearchPanel = ({
           onClear={clearStatus}
         >
           {statusOptions?.map(({ text, value }) => (
-            <Select.Option key={value} value={value}>
-              {text}
-            </Select.Option>
-          ))}
-        </Select>
-      </Item>
-      <Item>
-        <div>奖励场景：</div>
-        <Select
-          style={{ width: "20rem" }}
-          value={tempParams.scene}
-          placeholder="请选择奖励场景"
-          allowClear
-          onSelect={setScene}
-          onClear={clearScene}
-        >
-          {sceneOptions?.map(({ text, value }) => (
             <Select.Option key={value} value={value}>
               {text}
             </Select.Option>
