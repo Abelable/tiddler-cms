@@ -101,7 +101,7 @@ export const DetailModal = ({
                 <Form.Item
                   name="promotionCommissionRate"
                   label="代言奖励比例"
-                  tooltip={`佣金范围${goodsCategory?.minPromotionCommissionRate}%~${goodsCategory?.maxPromotionCommissionRate}%`}
+                  tooltip={`奖励范围${goodsCategory?.minPromotionCommissionRate}%~${goodsCategory?.maxPromotionCommissionRate}%`}
                   rules={[{ required: true, message: "请填写代言奖励比例" }]}
                 >
                   <InputNumber
@@ -134,7 +134,7 @@ export const DetailModal = ({
                 <Form.Item
                   name="superiorPromotionCommissionRate"
                   label="上级代言奖励比例"
-                  tooltip={`佣金范围${goodsCategory?.minSuperiorPromotionCommissionRate}%~${goodsCategory?.maxSuperiorPromotionCommissionRate}%`}
+                  tooltip={`奖励范围${goodsCategory?.minSuperiorPromotionCommissionRate}%~${goodsCategory?.maxSuperiorPromotionCommissionRate}%`}
                   rules={[
                     { required: true, message: "请填写上级代言奖励比例" },
                   ]}

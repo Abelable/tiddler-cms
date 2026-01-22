@@ -63,6 +63,7 @@ import { GoodsOrderList } from "./shopping/order-list";
 import { GiftTypeList } from "./team/gift-type-list";
 import { GiftGoodsList } from "./team/gift-goods-list";
 import { PromoterList } from "./team/promoter-list";
+import { CommissionWithdrawList } from "./finance/commission-withdraw";
 import { EvaluationTagList } from "./setting/evaluation-tag";
 import { ComplaintOptionList } from "./setting/complaint-option";
 
@@ -97,6 +98,8 @@ import {
   ProfileOutlined,
   SnippetsOutlined,
   SlackOutlined,
+  PayCircleOutlined,
+  PropertySafetyOutlined,
 } from "@ant-design/icons";
 import {
   ExpressIcon,
@@ -270,6 +273,10 @@ export const AuthenticatedApp = () => {
               <Route path="team/gift_type_list" element={<GiftTypeList />} />
               <Route path="team/gift_list" element={<GiftGoodsList />} />
               <Route path="team/promoter_list" element={<PromoterList />} />
+              <Route
+                path="finance/commission_withdraw"
+                element={<CommissionWithdrawList />}
+              />
               <Route path="auth/role_list" element={<RoleList />} />
               <Route path="auth/admin_list" element={<AdminList />} />
               <Route path="auth/personal_center" element={<PersonalCenter />} />
@@ -712,6 +719,23 @@ const MenuSider = ({
           label: <Link to={"shopping/order_list"}>订单列表</Link>,
           key: "shopping_order_list",
           icon: <SnippetsOutlined />,
+        },
+      ],
+    },
+    {
+      label: "财务管理",
+      key: "finance",
+      icon: <PropertySafetyOutlined />,
+      children: [
+        {
+          label: <Link to={"finance/income_withdraw"}>收益提现</Link>,
+          key: "finance_income_withdraw",
+          icon: <PayCircleOutlined />,
+        },
+        {
+          label: <Link to={"finance/commission_withdraw"}>奖励提现</Link>,
+          key: "finance_commission_withdraw",
+          icon: <PayCircleOutlined />,
         },
       ],
     },

@@ -308,6 +308,20 @@ const treeData: DataNode[] = [
     ],
   },
   {
+    title: "财务管理",
+    key: "finance",
+    children: [
+      {
+        title: "收益提现",
+        key: "finance_income_withdraw",
+      },
+      {
+        title: "收益提现",
+        key: "finance_commission_withdraw",
+      },
+    ],
+  },
+  {
     title: "权限管理",
     key: "auth",
     children: [
