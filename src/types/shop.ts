@@ -12,7 +12,7 @@ export interface Shop {
   name: string;
   categoryIds: number[];
   logo: string;
-  cover: string;
+  bg: string;
   createdAt: string;
   updatedAt: string;
 }

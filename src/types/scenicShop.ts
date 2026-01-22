@@ -10,7 +10,7 @@ export interface Shop {
   type: number;
   name: string;
   logo: string;
-  cover: string;
+  bg: string;
   createdAt: string;
   updatedAt: string;
 }

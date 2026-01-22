@@ -60,9 +60,9 @@ export const ShopModal = ({
                 size="small"
               />
             </Descriptions.Item>
-            {editingShop?.cover ? (
+            {editingShop?.bg ? (
               <Descriptions.Item label="店铺封面">
-                <Image width={132} height={86} src={editingShop?.cover} />
+                <Image width={132} height={86} src={editingShop?.bg} />
               </Descriptions.Item>
             ) : (
               <></>
