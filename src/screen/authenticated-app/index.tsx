@@ -728,12 +728,12 @@ const MenuSider = ({
       icon: <PropertySafetyOutlined />,
       children: [
         {
-          label: <Link to={"finance/income_withdraw"}>收益提现</Link>,
+          label: <Link to={"finance/income_withdraw"}>商家收益提现</Link>,
           key: "finance_income_withdraw",
           icon: <PayCircleOutlined />,
         },
         {
-          label: <Link to={"finance/commission_withdraw"}>奖励提现</Link>,
+          label: <Link to={"finance/commission_withdraw"}>代言奖励提现</Link>,
           key: "finance_commission_withdraw",
           icon: <PayCircleOutlined />,
         },

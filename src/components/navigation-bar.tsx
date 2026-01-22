@@ -76,7 +76,7 @@ const breadcrumbNameMap: { [key: string]: string } = {
   "/shopping/coupon_list": "优惠券",
   "/shopping/order_list": "订单列表",
   "/finance": "财务管理",
-  "/finance/commission_withdraw": "奖励提现",
+  "/finance/commission_withdraw": "代言奖励提现",
   "/auth": "权限管理",
   "/auth/role_list": "角色列表",
   "/auth/admin_list": "管理员列表",
