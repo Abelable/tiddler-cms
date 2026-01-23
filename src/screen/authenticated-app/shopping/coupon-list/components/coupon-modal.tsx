@@ -160,11 +160,7 @@ export const CouponModal = ({
               placeholder="请选择优惠券失效时间"
             />
           </Form.Item>
-          <Form.Item
-            name="goodsIds"
-            label="关联商品"
-            rules={[{ required: true, message: "请选择关联商品" }]}
-          >
+          <Form.Item name="goodsIds" label="关联商品">
             <Select
               mode="multiple"
               showSearch

@@ -147,9 +147,10 @@ export const useExportOrderConfig = (queryKey: QueryKey) =>
   );
 
 export const useAddCouponConfig = (queryKey: QueryKey) =>
-  useConfig(queryKey, (target, old) =>
-    old
-      ? {
+  useConfig(queryKey, (target, old) => {
+    if (old) {
+      if (target.goodsIds.length) {
+        return {
           ...old,
           list: [
             ...target.goodsIds.map((id: number, index: number) => ({
@@ -168,9 +169,23 @@ export const useAddCouponConfig = (queryKey: QueryKey) =>
             })),
             ...old.list,
           ],
-        }
-      : null
-  );
+        };
+      } else {
+        return {
+          ...old,
+          list: [
+            {
+              id: old.list[0] ? `${Number(old.list[0].id) + 1}` : "1",
+              ...target,
+            },
+            ...old.list,
+          ],
+        };
+      }
+    } else {
+      return null;
+    }
+  });
 
 export const useDownCouponConfig = (queryKey: QueryKey) =>
   useConfig(queryKey, (id, old) =>
