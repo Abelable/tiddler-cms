@@ -156,7 +156,7 @@ export const useTrackingInfo = (id: number) => {
   const client = useHttp();
   return useQuery<ShippingInfo>(
     ["tracking_info", { id }],
-    () => client("goods/order/tracking_info", { data: { id } }),
+    () => client("goods/order/shipping_info", { data: { id } }),
     {
       enabled: !!id,
     }
