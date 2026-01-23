@@ -109,6 +109,7 @@ export const List = ({
             title: "抽奖概率",
             dataIndex: "rate",
             render: (value) => (+value).toFixed(4),
+            sorter: (a, b) => a.rate - b.rate,
             width: "10rem",
           },
           {
