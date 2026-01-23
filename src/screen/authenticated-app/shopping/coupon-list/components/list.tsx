@@ -107,7 +107,7 @@ export const List = ({
                   : `满${coupon.priceLimit}元可用`}
               </>
             ),
-            width: "12rem",
+            width: "16rem",
           },
           {
             title: "状态",
