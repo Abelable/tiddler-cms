@@ -5,6 +5,8 @@ import {
   useDeleteConfig,
   useEditConfig,
 } from "../use-optimistic-options";
+import { cleanObject } from "utils";
+
 import type {
   NewYearGoodsListResult,
   NewYearGoodsListSearchParams,
@@ -22,9 +24,19 @@ export const useNewYearGoodsList = (
 export const useAddNewYearGoods = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation(
-    ({ goodsIds, luckScore }: { goodsIds: number[]; luckScore: number }) =>
+    ({
+      goodsIds,
+      luckScore,
+      stock,
+      limit,
+    }: {
+      goodsIds: number[];
+      luckScore: number;
+      stock: Number;
+      limit: Number;
+    }) =>
       client("new_year/goods/add", {
-        data: { goodsIds, luckScore },
+        data: cleanObject({ goodsIds, luckScore, stock, limit }),
         method: "POST",
       }),
     useAddConfig(queryKey)
@@ -37,6 +49,30 @@ export const useEditLuckScore = (queryKey: QueryKey) => {
     ({ id, luckScore }: { id: number; luckScore: number }) =>
       client("new_year/goods/edit_luck_score", {
         data: { id, luckScore },
+        method: "POST",
+      }),
+    useEditConfig(queryKey)
+  );
+};
+
+export const useEditStock = (queryKey: QueryKey) => {
+  const client = useHttp();
+  return useMutation(
+    ({ id, stock }: { id: number; stock: number }) =>
+      client("new_year/goods/edit_stock", {
+        data: { id, stock },
+        method: "POST",
+      }),
+    useEditConfig(queryKey)
+  );
+};
+
+export const useEditLimit = (queryKey: QueryKey) => {
+  const client = useHttp();
+  return useMutation(
+    ({ id, limit }: { id: number; limit: number }) =>
+      client("new_year/goods/edit_limit", {
+        data: { id, limit },
         method: "POST",
       }),
     useEditConfig(queryKey)

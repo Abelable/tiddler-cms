@@ -17,8 +17,10 @@ import dayjs from "dayjs";
 import {
   useDeleteNewYearGoods,
   useDownNewYearGoods,
+  useEditLimit,
   useEditLuckScore,
   useEditSort,
+  useEditStock,
   useUpNewYearGoods,
 } from "service/new-year/goods";
 import { useNewYearGoodsModal, useNewYearGoodsListQueryKey } from "../util";
@@ -47,6 +49,8 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
   const { mutate: editLuckScore } = useEditLuckScore(
     useNewYearGoodsListQueryKey()
   );
+  const { mutate: editStock } = useEditStock(useNewYearGoodsListQueryKey());
+  const { mutate: editLimit } = useEditLimit(useNewYearGoodsListQueryKey());
   const { mutate: editSort } = useEditSort(useNewYearGoodsListQueryKey());
 
   return (
@@ -106,6 +110,26 @@ export const List = ({ error, params, setParams, ...restProps }: ListProps) => {
                 onChange={(luckScore) =>
                   editLuckScore({ id: goods.id, luckScore })
                 }
+              />
+            ),
+          },
+          {
+            title: "库存",
+            dataIndex: "stock",
+            render: (value, goods) => (
+              <InputNumber
+                value={value}
+                onChange={(stock) => editStock({ id: goods.id, stock })}
+              />
+            ),
+          },
+          {
+            title: "兑换上限",
+            dataIndex: "limit",
+            render: (value, goods) => (
+              <InputNumber
+                value={value}
+                onChange={(limit) => editLimit({ id: goods.id, limit })}
               />
             ),
           },

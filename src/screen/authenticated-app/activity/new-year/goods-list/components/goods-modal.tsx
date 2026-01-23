@@ -75,6 +75,12 @@ export const GoodsModal = () => {
             placeholder="请填写所需福气值"
           />
         </Form.Item>
+        <Form.Item name="stock" label="库存">
+          <InputNumber style={{ width: "100%" }} placeholder="请填写库存" />
+        </Form.Item>
+        <Form.Item name="limit" label="兑换上限">
+          <InputNumber style={{ width: "100%" }} placeholder="请填写兑换上限" />
+        </Form.Item>
       </Form>
     </Modal>
   );
