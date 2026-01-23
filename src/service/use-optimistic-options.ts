@@ -149,7 +149,7 @@ export const useExportOrderConfig = (queryKey: QueryKey) =>
 export const useAddCouponConfig = (queryKey: QueryKey) =>
   useConfig(queryKey, (target, old) => {
     if (old) {
-      if (target.goodsIds.length) {
+      if (target.goodsIds) {
         return {
           ...old,
           list: [
