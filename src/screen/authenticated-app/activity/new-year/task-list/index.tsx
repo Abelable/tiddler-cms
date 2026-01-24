@@ -14,7 +14,7 @@ const typeOptions = [
 ];
 const sceneOptions = [
   { text: "页面跳转", value: 1 },
-  { text: "加微信群", value: 2 },
+  { text: "其他", value: 2 },
 ];
 
 export const NewYearTaskList = () => {
